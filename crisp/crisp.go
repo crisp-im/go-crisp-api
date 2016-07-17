@@ -1,4 +1,4 @@
-// Copyright 2016 The go-crisp-api AUTHORS. All rights reserved.
+// Copyright 2016 Crisp IM. All rights reserved.
 //
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
@@ -17,7 +17,7 @@ import (
 
 const (
   libraryVersion = "1.0.0"
-  endpointURL = "https://api.crisp.im/v1/"
+  defaultEndpointURL = "https://api.crisp.im/v1/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
 )
@@ -39,7 +39,10 @@ type Client struct {
 
   common service
 
-  Plugin *PluginService
+  Email   *EmailService
+  Plugin  *PluginService
+  User    *UserService
+  Website *WebsiteService
 }
 
 type service struct {
@@ -67,29 +70,35 @@ func (response *ErrorResponse) Error() string {
 
 
 // NewClient returns a new API client
-func NewClient(httpClient *http.Client) *Client {
+func NewClient(httpClient *http.Client, endpointURL *string) *Client {
+  targetEndpointURL := defaultEndpointURL
+
   if httpClient == nil {
     httpClient = http.DefaultClient
   }
+  if endpointURL != nil {
+    targetEndpointURL = *endpointURL
+  }
 
-  baseURL, _ := url.Parse(endpointURL)
+  baseURL, _ := url.Parse(targetEndpointURL)
 
   client := &Client{client: httpClient, basicAuth: &BasicAuth{}, BaseURL: baseURL, UserAgent: userAgent}
   client.common.client = client
 
+  client.Email = (*EmailService)(&client.common)
   client.Plugin = (*PluginService)(&client.common)
+  client.User = (*UserService)(&client.common)
+  client.Website = (*WebsiteService)(&client.common)
 
   return client
 }
 
 
 // Authenticate saves authentication parameters
-func (client *Client) Authenticate(username string, password string) (error) {
+func (client *Client) Authenticate(username string, password string) {
   client.basicAuth.Username = username
   client.basicAuth.Password = password
   client.basicAuth.Available = true
-
-  return nil
 }
 
 
@@ -121,6 +130,8 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
   }
 
   req.Header.Add("Accept", acceptContentType)
+  req.Header.Add("Content-Type", acceptContentType)
+
   if client.UserAgent != "" {
     req.Header.Add("User-Agent", client.UserAgent)
   }

@@ -1,4 +1,4 @@
-// Copyright 2016 The go-crisp-api AUTHORS. All rights reserved.
+// Copyright 2016 Crisp IM. All rights reserved.
 //
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
@@ -8,9 +8,6 @@ package crisp
 import (
   "fmt"
 )
-
-// PluginService service
-type PluginService service
 
 // PluginInformationData mapping
 type PluginInformationData struct {
@@ -49,11 +46,22 @@ type PluginStars struct {
   Total  *int  `json:"total"`
 }
 
-// GetPluginInformation gets information about a plugin
+// PluginPersonalPluginRankData mapping
+type PluginPersonalPluginRankData struct {
+  Data  *PluginPersonalPluginRank  `json:"data"`
+}
+
+// PluginPersonalPluginRank mapping
+type PluginPersonalPluginRank struct {
+  Rank  *int  `json:"rank"`
+}
+
+
+// GetPluginInformation resolves plugin information.
 // Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get
 func (service *PluginService) GetPluginInformation(pluginID string) (*PluginInformation, *Response, error) {
   url := fmt.Sprintf("plugin/%s", pluginID)
-  req, err := service.client.NewRequest("GET", url, nil)
+  req, _ := service.client.NewRequest("GET", url, nil)
 
   plugin := new(PluginInformationData)
   resp, err := service.client.Do(req, plugin)
@@ -64,11 +72,12 @@ func (service *PluginService) GetPluginInformation(pluginID string) (*PluginInfo
   return plugin.Data, resp, err
 }
 
-// GetPluginStars gets stars for a plugin
-// Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get
+
+// GetPluginStars resolves plugin stars. This gives some stats about user rating of the plugin.
+// Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get-1
 func (service *PluginService) GetPluginStars(pluginID string) (*PluginStars, *Response, error) {
   url := fmt.Sprintf("plugin/%s/stars", pluginID)
-  req, err := service.client.NewRequest("GET", url, nil)
+  req, _ := service.client.NewRequest("GET", url, nil)
 
   stars := new(PluginStarsData)
   resp, err := service.client.Do(req, stars)
@@ -77,4 +86,40 @@ func (service *PluginService) GetPluginStars(pluginID string) (*PluginStars, *Re
   }
 
   return stars.Data.Object, resp, err
+}
+
+
+// GetPersonalPluginRank resolves our own ranking of the plugin (if we ever ranked it).
+// Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get-2
+func (service *PluginService) GetPersonalPluginRank(pluginID string) (*PluginPersonalPluginRank, *Response, error) {
+  url := fmt.Sprintf("plugin/%s/stars/self", pluginID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  stars := new(PluginPersonalPluginRankData)
+  resp, err := service.client.Do(req, stars)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return stars.Data, resp, err
+}
+
+
+// RankPlugin ranks the plugin (as current user).
+// Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get-2
+func (service *PluginService) RankPlugin(pluginID string, rank int) (*Response, error) {
+  url := fmt.Sprintf("plugin/%s/stars/self", pluginID)
+  req, _ := service.client.NewRequest("PATCH", url, PluginPersonalPluginRank{&rank})
+
+  return service.client.Do(req, nil)
+}
+
+
+// DeletePluginRank deletes personal rank of the plugin (as current user).
+// Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-delete
+func (service *PluginService) DeletePluginRank(pluginID string) (*Response, error) {
+  url := fmt.Sprintf("plugin/%s/stars/self", pluginID)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
 }
