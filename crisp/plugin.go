@@ -17,7 +17,7 @@ type Plugin struct {
 
 // GetPluginInformation
 // Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get
-func (service *PluginService) GetPluginInformation(plugin_id int) (*Plugin, *Response, error) {
+func (service *PluginService) GetPluginInformation(plugin_id string) (*Plugin, *Response, error) {
   url := fmt.Sprintf("plugin/%s", plugin_id)
   req, err := service.client.NewRequest("GET", url, nil)
   if err != nil {

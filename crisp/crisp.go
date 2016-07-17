@@ -17,12 +17,12 @@ import (
 
 const (
   libraryVersion = "1.0.0"
-  apiVersion = "v2"
-  defaultBaseURL = "https://api.crisp.im"
+  endpointURL = "https://api.crisp.im/v1/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
 )
 
+// Client maps an API client
 type Client struct {
   client *http.Client
 
@@ -38,20 +38,23 @@ type service struct {
   client *Client
 }
 
+// Response maps an API HTTP response
 type Response struct {
   *http.Response
 }
 
+// ErrorResponse maps an API HTTP error response
 type ErrorResponse struct {
   Response *http.Response
+  Reason   string  `json:"reason"`
 }
 
 
 // Error prints an error response
 func (response *ErrorResponse) Error() string {
-  return fmt.Sprintf("%v %v: %d %v %+v",
+  return fmt.Sprintf("%v %v: %d %v",
     response.Response.Request.Method, response.Response.Request.URL,
-    response.Response.StatusCode)
+    response.Response.StatusCode, response.Reason)
 }
 
 
@@ -61,7 +64,7 @@ func NewClient(httpClient *http.Client) *Client {
     httpClient = http.DefaultClient
   }
 
-  baseURL, _ := url.Parse(defaultBaseURL)
+  baseURL, _ := url.Parse(endpointURL)
 
   client := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
   client.common.client = client
@@ -153,7 +156,10 @@ func CheckResponse(response *http.Response) error {
   }
   errorResponse := &ErrorResponse{Response: response}
 
-  // TODO: map to segmented error returns w/ types / structs
+  data, err := ioutil.ReadAll(response.Body)
+  if err == nil && data != nil {
+    json.Unmarshal(data, errorResponse)
+  }
 
   return errorResponse
 }
