@@ -4,8 +4,8 @@
 
 The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, access your agent accounts from your Go code.
 
-**📝 Implements: [API v1](https://docs.crisp.im/api/v1/) at reference revision: 07/17/2016**
-**😘 Maintainer: [@valeriansaliou](https://github.com/valeriansaliou)**
+* **📝 Implements**: [API v1](https://docs.crisp.im/api/v1/) at reference revision: 07/17/2016
+* **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
 
