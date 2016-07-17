@@ -22,9 +22,17 @@ const (
   acceptContentType = "application/json"
 )
 
+// BasicAuth maps basic auth credientials
+type BasicAuth struct {
+  Available bool
+  Username string
+  Password string
+}
+
 // Client maps an API client
 type Client struct {
   client *http.Client
+  basicAuth *BasicAuth
 
   BaseURL *url.URL
   UserAgent string
@@ -66,12 +74,22 @@ func NewClient(httpClient *http.Client) *Client {
 
   baseURL, _ := url.Parse(endpointURL)
 
-  client := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
+  client := &Client{client: httpClient, basicAuth: &BasicAuth{}, BaseURL: baseURL, UserAgent: userAgent}
   client.common.client = client
 
   client.Plugin = (*PluginService)(&client.common)
 
   return client
+}
+
+
+// Authenticate saves authentication parameters
+func (client *Client) Authenticate(username string, password string) (error) {
+  client.basicAuth.Username = username
+  client.basicAuth.Password = password
+  client.basicAuth.Available = true
+
+  return nil
 }
 
 
@@ -82,7 +100,7 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
     return nil, err
   }
 
-  u := client.BaseURL.ResolveReference(rel)
+  url := client.BaseURL.ResolveReference(rel)
 
   var buf io.ReadWriter
   if body != nil {
@@ -93,9 +111,13 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
     }
   }
 
-  req, err := http.NewRequest(method, u.String(), buf)
+  req, err := http.NewRequest(method, url.String(), buf)
   if err != nil {
     return nil, err
+  }
+
+  if client.basicAuth.Available == true {
+    req.SetBasicAuth(client.basicAuth.Username, client.basicAuth.Password)
   }
 
   req.Header.Add("Accept", acceptContentType)
