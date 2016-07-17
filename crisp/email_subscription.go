@@ -26,13 +26,13 @@ func (service *EmailService) GetSubscriptionStatus(emailHash string, key string)
   url := fmt.Sprintf("email/%s/subscription/%s", emailHash, key)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  plugin := new(SubscriptionStatusData)
-  resp, err := service.client.Do(req, plugin)
+  subscription := new(SubscriptionStatusData)
+  resp, err := service.client.Do(req, subscription)
   if err != nil {
     return nil, resp, err
   }
 
-  return plugin.Data, resp, err
+  return subscription.Data, resp, err
 }
 
 
