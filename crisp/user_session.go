@@ -8,24 +8,24 @@ package crisp
 
 // UserSessionParametersData mapping
 type UserSessionParametersData struct {
-  Data  *UserSessionParameters  `json:"data"`
+  Data  *UserSessionParameters  `json:"data,omitempty"`
 }
 
 // UserSessionParameters mapping
 type UserSessionParameters struct {
-  Identifier  *string  `json:"identifier"`
-  Key         *string  `json:"key"`
+  Identifier  *string  `json:"identifier,omitempty"`
+  Key         *string  `json:"key,omitempty"`
 }
 
 // UserSessionLogin mapping
 type UserSessionLogin struct {
-  Email     *string  `json:"email"`
-  Password  *string  `json:"password"`
+  Email     *string  `json:"email,omitempty"`
+  Password  *string  `json:"password,omitempty"`
 }
 
 // UserSessionRecover mapping
 type UserSessionRecover struct {
-  Email  *string  `json:"email"`
+  Email  *string  `json:"email,omitempty"`
 }
 
 

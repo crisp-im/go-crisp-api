@@ -8,17 +8,17 @@ package crisp
 
 // UserWebsiteData mapping
 type UserWebsiteData struct {
-  Data  *[]UserWebsite  `json:"data"`
+  Data  *[]UserWebsite  `json:"data,omitempty"`
 }
 
 // UserWebsite mapping
 type UserWebsite struct {
-  ID       *string    `json:"id"`
-  Name     *string    `json:"name"`
-  Domain   *string    `json:"domain"`
-  Logo     *string    `json:"logo"`
-  Members  *[]string  `json:"members"`
-  Count    *uint      `json:"count"`
+  ID       *string    `json:"id,omitempty"`
+  Name     *string    `json:"name,omitempty"`
+  Domain   *string    `json:"domain,omitempty"`
+  Logo     *string    `json:"logo,omitempty"`
+  Members  *[]string  `json:"members,omitempty"`
+  Count    *uint      `json:"count,omitempty"`
 }
 
 

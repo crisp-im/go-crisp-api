@@ -8,31 +8,31 @@ package crisp
 
 // UserAvailabilityData mapping
 type UserAvailabilityData struct {
-  Data  *UserAvailability  `json:"data"`
+  Data  *UserAvailability  `json:"data,omitempty"`
 }
 
 // UserAvailability mapping
 type UserAvailability struct {
-  UserID  *string                `json:"user_id"`
-  Type    *string                `json:"type"`
-  Time    *UserAvailabilityTime  `json:"time"`
+  UserID  *string                `json:"user_id,omitempty"`
+  Type    *string                `json:"type,omitempty"`
+  Time    *UserAvailabilityTime  `json:"time,omitempty"`
 }
 
 // UserAvailabilityTime mapping
 type UserAvailabilityTime struct {
-  For    *uint  `json:"for"`
-  Since  *uint  `json:"since"`
+  For    *uint  `json:"for,omitempty"`
+  Since  *uint  `json:"since,omitempty"`
 }
 
 // UserAvailabilityStatusData mapping
 type UserAvailabilityStatusData struct {
-  Data  *UserAvailabilityStatus  `json:"data"`
+  Data  *UserAvailabilityStatus  `json:"data,omitempty"`
 }
 
 // UserAvailabilityStatus mapping
 type UserAvailabilityStatus struct {
-  UserID  *string  `json:"user_id"`
-  Status  *string  `json:"status"`
+  UserID  *string  `json:"user_id,omitempty"`
+  Status  *string  `json:"status,omitempty"`
 }
 
 

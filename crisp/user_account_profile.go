@@ -8,25 +8,25 @@ package crisp
 
 // UserProfileData mapping
 type UserProfileData struct {
-  Data  *UserProfile  `json:"data"`
+  Data  *UserProfile  `json:"data,omitempty"`
 }
 
 // UserProfile mapping
 type UserProfile struct {
-  UserID     *string  `json:"user_id"`
-  Avatar     *string  `json:"avatar"`
-  Email      *string  `json:"email"`
-  FirstName  *string  `json:"first_name"`
-  LastName   *string  `json:"last_name"`
+  UserID     *string  `json:"user_id,omitempty"`
+  Avatar     *string  `json:"avatar,omitempty"`
+  Email      *string  `json:"email,omitempty"`
+  FirstName  *string  `json:"first_name,omitempty"`
+  LastName   *string  `json:"last_name,omitempty"`
 }
 
 // UserProfileSave mapping
 type UserProfileSave struct {
-  FirstName  *string  `json:"first_name"`
-  LastName   *string  `json:"last_name"`
-  Email      *string  `json:"email"`
-  Password   *string  `json:"password"`
-  Avatar     *string  `json:"avatar"`
+  FirstName  *string  `json:"first_name,omitempty"`
+  LastName   *string  `json:"last_name,omitempty"`
+  Email      *string  `json:"email,omitempty"`
+  Password   *string  `json:"password,omitempty"`
+  Avatar     *string  `json:"avatar,omitempty"`
 }
 
 

@@ -8,17 +8,17 @@ package crisp
 
 // UserNotificationSettingsData mapping
 type UserNotificationSettingsData struct {
-  Data  *UserNotificationSettings  `json:"data"`
+  Data  *UserNotificationSettings  `json:"data,omitempty"`
 }
 
 // UserNotificationSettings mapping
 type UserNotificationSettings struct {
-  UserID              *string  `json:"user_id"`
-  Disabled            *bool    `json:"disabled"`
-  MessagesOnline      *bool    `json:"messages_online"`
-  MessagesOffline     *bool    `json:"messages_offline"`
-  MessagesTranscript  *bool    `json:"messages_transcript"`
-  Sounds              *bool    `json:"sounds"`
+  UserID              *string  `json:"user_id,omitempty"`
+  Disabled            *bool    `json:"disabled,omitempty"`
+  MessagesOnline      *bool    `json:"messages_online,omitempty"`
+  MessagesOffline     *bool    `json:"messages_offline,omitempty"`
+  MessagesTranscript  *bool    `json:"messages_transcript,omitempty"`
+  Sounds              *bool    `json:"sounds,omitempty"`
 }
 
 

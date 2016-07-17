@@ -13,124 +13,124 @@ import (
 
 // BillingMethodAllData mapping
 type BillingMethodAllData struct {
-  Data  *[]BillingMethodAll  `json:"data"`
+  Data  *[]BillingMethodAll  `json:"data,omitempty"`
 }
 
 // BillingMethodAll mapping
 type BillingMethodAll struct {
-  UserID  *string         `json:"user_id"`
-  Cards   *BillingMethod  `json:"cards"`
+  UserID  *string         `json:"user_id,omitempty"`
+  Cards   *BillingMethod  `json:"cards,omitempty"`
 }
 
 // BillingMethodData mapping
 type BillingMethodData struct {
-  Data  *BillingMethod  `json:"data"`
+  Data  *BillingMethod  `json:"data,omitempty"`
 }
 
 // BillingMethod mapping
 type BillingMethod struct {
-  CardID             *string                  `json:"card_id"`
-  NameOnCard         *string                  `json:"name_on_card"`
-  Address            *string                  `json:"address"`
-  CardNumberPreview  *string                  `json:"card_number_preview"`
-  CardProvider       *string                  `json:"card_provider"`
-  ExpirationDate     *string                  `json:"expiration_date"`
-  AddedDate          *string                  `json:"added_date"`
-  IsExpired          *bool                    `json:"is_expired"`
-  LinkedWebsites     *[]BillingMethodWebsite  `json:"linked_websites"`
+  CardID             *string                  `json:"card_id,omitempty"`
+  NameOnCard         *string                  `json:"name_on_card,omitempty"`
+  Address            *string                  `json:"address,omitempty"`
+  CardNumberPreview  *string                  `json:"card_number_preview,omitempty"`
+  CardProvider       *string                  `json:"card_provider,omitempty"`
+  ExpirationDate     *string                  `json:"expiration_date,omitempty"`
+  AddedDate          *string                  `json:"added_date,omitempty"`
+  IsExpired          *bool                    `json:"is_expired,omitempty"`
+  LinkedWebsites     *[]BillingMethodWebsite  `json:"linked_websites,omitempty"`
 }
 
 // BillingMethodWebsite mapping
 type BillingMethodWebsite struct {
-  WebsiteID  *string  `json:"website_id"`
-  Name       *string  `json:"name"`
-  Domain     *string  `json:"domain"`
+  WebsiteID  *string  `json:"website_id,omitempty"`
+  Name       *string  `json:"name,omitempty"`
+  Domain     *string  `json:"domain,omitempty"`
 }
 
 // BillingMethodCreate mapping
 type BillingMethodCreate struct {
-  NameOnCard      *string                             `json:"name_on_card"`
-  Address         *string                             `json:"address"`
-  CardNumber      *string                             `json:"card_number"`
-  SecurityCode    *string                             `json:"security_code"`
-  ExpirationDate  *BillingMethodCreateExpirationDate  `json:"expiration_date"`
+  NameOnCard      *string                             `json:"name_on_card,omitempty"`
+  Address         *string                             `json:"address,omitempty"`
+  CardNumber      *string                             `json:"card_number,omitempty"`
+  SecurityCode    *string                             `json:"security_code,omitempty"`
+  ExpirationDate  *BillingMethodCreateExpirationDate  `json:"expiration_date,omitempty"`
 }
 
 // BillingMethodCreateExpirationDate mapping
 type BillingMethodCreateExpirationDate struct {
-  Month  *string  `json:"month"`
-  Year   *string  `json:"year"`
+  Month  *string  `json:"month,omitempty"`
+  Year   *string  `json:"year,omitempty"`
 }
 
 // BillingMethodInvoiceAllData mapping
 type BillingMethodInvoiceAllData struct {
-  Data  *BillingMethodInvoiceAll  `json:"data"`
+  Data  *BillingMethodInvoiceAll  `json:"data,omitempty"`
 }
 
 // BillingMethodInvoiceAll mapping
 type BillingMethodInvoiceAll struct {
-  Results  *[]BillingMethodInvoice      `json:"results"`
-  Paging   *BillingMethodInvoicePaging  `json:"paging"`
+  Results  *[]BillingMethodInvoice      `json:"results,omitempty"`
+  Paging   *BillingMethodInvoicePaging  `json:"paging,omitempty"`
 }
 
 // BillingMethodInvoiceData mapping
 type BillingMethodInvoiceData struct {
-  Data  *BillingMethodInvoice  `json:"data"`
+  Data  *BillingMethodInvoice  `json:"data,omitempty"`
 }
 
 // BillingMethodInvoice mapping
 type BillingMethodInvoice struct {
-  InvoiceID   *string                       `json:"invoice_id"`
-  BillID      *string                       `json:"bill_id"`
-  Date        *string                       `json:"date"`
-  Payment     *BillingMethodInvoicePayment  `json:"payment"`
-  Invoice     *BillingMethodInvoiceContent  `json:"invoice"`
+  InvoiceID   *string                       `json:"invoice_id,omitempty"`
+  BillID      *string                       `json:"bill_id,omitempty"`
+  Date        *string                       `json:"date,omitempty"`
+  Payment     *BillingMethodInvoicePayment  `json:"payment,omitempty"`
+  Invoice     *BillingMethodInvoiceContent  `json:"invoice,omitempty"`
 }
 
 // BillingMethodInvoicePayment mapping
 type BillingMethodInvoicePayment struct {
-  IsPaid         *bool  `json:"is_paid"`
-  NumberRetries  *uint  `json:"number_retries"`
+  IsPaid         *bool  `json:"is_paid,omitempty"`
+  NumberRetries  *uint  `json:"number_retries,omitempty"`
 }
 
 // BillingMethodInvoiceContent mapping
 type BillingMethodInvoiceContent struct {
-  ID        *string                          `json:"id"`
-  Currency  *string                          `json:"currency"`
-  Due       *BillingMethodInvoiceContentDue  `json:"due"`
+  ID        *string                          `json:"id,omitempty"`
+  Currency  *string                          `json:"currency,omitempty"`
+  Due       *BillingMethodInvoiceContentDue  `json:"due,omitempty"`
 }
 
 // BillingMethodInvoiceContentDue mapping
 type BillingMethodInvoiceContentDue struct {
-  Total   *uint                                  `json:"total"`
-  Parts   *[]BillingMethodInvoiceContentDuePart  `json:"parts"`
+  Total   *uint                                  `json:"total,omitempty"`
+  Parts   *[]BillingMethodInvoiceContentDuePart  `json:"parts,omitempty"`
 }
 
 // BillingMethodInvoiceContentDuePart mapping
 type BillingMethodInvoiceContentDuePart struct {
-  ID        *string                                      `json:"id"`
-  Name      *string                                      `json:"name"`
-  Domain    *string                                      `json:"domain"`
-  Plugins   *[]BillingMethodInvoiceContentDuePartPlugin  `json:"plugins"`
+  ID        *string                                      `json:"id,omitempty"`
+  Name      *string                                      `json:"name,omitempty"`
+  Domain    *string                                      `json:"domain,omitempty"`
+  Plugins   *[]BillingMethodInvoiceContentDuePartPlugin  `json:"plugins,omitempty"`
 }
 
 // BillingMethodInvoiceContentDuePartPlugin mapping
 type BillingMethodInvoiceContentDuePartPlugin struct {
-  ID     *string  `json:"id"`
-  Name   *string  `json:"name"`
-  Price  *uint    `json:"price"`
+  ID     *string  `json:"id,omitempty"`
+  Name   *string  `json:"name,omitempty"`
+  Price  *uint    `json:"price,omitempty"`
 }
 
 // BillingMethodInvoicePaging mapping
 type BillingMethodInvoicePaging struct {
-  Range    *uint  `json:"range"`
-  PerPage  *uint  `json:"per_page"`
-  Total    *uint  `json:"total"`
+  Range    *uint  `json:"range,omitempty"`
+  PerPage  *uint  `json:"per_page,omitempty"`
+  Total    *uint  `json:"total,omitempty"`
 }
 
 // BillingMethodLink mapping
 type BillingMethodLink struct {
-  Service  *string  `json:"service"`
+  Service  *string  `json:"service,omitempty"`
 }
 
 

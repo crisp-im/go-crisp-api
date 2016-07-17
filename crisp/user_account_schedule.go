@@ -8,34 +8,34 @@ package crisp
 
 // UserScheduleSettingsData mapping
 type UserScheduleSettingsData struct {
-  Data  *UserScheduleSettings  `json:"data"`
+  Data  *UserScheduleSettings  `json:"data,omitempty"`
 }
 
 // UserScheduleSettings mapping
 type UserScheduleSettings struct {
-  UserID    *string                     `json:"user_id"`
-  Enabled   *bool                       `json:"enabled"`
-  Presence  *bool                       `json:"presence"`
-  Offset    *int                        `json:"offset"`
-  Days      *UserScheduleSettingsDays   `json:"days"`
-  Hours     *UserScheduleSettingsHours  `json:"hours"`
+  UserID    *string                     `json:"user_id,omitempty"`
+  Enabled   *bool                       `json:"enabled,omitempty"`
+  Presence  *bool                       `json:"presence,omitempty"`
+  Offset    *int                        `json:"offset,omitempty"`
+  Days      *UserScheduleSettingsDays   `json:"days,omitempty"`
+  Hours     *UserScheduleSettingsHours  `json:"hours,omitempty"`
 }
 
 // UserScheduleSettingsDays mapping
 type UserScheduleSettingsDays struct {
-  Monday     *bool  `json:"monday"`
-  Tuesday    *bool  `json:"tuesday"`
-  Wednesday  *bool  `json:"wednesday"`
-  Thursday   *bool  `json:"thursday"`
-  Friday     *bool  `json:"friday"`
-  Saturday   *bool  `json:"saturday"`
-  Sunday     *bool  `json:"sunday"`
+  Monday     *bool  `json:"monday,omitempty"`
+  Tuesday    *bool  `json:"tuesday,omitempty"`
+  Wednesday  *bool  `json:"wednesday,omitempty"`
+  Thursday   *bool  `json:"thursday,omitempty"`
+  Friday     *bool  `json:"friday,omitempty"`
+  Saturday   *bool  `json:"saturday,omitempty"`
+  Sunday     *bool  `json:"sunday,omitempty"`
 }
 
 // UserScheduleSettingsHours mapping
 type UserScheduleSettingsHours struct {
-  From  *string  `json:"from"`
-  To    *string  `json:"to"`
+  From  *string  `json:"from,omitempty"`
+  To    *string  `json:"to,omitempty"`
 }
 
 

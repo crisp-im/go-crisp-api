@@ -59,7 +59,7 @@ type Response struct {
 // ErrorResponse maps an API HTTP error response
 type ErrorResponse struct {
   Response *http.Response
-  Reason   string  `json:"reason"`
+  Reason   string  `json:"reason,omitempty"`
 }
 
 

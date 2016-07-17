@@ -8,20 +8,20 @@ package crisp
 
 // UserAccountData mapping
 type UserAccountData struct {
-  Data  *UserAccount  `json:"data"`
+  Data  *UserAccount  `json:"data,omitempty"`
 }
 
 // UserAccount mapping
 type UserAccount struct {
-  UserID  *string  `json:"user_id"`
+  UserID  *string  `json:"user_id,omitempty"`
 }
 
 // UserAccountCreate mapping
 type UserAccountCreate struct {
-  Email      *string  `json:"email"`
-  Passowrd   *string  `json:"password"`
-  FirstName  *string  `json:"first_name"`
-  LastName   *string  `json:"last_name"`
+  Email      *string  `json:"email,omitempty"`
+  Passowrd   *string  `json:"password,omitempty"`
+  FirstName  *string  `json:"first_name,omitempty"`
+  LastName   *string  `json:"last_name,omitempty"`
 }
 
 

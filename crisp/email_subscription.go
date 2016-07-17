@@ -13,12 +13,12 @@ import (
 
 // SubscriptionStatusData mapping
 type SubscriptionStatusData struct {
-  Data  *SubscriptionStatus  `json:"data"`
+  Data  *SubscriptionStatus  `json:"data,omitempty"`
 }
 
 // SubscriptionStatus mapping
 type SubscriptionStatus struct {
-  Subscribed  *bool  `json:"subscribed"`
+  Subscribed  *bool  `json:"subscribed,omitempty"`
 }
 
 
