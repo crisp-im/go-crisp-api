@@ -20,7 +20,7 @@ type PluginListData struct {
 
 // ListAllPlugins lists all available plugins on the marketplace.
 // Reference: https://docs.crisp.im/api/v1/#plugin-plugins-list-get
-func (service *WebsiteService) ListAllPlugins(pageNumber uint) (*[]PluginInformation, *Response, error) {
+func (service *PluginService) ListAllPlugins(pageNumber uint) (*[]PluginInformation, *Response, error) {
   url := fmt.Sprintf("plugins/list/all/%d", pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -36,7 +36,7 @@ func (service *WebsiteService) ListAllPlugins(pageNumber uint) (*[]PluginInforma
 
 // ListFeaturedPlugins lists featured plugins on the marketplace, from the newer to older.
 // Reference: https://docs.crisp.im/api/v1/#plugin-plugins-list-get-1
-func (service *WebsiteService) ListFeaturedPlugins(pageNumber uint) (*[]PluginInformation, *Response, error) {
+func (service *PluginService) ListFeaturedPlugins(pageNumber uint) (*[]PluginInformation, *Response, error) {
   url := fmt.Sprintf("plugins/list/featured/%d", pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -52,7 +52,7 @@ func (service *WebsiteService) ListFeaturedPlugins(pageNumber uint) (*[]PluginIn
 
 // SearchPlugins searches for plugins in the marketplace, given a search term.
 // Reference: https://docs.crisp.im/api/v1/#plugin-plugins-list-get-2
-func (service *WebsiteService) SearchPlugins(query string, pageNumber uint) (*[]PluginInformation, *Response, error) {
+func (service *PluginService) SearchPlugins(query string, pageNumber uint) (*[]PluginInformation, *Response, error) {
   url := fmt.Sprintf("plugins/list/search/%d?query=%s", pageNumber, url.QueryEscape(query))
   req, _ := service.client.NewRequest("GET", url, nil)
 
