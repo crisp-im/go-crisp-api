@@ -6,6 +6,33 @@
 package crisp
 
 
-// import (
-//   "fmt"
-// )
+import (
+  "fmt"
+)
+
+
+// WebsiteAvailabilityStatusData mapping
+type WebsiteAvailabilityStatusData struct {
+  Data  *WebsiteAvailabilityStatus  `json:"data,omitempty"`
+}
+
+// WebsiteAvailabilityStatus mapping
+type WebsiteAvailabilityStatus struct {
+  Status  *string  `json:"status,omitempty"`
+}
+
+
+// GetWebsiteAvailabilityStatus resolves the website availability status. This tells whether the chatbox is seen as online or away by visitors.
+// Reference: https://docs.crisp.im/api/v1/#website-website-availability-get
+func (service *WebsiteService) GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error) {
+  url := fmt.Sprintf("website/%s/availability/status", websiteID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  billing := new(WebsiteAvailabilityStatusData)
+  resp, err := service.client.Do(req, billing)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return billing.Data, resp, err
+}

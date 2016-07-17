@@ -42,7 +42,6 @@ type WebsiteBillingLink struct {
 }
 
 
-
 // GetWebsiteBilling resolves website billing information (payment method linked to website).
 // Reference: https://docs.crisp.im/api/v1/#website-website-billing-get
 func (service *WebsiteService) GetWebsiteBilling(websiteID string) (*WebsiteBilling, *Response, error) {
