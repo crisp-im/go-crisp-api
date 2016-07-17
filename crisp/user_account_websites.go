@@ -18,7 +18,7 @@ type UserWebsite struct {
   Domain   *string    `json:"domain"`
   Logo     *string    `json:"logo"`
   Members  *[]string  `json:"members"`
-  Count    *int       `json:"count"`
+  Count    *uint      `json:"count"`
 }
 
 

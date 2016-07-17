@@ -20,8 +20,8 @@ type UserAvailability struct {
 
 // UserAvailabilityTime mapping
 type UserAvailabilityTime struct {
-  For    *int  `json:"for"`
-  Since  *int  `json:"since"`
+  For    *uint  `json:"for"`
+  Since  *uint  `json:"since"`
 }
 
 // UserAvailabilityStatusData mapping
@@ -54,7 +54,7 @@ func (service *UserService) GetUserAvailability() (*UserAvailability, *Response,
 
 // UpdateUserAvailability updates the advertised user availability, for a defined period of time after which to automatically expire.
 // Reference: https://docs.crisp.im/api/v1/#user-user-availability-patch
-func (service *UserService) UpdateUserAvailability(availabilityType string, timeFor int) (*Response, error) {
+func (service *UserService) UpdateUserAvailability(availabilityType string, timeFor uint) (*Response, error) {
   url := "user/availability"
   req, _ := service.client.NewRequest("PATCH", url, UserAvailability{Type: &availabilityType, Time: &UserAvailabilityTime{For: &timeFor}})
 

@@ -25,7 +25,7 @@ type PluginInformation struct {
   Description  *string    `json:"description"`
   Features     *[]string  `json:"features"`
   Showcase     *[]string  `json:"showcase"`
-  Price        *int       `json:"price"`
+  Price        *uint      `json:"price"`
   Color        *string    `json:"color"`
   Icon         *string    `json:"icon"`
   Banner       *string    `json:"banner"`
@@ -44,8 +44,8 @@ type PluginStarsObject struct {
 
 // PluginStars mapping
 type PluginStars struct {
-  Mean   *int  `json:"mean"`
-  Total  *int  `json:"total"`
+  Mean   *uint  `json:"mean"`
+  Total  *uint  `json:"total"`
 }
 
 // PluginPersonalPluginRankData mapping
@@ -55,7 +55,7 @@ type PluginPersonalPluginRankData struct {
 
 // PluginPersonalPluginRank mapping
 type PluginPersonalPluginRank struct {
-  Rank  *int  `json:"rank"`
+  Rank  *uint  `json:"rank"`
 }
 
 
@@ -109,7 +109,7 @@ func (service *PluginService) GetPersonalPluginRank(pluginID string) (*PluginPer
 
 // RankPlugin ranks the plugin (as current user).
 // Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get-2
-func (service *PluginService) RankPlugin(pluginID string, rank int) (*Response, error) {
+func (service *PluginService) RankPlugin(pluginID string, rank uint) (*Response, error) {
   url := fmt.Sprintf("plugin/%s/stars/self", pluginID)
   req, _ := service.client.NewRequest("PATCH", url, PluginPersonalPluginRank{&rank})
 
