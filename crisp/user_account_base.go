@@ -5,6 +5,7 @@
 
 package crisp
 
+
 // UserAccountData mapping
 type UserAccountData struct {
   Data  *UserAccount  `json:"data"`

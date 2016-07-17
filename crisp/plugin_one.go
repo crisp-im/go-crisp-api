@@ -5,9 +5,11 @@
 
 package crisp
 
+
 import (
   "fmt"
 )
+
 
 // PluginInformationData mapping
 type PluginInformationData struct {

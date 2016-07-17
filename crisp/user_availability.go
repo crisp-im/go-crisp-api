@@ -5,6 +5,7 @@
 
 package crisp
 
+
 // UserAvailabilityData mapping
 type UserAvailabilityData struct {
   Data  *UserAvailability  `json:"data"`

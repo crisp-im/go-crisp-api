@@ -5,9 +5,11 @@
 
 package crisp
 
+
 import (
   "fmt"
 )
+
 
 // SubscriptionStatusData mapping
 type SubscriptionStatusData struct {

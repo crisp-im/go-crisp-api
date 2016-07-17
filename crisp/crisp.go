@@ -5,6 +5,7 @@
 
 package crisp
 
+
 import (
   "bytes"
   "encoding/json"
@@ -14,6 +15,7 @@ import (
   "net/http"
   "net/url"
 )
+
 
 const (
   libraryVersion = "1.0.0"
