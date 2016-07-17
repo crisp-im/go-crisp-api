@@ -11,5 +11,5 @@ The full API reference is available at: [docs.crisp.im/api/](https://docs.crisp.
 ## Usage
 
 ```go
-import "github.com/crisp-im/go-crisp-api/api"
+import "github.com/crisp-im/go-crisp-api/crisp"
 ```
