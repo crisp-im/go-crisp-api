@@ -43,9 +43,9 @@ func (service *UserService) GetUserAccount() (*UserAccount, *Response, error) {
 
 // CreateUserAccount creates a new Crisp user account (operator account).
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-base-post
-func (service *EmailService) CreateUserAccount(email string, password string, firstName string, lastName string) (*Response, error) {
+func (service *EmailService) CreateUserAccount(user UserAccountCreate) (*Response, error) {
   url := "user/account"
-  req, _ := service.client.NewRequest("POST", url, UserAccountCreate{&email, &password, &firstName, &lastName})
+  req, _ := service.client.NewRequest("POST", url, user)
 
   return service.client.Do(req, nil)
 }

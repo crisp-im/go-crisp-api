@@ -57,9 +57,9 @@ func (service *UserService) GetScheduleSettings() (*UserScheduleSettings, *Respo
 
 // UpdateScheduleSettings updates user schedule settings.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-schedule-patch
-func (service *UserService) UpdateScheduleSettings(enabled bool, presence bool, offset int, dayMonday bool, dayTuesday bool, dayWednesday bool, dayThursday bool, dayFriday bool, daySaturday bool, daySunday bool, hourFrom string, hourTo string) (*Response, error) {
+func (service *UserService) UpdateScheduleSettings(schedule UserScheduleSettings) (*Response, error) {
   url := "user/account/schedule"
-  req, _ := service.client.NewRequest("PATCH", url, UserScheduleSettings{Enabled: &enabled, Presence: &presence, Offset: &offset, Days: &UserScheduleSettingsDays{Monday: &dayMonday, Tuesday: &dayTuesday, Wednesday: &dayWednesday, Thursday: &dayThursday, Friday: &dayFriday, Saturday: &daySaturday, Sunday: &daySunday}, Hours: &UserScheduleSettingsHours{From: &hourFrom, To: &hourTo}})
+  req, _ := service.client.NewRequest("PATCH", url, schedule)
 
   return service.client.Do(req, nil)
 }

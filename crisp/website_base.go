@@ -30,9 +30,9 @@ type WebsiteCreate struct {
 
 // CreateWebsite creates a new website.
 // Reference: https://docs.crisp.im/api/v1/#website-website-base-post
-func (service *WebsiteService) CreateWebsite(name string, domain string) (*Website, *Response, error) {
+func (service *WebsiteService) CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error) {
   url := "website"
-  req, _ := service.client.NewRequest("POST", url, WebsiteCreate{Name: &name, Domain: &domain})
+  req, _ := service.client.NewRequest("POST", url, websiteData)
 
   website := new(WebsiteData)
   resp, err := service.client.Do(req, website)

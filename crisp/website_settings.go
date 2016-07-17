@@ -63,9 +63,9 @@ func (service *WebsiteService) GetWebsiteSettings(websiteID string) (*WebsiteSet
 
 // UpdateWebsiteSettings updates the current settings for a website.
 // Reference: https://docs.crisp.im/api/v1/#website-website-settings-patch
-func (service *WebsiteService) UpdateWebsiteSettings(websiteID string, name string, domain string, logo string, contactEmail string, contactPhone string, chatboxAvailabilityTooltip bool, chatboxHideOnAway bool, chatboxPositionReverse bool, chatboxEmailVisitors bool, chatboxColorTheme string, chatboxTextTheme string, chatboxWelcomeMessage string, chatboxLocale string) (*Response, error) {
+func (service *WebsiteService) UpdateWebsiteSettings(websiteID string, settings WebsiteSettings) (*Response, error) {
   url := fmt.Sprintf("website/%s/settings", websiteID)
-  req, _ := service.client.NewRequest("PATCH", url, WebsiteSettings{Name: &name, Domain: &domain, Logo: &logo, Contact: &WebsiteSettingsContact{Email: &contactEmail, Phone: &contactPhone}, Chatbox: &WebsiteSettingsChatbox{AvailabilityTooltip: &chatboxAvailabilityTooltip, HideOnAway: &chatboxHideOnAway, PositionReverse: &chatboxPositionReverse, EmailVisitors: &chatboxEmailVisitors, ColorTheme: &chatboxColorTheme, TextTheme: &chatboxTextTheme, WelcomeMessage: &chatboxWelcomeMessage, Locale: &chatboxLocale}})
+  req, _ := service.client.NewRequest("PATCH", url, settings)
 
   return service.client.Do(req, nil)
 }

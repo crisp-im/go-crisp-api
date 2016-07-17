@@ -28,21 +28,21 @@ func (service *UserService) GetNotificationSettings() (*UserNotificationSettings
   url := "user/account/notification"
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  settings := new(UserNotificationSettingsData)
-  resp, err := service.client.Do(req, settings)
+  notifications := new(UserNotificationSettingsData)
+  resp, err := service.client.Do(req, notifications)
   if err != nil {
     return nil, resp, err
   }
 
-  return settings.Data, resp, err
+  return notifications.Data, resp, err
 }
 
 
 // UpdateNotificationSettings updates the user notification settings.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-notification-patch
-func (service *EmailService) UpdateNotificationSettings(disabled bool, messagesOnline bool, messagesOffline bool, messagesTranscript bool, sounds bool) (*Response, error) {
+func (service *EmailService) UpdateNotificationSettings(notifications UserNotificationSettings) (*Response, error) {
   url := "user/account/notification"
-  req, _ := service.client.NewRequest("POST", url, UserNotificationSettings{Disabled: &disabled, MessagesOnline: &messagesOnline, MessagesOffline: &messagesOffline, MessagesTranscript: &messagesTranscript, Sounds: &sounds})
+  req, _ := service.client.NewRequest("POST", url, notifications)
 
   return service.client.Do(req, nil)
 }

@@ -36,21 +36,21 @@ func (service *UserService) GetProfile() (*UserProfile, *Response, error) {
   url := "user/account/profile"
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  account := new(UserProfileData)
-  resp, err := service.client.Do(req, account)
+  profile := new(UserProfileData)
+  resp, err := service.client.Do(req, profile)
   if err != nil {
     return nil, resp, err
   }
 
-  return account.Data, resp, err
+  return profile.Data, resp, err
 }
 
 
 // UpdateProfile updates user profile data.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-profile-patch
-func (service *EmailService) UpdateProfile(firstName string, lastName string, email string, password string, avatar string) (*Response, error) {
+func (service *EmailService) UpdateProfile(profile UserProfileSave) (*Response, error) {
   url := "user/account/profile"
-  req, _ := service.client.NewRequest("PATCH", url, UserProfileSave{FirstName: &firstName, LastName: &lastName, Email: &email, Password: &password, Avatar: &avatar})
+  req, _ := service.client.NewRequest("PATCH", url, profile)
 
   return service.client.Do(req, nil)
 }

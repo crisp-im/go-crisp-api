@@ -152,9 +152,9 @@ func (service *UserService) ListAllBillingMethods() (*[]BillingMethodAll, *Respo
 
 // AddNewBillingMethod adds a payment method (credit card) to the user account.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-billing-post
-func (service *UserService) AddNewBillingMethod(nameOnCard string, address string, cardNumber string, securityCode string, expirationDateMonth string, expirationDateYear string) (*Response, error) {
+func (service *UserService) AddNewBillingMethod(billing BillingMethodCreate) (*Response, error) {
   url := "user/account/billing"
-  req, _ := service.client.NewRequest("POST", url, BillingMethodCreate{NameOnCard: &nameOnCard, Address: &address, CardNumber: &cardNumber, SecurityCode: &securityCode, ExpirationDate: &BillingMethodCreateExpirationDate{Month: &expirationDateMonth, Year: &expirationDateYear}})
+  req, _ := service.client.NewRequest("POST", url, billing)
 
   return service.client.Do(req, nil)
 }
