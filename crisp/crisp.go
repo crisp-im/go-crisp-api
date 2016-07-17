@@ -6,7 +6,11 @@
 package crisp
 
 import (
+  "bytes"
   "encoding/json"
+  "fmt"
+  "io"
+  "io/ioutil"
   "net/http"
   "net/url"
 )
@@ -34,12 +38,24 @@ type service struct {
   client *Client
 }
 
+type Response struct {
+  *http.Response
+}
+
 type ErrorResponse struct {
   Response *http.Response
 }
 
 
-// Returns a new API client
+// Error prints an error response
+func (response *ErrorResponse) Error() string {
+  return fmt.Sprintf("%v %v: %d %v %+v",
+    response.Response.Request.Method, response.Response.Request.URL,
+    response.Response.StatusCode)
+}
+
+
+// NewClient returns a new API client
 func NewClient(httpClient *http.Client) *Client {
   if httpClient == nil {
     httpClient = http.DefaultClient
@@ -56,7 +72,7 @@ func NewClient(httpClient *http.Client) *Client {
 }
 
 
-// Creates an API request
+// NewRequest creates an API request
 func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http.Request, error) {
   rel, err := url.Parse(urlStr)
   if err != nil {
@@ -88,37 +104,22 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
 }
 
 
-// Sends an API request
+// Do sends an API request
 func (client *Client) Do(req *http.Request, v interface{}) (*Response, error) {
-  rateLimitCategory := category(req.URL.Path)
-
-  // If we've hit rate limit, don't make further requests before Reset time.
-  if err := client.checkRateLimitBeforeDo(req, rateLimitCategory); err != nil {
-    return nil, err
-  }
-
   resp, err := client.client.Do(req)
   if err != nil {
     return nil, err
   }
 
   defer func() {
-    // Drain up to 512 bytes and close the body to let the Transport reuse the connection
     io.CopyN(ioutil.Discard, resp.Body, 512)
     resp.Body.Close()
   }()
 
   response := newResponse(resp)
 
-  client.rateMu.Lock()
-  client.rateLimits[rateLimitCategory] = response.Rate
-  client.mostRecent = rateLimitCategory
-  client.rateMu.Unlock()
-
   err = CheckResponse(resp)
   if err != nil {
-    // even though there was an error, we still return the response
-    // in case the caller wants to inspect it further
     return response, err
   }
 
@@ -128,7 +129,7 @@ func (client *Client) Do(req *http.Request, v interface{}) (*Response, error) {
     } else {
       err = json.NewDecoder(resp.Body).Decode(v)
       if err == io.EOF {
-        err = nil // ignore EOF errors caused by empty response body
+        err = nil
       }
     }
   }
@@ -137,7 +138,15 @@ func (client *Client) Do(req *http.Request, v interface{}) (*Response, error) {
 }
 
 
-// Check response for errors
+// newResponse creates an HTTP response
+func newResponse(httpResponse *http.Response) *Response {
+  response := &Response{Response: httpResponse}
+
+  return response
+}
+
+
+// CheckResponse checks response for errors
 func CheckResponse(response *http.Response) error {
   if code := response.StatusCode; 200 <= code && code <= 299 {
     return nil
