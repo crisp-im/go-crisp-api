@@ -24,18 +24,18 @@ type ConversationData struct {
 
 // Conversation mapping
 type Conversation struct {
-  SessionID     *string               `json:"session_id,omitempty"`
-  WebsiteID     *string               `json:"website_id,omitempty"`
-  State         *string               `json:"state,omitempty"`
-  Status        *uint8                `json:"status,omitempty"`
-  IsBlocked     *bool                 `json:"is_blocked,omitempty"`
-  Availability  *string               `json:"availability,omitempty"`
-  LastMessage   *string               `json:"last_message,omitempty"`
-  CreatedAt     *uint                 `json:"created_at,omitempty"`
-  UpdatedAt     *uint                 `json:"updated_at,omitempty"`
-  Unread        *ConversationUnread   `json:"unread,omitempty"`
-  Meta          *ConversationMeta     `json:"meta,omitempty"`
-  Messages      *ConversationMessage  `json:"message,omitempty"`
+  SessionID     *string                 `json:"session_id,omitempty"`
+  WebsiteID     *string                 `json:"website_id,omitempty"`
+  State         *string                 `json:"state,omitempty"`
+  Status        *uint8                  `json:"status,omitempty"`
+  IsBlocked     *bool                   `json:"is_blocked,omitempty"`
+  Availability  *string                 `json:"availability,omitempty"`
+  LastMessage   *string                 `json:"last_message,omitempty"`
+  CreatedAt     *uint                   `json:"created_at,omitempty"`
+  UpdatedAt     *uint                   `json:"updated_at,omitempty"`
+  Unread        *ConversationUnread     `json:"unread,omitempty"`
+  Meta          *ConversationMeta       `json:"meta,omitempty"`
+  Messages      *[]ConversationMessage  `json:"message,omitempty"`
 }
 
 // ConversationUnread mapping
@@ -46,12 +46,12 @@ type ConversationUnread struct {
 
 // ConversationMeta mapping
 type ConversationMeta struct {
-  Nickname              *string                                     `json:"nickname,omitempty"`
-  Email                 *string                                     `json:"email,omitempty"`
-  Avatar                *string                                     `json:"avatar,omitempty"`
-  BrowsingInformations  *ConversationMetaBrowsingInformations       `json:"browsing_informations,omitempty"`
-  Tags                  *[]string                                   `json:"tags,omitempty"`
-  Pages                 *ConversationMetaBrowsingInformationsPages  `json:"pages,omitempty"`
+  Nickname              *string                                      `json:"nickname,omitempty"`
+  Email                 *string                                      `json:"email,omitempty"`
+  Avatar                *string                                      `json:"avatar,omitempty"`
+  BrowsingInformations  *ConversationMetaBrowsingInformations        `json:"browsing_informations,omitempty"`
+  Tags                  *[]string                                    `json:"tags,omitempty"`
+  Pages                 *[]ConversationMetaBrowsingInformationsPage  `json:"pages,omitempty"`
 }
 
 // ConversationMessage mapping
@@ -134,8 +134,8 @@ type ConversationMetaBrowsingInformationsSystemBrowser struct {
   Name     *string  `json:"name,omitempty"`
 }
 
-// ConversationMetaBrowsingInformationsPages mapping
-type ConversationMetaBrowsingInformationsPages struct {
+// ConversationMetaBrowsingInformationsPage mapping
+type ConversationMetaBrowsingInformationsPage struct {
   PageTitle  *string  `json:"page_title,omitempty"`
   PageURL    *string  `json:"page_url,omitempty"`
   Timestamp  *uint    `json:"timestamp,omitempty"`
@@ -157,7 +157,7 @@ type ConversationTextMessage struct {
   From         *string  `json:"from,omitempty"`
   Origin       *string  `json:"origin,omitempty"`
   Content      *string  `json:"content,omitempty"`
-  Fingerprint  *string  `json:"fingerprint,omitempty"`
+  Fingerprint  *int     `json:"fingerprint,omitempty"`
 }
 
 // ConversationFileMessage mapping
@@ -166,7 +166,7 @@ type ConversationFileMessage struct {
   From         *string                          `json:"from,omitempty"`
   Origin       *string                          `json:"origin,omitempty"`
   Content      *ConversationFileMessageContent  `json:"content,omitempty"`
-  Fingerprint  *string                          `json:"fingerprint,omitempty"`
+  Fingerprint  *int                             `json:"fingerprint,omitempty"`
 }
 
 // ConversationFileMessageContent mapping
