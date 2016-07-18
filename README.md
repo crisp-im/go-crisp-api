@@ -97,9 +97,9 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Update Profile**: `crisp.User.UpdateProfile(profile UserProfileUpdate) (*Response, error)`
 
 * **User Account Recover**
-  * **Get Recovery Details**: `crisp.User.GetRecoveryDetails(recoverIdentifier string, recoverKey string) (*Response, error)`
-  * **Send Recovery Password**: `crisp.User.SendRecoveryPassword(recoverIdentifier string, recoverKey string) (*Response, error)`
-  * **Delete Recovery Keypair**: `crisp.User.DeleteRecoveryKeypair(recoverIdentifier string, recoverKey string) (*Response, error)`
+  * **Get Recovery Details**: `crisp.User.GetRecoveryDetails(userID string, recoverIdentifier string, recoverKey string) (*Response, error)`
+  * **Send Recovery Password**: `crisp.User.SendRecoveryPassword(userID string, recoverIdentifier string, recoverKey string, password string) (*Response, error)`
+  * **Delete Recovery Keypair**: `crisp.User.DeleteRecoveryKeypair(userID string, recoverIdentifier string, recoverKey string) (*Response, error)`
 
 * **User Account Schedule**
   * **Get Schedule Settings**: `crisp.User.GetScheduleSettings() (*UserScheduleSettings, *Response, error)`
@@ -140,9 +140,9 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Unlink Operator From Website**: `crisp.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
 
 * **Website Invite**
-  * **Get Invite Details**: `crisp.Website.GetInviteDetails(websiteID string, recoverIdentifier string, recoverKey string) (*WebsiteInvite, *Response, error)`
-  * **Redeem Invite**: `crisp.Website.RedeemInvite(websiteID string, recoverIdentifier string, recoverKey string) (*Response, error)`
-  * **Delete Invite Keypair**: `crisp.Website.DeleteInviteKeypair(websiteID string, recoverIdentifier string, recoverKey string) (*Response, error)`
+  * **Get Invite Details**: `crisp.Website.GetInviteDetails(websiteID string, inviteIdentifier string, inviteKey string) (*WebsiteInvite, *Response, error)`
+  * **Redeem Invite**: `crisp.Website.RedeemInvite(websiteID string, inviteIdentifier string, inviteKey string) (*Response, error)`
+  * **Delete Invite Keypair**: `crisp.Website.DeleteInviteKeypair(websiteID string, inviteIdentifier string, inviteKey string) (*Response, error)`
 
 * **Website Statistics**
   * **Get All Statistics**: `crisp.Website.GetAllStatistics(websiteID string) (*WebsiteStatisticsAll, *Response, error)`
@@ -161,7 +161,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website Conversations**
   * **List Conversations**: `crisp.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
-  * **List Conversations (Search Variant)**: `crisp.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string) (*[]Conversation, *Response, error)`
+  * **List Conversations (Search Variant)**: `crisp.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
 
 * **Website Conversation**
   * **Create A New Conversation**: `crisp.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
@@ -191,7 +191,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Plugin Subscription**
   * **List All Active Subscriptions**: `crisp.Plugin.ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error)`
-  * **List Subscriptions For A Website**: `crisp.Plugin.ListSubscriptionsForWebsite(websiteID string) (*PluginSubscription, *Response, error)`
+  * **List Subscriptions For A Website**: `crisp.Plugin.ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error)`
   * **Get Subscription Details**: `crisp.Plugin.GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error)`
   * **Subscribe Website To Plugin**: `crisp.Plugin.SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error)`
   * **Unsubscribe Plugin From Website**: `crisp.Plugin.UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error)`

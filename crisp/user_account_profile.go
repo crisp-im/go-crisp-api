@@ -54,7 +54,7 @@ func (service *UserService) GetProfile() (*UserProfile, *Response, error) {
 
 // UpdateProfile updates user profile data.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-profile-patch
-func (service *EmailService) UpdateProfile(profile UserProfileUpdate) (*Response, error) {
+func (service *UserService) UpdateProfile(profile UserProfileUpdate) (*Response, error) {
   url := "user/account/profile"
   req, _ := service.client.NewRequest("PATCH", url, profile)
 

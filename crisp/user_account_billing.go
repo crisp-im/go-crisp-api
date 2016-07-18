@@ -13,13 +13,13 @@ import (
 
 // BillingMethodAllData mapping
 type BillingMethodAllData struct {
-  Data  *[]BillingMethodAll  `json:"data,omitempty"`
+  Data  *BillingMethodAll  `json:"data,omitempty"`
 }
 
 // BillingMethodAll mapping
 type BillingMethodAll struct {
-  UserID  *string         `json:"user_id,omitempty"`
-  Cards   *BillingMethod  `json:"cards,omitempty"`
+  UserID  *string           `json:"user_id,omitempty"`
+  Cards   *[]BillingMethod  `json:"cards,omitempty"`
 }
 
 // BillingMethodData mapping
@@ -160,7 +160,7 @@ func (instance BillingMethodInvoice) String() string {
 
 // ListAllBillingMethods resolves the current user account information.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-base-get
-func (service *UserService) ListAllBillingMethods() (*[]BillingMethodAll, *Response, error) {
+func (service *UserService) ListAllBillingMethods() (*BillingMethodAll, *Response, error) {
   url := "user/account/billing"
   req, _ := service.client.NewRequest("GET", url, nil)
 

@@ -89,11 +89,11 @@ func (service *PluginService) ListAllActiveSubscriptions() (*[]PluginSubscriptio
 
 // ListSubscriptionsForWebsite lists plugin subscriptions for given website.
 // Reference: https://docs.crisp.im/api/v1/#plugin-plugins-subscription-get-1
-func (service *PluginService) ListSubscriptionsForWebsite(websiteID string) (*PluginSubscription, *Response, error) {
+func (service *PluginService) ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  plugins := new(PluginSubscriptionData)
+  plugins := new(PluginSubscriptionListData)
   resp, err := service.client.Do(req, plugins)
   if err != nil {
     return nil, resp, err
@@ -123,7 +123,7 @@ func (service *PluginService) GetSubscriptionDetails(websiteID string, pluginID 
 // Reference: https://docs.crisp.im/api/v1/#plugin-plugins-subscription-post
 func (service *PluginService) SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s", websiteID)
-  req, _ := service.client.NewRequest("PATCH", url, PluginSubscriptionCreate{PluginID: &pluginID})
+  req, _ := service.client.NewRequest("POST", url, PluginSubscriptionCreate{PluginID: &pluginID})
 
   return service.client.Do(req, nil)
 }

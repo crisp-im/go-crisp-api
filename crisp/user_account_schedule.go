@@ -13,12 +13,12 @@ type UserScheduleSettingsData struct {
 
 // UserScheduleSettings mapping
 type UserScheduleSettings struct {
-  UserID    *string                     `json:"user_id,omitempty"`
-  Enabled   *bool                       `json:"enabled,omitempty"`
-  Presence  *bool                       `json:"presence,omitempty"`
-  Offset    *int                        `json:"offset,omitempty"`
-  Days      *UserScheduleSettingsDays   `json:"days,omitempty"`
-  Hours     *UserScheduleSettingsHours  `json:"hours,omitempty"`
+  UserID    *string                       `json:"user_id,omitempty"`
+  Enabled   *bool                         `json:"enabled,omitempty"`
+  Presence  *bool                         `json:"presence,omitempty"`
+  Offset    *int                          `json:"offset,omitempty"`
+  Days      *UserScheduleSettingsDays     `json:"days,omitempty"`
+  Hours     *[]UserScheduleSettingsHours  `json:"hours,omitempty"`
 }
 
 // UserScheduleSettingsDays mapping
@@ -40,7 +40,6 @@ type UserScheduleSettingsHours struct {
 
 // UserScheduleSettingsUpdate mapping
 type UserScheduleSettingsUpdate struct {
-  UserID    string                           `json:"user_id,omitempty"`
   Enabled   bool                             `json:"enabled,omitempty"`
   Presence  bool                             `json:"presence,omitempty"`
   Offset    int                              `json:"offset,omitempty"`
