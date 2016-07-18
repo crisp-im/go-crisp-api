@@ -22,3 +22,165 @@ client := crisp.NewClient(nil, nil)
 // Get plugin information
 plugin, _, err := client.Plugin.GetPluginInformation("185fe7ee-7cc6-4b8b-884d-fda9df632c13", nil)
 ```
+
+## Authentication
+
+To authenticate to the API, generate your session identifier and session key [with this guide](https://docs.crisp.im/api/v1/#header-authentication).
+
+Then, add authentication parameters to your `client` instance right after you create it:
+
+```go
+client := crisp.NewClient(nil, nil)
+
+// Authenticate to API (identifier, key)
+crisp.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
+
+// Now, you can use authenticated API sections.
+```
+
+## Resource Methods
+
+The Crisp API methods are fully transcribed into this library. **Programmatic methods names are named after their label name in the [API Reference](https://docs.crisp.im/api/v1/)**.
+
+Thus, it is straightforward to look for them in the library while reading the [API Reference](https://docs.crisp.im/api/v1/).
+
+In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.NewClient(nil, nil)` and then call eg: `client.User.CheckSessionValidity()`.
+
+### Email
+
+* **Email Subscription**
+  * **Get Subscription Status**: `crisp.Email.GetSubscriptionStatus(emailHash string, key string) (*SubscriptionStatus, *Response, error)`
+  * **Update Subscription Status**: `crisp.Email.UpdateSubscriptionStatus(emailHash string, key string, subscribed bool) (*Response, error)`
+
+### User
+
+* **User Availability**
+  * **Get User Availability**: `crisp.User.GetUserAvailability() (*UserAvailability, *Response, error)`
+  * **Update User Availability**: `crisp.User.UpdateUserAvailability(availabilityType string, timeFor uint) (*Response, error)`
+  * **Get User Availability Status**: `crisp.User.GetUserAvailabilityStatus() (*UserAvailabilityStatus, *Response, error)`
+
+* **User Account Base**
+  * **Get User Account**: `crisp.User.GetUserAccount() (*UserAccount, *Response, error)`
+  * **Create User Account**: `crisp.User.CreateUserAccount(user UserAccountCreate) (*Response, error)`
+
+* **User Account Billing**
+  * **List All Billing Methods**: `crisp.User.ListAllBillingMethods() (*[]BillingMethodAll, *Response, error)`
+  * **Add New Billing Method**: `crisp.User.AddNewBillingMethod(billing BillingMethodCreate) (*Response, error)`
+  * **Get A Billing Method**: `crisp.User.GetBillingMethod(cardID string) (*BillingMethod, *Response, error)`
+  * **Remove A Billing Method**: `crisp.User.RemoveBillingMethod(cardID string) (*Response, error)`
+  * **List Invoices For Billing Method**: `crisp.User.ListInvoicesForBillingMethod(cardID string, pageNumber int) (*BillingMethodInvoiceAll, *Response, error)`
+  * **Get An Invoice For Billing Method**: `crisp.User.GetInvoiceForBillingMethod(cardID string, invoiceID string) (*BillingMethodInvoice, *Response, error)`
+  * **Link To An External Billing Method**: `crisp.User.LinkToExternalBillingMethod(billingService string) (*Response, error)`
+
+* **User Account Notification**
+  * **Get Notification Settings**: `crisp.User.GetNotificationSettings() (*UserNotificationSettings, *Response, error)`
+  * **Update Notification Settings**: `crisp.User.UpdateNotificationSettings(notifications UserNotificationSettings) (*Response, error)`
+
+* **User Account Websites**
+  * **List Websites**: `crisp.User.ListWebsites() (*[]UserWebsite, *Response, error)`
+
+* **User Account Profile**
+  * **Get Profile**: `crisp.User.GetProfile() (*UserProfile, *Response, error)`
+  * **Update Profile**: `crisp.User.UpdateProfile(profile UserProfileSave) (*Response, error)`
+
+* **User Account Recover**
+  * **Get Recovery Details**: `crisp.User.GetRecoveryDetails(recoverIdentifier string, recoverKey string) (*Response, error)`
+  * **Send Recovery Password**: `crisp.User.SendRecoveryPassword(recoverIdentifier string, recoverKey string) (*Response, error)`
+  * **Delete Recovery Keypair**: `crisp.User.DeleteRecoveryKeypair(recoverIdentifier string, recoverKey string) (*Response, error)`
+
+* **User Account Schedule**
+  * **Get Schedule Settings**: `crisp.User.GetScheduleSettings() (*UserScheduleSettings, *Response, error)`
+  * **Update Schedule Settings**: `crisp.User.UpdateScheduleSettings(schedule UserScheduleSettings) (*Response, error)`
+
+* **User Session**
+  * **Check Session Validity**: `crisp.User.CheckSessionValidity() (*Response, error)`
+  * **Create A New Session**: `crisp.User.CreateNewSession(email string, password string) (*UserSessionParameters, *Response, error)`
+  * **Destroy A Session**: `crisp.User.DestroySession() (*Response, error)`
+  * **Recover A Session**: `crisp.User.RecoverSession(email string)`
+
+* **User Statistics**
+  * **Count Total Unread Messages**: `crisp.User.CountTotalUnreadMessages() (*UserStatistics, *Response, error)`
+
+### Website
+
+* **Website Base**
+  * **Create Website**: `crisp.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
+  * **Delete A Website**: `crisp.Website.DeleteWebsite(websiteID string) (*Response, error)`
+
+* **Website Batch**
+  * **Resolve All Conversations**: `crisp.Website.ResolveAllConversations(websiteID string) (*Response, error)`
+  * **Read All Conversations**: `crisp.Website.ReadAllConversations(websiteID string) (*Response, error)`
+
+* **Website Billing**
+  * **Get Website Billing**: `crisp.Website.GetWebsiteBilling(websiteID string) (*WebsiteBilling, *Response, error)`
+  * **Update Website Billing**: `crisp.Website.UpdateWebsiteBilling(websiteID string, cardID string) (*Response, error)`
+  * **Unlink Website Billing**: `crisp.Website.UnlinkWebsiteBilling(websiteID string) (*Response, error)`
+
+* **Website Availability**
+  * **Get Website Availability Status**: `crisp.Website.GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error)`
+
+* **Website Operator**
+  * **List Website Operators**: `crisp.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
+  * **Get A Website Operator**: `crisp.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
+  * **Invite A Website Operator**: `crisp.Website.InviteWebsiteOperator(websiteID string, email string, role string) (*Response, error)`
+  * **Change Operator Role**: `crisp.Website.ChangeOperatorRole(websiteID string, userID string, role string) (*Response, error)`
+  * **Unlink Operator From Website**: `crisp.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
+
+* **Website Invite**
+  * **Get Invite Details**: `crisp.Website.GetInviteDetails(websiteID string, recoverIdentifier string, recoverKey string) (*WebsiteInvite, *Response, error)`
+  * **Redeem Invite**: `crisp.Website.RedeemInvite(websiteID string, recoverIdentifier string, recoverKey string) (*Response, error)`
+  * **Delete Invite Keypair**: `crisp.Website.DeleteInviteKeypair(websiteID string, recoverIdentifier string, recoverKey string) (*Response, error)`
+
+* **Website Statistics**
+  * **Get All Statistics**: `crisp.Website.GetAllStatistics(websiteID string) (*WebsiteStatisticsAll, *Response, error)`
+  * **Count Total Number Of Conversations**: `crisp.Website.CountTotalNumberOfConversations(websiteID string) (*WebsiteStatisticsTotal, *Response, error)`
+  * **Count Number Of Pending Conversations**: `crisp.Website.CountNumberOfPendingConversations(websiteID string) (*WebsiteStatisticsPending, *Response, error)`
+  * **Count Number Of Unresolved Conversations**: `crisp.Website.CountNumberOfUnresolvedConversations(websiteID string) (*WebsiteStatisticsUnresolved, *Response, error)`
+  * **Count Number Of Resolved Conversations**: `crisp.Website.CountNumberOfResolvedConversations(websiteID string) (*WebsiteStatisticsResolved, *Response, error)`
+  * **Count Number Of Unread Messages**: `crisp.Website.CountNumberOfUnreadMessages(websiteID string) (*WebsiteStatisticsUnread, *Response, error)`
+
+* **Website Settings**
+  * **Get Website Settings**: `crisp.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
+  * **Update Website Settings**: `crisp.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettings) (*Response, error)`
+
+* **Website Visitors**
+  * **List Visitors**: `crisp.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
+
+* **Website Conversations**
+  * **List Conversations**: `crisp.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
+  * **List Conversations (Search Variant)**: `crisp.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string) (*[]Conversation, *Response, error)`
+
+* **Website Conversation**
+  * **Create A New Conversation**: `crisp.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
+  * **Check If Conversation Exists**: `crisp.Website.CheckConversationExists(websiteID string, sessionID string) (*Response, error)`
+  * **Get A Conversation**: `crisp.Website.GetConversation(websiteID string, sessionID string) (*Conversation, *Response, error)`
+  * **Remove A Conversation**: `crisp.Website.RemoveConversation(websiteID string, sessionID string) (*Response, error)`
+  * **Initiate A Conversation With Existing Session**: `crisp.Website.InitiateConversationWithExistingSession(websiteID string, sessionID string) (*Response, error)`
+  * **Send A Message In Conversation (Text Variant)**: `crisp.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessage) (*Response, error)`
+  * **Send A Message In Conversation (File Variant)**: `crisp.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessage) (*Response, error)`
+  * **Update Conversation Metas**: `crisp.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
+  * **Change Conversation State**: `crisp.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
+  * **Block Incoming Messages For Conversation**: `crisp.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
+
+### Plugin
+
+* **One Plugin**
+  * **Get Plugin Information**: `crisp.Plugin.GetPluginInformation(pluginID string) (*PluginInformation, *Response, error)`
+  * **Get Plugin Stars**: `crisp.Plugin.GetPluginStars(pluginID string)`
+  * **Get Personal Plugin Rank**: `crisp.Plugin.GetPersonalPluginRank(pluginID string) (*PluginPersonalPluginRank, *Response, error)`
+  * **Rank A Plugin**: `crisp.Plugin.RankPlugin(pluginID string, rank uint) (*Response, error)`
+  * **Delete Plugin Rank**: `crisp.Plugin.DeletePluginRank(pluginID string) (*Response, error)`
+
+* **Plugin List**
+  * **List All Plugins**: `crisp.Plugin.ListAllPlugins(pageNumber uint) (*[]PluginInformation, *Response, error)`
+  * **List Featured Plugins**: `crisp.Plugin.ListFeaturedPlugins(pageNumber uint) (*[]PluginInformation, *Response, error)`
+  * **Search Plugins**: `crisp.Plugin.SearchPlugins(query string, pageNumber uint) (*[]PluginInformation, *Response, error)`
+
+* **Plugin Subscription**
+  * **List All Active Subscriptions**: `crisp.Plugin.ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error)`
+  * **List Subscriptions For A Website**: `crisp.Plugin.ListSubscriptionsForWebsite(websiteID string) (*PluginSubscription, *Response, error)`
+  * **Get Subscription Details**: `crisp.Plugin.GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error)`
+  * **Subscribe Website To Plugin**: `crisp.Plugin.SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error)`
+  * **Unsubscribe Plugin From Website**: `crisp.Plugin.UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error)`
+  * **Get Subscription Settings**: `crisp.Plugin.GetSubscriptionSettings(websiteID string, pluginID string) (*PluginSubscriptionSettings, *Response, error)`
+  * **Save Subscription Settings**: `crisp.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
