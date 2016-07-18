@@ -123,9 +123,9 @@ type BillingMethodInvoiceContentDuePartPlugin struct {
 
 // BillingMethodInvoicePaging mapping
 type BillingMethodInvoicePaging struct {
-  Range    *uint  `json:"range,omitempty"`
-  PerPage  *uint  `json:"per_page,omitempty"`
-  Total    *uint  `json:"total,omitempty"`
+  Range    *[]uint  `json:"range,omitempty"`
+  PerPage  *uint    `json:"per_page,omitempty"`
+  Total    *uint    `json:"total,omitempty"`
 }
 
 // BillingMethodLink mapping
@@ -161,7 +161,7 @@ func (instance BillingMethodInvoice) String() string {
 // ListAllBillingMethods resolves the current user account information.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-base-get
 func (service *UserService) ListAllBillingMethods() (*[]BillingMethodAll, *Response, error) {
-  url := "user/account/account"
+  url := "user/account/billing"
   req, _ := service.client.NewRequest("GET", url, nil)
 
   billing := new(BillingMethodAllData)

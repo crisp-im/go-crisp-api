@@ -87,14 +87,14 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **User Account Notification**
   * **Get Notification Settings**: `crisp.User.GetNotificationSettings() (*UserNotificationSettings, *Response, error)`
-  * **Update Notification Settings**: `crisp.User.UpdateNotificationSettings(notifications UserNotificationSettings) (*Response, error)`
+  * **Update Notification Settings**: `crisp.User.UpdateNotificationSettings(notifications UserNotificationSettingsUpdate) (*Response, error)`
 
 * **User Account Websites**
   * **List Websites**: `crisp.User.ListWebsites() (*[]UserWebsite, *Response, error)`
 
 * **User Account Profile**
   * **Get Profile**: `crisp.User.GetProfile() (*UserProfile, *Response, error)`
-  * **Update Profile**: `crisp.User.UpdateProfile(profile UserProfileSave) (*Response, error)`
+  * **Update Profile**: `crisp.User.UpdateProfile(profile UserProfileUpdate) (*Response, error)`
 
 * **User Account Recover**
   * **Get Recovery Details**: `crisp.User.GetRecoveryDetails(recoverIdentifier string, recoverKey string) (*Response, error)`
@@ -103,7 +103,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **User Account Schedule**
   * **Get Schedule Settings**: `crisp.User.GetScheduleSettings() (*UserScheduleSettings, *Response, error)`
-  * **Update Schedule Settings**: `crisp.User.UpdateScheduleSettings(schedule UserScheduleSettings) (*Response, error)`
+  * **Update Schedule Settings**: `crisp.User.UpdateScheduleSettings(schedule UserScheduleSettingsUpdate) (*Response, error)`
 
 * **User Session**
   * **Check Session Validity**: `crisp.User.CheckSessionValidity() (*Response, error)`
@@ -154,7 +154,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website Settings**
   * **Get Website Settings**: `crisp.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
-  * **Update Website Settings**: `crisp.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettings) (*Response, error)`
+  * **Update Website Settings**: `crisp.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error)`
 
 * **Website Visitors**
   * **List Visitors**: `crisp.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
@@ -169,8 +169,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get A Conversation**: `crisp.Website.GetConversation(websiteID string, sessionID string) (*Conversation, *Response, error)`
   * **Remove A Conversation**: `crisp.Website.RemoveConversation(websiteID string, sessionID string) (*Response, error)`
   * **Initiate A Conversation With Existing Session**: `crisp.Website.InitiateConversationWithExistingSession(websiteID string, sessionID string) (*Response, error)`
-  * **Send A Message In Conversation (Text Variant)**: `crisp.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessage) (*Response, error)`
-  * **Send A Message In Conversation (File Variant)**: `crisp.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessage) (*Response, error)`
+  * **Send A Message In Conversation (Text Variant)**: `crisp.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error)`
+  * **Send A Message In Conversation (File Variant)**: `crisp.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error)`
   * **Update Conversation Metas**: `crisp.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
   * **Change Conversation State**: `crisp.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
   * **Block Incoming Messages For Conversation**: `crisp.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
