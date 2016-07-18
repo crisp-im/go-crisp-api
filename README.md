@@ -57,7 +57,7 @@ userAccount = UserAccountCreate{
 }
 ```
 
-Refer directly to the library source code to know more about those structures.
+Refer directly to [the library source code](https://github.com/crisp-im/go-crisp-api/tree/master/crisp) to know more about those structures.
 
 ### Email
 
