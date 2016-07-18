@@ -54,7 +54,7 @@ password := "SecurePassword"
 firstName := "John"
 lastName := "Doe"
 
-userAccount = UserAccountCreate{
+userAccount = crisp.UserAccountCreate{
   Email: &email
   Passowrd: &password
   FirstName: &firstName

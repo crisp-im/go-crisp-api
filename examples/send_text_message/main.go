@@ -21,13 +21,7 @@ func main() {
   messageContent := "Hello :)"
   messageFingerprint := 12345
 
-  message := client.Website.ConversationTextMessage{
-    Type: &messageType,
-    From: &messageFrom,
-    Origin: &messageOrigin,
-    Content: &messageContent,
-    Fingerprint: &messageFingerprint
-  }
+  message := crisp.ConversationTextMessage{Type: &messageType, From: &messageFrom, Origin: &messageOrigin, Content: &messageContent, Fingerprint: &messageFingerprint}
 
   // Send text message for `website_id` and `session_id`
   _, err := client.Website.SendTextMessageInConversation("8c842203-7ed8-4e29-a608-7cf78a7d2fcc", "session_19e5240f-0a8d-461e-a661-a3123fc6eec9", message)
