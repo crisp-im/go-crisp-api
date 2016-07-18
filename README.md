@@ -25,7 +25,7 @@ plugin, _, err := client.Plugin.GetPluginInformation("185fe7ee-7cc6-4b8b-884d-fd
 
 ## Authentication
 
-To authenticate to the API, generate your session identifier and session key [with this guide](https://docs.crisp.im/api/v1/#header-authentication).
+To authenticate to the API, generate your session identifier and session key [using this guide](https://docs.crisp.im/api/v1/#header-authentication).
 
 Then, add authentication parameters to your `client` instance right after you create it:
 
@@ -40,11 +40,24 @@ crisp.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a
 
 ## Resource Methods
 
-The Crisp API methods are fully transcribed into this library. **Programmatic methods names are named after their label name in the [API Reference](https://docs.crisp.im/api/v1/)**.
+All the available Crisp API resources are fully implemented. **Programmatic methods names are named after their label name in the [API Reference](https://docs.crisp.im/api/v1/)**.
 
 Thus, it is straightforward to look for them in the library while reading the [API Reference](https://docs.crisp.im/api/v1/).
 
 In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.NewClient(nil, nil)` and then call eg: `client.User.CheckSessionValidity()`.
+
+When calling a method that writes data to the API (eg: `crisp.User.CreateUserAccount()`), you need to build an account instance this way:
+
+```go
+userAccount = UserAccountCreate{
+  Email: &"john@acme-inc.com"
+  Passowrd: &"SecurePassword"
+  FirstName: &"John"
+  LastName: &"Doe"
+}
+```
+
+Refer directly to the library source code to know more about those structures.
 
 ### Email
 
