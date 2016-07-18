@@ -22,6 +22,12 @@ type UserNotificationSettings struct {
 }
 
 
+// String returns the string representation of UserNotificationSettings
+func (instance UserNotificationSettings) String() string {
+  return Stringify(instance)
+}
+
+
 // GetNotificationSettings resolves the user notification settings.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-notification-get
 func (service *UserService) GetNotificationSettings() (*UserNotificationSettings, *Response, error) {

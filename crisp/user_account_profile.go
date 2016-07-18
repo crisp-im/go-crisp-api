@@ -30,6 +30,12 @@ type UserProfileSave struct {
 }
 
 
+// String returns the string representation of UserProfile
+func (instance UserProfile) String() string {
+  return Stringify(instance)
+}
+
+
 // GetProfile resolves user profile data.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-profile-get
 func (service *UserService) GetProfile() (*UserProfile, *Response, error) {

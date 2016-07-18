@@ -59,6 +59,24 @@ type PluginPersonalPluginRank struct {
 }
 
 
+// String returns the string representation of PluginInformation
+func (instance PluginInformation) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PluginStars
+func (instance PluginStars) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PluginPersonalPluginRank
+func (instance PluginPersonalPluginRank) String() string {
+  return Stringify(instance)
+}
+
+
 // GetPluginInformation resolves plugin information.
 // Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get
 func (service *PluginService) GetPluginInformation(pluginID string) (*PluginInformation, *Response, error) {

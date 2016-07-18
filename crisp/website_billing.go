@@ -42,6 +42,12 @@ type WebsiteBillingLink struct {
 }
 
 
+// String returns the string representation of WebsiteBilling
+func (instance WebsiteBilling) String() string {
+  return Stringify(instance)
+}
+
+
 // GetWebsiteBilling resolves website billing information (payment method linked to website).
 // Reference: https://docs.crisp.im/api/v1/#website-website-billing-get
 func (service *WebsiteService) GetWebsiteBilling(websiteID string) (*WebsiteBilling, *Response, error) {

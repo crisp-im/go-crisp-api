@@ -59,6 +59,18 @@ type PluginSubscriptionSettings struct {
 }
 
 
+// String returns the string representation of PluginSubscription
+func (instance PluginSubscription) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PluginSubscriptionSettings
+func (instance PluginSubscriptionSettings) String() string {
+  return Stringify(instance)
+}
+
+
 // ListAllActiveSubscriptions lists all active plugin subscriptions on all websites, linked to payment methods owned by the user.
 // Reference: https://docs.crisp.im/api/v1/#plugin-plugins-subscription-get
 func (service *PluginService) ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error) {

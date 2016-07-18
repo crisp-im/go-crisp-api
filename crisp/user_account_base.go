@@ -25,6 +25,12 @@ type UserAccountCreate struct {
 }
 
 
+// String returns the string representation of UserAccount
+func (instance UserAccount) String() string {
+  return Stringify(instance)
+}
+
+
 // GetUserAccount resolves the current user account information.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-base-get
 func (service *UserService) GetUserAccount() (*UserAccount, *Response, error) {

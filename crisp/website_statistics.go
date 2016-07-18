@@ -78,6 +78,42 @@ type WebsiteStatisticsUnread struct {
 }
 
 
+// String returns the string representation of WebsiteStatisticsAll
+func (instance WebsiteStatisticsAll) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteStatisticsTotal
+func (instance WebsiteStatisticsTotal) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteStatisticsPending
+func (instance WebsiteStatisticsPending) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteStatisticsUnresolved
+func (instance WebsiteStatisticsUnresolved) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteStatisticsResolved
+func (instance WebsiteStatisticsResolved) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteStatisticsUnread
+func (instance WebsiteStatisticsUnread) String() string {
+  return Stringify(instance)
+}
+
+
 // GetAllStatistics get all statistics for website.
 // Reference: https://docs.crisp.im/api/v1/#website-website-statistics-get
 func (service *WebsiteService) GetAllStatistics(websiteID string) (*WebsiteStatisticsAll, *Response, error) {

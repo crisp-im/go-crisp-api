@@ -45,6 +45,12 @@ type WebsiteSettingsChatbox struct {
 }
 
 
+// String returns the string representation of WebsiteSettings
+func (instance WebsiteSettings) String() string {
+  return Stringify(instance)
+}
+
+
 // GetWebsiteSettings resolves the current settings for a website.
 // Reference: https://docs.crisp.im/api/v1/#website-website-settings-get
 func (service *WebsiteService) GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error) {

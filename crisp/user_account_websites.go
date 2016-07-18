@@ -22,6 +22,12 @@ type UserWebsite struct {
 }
 
 
+// String returns the string representation of UserWebsite
+func (instance UserWebsite) String() string {
+  return Stringify(instance)
+}
+
+
 // ListWebsites lists the websites linked to user.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-websites-get
 func (service *UserService) ListWebsites() (*[]UserWebsite, *Response, error) {

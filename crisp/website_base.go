@@ -28,6 +28,12 @@ type WebsiteCreate struct {
 }
 
 
+// String returns the string representation of Website
+func (instance Website) String() string {
+  return Stringify(instance)
+}
+
+
 // CreateWebsite creates a new website.
 // Reference: https://docs.crisp.im/api/v1/#website-website-base-post
 func (service *WebsiteService) CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error) {

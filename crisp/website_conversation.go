@@ -194,10 +194,22 @@ type ConversationBlockUpdate struct {
 }
 
 
+// String returns the string representation of Conversation
+func (instance Conversation) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationNew
+func (instance ConversationNew) String() string {
+  return Stringify(instance)
+}
+
+
 // SearchConversations searches conversations for website.
 // Reference: https://docs.crisp.im/api/v1/#website-website-conversations-get
 func (service *WebsiteService) SearchConversations(websiteID string, pageNumber uint, searchQuery string) (*[]Conversation, *Response, error) {
-  resourceURL := ""
+  var resourceURL string
 
   if searchQuery != "" {
     resourceURL = fmt.Sprintf("website/%s/conversations/%d?search_query=%s", websiteID, pageNumber, url.QueryEscape(searchQuery))

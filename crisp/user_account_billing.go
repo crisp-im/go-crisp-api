@@ -134,6 +134,30 @@ type BillingMethodLink struct {
 }
 
 
+// String returns the string representation of BillingMethodAll
+func (instance BillingMethodAll) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of BillingMethod
+func (instance BillingMethod) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of BillingMethodInvoiceAll
+func (instance BillingMethodInvoiceAll) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of BillingMethodInvoice
+func (instance BillingMethodInvoice) String() string {
+  return Stringify(instance)
+}
+
+
 // ListAllBillingMethods resolves the current user account information.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-base-get
 func (service *UserService) ListAllBillingMethods() (*[]BillingMethodAll, *Response, error) {

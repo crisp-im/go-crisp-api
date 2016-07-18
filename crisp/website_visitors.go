@@ -37,6 +37,12 @@ type WebsiteVisitorLocation struct {
 }
 
 
+// String returns the string representation of WebsiteVisitor
+func (instance WebsiteVisitor) String() string {
+  return Stringify(instance)
+}
+
+
 // ListVisitors lists visitors currently on website.
 // Reference: https://docs.crisp.im/api/v1/#website-website-visitors-get
 func (service *WebsiteService) ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error) {

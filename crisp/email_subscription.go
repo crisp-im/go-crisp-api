@@ -22,6 +22,12 @@ type SubscriptionStatus struct {
 }
 
 
+// String returns the string representation of SubscriptionStatus
+func (instance SubscriptionStatus) String() string {
+  return Stringify(instance)
+}
+
+
 // GetSubscriptionStatus resolves current subscription status (subscribed or unsubscribed).
 // Reference: https://docs.crisp.im/api/v1/#email-email-subscription-get
 func (service *EmailService) GetSubscriptionStatus(emailHash string, key string) (*SubscriptionStatus, *Response, error) {

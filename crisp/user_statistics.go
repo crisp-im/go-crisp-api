@@ -18,6 +18,12 @@ type UserStatistics struct {
 }
 
 
+// String returns the string representation of UserStatistics
+func (instance UserStatistics) String() string {
+  return Stringify(instance)
+}
+
+
 // CountTotalUnreadMessages counts the total number of unread messages, cross-website.
 // Reference: https://docs.crisp.im/api/v1/#user-user-statistics-get
 func (service *UserService) CountTotalUnreadMessages() (*UserStatistics, *Response, error) {

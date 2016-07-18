@@ -23,6 +23,12 @@ type WebsiteInvite struct {
 }
 
 
+// String returns the string representation of WebsiteInvite
+func (instance WebsiteInvite) String() string {
+  return Stringify(instance)
+}
+
+
 // GetInviteDetails gets details on a invite keypair. Useful to check validity of invite keypair.
 // Reference: https://docs.crisp.im/api/v1/#website-website-invite-get
 func (service *WebsiteService) GetInviteDetails(websiteID string, recoverIdentifier string, recoverKey string) (*WebsiteInvite, *Response, error) {

@@ -36,6 +36,18 @@ type UserAvailabilityStatus struct {
 }
 
 
+// String returns the string representation of UserAvailability
+func (instance UserAvailability) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of UserAvailabilityStatus
+func (instance UserAvailabilityStatus) String() string {
+  return Stringify(instance)
+}
+
+
 // GetUserAvailability resolves the current user availability. Useful to check if a Crisp app is currently connected to the account.
 // Reference: https://docs.crisp.im/api/v1/#user-user-availability
 func (service *UserService) GetUserAvailability() (*UserAvailability, *Response, error) {

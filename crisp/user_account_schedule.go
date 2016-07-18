@@ -39,6 +39,12 @@ type UserScheduleSettingsHours struct {
 }
 
 
+// String returns the string representation of UserScheduleSettings
+func (instance UserScheduleSettings) String() string {
+  return Stringify(instance)
+}
+
+
 // GetScheduleSettings gets user schedule settings. Those settings are used by Crisp to automatically schedule when user will be seen online or offline by website visitors.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-schedule-get
 func (service *UserService) GetScheduleSettings() (*UserScheduleSettings, *Response, error) {

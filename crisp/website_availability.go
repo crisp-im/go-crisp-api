@@ -22,6 +22,12 @@ type WebsiteAvailabilityStatus struct {
 }
 
 
+// String returns the string representation of WebsiteAvailabilityStatus
+func (instance WebsiteAvailabilityStatus) String() string {
+  return Stringify(instance)
+}
+
+
 // GetWebsiteAvailabilityStatus resolves the website availability status. This tells whether the chatbox is seen as online or away by visitors.
 // Reference: https://docs.crisp.im/api/v1/#website-website-availability-get
 func (service *WebsiteService) GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error) {

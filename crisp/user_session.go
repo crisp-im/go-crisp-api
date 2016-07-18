@@ -29,6 +29,12 @@ type UserSessionRecover struct {
 }
 
 
+// String returns the string representation of UserSessionParameters
+func (instance UserSessionParameters) String() string {
+  return Stringify(instance)
+}
+
+
 // CheckSessionValidity checks whether the user is logged in or not, and whether his session is valid or not.
 // Reference: https://docs.crisp.im/api/v1/#user-user-session-head
 func (service *UserService) CheckSessionValidity() (*Response, error) {

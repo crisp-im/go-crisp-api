@@ -49,6 +49,18 @@ type WebsiteOperatorEdit struct {
 }
 
 
+// String returns the string representation of WebsiteOperatorListOne
+func (instance WebsiteOperatorListOne) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteOperator
+func (instance WebsiteOperator) String() string {
+  return Stringify(instance)
+}
+
+
 // ListWebsiteOperators lists all operator members of website.
 // Reference: https://docs.crisp.im/api/v1/#website-website-operator-get
 func (service *WebsiteService) ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error) {
