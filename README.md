@@ -49,11 +49,16 @@ In the following method prototypes, `crisp` is to be replaced with your Crisp AP
 When calling a method that writes data to the API (eg: `crisp.User.CreateUserAccount()`), you need to build an account instance this way:
 
 ```go
+email := "john@acme-inc.com"
+password := "SecurePassword"
+firstName := "John"
+lastName := "Doe"
+
 userAccount = UserAccountCreate{
-  Email: &"john@acme-inc.com"
-  Passowrd: &"SecurePassword"
-  FirstName: &"John"
-  LastName: &"Doe"
+  Email: &email
+  Passowrd: &password
+  FirstName: &firstName
+  LastName: &lastName
 }
 ```
 
