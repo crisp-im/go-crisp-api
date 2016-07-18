@@ -20,13 +20,13 @@ type UserProfile struct {
   LastName   *string  `json:"last_name,omitempty"`
 }
 
-// UserProfileSave mapping
-type UserProfileSave struct {
-  FirstName  *string  `json:"first_name,omitempty"`
-  LastName   *string  `json:"last_name,omitempty"`
-  Email      *string  `json:"email,omitempty"`
-  Password   *string  `json:"password,omitempty"`
-  Avatar     *string  `json:"avatar,omitempty"`
+// UserProfileUpdate mapping
+type UserProfileUpdate struct {
+  FirstName  string  `json:"first_name,omitempty"`
+  LastName   string  `json:"last_name,omitempty"`
+  Email      string  `json:"email,omitempty"`
+  Password   string  `json:"password,omitempty"`
+  Avatar     string  `json:"avatar,omitempty"`
 }
 
 
@@ -54,7 +54,7 @@ func (service *UserService) GetProfile() (*UserProfile, *Response, error) {
 
 // UpdateProfile updates user profile data.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-profile-patch
-func (service *EmailService) UpdateProfile(profile UserProfileSave) (*Response, error) {
+func (service *EmailService) UpdateProfile(profile UserProfileUpdate) (*Response, error) {
   url := "user/account/profile"
   req, _ := service.client.NewRequest("PATCH", url, profile)
 

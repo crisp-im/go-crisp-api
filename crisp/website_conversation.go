@@ -151,36 +151,36 @@ type ConversationNew struct {
   SessionID  *string  `json:"session_id,omitempty"`
 }
 
-// ConversationTextMessage mapping
-type ConversationTextMessage struct {
-  Type         *string  `json:"type,omitempty"`
-  From         *string  `json:"from,omitempty"`
-  Origin       *string  `json:"origin,omitempty"`
-  Content      *string  `json:"content,omitempty"`
-  Fingerprint  *int     `json:"fingerprint,omitempty"`
+// ConversationTextMessageNew mapping
+type ConversationTextMessageNew struct {
+  Type         string  `json:"type,omitempty"`
+  From         string  `json:"from,omitempty"`
+  Origin       string  `json:"origin,omitempty"`
+  Content      string  `json:"content,omitempty"`
+  Fingerprint  int     `json:"fingerprint,omitempty"`
 }
 
-// ConversationFileMessage mapping
-type ConversationFileMessage struct {
-  Type         *string                          `json:"type,omitempty"`
-  From         *string                          `json:"from,omitempty"`
-  Origin       *string                          `json:"origin,omitempty"`
-  Content      *ConversationFileMessageContent  `json:"content,omitempty"`
-  Fingerprint  *int                             `json:"fingerprint,omitempty"`
+// ConversationFileMessageNew mapping
+type ConversationFileMessageNew struct {
+  Type         string                          `json:"type,omitempty"`
+  From         string                          `json:"from,omitempty"`
+  Origin       string                          `json:"origin,omitempty"`
+  Content      ConversationFileMessageNewContent  `json:"content,omitempty"`
+  Fingerprint  int                             `json:"fingerprint,omitempty"`
 }
 
-// ConversationFileMessageContent mapping
-type ConversationFileMessageContent struct {
-  Name  *string  `json:"name,omitempty"`
-  URL   *string  `json:"url,omitempty"`
-  Type  *string  `json:"type,omitempty"`
+// ConversationFileMessageNewContent mapping
+type ConversationFileMessageNewContent struct {
+  Name  string  `json:"name,omitempty"`
+  URL   string  `json:"url,omitempty"`
+  Type  string  `json:"type,omitempty"`
 }
 
 // ConversationMetaUpdate mapping
 type ConversationMetaUpdate struct {
-  Nickname  *string    `json:"nickname,omitempty"`
-  Email     *string    `json:"email,omitempty"`
-  Tags      *[]string  `json:"tags,omitempty"`
+  Nickname  string    `json:"nickname,omitempty"`
+  Email     string    `json:"email,omitempty"`
+  Tags      []string  `json:"tags,omitempty"`
 }
 
 // ConversationStateUpdate mapping
@@ -300,7 +300,7 @@ func (service *WebsiteService) InitiateConversationWithExistingSession(websiteID
 
 // SendTextMessageInConversation sends a message in an existing conversation.
 // Reference: https://docs.crisp.im/api/v1/#website-website-conversation-post-2
-func (service *WebsiteService) SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessage) (*Response, error) {
+func (service *WebsiteService) SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
@@ -310,7 +310,7 @@ func (service *WebsiteService) SendTextMessageInConversation(websiteID string, s
 
 // SendFileMessageInConversation sends a message in an existing conversation.
 // Reference: https://docs.crisp.im/api/v1/#website-website-conversation-post-2
-func (service *WebsiteService) SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessage) (*Response, error) {
+func (service *WebsiteService) SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 

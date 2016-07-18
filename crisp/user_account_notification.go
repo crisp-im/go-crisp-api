@@ -21,6 +21,16 @@ type UserNotificationSettings struct {
   Sounds              *bool    `json:"sounds,omitempty"`
 }
 
+// UserNotificationSettingsUpdate mapping
+type UserNotificationSettingsUpdate struct {
+  UserID              string  `json:"user_id,omitempty"`
+  Disabled            bool    `json:"disabled,omitempty"`
+  MessagesOnline      bool    `json:"messages_online,omitempty"`
+  MessagesOffline     bool    `json:"messages_offline,omitempty"`
+  MessagesTranscript  bool    `json:"messages_transcript,omitempty"`
+  Sounds              bool    `json:"sounds,omitempty"`
+}
+
 
 // String returns the string representation of UserNotificationSettings
 func (instance UserNotificationSettings) String() string {
@@ -46,7 +56,7 @@ func (service *UserService) GetNotificationSettings() (*UserNotificationSettings
 
 // UpdateNotificationSettings updates the user notification settings.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-notification-patch
-func (service *EmailService) UpdateNotificationSettings(notifications UserNotificationSettings) (*Response, error) {
+func (service *EmailService) UpdateNotificationSettings(notifications UserNotificationSettingsUpdate) (*Response, error) {
   url := "user/account/notification"
   req, _ := service.client.NewRequest("POST", url, notifications)
 

@@ -38,6 +38,33 @@ type UserScheduleSettingsHours struct {
   To    *string  `json:"to,omitempty"`
 }
 
+// UserScheduleSettingsUpdate mapping
+type UserScheduleSettingsUpdate struct {
+  UserID    string                           `json:"user_id,omitempty"`
+  Enabled   bool                             `json:"enabled,omitempty"`
+  Presence  bool                             `json:"presence,omitempty"`
+  Offset    int                              `json:"offset,omitempty"`
+  Days      UserScheduleSettingsUpdateDays   `json:"days,omitempty"`
+  Hours     UserScheduleSettingsUpdateHours  `json:"hours,omitempty"`
+}
+
+// UserScheduleSettingsUpdateDays mapping
+type UserScheduleSettingsUpdateDays struct {
+  Monday     bool  `json:"monday,omitempty"`
+  Tuesday    bool  `json:"tuesday,omitempty"`
+  Wednesday  bool  `json:"wednesday,omitempty"`
+  Thursday   bool  `json:"thursday,omitempty"`
+  Friday     bool  `json:"friday,omitempty"`
+  Saturday   bool  `json:"saturday,omitempty"`
+  Sunday     bool  `json:"sunday,omitempty"`
+}
+
+// UserScheduleSettingsUpdateHours mapping
+type UserScheduleSettingsUpdateHours struct {
+  From  string  `json:"from,omitempty"`
+  To    string  `json:"to,omitempty"`
+}
+
 
 // String returns the string representation of UserScheduleSettings
 func (instance UserScheduleSettings) String() string {
@@ -63,7 +90,7 @@ func (service *UserService) GetScheduleSettings() (*UserScheduleSettings, *Respo
 
 // UpdateScheduleSettings updates user schedule settings.
 // Reference: https://docs.crisp.im/api/v1/#user-user-account-schedule-patch
-func (service *UserService) UpdateScheduleSettings(schedule UserScheduleSettings) (*Response, error) {
+func (service *UserService) UpdateScheduleSettings(schedule UserScheduleSettingsUpdate) (*Response, error) {
   url := "user/account/schedule"
   req, _ := service.client.NewRequest("PATCH", url, schedule)
 

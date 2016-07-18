@@ -49,17 +49,17 @@ type BillingMethodWebsite struct {
 
 // BillingMethodCreate mapping
 type BillingMethodCreate struct {
-  NameOnCard      *string                             `json:"name_on_card,omitempty"`
-  Address         *string                             `json:"address,omitempty"`
-  CardNumber      *string                             `json:"card_number,omitempty"`
-  SecurityCode    *string                             `json:"security_code,omitempty"`
-  ExpirationDate  *BillingMethodCreateExpirationDate  `json:"expiration_date,omitempty"`
+  NameOnCard      string                             `json:"name_on_card,omitempty"`
+  Address         string                             `json:"address,omitempty"`
+  CardNumber      string                             `json:"card_number,omitempty"`
+  SecurityCode    string                             `json:"security_code,omitempty"`
+  ExpirationDate  BillingMethodCreateExpirationDate  `json:"expiration_date,omitempty"`
 }
 
 // BillingMethodCreateExpirationDate mapping
 type BillingMethodCreateExpirationDate struct {
-  Month  *string  `json:"month,omitempty"`
-  Year   *string  `json:"year,omitempty"`
+  Month  string  `json:"month,omitempty"`
+  Year   string  `json:"year,omitempty"`
 }
 
 // BillingMethodInvoiceAllData mapping

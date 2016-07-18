@@ -18,10 +18,10 @@ type UserAccount struct {
 
 // UserAccountCreate mapping
 type UserAccountCreate struct {
-  Email      *string  `json:"email,omitempty"`
-  Passowrd   *string  `json:"password,omitempty"`
-  FirstName  *string  `json:"first_name,omitempty"`
-  LastName   *string  `json:"last_name,omitempty"`
+  Email      string  `json:"email,omitempty"`
+  Passowrd   string  `json:"password,omitempty"`
+  FirstName  string  `json:"first_name,omitempty"`
+  LastName   string  `json:"last_name,omitempty"`
 }
 
 

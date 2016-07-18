@@ -23,8 +23,8 @@ type Website struct {
 
 // WebsiteCreate mapping
 type WebsiteCreate struct {
-  Name    *string  `json:"name,omitempty"`
-  Domain  *string  `json:"domain,omitempty"`
+  Name    string  `json:"name,omitempty"`
+  Domain  string  `json:"domain,omitempty"`
 }
 
 

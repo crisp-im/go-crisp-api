@@ -44,6 +44,34 @@ type WebsiteSettingsChatbox struct {
   Locale               *string  `json:"locale,omitempty"`
 }
 
+// WebsiteSettingsUpdate mapping
+type WebsiteSettingsUpdate struct {
+  WebsiteID  string                        `json:"website_id,omitempty"`
+  Name       string                        `json:"name,omitempty"`
+  Domain     string                        `json:"domain,omitempty"`
+  Logo       string                        `json:"logo,omitempty"`
+  Contact    WebsiteSettingsUpdateContact  `json:"contact,omitempty"`
+  Chatbox    WebsiteSettingsUpdateChatbox  `json:"chatbox,omitempty"`
+}
+
+// WebsiteSettingsUpdateContact mapping
+type WebsiteSettingsUpdateContact struct {
+  Email  string  `json:"email,omitempty"`
+  Phone  string  `json:"phone,omitempty"`
+}
+
+// WebsiteSettingsUpdateChatbox mapping
+type WebsiteSettingsUpdateChatbox struct {
+  AvailabilityTooltip  bool    `json:"availability_tooltip,omitempty"`
+  HideOnAway           bool    `json:"hide_on_away,omitempty"`
+  PositionReverse      bool    `json:"position_reverse,omitempty"`
+  EmailVisitors        bool    `json:"email_visitors,omitempty"`
+  ColorTheme           string  `json:"color_theme,omitempty"`
+  TextTheme            string  `json:"text_theme,omitempty"`
+  WelcomeMessage       string  `json:"welcome_message,omitempty"`
+  Locale               string  `json:"locale,omitempty"`
+}
+
 
 // String returns the string representation of WebsiteSettings
 func (instance WebsiteSettings) String() string {
@@ -69,7 +97,7 @@ func (service *WebsiteService) GetWebsiteSettings(websiteID string) (*WebsiteSet
 
 // UpdateWebsiteSettings updates the current settings for a website.
 // Reference: https://docs.crisp.im/api/v1/#website-website-settings-patch
-func (service *WebsiteService) UpdateWebsiteSettings(websiteID string, settings WebsiteSettings) (*Response, error) {
+func (service *WebsiteService) UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error) {
   url := fmt.Sprintf("website/%s/settings", websiteID)
   req, _ := service.client.NewRequest("PATCH", url, settings)
 
