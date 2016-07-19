@@ -9,12 +9,16 @@ package crisp
 import (
   "github.com/graarh/golang-socketio"
   "github.com/graarh/golang-socketio/transport"
-  "errors"
+  "time"
   "net"
   "net/url"
   "strconv"
 )
 
+
+const (
+  reconnectWait = 4
+)
 
 // EventsService service
 type EventsService service
@@ -531,49 +535,6 @@ func (evt EventsReceiveBillingLinkRedirect) String() string {
 }
 
 
-// Listen starts listening for incoming realtime events.
-func (service *EventsService) Listen(handleDone func(*EventsRegister, error)) {
-  var secure bool
-
-  u, _ := url.Parse(service.client.config.RealtimeEndpointURL)
-  host, portString, _ := net.SplitHostPort(u.Host)
-
-  port, _ := strconv.ParseInt(portString, 10, 64)
-
-  if u.Scheme == "https" {
-    secure = true
-  } else {
-    secure = false
-  }
-
-  so, err := gosocketio.Dial(
-    gosocketio.GetUrl(host, int(port), secure),
-    transport.GetDefaultWebsocketTransport(),
-  )
-
-  if err == nil {
-    so.On("authenticated", func(chnl *gosocketio.Channel, authenticated bool) {
-      if authenticated == true {
-        reg := EventsRegister{Handlers: make(map[string]*caller)}
-
-        reg.BindEvents(so)
-
-        handleDone(&reg, nil)
-      }
-    })
-
-    // Authenticate to socket
-    if service.client.basicAuth.Available == true {
-      so.Channel.Emit("authentication", eventsSendAuthentication{service.client.basicAuth.Username, service.client.basicAuth.Password})
-    } else {
-      handleDone(nil, errors.New("Not authenticated"))
-    }
-  } else {
-    handleDone(nil, err)
-  }
-}
-
-
 // On registers an event handler on event name
 func (register *EventsRegister) On(eventName string, handler interface{}) error {
   c, err := newCaller(handler)
@@ -755,4 +716,83 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
       hdl.callFunc(&evt)
     }
   })
+}
+
+
+func (service *EventsService) getEndpointURL() (string) {
+  var secure bool
+
+  u, _ := url.Parse(service.client.config.RealtimeEndpointURL)
+  host, portString, _ := net.SplitHostPort(u.Host)
+
+  port, _ := strconv.ParseInt(portString, 10, 64)
+
+  if u.Scheme == "https" {
+    secure = true
+  } else {
+    secure = false
+  }
+
+  return gosocketio.GetUrl(host, int(port), secure)
+}
+
+
+func (service *EventsService) reconnect(handleDone func(*EventsRegister), connectorChild *int, connectedSocket *bool, child int) {
+  // Attempt to reconnect
+  for *connectedSocket == false && child == *connectorChild {
+    // Hold on.
+    time.Sleep(reconnectWait * time.Second)
+
+    *connectorChild++
+
+    service.connect(handleDone, connectorChild, connectedSocket)
+  }
+}
+
+
+func (service *EventsService) connect(handleDone func(*EventsRegister), connectorChild *int, connectedSocket *bool) {
+  child := *connectorChild
+
+  endpointURL := service.getEndpointURL()
+  transport := transport.GetDefaultWebsocketTransport()
+
+  so, err := gosocketio.Dial(endpointURL, transport)
+
+  if err == nil {
+    so.On("authenticated", func(chnl *gosocketio.Channel, authenticated bool) {
+      if authenticated == true {
+        reg := EventsRegister{Handlers: make(map[string]*caller)}
+
+        reg.BindEvents(so)
+
+        handleDone(&reg)
+      }
+    })
+
+    so.On(gosocketio.OnDisconnection, func(chnl *gosocketio.Channel) {
+      *connectedSocket = false
+
+      service.reconnect(handleDone, connectorChild, connectedSocket, child)
+    })
+
+    so.On(gosocketio.OnConnection, func(chnl *gosocketio.Channel) {
+      *connectedSocket = true
+
+      // Authenticate to socket
+      if service.client.basicAuth.Available == true {
+        so.Channel.Emit("authentication", eventsSendAuthentication{service.client.basicAuth.Username, service.client.basicAuth.Password})
+      }
+    })
+  } else {
+    service.reconnect(handleDone, connectorChild, connectedSocket, child)
+  }
+}
+
+
+// Listen starts listening for incoming realtime events.
+func (service *EventsService) Listen(handleDone func(*EventsRegister)) {
+  connectorChild := 0
+  connectedSocket := false
+
+  service.connect(handleDone, &connectorChild, &connectedSocket)
 }
