@@ -157,7 +157,7 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
 
   if client.basicAuth.Available == true {
     req.SetBasicAuth(client.basicAuth.Username, client.basicAuth.Password)
-    req.Header.Add("X-Client-Tier", client.basicAuth.Tier)
+    req.Header.Add("X-Crisp-Tier", client.basicAuth.Tier)
   }
 
   req.Header.Add("Accept", acceptContentType)
