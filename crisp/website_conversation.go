@@ -153,11 +153,18 @@ type ConversationNew struct {
 
 // ConversationTextMessageNew mapping
 type ConversationTextMessageNew struct {
-  Type         string  `json:"type,omitempty"`
-  From         string  `json:"from,omitempty"`
-  Origin       string  `json:"origin,omitempty"`
-  Content      string  `json:"content,omitempty"`
-  Fingerprint  int     `json:"fingerprint,omitempty"`
+  Type         string                          `json:"type,omitempty"`
+  From         string                          `json:"from,omitempty"`
+  Origin       string                          `json:"origin,omitempty"`
+  Content      string                          `json:"content,omitempty"`
+  Fingerprint  int                             `json:"fingerprint,omitempty"`
+  User         ConversationTextMessageNewUser  `json:"user,omitempty"`
+}
+
+// ConversationTextMessageNewUser mapping
+type ConversationTextMessageNewUser struct {
+  Nickname  string  `json:"nickname,omitempty"`
+  Avatar    string  `json:"avatar,omitempty"`
 }
 
 // ConversationFileMessageNew mapping
