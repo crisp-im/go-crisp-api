@@ -41,6 +41,7 @@ type BasicAuth struct {
 
 // Client maps an API client
 type Client struct {
+  config *ClientConfig
   client *http.Client
   basicAuth *BasicAuth
 
@@ -97,7 +98,7 @@ func NewWithConfig(config ClientConfig) *Client {
   // Create client
   baseURL, _ := url.Parse(config.RestEndpointURL)
 
-  client := &Client{client: config.HTTPClient, basicAuth: &BasicAuth{}, BaseURL: baseURL, UserAgent: userAgent}
+  client := &Client{config: &config, client: config.HTTPClient, basicAuth: &BasicAuth{}, BaseURL: baseURL, UserAgent: userAgent}
   client.common.client = client
 
   // Map services
@@ -105,6 +106,7 @@ func NewWithConfig(config ClientConfig) *Client {
   client.Plugin = (*PluginService)(&client.common)
   client.User = (*UserService)(&client.common)
   client.Website = (*WebsiteService)(&client.common)
+  client.Events = (*EventsService)(&client.common)
 
   return client
 }

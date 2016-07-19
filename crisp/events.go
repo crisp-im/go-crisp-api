@@ -9,57 +9,119 @@ package crisp
 import (
   "github.com/graarh/golang-socketio"
   "github.com/graarh/golang-socketio/transport"
-  "time"
-  "fmt"
+  "errors"
+  "net"
+  "net/url"
+  "strconv"
 )
 
 
 // EventsService service
 type EventsService service
 
-// EventsRegister register
-type EventsRegister struct {
-  // TODO
+// EventsNamed generic data mapper
+type EventsNamed interface {
+  Name()  string
 }
 
-// EventsPayloadAuthentication maps authenticate payload
-type EventsPayloadAuthentication struct {
+// EventsRegister register
+type EventsRegister struct {
+  Handlers  map[string]func(EventsNamed)
+}
+
+// EventsSendAuthentication maps authentication
+type EventsSendAuthentication struct {
   Username  string  `json:"username"`
   Password  string  `json:"password"`
 }
 
-// EventsMessage message
-type EventsMessage struct {
-  ID      int    `json:"id"`
-  Channel string `json:"channel"`
-  Text    string `json:"text"`
+// EventsReceiveMessageSend maps message:send
+type EventsReceiveMessageSend struct {
+  WebsiteID    *string                          `json:"website_id"`
+  SessionID    *string                          `json:"session_id"`
+  From         *string                          `json:"from"`
+  Type         *string                          `json:"type"`
+  Origin       *string                          `json:"origin"`
+  Content      *string                          `json:"content"`
+  Stamped      *bool                            `json:"stamped"`
+  Timestamp    *uint                            `json:"timestamp"`
+  Fingerprint  *int                             `json:"fingerprint"`
+  User         *EventsReceiveMessageCommonUser  `json:"user"`
+}
+
+// EventsReceiveMessageCommonUser maps message:*/user
+type EventsReceiveMessageCommonUser struct {
+  UserID    *string  `json:"user_id"`
+  Nickname  *string  `json:"nickname"`
+}
+
+
+// String returns the string representation of EventsReceiveMessageSend
+func (evt EventsReceiveMessageSend) String() string {
+  return Stringify(evt)
+}
+
+// Name returns the event name of EventsReceiveMessageSend
+func (evt EventsReceiveMessageSend) Name() string {
+  return "message:send"
 }
 
 
 // Listen starts listening for incoming realtime events.
-func (service *EventsService) Listen(handleConnected func(*gosocketio.Client, error)) {
-  // TODO: dynamic socket configuration!
+func (service *EventsService) Listen(handleDone func(*EventsRegister, error)) {
+  var secure bool
+
+  u, _ := url.Parse(service.client.config.RealtimeEndpointURL)
+  host, portString, _ := net.SplitHostPort(u.Host)
+
+  port, _ := strconv.ParseInt(portString, 10, 64)
+
+  if u.Scheme == "https" {
+    secure = true
+  } else {
+    secure = false
+  }
+
   so, err := gosocketio.Dial(
-    gosocketio.GetUrl("relay-app.crisp.im.dev", 3050, false),
-    //gosocketio.GetUrl("relay-app.crisp.im", 443, true),
+    gosocketio.GetUrl(host, int(port), secure),
     transport.GetDefaultWebsocketTransport(),
   )
 
   if err == nil {
-    so.On("authenticated", func(chnl *gosocketio.Channel, msg EventsMessage) {
-      fmt.Printf("authenticated => %v", msg)
+    so.On("authenticated", func(chnl *gosocketio.Channel, authenticated bool) {
+      if authenticated == true {
+        reg := EventsRegister{Handlers: make(map[string]func(EventsNamed))}
 
-      handleConnected(so, err)
+        reg.BindEvents(so)
+
+        handleDone(&reg, nil)
+      } else {
+        handleDone(nil, errors.New("Authentication failed"))
+      }
     })
 
-    time.Sleep(4 * time.Second)
-
     // Authenticate to socket
-    so.Channel.Emit("authentication", EventsPayloadAuthentication{"lol", "hey"})
-
-    time.Sleep(60 * time.Second)
+    if service.client.basicAuth.Available == true {
+      so.Channel.Emit("authentication", EventsSendAuthentication{service.client.basicAuth.Username, service.client.basicAuth.Password})
+    } else {
+      handleDone(nil, errors.New("Not authenticated"))
+    }
   } else {
-    // TODO: callback handle on error
-    fmt.Printf("TODO Error: %v", err)
+    handleDone(nil, err)
   }
+}
+
+
+// On registers an event handler on event name
+func (register *EventsRegister) On(eventName string, handleEvent func(EventsNamed)) {
+  register.Handlers[eventName] = handleEvent
+}
+
+// BindEvents listens for recognized incoming events
+func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
+  so.On("message:send", func(chnl *gosocketio.Channel, message EventsReceiveMessageSend) {
+    if handler, ok := register.Handlers["message:send"]; ok {
+      handler(message)
+    }
+  })
 }
