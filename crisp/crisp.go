@@ -20,7 +20,7 @@ import (
 const (
   libraryVersion = "1.1.0"
   defaultRestEndpointURL = "https://api.crisp.im/v1/"
-  defaultRealtimeEndpointURL = "https://relay-app.crisp.im/"
+  defaultRealtimeEndpointURL = "https://relay-app.crisp.im:443/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
 )
@@ -32,8 +32,7 @@ type ClientConfig struct {
   RealtimeEndpointURL string
 }
 
-// BasicAuth maps basic auth credientials
-type BasicAuth struct {
+type basicAuth struct {
   Available bool
   Username string
   Password string
@@ -43,7 +42,7 @@ type BasicAuth struct {
 type Client struct {
   config *ClientConfig
   client *http.Client
-  basicAuth *BasicAuth
+  basicAuth *basicAuth
 
   BaseURL *url.URL
   UserAgent string
@@ -67,15 +66,14 @@ type Response struct {
   *http.Response
 }
 
-// ErrorResponse maps an API HTTP error response
-type ErrorResponse struct {
+type errorResponse struct {
   Response *http.Response
   Reason   string  `json:"reason,omitempty"`
 }
 
 
 // Error prints an error response
-func (response *ErrorResponse) Error() string {
+func (response *errorResponse) Error() string {
   return fmt.Sprintf("%v %v: %d %v",
     response.Response.Request.Method, response.Response.Request.URL,
     response.Response.StatusCode, response.Reason)
@@ -98,7 +96,7 @@ func NewWithConfig(config ClientConfig) *Client {
   // Create client
   baseURL, _ := url.Parse(config.RestEndpointURL)
 
-  client := &Client{config: &config, client: config.HTTPClient, basicAuth: &BasicAuth{}, BaseURL: baseURL, UserAgent: userAgent}
+  client := &Client{config: &config, client: config.HTTPClient, basicAuth: &basicAuth{}, BaseURL: baseURL, UserAgent: userAgent}
   client.common.client = client
 
   // Map services
@@ -211,7 +209,7 @@ func CheckResponse(response *http.Response) error {
   if code := response.StatusCode; 200 <= code && code <= 299 {
     return nil
   }
-  errorResponse := &ErrorResponse{Response: response}
+  errorResponse := &errorResponse{Response: response}
 
   data, err := ioutil.ReadAll(response.Body)
   if err == nil && data != nil {
