@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-  client := crisp.NewClient(nil, nil)
+  client := crisp.NewClient()
 
   // Login user `john@acme-inc.com`
   session, _, err := client.User.CreateNewSession("john@acme-inc.com", "SecurePassword")

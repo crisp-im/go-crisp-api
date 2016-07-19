@@ -17,10 +17,10 @@ Construct a new Crisp client, then use the various services on the client to
 access different parts of the Crisp API. For example:
 
 ```go
-client := crisp.NewClient(nil, nil)
+client := crisp.NewClient()
 
 // Get plugin information
-plugin, _, err := client.Plugin.GetPluginInformation("185fe7ee-7cc6-4b8b-884d-fda9df632c13", nil)
+plugin, _, err := client.Plugin.GetPluginInformation("185fe7ee-7cc6-4b8b-884d-fda9df632c13")
 ```
 
 ## Authentication
@@ -30,7 +30,7 @@ To authenticate to the API, generate your session identifier and session key [us
 Then, add authentication parameters to your `client` instance right after you create it:
 
 ```go
-client := crisp.NewClient(nil, nil)
+client := crisp.NewClient()
 
 // Authenticate to API (identifier, key)
 crisp.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
@@ -44,7 +44,7 @@ All the available Crisp API resources are fully implemented. **Programmatic meth
 
 Thus, it is straightforward to look for them in the library while reading the [API Reference](https://docs.crisp.im/api/v1/).
 
-In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.NewClient(nil, nil)` and then call eg: `client.User.CheckSessionValidity()`.
+In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.NewClient()` and then call eg: `client.User.CheckSessionValidity()`.
 
 When calling a method that writes data to the API (eg: `crisp.User.CreateUserAccount()`), you need to build an account instance this way:
 

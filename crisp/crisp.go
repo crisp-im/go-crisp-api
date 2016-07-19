@@ -18,11 +18,19 @@ import (
 
 
 const (
-  libraryVersion = "1.0.0"
-  defaultEndpointURL = "https://api.crisp.im/v1/"
+  libraryVersion = "1.1.0"
+  defaultRestEndpointURL = "https://api.crisp.im/v1/"
+  defaultRealtimeEndpointURL = "https://relay-app.crisp.im/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
 )
+
+// ClientConfig mapping
+type ClientConfig struct {
+  HTTPClient *http.Client
+  RestEndpointURL string
+  RealtimeEndpointURL string
+}
 
 // BasicAuth maps basic auth credientials
 type BasicAuth struct {
@@ -71,28 +79,38 @@ func (response *ErrorResponse) Error() string {
 }
 
 
-// NewClient returns a new API client
-func NewClient(httpClient *http.Client, endpointURL *string) *Client {
-  targetEndpointURL := defaultEndpointURL
-
-  if httpClient == nil {
-    httpClient = http.DefaultClient
+// NewClientWithConfig returns a new API client
+func NewClientWithConfig(config ClientConfig) *Client {
+  // Defaults
+  if config.HTTPClient == nil {
+    config.HTTPClient = http.DefaultClient
   }
-  if endpointURL != nil {
-    targetEndpointURL = *endpointURL
+  if config.RestEndpointURL == "" {
+    config.RestEndpointURL = defaultRestEndpointURL
+  }
+  if config.RealtimeEndpointURL == "" {
+    config.RealtimeEndpointURL = defaultRealtimeEndpointURL
   }
 
-  baseURL, _ := url.Parse(targetEndpointURL)
+  // Create client
+  baseURL, _ := url.Parse(config.RestEndpointURL)
 
-  client := &Client{client: httpClient, basicAuth: &BasicAuth{}, BaseURL: baseURL, UserAgent: userAgent}
+  client := &Client{client: config.HTTPClient, basicAuth: &BasicAuth{}, BaseURL: baseURL, UserAgent: userAgent}
   client.common.client = client
 
+  // Map services
   client.Email = (*EmailService)(&client.common)
   client.Plugin = (*PluginService)(&client.common)
   client.User = (*UserService)(&client.common)
   client.Website = (*WebsiteService)(&client.common)
 
   return client
+}
+
+
+// NewClient returns a new API client
+func NewClient() *Client {
+  return NewClientWithConfig(ClientConfig{})
 }
 
 
