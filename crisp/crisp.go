@@ -79,8 +79,8 @@ func (response *ErrorResponse) Error() string {
 }
 
 
-// NewClientWithConfig returns a new API client
-func NewClientWithConfig(config ClientConfig) *Client {
+// NewWithConfig returns a new API client
+func NewWithConfig(config ClientConfig) *Client {
   // Defaults
   if config.HTTPClient == nil {
     config.HTTPClient = http.DefaultClient
@@ -108,9 +108,9 @@ func NewClientWithConfig(config ClientConfig) *Client {
 }
 
 
-// NewClient returns a new API client
-func NewClient() *Client {
-  return NewClientWithConfig(ClientConfig{})
+// New returns a new API client
+func New() *Client {
+  return NewWithConfig(ClientConfig{})
 }
 
 
