@@ -53,6 +53,8 @@ type Client struct {
   Plugin  *PluginService
   User    *UserService
   Website *WebsiteService
+
+  Events  *EventsService
 }
 
 type service struct {
