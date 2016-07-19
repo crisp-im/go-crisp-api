@@ -36,6 +36,7 @@ type basicAuth struct {
   Available bool
   Username string
   Password string
+  Tier string
 }
 
 // Client maps an API client
@@ -116,11 +117,18 @@ func New() *Client {
 }
 
 
-// Authenticate saves authentication parameters
-func (client *Client) Authenticate(username string, password string) {
+// AuthenticateTier saves authentication parameters for tier
+func (client *Client) AuthenticateTier(tier string, username string, password string) {
+  client.basicAuth.Tier = tier
   client.basicAuth.Username = username
   client.basicAuth.Password = password
   client.basicAuth.Available = true
+}
+
+
+// Authenticate saves authentication parameters for user (default)
+func (client *Client) Authenticate(username string, password string) {
+  client.AuthenticateTier("user", username, password)
 }
 
 
@@ -149,6 +157,7 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
 
   if client.basicAuth.Available == true {
     req.SetBasicAuth(client.basicAuth.Username, client.basicAuth.Password)
+    req.Header.Add("X-Client-Tier", client.basicAuth.Tier)
   }
 
   req.Header.Add("Accept", acceptContentType)
