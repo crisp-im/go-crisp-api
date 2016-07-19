@@ -38,69 +38,6 @@ client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6
 // Now, you can use authenticated API sections.
 ```
 
-## Realtime Events
-
-You can bind to realtime events from Crisp, in order to get notified of incoming messages and updates in websites.
-
-You won't receive any event if you don't explicitly subscribe to realtime events, as the library doesn't connect to the realtime backend automatically.
-
-To start listening for events and bind an handler, proceed as follow:
-
-```go
-client := crisp.NewClient()
-
-// Set authentication parameters
-client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
-
-// Connect to realtime API
-events := client.Realtime()
-
-// Lsten to incoming events
-events.On("message:send", func(so socket, msg string) {
-  // Handle message
-})
-```
-
-Available events are listed below:
-
-* **Session Events**
-  * **Session Update Availability**: `session:update_availability`
-  * **Session Request Initiated**: `session:request:initiated`
-  * **Session Set Email**: `session:set_email`
-  * **Session Set Avatar**: `session:set_avatar`
-  * **Session Set Cover**: `session:set_cover`
-  * **Session Set Nickname**: `session:set_nickname`
-  * **Session Sync Pages**: `session:sync:pages`
-  * **Session Sync Geolocation**: `session:sync:geolocation`
-  * **Session Sync System**: `session:sync:system`
-  * **Session Sync Extended Information**: `session:sync:extended_informations`
-  * **Session Set State**: `session:set_state`
-  * **Session Set Block**: `session:set_block`
-  * **Session Set Tags**: `session:set_tags`
-  * **Session Set Opened**: `session:set_opened`
-  * **Session Set Closed**: `session:set_closed`
-  * **Session Removed**: `session:removed`
-
-* **Message Events**
-  * **Message Send**: `message:send`
-  * **Message Received**: `message:received`
-  * **Message Compose Send**: `message:compose:send`
-  * **Message Compose Receive**: `message:compose:receive`
-  * **Message Acknowledge Read Send**: `message:acknowledge:read:send`
-  * **Message Acknowledge Read Received**: `message:acknowledge:read:received`
-  * **Message Acknowledge Delivered**: `message:acknowledge:delivered`
-
-* **Website Events**
-  * **Website Update Visitors Count**: `website:update_visitors_count`
-  * **Website Update Visitors List**: `website:update_visitors_list`
-
-* **Bucket Events**
-  * **Bucket URL Upload Generated**: `bucket:url:upload:generated`
-  * **Bucket URL Avatar Generated**: `bucket:url:avatar:generated`
-
-* **Billing Events**
-  * **Billing Link Redirect**: `billing:link:redirect`
-
 ## Resource Methods
 
 All the available Crisp API resources are fully implemented. **Programmatic methods names are named after their label name in the [API Reference](https://docs.crisp.im/api/v1/)**.
@@ -260,3 +197,66 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Unsubscribe Plugin From Website**: `crisp.Plugin.UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error)`
   * **Get Subscription Settings**: `crisp.Plugin.GetSubscriptionSettings(websiteID string, pluginID string) (*PluginSubscriptionSettings, *Response, error)`
   * **Save Subscription Settings**: `crisp.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
+
+## Realtime Events
+
+You can bind to realtime events from Crisp, in order to get notified of incoming messages and updates in websites.
+
+You won't receive any event if you don't explicitly subscribe to realtime events, as the library doesn't connect to the realtime backend automatically.
+
+To start listening for events and bind an handler, proceed as follow:
+
+```go
+client := crisp.NewClient()
+
+// Set authentication parameters
+client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
+
+// Connect to realtime API
+events := client.Realtime()
+
+// Lsten to incoming events
+events.On("message:send", func(so socket, msg string) {
+  // Handle message
+})
+```
+
+Available events are listed below:
+
+* **Session Events**
+  * **Session Update Availability**: `session:update_availability`
+  * **Session Request Initiated**: `session:request:initiated`
+  * **Session Set Email**: `session:set_email`
+  * **Session Set Avatar**: `session:set_avatar`
+  * **Session Set Cover**: `session:set_cover`
+  * **Session Set Nickname**: `session:set_nickname`
+  * **Session Sync Pages**: `session:sync:pages`
+  * **Session Sync Geolocation**: `session:sync:geolocation`
+  * **Session Sync System**: `session:sync:system`
+  * **Session Sync Extended Information**: `session:sync:extended_informations`
+  * **Session Set State**: `session:set_state`
+  * **Session Set Block**: `session:set_block`
+  * **Session Set Tags**: `session:set_tags`
+  * **Session Set Opened**: `session:set_opened`
+  * **Session Set Closed**: `session:set_closed`
+  * **Session Removed**: `session:removed`
+
+* **Message Events**
+  * **Message Send**: `message:send`
+  * **Message Received**: `message:received`
+  * **Message Compose Send**: `message:compose:send`
+  * **Message Compose Receive**: `message:compose:receive`
+  * **Message Acknowledge Read Send**: `message:acknowledge:read:send`
+  * **Message Acknowledge Read Received**: `message:acknowledge:read:received`
+  * **Message Acknowledge Delivered**: `message:acknowledge:delivered`
+
+* **Website Events**
+  * **Website Update Visitors Count**: `website:update_visitors_count`
+  * **Website Update Visitors List**: `website:update_visitors_list`
+
+* **Bucket Events**
+  * **Bucket URL Upload Generated**: `bucket:url:upload:generated`
+  * **Bucket URL Avatar Generated**: `bucket:url:avatar:generated`
+
+* **Billing Events**
+  * **Billing Link Redirect**: `billing:link:redirect`
