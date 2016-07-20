@@ -29,6 +29,7 @@ type EventsRegister struct {
 }
 
 type eventsSendAuthentication struct {
+  Tier      string  `json:"tier"`
   Username  string  `json:"username"`
   Password  string  `json:"password"`
 }
@@ -779,8 +780,8 @@ func (service *EventsService) connect(handleDone func(*EventsRegister), connecto
       *connectedSocket = true
 
       // Authenticate to socket
-      if service.client.basicAuth.Available == true {
-        so.Channel.Emit("authentication", eventsSendAuthentication{service.client.basicAuth.Username, service.client.basicAuth.Password})
+      if service.client.auth.Available == true {
+        so.Channel.Emit("authentication", eventsSendAuthentication{service.client.auth.Tier, service.client.auth.Username, service.client.auth.Password})
       }
     })
   } else {

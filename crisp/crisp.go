@@ -18,7 +18,7 @@ import (
 
 
 const (
-  libraryVersion = "1.1.2"
+  libraryVersion = "1.1.3"
   defaultRestEndpointURL = "https://api.crisp.im/v1/"
   defaultRealtimeEndpointURL = "https://relay-app.crisp.im:443/"
   userAgent = "go-crisp-api/" + libraryVersion
@@ -32,7 +32,7 @@ type ClientConfig struct {
   RealtimeEndpointURL string
 }
 
-type basicAuth struct {
+type auth struct {
   Available bool
   Username string
   Password string
@@ -43,7 +43,7 @@ type basicAuth struct {
 type Client struct {
   config *ClientConfig
   client *http.Client
-  basicAuth *basicAuth
+  auth *auth
 
   BaseURL *url.URL
   UserAgent string
@@ -97,7 +97,7 @@ func NewWithConfig(config ClientConfig) *Client {
   // Create client
   baseURL, _ := url.Parse(config.RestEndpointURL)
 
-  client := &Client{config: &config, client: config.HTTPClient, basicAuth: &basicAuth{}, BaseURL: baseURL, UserAgent: userAgent}
+  client := &Client{config: &config, client: config.HTTPClient, auth: &auth{}, BaseURL: baseURL, UserAgent: userAgent}
   client.common.client = client
 
   // Map services
@@ -119,10 +119,10 @@ func New() *Client {
 
 // AuthenticateTier saves authentication parameters for tier
 func (client *Client) AuthenticateTier(tier string, username string, password string) {
-  client.basicAuth.Tier = tier
-  client.basicAuth.Username = username
-  client.basicAuth.Password = password
-  client.basicAuth.Available = true
+  client.auth.Tier = tier
+  client.auth.Username = username
+  client.auth.Password = password
+  client.auth.Available = true
 }
 
 
@@ -155,9 +155,9 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
     return nil, err
   }
 
-  if client.basicAuth.Available == true {
-    req.SetBasicAuth(client.basicAuth.Username, client.basicAuth.Password)
-    req.Header.Add("X-Crisp-Tier", client.basicAuth.Tier)
+  if client.auth.Available == true {
+    req.SetBasicAuth(client.auth.Username, client.auth.Password)
+    req.Header.Add("X-Crisp-Tier", client.auth.Tier)
   }
 
   req.Header.Add("Accept", acceptContentType)
