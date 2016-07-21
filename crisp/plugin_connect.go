@@ -23,6 +23,12 @@ type PluginConnectWebsites struct {
 }
 
 
+// String returns the string representation of PluginConnectWebsites
+func (instance PluginConnectWebsites) String() string {
+  return Stringify(instance)
+}
+
+
 // CheckConnectSessionValidity checks whether the connected plugin session is valid or not.
 // Reference: https://docs.crisp.im/api/v1/#plugin-plugin-connect-session-head
 func (service *PluginService) CheckConnectSessionValidity() (*Response, error) {
