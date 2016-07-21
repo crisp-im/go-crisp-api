@@ -6,9 +6,20 @@
 package crisp
 
 
+import (
+  "fmt"
+)
+
+
 // PluginConnectWebsitesData mapping
 type PluginConnectWebsitesData struct {
-  Data  *[]string  `json:"data,omitempty"`
+  Data  *[]PluginConnectWebsites  `json:"data,omitempty"`
+}
+
+// PluginConnectWebsites mapping
+type PluginConnectWebsites struct {
+  WebsiteID  *string       `json:"website_id,omitempty"`
+  Settings   *interface{}  `json:"settings,omitempty"`
 }
 
 
@@ -24,8 +35,8 @@ func (service *PluginService) CheckConnectSessionValidity() (*Response, error) {
 
 // ListConnectWebsites lists the websites linked to connected plugin.
 // Reference: https://docs.crisp.im/api/v1/#plugin-plugin-connect-websites-get
-func (service *PluginService) ListConnectWebsites() (*[]string, *Response, error) {
-  url := "plugin/connect/websites"
+func (service *PluginService) ListConnectWebsites(pageNumber uint) (*[]PluginConnectWebsites, *Response, error) {
+  url := fmt.Sprintf("plugin/connect/websites/%d", pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
   websites := new(PluginConnectWebsitesData)
