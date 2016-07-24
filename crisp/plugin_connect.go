@@ -8,23 +8,42 @@ package crisp
 
 import (
   "fmt"
+  "net/url"
 )
 
 
-// PluginConnectWebsitesData mapping
-type PluginConnectWebsitesData struct {
-  Data  *[]PluginConnectWebsites  `json:"data,omitempty"`
+// PluginConnectAllWebsitesData mapping
+type PluginConnectAllWebsitesData struct {
+  Data  *[]PluginConnectAllWebsites  `json:"data,omitempty"`
 }
 
-// PluginConnectWebsites mapping
-type PluginConnectWebsites struct {
+// PluginConnectAllWebsites mapping
+type PluginConnectAllWebsites struct {
   WebsiteID  *string       `json:"website_id,omitempty"`
   Settings   *interface{}  `json:"settings,omitempty"`
 }
 
+// PluginConnectWebsitesSinceData mapping
+type PluginConnectWebsitesSinceData struct {
+  Data  *[]PluginConnectWebsitesSince  `json:"data,omitempty"`
+}
 
-// String returns the string representation of PluginConnectWebsites
-func (instance PluginConnectWebsites) String() string {
+// PluginConnectWebsitesSince mapping
+type PluginConnectWebsitesSince struct {
+  WebsiteID   *string       `json:"website_id,omitempty"`
+  Settings    *interface{}  `json:"settings,omitempty"`
+  Difference  *string       `json:"difference,omitempty"`
+}
+
+
+// String returns the string representation of PluginConnectAllWebsites
+func (instance PluginConnectAllWebsites) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PluginConnectWebsitesSince
+func (instance PluginConnectWebsitesSince) String() string {
   return Stringify(instance)
 }
 
@@ -39,13 +58,29 @@ func (service *PluginService) CheckConnectSessionValidity() (*Response, error) {
 }
 
 
-// ListConnectWebsites lists the websites linked to connected plugin.
+// ListAllConnectWebsites lists all websites linked to connected plugin.
 // Reference: https://docs.crisp.im/api/v1/#plugin-plugin-connect-websites-get
-func (service *PluginService) ListConnectWebsites(pageNumber uint) (*[]PluginConnectWebsites, *Response, error) {
-  url := fmt.Sprintf("plugin/connect/websites/%d", pageNumber)
+func (service *PluginService) ListAllConnectWebsites(pageNumber uint) (*[]PluginConnectAllWebsites, *Response, error) {
+  url := fmt.Sprintf("plugin/connect/websites/all/%d", pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  websites := new(PluginConnectWebsitesData)
+  websites := new(PluginConnectAllWebsitesData)
+  resp, err := service.client.Do(req, websites)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return websites.Data, resp, err
+}
+
+
+// ListConnectWebsitesSince lists the websites linked or unlinked or updated for connected plugin, since given date.
+// Reference: https://docs.crisp.im/api/v1/#plugin-plugin-connect-websites-get-1
+func (service *PluginService) ListConnectWebsitesSince(dateSince string) (*[]PluginConnectWebsitesSince, *Response, error) {
+  url := fmt.Sprintf("plugin/connect/websites/since?date_since=%s", url.QueryEscape(dateSince))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  websites := new(PluginConnectWebsitesSinceData)
   resp, err := service.client.Do(req, websites)
   if err != nil {
     return nil, resp, err
