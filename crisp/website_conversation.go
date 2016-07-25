@@ -183,6 +183,13 @@ type ConversationFileMessageNewContent struct {
   Type  string  `json:"type,omitempty"`
 }
 
+// ConversationComposeMessageNew mapping
+type ConversationComposeMessageNew struct {
+  Type     string  `json:"type,omitempty"`
+  From     string  `json:"from,omitempty"`
+  Excerpt  string  `json:"excerpt,omitempty"`
+}
+
 // ConversationMetaUpdate mapping
 type ConversationMetaUpdate struct {
   Nickname  string    `json:"nickname,omitempty"`
@@ -311,6 +318,15 @@ func (service *WebsiteService) SendTextMessageInConversation(websiteID string, s
 func (service *WebsiteService) SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ComposeMessageInConversation starts or stop composing a message in an existing conversation.
+func (service *WebsiteService) ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/compose", websiteID, sessionID)
+  req, _ := service.client.NewRequest("PATCH", url, compose)
 
   return service.client.Do(req, nil)
 }
