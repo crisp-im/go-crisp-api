@@ -365,6 +365,7 @@ type EventsReceiveBillingLinkRedirect struct {
 type EventsReceiveMessageCommonUser struct {
   UserID    *string  `json:"user_id"`
   Nickname  *string  `json:"nickname"`
+  Avatar    *string  `json:"avatar"`
 }
 
 
