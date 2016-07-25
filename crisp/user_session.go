@@ -36,7 +36,6 @@ func (instance UserSessionParameters) String() string {
 
 
 // CheckSessionValidity checks whether the user is logged in or not, and whether his session is valid or not.
-// Reference: https://docs.crisp.im/api/v1/#user-user-session-head
 func (service *UserService) CheckSessionValidity() (*Response, error) {
   url := "user/session"
   req, _ := service.client.NewRequest("HEAD", url, nil)
@@ -46,7 +45,6 @@ func (service *UserService) CheckSessionValidity() (*Response, error) {
 
 
 // CreateNewSession logins to user account and create a new session.
-// Reference: https://docs.crisp.im/api/v1/#user-user-session-post
 func (service *UserService) CreateNewSession(email string, password string) (*UserSessionParameters, *Response, error) {
   url := "user/session/login"
   req, _ := service.client.NewRequest("POST", url, UserSessionLogin{Email: &email, Password: &password})
@@ -62,7 +60,6 @@ func (service *UserService) CreateNewSession(email string, password string) (*Us
 
 
 // DestroySession logouts from user account and destroys current session.
-// Reference: https://docs.crisp.im/api/v1/#user-user-session-post-1
 func (service *UserService) DestroySession() (*Response, error) {
   url := "user/session/logout"
   req, _ := service.client.NewRequest("POST", url, nil)
@@ -72,7 +69,6 @@ func (service *UserService) DestroySession() (*Response, error) {
 
 
 // RecoverSession recovers an user account from which we are locked out. A password recovery email is sent.
-// Reference: https://docs.crisp.im/api/v1/#user-user-session-post-2
 func (service *UserService) RecoverSession(email string) (*Response, error) {
   url := "user/session/recover"
   req, _ := service.client.NewRequest("POST", url, UserSessionRecover{Email: &email})

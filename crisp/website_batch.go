@@ -12,7 +12,6 @@ import (
 
 
 // ResolveAllConversations resolves all conversations in website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-batch-patch
 func (service *WebsiteService) ResolveAllConversations(websiteID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/batch/resolve", websiteID)
   req, _ := service.client.NewRequest("PATCH", url, nil)
@@ -22,7 +21,6 @@ func (service *WebsiteService) ResolveAllConversations(websiteID string) (*Respo
 
 
 // ReadAllConversations marks all conversations as read in website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-batch-patch-1
 func (service *WebsiteService) ReadAllConversations(websiteID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/batch/read", websiteID)
   req, _ := service.client.NewRequest("PATCH", url, nil)

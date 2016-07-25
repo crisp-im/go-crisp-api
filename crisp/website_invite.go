@@ -30,7 +30,6 @@ func (instance WebsiteInvite) String() string {
 
 
 // GetInviteDetails gets details on a invite keypair. Useful to check validity of invite keypair.
-// Reference: https://docs.crisp.im/api/v1/#website-website-invite-get
 func (service *WebsiteService) GetInviteDetails(websiteID string, inviteIdentifier string, inviteKey string) (*WebsiteInvite, *Response, error) {
   url := fmt.Sprintf("website/%s/invite/%s/%s", websiteID, inviteIdentifier, inviteKey)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -46,7 +45,6 @@ func (service *WebsiteService) GetInviteDetails(websiteID string, inviteIdentifi
 
 
 // RedeemInvite redeems invite and join the website as operator.
-// Reference: https://docs.crisp.im/api/v1/#website-website-invite-put
 func (service *WebsiteService) RedeemInvite(websiteID string, inviteIdentifier string, inviteKey string) (*Response, error) {
   url := fmt.Sprintf("website/%s/invite/%s/%s", websiteID, inviteIdentifier, inviteKey)
   req, _ := service.client.NewRequest("PUT", url, nil)
@@ -56,7 +54,6 @@ func (service *WebsiteService) RedeemInvite(websiteID string, inviteIdentifier s
 
 
 // DeleteInviteKeypair deletes an invite keypair. Useful to invalidate keys if you ignore invite and never use the keys to redeem invite.
-// Reference: https://docs.crisp.im/api/v1/#website-website-invite-delete
 func (service *WebsiteService) DeleteInviteKeypair(websiteID string, inviteIdentifier string, inviteKey string) (*Response, error) {
   url := fmt.Sprintf("website/%s/invite/%s/%s", websiteID, inviteIdentifier, inviteKey)
   req, _ := service.client.NewRequest("DELETE", url, nil)

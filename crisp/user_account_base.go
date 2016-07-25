@@ -32,7 +32,6 @@ func (instance UserAccount) String() string {
 
 
 // GetUserAccount resolves the current user account information.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-base-get
 func (service *UserService) GetUserAccount() (*UserAccount, *Response, error) {
   url := "user/account"
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -48,7 +47,6 @@ func (service *UserService) GetUserAccount() (*UserAccount, *Response, error) {
 
 
 // CreateUserAccount creates a new Crisp user account (operator account).
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-base-post
 func (service *UserService) CreateUserAccount(user UserAccountCreate) (*Response, error) {
   url := "user/account"
   req, _ := service.client.NewRequest("POST", url, user)

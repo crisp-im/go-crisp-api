@@ -29,7 +29,6 @@ func (instance UserWebsite) String() string {
 
 
 // ListWebsites lists the websites linked to user.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-websites-get
 func (service *UserService) ListWebsites() (*[]UserWebsite, *Response, error) {
   url := "user/account/websites"
   req, _ := service.client.NewRequest("GET", url, nil)

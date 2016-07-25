@@ -78,7 +78,6 @@ func (instance PluginPersonalPluginRank) String() string {
 
 
 // GetPluginInformation resolves plugin information.
-// Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get
 func (service *PluginService) GetPluginInformation(pluginID string) (*PluginInformation, *Response, error) {
   url := fmt.Sprintf("plugin/%s", pluginID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -94,7 +93,6 @@ func (service *PluginService) GetPluginInformation(pluginID string) (*PluginInfo
 
 
 // GetPluginStars resolves plugin stars. This gives some stats about user rating of the plugin.
-// Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get-1
 func (service *PluginService) GetPluginStars(pluginID string) (*PluginStars, *Response, error) {
   url := fmt.Sprintf("plugin/%s/stars", pluginID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -110,7 +108,6 @@ func (service *PluginService) GetPluginStars(pluginID string) (*PluginStars, *Re
 
 
 // GetPersonalPluginRank resolves our own ranking of the plugin (if we ever ranked it).
-// Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get-2
 func (service *PluginService) GetPersonalPluginRank(pluginID string) (*PluginPersonalPluginRank, *Response, error) {
   url := fmt.Sprintf("plugin/%s/stars/self", pluginID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -126,7 +123,6 @@ func (service *PluginService) GetPersonalPluginRank(pluginID string) (*PluginPer
 
 
 // RankPlugin ranks the plugin (as current user).
-// Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-get-2
 func (service *PluginService) RankPlugin(pluginID string, rank uint) (*Response, error) {
   url := fmt.Sprintf("plugin/%s/stars/self", pluginID)
   req, _ := service.client.NewRequest("PATCH", url, PluginPersonalPluginRank{&rank})
@@ -136,7 +132,6 @@ func (service *PluginService) RankPlugin(pluginID string, rank uint) (*Response,
 
 
 // DeletePluginRank deletes personal rank of the plugin (as current user).
-// Reference: https://docs.crisp.im/api/v1/#plugin-one-plugin-delete
 func (service *PluginService) DeletePluginRank(pluginID string) (*Response, error) {
   url := fmt.Sprintf("plugin/%s/stars/self", pluginID)
   req, _ := service.client.NewRequest("DELETE", url, nil)

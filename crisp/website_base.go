@@ -35,7 +35,6 @@ func (instance Website) String() string {
 
 
 // CreateWebsite creates a new website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-base-post
 func (service *WebsiteService) CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error) {
   url := "website"
   req, _ := service.client.NewRequest("POST", url, websiteData)
@@ -51,7 +50,6 @@ func (service *WebsiteService) CreateWebsite(websiteData WebsiteCreate) (*Websit
 
 
 // DeleteWebsite deletes an existing website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-base-delete
 func (service *WebsiteService) DeleteWebsite(websiteID string) (*Response, error) {
   url := fmt.Sprintf("website/%s", websiteID)
   req, _ := service.client.NewRequest("DELETE", url, nil)

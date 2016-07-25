@@ -25,7 +25,6 @@ func (instance UserStatistics) String() string {
 
 
 // CountTotalUnreadMessages counts the total number of unread messages, cross-website.
-// Reference: https://docs.crisp.im/api/v1/#user-user-statistics-get
 func (service *UserService) CountTotalUnreadMessages() (*UserStatistics, *Response, error) {
   url := "user/stats/unread"
   req, _ := service.client.NewRequest("GET", url, nil)

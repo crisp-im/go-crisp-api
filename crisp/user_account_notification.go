@@ -38,7 +38,6 @@ func (instance UserNotificationSettings) String() string {
 
 
 // GetNotificationSettings resolves the user notification settings.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-notification-get
 func (service *UserService) GetNotificationSettings() (*UserNotificationSettings, *Response, error) {
   url := "user/account/notification"
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -54,7 +53,6 @@ func (service *UserService) GetNotificationSettings() (*UserNotificationSettings
 
 
 // UpdateNotificationSettings updates the user notification settings.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-notification-patch
 func (service *UserService) UpdateNotificationSettings(notifications UserNotificationSettingsUpdate) (*Response, error) {
   url := "user/account/notification"
   req, _ := service.client.NewRequest("POST", url, notifications)

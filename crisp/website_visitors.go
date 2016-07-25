@@ -44,7 +44,6 @@ func (instance WebsiteVisitor) String() string {
 
 
 // ListVisitors lists visitors currently on website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-visitors-get
 func (service *WebsiteService) ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error) {
   url := fmt.Sprintf("website/%s/visitors/%d", websiteID, pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)

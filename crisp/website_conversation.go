@@ -214,7 +214,6 @@ func (instance ConversationNew) String() string {
 
 
 // SearchConversations searches conversations for website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversations-get
 func (service *WebsiteService) SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error) {
   var resourceURL string
 
@@ -237,14 +236,12 @@ func (service *WebsiteService) SearchConversations(websiteID string, pageNumber 
 
 
 // ListConversations lists conversations for website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversations-get
 func (service *WebsiteService) ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error) {
   return service.SearchConversations(websiteID, pageNumber, "", "")
 }
 
 
 // CreateNewConversation creates a new conversation.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversation-post
 func (service *WebsiteService) CreateNewConversation(websiteID string) (*ConversationNew, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation", websiteID)
   req, _ := service.client.NewRequest("POST", url, nil)
@@ -260,7 +257,6 @@ func (service *WebsiteService) CreateNewConversation(websiteID string) (*Convers
 
 
 // CheckConversationExists checks if given conversation session identifier exists.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversation-head
 func (service *WebsiteService) CheckConversationExists(websiteID string, sessionID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s", websiteID, sessionID)
   req, _ := service.client.NewRequest("HEAD", url, nil)
@@ -270,7 +266,6 @@ func (service *WebsiteService) CheckConversationExists(websiteID string, session
 
 
 // GetConversation resolves conversation information and messages.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversation-get
 func (service *WebsiteService) GetConversation(websiteID string, sessionID string) (*Conversation, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s", websiteID, sessionID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -286,7 +281,6 @@ func (service *WebsiteService) GetConversation(websiteID string, sessionID strin
 
 
 // RemoveConversation removes a conversation in website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversation-delete
 func (service *WebsiteService) RemoveConversation(websiteID string, sessionID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s", websiteID, sessionID)
   req, _ := service.client.NewRequest("DELETE", url, nil)
@@ -296,7 +290,6 @@ func (service *WebsiteService) RemoveConversation(websiteID string, sessionID st
 
 
 // InitiateConversationWithExistingSession initiates a conversation from an existing session.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversation-post-1
 func (service *WebsiteService) InitiateConversationWithExistingSession(websiteID string, sessionID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/initiate", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, nil)
@@ -306,7 +299,6 @@ func (service *WebsiteService) InitiateConversationWithExistingSession(websiteID
 
 
 // SendTextMessageInConversation sends a message in an existing conversation.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversation-post-2
 func (service *WebsiteService) SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
@@ -316,7 +308,6 @@ func (service *WebsiteService) SendTextMessageInConversation(websiteID string, s
 
 
 // SendFileMessageInConversation sends a message in an existing conversation.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversation-post-2
 func (service *WebsiteService) SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
@@ -326,7 +317,6 @@ func (service *WebsiteService) SendFileMessageInConversation(websiteID string, s
 
 
 // UpdateConversationMetas updates conversation meta information.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversation-patch
 func (service *WebsiteService) UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/meta", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, metas)
@@ -336,7 +326,6 @@ func (service *WebsiteService) UpdateConversationMetas(websiteID string, session
 
 
 // ChangeConversationState updates conversation state.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversation-patch-1
 func (service *WebsiteService) ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/state", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationStateUpdate{&state})
@@ -346,7 +335,6 @@ func (service *WebsiteService) ChangeConversationState(websiteID string, session
 
 
 // BlockIncomingMessagesForConversation blocks further incoming messages from a conversation.
-// Reference: https://docs.crisp.im/api/v1/#website-website-conversation-patch-2
 func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/block", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationBlockUpdate{&blocked})

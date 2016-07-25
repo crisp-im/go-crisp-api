@@ -159,7 +159,6 @@ func (instance BillingMethodInvoice) String() string {
 
 
 // ListAllBillingMethods resolves the current user account information.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-base-get
 func (service *UserService) ListAllBillingMethods() (*BillingMethodAll, *Response, error) {
   url := "user/account/billing"
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -175,7 +174,6 @@ func (service *UserService) ListAllBillingMethods() (*BillingMethodAll, *Respons
 
 
 // AddNewBillingMethod adds a payment method (credit card) to the user account.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-billing-post
 func (service *UserService) AddNewBillingMethod(billing BillingMethodCreate) (*Response, error) {
   url := "user/account/billing"
   req, _ := service.client.NewRequest("POST", url, billing)
@@ -185,7 +183,6 @@ func (service *UserService) AddNewBillingMethod(billing BillingMethodCreate) (*R
 
 
 // GetBillingMethod acquires information about a saved billing method (eg: credit card).
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-billing-get-1
 func (service *UserService) GetBillingMethod(cardID string) (*BillingMethod, *Response, error) {
   url := fmt.Sprintf("user/account/billing/%s", cardID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -201,7 +198,6 @@ func (service *UserService) GetBillingMethod(cardID string) (*BillingMethod, *Re
 
 
 // RemoveBillingMethod deletes a saved billing method.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-billing-delete
 func (service *UserService) RemoveBillingMethod(cardID string) (*Response, error) {
   url := fmt.Sprintf("user/account/billing/%s", cardID)
   req, _ := service.client.NewRequest("DELETE", url, nil)
@@ -211,7 +207,6 @@ func (service *UserService) RemoveBillingMethod(cardID string) (*Response, error
 
 
 // ListInvoicesForBillingMethod lists saved invoices for billing method.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-billing-get-2
 func (service *UserService) ListInvoicesForBillingMethod(cardID string, pageNumber int) (*BillingMethodInvoiceAll, *Response, error) {
   url := fmt.Sprintf("user/account/billing/%s/invoices/%d", cardID, pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -227,7 +222,6 @@ func (service *UserService) ListInvoicesForBillingMethod(cardID string, pageNumb
 
 
 // GetInvoiceForBillingMethod get given saved invoice for billing method.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-billing-get-3
 func (service *UserService) GetInvoiceForBillingMethod(cardID string, invoiceID string) (*BillingMethodInvoice, *Response, error) {
   url := fmt.Sprintf("user/account/billing/%s/invoice/%s", cardID, invoiceID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -243,7 +237,6 @@ func (service *UserService) GetInvoiceForBillingMethod(cardID string, invoiceID 
 
 
 // LinkToExternalBillingMethod links to an external billing method. Used to for services which need an external approval (eg: PayPal), and that cannot be added directly via a simple form submit.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-billing-post-1
 func (service *UserService) LinkToExternalBillingMethod(billingService string) (*Response, error) {
   url := "user/account/billing/link"
   req, _ := service.client.NewRequest("POST", url, BillingMethodLink{Service: &billingService})

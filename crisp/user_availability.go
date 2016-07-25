@@ -49,7 +49,6 @@ func (instance UserAvailabilityStatus) String() string {
 
 
 // GetUserAvailability resolves the current user availability. Useful to check if a Crisp app is currently connected to the account.
-// Reference: https://docs.crisp.im/api/v1/#user-user-availability
 func (service *UserService) GetUserAvailability() (*UserAvailability, *Response, error) {
   url := "user/availability"
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -65,7 +64,6 @@ func (service *UserService) GetUserAvailability() (*UserAvailability, *Response,
 
 
 // UpdateUserAvailability updates the advertised user availability, for a defined period of time after which to automatically expire.
-// Reference: https://docs.crisp.im/api/v1/#user-user-availability-patch
 func (service *UserService) UpdateUserAvailability(availabilityType string, timeFor uint) (*Response, error) {
   url := "user/availability"
   req, _ := service.client.NewRequest("PATCH", url, UserAvailability{Type: &availabilityType, Time: &UserAvailabilityTime{For: &timeFor}})
@@ -75,7 +73,6 @@ func (service *UserService) UpdateUserAvailability(availabilityType string, time
 
 
 // GetUserAvailabilityStatus resolves the current user availability status. It differs from the raw user availability (the raw availability only tells if the user is connected on a Crisp app).
-// Reference: https://docs.crisp.im/api/v1/#user-user-availability-get-1
 func (service *UserService) GetUserAvailabilityStatus() (*UserAvailabilityStatus, *Response, error) {
   url := "user/availability/status"
   req, _ := service.client.NewRequest("GET", url, nil)

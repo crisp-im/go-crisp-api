@@ -49,7 +49,6 @@ func (instance WebsiteBilling) String() string {
 
 
 // GetWebsiteBilling resolves website billing information (payment method linked to website).
-// Reference: https://docs.crisp.im/api/v1/#website-website-billing-get
 func (service *WebsiteService) GetWebsiteBilling(websiteID string) (*WebsiteBilling, *Response, error) {
   url := fmt.Sprintf("website/%s/billing", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -65,7 +64,6 @@ func (service *WebsiteService) GetWebsiteBilling(websiteID string) (*WebsiteBill
 
 
 // UpdateWebsiteBilling updates website billing information (payment method linked to website).
-// Reference: https://docs.crisp.im/api/v1/#website-website-billing-patch
 func (service *WebsiteService) UpdateWebsiteBilling(websiteID string, cardID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/billing", websiteID)
   req, _ := service.client.NewRequest("PATCH", url, WebsiteBillingLink{CardID: &cardID})
@@ -75,7 +73,6 @@ func (service *WebsiteService) UpdateWebsiteBilling(websiteID string, cardID str
 
 
 // UnlinkWebsiteBilling unlink website billing information (payment method linked to website).
-// Reference: https://docs.crisp.im/api/v1/#website-website-billing-delete
 func (service *WebsiteService) UnlinkWebsiteBilling(websiteID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/billing", websiteID)
   req, _ := service.client.NewRequest("DELETE", url, nil)

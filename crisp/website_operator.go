@@ -62,7 +62,6 @@ func (instance WebsiteOperator) String() string {
 
 
 // ListWebsiteOperators lists all operator members of website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-operator-get
 func (service *WebsiteService) ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error) {
   url := fmt.Sprintf("website/%s/operator", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -78,7 +77,6 @@ func (service *WebsiteService) ListWebsiteOperators(websiteID string) (*[]Websit
 
 
 // GetWebsiteOperator resolves a given website operator.
-// Reference: https://docs.crisp.im/api/v1/#website-website-operator-get-1
 func (service *WebsiteService) GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error) {
   url := fmt.Sprintf("website/%s/operator/%s", websiteID, userID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -94,7 +92,6 @@ func (service *WebsiteService) GetWebsiteOperator(websiteID string, userID strin
 
 
 // InviteWebsiteOperator invites an email to join website as operator.
-// Reference: https://docs.crisp.im/api/v1/#website-website-operator-post
 func (service *WebsiteService) InviteWebsiteOperator(websiteID string, email string, role string) (*Response, error) {
   url := fmt.Sprintf("website/%s/operator", websiteID)
   req, _ := service.client.NewRequest("POST", url, WebsiteOperatorInvite{Email: &email, Role: &role})
@@ -104,7 +101,6 @@ func (service *WebsiteService) InviteWebsiteOperator(websiteID string, email str
 
 
 // ChangeOperatorRole changes the role of an existing operator. Useful to downgrade or upgrade an operator from/to owner role.
-// Reference: https://docs.crisp.im/api/v1/#website-website-operator-patch
 func (service *WebsiteService) ChangeOperatorRole(websiteID string, userID string, role string) (*Response, error) {
   url := fmt.Sprintf("website/%s/operator/%s", websiteID, userID)
   req, _ := service.client.NewRequest("PATCH", url, WebsiteOperatorEdit{Role: &role})
@@ -114,7 +110,6 @@ func (service *WebsiteService) ChangeOperatorRole(websiteID string, userID strin
 
 
 // UnlinkOperatorFromWebsite unlinks given operator from website. Note that the last operator in the website cannot be unlinked.
-// Reference: https://docs.crisp.im/api/v1/#website-website-operator-delete
 func (service *WebsiteService) UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/operator/%s", websiteID, userID)
   req, _ := service.client.NewRequest("DELETE", url, nil)

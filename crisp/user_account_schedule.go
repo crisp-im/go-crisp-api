@@ -72,7 +72,6 @@ func (instance UserScheduleSettings) String() string {
 
 
 // GetScheduleSettings gets user schedule settings. Those settings are used by Crisp to automatically schedule when user will be seen online or offline by website visitors.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-schedule-get
 func (service *UserService) GetScheduleSettings() (*UserScheduleSettings, *Response, error) {
   url := "user/account/schedule"
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -88,7 +87,6 @@ func (service *UserService) GetScheduleSettings() (*UserScheduleSettings, *Respo
 
 
 // UpdateScheduleSettings updates user schedule settings.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-schedule-patch
 func (service *UserService) UpdateScheduleSettings(schedule UserScheduleSettingsUpdate) (*Response, error) {
   url := "user/account/schedule"
   req, _ := service.client.NewRequest("PATCH", url, schedule)

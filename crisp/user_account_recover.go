@@ -17,7 +17,6 @@ type UserRecoverProceed struct {
 
 
 // GetRecoveryDetails gets details on a recovery keypair. Useful to check validity of recovery keypair.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-recover-get
 func (service *UserService) GetRecoveryDetails(userID string, recoverIdentifier string, recoverKey string) (*Response, error) {
   url := fmt.Sprintf("user/%s/account/recover/%s/%s", userID, recoverIdentifier, recoverKey)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -27,7 +26,6 @@ func (service *UserService) GetRecoveryDetails(userID string, recoverIdentifier 
 
 
 // SendRecoveryPassword submits new password and recover account.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-recover-put
 func (service *UserService) SendRecoveryPassword(userID string, recoverIdentifier string, recoverKey string, password string) (*Response, error) {
   url := fmt.Sprintf("user/%s/account/recover/%s/%s", userID, recoverIdentifier, recoverKey)
   req, _ := service.client.NewRequest("PUT", url, UserRecoverProceed{Password: &password})
@@ -37,7 +35,6 @@ func (service *UserService) SendRecoveryPassword(userID string, recoverIdentifie
 
 
 // DeleteRecoveryKeypair deletes a recovery keypair. Useful to invalidate keys if you ignore recovery and never use the keys to recover password.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-recover-delete
 func (service *UserService) DeleteRecoveryKeypair(userID string, recoverIdentifier string, recoverKey string) (*Response, error) {
   url := fmt.Sprintf("user/%s/account/recover/%s/%s", userID, recoverIdentifier, recoverKey)
   req, _ := service.client.NewRequest("DELETE", url, nil)

@@ -72,7 +72,6 @@ func (instance PluginSubscriptionSettings) String() string {
 
 
 // ListAllActiveSubscriptions lists all active plugin subscriptions on all websites, linked to payment methods owned by the user.
-// Reference: https://docs.crisp.im/api/v1/#plugin-plugins-subscription-get
 func (service *PluginService) ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error) {
   url := "plugins/subscription"
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -88,7 +87,6 @@ func (service *PluginService) ListAllActiveSubscriptions() (*[]PluginSubscriptio
 
 
 // ListSubscriptionsForWebsite lists plugin subscriptions for given website.
-// Reference: https://docs.crisp.im/api/v1/#plugin-plugins-subscription-get-1
 func (service *PluginService) ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -104,7 +102,6 @@ func (service *PluginService) ListSubscriptionsForWebsite(websiteID string) (*[]
 
 
 // GetSubscriptionDetails resolves details on a given subscription.
-// Reference: https://docs.crisp.im/api/v1/#plugin-plugins-subscription-get-2
 func (service *PluginService) GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s/%s", websiteID, pluginID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -120,7 +117,6 @@ func (service *PluginService) GetSubscriptionDetails(websiteID string, pluginID 
 
 
 // SubscribeWebsiteToPlugin subscribes a given website to a given plugin.
-// Reference: https://docs.crisp.im/api/v1/#plugin-plugins-subscription-post
 func (service *PluginService) SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s", websiteID)
   req, _ := service.client.NewRequest("POST", url, PluginSubscriptionCreate{PluginID: &pluginID})
@@ -130,7 +126,6 @@ func (service *PluginService) SubscribeWebsiteToPlugin(websiteID string, pluginI
 
 
 // UnsubscribePluginFromWebsite unsubscribes a given plugin from a given website.
-// Reference: https://docs.crisp.im/api/v1/#plugin-plugins-subscription-delete
 func (service *PluginService) UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s/%s", websiteID, pluginID)
   req, _ := service.client.NewRequest("DELETE", url, nil)
@@ -140,7 +135,6 @@ func (service *PluginService) UnsubscribePluginFromWebsite(websiteID string, plu
 
 
 // GetSubscriptionSettings resolves plugin subscription settings. Used to read plugin configuration on a given website.
-// Reference: https://docs.crisp.im/api/v1/#plugin-plugins-subscription-get-3
 func (service *PluginService) GetSubscriptionSettings(websiteID string, pluginID string) (*PluginSubscriptionSettings, *Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s/%s/settings", websiteID, pluginID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -156,7 +150,6 @@ func (service *PluginService) GetSubscriptionSettings(websiteID string, pluginID
 
 
 // SaveSubscriptionSettings saves plugin subscription settings. Used to configure a given plugin on a given website.
-// Reference: https://docs.crisp.im/api/v1/#plugin-plugins-subscription-patch
 func (service *PluginService) SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s/%s/settings", websiteID, pluginID)
   req, _ := service.client.NewRequest("PATCH", url, settings)

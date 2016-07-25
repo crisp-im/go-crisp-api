@@ -115,7 +115,6 @@ func (instance WebsiteStatisticsUnread) String() string {
 
 
 // GetAllStatistics get all statistics for website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-statistics-get
 func (service *WebsiteService) GetAllStatistics(websiteID string) (*WebsiteStatisticsAll, *Response, error) {
   url := fmt.Sprintf("website/%s/stats", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -130,7 +129,6 @@ func (service *WebsiteService) GetAllStatistics(websiteID string) (*WebsiteStati
 }
 
 // CountTotalNumberOfConversations get total number of conversations for website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-statistics-get-1
 func (service *WebsiteService) CountTotalNumberOfConversations(websiteID string) (*WebsiteStatisticsTotal, *Response, error) {
   url := fmt.Sprintf("website/%s/stats/total", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -145,7 +143,6 @@ func (service *WebsiteService) CountTotalNumberOfConversations(websiteID string)
 }
 
 // CountNumberOfPendingConversations get number of pending conversations for website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-statistics-get-2
 func (service *WebsiteService) CountNumberOfPendingConversations(websiteID string) (*WebsiteStatisticsPending, *Response, error) {
   url := fmt.Sprintf("website/%s/stats/pending", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -160,7 +157,6 @@ func (service *WebsiteService) CountNumberOfPendingConversations(websiteID strin
 }
 
 // CountNumberOfUnresolvedConversations get number of unresolved conversations for website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-statistics-get-3
 func (service *WebsiteService) CountNumberOfUnresolvedConversations(websiteID string) (*WebsiteStatisticsUnresolved, *Response, error) {
   url := fmt.Sprintf("website/%s/stats/unresolved", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -175,7 +171,6 @@ func (service *WebsiteService) CountNumberOfUnresolvedConversations(websiteID st
 }
 
 // CountNumberOfResolvedConversations get number of resolved conversations for website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-statistics-get-4
 func (service *WebsiteService) CountNumberOfResolvedConversations(websiteID string) (*WebsiteStatisticsResolved, *Response, error) {
   url := fmt.Sprintf("website/%s/stats/resolved", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -190,7 +185,6 @@ func (service *WebsiteService) CountNumberOfResolvedConversations(websiteID stri
 }
 
 // CountNumberOfUnreadMessages get number of unread messages for website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-statistics-get-5
 func (service *WebsiteService) CountNumberOfUnreadMessages(websiteID string) (*WebsiteStatisticsUnread, *Response, error) {
   url := fmt.Sprintf("website/%s/stats/unread", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)

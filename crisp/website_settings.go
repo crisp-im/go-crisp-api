@@ -80,7 +80,6 @@ func (instance WebsiteSettings) String() string {
 
 
 // GetWebsiteSettings resolves the current settings for a website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-settings-get
 func (service *WebsiteService) GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error) {
   url := fmt.Sprintf("website/%s/settings", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -96,7 +95,6 @@ func (service *WebsiteService) GetWebsiteSettings(websiteID string) (*WebsiteSet
 
 
 // UpdateWebsiteSettings updates the current settings for a website.
-// Reference: https://docs.crisp.im/api/v1/#website-website-settings-patch
 func (service *WebsiteService) UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error) {
   url := fmt.Sprintf("website/%s/settings", websiteID)
   req, _ := service.client.NewRequest("PATCH", url, settings)

@@ -37,7 +37,6 @@ func (instance UserProfile) String() string {
 
 
 // GetProfile resolves user profile data.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-profile-get
 func (service *UserService) GetProfile() (*UserProfile, *Response, error) {
   url := "user/account/profile"
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -53,7 +52,6 @@ func (service *UserService) GetProfile() (*UserProfile, *Response, error) {
 
 
 // UpdateProfile updates user profile data.
-// Reference: https://docs.crisp.im/api/v1/#user-user-account-profile-patch
 func (service *UserService) UpdateProfile(profile UserProfileUpdate) (*Response, error) {
   url := "user/account/profile"
   req, _ := service.client.NewRequest("PATCH", url, profile)

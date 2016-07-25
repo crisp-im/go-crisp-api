@@ -49,7 +49,6 @@ func (instance PluginConnectWebsitesSince) String() string {
 
 
 // CheckConnectSessionValidity checks whether the connected plugin session is valid or not.
-// Reference: https://docs.crisp.im/api/v1/#plugin-plugin-connect-session-head
 func (service *PluginService) CheckConnectSessionValidity() (*Response, error) {
   url := "plugin/connect/session"
   req, _ := service.client.NewRequest("HEAD", url, nil)
@@ -59,7 +58,6 @@ func (service *PluginService) CheckConnectSessionValidity() (*Response, error) {
 
 
 // ListAllConnectWebsites lists all websites linked to connected plugin.
-// Reference: https://docs.crisp.im/api/v1/#plugin-plugin-connect-websites-get
 func (service *PluginService) ListAllConnectWebsites(pageNumber uint) (*[]PluginConnectAllWebsites, *Response, error) {
   url := fmt.Sprintf("plugin/connect/websites/all/%d", pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
@@ -75,7 +73,6 @@ func (service *PluginService) ListAllConnectWebsites(pageNumber uint) (*[]Plugin
 
 
 // ListConnectWebsitesSince lists the websites linked or unlinked or updated for connected plugin, since given date.
-// Reference: https://docs.crisp.im/api/v1/#plugin-plugin-connect-websites-get-1
 func (service *PluginService) ListConnectWebsitesSince(dateSince string) (*[]PluginConnectWebsitesSince, *Response, error) {
   url := fmt.Sprintf("plugin/connect/websites/since?date_since=%s", url.QueryEscape(dateSince))
   req, _ := service.client.NewRequest("GET", url, nil)
