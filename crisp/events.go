@@ -12,6 +12,7 @@ import (
   "time"
   "net"
   "net/url"
+  "encoding/json"
   "strconv"
 )
 
@@ -198,22 +199,13 @@ type EventsReceiveSessionRemoved struct {
   SessionID  *string  `json:"session_id"`
 }
 
-// EventsReceiveMessageSend maps message:send
-type EventsReceiveMessageSend struct {
-  WebsiteID    *string                          `json:"website_id"`
-  SessionID    *string                          `json:"session_id"`
-  From         *string                          `json:"from"`
-  Type         *string                          `json:"type"`
-  Origin       *string                          `json:"origin"`
-  Content      *string                          `json:"content"`
-  Stamped      *bool                            `json:"stamped"`
-  Timestamp    *uint                            `json:"timestamp"`
-  Fingerprint  *int                             `json:"fingerprint"`
-  User         *EventsReceiveMessageCommonUser  `json:"user"`
+// EventsReceiveGenericMessageType maps message:{send,received} (generic type, type key only)
+type EventsReceiveGenericMessageType struct {
+  Type  *string  `json:"type"`
 }
 
-// EventsReceiveMessageReceived maps message:received
-type EventsReceiveMessageReceived struct {
+// EventsReceiveTextMessage maps message:{send,received} (text type)
+type EventsReceiveTextMessage struct {
   WebsiteID    *string                          `json:"website_id"`
   SessionID    *string                          `json:"session_id"`
   From         *string                          `json:"from"`
@@ -223,7 +215,35 @@ type EventsReceiveMessageReceived struct {
   Stamped      *bool                            `json:"stamped"`
   Timestamp    *uint                            `json:"timestamp"`
   Fingerprint  *int                             `json:"fingerprint"`
-  User         *EventsReceiveMessageCommonUser  `json:"user"`
+  User         *EventsReceiveCommonMessageUser  `json:"user"`
+}
+
+// EventsReceiveFileMessage maps message:{send,received} (file type)
+type EventsReceiveFileMessage struct {
+  WebsiteID    *string                           `json:"website_id"`
+  SessionID    *string                           `json:"session_id"`
+  From         *string                           `json:"from"`
+  Type         *string                           `json:"type"`
+  Origin       *string                           `json:"origin"`
+  Content      *EventsReceiveFileMessageContent  `json:"content"`
+  Stamped      *bool                             `json:"stamped"`
+  Timestamp    *uint                             `json:"timestamp"`
+  Fingerprint  *int                              `json:"fingerprint"`
+  User         *EventsReceiveCommonMessageUser   `json:"user"`
+}
+
+// EventsReceiveFileMessageContent maps message:{send,received}/content (file type)
+type EventsReceiveFileMessageContent struct {
+  Name  string  `json:"name"`
+  URL   string  `json:"url"`
+  Type  string  `json:"type"`
+}
+
+// EventsReceiveCommonMessageUser maps message:{send,received}/user
+type EventsReceiveCommonMessageUser struct {
+  UserID    *string  `json:"user_id"`
+  Nickname  *string  `json:"nickname"`
+  Avatar    *string  `json:"avatar"`
 }
 
 // EventsReceiveMessageComposeSend maps message:compose:send
@@ -248,24 +268,8 @@ type EventsReceiveMessageComposeReceiveCompose struct {
   Timestamp    *uint    `json:"timestamp"`
 }
 
-// EventsReceiveMessageAcknowledgeReadSend maps message:acknowledge:read:send
-type EventsReceiveMessageAcknowledgeReadSend struct {
-  WebsiteID     *string  `json:"website_id"`
-  SessionID     *string  `json:"session_id"`
-  Origin        *string  `json:"origin"`
-  Fingerprints  *[]int   `json:"fingerprints"`
-}
-
-// EventsReceiveMessageAcknowledgeReadReceived maps message:acknowledge:read:received
-type EventsReceiveMessageAcknowledgeReadReceived struct {
-  WebsiteID     *string  `json:"website_id"`
-  SessionID     *string  `json:"session_id"`
-  Origin        *string  `json:"origin"`
-  Fingerprints  *[]int   `json:"fingerprints"`
-}
-
-// EventsReceiveMessageAcknowledgeDelivered maps message:acknowledge:read:delivered
-type EventsReceiveMessageAcknowledgeDelivered struct {
+// EventsReceiveMessageAcknowledge maps message:acknowledge:*
+type EventsReceiveMessageAcknowledge struct {
   WebsiteID     *string  `json:"website_id"`
   SessionID     *string  `json:"session_id"`
   Origin        *string  `json:"origin"`
@@ -359,13 +363,6 @@ type EventsReceiveBucketURLAvatarGeneratedURL struct {
 type EventsReceiveBillingLinkRedirect struct {
   Service  *string  `json:"service"`
   URL      *string  `json:"url"`
-}
-
-// EventsReceiveMessageCommonUser maps message:*/user
-type EventsReceiveMessageCommonUser struct {
-  UserID    *string  `json:"user_id"`
-  Nickname  *string  `json:"nickname"`
-  Avatar    *string  `json:"avatar"`
 }
 
 
@@ -465,14 +462,20 @@ func (evt EventsReceiveSessionRemoved) String() string {
 }
 
 
-// String returns the string representation of EventsReceiveMessageSend
-func (evt EventsReceiveMessageSend) String() string {
+// String returns the string representation of EventsReceiveGenericMessageType
+func (evt EventsReceiveGenericMessageType) String() string {
   return Stringify(evt)
 }
 
 
-// String returns the string representation of EventsReceiveMessageReceived
-func (evt EventsReceiveMessageReceived) String() string {
+// String returns the string representation of EventsReceiveTextMessage
+func (evt EventsReceiveTextMessage) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveFileMessage
+func (evt EventsReceiveFileMessage) String() string {
   return Stringify(evt)
 }
 
@@ -489,20 +492,8 @@ func (evt EventsReceiveMessageComposeReceive) String() string {
 }
 
 
-// String returns the string representation of EventsReceiveMessageAcknowledgeReadSend
-func (evt EventsReceiveMessageAcknowledgeReadSend) String() string {
-  return Stringify(evt)
-}
-
-
-// String returns the string representation of EventsReceiveMessageAcknowledgeReadReceived
-func (evt EventsReceiveMessageAcknowledgeReadReceived) String() string {
-  return Stringify(evt)
-}
-
-
-// String returns the string representation of EventsReceiveMessageAcknowledgeDelivered
-func (evt EventsReceiveMessageAcknowledgeDelivered) String() string {
+// String returns the string representation of EventsReceiveMessageAcknowledge
+func (evt EventsReceiveMessageAcknowledge) String() string {
   return Stringify(evt)
 }
 
@@ -647,15 +638,49 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
     }
   })
 
-  so.On("message:send", func(chnl *gosocketio.Channel, evt EventsReceiveMessageSend) {
-    if hdl, ok := register.Handlers["message:send"]; ok {
-      hdl.callFunc(&evt)
+  so.On("message:send", func(chnl *gosocketio.Channel, evt *json.RawMessage) {
+    var messageGenericType EventsReceiveGenericMessageType
+    json.Unmarshal(*evt, &messageGenericType)
+
+    switch *messageGenericType.Type {
+    case "text":
+      if hdl, ok := register.Handlers["message:send/text"]; ok {
+        var messageSendText EventsReceiveTextMessage
+        json.Unmarshal(*evt, &messageSendText)
+
+        hdl.callFunc(&messageSendText)
+      }
+
+    case "file":
+      if hdl, ok := register.Handlers["message:send/file"]; ok {
+        var messageSendFile EventsReceiveFileMessage
+        json.Unmarshal(*evt, &messageSendFile)
+
+        hdl.callFunc(&messageSendFile)
+      }
     }
   })
 
-  so.On("message:received", func(chnl *gosocketio.Channel, evt EventsReceiveMessageReceived) {
-    if hdl, ok := register.Handlers["message:received"]; ok {
-      hdl.callFunc(&evt)
+  so.On("message:received", func(chnl *gosocketio.Channel, evt *json.RawMessage) {
+    var messageGenericType EventsReceiveGenericMessageType
+    json.Unmarshal(*evt, &messageGenericType)
+
+    switch *messageGenericType.Type {
+    case "text":
+      if hdl, ok := register.Handlers["message:received/text"]; ok {
+        var messageReceivedText EventsReceiveTextMessage
+        json.Unmarshal(*evt, &messageReceivedText)
+
+        hdl.callFunc(&messageReceivedText)
+      }
+
+    case "file":
+      if hdl, ok := register.Handlers["message:received/file"]; ok {
+        var messageReceivedFile EventsReceiveFileMessage
+        json.Unmarshal(*evt, &messageReceivedFile)
+
+        hdl.callFunc(&messageReceivedFile)
+      }
     }
   })
 
@@ -671,19 +696,19 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
     }
   })
 
-  so.On("message:acknowledge:read:send", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledgeReadSend) {
+  so.On("message:acknowledge:read:send", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
     if hdl, ok := register.Handlers["message:acknowledge:read:send"]; ok {
       hdl.callFunc(&evt)
     }
   })
 
-  so.On("message:acknowledge:read:received", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledgeReadReceived) {
+  so.On("message:acknowledge:read:received", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
     if hdl, ok := register.Handlers["message:acknowledge:read:received"]; ok {
       hdl.callFunc(&evt)
     }
   })
 
-  so.On("message:acknowledge:delivered", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledgeDelivered) {
+  so.On("message:acknowledge:delivered", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
     if hdl, ok := register.Handlers["message:acknowledge:delivered"]; ok {
       hdl.callFunc(&evt)
     }

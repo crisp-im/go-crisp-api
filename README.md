@@ -226,9 +226,14 @@ client.Events.Listen(func(reg *crisp.EventsRegister) {
   // Notice: if the realtime socket breaks at any point, this function will be called again upon reconnect (to re-bind events)
   // Thus, ensure you only use this to register handlers
 
-  // Register handler on 'message:send' namespace
-  reg.On("message:send", func(evt crisp.EventsReceiveMessageSend) {
-    // Handle message
+  // Register handler on 'message:send/text' namespace
+  reg.On("message:send/text", func(evt crisp.EventsReceiveTextMessage) {
+    // Handle text message from visitor
+  })
+
+  // Register handler on 'message:send/file' namespace
+  reg.On("message:send/file", func(evt crisp.EventsReceiveFileMessage) {
+    // Handle file message from visitor
   })
 })
 ```
@@ -254,8 +259,10 @@ Available events are listed below:
   * **Session Removed**: `session:removed`
 
 * **Message Events**
-  * **Message Send**: `message:send`
-  * **Message Received**: `message:received`
+  * **Message Send (Text Variant)**: `message:send/text`
+  * **Message Send (File Variant)**: `message:send/file`
+  * **Message Received (Text Variant)**: `message:received/text`
+  * **Message Received (File Variant)**: `message:received/file`
   * **Message Compose Send**: `message:compose:send`
   * **Message Compose Receive**: `message:compose:receive`
   * **Message Acknowledge Read Send**: `message:acknowledge:read:send`

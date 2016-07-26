@@ -19,12 +19,20 @@ func main() {
   client.Events.Listen(func(reg *crisp.EventsRegister) {
     fmt.Print("Now listening for events\n")
 
-    reg.On("message:send", func(evt crisp.EventsReceiveMessageSend) {
-      fmt.Printf("[message:send] %s\n", evt)
+    reg.On("message:send/text", func(evt crisp.EventsReceiveTextMessage) {
+      fmt.Printf("[message:send/text] %s\n", evt)
     })
 
-    reg.On("message:received", func(evt crisp.EventsReceiveMessageReceived) {
-      fmt.Printf("[message:received] %s\n", evt)
+    reg.On("message:send/file", func(evt crisp.EventsReceiveFileMessage) {
+      fmt.Printf("[message:send/file] %s\n", evt)
+    })
+
+    reg.On("message:received/text", func(evt crisp.EventsReceiveTextMessage) {
+      fmt.Printf("[message:received/text] %s\n", evt)
+    })
+
+    reg.On("message:received/file", func(evt crisp.EventsReceiveFileMessage) {
+      fmt.Printf("[message:received/file] %s\n", evt)
     })
 
     reg.On("message:compose:send", func(evt crisp.EventsReceiveMessageComposeSend) {
