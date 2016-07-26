@@ -192,7 +192,7 @@ type ConversationComposeMessageNew struct {
 
 // ConversationReadMessageMark mapping
 type ConversationReadMessageMark struct {
-  Type          string  `json:"type,omitempty"`
+  From          string  `json:"from,omitempty"`
   Origin        string  `json:"origin,omitempty"`
   Fingerprints  []int   `json:"fingerprints,omitempty"`
 }
@@ -340,9 +340,9 @@ func (service *WebsiteService) ComposeMessageInConversation(websiteID string, se
 
 
 // MarkMessagesReadInConversation marks messages as read in conversation. Either using given message fingerprints, or all messages.
-func (service *WebsiteService) MarkMessagesReadInConversation(websiteID string, sessionID string, compose ConversationReadMessageMark) (*Response, error) {
+func (service *WebsiteService) MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/read", websiteID, sessionID)
-  req, _ := service.client.NewRequest("PATCH", url, compose)
+  req, _ := service.client.NewRequest("PATCH", url, read)
 
   return service.client.Do(req, nil)
 }

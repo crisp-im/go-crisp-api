@@ -172,7 +172,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Send A Message In Conversation (Text Variant)**: `crisp.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error)`
   * **Send A Message In Conversation (File Variant)**: `crisp.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error)`
   * **Compose A Message In Conversation**: `crisp.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
-  * **Mark Messages As Read In Conversation**: `crisp.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, compose ConversationReadMessageMark) (*Response, error)`
+  * **Mark Messages As Read In Conversation**: `crisp.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
   * **Update Conversation Metas**: `crisp.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
   * **Change Conversation State**: `crisp.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
   * **Block Incoming Messages For Conversation**: `crisp.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
