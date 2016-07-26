@@ -153,18 +153,12 @@ type ConversationNew struct {
 
 // ConversationTextMessageNew mapping
 type ConversationTextMessageNew struct {
-  Type         string                          `json:"type,omitempty"`
-  From         string                          `json:"from,omitempty"`
-  Origin       string                          `json:"origin,omitempty"`
-  Content      string                          `json:"content,omitempty"`
-  Fingerprint  int                             `json:"fingerprint,omitempty"`
-  User         ConversationTextMessageNewUser  `json:"user,omitempty"`
-}
-
-// ConversationTextMessageNewUser mapping
-type ConversationTextMessageNewUser struct {
-  Nickname  string  `json:"nickname,omitempty"`
-  Avatar    string  `json:"avatar,omitempty"`
+  Type         string                         `json:"type,omitempty"`
+  From         string                         `json:"from,omitempty"`
+  Origin       string                         `json:"origin,omitempty"`
+  Content      string                         `json:"content,omitempty"`
+  Fingerprint  int                            `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser  `json:"user,omitempty"`
 }
 
 // ConversationFileMessageNew mapping
@@ -174,6 +168,7 @@ type ConversationFileMessageNew struct {
   Origin       string                             `json:"origin,omitempty"`
   Content      ConversationFileMessageNewContent  `json:"content,omitempty"`
   Fingerprint  int                                `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser      `json:"user,omitempty"`
 }
 
 // ConversationFileMessageNewContent mapping
@@ -181,6 +176,12 @@ type ConversationFileMessageNewContent struct {
   Name  string  `json:"name,omitempty"`
   URL   string  `json:"url,omitempty"`
   Type  string  `json:"type,omitempty"`
+}
+
+// ConversationAllMessageNewUser mapping
+type ConversationAllMessageNewUser struct {
+  Nickname  string  `json:"nickname,omitempty"`
+  Avatar    string  `json:"avatar,omitempty"`
 }
 
 // ConversationComposeMessageNew mapping
