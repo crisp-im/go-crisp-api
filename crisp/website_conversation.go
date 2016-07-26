@@ -169,11 +169,11 @@ type ConversationTextMessageNewUser struct {
 
 // ConversationFileMessageNew mapping
 type ConversationFileMessageNew struct {
-  Type         string                          `json:"type,omitempty"`
-  From         string                          `json:"from,omitempty"`
-  Origin       string                          `json:"origin,omitempty"`
+  Type         string                             `json:"type,omitempty"`
+  From         string                             `json:"from,omitempty"`
+  Origin       string                             `json:"origin,omitempty"`
   Content      ConversationFileMessageNewContent  `json:"content,omitempty"`
-  Fingerprint  int                             `json:"fingerprint,omitempty"`
+  Fingerprint  int                                `json:"fingerprint,omitempty"`
 }
 
 // ConversationFileMessageNewContent mapping
@@ -188,6 +188,13 @@ type ConversationComposeMessageNew struct {
   Type     string  `json:"type,omitempty"`
   From     string  `json:"from,omitempty"`
   Excerpt  string  `json:"excerpt,omitempty"`
+}
+
+// ConversationReadMessageMark mapping
+type ConversationReadMessageMark struct {
+  Type          string  `json:"type,omitempty"`
+  Origin        string  `json:"origin,omitempty"`
+  Fingerprints  []int   `json:"fingerprints,omitempty"`
 }
 
 // ConversationMetaUpdate mapping
@@ -326,6 +333,15 @@ func (service *WebsiteService) SendFileMessageInConversation(websiteID string, s
 // ComposeMessageInConversation starts or stop composing a message in an existing conversation.
 func (service *WebsiteService) ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/compose", websiteID, sessionID)
+  req, _ := service.client.NewRequest("PATCH", url, compose)
+
+  return service.client.Do(req, nil)
+}
+
+
+// MarkMessagesReadInConversation marks messages as read in conversation. Either using given message fingerprints, or all messages.
+func (service *WebsiteService) MarkMessagesReadInConversation(websiteID string, sessionID string, compose ConversationReadMessageMark) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/read", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, compose)
 
   return service.client.Do(req, nil)
