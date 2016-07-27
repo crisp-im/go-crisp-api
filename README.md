@@ -201,6 +201,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Save Subscription Settings**: `crisp.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
 
 * **Plugin Connect**
+  * **Get Connect Account**: `crisp.Plugin.GetConnectAccount() (*PluginConnectAccount, *Response, error)`
   * **Check Connect Session Validity**: `crisp.Plugin.CheckConnectSessionValidity() (*Response, error)`
   * **List All Connect Websites**: `crisp.Plugin.ListAllConnectWebsites(pageNumber uint) (*[]PluginConnectAllWebsites, *Response, error)`
   * **List Connect Websites Since**: `crisp.Plugin.ListConnectWebsitesSince(dateSince time.Time) (*[]PluginConnectWebsitesSince, *Response, error)`

@@ -13,6 +13,16 @@ import (
 )
 
 
+// PluginConnectAccountData mapping
+type PluginConnectAccountData struct {
+  Data  *PluginConnectAccount  `json:"data,omitempty"`
+}
+
+// PluginConnectAccount mapping
+type PluginConnectAccount struct {
+  PluginID  *string  `json:"plugin_id,omitempty"`
+}
+
 // PluginConnectAllWebsitesData mapping
 type PluginConnectAllWebsitesData struct {
   Data  *[]PluginConnectAllWebsites  `json:"data,omitempty"`
@@ -37,6 +47,12 @@ type PluginConnectWebsitesSince struct {
 }
 
 
+// String returns the string representation of PluginConnectAccount
+func (instance PluginConnectAccount) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of PluginConnectAllWebsites
 func (instance PluginConnectAllWebsites) String() string {
   return Stringify(instance)
@@ -46,6 +62,21 @@ func (instance PluginConnectAllWebsites) String() string {
 // String returns the string representation of PluginConnectWebsitesSince
 func (instance PluginConnectWebsitesSince) String() string {
   return Stringify(instance)
+}
+
+
+// GetConnectAccount resolves the current plugin account information.
+func (service *UserService) GetConnectAccount() (*PluginConnectAccount, *Response, error) {
+  url := "plugin/connect/account"
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  account := new(PluginConnectAccountData)
+  resp, err := service.client.Do(req, account)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return account.Data, resp, err
 }
 
 
