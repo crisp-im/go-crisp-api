@@ -544,97 +544,97 @@ func (register *EventsRegister) On(eventName string, handler interface{}) error 
 func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
   so.On("session:update_availability", func(chnl *gosocketio.Channel, evt EventsReceiveSessionUpdateAvailability) {
     if hdl, ok := register.Handlers["session:update_availability"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:request:initiated", func(chnl *gosocketio.Channel, evt EventsReceiveSessionRequestInitiated) {
     if hdl, ok := register.Handlers["session:request:initiated"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:set_email", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetEmail) {
     if hdl, ok := register.Handlers["session:set_email"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:set_avatar", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetAvatar) {
     if hdl, ok := register.Handlers["session:set_avatar"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:set_cover", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetCover) {
     if hdl, ok := register.Handlers["session:set_cover"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:set_nickname", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetNickname) {
     if hdl, ok := register.Handlers["session:set_nickname"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:sync:pages", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncPages) {
     if hdl, ok := register.Handlers["session:sync:pages"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:sync:geolocation", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncGeolocation) {
     if hdl, ok := register.Handlers["session:sync:geolocation"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:sync:system", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncSystem) {
     if hdl, ok := register.Handlers["session:sync:system"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:sync:extended_informations", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncExtendedInformation) {
     if hdl, ok := register.Handlers["session:sync:extended_informations"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:set_state", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetState) {
     if hdl, ok := register.Handlers["session:set_state"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:set_block", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetBlock) {
     if hdl, ok := register.Handlers["session:set_block"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:set_tags", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetTags) {
     if hdl, ok := register.Handlers["session:set_tags"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:set_opened", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetOpened) {
     if hdl, ok := register.Handlers["session:set_opened"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:set_closed", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetClosed) {
     if hdl, ok := register.Handlers["session:set_closed"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("session:removed", func(chnl *gosocketio.Channel, evt EventsReceiveSessionRemoved) {
     if hdl, ok := register.Handlers["session:removed"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
@@ -648,7 +648,7 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         var messageSendText EventsReceiveTextMessage
         json.Unmarshal(*evt, &messageSendText)
 
-        hdl.callFunc(&messageSendText)
+        go hdl.callFunc(&messageSendText)
       }
 
     case "file":
@@ -656,7 +656,7 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         var messageSendFile EventsReceiveFileMessage
         json.Unmarshal(*evt, &messageSendFile)
 
-        hdl.callFunc(&messageSendFile)
+        go hdl.callFunc(&messageSendFile)
       }
     }
   })
@@ -671,7 +671,7 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         var messageReceivedText EventsReceiveTextMessage
         json.Unmarshal(*evt, &messageReceivedText)
 
-        hdl.callFunc(&messageReceivedText)
+        go hdl.callFunc(&messageReceivedText)
       }
 
     case "file":
@@ -679,68 +679,68 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         var messageReceivedFile EventsReceiveFileMessage
         json.Unmarshal(*evt, &messageReceivedFile)
 
-        hdl.callFunc(&messageReceivedFile)
+        go hdl.callFunc(&messageReceivedFile)
       }
     }
   })
 
   so.On("message:compose:send", func(chnl *gosocketio.Channel, evt EventsReceiveMessageComposeSend) {
     if hdl, ok := register.Handlers["message:compose:send"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("message:compose:receive", func(chnl *gosocketio.Channel, evt EventsReceiveMessageComposeReceive) {
     if hdl, ok := register.Handlers["message:compose:receive"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("message:acknowledge:read:send", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
     if hdl, ok := register.Handlers["message:acknowledge:read:send"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("message:acknowledge:read:received", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
     if hdl, ok := register.Handlers["message:acknowledge:read:received"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("message:acknowledge:delivered", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
     if hdl, ok := register.Handlers["message:acknowledge:delivered"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("website:update_visitors_count", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteVisitorsCount) {
     if hdl, ok := register.Handlers["website:update_visitors_count"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("website:update_visitors_list", func(chnl *gosocketio.Channel, evt EventsReceiveUpdateVisitorsList) {
     if hdl, ok := register.Handlers["website:update_visitors_list"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("bucket:url:upload:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLUploadGenerated) {
     if hdl, ok := register.Handlers["bucket:url:upload:generated"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("bucket:url:avatar:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLAvatarGenerated) {
     if hdl, ok := register.Handlers["bucket:url:avatar:generated"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 
   so.On("billing:link:redirect", func(chnl *gosocketio.Channel, evt EventsReceiveBillingLinkRedirect) {
     if hdl, ok := register.Handlers["billing:link:redirect"]; ok {
-      hdl.callFunc(&evt)
+      go hdl.callFunc(&evt)
     }
   })
 }
