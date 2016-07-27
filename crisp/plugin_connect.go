@@ -8,6 +8,7 @@ package crisp
 
 import (
   "fmt"
+  "time"
   "net/url"
 )
 
@@ -73,8 +74,13 @@ func (service *PluginService) ListAllConnectWebsites(pageNumber uint) (*[]Plugin
 
 
 // ListConnectWebsitesSince lists the websites linked or unlinked or updated for connected plugin, since given date.
-func (service *PluginService) ListConnectWebsitesSince(dateSince string) (*[]PluginConnectWebsitesSince, *Response, error) {
-  url := fmt.Sprintf("plugin/connect/websites/since?date_since=%s", url.QueryEscape(dateSince))
+func (service *PluginService) ListConnectWebsitesSince(dateSince time.Time) (*[]PluginConnectWebsitesSince, *Response, error) {
+  dateSinceFormat, err := dateSince.UTC().MarshalText()
+  if err != nil {
+    return nil, nil, err
+  }
+
+  url := fmt.Sprintf("plugin/connect/websites/since?date_since=%s", url.QueryEscape(string(dateSinceFormat[:])))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   websites := new(PluginConnectWebsitesSinceData)

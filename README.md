@@ -203,7 +203,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Plugin Connect**
   * **Check Connect Session Validity**: `crisp.Plugin.CheckConnectSessionValidity() (*Response, error)`
   * **List All Connect Websites**: `crisp.Plugin.ListAllConnectWebsites(pageNumber uint) (*[]PluginConnectAllWebsites, *Response, error)`
-  * **List Connect Websites Since**: `crisp.Plugin.ListConnectWebsitesSince(dateSince string) (*[]PluginConnectWebsitesSince, *Response, error)`
+  * **List Connect Websites Since**: `crisp.Plugin.ListConnectWebsitesSince(dateSince time.Time) (*[]PluginConnectWebsitesSince, *Response, error)`
 
 ## Realtime Events
 
