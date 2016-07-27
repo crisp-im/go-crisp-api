@@ -66,7 +66,7 @@ func (instance PluginConnectWebsitesSince) String() string {
 
 
 // GetConnectAccount resolves the current plugin account information.
-func (service *UserService) GetConnectAccount() (*PluginConnectAccount, *Response, error) {
+func (service *PluginService) GetConnectAccount() (*PluginConnectAccount, *Response, error) {
   url := "plugin/connect/account"
   req, _ := service.client.NewRequest("GET", url, nil)
 
