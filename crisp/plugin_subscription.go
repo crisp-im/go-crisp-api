@@ -52,10 +52,11 @@ type PluginSubscriptionSettingsData struct {
 
 // PluginSubscriptionSettings mapping
 type PluginSubscriptionSettings struct {
-  PluginID   *string       `json:"plugin_id,omitempty"`
-  WebsiteID  *string       `json:"website_id,omitempty"`
-  Schema     *interface{}  `json:"schema,omitempty"`
-  Settings   *interface{}  `json:"settings,omitempty"`
+  PluginID          *string       `json:"plugin_id,omitempty"`
+  WebsiteID         *string       `json:"website_id,omitempty"`
+  Schema            *interface{}  `json:"schema,omitempty"`
+  Settings          *interface{}  `json:"settings,omitempty"`
+  SettingsFormURL   *string       `json:"settings_form_url,omitempty"`
 }
 
 
