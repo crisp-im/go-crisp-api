@@ -21,6 +21,9 @@ const (
   reconnectWait = 4
 )
 
+var activeSocket *gosocketio.Client
+
+
 // EventsService service
 type EventsService service
 
@@ -790,6 +793,8 @@ func (service *EventsService) connect(handleDone func(*EventsRegister), connecto
       if authenticated == true {
         reg := EventsRegister{Handlers: make(map[string]*caller)}
 
+        activeSocket = so
+
         reg.BindEvents(so)
 
         handleDone(&reg)
@@ -812,6 +817,14 @@ func (service *EventsService) connect(handleDone func(*EventsRegister), connecto
     })
   } else {
     service.reconnect(handleDone, connectorChild, connectedSocket, child)
+  }
+}
+
+
+// Bind emits a socket bind event which associates the socket to its channels
+func (service *EventsService) Bind() {
+  if activeSocket != nil {
+    activeSocket.Channel.Emit("socket:bind", "")
   }
 }
 
