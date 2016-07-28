@@ -36,6 +36,7 @@ type PluginSubscription struct {
   Banner       *string    `json:"banner,omitempty"`
   Since        *string    `json:"since,omitempty"`
   Active       *bool      `json:"active,omitempty"`
+  Token        *bool      `json:"token,omitempty"`
   WebsiteID    *string    `json:"website_id,omitempty"`
   CardID       *string    `json:"card_id,omitempty"`
 }

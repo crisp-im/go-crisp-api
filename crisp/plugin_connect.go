@@ -31,6 +31,7 @@ type PluginConnectAllWebsitesData struct {
 // PluginConnectAllWebsites mapping
 type PluginConnectAllWebsites struct {
   WebsiteID  *string       `json:"website_id,omitempty"`
+  Token      *string       `json:"token,omitempty"`
   Settings   *interface{}  `json:"settings,omitempty"`
 }
 
@@ -42,6 +43,7 @@ type PluginConnectWebsitesSinceData struct {
 // PluginConnectWebsitesSince mapping
 type PluginConnectWebsitesSince struct {
   WebsiteID   *string       `json:"website_id,omitempty"`
+  Token       *string       `json:"token,omitempty"`
   Settings    *interface{}  `json:"settings,omitempty"`
   Difference  *string       `json:"difference,omitempty"`
 }
