@@ -36,7 +36,6 @@ type PluginSubscription struct {
   Banner       *string    `json:"banner,omitempty"`
   Since        *string    `json:"since,omitempty"`
   Active       *bool      `json:"active,omitempty"`
-  Token        *bool      `json:"token,omitempty"`
   WebsiteID    *string    `json:"website_id,omitempty"`
   CardID       *string    `json:"card_id,omitempty"`
 }
@@ -55,6 +54,7 @@ type PluginSubscriptionSettingsData struct {
 type PluginSubscriptionSettings struct {
   PluginID          *string       `json:"plugin_id,omitempty"`
   WebsiteID         *string       `json:"website_id,omitempty"`
+  Token             *string       `json:"token,omitempty"`
   Schema            *interface{}  `json:"schema,omitempty"`
   Settings          *interface{}  `json:"settings,omitempty"`
   SettingsFormURL   *string       `json:"settings_form_url,omitempty"`
