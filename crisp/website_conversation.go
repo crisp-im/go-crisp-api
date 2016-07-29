@@ -202,16 +202,9 @@ type ConversationReadMessageMark struct {
   Fingerprints  []int   `json:"fingerprints,omitempty"`
 }
 
-// ConversationMetaSingleData mapping
-type ConversationMetaSingleData struct {
-  Data  *ConversationMetaSingle  `json:"data,omitempty"`
-}
-
-// ConversationMetaSingle mapping
-type ConversationMetaSingle struct {
-  Nickname  *string    `json:"nickname,omitempty"`
-  Email     *string    `json:"email,omitempty"`
-  Tags      *[]string  `json:"tags,omitempty"`
+// ConversationMetaData mapping
+type ConversationMetaData struct {
+  Data  *ConversationMeta  `json:"data,omitempty"`
 }
 
 // ConversationMetaUpdate mapping
@@ -270,8 +263,8 @@ func (instance ConversationMessage) String() string {
 }
 
 
-// String returns the string representation of ConversationMetaSingle
-func (instance ConversationMetaSingle) String() string {
+// String returns the string representation of ConversationMeta
+func (instance ConversationMeta) String() string {
   return Stringify(instance)
 }
 
@@ -373,8 +366,8 @@ func (service *WebsiteService) InitiateConversationWithExistingSession(websiteID
 }
 
 
-// GetsMessagesInConversation resolves messages in an existing conversation.
-func (service *WebsiteService) GetsMessagesInConversation(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error) {
+// GetMessagesInConversation resolves messages in an existing conversation.
+func (service *WebsiteService) GetMessagesInConversation(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/messages", websiteID, sessionID)
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -425,11 +418,11 @@ func (service *WebsiteService) MarkMessagesReadInConversation(websiteID string, 
 
 
 // GetConversationMetas resolves conversation meta information.
-func (service *WebsiteService) GetConversationMetas(websiteID string, sessionID string) (*ConversationMetaSingle, *Response, error) {
+func (service *WebsiteService) GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/meta", websiteID, sessionID)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  meta := new(ConversationMetaSingleData)
+  meta := new(ConversationMetaData)
   resp, err := service.client.Do(req, meta)
   if err != nil {
     return nil, resp, err
@@ -472,8 +465,8 @@ func (service *WebsiteService) ChangeConversationState(websiteID string, session
 }
 
 
-// GetsBlockStatusForConversation resolves conversation block status.
-func (service *WebsiteService) GetsBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error) {
+// GetBlockStatusForConversation resolves conversation block status.
+func (service *WebsiteService) GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/block", websiteID, sessionID)
   req, _ := service.client.NewRequest("GET", url, nil)
 
