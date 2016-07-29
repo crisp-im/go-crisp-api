@@ -61,13 +61,23 @@ type ConversationMessage struct {
   Type         *string                        `json:"type,omitempty"`
   From         *string                        `json:"from,omitempty"`
   Origin       *string                        `json:"origin,omitempty"`
-  Content      *string                        `json:"content,omitempty"`
+  Content      *interface{}                   `json:"content,omitempty"`
   Preview      *[]ConversationMessagePreview  `json:"preview,omitempty"`
   Read         *string                        `json:"read,omitempty"`
   Delivered    *string                        `json:"delivered,omitempty"`
   Fingerprint  *int                           `json:"fingerprint,omitempty"`
   Timestamp    *uint                          `json:"timestamp,omitempty"`
   User         *ConversationMessageUser       `json:"user,omitempty"`
+}
+
+// ConversationMessageTextContent mapping
+type ConversationMessageTextContent string
+
+// ConversationMessageFileContent mapping
+type ConversationMessageFileContent struct {
+  Name  *string  `json:"name"`
+  URL   *string  `json:"url"`
+  Type  *string  `json:"type"`
 }
 
 // ConversationMessagePreview mapping
