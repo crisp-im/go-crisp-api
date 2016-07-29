@@ -150,6 +150,11 @@ type ConversationNew struct {
   SessionID  *string  `json:"session_id,omitempty"`
 }
 
+// ConversationMessagesData mapping
+type ConversationMessagesData struct {
+  Data  *[]ConversationMessage  `json:"data,omitempty"`
+}
+
 // ConversationTextMessageNew mapping
 type ConversationTextMessageNew struct {
   Type         string                         `json:"type,omitempty"`
@@ -197,6 +202,18 @@ type ConversationReadMessageMark struct {
   Fingerprints  []int   `json:"fingerprints,omitempty"`
 }
 
+// ConversationMetaSingleData mapping
+type ConversationMetaSingleData struct {
+  Data  *ConversationMetaSingle  `json:"data,omitempty"`
+}
+
+// ConversationMetaSingle mapping
+type ConversationMetaSingle struct {
+  Nickname  *string    `json:"nickname,omitempty"`
+  Email     *string    `json:"email,omitempty"`
+  Tags      *[]string  `json:"tags,omitempty"`
+}
+
 // ConversationMetaUpdate mapping
 type ConversationMetaUpdate struct {
   Nickname  string    `json:"nickname,omitempty"`
@@ -204,9 +221,29 @@ type ConversationMetaUpdate struct {
   Tags      []string  `json:"tags,omitempty"`
 }
 
+// ConversationStateData mapping
+type ConversationStateData struct {
+  Data  *ConversationState  `json:"data,omitempty"`
+}
+
+// ConversationState mapping
+type ConversationState struct {
+  State  *string  `json:"state,omitempty"`
+}
+
 // ConversationStateUpdate mapping
 type ConversationStateUpdate struct {
   State  *string  `json:"state,omitempty"`
+}
+
+// ConversationBlockData mapping
+type ConversationBlockData struct {
+  Data  *ConversationBlock  `json:"data,omitempty"`
+}
+
+// ConversationBlock mapping
+type ConversationBlock struct {
+  Blocked  *bool  `json:"blocked,omitempty"`
 }
 
 // ConversationBlockUpdate mapping
@@ -223,6 +260,30 @@ func (instance Conversation) String() string {
 
 // String returns the string representation of ConversationNew
 func (instance ConversationNew) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationMessage
+func (instance ConversationMessage) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationMetaSingle
+func (instance ConversationMetaSingle) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationState
+func (instance ConversationState) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationBlock
+func (instance ConversationBlock) String() string {
   return Stringify(instance)
 }
 
@@ -312,6 +373,21 @@ func (service *WebsiteService) InitiateConversationWithExistingSession(websiteID
 }
 
 
+// GetsMessagesInConversation resolves messages in an existing conversation.
+func (service *WebsiteService) GetsMessagesInConversation(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/messages", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  messages := new(ConversationMessagesData)
+  resp, err := service.client.Do(req, messages)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return messages.Data, resp, err
+}
+
+
 // SendTextMessageInConversation sends a message in an existing conversation.
 func (service *WebsiteService) SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
@@ -348,6 +424,21 @@ func (service *WebsiteService) MarkMessagesReadInConversation(websiteID string, 
 }
 
 
+// GetConversationMetas resolves conversation meta information.
+func (service *WebsiteService) GetConversationMetas(websiteID string, sessionID string) (*ConversationMetaSingle, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/meta", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  meta := new(ConversationMetaSingleData)
+  resp, err := service.client.Do(req, meta)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return meta.Data, resp, err
+}
+
+
 // UpdateConversationMetas updates conversation meta information.
 func (service *WebsiteService) UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/meta", websiteID, sessionID)
@@ -357,12 +448,42 @@ func (service *WebsiteService) UpdateConversationMetas(websiteID string, session
 }
 
 
+// GetConversationState resolves conversation state.
+func (service *WebsiteService) GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/state", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  state := new(ConversationStateData)
+  resp, err := service.client.Do(req, state)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return state.Data, resp, err
+}
+
+
 // ChangeConversationState updates conversation state.
 func (service *WebsiteService) ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/state", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationStateUpdate{&state})
 
   return service.client.Do(req, nil)
+}
+
+
+// GetsBlockStatusForConversation resolves conversation block status.
+func (service *WebsiteService) GetsBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/block", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  block := new(ConversationBlockData)
+  resp, err := service.client.Do(req, block)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return block.Data, resp, err
 }
 
 
