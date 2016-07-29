@@ -294,7 +294,7 @@ type EventsReceiveUpdateVisitorsList struct {
 // EventsReceiveUpdateVisitorsListItself maps website:update_visitors_list/visitors_list
 type EventsReceiveUpdateVisitorsListItself struct {
   Items  *[]EventsReceiveUpdateVisitorsListItselfItem  `json:"items"`
-  Tule   *uint                                         `json:"time"`
+  Time   *uint                                         `json:"time"`
 }
 
 // EventsReceiveUpdateVisitorsListItselfItem maps website:update_visitors_list/items
