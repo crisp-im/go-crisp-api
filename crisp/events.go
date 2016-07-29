@@ -112,7 +112,6 @@ type EventsReceiveSessionSyncGeolocationData struct {
   City     *string     `json:"city,omitempty"`
   Region   *string     `json:"region,omitempty"`
   Country  *string     `json:"country,omitempty"`
-  Range    *[]uint     `json:"range,omitempty"`
 }
 
 // EventsReceiveSessionSyncSystem maps session:sync:system
