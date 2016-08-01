@@ -4,7 +4,7 @@
 
 The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, access your agent accounts from your Go code.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 07/29/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 08/01/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -209,6 +209,20 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Check Connect Session Validity**: `crisp.Plugin.CheckConnectSessionValidity() (*Response, error)`
   * **List All Connect Websites**: `crisp.Plugin.ListAllConnectWebsites(pageNumber uint) (*[]PluginConnectAllWebsites, *Response, error)`
   * **List Connect Websites Since**: `crisp.Plugin.ListConnectWebsitesSince(dateSince time.Time) (*[]PluginConnectWebsitesSince, *Response, error)`
+
+### Plan
+
+* **One Plan**
+  * **Get Plan Information**: `crisp.Plan.GetPlanInformation(planID string) (*PlanInformation, *Response, error)`
+
+* **Plan List**
+  * **List Plans**: `crisp.Plan.ListPlans() (*[]PlanInformation, *Response, error)`
+
+* **Plan Subscription**
+  * **List All Active Subscriptions**: `crisp.Plan.ListAllActiveSubscriptions() (*[]PlanSubscription, *Response, error)`
+  * **Get Subscription For A Website**: `crisp.Plan.GetSubscriptionForWebsite(websiteID string) (*PlanSubscription, *Response, error)`
+  * **Subscribe Website To Plan**: `crisp.Plan.SubscribeWebsiteToPlan(websiteID string, planID string) (*Response, error)`
+  * **Unsubscribe Plan From Website**: `crisp.Plan.UnsubscribePlanFromWebsite(websiteID string) (*Response, error)`
 
 ## Realtime Events
 

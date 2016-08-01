@@ -73,7 +73,7 @@ func (instance PluginSubscriptionSettings) String() string {
 }
 
 
-// ListAllActiveSubscriptions lists all active plugin subscriptions on all websites, linked to payment methods owned by the user.
+// ListAllActiveSubscriptions lists all active plugin subscriptions on all websites, linked to payment methods owned by the user, or from websites the user is member of.
 func (service *PluginService) ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error) {
   url := "plugins/subscription"
   req, _ := service.client.NewRequest("GET", url, nil)
