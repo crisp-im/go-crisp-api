@@ -58,6 +58,7 @@ type PluginSubscriptionSettings struct {
   Schema            *interface{}  `json:"schema,omitempty"`
   Settings          *interface{}  `json:"settings,omitempty"`
   SettingsFormURL   *string       `json:"settings_form_url,omitempty"`
+  CallbackURL       *string       `json:"callback_url,omitempty"`
 }
 
 
