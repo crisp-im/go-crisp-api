@@ -812,12 +812,7 @@ func (service *EventsService) connect(events []string, handleDone func(*EventsRe
 
       // Authenticate to socket
       if service.client.auth.Available == true {
-        eventsList := []string{}
-        if len(events) > 0 {
-          eventsList = append([]string{"authenticated"}, events...)
-        }
-
-        so.Channel.Emit("authentication", eventsSendAuthentication{Tier: service.client.auth.Tier, Username: service.client.auth.Username, Password: service.client.auth.Password, Events: eventsList})
+        so.Channel.Emit("authentication", eventsSendAuthentication{Tier: service.client.auth.Tier, Username: service.client.auth.Username, Password: service.client.auth.Password, Events: events})
       }
     })
   } else {
