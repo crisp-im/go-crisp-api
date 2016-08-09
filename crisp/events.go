@@ -134,7 +134,7 @@ type EventsReceiveSessionSyncSystemData struct {
   OS       *EventsReceiveSessionSyncSystemDataOS       `json:"os,omitempty"`
   Engine   *EventsReceiveSessionSyncSystemDataEngine   `json:"engine,omitempty"`
   Browser  *EventsReceiveSessionSyncSystemDataBrowser  `json:"browser,omitempty"`
-  UA       *string                                             `json:"ua,omitempty"`
+  UA       *string                                     `json:"ua,omitempty"`
 }
 
 // EventsReceiveSessionSyncSystemDataOS maps session:sync:system/system/os
