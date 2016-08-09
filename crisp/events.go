@@ -85,6 +85,13 @@ type EventsReceiveSessionSetNickname struct {
   Nickname   *string  `json:"nickname"`
 }
 
+// EventsReceiveSessionSetData maps session:set_data
+type EventsReceiveSessionSetData struct {
+  WebsiteID  *string       `json:"website_id"`
+  SessionID  *string       `json:"session_id"`
+  Data       *interface{}  `json:"data"`
+}
+
 // EventsReceiveSessionSyncPages maps session:sync:pages
 type EventsReceiveSessionSyncPages struct {
   WebsiteID  *string                              `json:"website_id"`
@@ -405,6 +412,12 @@ func (evt EventsReceiveSessionSetNickname) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveSessionSetData
+func (evt EventsReceiveSessionSetData) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveSessionSyncPages
 func (evt EventsReceiveSessionSyncPages) String() string {
   return Stringify(evt)
@@ -577,6 +590,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:set_nickname", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetNickname) {
     if hdl, ok := register.Handlers["session:set_nickname"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:set_data", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetData) {
+    if hdl, ok := register.Handlers["session:set_data"]; ok {
       go hdl.callFunc(&evt)
     }
   })

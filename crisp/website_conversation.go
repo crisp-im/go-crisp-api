@@ -48,6 +48,7 @@ type ConversationUnread struct {
 type ConversationMeta struct {
   Nickname              *string                                      `json:"nickname,omitempty"`
   Email                 *string                                      `json:"email,omitempty"`
+  Data                  *interface{}                                 `json:"data,omitempty"`
   Avatar                *string                                      `json:"avatar,omitempty"`
   BrowsingInformations  *ConversationMetaBrowsingInformations        `json:"browsing_informations,omitempty"`
   Tags                  *[]string                                    `json:"tags,omitempty"`
@@ -219,9 +220,10 @@ type ConversationMetaData struct {
 
 // ConversationMetaUpdate mapping
 type ConversationMetaUpdate struct {
-  Nickname  string    `json:"nickname,omitempty"`
-  Email     string    `json:"email,omitempty"`
-  Tags      []string  `json:"tags,omitempty"`
+  Nickname  string       `json:"nickname,omitempty"`
+  Email     string       `json:"email,omitempty"`
+  Tags      []string     `json:"tags,omitempty"`
+  Data      interface{}  `json:"data,omitempty"`
 }
 
 // ConversationStateData mapping

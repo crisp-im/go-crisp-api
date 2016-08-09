@@ -266,6 +266,7 @@ Available events are listed below:
   * **Session Set Avatar**: `session:set_avatar`
   * **Session Set Cover**: `session:set_cover`
   * **Session Set Nickname**: `session:set_nickname`
+  * **Session Set Data**: `session:set_data`
   * **Session Sync Pages**: `session:sync:pages`
   * **Session Sync Geolocation**: `session:sync:geolocation`
   * **Session Sync System**: `session:sync:system`
