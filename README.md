@@ -238,8 +238,8 @@ client := crisp.New()
 // Set authentication parameters
 client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
 
-// Connect to realtime events backend and listen
-client.Events.Listen(func(reg *crisp.EventsRegister) {
+// Connect to realtime events backend and listen (only to 'message:send' namespace)
+client.Events.Listen([]string{"message:send"}, func(reg *crisp.EventsRegister) {
   // Now listening for events
 
   // Notice: if the realtime socket breaks at any point, this function will be called again upon reconnect (to re-bind events)

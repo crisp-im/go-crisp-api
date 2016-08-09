@@ -33,9 +33,10 @@ type EventsRegister struct {
 }
 
 type eventsSendAuthentication struct {
-  Tier      string  `json:"tier"`
-  Username  string  `json:"username"`
-  Password  string  `json:"password"`
+  Tier      string    `json:"tier"`
+  Username  string    `json:"username"`
+  Password  string    `json:"password"`
+  Events    []string  `json:"events"`
 }
 
 // EventsReceiveAuthenticationUnauthorized maps unauthorized
@@ -766,7 +767,7 @@ func (service *EventsService) getEndpointURL() (string) {
 }
 
 
-func (service *EventsService) reconnect(handleDone func(*EventsRegister), connectorChild *int, connectedSocket *bool, child int) {
+func (service *EventsService) reconnect(events []string, handleDone func(*EventsRegister), connectorChild *int, connectedSocket *bool, child int) {
   // Attempt to reconnect
   for *connectedSocket == false && child == *connectorChild {
     // Hold on.
@@ -774,12 +775,12 @@ func (service *EventsService) reconnect(handleDone func(*EventsRegister), connec
 
     *connectorChild++
 
-    service.connect(handleDone, connectorChild, connectedSocket)
+    service.connect(events, handleDone, connectorChild, connectedSocket)
   }
 }
 
 
-func (service *EventsService) connect(handleDone func(*EventsRegister), connectorChild *int, connectedSocket *bool) {
+func (service *EventsService) connect(events []string, handleDone func(*EventsRegister), connectorChild *int, connectedSocket *bool) {
   child := *connectorChild
 
   endpointURL := service.getEndpointURL()
@@ -803,7 +804,7 @@ func (service *EventsService) connect(handleDone func(*EventsRegister), connecto
     so.On(gosocketio.OnDisconnection, func(chnl *gosocketio.Channel) {
       *connectedSocket = false
 
-      service.reconnect(handleDone, connectorChild, connectedSocket, child)
+      service.reconnect(events, handleDone, connectorChild, connectedSocket, child)
     })
 
     so.On(gosocketio.OnConnection, func(chnl *gosocketio.Channel) {
@@ -811,11 +812,11 @@ func (service *EventsService) connect(handleDone func(*EventsRegister), connecto
 
       // Authenticate to socket
       if service.client.auth.Available == true {
-        so.Channel.Emit("authentication", eventsSendAuthentication{service.client.auth.Tier, service.client.auth.Username, service.client.auth.Password})
+        so.Channel.Emit("authentication", eventsSendAuthentication{Tier: service.client.auth.Tier, Username: service.client.auth.Username, Password: service.client.auth.Password, Events: events})
       }
     })
   } else {
-    service.reconnect(handleDone, connectorChild, connectedSocket, child)
+    service.reconnect(events, handleDone, connectorChild, connectedSocket, child)
   }
 }
 
@@ -829,9 +830,9 @@ func (service *EventsService) Bind() {
 
 
 // Listen starts listening for incoming realtime events.
-func (service *EventsService) Listen(handleDone func(*EventsRegister)) {
+func (service *EventsService) Listen(events []string, handleDone func(*EventsRegister)) {
   connectorChild := 0
   connectedSocket := false
 
-  service.connect(handleDone, &connectorChild, &connectedSocket)
+  service.connect(events, handleDone, &connectorChild, &connectedSocket)
 }
