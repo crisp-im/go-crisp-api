@@ -151,6 +151,17 @@ type ConversationMetaBrowsingInformationsPage struct {
   Timestamp  *uint    `json:"timestamp,omitempty"`
 }
 
+// ConversationExportEmailData mapping
+type ConversationExportEmailData struct {
+  Data  *[]ConversationExportEmail  `json:"data,omitempty"`
+}
+
+// ConversationExportEmail mapping
+type ConversationExportEmail struct {
+  Nickname  *string  `json:"nickname,omitempty"`
+  Email     *string  `json:"email,omitempty"`
+}
+
 // ConversationNewData mapping
 type ConversationNewData struct {
   Data  *ConversationNew  `json:"data,omitempty"`
@@ -263,6 +274,12 @@ func (instance Conversation) String() string {
 }
 
 
+// String returns the string representation of ConversationExportEmail
+func (instance ConversationExportEmail) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of ConversationNew
 func (instance ConversationNew) String() string {
   return Stringify(instance)
@@ -318,6 +335,21 @@ func (service *WebsiteService) SearchConversations(websiteID string, pageNumber 
 // ListConversations lists conversations for website.
 func (service *WebsiteService) ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error) {
   return service.SearchConversations(websiteID, pageNumber, "", "")
+}
+
+
+// ExportConversationEmails exports conversation emails for website.
+func (service *WebsiteService) ExportConversationEmails(websiteID string) (*[]ConversationExportEmail, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/export/emails", websiteID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  emails := new(ConversationExportEmailData)
+  resp, err := service.client.Do(req, emails)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return emails.Data, resp, err
 }
 
 

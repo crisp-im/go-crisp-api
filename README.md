@@ -4,7 +4,7 @@
 
 The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, access your agent accounts from your Go code.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 08/01/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 08/13/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -162,6 +162,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Conversations**
   * **List Conversations**: `crisp.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
   * **List Conversations (Search Variant)**: `crisp.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
+  * **Export Conversation Emails**: `crisp.Website.ExportConversationEmails(websiteID string) (*[]ConversationExportEmail, *Response, error)`
 
 * **Website Conversation**
   * **Create A New Conversation**: `crisp.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
