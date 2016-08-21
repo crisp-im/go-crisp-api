@@ -77,7 +77,7 @@ func (service *PlanService) GetSubscriptionForWebsite(websiteID string) (*PlanSu
 // SubscribeWebsiteToPlan subscribes a given website to a given plan.
 func (service *PlanService) SubscribeWebsiteToPlan(websiteID string, planID string) (*Response, error) {
   url := fmt.Sprintf("plans/subscription/%s", websiteID)
-  req, _ := service.client.NewRequest("PUT", url, PlanSubscriptionCreate{PlanID: &planID})
+  req, _ := service.client.NewRequest("POST", url, PlanSubscriptionCreate{PlanID: &planID})
 
   return service.client.Do(req, nil)
 }
