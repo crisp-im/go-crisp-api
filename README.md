@@ -67,6 +67,11 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Subscription Status**: `crisp.Email.GetSubscriptionStatus(emailHash string, key string) (*SubscriptionStatus, *Response, error)`
   * **Update Subscription Status**: `crisp.Email.UpdateSubscriptionStatus(emailHash string, key string, subscribed bool) (*Response, error)`
 
+### Bucket
+
+* **Bucket URL**
+  * **Generate Bucket URL**: `crisp.Bucket.GenerateBucketURL(bucketData BucketURLRequest) (*Response, error)`
+
 ### User
 
 * **User Availability**
