@@ -23,11 +23,16 @@ type UserNotificationSettings struct {
 
 // UserNotificationSettingsUpdate mapping
 type UserNotificationSettingsUpdate struct {
-  Disabled            bool    `json:"disabled,omitempty"`
-  MessagesOnline      bool    `json:"messages_online,omitempty"`
-  MessagesOffline     bool    `json:"messages_offline,omitempty"`
-  MessagesTranscript  bool    `json:"messages_transcript,omitempty"`
-  Sounds              bool    `json:"sounds,omitempty"`
+  Disabled            bool  `json:"disabled,omitempty"`
+  MessagesOnline      bool  `json:"messages_online,omitempty"`
+  MessagesOffline     bool  `json:"messages_offline,omitempty"`
+  MessagesTranscript  bool  `json:"messages_transcript,omitempty"`
+  Sounds              bool  `json:"sounds,omitempty"`
+}
+
+// UserNotificationProviderAdd mapping
+type UserNotificationProviderAdd struct {
+  NotificationID  *string  `json:"notification_id,omitempty"`
 }
 
 
@@ -55,7 +60,16 @@ func (service *UserService) GetNotificationSettings() (*UserNotificationSettings
 // UpdateNotificationSettings updates the user notification settings.
 func (service *UserService) UpdateNotificationSettings(notifications UserNotificationSettingsUpdate) (*Response, error) {
   url := "user/account/notification"
-  req, _ := service.client.NewRequest("POST", url, notifications)
+  req, _ := service.client.NewRequest("PATCH", url, notifications)
+
+  return service.client.Do(req, nil)
+}
+
+
+// AddNotificationProvider adds a notification provider.
+func (service *UserService) AddNotificationProvider(notificationID string) (*Response, error) {
+  url := "user/account/notification/provider"
+  req, _ := service.client.NewRequest("POST", url, UserNotificationProviderAdd{&notificationID})
 
   return service.client.Do(req, nil)
 }

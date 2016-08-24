@@ -90,6 +90,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **User Account Notification**
   * **Get Notification Settings**: `crisp.User.GetNotificationSettings() (*UserNotificationSettings, *Response, error)`
   * **Update Notification Settings**: `crisp.User.UpdateNotificationSettings(notifications UserNotificationSettingsUpdate) (*Response, error)`
+  * **Add A Notification Provider**: `crisp.User.AddNotificationProvider(notificationID string) (*Response, error)`
 
 * **User Account Websites**
   * **List Websites**: `crisp.User.ListWebsites() (*[]UserWebsite, *Response, error)`
