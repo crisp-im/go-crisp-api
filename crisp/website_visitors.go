@@ -87,3 +87,13 @@ func (service *WebsiteService) ListVisitors(websiteID string, pageNumber uint) (
 
   return visitors.Data, resp, err
 }
+
+
+// RequestVisitorDetails requests advanced details on visitors that are currently browsing your website.
+func (service *WebsiteService) RequestVisitorDetails(websiteID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/visitors/details", websiteID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  resp, err := service.client.Do(req, nil)
+  return resp, err
+}

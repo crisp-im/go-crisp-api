@@ -161,6 +161,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Visitors**
   * **Count Visitors**: `crisp.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
   * **List Visitors**: `crisp.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
+  * **Request Visitor Details**: `crisp.Website.RequestVisitorDetails(websiteID string) (*Response, error)`
 
 * **Website Conversations**
   * **List Conversations**: `crisp.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
