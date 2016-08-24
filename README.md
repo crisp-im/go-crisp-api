@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 08/23/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 08/24/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -159,6 +159,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Update Website Settings**: `crisp.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error)`
 
 * **Website Visitors**
+  * **Count Visitors**: `crisp.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
   * **List Visitors**: `crisp.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
 
 * **Website Conversations**
@@ -177,6 +178,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Send A Message In Conversation (File Variant)**: `crisp.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error)`
   * **Compose A Message In Conversation**: `crisp.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
   * **Mark Messages As Read In Conversation**: `crisp.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
+  * **Update Conversation Open State**: `crisp.Website.UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error)`
   * **Get Conversation Metas**: `crisp.Website.GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error)`
   * **Update Conversation Metas**: `crisp.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
   * **Get Conversation State**: `crisp.Website.GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error)`

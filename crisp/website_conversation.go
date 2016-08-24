@@ -224,6 +224,11 @@ type ConversationReadMessageMark struct {
   Fingerprints  []int   `json:"fingerprints,omitempty"`
 }
 
+// ConversationOpenUpdate mapping
+type ConversationOpenUpdate struct {
+  Opened  *bool  `json:"blocked,omitempty"`
+}
+
 // ConversationMetaData mapping
 type ConversationMetaData struct {
   Data  *ConversationMeta  `json:"data,omitempty"`
@@ -456,6 +461,15 @@ func (service *WebsiteService) ComposeMessageInConversation(websiteID string, se
 func (service *WebsiteService) MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/read", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, read)
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateConversationOpenState updates conversation open state for authenticated operator user
+func (service *WebsiteService) UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/open", websiteID, sessionID)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationOpenUpdate{&opened})
 
   return service.client.Do(req, nil)
 }

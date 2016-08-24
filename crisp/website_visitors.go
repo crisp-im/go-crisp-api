@@ -11,6 +11,16 @@ import (
 )
 
 
+// WebsiteVisitorCountData mapping
+type WebsiteVisitorCountData struct {
+  Data  *WebsiteVisitorCount  `json:"data,omitempty"`
+}
+
+// WebsiteVisitorCount mapping
+type WebsiteVisitorCount struct {
+  Count  *uint  `json:"count,omitempty"`
+}
+
 // WebsiteVisitorListData mapping
 type WebsiteVisitorListData struct {
   Data  *[]WebsiteVisitor  `json:"data,omitempty"`
@@ -37,15 +47,36 @@ type WebsiteVisitorLocation struct {
 }
 
 
+// String returns the string representation of WebsiteVisitorCount
+func (instance WebsiteVisitorCount) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of WebsiteVisitor
 func (instance WebsiteVisitor) String() string {
   return Stringify(instance)
 }
 
 
+// CountVisitors counts visitors currently on website.
+func (service *WebsiteService) CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error) {
+  url := fmt.Sprintf("website/%s/visitors/count", websiteID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  visitors := new(WebsiteVisitorCountData)
+  resp, err := service.client.Do(req, visitors)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return visitors.Data, resp, err
+}
+
+
 // ListVisitors lists visitors currently on website.
 func (service *WebsiteService) ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error) {
-  url := fmt.Sprintf("website/%s/visitors/%d", websiteID, pageNumber)
+  url := fmt.Sprintf("website/%s/visitors/list/%d", websiteID, pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
   visitors := new(WebsiteVisitorListData)
