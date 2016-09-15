@@ -48,6 +48,7 @@ type ConversationUnread struct {
 type ConversationMeta struct {
   Nickname              *string                                      `json:"nickname,omitempty"`
   Email                 *string                                      `json:"email,omitempty"`
+  IP                    *string                                      `json:"ip,omitempty"`
   Data                  *interface{}                                 `json:"data,omitempty"`
   Avatar                *string                                      `json:"avatar,omitempty"`
   BrowsingInformations  *ConversationMetaBrowsingInformations        `json:"browsing_informations,omitempty"`
