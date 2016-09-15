@@ -151,6 +151,12 @@ type ConversationMetaBrowsingInformationsPage struct {
   Timestamp  *uint    `json:"timestamp,omitempty"`
 }
 
+// ConversationCompletion mapping
+type ConversationCompletion struct {
+  Count    *int     `json:"count,omitempty"`
+  Content  *string  `json:"content,omitempty"`
+}
+
 // ConversationExportEmailData mapping
 type ConversationExportEmailData struct {
   Data  *[]ConversationExportEmail  `json:"data,omitempty"`
@@ -229,6 +235,11 @@ type ConversationOpenUpdate struct {
   Opened  *bool  `json:"blocked,omitempty"`
 }
 
+// ConversationCompletionData mapping
+type ConversationCompletionData struct {
+  Data  *ConversationCompletion  `json:"data,omitempty"`
+}
+
 // ConversationMetaData mapping
 type ConversationMetaData struct {
   Data  *ConversationMeta  `json:"data,omitempty"`
@@ -293,6 +304,12 @@ func (instance ConversationNew) String() string {
 
 // String returns the string representation of ConversationMessage
 func (instance ConversationMessage) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationCompletion
+func (instance ConversationCompletion) String() string {
   return Stringify(instance)
 }
 
@@ -445,6 +462,21 @@ func (service *WebsiteService) SendFileMessageInConversation(websiteID string, s
   req, _ := service.client.NewRequest("POST", url, message)
 
   return service.client.Do(req, nil)
+}
+
+
+// SuggestMessageCompletion suggests message completion values.
+func (service *WebsiteService) SuggestMessageCompletion(websiteID string, sessionID string, message string) (*ConversationCompletion, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/completion?message=%s", websiteID, sessionID, url.QueryEscape(message))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  completion := new(ConversationCompletionData)
+  resp, err := service.client.Do(req, completion)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return completion.Data, resp, err
 }
 
 

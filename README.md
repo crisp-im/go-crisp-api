@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 08/25/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 09/15/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -186,6 +186,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Messages In Conversation**: `crisp.Website.GetMessagesInConversation(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error)`
   * **Send A Message In Conversation (Text Variant)**: `crisp.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error)`
   * **Send A Message In Conversation (File Variant)**: `crisp.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error)`
+  * **Suggest Message Completion**: `crisp.Website.SuggestMessageCompletion(websiteID string, sessionID string, message string) (*ConversationCompletion, *Response, error)`
   * **Compose A Message In Conversation**: `crisp.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
   * **Mark Messages As Read In Conversation**: `crisp.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
   * **Update Conversation Open State**: `crisp.Website.UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error)`
