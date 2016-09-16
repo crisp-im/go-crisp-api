@@ -34,6 +34,7 @@ type WebsiteSettingsContact struct {
 
 // WebsiteSettingsChatbox mapping
 type WebsiteSettingsChatbox struct {
+  LastOperatorFace     *bool    `json:"last_operator_face,omitempty"`
   AvailabilityTooltip  *bool    `json:"availability_tooltip,omitempty"`
   HideOnAway           *bool    `json:"hide_on_away,omitempty"`
   PositionReverse      *bool    `json:"position_reverse,omitempty"`
@@ -62,6 +63,7 @@ type WebsiteSettingsUpdateContact struct {
 
 // WebsiteSettingsUpdateChatbox mapping
 type WebsiteSettingsUpdateChatbox struct {
+  LastOperatorFace     bool    `json:"last_operator_face,omitempty"`
   AvailabilityTooltip  bool    `json:"availability_tooltip,omitempty"`
   HideOnAway           bool    `json:"hide_on_away,omitempty"`
   PositionReverse      bool    `json:"position_reverse,omitempty"`
