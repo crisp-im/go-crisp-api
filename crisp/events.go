@@ -156,6 +156,18 @@ type EventsReceiveSessionSyncSystemDataBrowser struct {
   Name     *string  `json:"name,omitempty"`
 }
 
+// EventsReceiveSessionSyncNetwork maps session:sync:network
+type EventsReceiveSessionSyncNetwork struct {
+  WebsiteID    *string                               `json:"website_id"`
+  SessionID    *string                               `json:"session_id"`
+  Network      *EventsReceiveSessionSyncNetworkData  `json:"network"`
+}
+
+// EventsReceiveSessionSyncNetworkData maps session:sync:network/network
+type EventsReceiveSessionSyncNetworkData struct {
+  IP  *string  `json:"ip,omitempty"`
+}
+
 // EventsReceiveSessionSyncExtendedInformation maps session:sync:extended_informations
 type EventsReceiveSessionSyncExtendedInformation struct {
   WebsiteID            *string       `json:"website_id"`
@@ -436,6 +448,12 @@ func (evt EventsReceiveSessionSyncSystem) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveSessionSyncNetwork
+func (evt EventsReceiveSessionSyncNetwork) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveSessionSyncExtendedInformation
 func (evt EventsReceiveSessionSyncExtendedInformation) String() string {
   return Stringify(evt)
@@ -614,6 +632,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:sync:system", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncSystem) {
     if hdl, ok := register.Handlers["session:sync:system"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:sync:network", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncNetwork) {
+    if hdl, ok := register.Handlers["session:sync:network"]; ok {
       go hdl.callFunc(&evt)
     }
   })

@@ -286,6 +286,7 @@ Available events are listed below:
   * **Session Sync Pages**: `session:sync:pages`
   * **Session Sync Geolocation**: `session:sync:geolocation`
   * **Session Sync System**: `session:sync:system`
+  * **Session Sync Network**: `session:sync:network`
   * **Session Sync Extended Information**: `session:sync:extended_informations`
   * **Session Set State**: `session:set_state`
   * **Session Set Block**: `session:set_block`
