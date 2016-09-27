@@ -19,6 +19,7 @@ type UserSessionParameters struct {
 
 // UserSessionLogin mapping
 type UserSessionLogin struct {
+  UserID    *string  `json:"user_id,omitempty"`
   Email     *string  `json:"email,omitempty"`
   Password  *string  `json:"password,omitempty"`
 }
