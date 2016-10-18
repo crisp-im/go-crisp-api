@@ -36,6 +36,7 @@ type BillingMethod struct {
   CardProvider       *string                  `json:"card_provider,omitempty"`
   ExpirationDate     *string                  `json:"expiration_date,omitempty"`
   AddedDate          *string                  `json:"added_date,omitempty"`
+  IsValid            *bool                    `json:"is_valid,omitempty"`
   IsExpired          *bool                    `json:"is_expired,omitempty"`
   LinkedWebsites     *[]BillingMethodWebsite  `json:"linked_websites,omitempty"`
 }
