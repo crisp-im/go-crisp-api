@@ -133,11 +133,6 @@ type BillingMethodLink struct {
   Service  *string  `json:"service,omitempty"`
 }
 
-// BillingMethodLinkFinish mapping
-type BillingMethodLinkFinish struct {
-  CardID  *string  `json:"card_id,omitempty"`
-}
-
 
 // String returns the string representation of BillingMethodAll
 func (instance BillingMethodAll) String() string {
@@ -253,7 +248,7 @@ func (service *UserService) LinkToExternalBillingMethod(billingService string) (
 // FinishLinkingExternalBillingMethod finishes the link process to an external billing method. Used to mark the card link as valid.
 func (service *UserService) FinishLinkingExternalBillingMethod(cardID string) (*Response, error) {
   url := fmt.Sprintf("user/account/billing/link/%s", cardID)
-  req, _ := service.client.NewRequest("POST", url, BillingMethodLinkFinish{CardID: &cardID})
+  req, _ := service.client.NewRequest("POST", url, nil)
 
   return service.client.Do(req, nil)
 }
