@@ -133,6 +133,11 @@ type BillingMethodLink struct {
   Service  *string  `json:"service,omitempty"`
 }
 
+// BillingMethodLinkFinish mapping
+type BillingMethodLinkFinish struct {
+  CardID  *string  `json:"card_id,omitempty"`
+}
+
 
 // String returns the string representation of BillingMethodAll
 func (instance BillingMethodAll) String() string {
@@ -240,6 +245,24 @@ func (service *UserService) GetInvoiceForBillingMethod(cardID string, invoiceID 
 func (service *UserService) LinkToExternalBillingMethod(billingService string) (*Response, error) {
   url := "user/account/billing/link"
   req, _ := service.client.NewRequest("POST", url, BillingMethodLink{Service: &billingService})
+
+  return service.client.Do(req, nil)
+}
+
+
+// FinishLinkingExternalBillingMethod finishes the link process to an external billing method. Used to mark the card link as valid.
+func (service *UserService) FinishLinkingExternalBillingMethod(cardID string) (*Response, error) {
+  url := fmt.Sprintf("user/account/billing/link/%s", cardID)
+  req, _ := service.client.NewRequest("POST", url, BillingMethodLinkFinish{CardID: &cardID})
+
+  return service.client.Do(req, nil)
+}
+
+
+// FinishUnlinkingExternalBillingMethod finishes the unlink process to an external billing method. Used to cancel the link process and remove the card.
+func (service *UserService) FinishUnlinkingExternalBillingMethod(cardID string) (*Response, error) {
+  url := fmt.Sprintf("user/account/billing/link/%s", cardID)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
 
   return service.client.Do(req, nil)
 }

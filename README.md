@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 09/27/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 10/18/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -91,6 +91,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Invoices For Billing Method**: `crisp.User.ListInvoicesForBillingMethod(cardID string, pageNumber int) (*BillingMethodInvoiceAll, *Response, error)`
   * **Get An Invoice For Billing Method**: `crisp.User.GetInvoiceForBillingMethod(cardID string, invoiceID string) (*BillingMethodInvoice, *Response, error)`
   * **Link To An External Billing Method**: `crisp.User.LinkToExternalBillingMethod(billingService string) (*Response, error)`
+  * **Finish Linking External Billing Method**: `crisp.User.FinishLinkingExternalBillingMethod(cardID string) (*Response, error)`
+  * **Finish Unlinking External Billing Method**: `crisp.User.FinishUnlinkingExternalBillingMethod(cardID string) (*Response, error)`
 
 * **User Account Notification**
   * **Get Notification Settings**: `crisp.User.GetNotificationSettings() (*UserNotificationSettings, *Response, error)`
