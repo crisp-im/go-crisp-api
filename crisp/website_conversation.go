@@ -111,11 +111,16 @@ type ConversationMetaBrowsingInformations struct {
 
 // ConversationMetaBrowsingInformationsGeolocation mapping
 type ConversationMetaBrowsingInformationsGeolocation struct {
-  Metro    *int        `json:"metro,omitempty"`
-  LL       *[]float32  `json:"ll,omitempty"`
-  City     *string     `json:"city,omitempty"`
-  Region   *string     `json:"region,omitempty"`
-  Country  *string     `json:"country,omitempty"`
+  Coordinates  *ConversationMetaBrowsingInformationsGeolocationCoordinates  `json:"coordinates,omitempty"`
+  City         *string                                                      `json:"city,omitempty"`
+  Region       *string                                                      `json:"region,omitempty"`
+  Country      *string                                                      `json:"country,omitempty"`
+}
+
+// ConversationMetaBrowsingInformationsGeolocationCoordinates mapping
+type ConversationMetaBrowsingInformationsGeolocationCoordinates struct {
+  Latitude   *float32  `json:"latitude,omitempty"`
+  Longitude  *float32  `json:"longitude,omitempty"`
 }
 
 // ConversationMetaBrowsingInformationsSystem mapping

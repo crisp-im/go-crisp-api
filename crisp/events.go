@@ -115,11 +115,16 @@ type EventsReceiveSessionSyncGeolocation struct {
 
 // EventsReceiveSessionSyncGeolocationData maps session:sync:geolocation/geolocation
 type EventsReceiveSessionSyncGeolocationData struct {
-  Metro    *int        `json:"metro,omitempty"`
-  LL       *[]float32  `json:"ll,omitempty"`
-  City     *string     `json:"city,omitempty"`
-  Region   *string     `json:"region,omitempty"`
-  Country  *string     `json:"country,omitempty"`
+  Coordinates  *EventsReceiveSessionSyncGeolocationDataCoordinates  `json:"coordinates,omitempty"`
+  City         *string                                              `json:"city,omitempty"`
+  Region       *string                                              `json:"region,omitempty"`
+  Country      *string                                              `json:"country,omitempty"`
+}
+
+// EventsReceiveSessionSyncGeolocationDataCoordinates mapping
+type EventsReceiveSessionSyncGeolocationDataCoordinates struct {
+  Latitude   *float32  `json:"latitude,omitempty"`
+  Longitude  *float32  `json:"longitude,omitempty"`
 }
 
 // EventsReceiveSessionSyncSystem maps session:sync:system
