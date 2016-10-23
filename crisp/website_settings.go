@@ -39,6 +39,7 @@ type WebsiteSettingsChatbox struct {
   HideOnAway           *bool    `json:"hide_on_away,omitempty"`
   PositionReverse      *bool    `json:"position_reverse,omitempty"`
   EmailVisitors        *bool    `json:"email_visitors,omitempty"`
+  CheckDomain          *bool    `json:"check_domain,omitempty"`
   ColorTheme           *string  `json:"color_theme,omitempty"`
   TextTheme            *string  `json:"text_theme,omitempty"`
   WelcomeMessage       *string  `json:"welcome_message,omitempty"`
@@ -68,6 +69,7 @@ type WebsiteSettingsUpdateChatbox struct {
   HideOnAway           bool    `json:"hide_on_away,omitempty"`
   PositionReverse      bool    `json:"position_reverse,omitempty"`
   EmailVisitors        bool    `json:"email_visitors,omitempty"`
+  CheckDomain          bool    `json:"check_domain,omitempty"`
   ColorTheme           string  `json:"color_theme,omitempty"`
   TextTheme            string  `json:"text_theme,omitempty"`
   WelcomeMessage       string  `json:"welcome_message,omitempty"`
