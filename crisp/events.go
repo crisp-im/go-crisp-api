@@ -266,6 +266,26 @@ type EventsReceiveFileMessageContent struct {
   Type  string  `json:"type"`
 }
 
+// EventsReceiveAnimationMessage maps message:{send,received} (animation type)
+type EventsReceiveAnimationMessage struct {
+  WebsiteID    *string                                `json:"website_id"`
+  SessionID    *string                                `json:"session_id"`
+  From         *string                                `json:"from"`
+  Type         *string                                `json:"type"`
+  Origin       *string                                `json:"origin"`
+  Content      *EventsReceiveAnimationMessageContent  `json:"content"`
+  Stamped      *bool                                  `json:"stamped"`
+  Timestamp    *uint                                  `json:"timestamp"`
+  Fingerprint  *int                                   `json:"fingerprint"`
+  User         *EventsReceiveCommonMessageUser        `json:"user"`
+}
+
+// EventsReceiveAnimationMessageContent maps message:{send,received}/content (animation type)
+type EventsReceiveAnimationMessageContent struct {
+  URL   string  `json:"url"`
+  Type  string  `json:"type"`
+}
+
 // EventsReceiveCommonMessageUser maps message:{send,received}/user
 type EventsReceiveCommonMessageUser struct {
   UserID    *string  `json:"user_id"`
@@ -519,6 +539,12 @@ func (evt EventsReceiveFileMessage) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveAnimationMessage
+func (evt EventsReceiveAnimationMessage) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveMessageComposeSend
 func (evt EventsReceiveMessageComposeSend) String() string {
   return Stringify(evt)
@@ -709,6 +735,14 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
         go hdl.callFunc(&messageSendFile)
       }
+
+    case "animation":
+      if hdl, ok := register.Handlers["message:send/animation"]; ok {
+        var messageSendAnimation EventsReceiveAnimationMessage
+        json.Unmarshal(*evt, &messageSendAnimation)
+
+        go hdl.callFunc(&messageSendAnimation)
+      }
     }
   })
 
@@ -731,6 +765,14 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         json.Unmarshal(*evt, &messageReceivedFile)
 
         go hdl.callFunc(&messageReceivedFile)
+      }
+
+    case "animation":
+      if hdl, ok := register.Handlers["message:received/animation"]; ok {
+        var messageReceivedAnimation EventsReceiveAnimationMessage
+        json.Unmarshal(*evt, &messageReceivedAnimation)
+
+        go hdl.callFunc(&messageReceivedAnimation)
       }
     }
   })

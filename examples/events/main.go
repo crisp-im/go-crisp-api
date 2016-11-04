@@ -28,12 +28,20 @@ func main() {
       fmt.Printf("[message:send/file] %s\n", evt)
     })
 
+    reg.On("message:send/animation", func(evt crisp.EventsReceiveAnimationMessage) {
+      fmt.Printf("[message:send/animation] %s\n", evt)
+    })
+
     reg.On("message:received/text", func(evt crisp.EventsReceiveTextMessage) {
       fmt.Printf("[message:received/text] %s\n", evt)
     })
 
     reg.On("message:received/file", func(evt crisp.EventsReceiveFileMessage) {
       fmt.Printf("[message:received/file] %s\n", evt)
+    })
+
+    reg.On("message:received/animation", func(evt crisp.EventsReceiveAnimationMessage) {
+      fmt.Printf("[message:received/animation] %s\n", evt)
     })
 
     reg.On("message:compose:send", func(evt crisp.EventsReceiveMessageComposeSend) {

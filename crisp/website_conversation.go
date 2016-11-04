@@ -82,6 +82,12 @@ type ConversationMessageFileContent struct {
   Type  *string  `json:"type"`
 }
 
+// ConversationMessageAnimationContent mapping
+type ConversationMessageAnimationContent struct {
+  URL   *string  `json:"url"`
+  Type  *string  `json:"type"`
+}
+
 // ConversationMessagePreview mapping
 type ConversationMessagePreview struct {
   URL      *string                                 `json:"url,omitempty"`
@@ -213,6 +219,22 @@ type ConversationFileMessageNew struct {
 // ConversationFileMessageNewContent mapping
 type ConversationFileMessageNewContent struct {
   Name  string  `json:"name,omitempty"`
+  URL   string  `json:"url,omitempty"`
+  Type  string  `json:"type,omitempty"`
+}
+
+// ConversationAnimationMessageNew mapping
+type ConversationAnimationMessageNew struct {
+  Type         string                                  `json:"type,omitempty"`
+  From         string                                  `json:"from,omitempty"`
+  Origin       string                                  `json:"origin,omitempty"`
+  Content      ConversationAnimationMessageNewContent  `json:"content,omitempty"`
+  Fingerprint  int                                     `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser           `json:"user,omitempty"`
+}
+
+// ConversationAnimationMessageNewContent mapping
+type ConversationAnimationMessageNewContent struct {
   URL   string  `json:"url,omitempty"`
   Type  string  `json:"type,omitempty"`
 }
@@ -454,7 +476,7 @@ func (service *WebsiteService) GetMessagesInConversation(websiteID string, sessi
 }
 
 
-// SendTextMessageInConversation sends a message in an existing conversation.
+// SendTextMessageInConversation sends a message in an existing conversation (text variant).
 func (service *WebsiteService) SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
@@ -463,8 +485,17 @@ func (service *WebsiteService) SendTextMessageInConversation(websiteID string, s
 }
 
 
-// SendFileMessageInConversation sends a message in an existing conversation.
+// SendFileMessageInConversation sends a message in an existing conversation (file variant).
 func (service *WebsiteService) SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, message)
+
+  return service.client.Do(req, nil)
+}
+
+
+// SendAnimationMessageInConversation sends a message in an existing conversation (animation variant).
+func (service *WebsiteService) SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
