@@ -95,6 +95,7 @@ type ConversationMessagePreview struct {
 type ConversationMessagePreviewInformation struct {
   Excerpt  *string  `json:"excerpt,omitempty"`
   Image    *string  `json:"image,omitempty"`
+  Embed    *string  `json:"embed,omitempty"`
 }
 
 // ConversationMessageUser mapping
