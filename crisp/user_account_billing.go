@@ -86,6 +86,7 @@ type BillingMethodInvoice struct {
   Date        *string                       `json:"date,omitempty"`
   Payment     *BillingMethodInvoicePayment  `json:"payment,omitempty"`
   Invoice     *BillingMethodInvoiceContent  `json:"invoice,omitempty"`
+  Receipt     *string                       `json:"receipt,omitempty"`
 }
 
 // BillingMethodInvoicePayment mapping
