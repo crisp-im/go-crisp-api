@@ -34,17 +34,18 @@ type WebsiteSettingsContact struct {
 
 // WebsiteSettingsChatbox mapping
 type WebsiteSettingsChatbox struct {
-  LastOperatorFace     *bool    `json:"last_operator_face,omitempty"`
-  ActivityMetrics      *bool    `json:"activity_metrics,omitempty"`
-  AvailabilityTooltip  *bool    `json:"availability_tooltip,omitempty"`
-  HideOnAway           *bool    `json:"hide_on_away,omitempty"`
-  PositionReverse      *bool    `json:"position_reverse,omitempty"`
-  EmailVisitors        *bool    `json:"email_visitors,omitempty"`
-  CheckDomain          *bool    `json:"check_domain,omitempty"`
-  ColorTheme           *string  `json:"color_theme,omitempty"`
-  TextTheme            *string  `json:"text_theme,omitempty"`
-  WelcomeMessage       *string  `json:"welcome_message,omitempty"`
-  Locale               *string  `json:"locale,omitempty"`
+  LastOperatorFace     *bool      `json:"last_operator_face,omitempty"`
+  ActivityMetrics      *bool      `json:"activity_metrics,omitempty"`
+  AvailabilityTooltip  *bool      `json:"availability_tooltip,omitempty"`
+  HideOnAway           *bool      `json:"hide_on_away,omitempty"`
+  PositionReverse      *bool      `json:"position_reverse,omitempty"`
+  EmailVisitors        *bool      `json:"email_visitors,omitempty"`
+  CheckDomain          *bool      `json:"check_domain,omitempty"`
+  ColorTheme           *string    `json:"color_theme,omitempty"`
+  TextTheme            *string    `json:"text_theme,omitempty"`
+  WelcomeMessage       *string    `json:"welcome_message,omitempty"`
+  Locale               *string    `json:"locale,omitempty"`
+  BlockedLocales       *[]string  `json:"blocked_locales,omitempty"`
 }
 
 // WebsiteSettingsUpdate mapping
@@ -65,17 +66,18 @@ type WebsiteSettingsUpdateContact struct {
 
 // WebsiteSettingsUpdateChatbox mapping
 type WebsiteSettingsUpdateChatbox struct {
-  LastOperatorFace     bool    `json:"last_operator_face,omitempty"`
-  ActivityMetrics      bool    `json:"activity_metrics,omitempty"`
-  AvailabilityTooltip  bool    `json:"availability_tooltip,omitempty"`
-  HideOnAway           bool    `json:"hide_on_away,omitempty"`
-  PositionReverse      bool    `json:"position_reverse,omitempty"`
-  EmailVisitors        bool    `json:"email_visitors,omitempty"`
-  CheckDomain          bool    `json:"check_domain,omitempty"`
-  ColorTheme           string  `json:"color_theme,omitempty"`
-  TextTheme            string  `json:"text_theme,omitempty"`
-  WelcomeMessage       string  `json:"welcome_message,omitempty"`
-  Locale               string  `json:"locale,omitempty"`
+  LastOperatorFace     bool       `json:"last_operator_face,omitempty"`
+  ActivityMetrics      bool       `json:"activity_metrics,omitempty"`
+  AvailabilityTooltip  bool       `json:"availability_tooltip,omitempty"`
+  HideOnAway           bool       `json:"hide_on_away,omitempty"`
+  PositionReverse      bool       `json:"position_reverse,omitempty"`
+  EmailVisitors        bool       `json:"email_visitors,omitempty"`
+  CheckDomain          bool       `json:"check_domain,omitempty"`
+  ColorTheme           string     `json:"color_theme,omitempty"`
+  TextTheme            string     `json:"text_theme,omitempty"`
+  WelcomeMessage       string     `json:"welcome_message,omitempty"`
+  Locale               string     `json:"locale,omitempty"`
+  BlockedLocales       *[]string  `json:"blocked_locales,omitempty"`
 }
 
 
