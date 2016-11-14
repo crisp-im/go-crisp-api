@@ -406,6 +406,18 @@ type EventsReceiveBucketURLAvatarGeneratedURL struct {
   Signed    *string  `json:"signed"`
 }
 
+// EventsReceiveMediaAnimationListed maps media:animation:listed
+type EventsReceiveMediaAnimationListed struct {
+  ID       *int                                        `json:"id"`
+  Results  *[]EventsReceiveMediaAnimationListedResult  `json:"results"`
+}
+
+// EventsReceiveMediaAnimationListedResult maps media:animation:listed/results
+type EventsReceiveMediaAnimationListedResult struct {
+  Type  *string  `json:"type"`
+  URL   *string  `json:"url"`
+}
+
 // EventsReceiveBillingLinkRedirect maps billing:link:redirect
 type EventsReceiveBillingLinkRedirect struct {
   Service  *string  `json:"service"`
@@ -583,6 +595,12 @@ func (evt EventsReceiveBucketURLUploadGenerated) String() string {
 
 // String returns the string representation of EventsReceiveBucketURLAvatarGenerated
 func (evt EventsReceiveBucketURLAvatarGenerated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveMediaAnimationListed
+func (evt EventsReceiveMediaAnimationListed) String() string {
   return Stringify(evt)
 }
 
@@ -827,6 +845,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("bucket:url:avatar:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLAvatarGenerated) {
     if hdl, ok := register.Handlers["bucket:url:avatar:generated"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("media:animation:listed", func(chnl *gosocketio.Channel, evt EventsReceiveMediaAnimationListed) {
+    if hdl, ok := register.Handlers["media:animation:listed"]; ok {
       go hdl.callFunc(&evt)
     }
   })

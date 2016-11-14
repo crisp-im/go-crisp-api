@@ -15,7 +15,7 @@ type BucketURLRequest struct {
   File        BucketURLRequestFile  `json:"file,omitempty"`
 }
 
-// BucketURLRequest mapping
+// BucketURLRequestFile mapping
 type BucketURLRequestFile struct {
   Name  string  `json:"name,omitempty"`
   Type  string  `json:"type,omitempty"`

@@ -18,7 +18,7 @@ import (
 
 
 const (
-  libraryVersion = "1.17.0"
+  libraryVersion = "1.18.0"
   defaultRestEndpointURL = "https://api.crisp.im/v1/"
   defaultRealtimeEndpointURL = "https://app.relay.crisp.im:443/"
   userAgent = "go-crisp-api/" + libraryVersion
@@ -52,6 +52,7 @@ type Client struct {
 
   Email   *EmailService
   Bucket  *BucketService
+  Media   *MediaService
   Plan    *PlanService
   Plugin  *PluginService
   User    *UserService
@@ -105,6 +106,7 @@ func NewWithConfig(config ClientConfig) *Client {
   // Map services
   client.Email = (*EmailService)(&client.common)
   client.Bucket = (*BucketService)(&client.common)
+  client.Media = (*MediaService)(&client.common)
   client.Plan = (*PlanService)(&client.common)
   client.Plugin = (*PluginService)(&client.common)
   client.User = (*UserService)(&client.common)
