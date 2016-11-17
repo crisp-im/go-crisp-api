@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 11/14/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 11/17/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -158,6 +158,11 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Invite Details**: `crisp.Website.GetInviteDetails(websiteID string, inviteIdentifier string, inviteKey string) (*WebsiteInvite, *Response, error)`
   * **Redeem Invite**: `crisp.Website.RedeemInvite(websiteID string, inviteIdentifier string, inviteKey string) (*Response, error)`
   * **Delete Invite Keypair**: `crisp.Website.DeleteInviteKeypair(websiteID string, inviteIdentifier string, inviteKey string) (*Response, error)`
+
+* **Website Rating**
+  * **Resolve Session Rating**: `crisp.Website.ResolveSessionRating(websiteID string, sessionID string) (*WebsiteRatingSession, *Response, error)`
+  * **Submit Session Rating**: `crisp.Website.SubmitSessionRating(websiteID string, sessionID string, websiteRatingSession WebsiteRatingSession) (*Response, error)`
+  * **Delete Session Rating**: `crisp.Website.DeleteSessionRating(websiteID string, sessionID string) (*Response, error)`
 
 * **Website Statistics**
   * **Get All Statistics**: `crisp.Website.GetAllStatistics(websiteID string) (*WebsiteStatisticsAll, *Response, error)`
