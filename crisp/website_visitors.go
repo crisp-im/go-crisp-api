@@ -37,6 +37,7 @@ type WebsiteVisitor struct {
   Useragent  *string                  `json:"useragent,omitempty"`
   Initiated  *bool                    `json:"initiated,omitempty"`
   Location   *WebsiteVisitorLocation  `json:"location,omitempty"`
+  Timezone   *int16                   `json:"timezone,omitempty"`
   Locales    *[]string                `json:"locales,omitempty"`
 }
 
