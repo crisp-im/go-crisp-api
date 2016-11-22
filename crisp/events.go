@@ -101,9 +101,10 @@ type EventsReceiveSessionSyncPages struct {
 
 // EventsReceiveSessionSyncPagesOne maps session:sync:pages/pages
 type EventsReceiveSessionSyncPagesOne struct {
-  PageTitle  *string  `json:"page_title"`
-  PageURL    *string  `json:"page_url"`
-  Timestamp  *uint    `json:"timestamp"`
+  PageTitle     *string  `json:"page_title"`
+  PageURL       *string  `json:"page_url"`
+  PageReferrer  *string  `json:"page_referrer"`
+  Timestamp     *uint    `json:"timestamp"`
 }
 
 // EventsReceiveSessionSyncGeolocation maps session:sync:geolocation
@@ -362,9 +363,10 @@ type EventsReceiveUpdateVisitorsListItselfItemPages struct {
 
 // EventsReceiveUpdateVisitorsListItselfItemPagesCurrent maps website:update_visitors_list/items/pages/current
 type EventsReceiveUpdateVisitorsListItselfItemPagesCurrent struct {
-  PageTitle  *string  `json:"page_title"`
-  PageURL    *string  `json:"page_url"`
-  Timestamp  *uint    `json:"timestamp"`
+  PageTitle     *string  `json:"page_title"`
+  PageURL       *string  `json:"page_url"`
+  PageReferrer  *string  `json:"page_referrer"`
+  Timestamp     *uint    `json:"timestamp"`
 }
 
 // EventsReceiveBucketURLUploadGenerated maps bucket:url:upload:generated

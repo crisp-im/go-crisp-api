@@ -163,9 +163,10 @@ type ConversationMetaBrowsingInformationsSystemBrowser struct {
 
 // ConversationMetaBrowsingInformationsPage mapping
 type ConversationMetaBrowsingInformationsPage struct {
-  PageTitle  *string  `json:"page_title,omitempty"`
-  PageURL    *string  `json:"page_url,omitempty"`
-  Timestamp  *uint    `json:"timestamp,omitempty"`
+  PageTitle     *string  `json:"page_title,omitempty"`
+  PageURL       *string  `json:"page_url,omitempty"`
+  PageReferrer  *string  `json:"page_referrer,omitempty"`
+  Timestamp     *uint    `json:"timestamp,omitempty"`
 }
 
 // ConversationCompletion mapping
