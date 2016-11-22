@@ -137,10 +137,10 @@ type EventsReceiveSessionSyncSystem struct {
 
 // EventsReceiveSessionSyncSystemData maps session:sync:system/system
 type EventsReceiveSessionSyncSystemData struct {
-  OS       *EventsReceiveSessionSyncSystemDataOS       `json:"os,omitempty"`
-  Engine   *EventsReceiveSessionSyncSystemDataEngine   `json:"engine,omitempty"`
-  Browser  *EventsReceiveSessionSyncSystemDataBrowser  `json:"browser,omitempty"`
-  UA       *string                                     `json:"ua,omitempty"`
+  OS         *EventsReceiveSessionSyncSystemDataOS       `json:"os,omitempty"`
+  Engine     *EventsReceiveSessionSyncSystemDataEngine   `json:"engine,omitempty"`
+  Browser    *EventsReceiveSessionSyncSystemDataBrowser  `json:"browser,omitempty"`
+  Useragent  *string                                     `json:"useragent,omitempty"`
 }
 
 // EventsReceiveSessionSyncSystemDataOS maps session:sync:system/system/os
@@ -174,11 +174,11 @@ type EventsReceiveSessionSyncNetworkData struct {
   IP  *string  `json:"ip,omitempty"`
 }
 
-// EventsReceiveSessionSyncExtendedInformation maps session:sync:extended_informations
-type EventsReceiveSessionSyncExtendedInformation struct {
-  WebsiteID            *string       `json:"website_id"`
-  SessionID            *string       `json:"session_id"`
-  ExtendedInformation  *interface{}  `json:"extended_informations"`
+// EventsReceiveSessionSyncIdentity maps session:sync:identity
+type EventsReceiveSessionSyncIdentity struct {
+  WebsiteID  *string       `json:"website_id"`
+  SessionID  *string       `json:"session_id"`
+  Identity   *interface{}  `json:"identity"`
 }
 
 // EventsReceiveSessionSetState maps session:set_state
@@ -496,8 +496,8 @@ func (evt EventsReceiveSessionSyncNetwork) String() string {
 }
 
 
-// String returns the string representation of EventsReceiveSessionSyncExtendedInformation
-func (evt EventsReceiveSessionSyncExtendedInformation) String() string {
+// String returns the string representation of EventsReceiveSessionSyncIdentity
+func (evt EventsReceiveSessionSyncIdentity) String() string {
   return Stringify(evt)
 }
 
@@ -702,8 +702,8 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
     }
   })
 
-  so.On("session:sync:extended_informations", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncExtendedInformation) {
-    if hdl, ok := register.Handlers["session:sync:extended_informations"]; ok {
+  so.On("session:sync:identity", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncIdentity) {
+    if hdl, ok := register.Handlers["session:sync:identity"]; ok {
       go hdl.callFunc(&evt)
     }
   })

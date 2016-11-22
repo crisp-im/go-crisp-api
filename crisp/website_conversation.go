@@ -47,14 +47,14 @@ type ConversationUnread struct {
 
 // ConversationMeta mapping
 type ConversationMeta struct {
-  Nickname              *string                                      `json:"nickname,omitempty"`
-  Email                 *string                                      `json:"email,omitempty"`
-  IP                    *string                                      `json:"ip,omitempty"`
-  Data                  *interface{}                                 `json:"data,omitempty"`
-  Avatar                *string                                      `json:"avatar,omitempty"`
-  BrowsingInformations  *ConversationMetaBrowsingInformations        `json:"browsing_informations,omitempty"`
-  Segments              *[]string                                    `json:"segments,omitempty"`
-  Pages                 *[]ConversationMetaBrowsingInformationsPage  `json:"pages,omitempty"`
+  Nickname  *string                  `json:"nickname,omitempty"`
+  Email     *string                  `json:"email,omitempty"`
+  IP        *string                  `json:"ip,omitempty"`
+  Data      *interface{}             `json:"data,omitempty"`
+  Avatar    *string                  `json:"avatar,omitempty"`
+  Device    *ConversationMetaDevice  `json:"device,omitempty"`
+  Segments  *[]string                `json:"segments,omitempty"`
+  Pages     *[]ConversationMetaPage  `json:"pages,omitempty"`
 }
 
 // ConversationMessage mapping
@@ -114,55 +114,55 @@ type ConversationMessageUser struct {
   Nickname  *string  `json:"nickname,omitempty"`
 }
 
-// ConversationMetaBrowsingInformations mapping
-type ConversationMetaBrowsingInformations struct {
-  Geolocation  *ConversationMetaBrowsingInformationsGeolocation  `json:"geolocation,omitempty"`
-  System       *ConversationMetaBrowsingInformationsSystem       `json:"system,omitempty"`
+// ConversationMetaDevice mapping
+type ConversationMetaDevice struct {
+  Geolocation  *ConversationMetaDeviceGeolocation  `json:"geolocation,omitempty"`
+  System       *ConversationMetaDeviceSystem       `json:"system,omitempty"`
 }
 
-// ConversationMetaBrowsingInformationsGeolocation mapping
-type ConversationMetaBrowsingInformationsGeolocation struct {
-  Coordinates  *ConversationMetaBrowsingInformationsGeolocationCoordinates  `json:"coordinates,omitempty"`
-  City         *string                                                      `json:"city,omitempty"`
-  Region       *string                                                      `json:"region,omitempty"`
-  Country      *string                                                      `json:"country,omitempty"`
+// ConversationMetaDeviceGeolocation mapping
+type ConversationMetaDeviceGeolocation struct {
+  Coordinates  *ConversationMetaDeviceGeolocationCoordinates  `json:"coordinates,omitempty"`
+  City         *string                                        `json:"city,omitempty"`
+  Region       *string                                        `json:"region,omitempty"`
+  Country      *string                                        `json:"country,omitempty"`
 }
 
-// ConversationMetaBrowsingInformationsGeolocationCoordinates mapping
-type ConversationMetaBrowsingInformationsGeolocationCoordinates struct {
+// ConversationMetaDeviceGeolocationCoordinates mapping
+type ConversationMetaDeviceGeolocationCoordinates struct {
   Latitude   *float32  `json:"latitude,omitempty"`
   Longitude  *float32  `json:"longitude,omitempty"`
 }
 
-// ConversationMetaBrowsingInformationsSystem mapping
-type ConversationMetaBrowsingInformationsSystem struct {
-  OS       *ConversationMetaBrowsingInformationsSystemOS       `json:"os,omitempty"`
-  Engine   *ConversationMetaBrowsingInformationsSystemEngine   `json:"engine,omitempty"`
-  Browser  *ConversationMetaBrowsingInformationsSystemBrowser  `json:"browser,omitempty"`
-  UA       *string                                             `json:"ua,omitempty"`
+// ConversationMetaDeviceSystem mapping
+type ConversationMetaDeviceSystem struct {
+  OS         *ConversationMetaDeviceSystemOS       `json:"os,omitempty"`
+  Engine     *ConversationMetaDeviceSystemEngine   `json:"engine,omitempty"`
+  Browser    *ConversationMetaDeviceSystemBrowser  `json:"browser,omitempty"`
+  Useragent  *string                               `json:"useragent,omitempty"`
 }
 
-// ConversationMetaBrowsingInformationsSystemOS mapping
-type ConversationMetaBrowsingInformationsSystemOS struct {
+// ConversationMetaDeviceSystemOS mapping
+type ConversationMetaDeviceSystemOS struct {
   Version  *string  `json:"version,omitempty"`
   Name     *string  `json:"name,omitempty"`
 }
 
-// ConversationMetaBrowsingInformationsSystemEngine mapping
-type ConversationMetaBrowsingInformationsSystemEngine struct {
+// ConversationMetaDeviceSystemEngine mapping
+type ConversationMetaDeviceSystemEngine struct {
   Version  *string  `json:"version,omitempty"`
   Name     *string  `json:"name,omitempty"`
 }
 
-// ConversationMetaBrowsingInformationsSystemBrowser mapping
-type ConversationMetaBrowsingInformationsSystemBrowser struct {
+// ConversationMetaDeviceSystemBrowser mapping
+type ConversationMetaDeviceSystemBrowser struct {
   Major    *string  `json:"major,omitempty"`
   Version  *string  `json:"version,omitempty"`
   Name     *string  `json:"name,omitempty"`
 }
 
-// ConversationMetaBrowsingInformationsPage mapping
-type ConversationMetaBrowsingInformationsPage struct {
+// ConversationMetaPage mapping
+type ConversationMetaPage struct {
   PageTitle     *string  `json:"page_title,omitempty"`
   PageURL       *string  `json:"page_url,omitempty"`
   PageReferrer  *string  `json:"page_referrer,omitempty"`
