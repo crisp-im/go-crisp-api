@@ -88,6 +88,9 @@ type ConversationMessageAnimationContent struct {
   Type  *string  `json:"type"`
 }
 
+// ConversationMessageNoteContent mapping
+type ConversationMessageNoteContent string
+
 // ConversationMessagePreview mapping
 type ConversationMessagePreview struct {
   URL      *string                                 `json:"url,omitempty"`
@@ -238,6 +241,9 @@ type ConversationAnimationMessageNewContent struct {
   URL   string  `json:"url,omitempty"`
   Type  string  `json:"type,omitempty"`
 }
+
+// ConversationNoteMessageNew mapping
+type ConversationNoteMessageNew ConversationTextMessageNew
 
 // ConversationAllMessageNewUser mapping
 type ConversationAllMessageNewUser struct {
@@ -496,6 +502,15 @@ func (service *WebsiteService) SendFileMessageInConversation(websiteID string, s
 
 // SendAnimationMessageInConversation sends a message in an existing conversation (animation variant).
 func (service *WebsiteService) SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, message)
+
+  return service.client.Do(req, nil)
+}
+
+
+// SendNoteMessageInConversation sends a message in an existing conversation (note variant).
+func (service *WebsiteService) SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 

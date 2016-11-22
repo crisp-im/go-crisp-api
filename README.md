@@ -199,6 +199,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Send A Message In Conversation (Text Variant)**: `crisp.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error)`
   * **Send A Message In Conversation (File Variant)**: `crisp.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error)`
   * **Send A Message In Conversation (Animation Variant)**: `crisp.Website.SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*Response, error)`
+  * **Send A Message In Conversation (Note Variant)**: `crisp.Website.SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*Response, error)`
   * **Suggest Message Completion**: `crisp.Website.SuggestMessageCompletion(websiteID string, sessionID string, message string) (*ConversationCompletion, *Response, error)`
   * **Compose A Message In Conversation**: `crisp.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
   * **Mark Messages As Read In Conversation**: `crisp.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
@@ -317,9 +318,11 @@ Available events are listed below:
   * **Message Send (Text Variant)**: `message:send/text`
   * **Message Send (File Variant)**: `message:send/file`
   * **Message Send (Animation Variant)**: `message:send/animation`
+  * **Message Send (Note Variant)**: `message:send/note`
   * **Message Received (Text Variant)**: `message:received/text`
   * **Message Received (File Variant)**: `message:received/file`
   * **Message Received (Animation Variant)**: `message:received/animation`
+  * **Message Received (Note Variant)**: `message:received/note`
   * **Message Compose Send**: `message:compose:send`
   * **Message Compose Receive**: `message:compose:receive`
   * **Message Acknowledge Read Send**: `message:acknowledge:read:send`
