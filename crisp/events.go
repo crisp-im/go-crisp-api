@@ -194,11 +194,11 @@ type EventsReceiveSessionSetBlock struct {
   IsBlocked  *bool    `json:"is_blocked"`
 }
 
-// EventsReceiveSessionSetTags maps session:set_tags
-type EventsReceiveSessionSetTags struct {
+// EventsReceiveSessionSetSegments maps session:set_segments
+type EventsReceiveSessionSetSegments struct {
   WebsiteID  *string    `json:"website_id"`
   SessionID  *string    `json:"session_id"`
-  Tags       *[]string  `json:"tags"`
+  Segments   *[]string  `json:"segments"`
 }
 
 // EventsReceiveSessionSetOpened maps session:set_opened
@@ -509,8 +509,8 @@ func (evt EventsReceiveSessionSetBlock) String() string {
 }
 
 
-// String returns the string representation of EventsReceiveSessionSetTags
-func (evt EventsReceiveSessionSetTags) String() string {
+// String returns the string representation of EventsReceiveSessionSetSegments
+func (evt EventsReceiveSessionSetSegments) String() string {
   return Stringify(evt)
 }
 
@@ -709,8 +709,8 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
     }
   })
 
-  so.On("session:set_tags", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetTags) {
-    if hdl, ok := register.Handlers["session:set_tags"]; ok {
+  so.On("session:set_segments", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetSegments) {
+    if hdl, ok := register.Handlers["session:set_segments"]; ok {
       go hdl.callFunc(&evt)
     }
   })

@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 11/19/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 11/22/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -308,7 +308,7 @@ Available events are listed below:
   * **Session Sync Extended Information**: `session:sync:extended_informations`
   * **Session Set State**: `session:set_state`
   * **Session Set Block**: `session:set_block`
-  * **Session Set Tags**: `session:set_tags`
+  * **Session Set Segments**: `session:set_segments`
   * **Session Set Opened**: `session:set_opened`
   * **Session Set Closed**: `session:set_closed`
   * **Session Removed**: `session:removed`

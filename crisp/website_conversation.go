@@ -52,7 +52,7 @@ type ConversationMeta struct {
   Data                  *interface{}                                 `json:"data,omitempty"`
   Avatar                *string                                      `json:"avatar,omitempty"`
   BrowsingInformations  *ConversationMetaBrowsingInformations        `json:"browsing_informations,omitempty"`
-  Tags                  *[]string                                    `json:"tags,omitempty"`
+  Segments              *[]string                                    `json:"segments,omitempty"`
   Pages                 *[]ConversationMetaBrowsingInformationsPage  `json:"pages,omitempty"`
 }
 
@@ -278,7 +278,7 @@ type ConversationMetaData struct {
 type ConversationMetaUpdate struct {
   Nickname  string       `json:"nickname,omitempty"`
   Email     string       `json:"email,omitempty"`
-  Tags      []string     `json:"tags,omitempty"`
+  Segments  []string     `json:"segments,omitempty"`
   Data      interface{}  `json:"data,omitempty"`
 }
 
