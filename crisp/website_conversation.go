@@ -8,6 +8,7 @@ package crisp
 
 import (
   "fmt"
+  "net/http"
   "net/url"
 )
 
@@ -316,6 +317,11 @@ type ConversationBlock struct {
 // ConversationBlockUpdate mapping
 type ConversationBlockUpdate struct {
   Blocked  *bool  `json:"blocked,omitempty"`
+}
+
+// ConversationTranscriptRequest mapping
+type ConversationTranscriptRequest struct {
+  Email  *string  `json:"email,omitempty"`
 }
 
 
@@ -627,6 +633,22 @@ func (service *WebsiteService) GetBlockStatusForConversation(websiteID string, s
 func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/block", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationBlockUpdate{&blocked})
+
+  return service.client.Do(req, nil)
+}
+
+
+// RequestEmailTranscriptForConversation requests an email transcript for a conversation.
+func (service *WebsiteService) RequestEmailTranscriptForConversation(websiteID string, sessionID string, email string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/transcript", websiteID, sessionID)
+
+  var req *http.Request
+
+  if email != "" {
+    req, _ = service.client.NewRequest("POST", url, ConversationTranscriptRequest{&email})
+  } else {
+    req, _ = service.client.NewRequest("POST", url, nil)
+  }
 
   return service.client.Do(req, nil)
 }
