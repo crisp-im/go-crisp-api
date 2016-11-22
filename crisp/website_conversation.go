@@ -118,6 +118,8 @@ type ConversationMessageUser struct {
 type ConversationMetaDevice struct {
   Geolocation  *ConversationMetaDeviceGeolocation  `json:"geolocation,omitempty"`
   System       *ConversationMetaDeviceSystem       `json:"system,omitempty"`
+  Timezone     *int16                              `json:"timezone,omitempty"`
+  Locales      *[]string                           `json:"locales,omitempty"`
 }
 
 // ConversationMetaDeviceGeolocation mapping

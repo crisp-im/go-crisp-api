@@ -174,6 +174,30 @@ type EventsReceiveSessionSyncNetworkData struct {
   IP  *string  `json:"ip,omitempty"`
 }
 
+// EventsReceiveSessionSyncTimezone maps session:sync:timezone
+type EventsReceiveSessionSyncTimezone struct {
+  WebsiteID    *string                                `json:"website_id"`
+  SessionID    *string                                `json:"session_id"`
+  Timezone     *EventsReceiveSessionSyncTimezoneData  `json:"timezone"`
+}
+
+// EventsReceiveSessionSyncTimezoneData maps session:sync:timezone/timezone
+type EventsReceiveSessionSyncTimezoneData struct {
+  Offset  *int16  `json:"offset,omitempty"`
+}
+
+// EventsReceiveSessionSyncLocales maps session:sync:locales
+type EventsReceiveSessionSyncLocales struct {
+  WebsiteID    *string                               `json:"website_id"`
+  SessionID    *string                               `json:"session_id"`
+  Locales      *EventsReceiveSessionSyncLocalesData  `json:"locales"`
+}
+
+// EventsReceiveSessionSyncLocalesData maps session:sync:locales/locales
+type EventsReceiveSessionSyncLocalesData struct {
+  Locales  *[]string  `json:"locales,omitempty"`
+}
+
 // EventsReceiveSessionSyncIdentity maps session:sync:identity
 type EventsReceiveSessionSyncIdentity struct {
   WebsiteID  *string       `json:"website_id"`
@@ -496,6 +520,18 @@ func (evt EventsReceiveSessionSyncNetwork) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveSessionSyncTimezone
+func (evt EventsReceiveSessionSyncTimezone) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveSessionSyncLocales
+func (evt EventsReceiveSessionSyncLocales) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveSessionSyncIdentity
 func (evt EventsReceiveSessionSyncIdentity) String() string {
   return Stringify(evt)
@@ -698,6 +734,18 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:sync:network", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncNetwork) {
     if hdl, ok := register.Handlers["session:sync:network"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:sync:timezone", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncTimezone) {
+    if hdl, ok := register.Handlers["session:sync:timezone"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:sync:locales", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncLocales) {
+    if hdl, ok := register.Handlers["session:sync:locales"]; ok {
       go hdl.callFunc(&evt)
     }
   })
