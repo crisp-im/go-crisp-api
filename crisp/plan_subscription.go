@@ -24,15 +24,16 @@ type PlanSubscriptionData struct {
 
 // PlanSubscription mapping
 type PlanSubscription struct {
-  ID         *string                   `json:"id,omitempty"`
-  Name       *string                   `json:"name,omitempty"`
-  Price      *uint                     `json:"price,omitempty"`
-  TrialDays  *uint                     `json:"trial_days,omitempty"`
-  Since      *string                   `json:"since,omitempty"`
-  TrialEnd   *string                   `json:"trial_end,omitempty"`
-  Active     *bool                     `json:"active,omitempty"`
-  Website    *PlanSubscriptionWebsite  `json:"website,omitempty"`
-  CardID     *string                   `json:"card_id,omitempty"`
+  ID              *string                   `json:"id,omitempty"`
+  Name            *string                   `json:"name,omitempty"`
+  Price           *uint                     `json:"price,omitempty"`
+  TrialDays       *uint                     `json:"trial_days,omitempty"`
+  Since           *string                   `json:"since,omitempty"`
+  TrialEnd        *string                   `json:"trial_end,omitempty"`
+  Active          *bool                     `json:"active,omitempty"`
+  Website         *PlanSubscriptionWebsite  `json:"website,omitempty"`
+  CouponRedeemed  *bool                     `json:"coupon_redeemed,omitempty"`
+  CardID          *string                   `json:"card_id,omitempty"`
 }
 
 // PlanSubscriptionWebsite mapping
