@@ -8,6 +8,7 @@ package crisp
 
 import (
   "fmt"
+  "net/url"
 )
 
 
@@ -47,9 +48,39 @@ type PlanSubscriptionCreate struct {
   PlanID  *string  `json:"plan_id,omitempty"`
 }
 
+// PlanSubscriptionCouponData mapping
+type PlanSubscriptionCouponData struct {
+  Data  *PlanSubscriptionCoupon  `json:"data,omitempty"`
+}
+
+// PlanSubscriptionCoupon mapping
+type PlanSubscriptionCoupon struct {
+  Code         *string                        `json:"code,omitempty"`
+  Policy       *PlanSubscriptionCouponPolicy  `json:"policy,omitempty"`
+  RedeemLimit  *uint32                        `json:"redeem_limit,omitempty"`
+  ExpireAt     *string                        `json:"expire_at,omitempty"`
+}
+
+// PlanSubscriptionCouponPolicy mapping
+type PlanSubscriptionCouponPolicy struct {
+  RebatePercent  *float32  `json:"rebate_percent,omitempty"`
+  TrialDays      *uint32   `json:"trial_days,omitempty"`
+}
+
+// PlanSubscriptionCouponRedeem mapping
+type PlanSubscriptionCouponRedeem struct {
+  Code  *string  `json:"code,omitempty"`
+}
+
 
 // String returns the string representation of PlanSubscription
 func (instance PlanSubscription) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PlanSubscriptionCoupon
+func (instance PlanSubscriptionCoupon) String() string {
   return Stringify(instance)
 }
 
@@ -97,6 +128,30 @@ func (service *PlanService) SubscribeWebsiteToPlan(websiteID string, planID stri
 func (service *PlanService) UnsubscribePlanFromWebsite(websiteID string) (*Response, error) {
   url := fmt.Sprintf("plans/subscription/%s", websiteID)
   req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// CheckCouponAvailabilityForWebsiteSubscription resolves a coupon for a website subscription.
+func (service *PlanService) CheckCouponAvailabilityForWebsiteSubscription(websiteID string, code string) (*PlanSubscriptionCoupon, *Response, error) {
+  url := fmt.Sprintf("plans/subscription/%s/coupon?code=%s", websiteID, url.QueryEscape(code))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  plans := new(PlanSubscriptionCouponData)
+  resp, err := service.client.Do(req, plans)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return plans.Data, resp, err
+}
+
+
+// RedeemCouponForWebsiteSubscription redeems a coupon for a website subscription.
+func (service *PlanService) RedeemCouponForWebsiteSubscription(websiteID string, code string) (*Response, error) {
+  url := fmt.Sprintf("plans/subscription/%s/coupon", websiteID)
+  req, _ := service.client.NewRequest("PATCH", url, PlanSubscriptionCouponRedeem{Code: &code})
 
   return service.client.Do(req, nil)
 }

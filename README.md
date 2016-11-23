@@ -254,6 +254,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Subscription For A Website**: `crisp.Plan.GetSubscriptionForWebsite(websiteID string) (*PlanSubscription, *Response, error)`
   * **Subscribe Website To Plan**: `crisp.Plan.SubscribeWebsiteToPlan(websiteID string, planID string) (*Response, error)`
   * **Unsubscribe Plan From Website**: `crisp.Plan.UnsubscribePlanFromWebsite(websiteID string) (*Response, error)`
+  * **Check Coupon Availability For Website Subscription**: `crisp.Plan.CheckCouponAvailabilityForWebsiteSubscription(websiteID string, code string) (*PlanSubscriptionCoupon, *Response, error)`
+  * **Redeem Coupon For Website Subscription**: `crisp.Plan.RedeemCouponForWebsiteSubscription(websiteID string, code string) (*Response, error)`
 
 ## Realtime Events
 
