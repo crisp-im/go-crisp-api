@@ -64,6 +64,20 @@ type EventsReceiveSessionSetEmail struct {
   Email      *string  `json:"email"`
 }
 
+// EventsReceiveSessionSetPhone maps session:set_phone
+type EventsReceiveSessionSetPhone struct {
+  WebsiteID  *string  `json:"website_id"`
+  SessionID  *string  `json:"session_id"`
+  Phone      *string  `json:"phone"`
+}
+
+// EventsReceiveSessionSetAddress maps session:set_address
+type EventsReceiveSessionSetAddress struct {
+  WebsiteID  *string  `json:"website_id"`
+  SessionID  *string  `json:"session_id"`
+  Address    *string  `json:"address"`
+}
+
 // EventsReceiveSessionSetAvatar maps session:set_avatar
 type EventsReceiveSessionSetAvatar struct {
   WebsiteID  *string  `json:"website_id"`
@@ -698,6 +712,18 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:set_email", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetEmail) {
     if hdl, ok := register.Handlers["session:set_email"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:set_phone", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetPhone) {
+    if hdl, ok := register.Handlers["session:set_phone"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:set_address", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetAddress) {
+    if hdl, ok := register.Handlers["session:set_address"]; ok {
       go hdl.callFunc(&evt)
     }
   })

@@ -301,6 +301,8 @@ Available events are listed below:
   * **Session Update Availability**: `session:update_availability`
   * **Session Request Initiated**: `session:request:initiated`
   * **Session Set Email**: `session:set_email`
+  * **Session Set Phone**: `session:set_phone`
+  * **Session Set Address**: `session:set_address`
   * **Session Set Avatar**: `session:set_avatar`
   * **Session Set Cover**: `session:set_cover`
   * **Session Set Nickname**: `session:set_nickname`
