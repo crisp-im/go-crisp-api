@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 11/23/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 11/24/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -337,6 +337,7 @@ Available events are listed below:
 * **Website Events**
   * **Website Update Visitors Count**: `website:update_visitors_count`
   * **Website Update Visitors List**: `website:update_visitors_list`
+  * **Website Update Operators Availability**: `website:update_operators_availability`
 
 * **Bucket Events**
   * **Bucket URL Upload Generated**: `bucket:url:upload:generated`

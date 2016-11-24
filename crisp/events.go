@@ -393,6 +393,18 @@ type EventsReceiveUpdateVisitorsListItselfItemPagesCurrent struct {
   Timestamp     *uint    `json:"timestamp"`
 }
 
+// EventsReceiveUpdateOperatorsAvailability maps website:update_operators_availability
+type EventsReceiveUpdateOperatorsAvailability struct {
+  WebsiteID     *string                                          `json:"website_id"`
+  UserID        *string                                          `json:"user_id"`
+  Availability  *EventsReceiveUpdateOperatorsAvailabilityItself  `json:"availability"`
+}
+
+// EventsReceiveUpdateOperatorsAvailabilityItself maps website:update_operators_availability/availability
+type EventsReceiveUpdateOperatorsAvailabilityItself struct {
+  Type  *string  `json:"type"`
+}
+
 // EventsReceiveBucketURLUploadGenerated maps bucket:url:upload:generated
 type EventsReceiveBucketURLUploadGenerated struct {
   From        *string                                         `json:"from"`
@@ -908,6 +920,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("website:update_visitors_list", func(chnl *gosocketio.Channel, evt EventsReceiveUpdateVisitorsList) {
     if hdl, ok := register.Handlers["website:update_visitors_list"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("website:update_operators_availability", func(chnl *gosocketio.Channel, evt EventsReceiveUpdateOperatorsAvailability) {
+    if hdl, ok := register.Handlers["website:update_operators_availability"]; ok {
       go hdl.callFunc(&evt)
     }
   })
