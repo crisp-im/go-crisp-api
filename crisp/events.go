@@ -341,19 +341,16 @@ type EventsReceiveMessageComposeSend struct {
   SessionID    *string  `json:"session_id"`
   Type         *string  `json:"type"`
   Excerpt      *string  `json:"excerpt"`
+  Timestamp    *uint    `json:"timestamp"`
 }
 
 // EventsReceiveMessageComposeReceive maps message:compose:receive
 type EventsReceiveMessageComposeReceive struct {
-  WebsiteID    *string                                     `json:"website_id"`
-  SessionID    *string                                     `json:"session_id"`
-  Compose      *EventsReceiveMessageComposeReceiveCompose  `json:"compose"`
-}
-
-// EventsReceiveMessageComposeReceiveCompose maps message:compose:receive/compose
-type EventsReceiveMessageComposeReceiveCompose struct {
+  WebsiteID    *string  `json:"website_id"`
+  SessionID    *string  `json:"session_id"`
   UserID       *string  `json:"user_id"`
   Type         *string  `json:"type"`
+  Excerpt      *string  `json:"excerpt"`
   Timestamp    *uint    `json:"timestamp"`
 }
 
