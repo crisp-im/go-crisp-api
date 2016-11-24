@@ -187,7 +187,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Conversations**
   * **List Conversations**: `crisp.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
   * **List Conversations (Search Variant)**: `crisp.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
-  * **Export Conversation Emails**: `crisp.Website.ExportConversationEmails(websiteID string) (*[]ConversationExportEmail, *Response, error)`
+  * **Export Conversation Emails**: `crisp.Website.ExportConversationEmails(websiteID string, pageNumber uint, filterSegment string, filterCountry string, filterDateStart time.Time, filterDateEnd time.Time) (*[]ConversationExportEmail, *Response, error)`
 
 * **Website Conversation**
   * **Create A New Conversation**: `crisp.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`

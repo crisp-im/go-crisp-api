@@ -8,6 +8,7 @@ package crisp
 
 import (
   "fmt"
+  "time"
   "net/http"
   "net/url"
 )
@@ -409,9 +410,26 @@ func (service *WebsiteService) ListConversations(websiteID string, pageNumber ui
 
 
 // ExportConversationEmails exports conversation emails for website.
-func (service *WebsiteService) ExportConversationEmails(websiteID string) (*[]ConversationExportEmail, *Response, error) {
-  url := fmt.Sprintf("website/%s/conversations/export/emails", websiteID)
-  req, _ := service.client.NewRequest("GET", url, nil)
+func (service *WebsiteService) ExportConversationEmails(websiteID string, pageNumber uint, filterSegment string, filterCountry string, filterDateStart time.Time, filterDateEnd time.Time) (*[]ConversationExportEmail, *Response, error) {
+  filterDateStartFormat, err := filterDateStart.UTC().MarshalText()
+  if err != nil {
+    return nil, nil, err
+  }
+
+  filterDateEndFormat, err := filterDateEnd.UTC().MarshalText()
+  if err != nil {
+    return nil, nil, err
+  }
+
+  var resourceURL string
+
+  if filterSegment != "" || filterCountry != "" || len(filterDateStartFormat) > 0 || len(filterDateEndFormat) > 0 {
+    resourceURL = fmt.Sprintf("website/%s/conversations/export/emails/%d?filter_segment=%s&filter_country=%s&filter_date_start=%s&filter_date_end=%s", websiteID, pageNumber, url.QueryEscape(filterSegment), url.QueryEscape(filterCountry), url.QueryEscape(string(filterDateStartFormat[:])), url.QueryEscape(string(filterDateEndFormat[:])))
+  } else {
+    resourceURL = fmt.Sprintf("website/%s/conversations/export/emails/%d", websiteID, pageNumber)
+  }
+
+  req, _ := service.client.NewRequest("GET", resourceURL, nil)
 
   emails := new(ConversationExportEmailData)
   resp, err := service.client.Do(req, emails)
