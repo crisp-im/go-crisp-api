@@ -710,10 +710,10 @@ func (service *WebsiteService) ListBrowsingSessionsForConversation(websiteID str
 }
 
 
-// InitiateExistingBrowsingSession initiates an existing browsing session.
-func (service *WebsiteService) InitiateExistingBrowsingSession(websiteID string, sessionID string, browsingID string) (*Response, error) {
-  url := fmt.Sprintf("website/%s/conversation/%s/browsing/%s", websiteID, sessionID, browsingID)
-  req, _ := service.client.NewRequest("PUT", url, nil)
+// InitiateBrowsingSessionsForConversation initiates browsing sessions for conversation.
+func (service *WebsiteService) InitiateBrowsingSessionsForConversation(websiteID string, sessionID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/browsing", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, nil)
 
   return service.client.Do(req, nil)
 }

@@ -211,7 +211,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Block Status For Conversation**: `crisp.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
   * **Block Incoming Messages For Conversation**: `crisp.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
   * **List Browsing Sessions For Conversation**: `crisp.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
-  * **Initiate An Existing Browsing Session**: `crisp.Website.InitiateExistingBrowsingSession(websiteID string, sessionID string, browsingID string) (*Response, error)`
+  * **Initiate Browsing Sessions For Conversation**: `crisp.Website.InitiateBrowsingSessionsForConversation(websiteID string, sessionID string) (*Response, error)`
   * **Send Action To An Existing Browsing Session**: `crisp.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
   * **Request Email Transcript For Conversation**: `crisp.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, email string) (*Response, error)`
 
