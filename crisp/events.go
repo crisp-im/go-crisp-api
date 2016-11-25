@@ -369,6 +369,12 @@ type EventsBrowsingRequestInitiated struct {
   BrowsingID  *string  `json:"browsing_id"`
 }
 
+// EventsBrowsingRequestRejected maps browsing:request:rejected
+type EventsBrowsingRequestRejected struct {
+  WebsiteID   *string  `json:"website_id"`
+  SessionID   *string  `json:"session_id"`
+}
+
 // EventsBrowsingActionStarted maps browsing:action:started
 type EventsBrowsingActionStarted struct {
   WebsiteID   *string  `json:"website_id"`
@@ -990,6 +996,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("browsing:request:initiated", func(chnl *gosocketio.Channel, evt EventsBrowsingRequestInitiated) {
     if hdl, ok := register.Handlers["browsing:request:initiated"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:request:rejected", func(chnl *gosocketio.Channel, evt EventsBrowsingRequestRejected) {
+    if hdl, ok := register.Handlers["browsing:request:rejected"]; ok {
       go hdl.callFunc(&evt)
     }
   })
