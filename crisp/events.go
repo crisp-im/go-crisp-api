@@ -362,6 +362,59 @@ type EventsReceiveMessageAcknowledge struct {
   Fingerprints  *[]int   `json:"fingerprints"`
 }
 
+// EventsBrowsingRequestInitiated maps browsing:request:initiated
+type EventsBrowsingRequestInitiated struct {
+  WebsiteID   *string  `json:"website_id"`
+  SessionID   *string  `json:"session_id"`
+  BrowsingID  *string  `json:"browsing_id"`
+}
+
+// EventsBrowsingActionStarted maps browsing:action:started
+type EventsBrowsingActionStarted struct {
+  WebsiteID   *string  `json:"website_id"`
+  SessionID   *string  `json:"session_id"`
+  BrowsingID  *string  `json:"browsing_id"`
+}
+
+// EventsBrowsingActionStopped maps browsing:action:stopped
+type EventsBrowsingActionStopped struct {
+  WebsiteID   *string  `json:"website_id"`
+  SessionID   *string  `json:"session_id"`
+  BrowsingID  *string  `json:"browsing_id"`
+}
+
+// EventsBrowsingStreamMirror maps browsing:stream:mirror
+type EventsBrowsingStreamMirror struct {
+  WebsiteID   *string       `json:"website_id"`
+  SessionID   *string       `json:"session_id"`
+  BrowsingID  *string       `json:"browsing_id"`
+  Data        *interface{}  `json:"data"`
+}
+
+// EventsBrowsingStreamMouse maps browsing:stream:mouse
+type EventsBrowsingStreamMouse struct {
+  WebsiteID   *string       `json:"website_id"`
+  SessionID   *string       `json:"session_id"`
+  BrowsingID  *string       `json:"browsing_id"`
+  Data        *interface{}  `json:"data"`
+}
+
+// EventsBrowsingStreamTab maps browsing:stream:tab
+type EventsBrowsingStreamTab struct {
+  WebsiteID   *string       `json:"website_id"`
+  SessionID   *string       `json:"session_id"`
+  BrowsingID  *string       `json:"browsing_id"`
+  Data        *interface{}  `json:"data"`
+}
+
+// EventsBrowsingStreamScroll maps browsing:stream:scroll
+type EventsBrowsingStreamScroll struct {
+  WebsiteID   *string       `json:"website_id"`
+  SessionID   *string       `json:"session_id"`
+  BrowsingID  *string       `json:"browsing_id"`
+  Data        *interface{}  `json:"data"`
+}
+
 // EventsReceiveWebsiteVisitorsCount maps website:update_visitors_count
 type EventsReceiveWebsiteVisitorsCount struct {
   WebsiteID      *string  `json:"website_id"`
@@ -931,6 +984,48 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("message:acknowledge:delivered", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
     if hdl, ok := register.Handlers["message:acknowledge:delivered"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:request:initiated", func(chnl *gosocketio.Channel, evt EventsBrowsingRequestInitiated) {
+    if hdl, ok := register.Handlers["browsing:request:initiated"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:action:started", func(chnl *gosocketio.Channel, evt EventsBrowsingActionStarted) {
+    if hdl, ok := register.Handlers["browsing:action:started"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:action:stopped", func(chnl *gosocketio.Channel, evt EventsBrowsingActionStopped) {
+    if hdl, ok := register.Handlers["browsing:action:stopped"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:stream:mirror", func(chnl *gosocketio.Channel, evt EventsBrowsingStreamMirror) {
+    if hdl, ok := register.Handlers["browsing:stream:mirror"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:stream:mouse", func(chnl *gosocketio.Channel, evt EventsBrowsingStreamMouse) {
+    if hdl, ok := register.Handlers["browsing:stream:mouse"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:stream:tab", func(chnl *gosocketio.Channel, evt EventsBrowsingStreamTab) {
+    if hdl, ok := register.Handlers["browsing:stream:tab"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:stream:scroll", func(chnl *gosocketio.Channel, evt EventsBrowsingStreamScroll) {
+    if hdl, ok := register.Handlers["browsing:stream:scroll"]; ok {
       go hdl.callFunc(&evt)
     }
   })

@@ -332,6 +332,22 @@ type ConversationTranscriptRequest struct {
   Email  *string  `json:"email,omitempty"`
 }
 
+// ConversationBrowsingData mapping
+type ConversationBrowsingData struct {
+  Data  *[]ConversationBrowsing  `json:"data,omitempty"`
+}
+
+// ConversationBrowsing mapping
+type ConversationBrowsing struct {
+  BrowsingID  *string  `json:"browsing_id,omitempty"`
+  Useragent   *string  `json:"useragent,omitempty"`
+}
+
+// ConversationBrowsingAction mapping
+type ConversationBrowsingAction struct {
+  Action  *string  `json:"action,omitempty"`
+}
+
 
 // String returns the string representation of Conversation
 func (instance Conversation) String() string {
@@ -674,6 +690,39 @@ func (service *WebsiteService) RequestEmailTranscriptForConversation(websiteID s
   } else {
     req, _ = service.client.NewRequest("POST", url, nil)
   }
+
+  return service.client.Do(req, nil)
+}
+
+
+// ListBrowsingSessionsForConversation lists available browsing sessions for conversation.
+func (service *WebsiteService) ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/browsing", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  browsing := new(ConversationBrowsingData)
+  resp, err := service.client.Do(req, browsing)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return browsing.Data, resp, err
+}
+
+
+// InitiateExistingBrowsingSession initiates an existing browsing session.
+func (service *WebsiteService) InitiateExistingBrowsingSession(websiteID string, sessionID string, browsingID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/browsing/%s", websiteID, sessionID, browsingID)
+  req, _ := service.client.NewRequest("PUT", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// SendActionToExistingBrowsingSession sends an action to an existing browsing session.
+func (service *WebsiteService) SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/browsing/%s", websiteID, sessionID, browsingID)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationBrowsingAction{&action})
 
   return service.client.Do(req, nil)
 }

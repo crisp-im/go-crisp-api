@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 11/24/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 11/25/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -210,6 +210,9 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Change Conversation State**: `crisp.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
   * **Get Block Status For Conversation**: `crisp.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
   * **Block Incoming Messages For Conversation**: `crisp.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
+  * **List Browsing Sessions For Conversation**: `crisp.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
+  * **Initiate An Existing Browsing Session**: `crisp.Website.InitiateExistingBrowsingSession(websiteID string, sessionID string, browsingID string) (*Response, error)`
+  * **Send Action To An Existing Browsing Session**: `crisp.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
   * **Request Email Transcript For Conversation**: `crisp.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, email string) (*Response, error)`
 
 ### Plugin
@@ -335,6 +338,15 @@ Available events are listed below:
   * **Message Acknowledge Read Send**: `message:acknowledge:read:send`
   * **Message Acknowledge Read Received**: `message:acknowledge:read:received`
   * **Message Acknowledge Delivered**: `message:acknowledge:delivered`
+
+* **Browsing Events**
+  * **Browsing Request Initiated**: `browsing:request:initiated`
+  * **Browsing Action Started**: `browsing:action:started`
+  * **Browsing Action Stopped**: `browsing:action:stopped`
+  * **Browsing Stream Mirror**: `browsing:stream:mirror`
+  * **Browsing Stream Mouse**: `browsing:stream:mouse`
+  * **Browsing Stream Tab**: `browsing:stream:tab`
+  * **Browsing Stream Scroll**: `browsing:stream:scroll`
 
 * **Website Events**
   * **Website Update Visitors Count**: `website:update_visitors_count`
