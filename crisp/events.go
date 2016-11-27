@@ -391,34 +391,59 @@ type EventsBrowsingActionStopped struct {
 
 // EventsBrowsingStreamMirror maps browsing:stream:mirror
 type EventsBrowsingStreamMirror struct {
-  WebsiteID   *string       `json:"website_id"`
-  SessionID   *string       `json:"session_id"`
-  BrowsingID  *string       `json:"browsing_id"`
-  Data        *interface{}  `json:"data"`
+  WebsiteID   *string                          `json:"website_id"`
+  SessionID   *string                          `json:"session_id"`
+  BrowsingID  *string                          `json:"browsing_id"`
+  Data        *EventsBrowsingStreamMirrorData  `json:"data"`
+}
+
+// EventsBrowsingStreamMirrorData maps browsing:stream:mirror/data
+type EventsBrowsingStreamMirrorData struct {
+  F     *string    `json:"f"`
+  Args  *[]string  `json:"args"`
 }
 
 // EventsBrowsingStreamMouse maps browsing:stream:mouse
 type EventsBrowsingStreamMouse struct {
-  WebsiteID   *string       `json:"website_id"`
-  SessionID   *string       `json:"session_id"`
-  BrowsingID  *string       `json:"browsing_id"`
-  Data        *interface{}  `json:"data"`
+  WebsiteID   *string                         `json:"website_id"`
+  SessionID   *string                         `json:"session_id"`
+  BrowsingID  *string                         `json:"browsing_id"`
+  Data        *EventsBrowsingStreamMouseData  `json:"data"`
+}
+
+// EventsBrowsingStreamMouseData maps browsing:stream:mouse/data
+type EventsBrowsingStreamMouseData struct {
+  X  *int32  `json:"x"`
+  Y  *int32  `json:"y"`
 }
 
 // EventsBrowsingStreamTab maps browsing:stream:tab
 type EventsBrowsingStreamTab struct {
-  WebsiteID   *string       `json:"website_id"`
-  SessionID   *string       `json:"session_id"`
-  BrowsingID  *string       `json:"browsing_id"`
-  Data        *interface{}  `json:"data"`
+  WebsiteID   *string                       `json:"website_id"`
+  SessionID   *string                       `json:"session_id"`
+  BrowsingID  *string                       `json:"browsing_id"`
+  Data        *EventsBrowsingStreamTabData  `json:"data"`
+}
+
+// EventsBrowsingStreamTabData maps browsing:stream:tab/data
+type EventsBrowsingStreamTabData struct {
+  Title   *string  `json:"title"`
+  Width   *int32   `json:"width"`
+  Height  *int32   `json:"height"`
 }
 
 // EventsBrowsingStreamScroll maps browsing:stream:scroll
 type EventsBrowsingStreamScroll struct {
-  WebsiteID   *string       `json:"website_id"`
-  SessionID   *string       `json:"session_id"`
-  BrowsingID  *string       `json:"browsing_id"`
-  Data        *interface{}  `json:"data"`
+  WebsiteID   *string                          `json:"website_id"`
+  SessionID   *string                          `json:"session_id"`
+  BrowsingID  *string                          `json:"browsing_id"`
+  Data        *EventsBrowsingStreamScrollData  `json:"data"`
+}
+
+// EventsBrowsingStreamScrollData maps browsing:stream:scroll/data
+type EventsBrowsingStreamScrollData struct {
+  X  *int32  `json:"x"`
+  Y  *int32  `json:"y"`
 }
 
 // EventsReceiveWebsiteVisitorsCount maps website:update_visitors_count

@@ -341,6 +341,7 @@ Available events are listed below:
 
 * **Browsing Events**
   * **Browsing Request Initiated**: `browsing:request:initiated`
+  * **Browsing Request Rejected**: `browsing:request:rejected`
   * **Browsing Action Started**: `browsing:action:started`
   * **Browsing Action Stopped**: `browsing:action:stopped`
   * **Browsing Stream Mirror**: `browsing:stream:mirror`
