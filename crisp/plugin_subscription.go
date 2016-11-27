@@ -152,8 +152,17 @@ func (service *PluginService) GetSubscriptionSettings(websiteID string, pluginID
 }
 
 
-// SaveSubscriptionSettings saves plugin subscription settings. Used to configure a given plugin on a given website.
+// SaveSubscriptionSettings saves plugin subscription settings (overwrites existing settings). Used to configure a given plugin on a given website.
 func (service *PluginService) SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error) {
+  url := fmt.Sprintf("plugins/subscription/%s/%s/settings", websiteID, pluginID)
+  req, _ := service.client.NewRequest("PUT", url, settings)
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateSubscriptionSettings updates plugin subscription settings (merges with existing settings). Used to configure a given plugin on a given website.
+func (service *PluginService) UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s/%s/settings", websiteID, pluginID)
   req, _ := service.client.NewRequest("PATCH", url, settings)
 
