@@ -529,13 +529,8 @@ func (service *WebsiteService) GetMessagesInConversationLast(websiteID string, s
 
 
 // GetMessagesInConversationBefore resolves messages in an existing conversation (before variant).
-func (service *WebsiteService) GetMessagesInConversationBefore(websiteID string, sessionID string, dateBefore time.Time) (*[]ConversationMessage, *Response, error) {
-  dateBeforeFormat, err := dateBefore.UTC().MarshalText()
-  if err != nil {
-    return nil, nil, err
-  }
-
-  url := fmt.Sprintf("website/%s/conversation/%s/messages?date_before=%s", websiteID, sessionID, url.QueryEscape(string(dateBeforeFormat[:])))
+func (service *WebsiteService) GetMessagesInConversationBefore(websiteID string, sessionID string, timestampBefore uint32) (*[]ConversationMessage, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/messages?timestamp_before=%d", websiteID, sessionID, timestampBefore)
   req, _ := service.client.NewRequest("GET", url, nil)
 
   messages := new(ConversationMessagesData)
