@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 11/27/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 12/01/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -195,7 +195,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get A Conversation**: `crisp.Website.GetConversation(websiteID string, sessionID string) (*Conversation, *Response, error)`
   * **Remove A Conversation**: `crisp.Website.RemoveConversation(websiteID string, sessionID string) (*Response, error)`
   * **Initiate A Conversation With Existing Session**: `crisp.Website.InitiateConversationWithExistingSession(websiteID string, sessionID string) (*Response, error)`
-  * **Get Messages In Conversation**: `crisp.Website.GetMessagesInConversation(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error)`
+  * **Get Messages In Conversation (Last Variant)**: `crisp.Website.GetMessagesInConversationLast(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error)`
+  * **Get Messages In Conversation (Before Variant)**: `crisp.Website.GetMessagesInConversationBefore(websiteID string, sessionID string, dateBefore time.Time) (*[]ConversationMessage, *Response, error)`
   * **Send A Message In Conversation (Text Variant)**: `crisp.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error)`
   * **Send A Message In Conversation (File Variant)**: `crisp.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error)`
   * **Send A Message In Conversation (Animation Variant)**: `crisp.Website.SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*Response, error)`

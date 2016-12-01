@@ -26,18 +26,17 @@ type ConversationData struct {
 
 // Conversation mapping
 type Conversation struct {
-  SessionID     *string                 `json:"session_id,omitempty"`
-  WebsiteID     *string                 `json:"website_id,omitempty"`
-  State         *string                 `json:"state,omitempty"`
-  Status        *uint8                  `json:"status,omitempty"`
-  IsBlocked     *bool                   `json:"is_blocked,omitempty"`
-  Availability  *string                 `json:"availability,omitempty"`
-  LastMessage   *string                 `json:"last_message,omitempty"`
-  CreatedAt     *uint                   `json:"created_at,omitempty"`
-  UpdatedAt     *uint                   `json:"updated_at,omitempty"`
-  Unread        *ConversationUnread     `json:"unread,omitempty"`
-  Meta          *ConversationMeta       `json:"meta,omitempty"`
-  Messages      *[]ConversationMessage  `json:"message,omitempty"`
+  SessionID     *string              `json:"session_id,omitempty"`
+  WebsiteID     *string              `json:"website_id,omitempty"`
+  State         *string              `json:"state,omitempty"`
+  Status        *uint8               `json:"status,omitempty"`
+  IsBlocked     *bool                `json:"is_blocked,omitempty"`
+  Availability  *string              `json:"availability,omitempty"`
+  LastMessage   *string              `json:"last_message,omitempty"`
+  CreatedAt     *uint                `json:"created_at,omitempty"`
+  UpdatedAt     *uint                `json:"updated_at,omitempty"`
+  Unread        *ConversationUnread  `json:"unread,omitempty"`
+  Meta          *ConversationMeta    `json:"meta,omitempty"`
 }
 
 // ConversationUnread mapping
@@ -514,9 +513,29 @@ func (service *WebsiteService) InitiateConversationWithExistingSession(websiteID
 }
 
 
-// GetMessagesInConversation resolves messages in an existing conversation.
-func (service *WebsiteService) GetMessagesInConversation(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error) {
+// GetMessagesInConversationLast resolves messages in an existing conversation (last variant).
+func (service *WebsiteService) GetMessagesInConversationLast(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/messages", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  messages := new(ConversationMessagesData)
+  resp, err := service.client.Do(req, messages)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return messages.Data, resp, err
+}
+
+
+// GetMessagesInConversationBefore resolves messages in an existing conversation (before variant).
+func (service *WebsiteService) GetMessagesInConversationBefore(websiteID string, sessionID string, dateBefore time.Time) (*[]ConversationMessage, *Response, error) {
+  dateBeforeFormat, err := dateBefore.UTC().MarshalText()
+  if err != nil {
+    return nil, nil, err
+  }
+
+  url := fmt.Sprintf("website/%s/conversation/%s/messages?date_before=%s", websiteID, sessionID, url.QueryEscape(string(dateBeforeFormat[:])))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   messages := new(ConversationMessagesData)
