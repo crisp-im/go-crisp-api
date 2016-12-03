@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 12/02/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 12/03/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -183,6 +183,17 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website States**
   * **Request Website States**: `crisp.Website.RequestWebsiteStates(websiteID string) (*Response, error)`
+
+* **Website Shortcuts**
+  * **List Shortcuts**: `crisp.Website.ListShortcuts(websiteID string, pageNumber uint) (*[]WebsiteShortcut, *Response, error)`
+  * **List Shortcuts (Search Variant)**: `crisp.Website.SearchShortcuts(websiteID string, pageNumber uint, searchQuery string) (*[]WebsiteShortcut, *Response, error)`
+
+* **Website Shortcut**
+  * **Create A New Shortcut**: `crisp.Website.CreateNewShortcut(websiteID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
+  * **Check If Shortcut Exists**: `crisp.Website.CheckShortcutExists(websiteID string, shortcutID string) (*Response, error)`
+  * **Get A Shortcut**: `crisp.Website.GetShortcut(websiteID string, shortcutID string) (*WebsiteShortcut, *Response, error)`
+  * **Update A Shortcut**: `crisp.Website.UpdateShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
+  * **Remove A Shortcut**: `crisp.Website.RemoveShortcut(websiteID string, shortcutID string) (*Response, error)`
 
 * **Website Conversations**
   * **List Conversations**: `crisp.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
