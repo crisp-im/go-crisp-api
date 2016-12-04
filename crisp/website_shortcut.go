@@ -38,12 +38,6 @@ type WebsiteShortcutItem struct {
 }
 
 
-// String returns the string representation of WebsiteShortcutItem
-func (instance WebsiteShortcutItem) String() string {
-  return Stringify(instance)
-}
-
-
 // String returns the string representation of WebsiteShortcut
 func (instance WebsiteShortcut) String() string {
   return Stringify(instance)

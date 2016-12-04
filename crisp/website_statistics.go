@@ -18,10 +18,10 @@ type WebsiteStatisticsAllData struct {
 
 // WebsiteStatisticsAll mapping
 type WebsiteStatisticsAll struct {
-  Total    *int  `json:"total,omitempty"`
-  Resolve  *int  `json:"resolve,omitempty"`
-  Pending  *int  `json:"pending,omitempty"`
-  Unread   *int  `json:"unread,omitempty"`
+  Total    *uint  `json:"total,omitempty"`
+  Resolve  *uint  `json:"resolve,omitempty"`
+  Pending  *uint  `json:"pending,omitempty"`
+  Unread   *uint  `json:"unread,omitempty"`
 }
 
 // WebsiteStatisticsTotalData mapping
@@ -31,10 +31,10 @@ type WebsiteStatisticsTotalData struct {
 
 // WebsiteStatisticsTotal mapping
 type WebsiteStatisticsTotal struct {
-  Total    *int  `json:"total,omitempty"`
-  Resolve  *int  `json:"resolve,omitempty"`
-  Pending  *int  `json:"pending,omitempty"`
-  Unread   *int  `json:"unread,omitempty"`
+  Total    *uint  `json:"total,omitempty"`
+  Resolve  *uint  `json:"resolve,omitempty"`
+  Pending  *uint  `json:"pending,omitempty"`
+  Unread   *uint  `json:"unread,omitempty"`
 }
 
 // WebsiteStatisticsPendingData mapping
@@ -44,7 +44,7 @@ type WebsiteStatisticsPendingData struct {
 
 // WebsiteStatisticsPending mapping
 type WebsiteStatisticsPending struct {
-  Pending  *int  `json:"pending,omitempty"`
+  Pending  *uint  `json:"pending,omitempty"`
 }
 
 // WebsiteStatisticsUnresolvedData mapping
@@ -54,7 +54,7 @@ type WebsiteStatisticsUnresolvedData struct {
 
 // WebsiteStatisticsUnresolved mapping
 type WebsiteStatisticsUnresolved struct {
-  Unresolved  *int  `json:"unresolved,omitempty"`
+  Unresolved  *uint  `json:"unresolved,omitempty"`
 }
 
 // WebsiteStatisticsResolvedData mapping
@@ -64,7 +64,7 @@ type WebsiteStatisticsResolvedData struct {
 
 // WebsiteStatisticsResolved mapping
 type WebsiteStatisticsResolved struct {
-  Resolved  *int  `json:"resolved,omitempty"`
+  Resolved  *uint  `json:"resolved,omitempty"`
 }
 
 // WebsiteStatisticsUnreadData mapping
@@ -74,7 +74,7 @@ type WebsiteStatisticsUnreadData struct {
 
 // WebsiteStatisticsUnread mapping
 type WebsiteStatisticsUnread struct {
-  Unread  *int  `json:"unread,omitempty"`
+  Unread  *uint  `json:"unread,omitempty"`
 }
 
 

@@ -227,6 +227,16 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Send Action To An Existing Browsing Session**: `crisp.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
   * **Request Email Transcript For Conversation**: `crisp.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, email string) (*Response, error)`
 
+* **Website People**
+  * **Get People Statistics**: `crisp.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
+  * **List People Profiles**: `crisp.Website.ListPeopleProfiles(websiteID string, pageNumber uint) (*[]PeopleProfile, *Response, error)`
+  * **Add New People Profile**: `crisp.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileCard) (*Response, error)`
+  * **Check If People Profile Exists**: `crisp.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`
+  * **Get People Profile**: `crisp.Website.GetPeopleProfile(websiteID string, peopleID string) (*PeopleProfile, *Response, error)`
+  * **Save People Profile**: `crisp.Website.SavePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileCard) (*Response, error)`
+  * **Update People Profile**: `crisp.Website.UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileCard) (*Response, error)`
+  * **Remove People Profile**: `crisp.Website.RemovePeopleProfile(websiteID string, peopleID string) (*Response, error)`
+
 ### Plugin
 
 * **One Plugin**
