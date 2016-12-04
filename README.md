@@ -192,6 +192,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Create A New Shortcut**: `crisp.Website.CreateNewShortcut(websiteID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
   * **Check If Shortcut Exists**: `crisp.Website.CheckShortcutExists(websiteID string, shortcutID string) (*Response, error)`
   * **Get A Shortcut**: `crisp.Website.GetShortcut(websiteID string, shortcutID string) (*WebsiteShortcut, *Response, error)`
+  * **Save A Shortcut**: `crisp.Website.SaveShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
   * **Update A Shortcut**: `crisp.Website.UpdateShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
   * **Remove A Shortcut**: `crisp.Website.RemoveShortcut(websiteID string, shortcutID string) (*Response, error)`
 

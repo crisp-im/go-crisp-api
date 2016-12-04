@@ -105,6 +105,15 @@ func (service *WebsiteService) GetShortcut(websiteID string, shortcutID string) 
 }
 
 
+// SaveShortcut saves a shortcut in website.
+func (service *WebsiteService) SaveShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error) {
+  url := fmt.Sprintf("website/%s/shortcut/%s", websiteID, shortcutID)
+  req, _ := service.client.NewRequest("PUT", url, websiteShortcutItem)
+
+  return service.client.Do(req, nil)
+}
+
+
 // UpdateShortcut updates a shortcut in website.
 func (service *WebsiteService) UpdateShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error) {
   url := fmt.Sprintf("website/%s/shortcut/%s", websiteID, shortcutID)
