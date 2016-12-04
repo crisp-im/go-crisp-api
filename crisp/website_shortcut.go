@@ -22,18 +22,22 @@ type WebsiteShortcutListData struct {
   Data  *[]WebsiteShortcut  `json:"data,omitempty"`
 }
 
+// WebsiteShortcutTagsData mapping
+type WebsiteShortcutTagsData struct {
+  Data  *[]string  `json:"data,omitempty"`
+}
+
 // WebsiteShortcut mapping
 type WebsiteShortcut struct {
+  WebsiteShortcutItem
   ShortcutID  *string  `json:"shortcut_id,omitempty"`
-  Bang        *string  `json:"bang,omitempty"`
-  Text        *string  `json:"text,omitempty"`
-  Disabled    *bool    `json:"disabled,omitempty"`
 }
 
 // WebsiteShortcutItem mapping
 type WebsiteShortcutItem struct {
   Bang      *string  `json:"bang,omitempty"`
   Text      *string  `json:"text,omitempty"`
+  Tag       *string  `json:"tag,omitempty"`
   Disabled  *bool    `json:"disabled,omitempty"`
 }
 
@@ -45,13 +49,13 @@ func (instance WebsiteShortcut) String() string {
 
 
 // SearchShortcuts lists shortcuts for website (search variant).
-func (service *WebsiteService) SearchShortcuts(websiteID string, pageNumber uint, searchQuery string) (*[]WebsiteShortcut, *Response, error) {
+func (service *WebsiteService) SearchShortcuts(websiteID string, pageNumber uint, searchQuery string, searchTag string) (*[]WebsiteShortcut, *Response, error) {
   var resourceURL string
 
-  if searchQuery != "" {
-    resourceURL = fmt.Sprintf("website/%s/shortcuts/%d?search_query=%s", websiteID, pageNumber, url.QueryEscape(searchQuery))
+  if searchQuery != "" && searchTag != "" {
+    resourceURL = fmt.Sprintf("website/%s/shortcuts/list/%d?search_query=%s&search_tag=%s", websiteID, pageNumber, url.QueryEscape(searchQuery), url.QueryEscape(searchTag))
   } else {
-    resourceURL = fmt.Sprintf("website/%s/shortcuts/%d", websiteID, pageNumber)
+    resourceURL = fmt.Sprintf("website/%s/shortcuts/list/%d", websiteID, pageNumber)
   }
 
   req, _ := service.client.NewRequest("GET", resourceURL, nil)
@@ -68,7 +72,22 @@ func (service *WebsiteService) SearchShortcuts(websiteID string, pageNumber uint
 
 // ListShortcuts lists shortcuts for website.
 func (service *WebsiteService) ListShortcuts(websiteID string, pageNumber uint) (*[]WebsiteShortcut, *Response, error) {
-  return service.SearchShortcuts(websiteID, pageNumber, "")
+  return service.SearchShortcuts(websiteID, pageNumber, "", "")
+}
+
+
+// ListShortcutTags lists shortcut tags for website.
+func (service *WebsiteService) ListShortcutTags(websiteID string) (*[]string, *Response, error) {
+  url := fmt.Sprintf("website/%s/shortcuts/tags", websiteID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  tags := new(WebsiteShortcutTagsData)
+  resp, err := service.client.Do(req, tags)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return tags.Data, resp, err
 }
 
 

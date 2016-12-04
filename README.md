@@ -186,7 +186,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website Shortcuts**
   * **List Shortcuts**: `crisp.Website.ListShortcuts(websiteID string, pageNumber uint) (*[]WebsiteShortcut, *Response, error)`
-  * **List Shortcuts (Search Variant)**: `crisp.Website.SearchShortcuts(websiteID string, pageNumber uint, searchQuery string) (*[]WebsiteShortcut, *Response, error)`
+  * **List Shortcuts (Search Variant)**: `crisp.Website.SearchShortcuts(websiteID string, pageNumber uint, searchQuery string, searchTag string) (*[]WebsiteShortcut, *Response, error)`
+  * **List Shortcut Tags**: `crisp.Website.ListShortcutTags(websiteID string) (*[]string, *Response, error)`
 
 * **Website Shortcut**
   * **Create A New Shortcut**: `crisp.Website.CreateNewShortcut(websiteID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
