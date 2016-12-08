@@ -365,6 +365,7 @@ type EventsPeopleBindSession struct {
 // EventsPeopleSyncProfile maps people:sync:profile
 type EventsPeopleSyncProfile struct {
   WebsiteID  *string             `json:"website_id"`
+  SessionID  *string             `json:"session_id"`
   PeopleID   *string             `json:"people_id"`
   Identity   *PeopleProfileCard  `json:"identity"`
 }
