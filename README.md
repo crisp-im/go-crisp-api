@@ -340,7 +340,6 @@ Available events are listed below:
   * **Session Sync Network**: `session:sync:network`
   * **Session Sync Timezone**: `session:sync:timezone`
   * **Session Sync Locales**: `session:sync:locales`
-  * **Session Sync Identity**: `session:sync:identity`
   * **Session Set State**: `session:set_state`
   * **Session Set Block**: `session:set_block`
   * **Session Set Segments**: `session:set_segments`
@@ -365,6 +364,7 @@ Available events are listed below:
 
 * **People Events**
   * **People Bind Session**: `people:bind:session`
+  * **People Sync Profile**: `people:sync:profile`
 
 * **Browsing Events**
   * **Browsing Request Initiated**: `browsing:request:initiated`

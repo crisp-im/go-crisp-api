@@ -212,13 +212,6 @@ type EventsReceiveSessionSyncLocalesData struct {
   Locales  *[]string  `json:"locales,omitempty"`
 }
 
-// EventsReceiveSessionSyncIdentity maps session:sync:identity
-type EventsReceiveSessionSyncIdentity struct {
-  WebsiteID  *string       `json:"website_id"`
-  SessionID  *string       `json:"session_id"`
-  Identity   *interface{}  `json:"identity"`
-}
-
 // EventsReceiveSessionSetState maps session:set_state
 type EventsReceiveSessionSetState struct {
   WebsiteID  *string  `json:"website_id"`
@@ -367,6 +360,13 @@ type EventsPeopleBindSession struct {
   WebsiteID  *string  `json:"website_id"`
   SessionID  *string  `json:"session_id"`
   PeopleID   *string  `json:"people_id"`
+}
+
+// EventsPeopleSyncProfile maps people:sync:profile
+type EventsPeopleSyncProfile struct {
+  WebsiteID  *string             `json:"website_id"`
+  PeopleID   *string             `json:"people_id"`
+  Identity   *PeopleProfileCard  `json:"identity"`
 }
 
 // EventsBrowsingRequestInitiated maps browsing:request:initiated
@@ -646,12 +646,6 @@ func (evt EventsReceiveSessionSyncLocales) String() string {
 }
 
 
-// String returns the string representation of EventsReceiveSessionSyncIdentity
-func (evt EventsReceiveSessionSyncIdentity) String() string {
-  return Stringify(evt)
-}
-
-
 // String returns the string representation of EventsReceiveSessionSetState
 func (evt EventsReceiveSessionSetState) String() string {
   return Stringify(evt)
@@ -732,6 +726,18 @@ func (evt EventsReceiveMessageComposeReceive) String() string {
 
 // String returns the string representation of EventsReceiveMessageAcknowledge
 func (evt EventsReceiveMessageAcknowledge) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsPeopleBindSession
+func (evt EventsPeopleBindSession) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsPeopleSyncProfile
+func (evt EventsPeopleSyncProfile) String() string {
   return Stringify(evt)
 }
 
@@ -872,12 +878,6 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:sync:locales", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncLocales) {
     if hdl, ok := register.Handlers["session:sync:locales"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:sync:identity", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncIdentity) {
-    if hdl, ok := register.Handlers["session:sync:identity"]; ok {
       go hdl.callFunc(&evt)
     }
   })
@@ -1028,6 +1028,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("people:bind:session", func(chnl *gosocketio.Channel, evt EventsPeopleBindSession) {
     if hdl, ok := register.Handlers["people:bind:session"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("people:sync:profile", func(chnl *gosocketio.Channel, evt EventsPeopleSyncProfile) {
+    if hdl, ok := register.Handlers["people:sync:profile"]; ok {
       go hdl.callFunc(&evt)
     }
   })
