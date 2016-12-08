@@ -362,6 +362,13 @@ type EventsReceiveMessageAcknowledge struct {
   Fingerprints  *[]int   `json:"fingerprints"`
 }
 
+// EventsPeopleBindSession maps people:bind:session
+type EventsPeopleBindSession struct {
+  WebsiteID  *string  `json:"website_id"`
+  SessionID  *string  `json:"session_id"`
+  PeopleID   *string  `json:"people_id"`
+}
+
 // EventsBrowsingRequestInitiated maps browsing:request:initiated
 type EventsBrowsingRequestInitiated struct {
   WebsiteID   *string  `json:"website_id"`
@@ -1015,6 +1022,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("message:acknowledge:delivered", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
     if hdl, ok := register.Handlers["message:acknowledge:delivered"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("people:bind:session", func(chnl *gosocketio.Channel, evt EventsPeopleBindSession) {
+    if hdl, ok := register.Handlers["people:bind:session"]; ok {
       go hdl.callFunc(&evt)
     }
   })

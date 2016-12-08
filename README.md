@@ -363,6 +363,9 @@ Available events are listed below:
   * **Message Acknowledge Read Received**: `message:acknowledge:read:received`
   * **Message Acknowledge Delivered**: `message:acknowledge:delivered`
 
+* **People Events**
+  * **People Bind Session**: `people:bind:session`
+
 * **Browsing Events**
   * **Browsing Request Initiated**: `browsing:request:initiated`
   * **Browsing Request Rejected**: `browsing:request:rejected`
