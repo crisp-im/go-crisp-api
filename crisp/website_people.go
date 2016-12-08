@@ -47,8 +47,7 @@ type PeopleProfileCard struct {
 
 // PeopleProfileCardPerson mapping
 type PeopleProfileCardPerson struct {
-  FirstName    *string                             `json:"first_name,omitempty"`
-  LastName     *string                             `json:"last_name,omitempty"`
+  Nickname     *string                             `json:"nickname,omitempty"`
   Avatar       *string                             `json:"avatar,omitempty"`
   Cover        *string                             `json:"cover,omitempty"`
   Gender       *string                             `json:"gender,omitempty"`
