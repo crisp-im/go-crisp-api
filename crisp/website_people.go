@@ -65,7 +65,6 @@ type PeopleProfileCardPerson struct {
 // PeopleProfileCardPersonProfile mapping
 type PeopleProfileCardPersonProfile struct {
   Type    *string  `json:"type,omitempty"`
-  URL     *string  `json:"url,omitempty"`
   Handle  *string  `json:"handle,omitempty"`
 }
 
