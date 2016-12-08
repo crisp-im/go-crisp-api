@@ -34,20 +34,21 @@ type WebsiteSettingsContact struct {
 
 // WebsiteSettingsChatbox mapping
 type WebsiteSettingsChatbox struct {
-  Tile                 *string    `json:"tile,omitempty"`
-  LastOperatorFace     *bool      `json:"last_operator_face,omitempty"`
-  ActivityMetrics      *bool      `json:"activity_metrics,omitempty"`
-  AvailabilityTooltip  *bool      `json:"availability_tooltip,omitempty"`
-  HideOnAway           *bool      `json:"hide_on_away,omitempty"`
-  PositionReverse      *bool      `json:"position_reverse,omitempty"`
-  EmailVisitors        *bool      `json:"email_visitors,omitempty"`
-  CheckDomain          *bool      `json:"check_domain,omitempty"`
-  ColorTheme           *string    `json:"color_theme,omitempty"`
-  TextTheme            *string    `json:"text_theme,omitempty"`
-  WelcomeMessage       *string    `json:"welcome_message,omitempty"`
-  Locale               *string    `json:"locale,omitempty"`
-  BlockedPages         *[]string  `json:"blocked_pages,omitempty"`
-  BlockedLocales       *[]string  `json:"blocked_locales,omitempty"`
+  Tile                   *string    `json:"tile,omitempty"`
+  LastOperatorFace       *bool      `json:"last_operator_face,omitempty"`
+  ActivityMetrics        *bool      `json:"activity_metrics,omitempty"`
+  AvailabilityTooltip    *bool      `json:"availability_tooltip,omitempty"`
+  HideOnAway             *bool      `json:"hide_on_away,omitempty"`
+  PositionReverse        *bool      `json:"position_reverse,omitempty"`
+  EmailVisitors          *bool      `json:"email_visitors,omitempty"`
+  ForceIdentifyVisitors  *bool      `json:"force_identify_visitors,omitempty"`
+  CheckDomain            *bool      `json:"check_domain,omitempty"`
+  ColorTheme             *string    `json:"color_theme,omitempty"`
+  TextTheme              *string    `json:"text_theme,omitempty"`
+  WelcomeMessage         *string    `json:"welcome_message,omitempty"`
+  Locale                 *string    `json:"locale,omitempty"`
+  BlockedPages           *[]string  `json:"blocked_pages,omitempty"`
+  BlockedLocales         *[]string  `json:"blocked_locales,omitempty"`
 }
 
 // WebsiteSettingsUpdate mapping
@@ -68,20 +69,21 @@ type WebsiteSettingsUpdateContact struct {
 
 // WebsiteSettingsUpdateChatbox mapping
 type WebsiteSettingsUpdateChatbox struct {
-  Tile                 string     `json:"tile,omitempty"`
-  LastOperatorFace     bool       `json:"last_operator_face,omitempty"`
-  ActivityMetrics      bool       `json:"activity_metrics,omitempty"`
-  AvailabilityTooltip  bool       `json:"availability_tooltip,omitempty"`
-  HideOnAway           bool       `json:"hide_on_away,omitempty"`
-  PositionReverse      bool       `json:"position_reverse,omitempty"`
-  EmailVisitors        bool       `json:"email_visitors,omitempty"`
-  CheckDomain          bool       `json:"check_domain,omitempty"`
-  ColorTheme           string     `json:"color_theme,omitempty"`
-  TextTheme            string     `json:"text_theme,omitempty"`
-  WelcomeMessage       string     `json:"welcome_message,omitempty"`
-  Locale               string     `json:"locale,omitempty"`
-  BlockedPages         *[]string  `json:"blocked_pages,omitempty"`
-  BlockedLocales       *[]string  `json:"blocked_locales,omitempty"`
+  Tile                   string     `json:"tile,omitempty"`
+  LastOperatorFace       bool       `json:"last_operator_face,omitempty"`
+  ActivityMetrics        bool       `json:"activity_metrics,omitempty"`
+  AvailabilityTooltip    bool       `json:"availability_tooltip,omitempty"`
+  HideOnAway             bool       `json:"hide_on_away,omitempty"`
+  PositionReverse        bool       `json:"position_reverse,omitempty"`
+  EmailVisitors          bool       `json:"email_visitors,omitempty"`
+  ForceIdentifyVisitors  bool       `json:"force_identify_visitors,omitempty"`
+  CheckDomain            bool       `json:"check_domain,omitempty"`
+  ColorTheme             string     `json:"color_theme,omitempty"`
+  TextTheme              string     `json:"text_theme,omitempty"`
+  WelcomeMessage         string     `json:"welcome_message,omitempty"`
+  Locale                 string     `json:"locale,omitempty"`
+  BlockedPages           *[]string  `json:"blocked_pages,omitempty"`
+  BlockedLocales         *[]string  `json:"blocked_locales,omitempty"`
 }
 
 
