@@ -28,6 +28,7 @@ type ConversationData struct {
 type Conversation struct {
   SessionID     *string              `json:"session_id,omitempty"`
   WebsiteID     *string              `json:"website_id,omitempty"`
+  PeopleID      *string              `json:"people_id,omitempty"`
   State         *string              `json:"state,omitempty"`
   Status        *uint8               `json:"status,omitempty"`
   IsBlocked     *bool                `json:"is_blocked,omitempty"`
