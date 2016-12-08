@@ -58,7 +58,7 @@ type PeopleProfileCardPerson struct {
   Timezone     *int16                              `json:"timezone,omitempty"`
   Profiles     *[]PeopleProfileCardPersonProfile   `json:"profiles,omitempty"`
   Employment   *PeopleProfileCardPersonEmployment  `json:"employment,omitempty"`
-  Location     *PeopleProfileCardLocation          `json:"location,omitempty"`
+  Geolocation  *PeopleProfileCardGeolocation       `json:"geolocation,omitempty"`
   Locales      *[]string                           `json:"locales,omitempty"`
 }
 
@@ -80,16 +80,16 @@ type PeopleProfileCardPersonEmployment struct {
 
 // PeopleProfileCardCompany mapping
 type PeopleProfileCardCompany struct {
-  Name       *string                           `json:"name,omitempty"`
-  LegalName  *string                           `json:"legal_name,omitempty"`
-  Domain     *string                           `json:"domain,omitempty"`
-  URL        *string                           `json:"url,omitempty"`
-  Timezone   *int16                            `json:"timezone,omitempty"`
-  Phones     *[]string                         `json:"phones,omitempty"`
-  Emails     *[]string                         `json:"emails,omitempty"`
-  Location   *PeopleProfileCardLocation        `json:"location,omitempty"`
-  Metrics    *PeopleProfileCardCompanyMetrics  `json:"metrics,omitempty"`
-  Tags       *[]string                         `json:"tags,omitempty"`
+  Name         *string                           `json:"name,omitempty"`
+  LegalName    *string                           `json:"legal_name,omitempty"`
+  Domain       *string                           `json:"domain,omitempty"`
+  URL          *string                           `json:"url,omitempty"`
+  Timezone     *int16                            `json:"timezone,omitempty"`
+  Phones       *[]string                         `json:"phones,omitempty"`
+  Emails       *[]string                         `json:"emails,omitempty"`
+  Geolocation  *PeopleProfileCardGeolocation     `json:"geolocation,omitempty"`
+  Metrics      *PeopleProfileCardCompanyMetrics  `json:"metrics,omitempty"`
+  Tags         *[]string                         `json:"tags,omitempty"`
 }
 
 // PeopleProfileCardCompanyMetrics mapping
@@ -100,16 +100,16 @@ type PeopleProfileCardCompanyMetrics struct {
   ARR        *int16  `json:"arr,omitempty"`
 }
 
-// PeopleProfileCardLocation mapping
-type PeopleProfileCardLocation struct {
-  Country      *string                                `json:"country,omitempty"`
-  Region       *string                                `json:"region,omitempty"`
-  City         *string                                `json:"city,omitempty"`
-  Coordinates  *PeopleProfileCardLocationCoordinates  `json:"coordinates,omitempty"`
+// PeopleProfileCardGeolocation mapping
+type PeopleProfileCardGeolocation struct {
+  Country      *string                                   `json:"country,omitempty"`
+  Region       *string                                   `json:"region,omitempty"`
+  City         *string                                   `json:"city,omitempty"`
+  Coordinates  *PeopleProfileCardGeolocationCoordinates  `json:"coordinates,omitempty"`
 }
 
-// PeopleProfileCardLocationCoordinates mapping
-type PeopleProfileCardLocationCoordinates struct {
+// PeopleProfileCardGeolocationCoordinates mapping
+type PeopleProfileCardGeolocationCoordinates struct {
   Latitude   *float32  `json:"latitude,omitempty"`
   Longitude  *float32  `json:"longitude,omitempty"`
 }
