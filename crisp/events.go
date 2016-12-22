@@ -39,6 +39,10 @@ type eventsSendAuthentication struct {
   Events    []string  `json:"events"`
 }
 
+type eventsSendBind struct {
+  Events  []string  `json:"events"`
+}
+
 // EventsReceiveAuthenticationUnauthorized maps unauthorized
 type EventsReceiveAuthenticationUnauthorized struct {
   Message  *string  `json:"message"`
@@ -1203,10 +1207,34 @@ func (service *EventsService) connect(events []string, handleDone func(*EventsRe
 }
 
 
-// Bind emits a socket bind event which associates the socket to its channels
-func (service *EventsService) Bind() {
+// Rebind emits an empty socket bind event which associates the socket to its channels (without modifying allowed events)
+func (service *EventsService) Rebind() {
   if activeSocket != nil {
     activeSocket.Channel.Emit("socket:bind", "")
+  }
+}
+
+
+// Bind emits a socket bind event which associates the socket to its channels (with allowed events)
+func (service *EventsService) Bind(events []string) {
+  if activeSocket != nil {
+    activeSocket.Channel.Emit("socket:bind", eventsSendBind{Events: events})
+  }
+}
+
+
+// BindPush emits a socket bind push event which adds allowed events to socket
+func (service *EventsService) BindPush(events []string) {
+  if activeSocket != nil {
+    activeSocket.Channel.Emit("socket:bind:push", eventsSendBind{Events: events})
+  }
+}
+
+
+// BindPop emits a socket bind pop event which removes allowed events from socket
+func (service *EventsService) BindPop(events []string) {
+  if activeSocket != nil {
+    activeSocket.Channel.Emit("socket:bind:pop", eventsSendBind{Events: events})
   }
 }
 
