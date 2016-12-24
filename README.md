@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 12/08/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 12/24/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -200,6 +200,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Conversations**
   * **List Conversations**: `crisp.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
   * **List Conversations (Search Variant)**: `crisp.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
+  * **List Conversation Segments In Meta**: `crisp.Website.ListConversationSegmentsInMeta(websiteID string, pageNumber uint) (*[]ConversationMetaSegment, *Response, error)`
   * **Export Conversation Emails**: `crisp.Website.ExportConversationEmails(websiteID string, pageNumber uint, filterSegment string, filterCountry string, filterDateStart time.Time, filterDateEnd time.Time) (*[]ConversationExportEmail, *Response, error)`
 
 * **Website Conversation**
@@ -230,6 +231,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website People**
   * **Get People Statistics**: `crisp.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
+  * **List People Segments**: `crisp.Website.ListPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSegment, *Response, error)`
   * **List People Profiles**: `crisp.Website.ListPeopleProfiles(websiteID string, pageNumber uint) (*[]PeopleProfile, *Response, error)`
   * **Add New People Profile**: `crisp.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileCard) (*Response, error)`
   * **Check If People Profile Exists**: `crisp.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`

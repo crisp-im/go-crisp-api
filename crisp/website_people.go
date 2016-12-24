@@ -16,6 +16,22 @@ type PeopleStatisticsData struct {
   Data  *PeopleStatistics  `json:"data,omitempty"`
 }
 
+// PeopleStatistics mapping
+type PeopleStatistics struct {
+  Total  *uint  `json:"total,omitempty"`
+}
+
+// PeopleSegmentData mapping
+type PeopleSegmentData struct {
+  Data  *[]PeopleSegment  `json:"data,omitempty"`
+}
+
+// PeopleSegment mapping
+type PeopleSegment struct {
+  Segment  *string  `json:"segment,omitempty"`
+  Count    *int32   `json:"count,omitempty"`
+}
+
 // PeopleProfileData mapping
 type PeopleProfileData struct {
   Data  *PeopleProfile  `json:"data,omitempty"`
@@ -24,11 +40,6 @@ type PeopleProfileData struct {
 // PeopleProfileListData mapping
 type PeopleProfileListData struct {
   Data  *[]PeopleProfile  `json:"data,omitempty"`
-}
-
-// PeopleStatistics mapping
-type PeopleStatistics struct {
-  Total  *uint  `json:"total,omitempty"`
 }
 
 // PeopleProfile mapping
@@ -120,6 +131,12 @@ func (instance PeopleStatistics) String() string {
 }
 
 
+// String returns the string representation of PeopleSegment
+func (instance PeopleSegment) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of PeopleProfile
 func (instance PeopleProfile) String() string {
   return Stringify(instance)
@@ -138,6 +155,21 @@ func (service *WebsiteService) GetPeopleStatistics(websiteID string) (*PeopleSta
   }
 
   return stats.Data, resp, err
+}
+
+
+// ListPeopleSegments lists segments in use for people.
+func (service *WebsiteService) ListPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSegment, *Response, error) {
+  url := fmt.Sprintf("website/%s/people/segments/%d", websiteID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  segments := new(PeopleSegmentData)
+  resp, err := service.client.Do(req, segments)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return segments.Data, resp, err
 }
 
 

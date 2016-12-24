@@ -174,6 +174,17 @@ type ConversationMetaPage struct {
   Timestamp     *uint    `json:"timestamp,omitempty"`
 }
 
+// ConversationMetaSegmentData mapping
+type ConversationMetaSegmentData struct {
+  Data  *[]ConversationMetaSegment  `json:"data,omitempty"`
+}
+
+// ConversationMetaSegment mapping
+type ConversationMetaSegment struct {
+  Segment  *string  `json:"segment,omitempty"`
+  Count    *int32   `json:"count,omitempty"`
+}
+
 // ConversationExportEmailData mapping
 type ConversationExportEmailData struct {
   Data  *[]ConversationExportEmail  `json:"data,omitempty"`
@@ -344,6 +355,12 @@ func (instance Conversation) String() string {
 }
 
 
+// String returns the string representation of ConversationMetaSegment
+func (instance ConversationMetaSegment) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of ConversationExportEmail
 func (instance ConversationExportEmail) String() string {
   return Stringify(instance)
@@ -405,6 +422,21 @@ func (service *WebsiteService) SearchConversations(websiteID string, pageNumber 
 // ListConversations lists conversations for website.
 func (service *WebsiteService) ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error) {
   return service.SearchConversations(websiteID, pageNumber, "", "")
+}
+
+
+// ListConversationSegmentsInMeta lists conversation segments in meta for website.
+func (service *WebsiteService) ListConversationSegmentsInMeta(websiteID string, pageNumber uint) (*[]ConversationMetaSegment, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/meta/segments/%d", websiteID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  segments := new(ConversationMetaSegmentData)
+  resp, err := service.client.Do(req, segments)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return segments.Data, resp, err
 }
 
 
