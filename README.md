@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 12/24/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 12/27/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -196,6 +196,21 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Save A Shortcut**: `crisp.Website.SaveShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
   * **Update A Shortcut**: `crisp.Website.UpdateShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
   * **Remove A Shortcut**: `crisp.Website.RemoveShortcut(websiteID string, shortcutID string) (*Response, error)`
+
+* **Website Campaigns**
+  * **List Campaigns**: `crisp.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaigns (Filter Variant)**: `crisp.Website.FilterCampaigns(websiteID string, pageNumber uint, filterName string, filterReady bool, filterDispatched bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
+
+* **Website Campaign**
+  * **Create A New Campaign**: `crisp.Website.CreateNewCampaign(websiteID string, name string) (*WebsiteCampaignNew, *Response, error)`
+  * **Check If Campaign Exists**: `crisp.Website.CheckCampaignExists(websiteID string, campaignID string) (*Response, error)`
+  * **Get A Campaign**: `crisp.Website.GetCampaign(websiteID string, campaignID string) (*WebsiteCampaignItem, *Response, error)`
+  * **Save A Campaign**: `crisp.Website.SaveCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
+  * **Update A Campaign**: `crisp.Website.UpdateCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
+  * **Remove A Campaign**: `crisp.Website.RemoveCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Dispatch A Campaign (Live Variant)**: `crisp.Website.DispatchCampaignLive(websiteID string, campaignID string) (*Response, error)`
+  * **Dispatch A Campaign (Test Variant)**: `crisp.Website.DispatchCampaignTest(websiteID string, campaignID string, emails []string) (*Response, error)`
+  * **Pause A Campaign**: `crisp.Website.PauseCampaign(websiteID string, campaignID string) (*Response, error)`
 
 * **Website Conversations**
   * **List Conversations**: `crisp.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
