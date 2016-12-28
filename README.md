@@ -208,8 +208,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Save A Campaign**: `crisp.Website.SaveCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
   * **Update A Campaign**: `crisp.Website.UpdateCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
   * **Remove A Campaign**: `crisp.Website.RemoveCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Dispatch A Campaign (Live Variant)**: `crisp.Website.DispatchCampaignLive(websiteID string, campaignID string) (*Response, error)`
-  * **Dispatch A Campaign (Test Variant)**: `crisp.Website.DispatchCampaignTest(websiteID string, campaignID string, emails []string) (*Response, error)`
+  * **Dispatch A Campaign**: `crisp.Website.DispatchCampaign(websiteID string, campaignID string) (*Response, error)`
   * **Resume A Campaign**: `crisp.Website.ResumeCampaign(websiteID string, campaignID string) (*Response, error)`
   * **Pause A Campaign**: `crisp.Website.PauseCampaign(websiteID string, campaignID string) (*Response, error)`
 

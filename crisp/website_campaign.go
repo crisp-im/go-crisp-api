@@ -27,12 +27,6 @@ type WebsiteCampaignNewItem struct {
   Name  string  `json:"name"`
 }
 
-// WebsiteCampaignDispatch mapping
-type WebsiteCampaignDispatch struct {
-  Type    string    `json:"type,omitempty"`
-  Emails  []string  `json:"emails,omitempty"`
-}
-
 // WebsiteCampaignExcerptsData mapping
 type WebsiteCampaignExcerptsData struct {
   Data  *[]WebsiteCampaignExcerpt  `json:"data,omitempty"`
@@ -222,19 +216,10 @@ func (service *WebsiteService) RemoveCampaign(websiteID string, campaignID strin
 }
 
 
-// DispatchCampaignLive dispatches a ready campaign (live variant).
-func (service *WebsiteService) DispatchCampaignLive(websiteID string, campaignID string) (*Response, error) {
+// DispatchCampaign dispatches a ready campaign.
+func (service *WebsiteService) DispatchCampaign(websiteID string, campaignID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/campaign/%s/dispatch", websiteID, campaignID)
-  req, _ := service.client.NewRequest("POST", url, WebsiteCampaignDispatch{Type: "live"})
-
-  return service.client.Do(req, nil)
-}
-
-
-// DispatchCampaignTest dispatches a ready campaign (test variant).
-func (service *WebsiteService) DispatchCampaignTest(websiteID string, campaignID string, emails []string) (*Response, error) {
-  url := fmt.Sprintf("website/%s/campaign/%s/dispatch", websiteID, campaignID)
-  req, _ := service.client.NewRequest("POST", url, WebsiteCampaignDispatch{Type: "test", Emails: emails})
+  req, _ := service.client.NewRequest("POST", url, nil)
 
   return service.client.Do(req, nil)
 }
