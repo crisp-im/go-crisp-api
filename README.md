@@ -387,8 +387,7 @@ Available events are listed below:
 * **Campaign Events**
   * **Campaign Progress**: `campaign:progress`
   * **Campaign Dispatched**: `campaign:dispatched`
-  * **Campaign Resumed**: `campaign:resumed`
-  * **Campaign Paused**: `campaign:paused`
+  * **Campaign Running**: `campaign:running`
 
 * **Browsing Events**
   * **Browsing Request Initiated**: `browsing:request:initiated`

@@ -387,16 +387,11 @@ type EventsCampaignDispatched struct {
   CampaignID  *string  `json:"campaign_id"`
 }
 
-// EventsCampaignResumed maps campaign:resumed
-type EventsCampaignResumed struct {
+// EventsCampaignRunning maps campaign:running
+type EventsCampaignRunning struct {
   WebsiteID   *string  `json:"website_id"`
   CampaignID  *string  `json:"campaign_id"`
-}
-
-// EventsCampaignPaused maps campaign:paused
-type EventsCampaignPaused struct {
-  WebsiteID   *string  `json:"website_id"`
-  CampaignID  *string  `json:"campaign_id"`
+  Running     *bool    `json:"running"`
 }
 
 // EventsBrowsingRequestInitiated maps browsing:request:initiated
@@ -784,14 +779,8 @@ func (evt EventsCampaignDispatched) String() string {
 }
 
 
-// String returns the string representation of EventsCampaignResumed
-func (evt EventsCampaignResumed) String() string {
-  return Stringify(evt)
-}
-
-
-// String returns the string representation of EventsCampaignPaused
-func (evt EventsCampaignPaused) String() string {
+// String returns the string representation of EventsCampaignRunning
+func (evt EventsCampaignRunning) String() string {
   return Stringify(evt)
 }
 
@@ -1104,14 +1093,8 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
     }
   })
 
-  so.On("campaign:resumed", func(chnl *gosocketio.Channel, evt EventsCampaignResumed) {
-    if hdl, ok := register.Handlers["campaign:resumed"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("campaign:paused", func(chnl *gosocketio.Channel, evt EventsCampaignPaused) {
-    if hdl, ok := register.Handlers["campaign:paused"]; ok {
+  so.On("campaign:running", func(chnl *gosocketio.Channel, evt EventsCampaignRunning) {
+    if hdl, ok := register.Handlers["campaign:running"]; ok {
       go hdl.callFunc(&evt)
     }
   })
