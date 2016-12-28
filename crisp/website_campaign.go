@@ -233,6 +233,15 @@ func (service *WebsiteService) DispatchCampaignTest(websiteID string, campaignID
 }
 
 
+// ResumeCampaign resumes a dispatched campaign.
+func (service *WebsiteService) ResumeCampaign(websiteID string, campaignID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/campaign/%s/resume", websiteID, campaignID)
+  req, _ := service.client.NewRequest("POST", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
 // PauseCampaign pauses a dispatched campaign.
 func (service *WebsiteService) PauseCampaign(websiteID string, campaignID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/campaign/%s/pause", websiteID, campaignID)
