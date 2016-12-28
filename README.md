@@ -384,6 +384,12 @@ Available events are listed below:
   * **People Bind Session**: `people:bind:session`
   * **People Sync Profile**: `people:sync:profile`
 
+* **Campaign Events**
+  * **Campaign Progress**: `campaign:progress`
+  * **Campaign Dispatched**: `campaign:dispatched`
+  * **Campaign Resumed**: `campaign:resumed`
+  * **Campaign Paused**: `campaign:paused`
+
 * **Browsing Events**
   * **Browsing Request Initiated**: `browsing:request:initiated`
   * **Browsing Request Rejected**: `browsing:request:rejected`

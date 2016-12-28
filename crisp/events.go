@@ -374,6 +374,31 @@ type EventsPeopleSyncProfile struct {
   Identity   *PeopleProfileCard  `json:"identity"`
 }
 
+// EventsCampaignProgress maps campaign:progress
+type EventsCampaignProgress struct {
+  WebsiteID   *string  `json:"website_id"`
+  CampaignID  *string  `json:"campaign_id"`
+  Progress    *uint8   `json:"progress"`
+}
+
+// EventsCampaignDispatched maps campaign:dispatched
+type EventsCampaignDispatched struct {
+  WebsiteID   *string  `json:"website_id"`
+  CampaignID  *string  `json:"campaign_id"`
+}
+
+// EventsCampaignResumed maps campaign:resumed
+type EventsCampaignResumed struct {
+  WebsiteID   *string  `json:"website_id"`
+  CampaignID  *string  `json:"campaign_id"`
+}
+
+// EventsCampaignPaused maps campaign:paused
+type EventsCampaignPaused struct {
+  WebsiteID   *string  `json:"website_id"`
+  CampaignID  *string  `json:"campaign_id"`
+}
+
 // EventsBrowsingRequestInitiated maps browsing:request:initiated
 type EventsBrowsingRequestInitiated struct {
   WebsiteID   *string  `json:"website_id"`
@@ -747,6 +772,30 @@ func (evt EventsPeopleSyncProfile) String() string {
 }
 
 
+// String returns the string representation of EventsCampaignProgress
+func (evt EventsCampaignProgress) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCampaignDispatched
+func (evt EventsCampaignDispatched) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCampaignResumed
+func (evt EventsCampaignResumed) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCampaignPaused
+func (evt EventsCampaignPaused) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveWebsiteVisitorsCount
 func (evt EventsReceiveWebsiteVisitorsCount) String() string {
   return Stringify(evt)
@@ -1039,6 +1088,30 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("people:sync:profile", func(chnl *gosocketio.Channel, evt EventsPeopleSyncProfile) {
     if hdl, ok := register.Handlers["people:sync:profile"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("campaign:progress", func(chnl *gosocketio.Channel, evt EventsCampaignProgress) {
+    if hdl, ok := register.Handlers["campaign:progress"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("campaign:dispatched", func(chnl *gosocketio.Channel, evt EventsCampaignDispatched) {
+    if hdl, ok := register.Handlers["campaign:dispatched"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("campaign:resumed", func(chnl *gosocketio.Channel, evt EventsCampaignResumed) {
+    if hdl, ok := register.Handlers["campaign:resumed"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("campaign:paused", func(chnl *gosocketio.Channel, evt EventsCampaignPaused) {
+    if hdl, ok := register.Handlers["campaign:paused"]; ok {
       go hdl.callFunc(&evt)
     }
   })
