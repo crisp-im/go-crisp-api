@@ -44,6 +44,7 @@ type WebsiteCampaignExcerpt struct {
   Name          *string  `json:"name,omitempty"`
   Ready         *bool    `json:"ready,omitempty"`
   Dispatched    *bool    `json:"dispatched,omitempty"`
+  Running       *bool    `json:"running,omitempty"`
   Progress      *uint8   `json:"progress,omitempty"`
   CreatedAt     *uint    `json:"created_at,omitempty"`
   UpdatedAt     *uint    `json:"updated_at,omitempty"`
@@ -118,10 +119,11 @@ func (service *WebsiteService) ListCampaigns(websiteID string, pageNumber uint) 
 
 
 // FilterCampaigns lists campaigns for website (filter variant).
-func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint, filterName string, filterReady bool, filterDispatched bool) (*[]WebsiteCampaignExcerpt, *Response, error) {
+func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint, filterName string, filterReady bool, filterDispatched bool, filterRunning bool) (*[]WebsiteCampaignExcerpt, *Response, error) {
   var (
     filterReadyValue string
     filterDispatchedValue string
+    filterRunningValue string
   )
 
   if filterReady == true {
@@ -136,7 +138,13 @@ func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint
     filterDispatchedValue = "0"
   }
 
-  url := fmt.Sprintf("website/%s/campaigns/%d?filter_name=%s&filter_ready=%s&filter_dispatched=%s", websiteID, pageNumber, url.QueryEscape(filterName), filterReadyValue, filterDispatchedValue)
+  if filterRunning == true {
+    filterRunningValue = "1"
+  } else {
+    filterRunningValue = "0"
+  }
+
+  url := fmt.Sprintf("website/%s/campaigns/%d?filter_name=%s&filter_ready=%s&filter_dispatched=%s&filter_running=%s", websiteID, pageNumber, url.QueryEscape(filterName), url.QueryEscape(filterReadyValue), url.QueryEscape(filterDispatchedValue), url.QueryEscape(filterRunningValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   campaigns := new(WebsiteCampaignExcerptsData)

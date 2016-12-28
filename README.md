@@ -199,7 +199,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website Campaigns**
   * **List Campaigns**: `crisp.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
-  * **List Campaigns (Filter Variant)**: `crisp.Website.FilterCampaigns(websiteID string, pageNumber uint, filterName string, filterReady bool, filterDispatched bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaigns (Filter Variant)**: `crisp.Website.FilterCampaigns(websiteID string, pageNumber uint, filterName string, filterReady bool, filterDispatched bool, filterRunning bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
 
 * **Website Campaign**
   * **Create A New Campaign**: `crisp.Website.CreateNewCampaign(websiteID string, name string) (*WebsiteCampaignNew, *Response, error)`
