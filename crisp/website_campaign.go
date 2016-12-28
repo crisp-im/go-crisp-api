@@ -67,8 +67,7 @@ type WebsiteCampaignItem struct {
 
 // WebsiteCampaignItemSender mapping
 type WebsiteCampaignItemSender struct {
-  Nickname  *string    `json:"nickname,omitempty"`
-  Email     *[]string  `json:"email,omitempty"`
+  UserID  *string  `json:"user_id,omitempty"`
 }
 
 // WebsiteCampaignItemRecipients mapping
