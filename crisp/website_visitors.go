@@ -89,29 +89,6 @@ func (service *WebsiteService) ListVisitors(websiteID string, pageNumber uint) (
 }
 
 
-// FilterVisitors lists visitors currently on website (filter variant).
-func (service *WebsiteService) FilterVisitors(websiteID string, pageNumber uint, filterInitiated bool, filterNickname string, filterEmail string, filterLocationCity string, filterLocationCountry string, filterUseragent string, filterTimezone int16, filterLocale string, filterLastPageTitle string, filterLastPageURL string) (*[]WebsiteVisitor, *Response, error) {
-  var filterInitiatedValue string
-
-  if filterInitiated == true {
-    filterInitiatedValue = "1"
-  } else {
-    filterInitiatedValue = "0"
-  }
-
-  url := fmt.Sprintf("website/%s/visitors/list/%d?filter_initiated=%s&filter_nickname=%s&filter_email=%s&filter_location_city=%s&filter_location_country=%s&filter_useragent=%s&filter_timezone=%d&filter_locale=%s&filter_last_page_title=%s&filter_last_page_url=%s", websiteID, pageNumber, filterInitiatedValue, filterNickname, filterEmail, filterLocationCity, filterLocationCountry, filterUseragent, filterTimezone, filterLocale, filterLastPageTitle, filterLastPageURL)
-  req, _ := service.client.NewRequest("GET", url, nil)
-
-  visitors := new(WebsiteVisitorListData)
-  resp, err := service.client.Do(req, visitors)
-  if err != nil {
-    return nil, resp, err
-  }
-
-  return visitors.Data, resp, err
-}
-
-
 // RequestVisitorMapWide requests a map of visitors to be generated, in a geographical area (wide variant).
 func (service *WebsiteService) RequestVisitorMapWide(websiteID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/visitors/map", websiteID)

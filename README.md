@@ -171,7 +171,6 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Visitors**
   * **Count Visitors**: `crisp.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
   * **List Visitors**: `crisp.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
-  * **List Visitors (Filter Variant)**: `crisp.Website.FilterVisitors(websiteID string, pageNumber uint, filterInitiated bool, filterNickname string, filterEmail string, filterLocationCity string, filterLocationCountry string, filterUseragent string, filterTimezone int16, filterLocale string, filterLastPageTitle string, filterLastPageURL string) (*[]WebsiteVisitor, *Response, error)`
   * **Request Visitor Map (Wide Variant)**: `crisp.Website.RequestVisitorMapWide(websiteID string) (*Response, error)`
   * **Request Visitor Map (Area Variant)**: `crisp.Website.RequestVisitorMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*Response, error)`
 
