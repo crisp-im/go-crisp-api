@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 12/28/2016
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 12/29/2016
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -164,14 +164,6 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Submit Session Rating**: `crisp.Website.SubmitSessionRating(websiteID string, sessionID string, websiteRatingSession WebsiteRatingSession) (*Response, error)`
   * **Delete Session Rating**: `crisp.Website.DeleteSessionRating(websiteID string, sessionID string) (*Response, error)`
 
-* **Website Statistics**
-  * **Get All Statistics**: `crisp.Website.GetAllStatistics(websiteID string) (*WebsiteStatisticsAll, *Response, error)`
-  * **Count Total Number Of Conversations**: `crisp.Website.CountTotalNumberOfConversations(websiteID string) (*WebsiteStatisticsTotal, *Response, error)`
-  * **Count Number Of Pending Conversations**: `crisp.Website.CountNumberOfPendingConversations(websiteID string) (*WebsiteStatisticsPending, *Response, error)`
-  * **Count Number Of Unresolved Conversations**: `crisp.Website.CountNumberOfUnresolvedConversations(websiteID string) (*WebsiteStatisticsUnresolved, *Response, error)`
-  * **Count Number Of Resolved Conversations**: `crisp.Website.CountNumberOfResolvedConversations(websiteID string) (*WebsiteStatisticsResolved, *Response, error)`
-  * **Count Number Of Unread Messages**: `crisp.Website.CountNumberOfUnreadMessages(websiteID string) (*WebsiteStatisticsUnread, *Response, error)`
-
 * **Website Settings**
   * **Get Website Settings**: `crisp.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
   * **Update Website Settings**: `crisp.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error)`
@@ -179,7 +171,9 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Visitors**
   * **Count Visitors**: `crisp.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
   * **List Visitors**: `crisp.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
-  * **Request Visitor Details**: `crisp.Website.RequestVisitorDetails(websiteID string) (*Response, error)`
+  * **List Visitors (Filter Variant)**: `crisp.Website.FilterVisitors(websiteID string, pageNumber uint, filterInitiated bool, filterNickname string, filterEmail string, filterLocationCity string, filterLocationCountry string, filterUseragent string, filterTimezone int16, filterLocale string, filterLastPageTitle string, filterLastPageURL string) (*[]WebsiteVisitor, *Response, error)`
+  * **Request Visitor Map (Wide Variant)**: `crisp.Website.RequestVisitorMapWide(websiteID string) (*Response, error)`
+  * **Request Visitor Map (Area Variant)**: `crisp.Website.RequestVisitorMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*Response, error)`
 
 * **Website States**
   * **Request Website States**: `crisp.Website.RequestWebsiteStates(websiteID string) (*Response, error)`
@@ -400,7 +394,7 @@ Available events are listed below:
 
 * **Website Events**
   * **Website Update Visitors Count**: `website:update_visitors_count`
-  * **Website Update Visitors List**: `website:update_visitors_list`
+  * **Website Update Visitors Map**: `website:update_visitors_map`
   * **Website Update Operators Availability**: `website:update_operators_availability`
 
 * **Bucket Events**

@@ -484,40 +484,42 @@ type EventsReceiveWebsiteVisitorsCount struct {
   VisitorsCount  *uint    `json:"visitors_count"`
 }
 
-// EventsReceiveUpdateVisitorsList maps website:update_visitors_list
-type EventsReceiveUpdateVisitorsList struct {
-  WebsiteID     *string                                 `json:"website_id"`
-  VisitorsList  *EventsReceiveUpdateVisitorsListItself  `json:"visitors_list"`
+// EventsReceiveUpdateVisitorsMap maps website:update_visitors_map
+type EventsReceiveUpdateVisitorsMap struct {
+  WebsiteID    *string                                `json:"website_id"`
+  VisitorsMap  *EventsReceiveUpdateVisitorsMapItself  `json:"visitors_map"`
 }
 
-// EventsReceiveUpdateVisitorsListItself maps website:update_visitors_list/visitors_list
-type EventsReceiveUpdateVisitorsListItself struct {
-  Items  *[]EventsReceiveUpdateVisitorsListItselfItem  `json:"items"`
-  Time   *uint                                         `json:"time"`
+// EventsReceiveUpdateVisitorsMapItself maps website:update_visitors_map/visitors_map
+type EventsReceiveUpdateVisitorsMapItself struct {
+  Items  *[]EventsReceiveUpdateVisitorsMapItselfItem  `json:"items"`
+  Time   *uint                                        `json:"time"`
 }
 
-// EventsReceiveUpdateVisitorsListItselfItem maps website:update_visitors_list/items
-type EventsReceiveUpdateVisitorsListItselfItem struct {
-  SessionID  *string                                          `json:"session_id"`
-  Nickname   *string                                          `json:"nickname"`
-  City       *string                                          `json:"city"`
-  Country    *string                                          `json:"country"`
-  Initiated  *bool                                            `json:"initiated"`
-  Pages      *EventsReceiveUpdateVisitorsListItselfItemPages  `json:"pages"`
+// EventsReceiveUpdateVisitorsMapItselfItem maps website:update_visitors_map/items
+type EventsReceiveUpdateVisitorsMapItselfItem struct {
+  Geolocation  *EventsReceiveUpdateVisitorsMapItselfItemGeolocation  `json:"geolocation"`
+  Visitors     *EventsReceiveUpdateVisitorsMapItselfItemVisitors     `json:"visitors"`
 }
 
-// EventsReceiveUpdateVisitorsListItselfItemPages maps website:update_visitors_list/items/pages
-type EventsReceiveUpdateVisitorsListItselfItemPages struct {
-  Count    *uint                                             `json:"count"`
-  Current  *EventsReceiveUpdateVisitorsListItselfItemPagesCurrent   `json:"current"`
+// EventsReceiveUpdateVisitorsMapItselfItemGeolocation maps website:update_visitors_map/items/geolocation
+type EventsReceiveUpdateVisitorsMapItselfItemGeolocation struct {
+  Coordinates  *EventsReceiveUpdateVisitorsMapItselfItemGeolocationCoordinates  `json:"coordinates,omitempty"`
+  City         *string                                                          `json:"city,omitempty"`
+  Region       *string                                                          `json:"region,omitempty"`
+  Country      *string                                                          `json:"country,omitempty"`
 }
 
-// EventsReceiveUpdateVisitorsListItselfItemPagesCurrent maps website:update_visitors_list/items/pages/current
-type EventsReceiveUpdateVisitorsListItselfItemPagesCurrent struct {
-  PageTitle     *string  `json:"page_title"`
-  PageURL       *string  `json:"page_url"`
-  PageReferrer  *string  `json:"page_referrer"`
-  Timestamp     *uint    `json:"timestamp"`
+// EventsReceiveUpdateVisitorsMapItselfItemGeolocationCoordinates maps website:update_visitors_map/items/geolocation/coordinates
+type EventsReceiveUpdateVisitorsMapItselfItemGeolocationCoordinates struct {
+  Latitude   *float32  `json:"latitude,omitempty"`
+  Longitude  *float32  `json:"longitude,omitempty"`
+}
+
+// EventsReceiveUpdateVisitorsMapItselfItemVisitors maps website:update_visitors_map/items/visitors
+type EventsReceiveUpdateVisitorsMapItselfItemVisitors struct {
+  Count   *uint  `json:"count,omitempty"`
+  Active  *uint  `json:"active,omitempty"`
 }
 
 // EventsReceiveUpdateOperatorsAvailability maps website:update_operators_availability
@@ -791,8 +793,8 @@ func (evt EventsReceiveWebsiteVisitorsCount) String() string {
 }
 
 
-// String returns the string representation of EventsReceiveUpdateVisitorsList
-func (evt EventsReceiveUpdateVisitorsList) String() string {
+// String returns the string representation of EventsReceiveUpdateVisitorsMap
+func (evt EventsReceiveUpdateVisitorsMap) String() string {
   return Stringify(evt)
 }
 
@@ -1153,8 +1155,8 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
     }
   })
 
-  so.On("website:update_visitors_list", func(chnl *gosocketio.Channel, evt EventsReceiveUpdateVisitorsList) {
-    if hdl, ok := register.Handlers["website:update_visitors_list"]; ok {
+  so.On("website:update_visitors_map", func(chnl *gosocketio.Channel, evt EventsReceiveUpdateVisitorsMap) {
+    if hdl, ok := register.Handlers["website:update_visitors_map"]; ok {
       go hdl.callFunc(&evt)
     }
   })
