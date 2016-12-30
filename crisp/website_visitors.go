@@ -69,8 +69,9 @@ type WebsiteVisitorsMapPointsData struct {
 
 // WebsiteVisitorsMapPoint mapping
 type WebsiteVisitorsMapPoint struct {
-  Geolocation  *WebsiteVisitorsMapPointGeolocation  `json:"geolocation"`
   Visitors     *WebsiteVisitorsMapPointVisitors     `json:"visitors"`
+  Geolocation  *WebsiteVisitorsMapPointGeolocation  `json:"geolocation"`
+  Radius       *int16                               `json:"radius,omitempty"`
 }
 
 // WebsiteVisitorsMapPointGeolocation mapping
@@ -85,7 +86,6 @@ type WebsiteVisitorsMapPointGeolocation struct {
 type WebsiteVisitorsMapPointGeolocationCoordinates struct {
   Latitude   *float32  `json:"latitude,omitempty"`
   Longitude  *float32  `json:"longitude,omitempty"`
-  Radius     *int16    `json:"radius,omitempty"`
 }
 
 // WebsiteVisitorsMapPointVisitors mapping
