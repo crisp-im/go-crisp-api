@@ -71,7 +71,6 @@ type WebsiteVisitorsMapPointsData struct {
 type WebsiteVisitorsMapPoint struct {
   Visitors     *WebsiteVisitorsMapPointVisitors     `json:"visitors"`
   Geolocation  *WebsiteVisitorsMapPointGeolocation  `json:"geolocation"`
-  Radius       *int16                               `json:"radius,omitempty"`
 }
 
 // WebsiteVisitorsMapPointGeolocation mapping
