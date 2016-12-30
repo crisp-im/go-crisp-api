@@ -35,9 +35,17 @@ type WebsiteVisitor struct {
   Avatar     *string                  `json:"avatar,omitempty"`
   Useragent  *string                  `json:"useragent,omitempty"`
   Initiated  *bool                    `json:"initiated,omitempty"`
+  Active     *bool                    `json:"active,omitempty"`
+  LastPage   *WebsiteVisitorLastPage  `json:"last_page,omitempty"`
   Location   *WebsiteVisitorLocation  `json:"location,omitempty"`
   Timezone   *int16                   `json:"timezone,omitempty"`
   Locales    *[]string                `json:"locales,omitempty"`
+}
+
+// WebsiteVisitorLastPage mapping
+type WebsiteVisitorLastPage struct {
+  PageTitle  *string  `json:"page_title,omitempty"`
+  PageURL    *string  `json:"page_url,omitempty"`
 }
 
 // WebsiteVisitorLocation mapping
