@@ -29,17 +29,17 @@ type WebsiteVisitorListData struct {
 
 // WebsiteVisitor mapping
 type WebsiteVisitor struct {
-  SessionID  *string                  `json:"session_id,omitempty"`
-  Nickname   *string                  `json:"nickname,omitempty"`
-  Email      *string                  `json:"email,omitempty"`
-  Avatar     *string                  `json:"avatar,omitempty"`
-  Useragent  *string                  `json:"useragent,omitempty"`
-  Initiated  *bool                    `json:"initiated,omitempty"`
-  Active     *bool                    `json:"active,omitempty"`
-  LastPage   *WebsiteVisitorLastPage  `json:"last_page,omitempty"`
-  Location   *WebsiteVisitorLocation  `json:"location,omitempty"`
-  Timezone   *int16                   `json:"timezone,omitempty"`
-  Locales    *[]string                `json:"locales,omitempty"`
+  SessionID    *string                     `json:"session_id,omitempty"`
+  Nickname     *string                     `json:"nickname,omitempty"`
+  Email        *string                     `json:"email,omitempty"`
+  Avatar       *string                     `json:"avatar,omitempty"`
+  Useragent    *string                     `json:"useragent,omitempty"`
+  Initiated    *bool                       `json:"initiated,omitempty"`
+  Active       *bool                       `json:"active,omitempty"`
+  LastPage     *WebsiteVisitorLastPage     `json:"last_page,omitempty"`
+  Geolocation  *WebsiteVisitorGeolocation  `json:"geolocation,omitempty"`
+  Timezone     *int16                      `json:"timezone,omitempty"`
+  Locales      *[]string                   `json:"locales,omitempty"`
 }
 
 // WebsiteVisitorLastPage mapping
@@ -48,10 +48,18 @@ type WebsiteVisitorLastPage struct {
   PageURL    *string  `json:"page_url,omitempty"`
 }
 
-// WebsiteVisitorLocation mapping
-type WebsiteVisitorLocation struct {
-  City     *string  `json:"city,omitempty"`
-  Country  *string  `json:"country,omitempty"`
+// WebsiteVisitorGeolocation mapping
+type WebsiteVisitorGeolocation struct {
+  Coordinates  *WebsiteVisitorGeolocationCoordinates  `json:"coordinates,omitempty"`
+  City         *string                                `json:"city,omitempty"`
+  Region       *string                                `json:"region,omitempty"`
+  Country      *string                                `json:"country,omitempty"`
+}
+
+// WebsiteVisitorGeolocationCoordinates mapping
+type WebsiteVisitorGeolocationCoordinates struct {
+  Latitude   *float32  `json:"latitude,omitempty"`
+  Longitude  *float32  `json:"longitude,omitempty"`
 }
 
 
