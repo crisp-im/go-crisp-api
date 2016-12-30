@@ -62,6 +62,36 @@ type WebsiteVisitorGeolocationCoordinates struct {
   Longitude  *float32  `json:"longitude,omitempty"`
 }
 
+// WebsiteVisitorsMapPointsData mapping
+type WebsiteVisitorsMapPointsData struct {
+  Data  *[]WebsiteVisitorsMapPoint  `json:"data,omitempty"`
+}
+
+// WebsiteVisitorsMapPoint mapping
+type WebsiteVisitorsMapPoint struct {
+  Geolocation  *WebsiteVisitorsMapPointGeolocation  `json:"geolocation"`
+  Visitors     *WebsiteVisitorsMapPointVisitors     `json:"visitors"`
+}
+
+// WebsiteVisitorsMapPointGeolocation mapping
+type WebsiteVisitorsMapPointGeolocation struct {
+  Coordinates  *WebsiteVisitorsMapPointGeolocationCoordinates  `json:"coordinates,omitempty"`
+  City         *string                                              `json:"city,omitempty"`
+  Region       *string                                              `json:"region,omitempty"`
+  Country      *string                                              `json:"country,omitempty"`
+}
+
+// WebsiteVisitorsMapPointGeolocationCoordinates mapping
+type WebsiteVisitorsMapPointGeolocationCoordinates struct {
+  Latitude   *float32  `json:"latitude,omitempty"`
+  Longitude  *float32  `json:"longitude,omitempty"`
+}
+
+// WebsiteVisitorsMapPointVisitors mapping
+type WebsiteVisitorsMapPointVisitors struct {
+  Count  *uint  `json:"count,omitempty"`
+}
+
 
 // String returns the string representation of WebsiteVisitorCount
 func (instance WebsiteVisitorCount) String() string {
@@ -71,6 +101,12 @@ func (instance WebsiteVisitorCount) String() string {
 
 // String returns the string representation of WebsiteVisitor
 func (instance WebsiteVisitor) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteVisitorsMapPoint
+func (instance WebsiteVisitorsMapPoint) String() string {
   return Stringify(instance)
 }
 
@@ -105,21 +141,31 @@ func (service *WebsiteService) ListVisitors(websiteID string, pageNumber uint) (
 }
 
 
-// RequestVisitorMapWide requests a map of visitors to be generated, in a geographical area (wide variant).
-func (service *WebsiteService) RequestVisitorMapWide(websiteID string) (*Response, error) {
+// PinpointVisitorsOnMapWide maps visitors in a geographical area, given a geographical center and a map radius (wide variant).
+func (service *WebsiteService) PinpointVisitorsOnMapWide(websiteID string) (*[]WebsiteVisitorsMapPoint, *Response, error) {
   url := fmt.Sprintf("website/%s/visitors/map", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  resp, err := service.client.Do(req, nil)
-  return resp, err
+  points := new(WebsiteVisitorsMapPointsData)
+  resp, err := service.client.Do(req, points)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return points.Data, resp, err
 }
 
 
-// RequestVisitorMapArea requests a map of visitors to be generated, in a geographical area (area variant).
-func (service *WebsiteService) RequestVisitorMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*Response, error) {
+// PinpointVisitorsOnMapArea maps visitors in a geographical area, given a geographical center and a map radius (area variant).
+func (service *WebsiteService) PinpointVisitorsOnMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*[]WebsiteVisitorsMapPoint, *Response, error) {
   url := fmt.Sprintf("website/%s/visitors/map?center_longitude=%f&center_latitude=%f&center_radius=%d", websiteID, centerLongitude, centerLatitude, centerRadius)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  resp, err := service.client.Do(req, nil)
-  return resp, err
+  points := new(WebsiteVisitorsMapPointsData)
+  resp, err := service.client.Do(req, points)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return points.Data, resp, err
 }

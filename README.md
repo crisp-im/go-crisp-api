@@ -171,8 +171,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Visitors**
   * **Count Visitors**: `crisp.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
   * **List Visitors**: `crisp.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
-  * **Request Visitor Map (Wide Variant)**: `crisp.Website.RequestVisitorMapWide(websiteID string) (*Response, error)`
-  * **Request Visitor Map (Area Variant)**: `crisp.Website.RequestVisitorMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*Response, error)`
+  * **Pinpoint Visitors On A Map (Wide Variant)**: `crisp.Website.PinpointVisitorsOnMapWide(websiteID string) (*[]WebsiteVisitorsMapPoint, *Response, error)`
+  * **Pinpoint Visitors On A Map (Area Variant)**: `crisp.Website.PinpointVisitorsOnMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*[]WebsiteVisitorsMapPoint, *Response, error)`
 
 * **Website States**
   * **Request Website States**: `crisp.Website.RequestWebsiteStates(websiteID string) (*Response, error)`
@@ -393,7 +393,6 @@ Available events are listed below:
 
 * **Website Events**
   * **Website Update Visitors Count**: `website:update_visitors_count`
-  * **Website Update Visitors Map**: `website:update_visitors_map`
   * **Website Update Operators Availability**: `website:update_operators_availability`
 
 * **Bucket Events**

@@ -484,44 +484,6 @@ type EventsReceiveWebsiteVisitorsCount struct {
   VisitorsCount  *uint    `json:"visitors_count"`
 }
 
-// EventsReceiveUpdateVisitorsMap maps website:update_visitors_map
-type EventsReceiveUpdateVisitorsMap struct {
-  WebsiteID    *string                                `json:"website_id"`
-  VisitorsMap  *EventsReceiveUpdateVisitorsMapItself  `json:"visitors_map"`
-}
-
-// EventsReceiveUpdateVisitorsMapItself maps website:update_visitors_map/visitors_map
-type EventsReceiveUpdateVisitorsMapItself struct {
-  Items  *[]EventsReceiveUpdateVisitorsMapItselfItem  `json:"items"`
-  Time   *uint                                        `json:"time"`
-}
-
-// EventsReceiveUpdateVisitorsMapItselfItem maps website:update_visitors_map/items
-type EventsReceiveUpdateVisitorsMapItselfItem struct {
-  Geolocation  *EventsReceiveUpdateVisitorsMapItselfItemGeolocation  `json:"geolocation"`
-  Visitors     *EventsReceiveUpdateVisitorsMapItselfItemVisitors     `json:"visitors"`
-}
-
-// EventsReceiveUpdateVisitorsMapItselfItemGeolocation maps website:update_visitors_map/items/geolocation
-type EventsReceiveUpdateVisitorsMapItselfItemGeolocation struct {
-  Coordinates  *EventsReceiveUpdateVisitorsMapItselfItemGeolocationCoordinates  `json:"coordinates,omitempty"`
-  City         *string                                                          `json:"city,omitempty"`
-  Region       *string                                                          `json:"region,omitempty"`
-  Country      *string                                                          `json:"country,omitempty"`
-}
-
-// EventsReceiveUpdateVisitorsMapItselfItemGeolocationCoordinates maps website:update_visitors_map/items/geolocation/coordinates
-type EventsReceiveUpdateVisitorsMapItselfItemGeolocationCoordinates struct {
-  Latitude   *float32  `json:"latitude,omitempty"`
-  Longitude  *float32  `json:"longitude,omitempty"`
-}
-
-// EventsReceiveUpdateVisitorsMapItselfItemVisitors maps website:update_visitors_map/items/visitors
-type EventsReceiveUpdateVisitorsMapItselfItemVisitors struct {
-  Count   *uint  `json:"count,omitempty"`
-  Active  *uint  `json:"active,omitempty"`
-}
-
 // EventsReceiveUpdateOperatorsAvailability maps website:update_operators_availability
 type EventsReceiveUpdateOperatorsAvailability struct {
   WebsiteID     *string                                          `json:"website_id"`
@@ -789,12 +751,6 @@ func (evt EventsCampaignRunning) String() string {
 
 // String returns the string representation of EventsReceiveWebsiteVisitorsCount
 func (evt EventsReceiveWebsiteVisitorsCount) String() string {
-  return Stringify(evt)
-}
-
-
-// String returns the string representation of EventsReceiveUpdateVisitorsMap
-func (evt EventsReceiveUpdateVisitorsMap) String() string {
   return Stringify(evt)
 }
 
@@ -1151,12 +1107,6 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("website:update_visitors_count", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteVisitorsCount) {
     if hdl, ok := register.Handlers["website:update_visitors_count"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("website:update_visitors_map", func(chnl *gosocketio.Channel, evt EventsReceiveUpdateVisitorsMap) {
-    if hdl, ok := register.Handlers["website:update_visitors_map"]; ok {
       go hdl.callFunc(&evt)
     }
   })
