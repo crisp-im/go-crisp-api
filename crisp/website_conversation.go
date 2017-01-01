@@ -57,7 +57,19 @@ type ConversationMeta struct {
   Avatar    *string                  `json:"avatar,omitempty"`
   Device    *ConversationMetaDevice  `json:"device,omitempty"`
   Segments  *[]string                `json:"segments,omitempty"`
-  Pages     *[]ConversationMetaPage  `json:"pages,omitempty"`
+}
+
+// ConversationPagesData mapping
+type ConversationPagesData struct {
+  Data  *[]ConversationPage  `json:"data,omitempty"`
+}
+
+// ConversationPage mapping
+type ConversationPage struct {
+  PageTitle     *string  `json:"page_title,omitempty"`
+  PageURL       *string  `json:"page_url,omitempty"`
+  PageReferrer  *string  `json:"page_referrer,omitempty"`
+  Timestamp     *uint    `json:"timestamp,omitempty"`
 }
 
 // ConversationMessage mapping
@@ -164,14 +176,6 @@ type ConversationMetaDeviceSystemBrowser struct {
   Major    *string  `json:"major,omitempty"`
   Version  *string  `json:"version,omitempty"`
   Name     *string  `json:"name,omitempty"`
-}
-
-// ConversationMetaPage mapping
-type ConversationMetaPage struct {
-  PageTitle     *string  `json:"page_title,omitempty"`
-  PageURL       *string  `json:"page_url,omitempty"`
-  PageReferrer  *string  `json:"page_referrer,omitempty"`
-  Timestamp     *uint    `json:"timestamp,omitempty"`
 }
 
 // ConversationMetaSegmentData mapping
@@ -643,6 +647,21 @@ func (service *WebsiteService) UpdateConversationMetas(websiteID string, session
   req, _ := service.client.NewRequest("PATCH", url, metas)
 
   return service.client.Do(req, nil)
+}
+
+
+// ListConversationPages lists browsed pages in conversation.
+func (service *WebsiteService) ListConversationPages(websiteID string, sessionID string, pageNumber uint) (*[]ConversationPage, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/pages/%d", websiteID, sessionID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  pages := new(ConversationPagesData)
+  resp, err := service.client.Do(req, pages)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return pages.Data, resp, err
 }
 
 
