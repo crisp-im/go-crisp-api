@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 01/01/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 01/02/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -53,7 +53,7 @@ When calling a method that writes data to the API (eg: `crisp.User.CreateUserAcc
 ```go
 userAccount = crisp.UserAccountCreate{
   Email: "john@acme-inc.com"
-  Passowrd: "SecurePassword"
+  Password: "SecurePassword"
   FirstName: "John"
   LastName: "Doe"
 }
@@ -136,8 +136,9 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Delete A Website**: `crisp.Website.DeleteWebsite(websiteID string) (*Response, error)`
 
 * **Website Batch**
-  * **Resolve All Conversations**: `crisp.Website.ResolveAllConversations(websiteID string) (*Response, error)`
-  * **Read All Conversations**: `crisp.Website.ReadAllConversations(websiteID string) (*Response, error)`
+  * **Resolve Given Conversations**: `crisp.Website.ResolveGivenConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Read Given Conversations**: `crisp.Website.ReadGivenConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Remove Given Conversations**: `crisp.Website.RemoveGivenConversations(websiteID string, sessions []string) (*Response, error)`
 
 * **Website Billing**
   * **Get Website Billing**: `crisp.Website.GetWebsiteBilling(websiteID string) (*WebsiteBilling, *Response, error)`

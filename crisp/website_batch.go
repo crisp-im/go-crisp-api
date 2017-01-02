@@ -11,19 +11,34 @@ import (
 )
 
 
-// ResolveAllConversations resolves all conversations in website.
-func (service *WebsiteService) ResolveAllConversations(websiteID string) (*Response, error) {
+// WebsiteBatchOperation mapping
+type WebsiteBatchOperation struct {
+  Sessions  *[]string  `json:"sessions,omitempty"`
+}
+
+
+// ResolveGivenConversations resolves given (or all) conversations in website.
+func (service *WebsiteService) ResolveGivenConversations(websiteID string, sessions []string) (*Response, error) {
   url := fmt.Sprintf("website/%s/batch/resolve", websiteID)
-  req, _ := service.client.NewRequest("PATCH", url, nil)
+  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchOperation{Sessions: &sessions})
 
   return service.client.Do(req, nil)
 }
 
 
-// ReadAllConversations marks all conversations as read in website.
-func (service *WebsiteService) ReadAllConversations(websiteID string) (*Response, error) {
+// ReadGivenConversations marks given (or all) conversations as read in website.
+func (service *WebsiteService) ReadGivenConversations(websiteID string, sessions []string) (*Response, error) {
   url := fmt.Sprintf("website/%s/batch/read", websiteID)
-  req, _ := service.client.NewRequest("PATCH", url, nil)
+  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchOperation{Sessions: &sessions})
+
+  return service.client.Do(req, nil)
+}
+
+
+// RemoveGivenConversations removes given conversations in website.
+func (service *WebsiteService) RemoveGivenConversations(websiteID string, sessions []string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/batch/remove", websiteID)
+  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchOperation{Sessions: &sessions})
 
   return service.client.Do(req, nil)
 }
