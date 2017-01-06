@@ -55,6 +55,7 @@ type ConversationMeta struct {
   IP        *string                  `json:"ip,omitempty"`
   Data      *interface{}             `json:"data,omitempty"`
   Avatar    *string                  `json:"avatar,omitempty"`
+  Cover    *string                   `json:"cover,omitempty"`
   Device    *ConversationMetaDevice  `json:"device,omitempty"`
   Segments  *[]string                `json:"segments,omitempty"`
 }
@@ -296,6 +297,8 @@ type ConversationMetaUpdate struct {
   Nickname  string       `json:"nickname,omitempty"`
   Email     string       `json:"email,omitempty"`
   Avatar    string       `json:"avatar,omitempty"`
+  Cover     string       `json:"cover,omitempty"`
+  IP        string       `json:"ip,omitempty"`
   Phone     string       `json:"phone,omitempty"`
   Address   string       `json:"address,omitempty"`
   Segments  []string     `json:"segments,omitempty"`
