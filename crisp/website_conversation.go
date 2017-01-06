@@ -295,6 +295,7 @@ type ConversationMetaData struct {
 type ConversationMetaUpdate struct {
   Nickname  string       `json:"nickname,omitempty"`
   Email     string       `json:"email,omitempty"`
+  Avatar    string       `json:"avatar,omitempty"`
   Phone     string       `json:"phone,omitempty"`
   Address   string       `json:"address,omitempty"`
   Segments  []string     `json:"segments,omitempty"`
