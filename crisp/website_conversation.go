@@ -55,7 +55,7 @@ type ConversationMeta struct {
   IP        *string                  `json:"ip,omitempty"`
   Data      *interface{}             `json:"data,omitempty"`
   Avatar    *string                  `json:"avatar,omitempty"`
-  Cover    *string                   `json:"cover,omitempty"`
+  Cover     *string                  `json:"cover,omitempty"`
   Device    *ConversationMetaDevice  `json:"device,omitempty"`
   Segments  *[]string                `json:"segments,omitempty"`
 }
@@ -294,15 +294,65 @@ type ConversationMetaData struct {
 
 // ConversationMetaUpdate mapping
 type ConversationMetaUpdate struct {
-  Nickname  string       `json:"nickname,omitempty"`
-  Email     string       `json:"email,omitempty"`
-  Avatar    string       `json:"avatar,omitempty"`
-  Cover     string       `json:"cover,omitempty"`
-  IP        string       `json:"ip,omitempty"`
-  Phone     string       `json:"phone,omitempty"`
-  Address   string       `json:"address,omitempty"`
-  Segments  []string     `json:"segments,omitempty"`
-  Data      interface{}  `json:"data,omitempty"`
+  Nickname  string                        `json:"nickname,omitempty"`
+  Email     string                        `json:"email,omitempty"`
+  Avatar    string                        `json:"avatar,omitempty"`
+  Cover     string                        `json:"cover,omitempty"`
+  IP        string                        `json:"ip,omitempty"`
+  Phone     string                        `json:"phone,omitempty"`
+  Address   string                        `json:"address,omitempty"`
+  Segments  []string                      `json:"segments,omitempty"`
+  Data      interface{}                   `json:"data,omitempty"`
+  Device    ConversationMetaUpdateDevice  `json:"device,omitempty"`
+}
+
+// ConversationMetaUpdateDevice mapping
+type ConversationMetaUpdateDevice struct {
+  Geolocation  ConversationMetaUpdateDeviceGeolocation  `json:"geolocation,omitempty"`
+  System       ConversationMetaUpdateDeviceSystem       `json:"system,omitempty"`
+  Timezone     int16                                    `json:"timezone,omitempty"`
+  Locales      []string                                 `json:"locales,omitempty"`
+}
+
+// ConversationMetaUpdateDeviceGeolocation mapping
+type ConversationMetaUpdateDeviceGeolocation struct {
+  Coordinates  ConversationMetaUpdateDeviceGeolocationCoordinates  `json:"coordinates,omitempty"`
+  City         string                                              `json:"city,omitempty"`
+  Region       string                                              `json:"region,omitempty"`
+  Country      string                                              `json:"country,omitempty"`
+}
+
+// ConversationMetaUpdateDeviceGeolocationCoordinates mapping
+type ConversationMetaUpdateDeviceGeolocationCoordinates struct {
+  Latitude   float32  `json:"latitude,omitempty"`
+  Longitude  float32  `json:"longitude,omitempty"`
+}
+
+// ConversationMetaUpdateDeviceSystem mapping
+type ConversationMetaUpdateDeviceSystem struct {
+  OS         ConversationMetaUpdateDeviceSystemOS       `json:"os,omitempty"`
+  Engine     ConversationMetaUpdateDeviceSystemEngine   `json:"engine,omitempty"`
+  Browser    ConversationMetaUpdateDeviceSystemBrowser  `json:"browser,omitempty"`
+  Useragent  string                                     `json:"useragent,omitempty"`
+}
+
+// ConversationMetaUpdateDeviceSystemOS mapping
+type ConversationMetaUpdateDeviceSystemOS struct {
+  Version  string  `json:"version,omitempty"`
+  Name     string  `json:"name,omitempty"`
+}
+
+// ConversationMetaUpdateDeviceSystemEngine mapping
+type ConversationMetaUpdateDeviceSystemEngine struct {
+  Version  string  `json:"version,omitempty"`
+  Name     string  `json:"name,omitempty"`
+}
+
+// ConversationMetaUpdateDeviceSystemBrowser mapping
+type ConversationMetaUpdateDeviceSystemBrowser struct {
+  Major    string  `json:"major,omitempty"`
+  Version  string  `json:"version,omitempty"`
+  Name     string  `json:"name,omitempty"`
 }
 
 // ConversationStateData mapping
