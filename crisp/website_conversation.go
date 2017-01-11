@@ -303,7 +303,7 @@ type ConversationMetaUpdate struct {
   Address   string                        `json:"address,omitempty"`
   Segments  []string                      `json:"segments,omitempty"`
   Data      interface{}                   `json:"data,omitempty"`
-  Device    ConversationMetaUpdateDevice  `json:"device,omitempty"`
+  Device    *ConversationMetaUpdateDevice `json:"device,omitempty"`
 }
 
 // ConversationMetaUpdateDevice mapping
