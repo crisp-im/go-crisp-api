@@ -308,8 +308,8 @@ type ConversationMetaUpdate struct {
 
 // ConversationMetaUpdateDevice mapping
 type ConversationMetaUpdateDevice struct {
-  Geolocation  ConversationMetaUpdateDeviceGeolocation  `json:"geolocation,omitempty"`
-  System       ConversationMetaUpdateDeviceSystem       `json:"system,omitempty"`
+  Geolocation  *ConversationMetaUpdateDeviceGeolocation  `json:"geolocation,omitempty"`
+  System       *ConversationMetaUpdateDeviceSystem       `json:"system,omitempty"`
   Timezone     int16                                    `json:"timezone,omitempty"`
   Locales      []string                                 `json:"locales,omitempty"`
 }

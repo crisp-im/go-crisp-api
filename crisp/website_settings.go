@@ -53,12 +53,12 @@ type WebsiteSettingsChatbox struct {
 
 // WebsiteSettingsUpdate mapping
 type WebsiteSettingsUpdate struct {
-  WebsiteID  string                        `json:"website_id,omitempty"`
-  Name       string                        `json:"name,omitempty"`
-  Domain     string                        `json:"domain,omitempty"`
-  Logo       string                        `json:"logo,omitempty"`
-  Contact    WebsiteSettingsUpdateContact  `json:"contact,omitempty"`
-  Chatbox    WebsiteSettingsUpdateChatbox  `json:"chatbox,omitempty"`
+  WebsiteID  string                         `json:"website_id,omitempty"`
+  Name       string                         `json:"name,omitempty"`
+  Domain     string                         `json:"domain,omitempty"`
+  Logo       string                         `json:"logo,omitempty"`
+  Contact    *WebsiteSettingsUpdateContact  `json:"contact,omitempty"`
+  Chatbox    *WebsiteSettingsUpdateChatbox  `json:"chatbox,omitempty"`
 }
 
 // WebsiteSettingsUpdateContact mapping
