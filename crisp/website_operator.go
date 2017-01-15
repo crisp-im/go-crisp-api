@@ -31,6 +31,7 @@ type WebsiteOperatorData struct {
 type WebsiteOperator struct {
   UserID        *string  `json:"user_id,omitempty"`
   Email         *string  `json:"email,omitempty"`
+  Avatar        *string  `json:"avatar,omitempty"`
   FirstName     *string  `json:"first_name,omitempty"`
   LastName      *string  `json:"last_name,omitempty"`
   Role          *string  `json:"role,omitempty"`
