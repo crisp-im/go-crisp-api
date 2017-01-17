@@ -343,12 +343,19 @@ type EventsReceiveMessageComposeSend struct {
 
 // EventsReceiveMessageComposeReceive maps message:compose:receive
 type EventsReceiveMessageComposeReceive struct {
-  WebsiteID    *string  `json:"website_id"`
-  SessionID    *string  `json:"session_id"`
-  UserID       *string  `json:"user_id"`
-  Type         *string  `json:"type"`
-  Excerpt      *string  `json:"excerpt"`
-  Timestamp    *uint    `json:"timestamp"`
+  WebsiteID    *string                                  `json:"website_id"`
+  SessionID    *string                                  `json:"session_id"`
+  Type         *string                                  `json:"type"`
+  Excerpt      *string                                  `json:"excerpt"`
+  Timestamp    *uint                                    `json:"timestamp"`
+  User         *EventsReceiveMessageComposeReceiveUser  `json:"user"`
+}
+
+// EventsReceiveMessageComposeReceiveUser maps message:compose:receive/user
+type EventsReceiveMessageComposeReceiveUser struct {
+  UserID    *string  `json:"user_id"`
+  Nickname  *string  `json:"nickname"`
+  Avatar    *string  `json:"avatar"`
 }
 
 // EventsReceiveMessageAcknowledge maps message:acknowledge:*
