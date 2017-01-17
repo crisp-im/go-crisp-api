@@ -26,18 +26,40 @@ type ConversationData struct {
 
 // Conversation mapping
 type Conversation struct {
-  SessionID     *string              `json:"session_id,omitempty"`
-  WebsiteID     *string              `json:"website_id,omitempty"`
-  PeopleID      *string              `json:"people_id,omitempty"`
-  State         *string              `json:"state,omitempty"`
-  Status        *uint8               `json:"status,omitempty"`
-  IsBlocked     *bool                `json:"is_blocked,omitempty"`
-  Availability  *string              `json:"availability,omitempty"`
-  LastMessage   *string              `json:"last_message,omitempty"`
-  CreatedAt     *uint                `json:"created_at,omitempty"`
-  UpdatedAt     *uint                `json:"updated_at,omitempty"`
-  Unread        *ConversationUnread  `json:"unread,omitempty"`
-  Meta          *ConversationMeta    `json:"meta,omitempty"`
+  SessionID     *string               `json:"session_id,omitempty"`
+  WebsiteID     *string               `json:"website_id,omitempty"`
+  PeopleID      *string               `json:"people_id,omitempty"`
+  State         *string               `json:"state,omitempty"`
+  Status        *uint8                `json:"status,omitempty"`
+  IsBlocked     *bool                 `json:"is_blocked,omitempty"`
+  Availability  *string               `json:"availability,omitempty"`
+  LastMessage   *string               `json:"last_message,omitempty"`
+  CreatedAt     *uint                 `json:"created_at,omitempty"`
+  UpdatedAt     *uint                 `json:"updated_at,omitempty"`
+  Compose       *ConversationCompose  `json:"compose,omitempty"`
+  Unread        *ConversationUnread   `json:"unread,omitempty"`
+  Meta          *ConversationMeta     `json:"meta,omitempty"`
+}
+
+// ConversationCompose mapping
+type ConversationCompose struct {
+  Operator  *ConversationComposeAtom  `json:"operator,omitempty"`
+  Visitor   *ConversationComposeAtom  `json:"visitor,omitempty"`
+}
+
+// ConversationComposeAtom mapping
+type ConversationComposeAtom struct {
+  Type         *string                       `json:"type,omitempty"`
+  Excerpt      *string                       `json:"excerpt,omitempty"`
+  Timestamp    *uint                         `json:"timestamp,omitempty"`
+  User         *ConversationComposeAtomUser  `json:"user,omitempty"`
+}
+
+// ConversationComposeAtomUser mapping
+type ConversationComposeAtomUser struct {
+  UserID    *string  `json:"user_id,omitempty"`
+  Nickname  *string  `json:"nickname,omitempty"`
+  Avatar    *string  `json:"avatar,omitempty"`
 }
 
 // ConversationUnread mapping
@@ -128,6 +150,7 @@ type ConversationMessagePreviewInformation struct {
 type ConversationMessageUser struct {
   UserID    *string  `json:"user_id,omitempty"`
   Nickname  *string  `json:"nickname,omitempty"`
+  Avatar    *string  `json:"avatar,omitempty"`
 }
 
 // ConversationMetaDevice mapping
