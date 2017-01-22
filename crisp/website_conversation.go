@@ -410,6 +410,7 @@ type ConversationBlockUpdate struct {
 
 // ConversationTranscriptRequest mapping
 type ConversationTranscriptRequest struct {
+  To     *string  `json:"to,omitempty"`
   Email  *string  `json:"email,omitempty"`
 }
 
@@ -791,16 +792,18 @@ func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID st
 
 
 // RequestEmailTranscriptForConversation requests an email transcript for a conversation.
-func (service *WebsiteService) RequestEmailTranscriptForConversation(websiteID string, sessionID string, email string) (*Response, error) {
+func (service *WebsiteService) RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/transcript", websiteID, sessionID)
 
   var req *http.Request
 
+  transcriptRequest := ConversationTranscriptRequest{To: &to}
+
   if email != "" {
-    req, _ = service.client.NewRequest("POST", url, ConversationTranscriptRequest{&email})
-  } else {
-    req, _ = service.client.NewRequest("POST", url, nil)
+    transcriptRequest.Email = &email
   }
+
+  req, _ = service.client.NewRequest("POST", url, transcriptRequest)
 
   return service.client.Do(req, nil)
 }
