@@ -54,6 +54,8 @@ type PeopleProfileCard struct {
   Person    *PeopleProfileCardPerson   `json:"person,omitempty"`
   Company   *PeopleProfileCardCompany  `json:"company,omitempty"`
   Segments  *[]string                  `json:"segments,omitempty"`
+  Active    *PeopleProfileCardActive   `json:"active,omitempty"`
+  Score     *uint8                     `json:"score,omitempty"`
 }
 
 // PeopleProfileCardPerson mapping
@@ -124,6 +126,20 @@ type PeopleProfileCardGeolocationCoordinates struct {
   Longitude  *float32  `json:"longitude,omitempty"`
 }
 
+// PeopleProfileCardActive mapping
+type PeopleProfileCardActive struct {
+  Now   *bool  `json:"now,omitempty"`
+  Last  *uint  `json:"last,omitempty"`
+}
+
+// PeopleProfileUpdateCard mapping
+type PeopleProfileUpdateCard struct {
+  Email     string                     `json:"email,omitempty"`
+  Person    *PeopleProfileCardPerson   `json:"person,omitempty"`
+  Company   *PeopleProfileCardCompany  `json:"company,omitempty"`
+  Segments  []string                   `json:"segments,omitempty"`
+}
+
 
 // String returns the string representation of PeopleStatistics
 func (instance PeopleStatistics) String() string {
@@ -189,7 +205,7 @@ func (service *WebsiteService) ListPeopleProfiles(websiteID string, pageNumber u
 
 
 // AddNewPeopleProfile adds a new people profile.
-func (service *WebsiteService) AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileCard) (*Response, error) {
+func (service *WebsiteService) AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error) {
   url := fmt.Sprintf("website/%s/people/profile", websiteID)
   req, _ := service.client.NewRequest("POST", url, peopleProfile)
 
@@ -222,7 +238,7 @@ func (service *WebsiteService) GetPeopleProfile(websiteID string, peopleID strin
 
 
 // SavePeopleProfile saves people profile, and overwrite all previous information.
-func (service *WebsiteService) SavePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileCard) (*Response, error) {
+func (service *WebsiteService) SavePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error) {
   url := fmt.Sprintf("website/%s/people/profile/%s", websiteID, peopleID)
   req, _ := service.client.NewRequest("PUT", url, peopleProfile)
 
@@ -231,7 +247,7 @@ func (service *WebsiteService) SavePeopleProfile(websiteID string, peopleID stri
 
 
 // UpdatePeopleProfile updates people profile, and save only changed fields on the previous profile revision.
-func (service *WebsiteService) UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileCard) (*Response, error) {
+func (service *WebsiteService) UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error) {
   url := fmt.Sprintf("website/%s/people/profile/%s", websiteID, peopleID)
   req, _ := service.client.NewRequest("PATCH", url, peopleProfile)
 
