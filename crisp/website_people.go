@@ -140,6 +140,11 @@ type PeopleProfileUpdateCard struct {
   Segments  []string                   `json:"segments,omitempty"`
 }
 
+// PeopleConversationsData mapping
+type PeopleConversationsData struct {
+  Data  []string  `json:"data,omitempty"`
+}
+
 
 // String returns the string representation of PeopleStatistics
 func (instance PeopleStatistics) String() string {
@@ -261,4 +266,19 @@ func (service *WebsiteService) RemovePeopleProfile(websiteID string, peopleID st
   req, _ := service.client.NewRequest("DELETE", url, nil)
 
   return service.client.Do(req, nil)
+}
+
+
+// ListPeopleConversations lists conversations linked to people.
+func (service *WebsiteService) ListPeopleConversations(websiteID string, peopleID string, pageNumber uint) ([]string, *Response, error) {
+  url := fmt.Sprintf("website/%s/people/conversations/%s/list/%d", websiteID, peopleID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  conversations := new(PeopleConversationsData)
+  resp, err := service.client.Do(req, conversations)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return conversations.Data, resp, err
 }
