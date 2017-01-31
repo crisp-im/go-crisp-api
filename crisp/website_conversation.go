@@ -33,12 +33,19 @@ type Conversation struct {
   Status        *uint8                `json:"status,omitempty"`
   IsBlocked     *bool                 `json:"is_blocked,omitempty"`
   Availability  *string               `json:"availability,omitempty"`
+  Active        *ConversationActive   `json:"active,omitempty"`
   LastMessage   *string               `json:"last_message,omitempty"`
   CreatedAt     *uint                 `json:"created_at,omitempty"`
   UpdatedAt     *uint                 `json:"updated_at,omitempty"`
   Compose       *ConversationCompose  `json:"compose,omitempty"`
   Unread        *ConversationUnread   `json:"unread,omitempty"`
   Meta          *ConversationMeta     `json:"meta,omitempty"`
+}
+
+// ConversationActive mapping
+type ConversationActive struct {
+  Now   *bool  `json:"now,omitempty"`
+  Last  *uint  `json:"last,omitempty"`
 }
 
 // ConversationCompose mapping
