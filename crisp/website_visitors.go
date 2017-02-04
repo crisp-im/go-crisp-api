@@ -89,8 +89,9 @@ type WebsiteVisitorsMapPointGeolocationCoordinates struct {
 
 // WebsiteVisitorsMapPointVisitors mapping
 type WebsiteVisitorsMapPointVisitors struct {
-  Count      *uint  `json:"count,omitempty"`
-  Threshold  *uint  `json:"threshold,omitempty"`
+  Count       *uint      `json:"count,omitempty"`
+  Threshold   *uint      `json:"threshold,omitempty"`
+  SessionIDs  *[]string  `json:"session_ids,omitempty"`
 }
 
 
