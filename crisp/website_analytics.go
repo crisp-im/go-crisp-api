@@ -44,7 +44,7 @@ func (instance WebsiteAnalytics) String() string {
 
 
 // AcquireChatsAnalytics acquires analytics on chats in website.
-func (service *WebsiteService) AcquireChatsAnalytics(websiteID string, filterMetric string, filterOperator string, filterDateStart time.Time, filterDateEnd time.Time) (*WebsiteAnalytics, *Response, error) {
+func (service *WebsiteService) AcquireChatsAnalytics(websiteID string, filterMetric string, filterOperator string, filterDateStart time.Time, filterDateEnd time.Time, filterDateSplit uint8) (*WebsiteAnalytics, *Response, error) {
   filterDateStartFormat, err := filterDateStart.UTC().MarshalText()
   if err != nil {
     return nil, nil, err
@@ -55,7 +55,7 @@ func (service *WebsiteService) AcquireChatsAnalytics(websiteID string, filterMet
     return nil, nil, err
   }
 
-  url := fmt.Sprintf("website/%s/analytics/chats/?filter_metric=%s&filter_operator=%s&filter_date_start=%s&filter_date_end=%s", websiteID, url.QueryEscape(filterMetric), url.QueryEscape(filterOperator), url.QueryEscape(string(filterDateStartFormat[:])), url.QueryEscape(string(filterDateEndFormat[:])))
+  url := fmt.Sprintf("website/%s/analytics/chats/?filter_metric=%s&filter_operator=%s&filter_date_start=%s&filter_date_end=%s&filter_date_split=%d", websiteID, url.QueryEscape(filterMetric), url.QueryEscape(filterOperator), url.QueryEscape(string(filterDateStartFormat[:])), url.QueryEscape(string(filterDateEndFormat[:])), filterDateSplit)
 
   req, _ := service.client.NewRequest("GET", url, nil)
 

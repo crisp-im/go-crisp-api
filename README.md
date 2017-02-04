@@ -7,7 +7,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 02/03/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 02/04/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -241,7 +241,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Request Email Transcript For Conversation**: `crisp.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error)`
 
 * **Website Analytics**
-  * **Acquire Chats Analytics**: `crisp.Website.AcquireChatsAnalytics(websiteID string, filterMetric string, filterOperator string, filterDateStart time.Time, filterDateEnd time.Time) (*WebsiteAnalytics, *Response, error)`
+  * **Acquire Chats Analytics**: `crisp.Website.AcquireChatsAnalytics(websiteID string, filterMetric string, filterOperator string, filterDateStart time.Time, filterDateEnd time.Time, filterDateSplit uint8) (*WebsiteAnalytics, *Response, error)`
 
 * **Website People**
   * **Get People Statistics**: `crisp.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
