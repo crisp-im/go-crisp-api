@@ -21,6 +21,7 @@ type WebsiteBilling struct {
   CardID             *string                   `json:"card_id,omitempty"`
   NameOnCard         *string                   `json:"name_on_card,omitempty"`
   Address            *string                   `json:"address,omitempty"`
+  Information        *string                   `json:"information,omitempty"`
   CardNumberPreview  *string                   `json:"card_number_preview,omitempty"`
   CardProvider       *string                   `json:"card_provider,omitempty"`
   ExpirationDate     *string                   `json:"expiration_date,omitempty"`
