@@ -13,19 +13,21 @@ type UserNotificationSettingsData struct {
 
 // UserNotificationSettings mapping
 type UserNotificationSettings struct {
-  UserID           *string  `json:"user_id,omitempty"`
-  Disabled         *bool    `json:"disabled,omitempty"`
-  MessagesOnline   *bool    `json:"messages_online,omitempty"`
-  MessagesOffline  *bool    `json:"messages_offline,omitempty"`
-  Sounds           *bool    `json:"sounds,omitempty"`
+  UserID              *string  `json:"user_id,omitempty"`
+  Disabled            *bool    `json:"disabled,omitempty"`
+  MessagesOnline      *bool    `json:"messages_online,omitempty"`
+  MessagesOffline     *bool    `json:"messages_offline,omitempty"`
+  MessagesTranscript  *bool    `json:"messages_transcript,omitempty"`
+  Sounds              *bool    `json:"sounds,omitempty"`
 }
 
 // UserNotificationSettingsUpdate mapping
 type UserNotificationSettingsUpdate struct {
-  Disabled         bool  `json:"disabled,omitempty"`
-  MessagesOnline   bool  `json:"messages_online,omitempty"`
-  MessagesOffline  bool  `json:"messages_offline,omitempty"`
-  Sounds           bool  `json:"sounds,omitempty"`
+  Disabled            bool  `json:"disabled,omitempty"`
+  MessagesOnline      bool  `json:"messages_online,omitempty"`
+  MessagesOffline     bool  `json:"messages_offline,omitempty"`
+  MessagesTranscript  bool  `json:"messages_transcript,omitempty"`
+  Sounds              bool  `json:"sounds,omitempty"`
 }
 
 // UserNotificationProviderAdd mapping
