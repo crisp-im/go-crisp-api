@@ -16,6 +16,7 @@ type UserScheduleSettings struct {
   UserID    *string                       `json:"user_id,omitempty"`
   Enabled   *bool                         `json:"enabled,omitempty"`
   Presence  *bool                         `json:"presence,omitempty"`
+  Stealth   *bool                         `json:"stealth,omitempty"`
   Offset    *int                          `json:"offset,omitempty"`
   Days      *UserScheduleSettingsDays     `json:"days,omitempty"`
   Hours     *[]UserScheduleSettingsHours  `json:"hours,omitempty"`
@@ -42,6 +43,7 @@ type UserScheduleSettingsHours struct {
 type UserScheduleSettingsUpdate struct {
   Enabled   bool                             `json:"enabled,omitempty"`
   Presence  bool                             `json:"presence,omitempty"`
+  Stealth   bool                             `json:"stealth,omitempty"`
   Offset    int                              `json:"offset,omitempty"`
   Days      UserScheduleSettingsUpdateDays   `json:"days,omitempty"`
   Hours     UserScheduleSettingsUpdateHours  `json:"hours,omitempty"`
