@@ -165,7 +165,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website Rating**
   * **Resolve Session Rating**: `crisp.Website.ResolveSessionRating(websiteID string, sessionID string) (*WebsiteRatingSession, *Response, error)`
-  * **Submit Session Rating**: `crisp.Website.SubmitSessionRating(websiteID string, sessionID string, websiteRatingSession WebsiteRatingSession) (*Response, error)`
+  * **Submit Session Rating**: `crisp.Website.SubmitSessionRating(websiteID string, sessionID string, websiteRatingSession WebsiteRatingCreateSession) (*Response, error)`
   * **Delete Session Rating**: `crisp.Website.DeleteSessionRating(websiteID string, sessionID string) (*Response, error)`
 
 * **Website Settings**

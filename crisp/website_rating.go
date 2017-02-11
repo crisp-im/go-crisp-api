@@ -18,6 +18,13 @@ type WebsiteRatingSessionData struct {
 
 // WebsiteRatingSession mapping
 type WebsiteRatingSession struct {
+  Stars      *uint8   `json:"stars,omitempty"`
+  Comment    *string  `json:"comment,omitempty"`
+  CreatedAt  *uint    `json:"created_at,omitempty"`
+}
+
+// WebsiteRatingCreateSession mapping
+type WebsiteRatingCreateSession struct {
   Stars    *uint8   `json:"stars,omitempty"`
   Comment  *string  `json:"comment,omitempty"`
 }
@@ -45,7 +52,7 @@ func (service *WebsiteService) ResolveSessionRating(websiteID string, sessionID 
 
 
 // SubmitSessionRating submits a session rating for website. Used for session users to publish their own website rating.
-func (service *WebsiteService) SubmitSessionRating(websiteID string, sessionID string, websiteRatingSession WebsiteRatingSession) (*Response, error) {
+func (service *WebsiteService) SubmitSessionRating(websiteID string, sessionID string, websiteRatingSession WebsiteRatingCreateSession) (*Response, error) {
   url := fmt.Sprintf("website/%s/rating/session/%s", websiteID, sessionID)
   req, _ := service.client.NewRequest("PUT", url, websiteRatingSession)
 
