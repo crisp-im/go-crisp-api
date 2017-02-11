@@ -11,19 +11,6 @@ import (
 )
 
 
-// WebsiteOperatorsLastActiveListData mapping
-type WebsiteOperatorsLastActiveListData struct {
-  Data  *[]WebsiteOperatorsLastActiveListOne  `json:"data,omitempty"`
-}
-
-// WebsiteOperatorsLastActiveListOne mapping
-type WebsiteOperatorsLastActiveListOne struct {
-  UserID     *string  `json:"user_id,omitempty"`
-  Avatar     *string  `json:"avatar,omitempty"`
-  Nickname   *string  `json:"nickname,omitempty"`
-  Timestamp  *uint    `json:"timestamp,omitempty"`
-}
-
 // WebsiteOperatorListData mapping
 type WebsiteOperatorListData struct {
   Data  *[]WebsiteOperatorListOne  `json:"data,omitempty"`
@@ -51,6 +38,19 @@ type WebsiteOperator struct {
   Availability  *string  `json:"availability,omitempty"`
 }
 
+// WebsiteOperatorsLastActiveListData mapping
+type WebsiteOperatorsLastActiveListData struct {
+  Data  *[]WebsiteOperatorsLastActiveListOne  `json:"data,omitempty"`
+}
+
+// WebsiteOperatorsLastActiveListOne mapping
+type WebsiteOperatorsLastActiveListOne struct {
+  UserID     *string  `json:"user_id,omitempty"`
+  Avatar     *string  `json:"avatar,omitempty"`
+  Nickname   *string  `json:"nickname,omitempty"`
+  Timestamp  *uint    `json:"timestamp,omitempty"`
+}
+
 // WebsiteOperatorInvite mapping
 type WebsiteOperatorInvite struct {
   Email  *string  `json:"email,omitempty"`
@@ -75,6 +75,21 @@ func (instance WebsiteOperator) String() string {
 }
 
 
+// ListWebsiteOperators lists all operator members of website.
+func (service *WebsiteService) ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error) {
+  url := fmt.Sprintf("website/%s/operators/list", websiteID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  operators := new(WebsiteOperatorListData)
+  resp, err := service.client.Do(req, operators)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return operators.Data, resp, err
+}
+
+
 // ListLastActiveWebsiteOperators lists last active website operators.
 func (service *WebsiteService) ListLastActiveWebsiteOperators(websiteID string) (*[]WebsiteOperatorsLastActiveListOne, *Response, error) {
   url := fmt.Sprintf("website/%s/operators/active", websiteID)
@@ -96,21 +111,6 @@ func (service *WebsiteService) FlushLastActiveWebsiteOperators(websiteID string)
   req, _ := service.client.NewRequest("DELETE", url, nil)
 
   return service.client.Do(req, nil)
-}
-
-
-// ListWebsiteOperators lists all operator members of website.
-func (service *WebsiteService) ListWebsiteOperators(websiteID string, pageNumber uint) (*[]WebsiteOperatorListOne, *Response, error) {
-  url := fmt.Sprintf("website/%s/operators/list/%d", websiteID, pageNumber)
-  req, _ := service.client.NewRequest("GET", url, nil)
-
-  operators := new(WebsiteOperatorListData)
-  resp, err := service.client.Do(req, operators)
-  if err != nil {
-    return nil, resp, err
-  }
-
-  return operators.Data, resp, err
 }
 
 
