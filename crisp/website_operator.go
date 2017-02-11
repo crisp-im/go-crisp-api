@@ -100,8 +100,8 @@ func (service *WebsiteService) FlushLastActiveWebsiteOperators(websiteID string)
 
 
 // ListWebsiteOperators lists all operator members of website.
-func (service *WebsiteService) ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error) {
-  url := fmt.Sprintf("website/%s/operator", websiteID)
+func (service *WebsiteService) ListWebsiteOperators(websiteID string, pageNumber uint) (*[]WebsiteOperatorListOne, *Response, error) {
+  url := fmt.Sprintf("website/%s/operators/list/%d", websiteID, pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
   operators := new(WebsiteOperatorListData)

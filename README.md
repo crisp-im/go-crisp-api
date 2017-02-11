@@ -152,7 +152,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Operator**
   * **List Last Active Website Operators**: `crisp.Website.ListLastActiveWebsiteOperators(websiteID string) (*[]WebsiteOperatorsLastActiveListOne, *Response, error)`
   * **Flush Last Active Website Operators**: `crisp.Website.FlushLastActiveWebsiteOperators(websiteID string) (*Response, error)`
-  * **List Website Operators**: `crisp.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
+  * **List Website Operators**: `crisp.Website.ListWebsiteOperators(websiteID string, pageNumber uint) (*[]WebsiteOperatorListOne, *Response, error)`
   * **Get A Website Operator**: `crisp.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
   * **Invite A Website Operator**: `crisp.Website.InviteWebsiteOperator(websiteID string, email string, role string) (*Response, error)`
   * **Change Operator Role**: `crisp.Website.ChangeOperatorRole(websiteID string, userID string, role string) (*Response, error)`
