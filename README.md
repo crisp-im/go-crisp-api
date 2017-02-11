@@ -7,7 +7,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 02/09/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 02/11/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -150,6 +150,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Website Availability Status**: `crisp.Website.GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error)`
 
 * **Website Operator**
+  * **List Last Active Website Operators**: `crisp.Website.ListLastActiveWebsiteOperators(websiteID string) (*[]WebsiteOperatorsLastActiveListOne, *Response, error)`
+  * **Flush Last Active Website Operators**: `crisp.Website.FlushLastActiveWebsiteOperators(websiteID string) (*Response, error)`
   * **List Website Operators**: `crisp.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
   * **Get A Website Operator**: `crisp.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
   * **Invite A Website Operator**: `crisp.Website.InviteWebsiteOperator(websiteID string, email string, role string) (*Response, error)`
