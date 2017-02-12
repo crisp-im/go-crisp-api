@@ -33,11 +33,11 @@ func (service *WebsiteService) GetWebsiteAvailabilityStatus(websiteID string) (*
   url := fmt.Sprintf("website/%s/availability/status", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  billing := new(WebsiteAvailabilityStatusData)
-  resp, err := service.client.Do(req, billing)
+  availability := new(WebsiteAvailabilityStatusData)
+  resp, err := service.client.Do(req, availability)
   if err != nil {
     return nil, resp, err
   }
 
-  return billing.Data, resp, err
+  return availability.Data, resp, err
 }
