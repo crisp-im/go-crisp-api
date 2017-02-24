@@ -18,6 +18,7 @@ type UserNotificationSettings struct {
   MessagesOnline      *bool    `json:"messages_online,omitempty"`
   MessagesOffline     *bool    `json:"messages_offline,omitempty"`
   MessagesTranscript  *bool    `json:"messages_transcript,omitempty"`
+  MessagesRating      *bool    `json:"messages_rating,omitempty"`
   Sounds              *bool    `json:"sounds,omitempty"`
 }
 
@@ -27,6 +28,7 @@ type UserNotificationSettingsUpdate struct {
   MessagesOnline      bool  `json:"messages_online,omitempty"`
   MessagesOffline     bool  `json:"messages_offline,omitempty"`
   MessagesTranscript  bool  `json:"messages_transcript,omitempty"`
+  MessagesRating      bool  `json:"messages_rating,omitempty"`
   Sounds              bool  `json:"sounds,omitempty"`
 }
 
