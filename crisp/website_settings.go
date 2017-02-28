@@ -23,6 +23,7 @@ type WebsiteSettings struct {
   Domain     *string                  `json:"domain,omitempty"`
   Logo       *string                  `json:"logo,omitempty"`
   Contact    *WebsiteSettingsContact  `json:"contact,omitempty"`
+  Emails     *WebsiteSettingsEmails   `json:"emails,omitempty"`
   Chatbox    *WebsiteSettingsChatbox  `json:"chatbox,omitempty"`
 }
 
@@ -30,6 +31,12 @@ type WebsiteSettings struct {
 type WebsiteSettingsContact struct {
   Email  *string  `json:"email,omitempty"`
   Phone  *string  `json:"phone,omitempty"`
+}
+
+// WebsiteSettingsEmails mapping
+type WebsiteSettingsEmails struct {
+  Rating      *bool  `json:"rating,omitempty"`
+  Transcript  *bool  `json:"transcript,omitempty"`
 }
 
 // WebsiteSettingsChatbox mapping
@@ -58,6 +65,7 @@ type WebsiteSettingsUpdate struct {
   Domain     string                         `json:"domain,omitempty"`
   Logo       string                         `json:"logo,omitempty"`
   Contact    *WebsiteSettingsUpdateContact  `json:"contact,omitempty"`
+  Emails     *WebsiteSettingsUpdateEmails   `json:"emails,omitempty"`
   Chatbox    *WebsiteSettingsUpdateChatbox  `json:"chatbox,omitempty"`
 }
 
@@ -65,6 +73,12 @@ type WebsiteSettingsUpdate struct {
 type WebsiteSettingsUpdateContact struct {
   Email  string  `json:"email,omitempty"`
   Phone  string  `json:"phone,omitempty"`
+}
+
+// WebsiteSettingsUpdateEmails mapping
+type WebsiteSettingsUpdateEmails struct {
+  Rating      bool  `json:"rating,omitempty"`
+  Transcript  bool  `json:"transcript,omitempty"`
 }
 
 // WebsiteSettingsUpdateChatbox mapping
