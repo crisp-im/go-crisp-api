@@ -267,7 +267,6 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Plugin List**
   * **List All Plugins**: `crisp.Plugin.ListAllPlugins(pageNumber uint) (*[]PluginInformation, *Response, error)`
-  * **List Featured Plugins**: `crisp.Plugin.ListFeaturedPlugins(pageNumber uint) (*[]PluginInformation, *Response, error)`
   * **Search Plugins**: `crisp.Plugin.SearchPlugins(query string, pageNumber uint) (*[]PluginInformation, *Response, error)`
 
 * **Plugin Subscription**
