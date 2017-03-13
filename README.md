@@ -7,7 +7,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 02/24/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 03/13/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -264,10 +264,6 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **One Plugin**
   * **Get Plugin Information**: `crisp.Plugin.GetPluginInformation(pluginID string) (*PluginInformation, *Response, error)`
-  * **Get Plugin Stars**: `crisp.Plugin.GetPluginStars(pluginID string)`
-  * **Get Personal Plugin Rank**: `crisp.Plugin.GetPersonalPluginRank(pluginID string) (*PluginPersonalPluginRank, *Response, error)`
-  * **Rank A Plugin**: `crisp.Plugin.RankPlugin(pluginID string, rank uint) (*Response, error)`
-  * **Delete Plugin Rank**: `crisp.Plugin.DeletePluginRank(pluginID string) (*Response, error)`
 
 * **Plugin List**
   * **List All Plugins**: `crisp.Plugin.ListAllPlugins(pageNumber uint) (*[]PluginInformation, *Response, error)`
