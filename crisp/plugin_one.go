@@ -18,19 +18,20 @@ type PluginInformationData struct {
 
 // PluginInformation mapping
 type PluginInformation struct {
-  ID           *string                   `json:"id,omitempty"`
-  URN          *string                   `json:"urn,omitempty"`
-  Type         *string                   `json:"type,omitempty"`
-  Name         *string                   `json:"name,omitempty"`
-  Description  *string                   `json:"description,omitempty"`
-  Features     *[]string                 `json:"features,omitempty"`
-  Showcase     *[]string                 `json:"showcase,omitempty"`
-  Price        *uint                     `json:"price,omitempty"`
-  Plans        *[]PluginInformationPlan  `json:"plans,omitempty"`
-  Color        *string                   `json:"color,omitempty"`
-  Icon         *string                   `json:"icon,omitempty"`
-  Banner       *string                   `json:"banner,omitempty"`
-  Since        *string                   `json:"since,omitempty"`
+  ID            *string                   `json:"id,omitempty"`
+  URN           *string                   `json:"urn,omitempty"`
+  Type          *string                   `json:"type,omitempty"`
+  Name          *string                   `json:"name,omitempty"`
+  Description   *string                   `json:"description,omitempty"`
+  Features      *[]string                 `json:"features,omitempty"`
+  Showcase      *[]string                 `json:"showcase,omitempty"`
+  Price         *uint                     `json:"price,omitempty"`
+  Plans         *[]PluginInformationPlan  `json:"plans,omitempty"`
+  Color         *string                   `json:"color,omitempty"`
+  Icon          *string                   `json:"icon,omitempty"`
+  Banner        *string                   `json:"banner,omitempty"`
+  Configurable  *bool                     `json:"configurable,omitempty"`
+  Since         *string                   `json:"since,omitempty"`
 }
 
 // PluginInformationPlan mapping
