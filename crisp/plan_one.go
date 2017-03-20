@@ -33,12 +33,8 @@ type PlanInformationPlugin struct {
   Type         *string    `json:"type,omitempty"`
   Name         *string    `json:"name,omitempty"`
   Description  *string    `json:"description,omitempty"`
-  Features     *[]string  `json:"features,omitempty"`
-  Showcase     *[]string  `json:"showcase,omitempty"`
   Price        *uint      `json:"price,omitempty"`
-  Color        *string    `json:"color,omitempty"`
   Icon         *string    `json:"icon,omitempty"`
-  Banner       *string    `json:"banner,omitempty"`
   Since        *string    `json:"since,omitempty"`
 }
 
