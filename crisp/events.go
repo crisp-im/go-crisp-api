@@ -89,13 +89,6 @@ type EventsReceiveSessionSetAvatar struct {
   Avatar     *string  `json:"avatar"`
 }
 
-// EventsReceiveSessionSetCover maps session:set_cover
-type EventsReceiveSessionSetCover struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  Cover      *string  `json:"cover"`
-}
-
 // EventsReceiveSessionSetNickname maps session:set_nickname
 type EventsReceiveSessionSetNickname struct {
   WebsiteID  *string  `json:"website_id"`
@@ -588,12 +581,6 @@ func (evt EventsReceiveSessionSetAvatar) String() string {
 }
 
 
-// String returns the string representation of EventsReceiveSessionSetCover
-func (evt EventsReceiveSessionSetCover) String() string {
-  return Stringify(evt)
-}
-
-
 // String returns the string representation of EventsReceiveSessionSetNickname
 func (evt EventsReceiveSessionSetNickname) String() string {
   return Stringify(evt)
@@ -832,12 +819,6 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:set_avatar", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetAvatar) {
     if hdl, ok := register.Handlers["session:set_avatar"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_cover", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetCover) {
-    if hdl, ok := register.Handlers["session:set_cover"]; ok {
       go hdl.callFunc(&evt)
     }
   })

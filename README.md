@@ -7,7 +7,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 03/20/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 03/26/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -348,7 +348,6 @@ Available events are listed below:
   * **Session Set Phone**: `session:set_phone`
   * **Session Set Address**: `session:set_address`
   * **Session Set Avatar**: `session:set_avatar`
-  * **Session Set Cover**: `session:set_cover`
   * **Session Set Nickname**: `session:set_nickname`
   * **Session Set Data**: `session:set_data`
   * **Session Sync Pages**: `session:sync:pages`

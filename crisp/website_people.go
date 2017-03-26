@@ -62,7 +62,6 @@ type PeopleProfileCard struct {
 type PeopleProfileCardPerson struct {
   Nickname     *string                             `json:"nickname,omitempty"`
   Avatar       *string                             `json:"avatar,omitempty"`
-  Cover        *string                             `json:"cover,omitempty"`
   Gender       *string                             `json:"gender,omitempty"`
   Phone        *string                             `json:"phone,omitempty"`
   Address      *string                             `json:"address,omitempty"`
