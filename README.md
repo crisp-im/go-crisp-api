@@ -7,7 +7,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2016 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 03/26/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 04/02/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -216,7 +216,6 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Conversations**: `crisp.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
   * **List Conversations (Search Variant)**: `crisp.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
   * **List Conversation Segments In Meta**: `crisp.Website.ListConversationSegmentsInMeta(websiteID string, pageNumber uint) (*[]ConversationMetaSegment, *Response, error)`
-  * **Export Conversation Emails**: `crisp.Website.ExportConversationEmails(websiteID string, pageNumber uint, filterSegment string, filterCountry string, filterDateStart time.Time, filterDateEnd time.Time) (*[]ConversationExportEmail, *Response, error)`
 
 * **Website Conversation**
   * **Create A New Conversation**: `crisp.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
@@ -259,6 +258,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Update People Profile**: `crisp.Website.UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
   * **Remove People Profile**: `crisp.Website.RemovePeopleProfile(websiteID string, peopleID string) (*Response, error)`
   * **List People Conversations**: `crisp.Website.ListPeopleConversations(websiteID string, peopleID string, pageNumber uint) ([]string, *Response, error)`
+  * **Export All People Profiles**: `crisp.Website.ExportAllPeopleProfiles(websiteID string) (*Response, error)`
 
 ### Plugin
 

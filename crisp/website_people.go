@@ -281,3 +281,12 @@ func (service *WebsiteService) ListPeopleConversations(websiteID string, peopleI
 
   return conversations.Data, resp, err
 }
+
+
+// ExportAllPeopleProfiles exports all people profiles.
+func (service *WebsiteService) ExportAllPeopleProfiles(websiteID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/people/export/profiles", websiteID)
+  req, _ := service.client.NewRequest("POST", url, nil)
+
+  return service.client.Do(req, nil)
+}

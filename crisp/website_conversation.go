@@ -8,7 +8,6 @@ package crisp
 
 import (
   "fmt"
-  "time"
   "net/http"
   "net/url"
 )
@@ -217,17 +216,6 @@ type ConversationMetaSegmentData struct {
 type ConversationMetaSegment struct {
   Segment  *string  `json:"segment,omitempty"`
   Count    *int32   `json:"count,omitempty"`
-}
-
-// ConversationExportEmailData mapping
-type ConversationExportEmailData struct {
-  Data  *[]ConversationExportEmail  `json:"data,omitempty"`
-}
-
-// ConversationExportEmail mapping
-type ConversationExportEmail struct {
-  Nickname  *string  `json:"nickname,omitempty"`
-  Email     *string  `json:"email,omitempty"`
 }
 
 // ConversationNewData mapping
@@ -448,12 +436,6 @@ func (instance ConversationMetaSegment) String() string {
 }
 
 
-// String returns the string representation of ConversationExportEmail
-func (instance ConversationExportEmail) String() string {
-  return Stringify(instance)
-}
-
-
 // String returns the string representation of ConversationNew
 func (instance ConversationNew) String() string {
   return Stringify(instance)
@@ -524,38 +506,6 @@ func (service *WebsiteService) ListConversationSegmentsInMeta(websiteID string, 
   }
 
   return segments.Data, resp, err
-}
-
-
-// ExportConversationEmails exports conversation emails for website.
-func (service *WebsiteService) ExportConversationEmails(websiteID string, pageNumber uint, filterSegment string, filterCountry string, filterDateStart time.Time, filterDateEnd time.Time) (*[]ConversationExportEmail, *Response, error) {
-  filterDateStartFormat, err := filterDateStart.UTC().MarshalText()
-  if err != nil {
-    return nil, nil, err
-  }
-
-  filterDateEndFormat, err := filterDateEnd.UTC().MarshalText()
-  if err != nil {
-    return nil, nil, err
-  }
-
-  var resourceURL string
-
-  if filterSegment != "" || filterCountry != "" || len(filterDateStartFormat) > 0 || len(filterDateEndFormat) > 0 {
-    resourceURL = fmt.Sprintf("website/%s/conversations/export/emails/%d?filter_segment=%s&filter_country=%s&filter_date_start=%s&filter_date_end=%s", websiteID, pageNumber, url.QueryEscape(filterSegment), url.QueryEscape(filterCountry), url.QueryEscape(string(filterDateStartFormat[:])), url.QueryEscape(string(filterDateEndFormat[:])))
-  } else {
-    resourceURL = fmt.Sprintf("website/%s/conversations/export/emails/%d", websiteID, pageNumber)
-  }
-
-  req, _ := service.client.NewRequest("GET", resourceURL, nil)
-
-  emails := new(ConversationExportEmailData)
-  resp, err := service.client.Do(req, emails)
-  if err != nil {
-    return nil, resp, err
-  }
-
-  return emails.Data, resp, err
 }
 
 
