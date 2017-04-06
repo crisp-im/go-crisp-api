@@ -268,6 +268,7 @@ type EventsReceiveTextMessage struct {
   Type         *string                          `json:"type"`
   Origin       *string                          `json:"origin"`
   Content      *string                          `json:"content"`
+  Mentions     *[]string                        `json:"mentions"`
   Stamped      *bool                            `json:"stamped"`
   Timestamp    *uint                            `json:"timestamp"`
   Fingerprint  *int                             `json:"fingerprint"`
@@ -282,6 +283,7 @@ type EventsReceiveFileMessage struct {
   Type         *string                           `json:"type"`
   Origin       *string                           `json:"origin"`
   Content      *EventsReceiveFileMessageContent  `json:"content"`
+  Mentions     *[]string                         `json:"mentions"`
   Stamped      *bool                             `json:"stamped"`
   Timestamp    *uint                             `json:"timestamp"`
   Fingerprint  *int                              `json:"fingerprint"`
@@ -303,6 +305,7 @@ type EventsReceiveAnimationMessage struct {
   Type         *string                                `json:"type"`
   Origin       *string                                `json:"origin"`
   Content      *EventsReceiveAnimationMessageContent  `json:"content"`
+  Mentions     *[]string                              `json:"mentions"`
   Stamped      *bool                                  `json:"stamped"`
   Timestamp    *uint                                  `json:"timestamp"`
   Fingerprint  *int                                   `json:"fingerprint"`

@@ -109,6 +109,7 @@ type ConversationMessage struct {
   Origin       *string                        `json:"origin,omitempty"`
   Content      *interface{}                   `json:"content,omitempty"`
   Preview      *[]ConversationMessagePreview  `json:"preview,omitempty"`
+  Mentions     *[]string                      `json:"mentions,omitempty"`
   Read         *string                        `json:"read,omitempty"`
   Delivered    *string                        `json:"delivered,omitempty"`
   Fingerprint  *int                           `json:"fingerprint,omitempty"`
@@ -239,6 +240,7 @@ type ConversationTextMessageNew struct {
   From         string                         `json:"from,omitempty"`
   Origin       string                         `json:"origin,omitempty"`
   Content      string                         `json:"content,omitempty"`
+  Mentions     []string                       `json:"mentions,omitempty"`
   Fingerprint  int                            `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser  `json:"user,omitempty"`
 }
@@ -249,6 +251,7 @@ type ConversationFileMessageNew struct {
   From         string                             `json:"from,omitempty"`
   Origin       string                             `json:"origin,omitempty"`
   Content      ConversationFileMessageNewContent  `json:"content,omitempty"`
+  Mentions     []string                           `json:"mentions,omitempty"`
   Fingerprint  int                                `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser      `json:"user,omitempty"`
 }
@@ -266,6 +269,7 @@ type ConversationAnimationMessageNew struct {
   From         string                                  `json:"from,omitempty"`
   Origin       string                                  `json:"origin,omitempty"`
   Content      ConversationAnimationMessageNewContent  `json:"content,omitempty"`
+  Mentions     []string                                `json:"mentions,omitempty"`
   Fingerprint  int                                     `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser           `json:"user,omitempty"`
 }
