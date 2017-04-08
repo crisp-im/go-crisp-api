@@ -249,6 +249,13 @@ type EventsReceiveSessionSetOpenStateOperator struct {
   UserID  *string  `json:"user_id"`
 }
 
+// EventsReceiveSessionSetMentions maps session:set_mentions
+type EventsReceiveSessionSetMentions struct {
+  WebsiteID  *string    `json:"website_id"`
+  SessionID  *string    `json:"session_id"`
+  Mentions   *[]string  `json:"mentions"`
+}
+
 // EventsReceiveSessionRemoved maps session:removed
 type EventsReceiveSessionRemoved struct {
   WebsiteID  *string  `json:"website_id"`
@@ -662,6 +669,12 @@ func (evt EventsReceiveSessionSetClosed) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveSessionSetMentions
+func (evt EventsReceiveSessionSetMentions) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveSessionRemoved
 func (evt EventsReceiveSessionRemoved) String() string {
   return Stringify(evt)
@@ -900,6 +913,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:set_closed", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetClosed) {
     if hdl, ok := register.Handlers["session:set_closed"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:set_mentions", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetMentions) {
+    if hdl, ok := register.Handlers["session:set_mentions"]; ok {
       go hdl.callFunc(&evt)
     }
   })
