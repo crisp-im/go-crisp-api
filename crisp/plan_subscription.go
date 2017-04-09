@@ -30,6 +30,8 @@ type PlanSubscription struct {
   TrialDays       *uint                     `json:"trial_days,omitempty"`
   Since           *string                   `json:"since,omitempty"`
   TrialEnd        *string                   `json:"trial_end,omitempty"`
+  BillPeriod      *string                   `json:"bill_period,omitempty"`
+  BillValidUntil  *string                   `json:"bill_valid_until,omitempty"`
   Active          *bool                     `json:"active,omitempty"`
   Website         *PlanSubscriptionWebsite  `json:"website,omitempty"`
   CouponRedeemed  *bool                     `json:"coupon_redeemed,omitempty"`
@@ -47,6 +49,11 @@ type PlanSubscriptionWebsite struct {
 // PlanSubscriptionCreate mapping
 type PlanSubscriptionCreate struct {
   PlanID  *string  `json:"plan_id,omitempty"`
+}
+
+// PlanSubscriptionBillPeriodChange mapping
+type PlanSubscriptionBillPeriodChange struct {
+  Period  *string  `json:"period,omitempty"`
 }
 
 // PlanSubscriptionCouponData mapping
@@ -129,6 +136,15 @@ func (service *PlanService) SubscribeWebsiteToPlan(websiteID string, planID stri
 func (service *PlanService) UnsubscribePlanFromWebsite(websiteID string) (*Response, error) {
   url := fmt.Sprintf("plans/subscription/%s", websiteID)
   req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ChangeBillPeriodForWebsiteSubscription changes how often the website subscription is paid for.
+func (service *PlanService) ChangeBillPeriodForWebsiteSubscription(websiteID string, period string) (*Response, error) {
+  url := fmt.Sprintf("plans/subscription/%s/bill/period", websiteID)
+  req, _ := service.client.NewRequest("PATCH", url, PlanSubscriptionBillPeriodChange{Period: &period})
 
   return service.client.Do(req, nil)
 }

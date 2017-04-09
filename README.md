@@ -7,7 +7,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 04/08/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 04/09/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -298,6 +298,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Subscription For A Website**: `crisp.Plan.GetSubscriptionForWebsite(websiteID string) (*PlanSubscription, *Response, error)`
   * **Subscribe Website To Plan**: `crisp.Plan.SubscribeWebsiteToPlan(websiteID string, planID string) (*Response, error)`
   * **Unsubscribe Plan From Website**: `crisp.Plan.UnsubscribePlanFromWebsite(websiteID string) (*Response, error)`
+  * **Change Bill Period For Website Subscription**: `crisp.Plan.ChangeBillPeriodForWebsiteSubscription(websiteID string, period string) (*Response, error)`
   * **Check Coupon Availability For Website Subscription**: `crisp.Plan.CheckCouponAvailabilityForWebsiteSubscription(websiteID string, code string) (*PlanSubscriptionCoupon, *Response, error)`
   * **Redeem Coupon For Website Subscription**: `crisp.Plan.RedeemCouponForWebsiteSubscription(websiteID string, code string) (*Response, error)`
 
