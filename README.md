@@ -1,7 +1,6 @@
 # go-crisp-api
 
 [![Build Status](https://travis-ci.org/crisp-im/go-crisp-api.svg?branch=master)](https://travis-ci.org/crisp-im/go-crisp-api)
-[![Chat on Crisp](https://storage.crisp.im/plugins/images/936925df-f37b-4ba8-bab0-70cd2edcb0be/badge.svg)](https://go.crisp.im/chat/embed/?website_id=-JzqEmX56venQuQw4YV8)
 
 The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, access your agent accounts from your Go code.
 
