@@ -488,6 +488,52 @@ type EventsBrowsingStreamScrollData struct {
   Y  *int32  `json:"y"`
 }
 
+// EventsCallRequestInitiated maps call:request:initiated
+type EventsCallRequestInitiated struct {
+  WebsiteID  *string  `json:"website_id"`
+  SessionID  *string  `json:"session_id"`
+  CallID     *string  `json:"call_id"`
+}
+
+// EventsCallRequestRejected maps call:request:rejected
+type EventsCallRequestRejected struct {
+  WebsiteID  *string  `json:"website_id"`
+  SessionID  *string  `json:"session_id"`
+  CallID     *string  `json:"call_id"`
+}
+
+// EventsCallActionStarted maps call:action:started
+type EventsCallActionStarted struct {
+  WebsiteID  *string  `json:"website_id"`
+  SessionID  *string  `json:"session_id"`
+  CallID     *string  `json:"call_id"`
+}
+
+// EventsCallActionStopped maps call:action:stopped
+type EventsCallActionStopped struct {
+  WebsiteID  *string  `json:"website_id"`
+  SessionID  *string  `json:"session_id"`
+  CallID     *string  `json:"call_id"`
+}
+
+// EventsCallSignalingSDP maps call:signaling:sdp
+type EventsCallSignalingSDP struct {
+  WebsiteID  *string       `json:"website_id"`
+  SessionID  *string       `json:"session_id"`
+  CallID     *string       `json:"call_id"`
+  From       *string       `json:"from"`
+  SDP        *interface{}  `json:"sdp"`
+}
+
+// EventsCallSignalingCandidate maps call:signaling:candidate
+type EventsCallSignalingCandidate struct {
+  WebsiteID  *string       `json:"website_id"`
+  SessionID  *string       `json:"session_id"`
+  CallID     *string       `json:"call_id"`
+  From       *string       `json:"from"`
+  Candidate  *interface{}  `json:"candidate"`
+}
+
 // EventsReceiveWebsiteVisitorsCount maps website:update_visitors_count
 type EventsReceiveWebsiteVisitorsCount struct {
   WebsiteID      *string  `json:"website_id"`
@@ -755,6 +801,90 @@ func (evt EventsCampaignDispatched) String() string {
 
 // String returns the string representation of EventsCampaignRunning
 func (evt EventsCampaignRunning) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingRequestInitiated
+func (evt EventsBrowsingRequestInitiated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingRequestRejected
+func (evt EventsBrowsingRequestRejected) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingActionStarted
+func (evt EventsBrowsingActionStarted) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingActionStopped
+func (evt EventsBrowsingActionStopped) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingStreamMirror
+func (evt EventsBrowsingStreamMirror) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingStreamMouse
+func (evt EventsBrowsingStreamMouse) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingStreamTab
+func (evt EventsBrowsingStreamTab) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingStreamScroll
+func (evt EventsBrowsingStreamScroll) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCallRequestInitiated
+func (evt EventsCallRequestInitiated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCallRequestRejected
+func (evt EventsCallRequestRejected) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCallActionStarted
+func (evt EventsCallActionStarted) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCallActionStopped
+func (evt EventsCallActionStopped) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCallSignalingSDP
+func (evt EventsCallSignalingSDP) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCallSignalingCandidate
+func (evt EventsCallSignalingCandidate) String() string {
   return Stringify(evt)
 }
 
@@ -1111,6 +1241,42 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("browsing:stream:scroll", func(chnl *gosocketio.Channel, evt EventsBrowsingStreamScroll) {
     if hdl, ok := register.Handlers["browsing:stream:scroll"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("call:request:initiated", func(chnl *gosocketio.Channel, evt EventsCallRequestInitiated) {
+    if hdl, ok := register.Handlers["call:request:initiated"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("call:request:rejected", func(chnl *gosocketio.Channel, evt EventsCallRequestRejected) {
+    if hdl, ok := register.Handlers["call:request:rejected"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("call:action:started", func(chnl *gosocketio.Channel, evt EventsCallActionStarted) {
+    if hdl, ok := register.Handlers["call:action:started"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("call:action:stopped", func(chnl *gosocketio.Channel, evt EventsCallActionStopped) {
+    if hdl, ok := register.Handlers["call:action:stopped"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("call:signaling:sdp", func(chnl *gosocketio.Channel, evt EventsCallSignalingSDP) {
+    if hdl, ok := register.Handlers["call:signaling:sdp"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("call:signaling:candidate", func(chnl *gosocketio.Channel, evt EventsCallSignalingCandidate) {
+    if hdl, ok := register.Handlers["call:signaling:candidate"]; ok {
       go hdl.callFunc(&evt)
     }
   })

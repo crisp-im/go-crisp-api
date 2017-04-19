@@ -428,6 +428,22 @@ type ConversationBrowsingAction struct {
   Action  *string  `json:"action,omitempty"`
 }
 
+// ConversationCallData mapping
+type ConversationCallData struct {
+  Data  *ConversationCall  `json:"data,omitempty"`
+}
+
+// ConversationCall mapping
+type ConversationCall struct {
+  CallID  *string  `json:"call_id,omitempty"`
+}
+
+// ConversationCallSignalingPayload mapping
+type ConversationCallSignalingPayload struct {
+  Type     string       `json:"type,omitempty"`
+  Payload  interface{}  `json:"payload,omitempty"`
+}
+
 
 // String returns the string representation of Conversation
 func (instance Conversation) String() string {
@@ -467,6 +483,18 @@ func (instance ConversationState) String() string {
 
 // String returns the string representation of ConversationBlock
 func (instance ConversationBlock) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationBrowsing
+func (instance ConversationBrowsing) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationCall
+func (instance ConversationCall) String() string {
   return Stringify(instance)
 }
 
@@ -784,8 +812,8 @@ func (service *WebsiteService) ListBrowsingSessionsForConversation(websiteID str
 }
 
 
-// InitiateBrowsingSessionsForConversation initiates browsing sessions for conversation.
-func (service *WebsiteService) InitiateBrowsingSessionsForConversation(websiteID string, sessionID string) (*Response, error) {
+// InitiateBrowsingSessionForConversation initiates browsing session for conversation.
+func (service *WebsiteService) InitiateBrowsingSessionForConversation(websiteID string, sessionID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/browsing", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, nil)
 
@@ -797,6 +825,48 @@ func (service *WebsiteService) InitiateBrowsingSessionsForConversation(websiteID
 func (service *WebsiteService) SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/browsing/%s", websiteID, sessionID, browsingID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationBrowsingAction{&action})
+
+  return service.client.Do(req, nil)
+}
+
+
+// InitiateNewCallSessionForConversation initiates a new audio/video call session for conversation.
+func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/call", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// GetOngoingCallSessionForConversation gets the ongoing audio/video call session for conversation.
+func (service *WebsiteService) GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/call", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  call := new(ConversationCallData)
+  resp, err := service.client.Do(req, call)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return call.Data, resp, err
+}
+
+
+// AbortOngoingCallSessionForConversation aborts the ongoing audio/video call session for conversation.
+func (service *WebsiteService) AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/call/%s", websiteID, sessionID, callID)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// TransmitSignalingOnOngoingCallSession transmits a signaling payload for the ongoing audio/video call session for conversation.
+func (service *WebsiteService) TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/call/%s", websiteID, sessionID, callID)
+  req, _ := service.client.NewRequest("PATCH", url, payload)
 
   return service.client.Do(req, nil)
 }

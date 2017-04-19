@@ -238,10 +238,14 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Change Conversation State**: `crisp.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
   * **Get Block Status For Conversation**: `crisp.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
   * **Block Incoming Messages For Conversation**: `crisp.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
-  * **List Browsing Sessions For Conversation**: `crisp.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
-  * **Initiate Browsing Sessions For Conversation**: `crisp.Website.InitiateBrowsingSessionsForConversation(websiteID string, sessionID string) (*Response, error)`
-  * **Send Action To An Existing Browsing Session**: `crisp.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
   * **Request Email Transcript For Conversation**: `crisp.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error)`
+  * **List Browsing Sessions For Conversation**: `crisp.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
+  * **Initiate Browsing Session For Conversation**: `crisp.Website.InitiateBrowsingSessionForConversation(websiteID string, sessionID string) (*Response, error)`
+  * **Send Action To An Existing Browsing Session**: `crisp.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
+  * **Initiate New Call Session For Conversation**: `crisp.Website.InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*Response, error)`
+  * **Get Ongoing Call Session For Conversation**: `crisp.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
+  * **Abort Ongoing Call Session For Conversation**: `crisp.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error)`
+  * **Transmit Signaling On Ongoing Call Session**: `crisp.Website.TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error)`
 
 * **Website Analytics**
   * **Acquire Chats Analytics**: `crisp.Website.AcquireChatsAnalytics(websiteID string, filterMetric string, filterOperator string, filterDateStart time.Time, filterDateEnd time.Time, filterDateSplit uint8) (*WebsiteAnalytics, *Response, error)`
@@ -397,6 +401,14 @@ Available events are listed below:
   * **Browsing Stream Mouse**: `browsing:stream:mouse`
   * **Browsing Stream Tab**: `browsing:stream:tab`
   * **Browsing Stream Scroll**: `browsing:stream:scroll`
+
+* **Call Events**
+  * **Call Request Initiated**: `call:request:initiated`
+  * **Call Request Rejected**: `call:request:rejected`
+  * **Call Action Started**: `call:action:started`
+  * **Call Action Stopped**: `call:action:stopped`
+  * **Call Signaling SDP**: `call:signaling:sdp`
+  * **Call Signaling Candidate**: `call:signaling:candidate`
 
 * **Website Events**
   * **Website Update Visitors Count**: `website:update_visitors_count`
