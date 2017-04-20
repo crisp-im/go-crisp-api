@@ -27,7 +27,13 @@ plugin, _, err := client.Plugin.GetPluginInformation("185fe7ee-7cc6-4b8b-884d-fd
 
 ## Authentication
 
-To authenticate to the API, generate your session identifier and session key [using this guide](https://docs.crisp.im/api/v1/#header-authentication).
+To authenticate to the API, generate your session identifier and session key **once** using the following cURL request in your terminal (make sure to replace `YOUR_ACCOUNT_EMAIL` and `YOUR_ACCOUNT_PASSWORD`):
+
+```bash
+curl -H "Content-Type: application/json" -X POST -d '{"email":"YOUR_ACCOUNT_EMAIL","password":"YOUR_ACCOUNT_PASSWORD"}' https://api.crisp.im/v1/user/session/login
+```
+
+If authentication succeeds, you will get a JSON response containing your authentication keys: `identifier` and `key`. **Keep those 2 values private**.
 
 Then, add authentication parameters to your `client` instance right after you create it:
 
@@ -35,10 +41,13 @@ Then, add authentication parameters to your `client` instance right after you cr
 client := crisp.New()
 
 // Authenticate to API (identifier, key)
-client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
+// eg. client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
+client.Authenticate(identifier, key)
 
 // Now, you can use authenticated API sections.
 ```
+
+**🔴 Important: Be sure to login once, and re-use the same authentication keys (same `identifier` + `key`) in all your subsequent requests to the API. Do not generate new tokens from your code for every new request to the API (you will be heavily rate-limited; that will induce HTTP failures for some of your API calls).**
 
 ## Resource Methods
 
