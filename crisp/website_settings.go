@@ -29,8 +29,11 @@ type WebsiteSettings struct {
 
 // WebsiteSettingsContact mapping
 type WebsiteSettingsContact struct {
-  Email  *string  `json:"email,omitempty"`
-  Phone  *string  `json:"phone,omitempty"`
+  Email      *string  `json:"email,omitempty"`
+  Phone      *string  `json:"phone,omitempty"`
+  Messenger  *string  `json:"messenger,omitempty"`
+  Telegram   *string  `json:"telegram,omitempty"`
+  Twitter    *string  `json:"twitter,omitempty"`
 }
 
 // WebsiteSettingsEmails mapping
@@ -72,8 +75,11 @@ type WebsiteSettingsUpdate struct {
 
 // WebsiteSettingsUpdateContact mapping
 type WebsiteSettingsUpdateContact struct {
-  Email  string  `json:"email,omitempty"`
-  Phone  string  `json:"phone,omitempty"`
+  Email      string  `json:"email,omitempty"`
+  Phone      string  `json:"phone,omitempty"`
+  Messenger  string  `json:"messenger,omitempty"`
+  Telegram   string  `json:"telegram,omitempty"`
+  Twitter    string  `json:"twitter,omitempty"`
 }
 
 // WebsiteSettingsUpdateEmails mapping
