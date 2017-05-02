@@ -236,6 +236,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Send A Message In Conversation (Text Variant)**: `crisp.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error)`
   * **Send A Message In Conversation (File Variant)**: `crisp.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error)`
   * **Send A Message In Conversation (Animation Variant)**: `crisp.Website.SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*Response, error)`
+  * **Send A Message In Conversation (Audio Variant)**: `crisp.Website.SendAudioMessageInConversation(websiteID string, sessionID string, message ConversationAudioMessageNew) (*Response, error)`
+  * **Send A Message In Conversation (Picker Variant)**: `crisp.Website.SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*Response, error)`
   * **Send A Message In Conversation (Note Variant)**: `crisp.Website.SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*Response, error)`
   * **Compose A Message In Conversation**: `crisp.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
   * **Mark Messages As Read In Conversation**: `crisp.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
@@ -349,6 +351,16 @@ client.Events.Listen([]string{"message:send"}, func(reg *crisp.EventsRegister) {
   reg.On("message:send/animation", func(evt crisp.EventsReceiveAnimationMessage) {
     // Handle animation message from visitor
   })
+
+  // Register handler on 'message:send/audio' namespace
+  reg.On("message:send/audio", func(evt crisp.EventsReceiveAudioMessage) {
+    // Handle audio message from visitor
+  })
+
+  // Register handler on 'message:send/picker' namespace
+  reg.On("message:send/picker", func(evt crisp.EventsReceivePickerMessage) {
+    // Handle picker message from visitor
+  })
 })
 ```
 
@@ -381,10 +393,14 @@ Available events are listed below:
   * **Message Send (Text Variant)**: `message:send/text`
   * **Message Send (File Variant)**: `message:send/file`
   * **Message Send (Animation Variant)**: `message:send/animation`
+  * **Message Send (Audio Variant)**: `message:send/audio`
+  * **Message Send (Picker Variant)**: `message:send/picker`
   * **Message Send (Note Variant)**: `message:send/note`
   * **Message Received (Text Variant)**: `message:received/text`
   * **Message Received (File Variant)**: `message:received/file`
   * **Message Received (Animation Variant)**: `message:received/animation`
+  * **Message Received (Audio Variant)**: `message:received/audio`
+  * **Message Received (Picker Variant)**: `message:received/picker`
   * **Message Received (Note Variant)**: `message:received/note`
   * **Message Compose Send**: `message:compose:send`
   * **Message Compose Receive**: `message:compose:receive`

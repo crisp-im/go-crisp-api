@@ -32,6 +32,14 @@ func main() {
       fmt.Printf("[message:send/animation] %s\n", evt)
     })
 
+    reg.On("message:send/audio", func(evt crisp.EventsReceiveAudioMessage) {
+      fmt.Printf("[message:send/audio] %s\n", evt)
+    })
+
+    reg.On("message:send/picker", func(evt crisp.EventsReceivePickerMessage) {
+      fmt.Printf("[message:send/picker] %s\n", evt)
+    })
+
     reg.On("message:send/note", func(evt crisp.EventsReceiveNoteMessage) {
       fmt.Printf("[message:send/note] %s\n", evt)
     })
@@ -46,6 +54,14 @@ func main() {
 
     reg.On("message:received/animation", func(evt crisp.EventsReceiveAnimationMessage) {
       fmt.Printf("[message:received/animation] %s\n", evt)
+    })
+
+    reg.On("message:received/audio", func(evt crisp.EventsReceiveAudioMessage) {
+      fmt.Printf("[message:received/audio] %s\n", evt)
+    })
+
+    reg.On("message:received/picker", func(evt crisp.EventsReceivePickerMessage) {
+      fmt.Printf("[message:received/picker] %s\n", evt)
     })
 
     reg.On("message:received/note", func(evt crisp.EventsReceiveNoteMessage) {

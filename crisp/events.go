@@ -43,6 +43,29 @@ type eventsSendBind struct {
   Events  []string  `json:"events"`
 }
 
+type eventsReceiveGenericMessageType struct {
+  Type  *string  `json:"type"`
+}
+
+type eventsReceiveGenericMessage struct {
+  eventsReceiveGenericMessageType
+  WebsiteID    *string                          `json:"website_id"`
+  SessionID    *string                          `json:"session_id"`
+  From         *string                          `json:"from"`
+  Origin       *string                          `json:"origin"`
+  Mentions     *[]string                        `json:"mentions"`
+  Stamped      *bool                            `json:"stamped"`
+  Timestamp    *uint                            `json:"timestamp"`
+  Fingerprint  *int                             `json:"fingerprint"`
+  User         *eventsReceiveCommonMessageUser  `json:"user"`
+}
+
+type eventsReceiveCommonMessageUser struct {
+  UserID    *string  `json:"user_id"`
+  Nickname  *string  `json:"nickname"`
+  Avatar    *string  `json:"avatar"`
+}
+
 // EventsReceiveAuthenticationUnauthorized maps unauthorized
 type EventsReceiveAuthenticationUnauthorized struct {
   Message  *string  `json:"message"`
@@ -262,39 +285,16 @@ type EventsReceiveSessionRemoved struct {
   SessionID  *string  `json:"session_id"`
 }
 
-// EventsReceiveGenericMessageType maps message:{send,received} (generic type, type key only)
-type EventsReceiveGenericMessageType struct {
-  Type  *string  `json:"type"`
-}
-
 // EventsReceiveTextMessage maps message:{send,received} (text type)
 type EventsReceiveTextMessage struct {
-  WebsiteID    *string                          `json:"website_id"`
-  SessionID    *string                          `json:"session_id"`
-  From         *string                          `json:"from"`
-  Type         *string                          `json:"type"`
-  Origin       *string                          `json:"origin"`
-  Content      *string                          `json:"content"`
-  Mentions     *[]string                        `json:"mentions"`
-  Stamped      *bool                            `json:"stamped"`
-  Timestamp    *uint                            `json:"timestamp"`
-  Fingerprint  *int                             `json:"fingerprint"`
-  User         *EventsReceiveCommonMessageUser  `json:"user"`
+  eventsReceiveGenericMessage
+  Content  *string  `json:"content"`
 }
 
 // EventsReceiveFileMessage maps message:{send,received} (file type)
 type EventsReceiveFileMessage struct {
-  WebsiteID    *string                           `json:"website_id"`
-  SessionID    *string                           `json:"session_id"`
-  From         *string                           `json:"from"`
-  Type         *string                           `json:"type"`
-  Origin       *string                           `json:"origin"`
-  Content      *EventsReceiveFileMessageContent  `json:"content"`
-  Mentions     *[]string                         `json:"mentions"`
-  Stamped      *bool                             `json:"stamped"`
-  Timestamp    *uint                             `json:"timestamp"`
-  Fingerprint  *int                              `json:"fingerprint"`
-  User         *EventsReceiveCommonMessageUser   `json:"user"`
+  eventsReceiveGenericMessage
+  Content  *EventsReceiveFileMessageContent  `json:"content"`
 }
 
 // EventsReceiveFileMessageContent maps message:{send,received}/content (file type)
@@ -306,17 +306,8 @@ type EventsReceiveFileMessageContent struct {
 
 // EventsReceiveAnimationMessage maps message:{send,received} (animation type)
 type EventsReceiveAnimationMessage struct {
-  WebsiteID    *string                                `json:"website_id"`
-  SessionID    *string                                `json:"session_id"`
-  From         *string                                `json:"from"`
-  Type         *string                                `json:"type"`
-  Origin       *string                                `json:"origin"`
-  Content      *EventsReceiveAnimationMessageContent  `json:"content"`
-  Mentions     *[]string                              `json:"mentions"`
-  Stamped      *bool                                  `json:"stamped"`
-  Timestamp    *uint                                  `json:"timestamp"`
-  Fingerprint  *int                                   `json:"fingerprint"`
-  User         *EventsReceiveCommonMessageUser        `json:"user"`
+  eventsReceiveGenericMessage
+  Content  *EventsReceiveAnimationMessageContent  `json:"content"`
 }
 
 // EventsReceiveAnimationMessageContent maps message:{send,received}/content (animation type)
@@ -325,15 +316,41 @@ type EventsReceiveAnimationMessageContent struct {
   Type  string  `json:"type"`
 }
 
+// EventsReceiveAudioMessage maps message:{send,received} (audio type)
+type EventsReceiveAudioMessage struct {
+  eventsReceiveGenericMessage
+  Content  *EventsReceiveAudioMessageContent  `json:"content"`
+}
+
+// EventsReceiveAudioMessageContent maps message:{send,received}/content (audio type)
+type EventsReceiveAudioMessageContent struct {
+  URL       string  `json:"url"`
+  Type      string  `json:"type"`
+  Duration  uint16  `json:"duration"`
+}
+
+// EventsReceivePickerMessage maps message:{send,received} (picker type)
+type EventsReceivePickerMessage struct {
+  eventsReceiveGenericMessage
+  Content  *EventsReceivePickerMessageContent  `json:"content"`
+}
+
+// EventsReceivePickerMessageContent maps message:{send,received}/content (picker type)
+type EventsReceivePickerMessageContent struct {
+  ID       string                                      `json:"id"`
+  Text     string                                      `json:"text"`
+  Choices  *[]EventsReceivePickerMessageContentChoice  `json:"choices"`
+}
+
+// EventsReceivePickerMessageContentChoice maps message:{send,received}/content/choices (picker type)
+type EventsReceivePickerMessageContentChoice struct {
+  Value     string  `json:"value"`
+  Label     string  `json:"label"`
+  Selected  bool    `json:"selected"`
+}
+
 // EventsReceiveNoteMessage maps message:{send,received} (note type)
 type EventsReceiveNoteMessage EventsReceiveTextMessage
-
-// EventsReceiveCommonMessageUser maps message:{send,received}/user
-type EventsReceiveCommonMessageUser struct {
-  UserID    *string  `json:"user_id"`
-  Nickname  *string  `json:"nickname"`
-  Avatar    *string  `json:"avatar"`
-}
 
 // EventsReceiveMessageComposeSend maps message:compose:send
 type EventsReceiveMessageComposeSend struct {
@@ -727,12 +744,6 @@ func (evt EventsReceiveSessionRemoved) String() string {
 }
 
 
-// String returns the string representation of EventsReceiveGenericMessageType
-func (evt EventsReceiveGenericMessageType) String() string {
-  return Stringify(evt)
-}
-
-
 // String returns the string representation of EventsReceiveTextMessage
 func (evt EventsReceiveTextMessage) String() string {
   return Stringify(evt)
@@ -747,6 +758,18 @@ func (evt EventsReceiveFileMessage) String() string {
 
 // String returns the string representation of EventsReceiveAnimationMessage
 func (evt EventsReceiveAnimationMessage) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveAudioMessage
+func (evt EventsReceiveAudioMessage) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceivePickerMessage
+func (evt EventsReceivePickerMessage) String() string {
   return Stringify(evt)
 }
 
@@ -1060,7 +1083,7 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
   })
 
   so.On("message:send", func(chnl *gosocketio.Channel, evt *json.RawMessage) {
-    var messageGenericType EventsReceiveGenericMessageType
+    var messageGenericType eventsReceiveGenericMessageType
     json.Unmarshal(*evt, &messageGenericType)
 
     switch *messageGenericType.Type {
@@ -1088,6 +1111,22 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         go hdl.callFunc(&messageSendAnimation)
       }
 
+    case "audio":
+      if hdl, ok := register.Handlers["message:send/audio"]; ok {
+        var messageSendAudio EventsReceiveAudioMessage
+        json.Unmarshal(*evt, &messageSendAudio)
+
+        go hdl.callFunc(&messageSendAudio)
+      }
+
+    case "picker":
+      if hdl, ok := register.Handlers["message:send/picker"]; ok {
+        var messageSendPicker EventsReceivePickerMessage
+        json.Unmarshal(*evt, &messageSendPicker)
+
+        go hdl.callFunc(&messageSendPicker)
+      }
+
     case "note":
       if hdl, ok := register.Handlers["message:send/note"]; ok {
         var messageSendNote EventsReceiveNoteMessage
@@ -1099,7 +1138,7 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
   })
 
   so.On("message:received", func(chnl *gosocketio.Channel, evt *json.RawMessage) {
-    var messageGenericType EventsReceiveGenericMessageType
+    var messageGenericType eventsReceiveGenericMessageType
     json.Unmarshal(*evt, &messageGenericType)
 
     switch *messageGenericType.Type {
@@ -1125,6 +1164,22 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         json.Unmarshal(*evt, &messageReceivedAnimation)
 
         go hdl.callFunc(&messageReceivedAnimation)
+      }
+
+    case "audio":
+      if hdl, ok := register.Handlers["message:received/audio"]; ok {
+        var messageReceivedAudio EventsReceiveAudioMessage
+        json.Unmarshal(*evt, &messageReceivedAudio)
+
+        go hdl.callFunc(&messageReceivedAudio)
+      }
+
+    case "picker":
+      if hdl, ok := register.Handlers["message:received/picker"]; ok {
+        var messageReceivedPicker EventsReceivePickerMessage
+        json.Unmarshal(*evt, &messageReceivedPicker)
+
+        go hdl.callFunc(&messageReceivedPicker)
       }
 
     case "note":

@@ -134,6 +134,27 @@ type ConversationMessageAnimationContent struct {
   Type  *string  `json:"type"`
 }
 
+// ConversationMessageAudioContent mapping
+type ConversationMessageAudioContent struct {
+  URL       *string  `json:"url"`
+  Type      *string  `json:"type"`
+  Duration  *uint16  `json:"duration"`
+}
+
+// ConversationMessagePickerContent mapping
+type ConversationMessagePickerContent struct {
+  ID       *string                                    `json:"id"`
+  Text     *string                                    `json:"text"`
+  Choices  *[]ConversationMessagePickerContentChoice  `json:"choices"`
+}
+
+// ConversationMessagePickerContentChoice mapping
+type ConversationMessagePickerContentChoice struct {
+  Value     *string  `json:"value"`
+  Label     *string  `json:"label"`
+  Selected  *bool    `json:"selected"`
+}
+
 // ConversationMessageNoteContent mapping
 type ConversationMessageNoteContent string
 
@@ -279,6 +300,49 @@ type ConversationAnimationMessageNew struct {
 type ConversationAnimationMessageNewContent struct {
   URL   string  `json:"url,omitempty"`
   Type  string  `json:"type,omitempty"`
+}
+
+// ConversationAudioMessageNew mapping
+type ConversationAudioMessageNew struct {
+  Type         string                              `json:"type,omitempty"`
+  From         string                              `json:"from,omitempty"`
+  Origin       string                              `json:"origin,omitempty"`
+  Content      ConversationAudioMessageNewContent  `json:"content,omitempty"`
+  Mentions     []string                            `json:"mentions,omitempty"`
+  Fingerprint  int                                 `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+}
+
+// ConversationAudioMessageNewContent mapping
+type ConversationAudioMessageNewContent struct {
+  URL       string  `json:"url,omitempty"`
+  Type      string  `json:"type,omitempty"`
+  Duration  uint16  `json:"duration,omitempty"`
+}
+
+// ConversationPickerMessageNew mapping
+type ConversationPickerMessageNew struct {
+  Type         string                               `json:"type,omitempty"`
+  From         string                               `json:"from,omitempty"`
+  Origin       string                               `json:"origin,omitempty"`
+  Content      ConversationPickerMessageNewContent  `json:"content,omitempty"`
+  Mentions     []string                             `json:"mentions,omitempty"`
+  Fingerprint  int                                  `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser        `json:"user,omitempty"`
+}
+
+// ConversationPickerMessageNewContent mapping
+type ConversationPickerMessageNewContent struct {
+  ID       string                                       `json:"id,omitempty"`
+  Text     string                                       `json:"text,omitempty"`
+  Choices  []ConversationPickerMessageNewContentChoice  `json:"choices,omitempty"`
+}
+
+// ConversationPickerMessageNewContentChoice mapping
+type ConversationPickerMessageNewContentChoice struct {
+  Value     string  `json:"value,omitempty"`
+  Label     string  `json:"label,omitempty"`
+  Selected  bool    `json:"selected,omitempty"`
 }
 
 // ConversationNoteMessageNew mapping
@@ -649,6 +713,24 @@ func (service *WebsiteService) SendFileMessageInConversation(websiteID string, s
 
 // SendAnimationMessageInConversation sends a message in an existing conversation (animation variant).
 func (service *WebsiteService) SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, message)
+
+  return service.client.Do(req, nil)
+}
+
+
+// SendAudioMessageInConversation sends a message in an existing conversation (audio variant).
+func (service *WebsiteService) SendAudioMessageInConversation(websiteID string, sessionID string, message ConversationAudioMessageNew) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, message)
+
+  return service.client.Do(req, nil)
+}
+
+
+// SendPickerMessageInConversation sends a message in an existing conversation (picker variant).
+func (service *WebsiteService) SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
