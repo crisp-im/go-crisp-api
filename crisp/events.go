@@ -285,6 +285,14 @@ type EventsReceiveSessionRemoved struct {
   SessionID  *string  `json:"session_id"`
 }
 
+// EventsReceiveMessageUpdated maps message:updated
+type EventsReceiveMessageUpdated struct {
+  WebsiteID    *string       `json:"website_id"`
+  SessionID    *string       `json:"session_id"`
+  Fingerprint  *int          `json:"fingerprint"`
+  Content      *interface{}  `json:"content"`
+}
+
 // EventsReceiveTextMessage maps message:{send,received} (text type)
 type EventsReceiveTextMessage struct {
   eventsReceiveGenericMessage
@@ -744,6 +752,12 @@ func (evt EventsReceiveSessionRemoved) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveMessageUpdated
+func (evt EventsReceiveMessageUpdated) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveTextMessage
 func (evt EventsReceiveTextMessage) String() string {
   return Stringify(evt)
@@ -1078,6 +1092,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:removed", func(chnl *gosocketio.Channel, evt EventsReceiveSessionRemoved) {
     if hdl, ok := register.Handlers["session:removed"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("message:updated", func(chnl *gosocketio.Channel, evt EventsReceiveMessageUpdated) {
+    if hdl, ok := register.Handlers["message:updated"]; ok {
       go hdl.callFunc(&evt)
     }
   })

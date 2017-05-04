@@ -390,6 +390,7 @@ Available events are listed below:
   * **Session Removed**: `session:removed`
 
 * **Message Events**
+  * **Message Updated**: `message:updated`
   * **Message Send (Text Variant)**: `message:send/text`
   * **Message Send (File Variant)**: `message:send/file`
   * **Message Send (Animation Variant)**: `message:send/animation`
