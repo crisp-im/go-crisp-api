@@ -45,6 +45,7 @@ type WebsiteSettingsEmails struct {
 // WebsiteSettingsChatbox mapping
 type WebsiteSettingsChatbox struct {
   Tile                 *string    `json:"tile,omitempty"`
+  WaitGame             *bool      `json:"wait_game,omitempty"`
   LastOperatorFace     *bool      `json:"last_operator_face,omitempty"`
   ActivityMetrics      *bool      `json:"activity_metrics,omitempty"`
   AvailabilityTooltip  *bool      `json:"availability_tooltip,omitempty"`
@@ -91,6 +92,7 @@ type WebsiteSettingsUpdateEmails struct {
 // WebsiteSettingsUpdateChatbox mapping
 type WebsiteSettingsUpdateChatbox struct {
   Tile                 string     `json:"tile,omitempty"`
+  WaitGame             bool       `json:"wait_game,omitempty"`
   LastOperatorFace     bool       `json:"last_operator_face,omitempty"`
   ActivityMetrics      bool       `json:"activity_metrics,omitempty"`
   AvailabilityTooltip  bool       `json:"availability_tooltip,omitempty"`
