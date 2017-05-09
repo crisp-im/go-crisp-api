@@ -357,6 +357,20 @@ type EventsReceivePickerMessageContentChoice struct {
   Selected  bool    `json:"selected"`
 }
 
+// EventsReceiveFieldMessage maps message:{send,received} (field type)
+type EventsReceiveFieldMessage struct {
+  eventsReceiveGenericMessage
+  Content  *EventsReceiveFieldMessageContent  `json:"content"`
+}
+
+// EventsReceiveFieldMessageContent maps message:{send,received}/content (field type)
+type EventsReceiveFieldMessageContent struct {
+  ID       string  `json:"id"`
+  Text     string  `json:"text"`
+  Explain  string  `json:"explain"`
+  Value    string  `json:"value"`
+}
+
 // EventsReceiveNoteMessage maps message:{send,received} (note type)
 type EventsReceiveNoteMessage EventsReceiveTextMessage
 
@@ -788,6 +802,12 @@ func (evt EventsReceivePickerMessage) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveFieldMessage
+func (evt EventsReceiveFieldMessage) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveNoteMessage
 func (evt EventsReceiveNoteMessage) String() string {
   return Stringify(evt)
@@ -1147,6 +1167,14 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         go hdl.callFunc(&messageSendPicker)
       }
 
+    case "field":
+      if hdl, ok := register.Handlers["message:send/field"]; ok {
+        var messageSendField EventsReceiveFieldMessage
+        json.Unmarshal(*evt, &messageSendField)
+
+        go hdl.callFunc(&messageSendField)
+      }
+
     case "note":
       if hdl, ok := register.Handlers["message:send/note"]; ok {
         var messageSendNote EventsReceiveNoteMessage
@@ -1200,6 +1228,14 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         json.Unmarshal(*evt, &messageReceivedPicker)
 
         go hdl.callFunc(&messageReceivedPicker)
+      }
+
+    case "field":
+      if hdl, ok := register.Handlers["message:received/field"]; ok {
+        var messageReceivedField EventsReceiveFieldMessage
+        json.Unmarshal(*evt, &messageReceivedField)
+
+        go hdl.callFunc(&messageReceivedField)
       }
 
     case "note":

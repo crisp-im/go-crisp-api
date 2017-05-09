@@ -155,6 +155,14 @@ type ConversationMessagePickerContentChoice struct {
   Selected  *bool    `json:"selected"`
 }
 
+// ConversationMessageFieldContent mapping
+type ConversationMessageFieldContent struct {
+  ID       *string  `json:"id"`
+  Text     *string  `json:"text"`
+  Explain  *string  `json:"explain"`
+  Value    *string  `json:"value"`
+}
+
 // ConversationMessageNoteContent mapping
 type ConversationMessageNoteContent string
 
@@ -343,6 +351,25 @@ type ConversationPickerMessageNewContentChoice struct {
   Value     string  `json:"value,omitempty"`
   Label     string  `json:"label,omitempty"`
   Selected  bool    `json:"selected,omitempty"`
+}
+
+// ConversationFieldMessageNew mapping
+type ConversationFieldMessageNew struct {
+  Type         string                              `json:"type,omitempty"`
+  From         string                              `json:"from,omitempty"`
+  Origin       string                              `json:"origin,omitempty"`
+  Content      ConversationFieldMessageNewContent  `json:"content,omitempty"`
+  Mentions     []string                            `json:"mentions,omitempty"`
+  Fingerprint  int                                 `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+}
+
+// ConversationFieldMessageNewContent mapping
+type ConversationFieldMessageNewContent struct {
+  ID       string  `json:"id,omitempty"`
+  Text     string  `json:"text,omitempty"`
+  Explain  string  `json:"explain,omitempty"`
+  Value    string  `json:"value,omitempty"`
 }
 
 // ConversationNoteMessageNew mapping
@@ -731,6 +758,15 @@ func (service *WebsiteService) SendAudioMessageInConversation(websiteID string, 
 
 // SendPickerMessageInConversation sends a message in an existing conversation (picker variant).
 func (service *WebsiteService) SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, message)
+
+  return service.client.Do(req, nil)
+}
+
+
+// SendFieldMessageInConversation sends a message in an existing conversation (field variant).
+func (service *WebsiteService) SendFieldMessageInConversation(websiteID string, sessionID string, message ConversationFieldMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
