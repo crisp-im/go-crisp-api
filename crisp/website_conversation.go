@@ -101,6 +101,19 @@ type ConversationPage struct {
   Timestamp     *uint    `json:"timestamp,omitempty"`
 }
 
+// ConversationEventsData mapping
+type ConversationEventsData struct {
+  Data  *[]ConversationEvent  `json:"data,omitempty"`
+}
+
+// ConversationEvent mapping
+type ConversationEvent struct {
+  Text       *string       `json:"text,omitempty"`
+  Data       *interface{}  `json:"data,omitempty"`
+  Color      *string       `json:"color,omitempty"`
+  Timestamp  *uint         `json:"timestamp,omitempty"`
+}
+
 // ConversationMessage mapping
 type ConversationMessage struct {
   SessionID    *string                        `json:"session_id,omitempty"`
@@ -846,6 +859,21 @@ func (service *WebsiteService) ListConversationPages(websiteID string, sessionID
   }
 
   return pages.Data, resp, err
+}
+
+
+// ListConversationEvents lists stacked events in conversation.
+func (service *WebsiteService) ListConversationEvents(websiteID string, sessionID string, pageNumber uint) (*[]ConversationEvent, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/events/%d", websiteID, sessionID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  events := new(ConversationEventsData)
+  resp, err := service.client.Do(req, events)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return events.Data, resp, err
 }
 
 

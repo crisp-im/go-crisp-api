@@ -141,6 +141,21 @@ type EventsReceiveSessionSyncPagesOne struct {
   Timestamp     *uint    `json:"timestamp"`
 }
 
+// EventsReceiveSessionSyncEvents maps session:sync:events
+type EventsReceiveSessionSyncEvents struct {
+  WebsiteID  *string                             `json:"website_id"`
+  SessionID  *string                             `json:"session_id"`
+  Events     *EventsReceiveSessionSyncEventsOne  `json:"events"`
+}
+
+// EventsReceiveSessionSyncEventsOne maps session:sync:events/events
+type EventsReceiveSessionSyncEventsOne struct {
+  Text       *string       `json:"text"`
+  Data       *interface{}  `json:"data"`
+  Color      *string       `json:"color"`
+  Timestamp  *uint         `json:"timestamp"`
+}
+
 // EventsReceiveSessionSyncGeolocation maps session:sync:geolocation
 type EventsReceiveSessionSyncGeolocation struct {
   WebsiteID    *string                                   `json:"website_id"`
@@ -694,6 +709,12 @@ func (evt EventsReceiveSessionSyncPages) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveSessionSyncEvents
+func (evt EventsReceiveSessionSyncEvents) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveSessionSyncGeolocation
 func (evt EventsReceiveSessionSyncGeolocation) String() string {
   return Stringify(evt)
@@ -1040,6 +1061,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:sync:pages", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncPages) {
     if hdl, ok := register.Handlers["session:sync:pages"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:sync:events", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncEvents) {
+    if hdl, ok := register.Handlers["session:sync:events"]; ok {
       go hdl.callFunc(&evt)
     }
   })

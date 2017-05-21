@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 05/09/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 05/21/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -246,6 +246,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Conversation Metas**: `crisp.Website.GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error)`
   * **Update Conversation Metas**: `crisp.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
   * **List Conversation Pages**: `crisp.Website.ListConversationPages(websiteID string, sessionID string, pageNumber uint) (*[]ConversationPage, *Response, error)`
+  * **List Conversation Events**: `crisp.Website.ListConversationEvents(websiteID string, sessionID string, pageNumber uint) (*[]ConversationEvent, *Response, error)`
   * **Get Conversation State**: `crisp.Website.GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error)`
   * **Change Conversation State**: `crisp.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
   * **Get Block Status For Conversation**: `crisp.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
@@ -382,6 +383,7 @@ Available events are listed below:
   * **Session Set Nickname**: `session:set_nickname`
   * **Session Set Data**: `session:set_data`
   * **Session Sync Pages**: `session:sync:pages`
+  * **Session Sync Events**: `session:sync:events`
   * **Session Sync Geolocation**: `session:sync:geolocation`
   * **Session Sync System**: `session:sync:system`
   * **Session Sync Network**: `session:sync:network`
