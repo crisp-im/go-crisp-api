@@ -588,22 +588,28 @@ type EventsCallSignalingCandidate struct {
   Candidate  *interface{}  `json:"candidate"`
 }
 
-// EventsReceiveWebsiteVisitorsCount maps website:update_visitors_count
-type EventsReceiveWebsiteVisitorsCount struct {
+// EventsReceiveWebsiteUpdateVisitorsCount maps website:update_visitors_count
+type EventsReceiveWebsiteUpdateVisitorsCount struct {
   WebsiteID      *string  `json:"website_id"`
   VisitorsCount  *uint    `json:"visitors_count"`
 }
 
-// EventsReceiveUpdateOperatorsAvailability maps website:update_operators_availability
-type EventsReceiveUpdateOperatorsAvailability struct {
-  WebsiteID     *string                                          `json:"website_id"`
-  UserID        *string                                          `json:"user_id"`
-  Availability  *EventsReceiveUpdateOperatorsAvailabilityItself  `json:"availability"`
+// EventsReceiveWebsiteUpdateOperatorsAvailability maps website:update_operators_availability
+type EventsReceiveWebsiteUpdateOperatorsAvailability struct {
+  WebsiteID     *string                                                 `json:"website_id"`
+  UserID        *string                                                 `json:"user_id"`
+  Availability  *EventsReceiveWebsiteUpdateOperatorsAvailabilityItself  `json:"availability"`
 }
 
-// EventsReceiveUpdateOperatorsAvailabilityItself maps website:update_operators_availability/availability
-type EventsReceiveUpdateOperatorsAvailabilityItself struct {
+// EventsReceiveWebsiteUpdateOperatorsAvailabilityItself maps website:update_operators_availability/availability
+type EventsReceiveWebsiteUpdateOperatorsAvailabilityItself struct {
   Type  *string  `json:"type"`
+}
+
+// EventsReceiveWebsiteUsersAvailable maps website:users:available
+type EventsReceiveWebsiteUsersAvailable struct {
+  WebsiteID  *string  `json:"website_id"`
+  Available  *bool    `json:"available"`
 }
 
 // EventsReceiveBucketURLUploadGenerated maps bucket:url:upload:generated
@@ -967,8 +973,20 @@ func (evt EventsCallSignalingCandidate) String() string {
 }
 
 
-// String returns the string representation of EventsReceiveWebsiteVisitorsCount
-func (evt EventsReceiveWebsiteVisitorsCount) String() string {
+// String returns the string representation of EventsReceiveWebsiteUpdateVisitorsCount
+func (evt EventsReceiveWebsiteUpdateVisitorsCount) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveWebsiteUpdateOperatorsAvailability
+func (evt EventsReceiveWebsiteUpdateOperatorsAvailability) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveWebsiteUsersAvailable
+func (evt EventsReceiveWebsiteUsersAvailable) String() string {
   return Stringify(evt)
 }
 
@@ -1419,14 +1437,20 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
     }
   })
 
-  so.On("website:update_visitors_count", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteVisitorsCount) {
+  so.On("website:update_visitors_count", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteUpdateVisitorsCount) {
     if hdl, ok := register.Handlers["website:update_visitors_count"]; ok {
       go hdl.callFunc(&evt)
     }
   })
 
-  so.On("website:update_operators_availability", func(chnl *gosocketio.Channel, evt EventsReceiveUpdateOperatorsAvailability) {
+  so.On("website:update_operators_availability", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteUpdateOperatorsAvailability) {
     if hdl, ok := register.Handlers["website:update_operators_availability"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("website:users:available", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteUsersAvailable) {
+    if hdl, ok := register.Handlers["website:users:available"]; ok {
       go hdl.callFunc(&evt)
     }
   })

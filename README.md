@@ -449,6 +449,7 @@ Available events are listed below:
 * **Website Events**
   * **Website Update Visitors Count**: `website:update_visitors_count`
   * **Website Update Operators Availability**: `website:update_operators_availability`
+  * **Website Users Available**: `website:users:available`
 
 * **Bucket Events**
   * **Bucket URL Upload Generated**: `bucket:url:upload:generated`
