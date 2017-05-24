@@ -634,25 +634,10 @@ type EventsReceiveBucketURLUploadGeneratedURL struct {
 }
 
 // EventsReceiveBucketURLAvatarGenerated maps bucket:url:avatar:generated
-type EventsReceiveBucketURLAvatarGenerated struct {
-  From        *string                                       `json:"from"`
-  ID          *int                                          `json:"id"`
-  Identifier  *string                                       `json:"identifier"`
-  Policy      *EventsReceiveBucketURLAvatarGeneratedPolicy  `json:"policy"`
-  Type        *string                                       `json:"type"`
-  URL         *EventsReceiveBucketURLAvatarGeneratedURL     `json:"url"`
-}
+type EventsReceiveBucketURLAvatarGenerated EventsReceiveBucketURLUploadGenerated
 
-// EventsReceiveBucketURLAvatarGeneratedPolicy maps bucket:url:avatar:generated/policy
-type EventsReceiveBucketURLAvatarGeneratedPolicy struct {
-  SizeLimit  *uint  `json:"size_limit"`
-}
-
-// EventsReceiveBucketURLAvatarGeneratedURL maps bucket:url:avatar:generated/url
-type EventsReceiveBucketURLAvatarGeneratedURL struct {
-  Resource  *string  `json:"resource"`
-  Signed    *string  `json:"signed"`
-}
+// EventsReceiveBucketURLCampaignGenerated maps bucket:url:campaign:generated
+type EventsReceiveBucketURLCampaignGenerated EventsReceiveBucketURLUploadGenerated
 
 // EventsReceiveMediaAnimationListed maps media:animation:listed
 type EventsReceiveMediaAnimationListed struct {
@@ -999,6 +984,12 @@ func (evt EventsReceiveBucketURLUploadGenerated) String() string {
 
 // String returns the string representation of EventsReceiveBucketURLAvatarGenerated
 func (evt EventsReceiveBucketURLAvatarGenerated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveBucketURLCampaignGenerated
+func (evt EventsReceiveBucketURLCampaignGenerated) String() string {
   return Stringify(evt)
 }
 
@@ -1463,6 +1454,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("bucket:url:avatar:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLAvatarGenerated) {
     if hdl, ok := register.Handlers["bucket:url:avatar:generated"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("bucket:url:campaign:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLCampaignGenerated) {
+    if hdl, ok := register.Handlers["bucket:url:campaign:generated"]; ok {
       go hdl.callFunc(&evt)
     }
   })

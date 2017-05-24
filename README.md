@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 05/21/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 05/24/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -454,6 +454,7 @@ Available events are listed below:
 * **Bucket Events**
   * **Bucket URL Upload Generated**: `bucket:url:upload:generated`
   * **Bucket URL Avatar Generated**: `bucket:url:avatar:generated`
+  * **Bucket URL Campaign Generated**: `bucket:url:campaign:generated`
 
 * **Media Events**
   * **Media Animation Listed**: `media:animation:listed`
