@@ -92,8 +92,16 @@ func (service *PluginService) CheckConnectSessionValidity() (*Response, error) {
 
 
 // ListAllConnectWebsites lists all websites linked to connected plugin.
-func (service *PluginService) ListAllConnectWebsites(pageNumber uint) (*[]PluginConnectAllWebsites, *Response, error) {
-  url := fmt.Sprintf("plugin/connect/websites/all/%d", pageNumber)
+func (service *PluginService) ListAllConnectWebsites(pageNumber uint, filterConfigured bool) (*[]PluginConnectAllWebsites, *Response, error) {
+  var filterConfiguredValue string
+
+  if filterConfigured == true {
+    filterConfiguredValue = "1"
+  } else {
+    filterConfiguredValue = "0"
+  }
+
+  url := fmt.Sprintf("plugin/connect/websites/all/%d?filter_configured=%s", pageNumber, url.QueryEscape(filterConfiguredValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   websites := new(PluginConnectAllWebsitesData)
@@ -107,13 +115,21 @@ func (service *PluginService) ListAllConnectWebsites(pageNumber uint) (*[]Plugin
 
 
 // ListConnectWebsitesSince lists the websites linked or unlinked or updated for connected plugin, since given date.
-func (service *PluginService) ListConnectWebsitesSince(dateSince time.Time) (*[]PluginConnectWebsitesSince, *Response, error) {
+func (service *PluginService) ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool) (*[]PluginConnectWebsitesSince, *Response, error) {
   dateSinceFormat, err := dateSince.UTC().MarshalText()
   if err != nil {
     return nil, nil, err
   }
 
-  url := fmt.Sprintf("plugin/connect/websites/since?date_since=%s", url.QueryEscape(string(dateSinceFormat[:])))
+  var filterConfiguredValue string
+
+  if filterConfigured == true {
+    filterConfiguredValue = "1"
+  } else {
+    filterConfiguredValue = "0"
+  }
+
+  url := fmt.Sprintf("plugin/connect/websites/since?date_since=%s&filter_configured=%s", url.QueryEscape(string(dateSinceFormat[:])), url.QueryEscape(filterConfiguredValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   websites := new(PluginConnectWebsitesSinceData)

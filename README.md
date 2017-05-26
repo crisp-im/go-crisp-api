@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 05/24/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 05/26/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -298,8 +298,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Plugin Connect**
   * **Get Connect Account**: `crisp.Plugin.GetConnectAccount() (*PluginConnectAccount, *Response, error)`
   * **Check Connect Session Validity**: `crisp.Plugin.CheckConnectSessionValidity() (*Response, error)`
-  * **List All Connect Websites**: `crisp.Plugin.ListAllConnectWebsites(pageNumber uint) (*[]PluginConnectAllWebsites, *Response, error)`
-  * **List Connect Websites Since**: `crisp.Plugin.ListConnectWebsitesSince(dateSince time.Time) (*[]PluginConnectWebsitesSince, *Response, error)`
+  * **List All Connect Websites**: `crisp.Plugin.ListAllConnectWebsites(pageNumber uint, filterConfigured bool) (*[]PluginConnectAllWebsites, *Response, error)`
+  * **List Connect Websites Since**: `crisp.Plugin.ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool) (*[]PluginConnectWebsitesSince, *Response, error)`
 
 ### Plan
 
