@@ -19,6 +19,7 @@ type WebsiteAvailabilityStatusData struct {
 // WebsiteAvailabilityStatus mapping
 type WebsiteAvailabilityStatus struct {
   Status  *string  `json:"status,omitempty"`
+  Since   *uint    `json:"since,omitempty"`
 }
 
 
