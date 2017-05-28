@@ -61,6 +61,7 @@ type eventsReceiveGenericMessage struct {
 }
 
 type eventsReceiveCommonMessageUser struct {
+  Type      *string  `json:"type"`
   UserID    *string  `json:"user_id"`
   Nickname  *string  `json:"nickname"`
   Avatar    *string  `json:"avatar"`

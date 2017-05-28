@@ -197,6 +197,7 @@ type ConversationMessagePreviewInformation struct {
 
 // ConversationMessageUser mapping
 type ConversationMessageUser struct {
+  Type      *string  `json:"type,omitempty"`
   UserID    *string  `json:"user_id,omitempty"`
   Nickname  *string  `json:"nickname,omitempty"`
   Avatar    *string  `json:"avatar,omitempty"`
@@ -390,6 +391,7 @@ type ConversationNoteMessageNew ConversationTextMessageNew
 
 // ConversationAllMessageNewUser mapping
 type ConversationAllMessageNewUser struct {
+  Type      string  `json:"type,omitempty"`
   Nickname  string  `json:"nickname,omitempty"`
   Avatar    string  `json:"avatar,omitempty"`
 }
