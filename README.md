@@ -142,6 +142,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website Base**
   * **Create Website**: `crisp.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
+  * **Get A Website**: `crisp.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
   * **Delete A Website**: `crisp.Website.DeleteWebsite(websiteID string) (*Response, error)`
 
 * **Website Batch**
