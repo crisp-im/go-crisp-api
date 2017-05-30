@@ -257,6 +257,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Initiate Browsing Session For Conversation**: `crisp.Website.InitiateBrowsingSessionForConversation(websiteID string, sessionID string) (*Response, error)`
   * **Send Action To An Existing Browsing Session**: `crisp.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
   * **Debug Existing Browsing Session**: `crisp.Website.DebugExistingBrowsingSession(websiteID string, sessionID string, browsingID string, debug ConversationBrowsingDebug) (*Response, error)`
+  * **Assist Existing Browsing Session**: `crisp.Website.AssistExistingBrowsingSession(websiteID string, sessionID string, browsingID string, assist ConversationBrowsingAssist) (*Response, error)`
   * **Initiate New Call Session For Conversation**: `crisp.Website.InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*Response, error)`
   * **Get Ongoing Call Session For Conversation**: `crisp.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
   * **Abort Ongoing Call Session For Conversation**: `crisp.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error)`
@@ -443,6 +444,8 @@ Available events are listed below:
   * **Browsing Debug Stopped**: `browsing:debug:stopped`
   * **Browsing Debug Executed**: `browsing:debug:executed`
   * **Browsing Debug Stream**: `browsing:debug:stream`
+  * **Browsing Assist Started**: `browsing:assist:started`
+  * **Browsing Assist Stopped**: `browsing:assist:stopped`
 
 * **Call Events**
   * **Call Request Initiated**: `call:request:initiated`

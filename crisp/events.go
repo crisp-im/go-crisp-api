@@ -562,6 +562,16 @@ type EventsBrowsingDebugStreamData struct {
   Traceback  *string  `json:"traceback"`
 }
 
+// EventsBrowsingAssistStarted maps browsing:assist:started
+type EventsBrowsingAssistStarted struct {
+  eventsBrowsingGeneric
+}
+
+// EventsBrowsingAssistStopped maps browsing:assist:stopped
+type EventsBrowsingAssistStopped struct {
+  eventsBrowsingGeneric
+}
+
 // EventsCallRequestInitiated maps call:request:initiated
 type EventsCallRequestInitiated struct {
   eventsCallGeneric
@@ -950,6 +960,18 @@ func (evt EventsBrowsingDebugExecuted) String() string {
 
 // String returns the string representation of EventsBrowsingDebugStream
 func (evt EventsBrowsingDebugStream) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingAssistStarted
+func (evt EventsBrowsingAssistStarted) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingAssistStopped
+func (evt EventsBrowsingAssistStopped) String() string {
   return Stringify(evt)
 }
 
@@ -1444,6 +1466,18 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("browsing:debug:stream", func(chnl *gosocketio.Channel, evt EventsBrowsingDebugStream) {
     if hdl, ok := register.Handlers["browsing:debug:stream"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:assist:started", func(chnl *gosocketio.Channel, evt EventsBrowsingAssistStarted) {
+    if hdl, ok := register.Handlers["browsing:assist:started"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:assist:stopped", func(chnl *gosocketio.Channel, evt EventsBrowsingAssistStopped) {
+    if hdl, ok := register.Handlers["browsing:assist:stopped"]; ok {
       go hdl.callFunc(&evt)
     }
   })

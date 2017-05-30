@@ -540,6 +540,25 @@ type ConversationBrowsingDebug struct {
   Execute  *string  `json:"execute,omitempty"`
 }
 
+// ConversationBrowsingAssist mapping
+type ConversationBrowsingAssist struct {
+  Action  *string                            `json:"action,omitempty"`
+  Mouse   *ConversationBrowsingAssistMouse   `json:"mouse,omitempty"`
+  Scroll  *ConversationBrowsingAssistScroll  `json:"scroll,omitempty"`
+}
+
+// ConversationBrowsingAssistMouse mapping
+type ConversationBrowsingAssistMouse struct {
+  X  *uint16  `json:"x,omitempty"`
+  Y  *uint16  `json:"y,omitempty"`
+}
+
+// ConversationBrowsingAssistScroll mapping
+type ConversationBrowsingAssistScroll struct {
+  X  *uint16  `json:"x,omitempty"`
+  Y  *uint16  `json:"y,omitempty"`
+}
+
 // ConversationCallData mapping
 type ConversationCallData struct {
   Data  *ConversationCall  `json:"data,omitempty"`
@@ -988,6 +1007,15 @@ func (service *WebsiteService) SendActionToExistingBrowsingSession(websiteID str
 func (service *WebsiteService) DebugExistingBrowsingSession(websiteID string, sessionID string, browsingID string, debug ConversationBrowsingDebug) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/browsing/%s/debug", websiteID, sessionID, browsingID)
   req, _ := service.client.NewRequest("PATCH", url, debug)
+
+  return service.client.Do(req, nil)
+}
+
+
+// AssistExistingBrowsingSession assists an existing browsing session.
+func (service *WebsiteService) AssistExistingBrowsingSession(websiteID string, sessionID string, browsingID string, assist ConversationBrowsingAssist) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/browsing/%s/assist", websiteID, sessionID, browsingID)
+  req, _ := service.client.NewRequest("PATCH", url, assist)
 
   return service.client.Do(req, nil)
 }
