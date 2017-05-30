@@ -47,10 +47,42 @@ type eventsReceiveGenericMessageType struct {
   Type  *string  `json:"type"`
 }
 
+type eventsUserGeneric struct {
+  UserID  *string  `json:"user_id"`
+}
+
+type eventsWebsiteGeneric struct {
+  WebsiteID  *string  `json:"website_id"`
+}
+
+type eventsSessionGeneric struct {
+  eventsWebsiteGeneric
+  SessionID  *string  `json:"session_id"`
+}
+
+type eventsBrowsingGeneric struct {
+  eventsSessionGeneric
+  BrowsingID  *string  `json:"browsing_id"`
+}
+
+type eventsCallGeneric struct {
+  eventsSessionGeneric
+  CallID  *string  `json:"call_id"`
+}
+
+type eventsPeopleGeneric struct {
+  eventsSessionGeneric
+  PeopleID  *string  `json:"people_id"`
+}
+
+type eventsCampaignGeneric struct {
+  eventsWebsiteGeneric
+  CampaignID  *string  `json:"campaign_id"`
+}
+
 type eventsReceiveGenericMessage struct {
   eventsReceiveGenericMessageType
-  WebsiteID    *string                          `json:"website_id"`
-  SessionID    *string                          `json:"session_id"`
+  eventsSessionGeneric
   From         *string                          `json:"from"`
   Origin       *string                          `json:"origin"`
   Mentions     *[]string                        `json:"mentions"`
@@ -74,64 +106,55 @@ type EventsReceiveAuthenticationUnauthorized struct {
 
 // EventsReceiveSessionUpdateAvailability maps session:update_availability
 type EventsReceiveSessionUpdateAvailability struct {
-  WebsiteID     *string  `json:"website_id"`
-  SessionID     *string  `json:"session_id"`
+  eventsSessionGeneric
   Availability  *string  `json:"availability"`
 }
 
 // EventsReceiveSessionRequestInitiated maps session:request:initiated
 type EventsReceiveSessionRequestInitiated struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
+  eventsSessionGeneric
 }
 
 // EventsReceiveSessionSetEmail maps session:set_email
 type EventsReceiveSessionSetEmail struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  Email      *string  `json:"email"`
+  eventsSessionGeneric
+  Email  *string  `json:"email"`
 }
 
 // EventsReceiveSessionSetPhone maps session:set_phone
 type EventsReceiveSessionSetPhone struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  Phone      *string  `json:"phone"`
+  eventsSessionGeneric
+  Phone  *string  `json:"phone"`
 }
 
 // EventsReceiveSessionSetAddress maps session:set_address
 type EventsReceiveSessionSetAddress struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  Address    *string  `json:"address"`
+  eventsSessionGeneric
+  Address  *string  `json:"address"`
 }
 
 // EventsReceiveSessionSetAvatar maps session:set_avatar
 type EventsReceiveSessionSetAvatar struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  Avatar     *string  `json:"avatar"`
+  eventsSessionGeneric
+  Avatar  *string  `json:"avatar"`
 }
 
 // EventsReceiveSessionSetNickname maps session:set_nickname
 type EventsReceiveSessionSetNickname struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  Nickname   *string  `json:"nickname"`
+  eventsSessionGeneric
+  Nickname  *string  `json:"nickname"`
 }
 
 // EventsReceiveSessionSetData maps session:set_data
 type EventsReceiveSessionSetData struct {
-  WebsiteID  *string       `json:"website_id"`
-  SessionID  *string       `json:"session_id"`
-  Data       *interface{}  `json:"data"`
+  eventsSessionGeneric
+  Data  *interface{}  `json:"data"`
 }
 
 // EventsReceiveSessionSyncPages maps session:sync:pages
 type EventsReceiveSessionSyncPages struct {
-  WebsiteID  *string                              `json:"website_id"`
-  SessionID  *string                              `json:"session_id"`
-  Pages      *[]EventsReceiveSessionSyncPagesOne  `json:"pages"`
+  eventsSessionGeneric
+  Pages  *[]EventsReceiveSessionSyncPagesOne  `json:"pages"`
 }
 
 // EventsReceiveSessionSyncPagesOne maps session:sync:pages/pages
@@ -144,9 +167,8 @@ type EventsReceiveSessionSyncPagesOne struct {
 
 // EventsReceiveSessionSyncEvents maps session:sync:events
 type EventsReceiveSessionSyncEvents struct {
-  WebsiteID  *string                             `json:"website_id"`
-  SessionID  *string                             `json:"session_id"`
-  Events     *EventsReceiveSessionSyncEventsOne  `json:"events"`
+  eventsSessionGeneric
+  Events  *EventsReceiveSessionSyncEventsOne  `json:"events"`
 }
 
 // EventsReceiveSessionSyncEventsOne maps session:sync:events/events
@@ -159,8 +181,7 @@ type EventsReceiveSessionSyncEventsOne struct {
 
 // EventsReceiveSessionSyncGeolocation maps session:sync:geolocation
 type EventsReceiveSessionSyncGeolocation struct {
-  WebsiteID    *string                                   `json:"website_id"`
-  SessionID    *string                                   `json:"session_id"`
+  eventsSessionGeneric
   Geolocation  *EventsReceiveSessionSyncGeolocationData  `json:"geolocation"`
 }
 
@@ -180,9 +201,8 @@ type EventsReceiveSessionSyncGeolocationDataCoordinates struct {
 
 // EventsReceiveSessionSyncSystem maps session:sync:system
 type EventsReceiveSessionSyncSystem struct {
-  WebsiteID    *string                              `json:"website_id"`
-  SessionID    *string                              `json:"session_id"`
-  System       *EventsReceiveSessionSyncSystemData  `json:"system"`
+  eventsSessionGeneric
+  System  *EventsReceiveSessionSyncSystemData  `json:"system"`
 }
 
 // EventsReceiveSessionSyncSystemData maps session:sync:system/system
@@ -214,9 +234,8 @@ type EventsReceiveSessionSyncSystemDataBrowser struct {
 
 // EventsReceiveSessionSyncNetwork maps session:sync:network
 type EventsReceiveSessionSyncNetwork struct {
-  WebsiteID    *string                               `json:"website_id"`
-  SessionID    *string                               `json:"session_id"`
-  Network      *EventsReceiveSessionSyncNetworkData  `json:"network"`
+  eventsSessionGeneric
+  Network  *EventsReceiveSessionSyncNetworkData  `json:"network"`
 }
 
 // EventsReceiveSessionSyncNetworkData maps session:sync:network/network
@@ -226,9 +245,8 @@ type EventsReceiveSessionSyncNetworkData struct {
 
 // EventsReceiveSessionSyncTimezone maps session:sync:timezone
 type EventsReceiveSessionSyncTimezone struct {
-  WebsiteID    *string                                `json:"website_id"`
-  SessionID    *string                                `json:"session_id"`
-  Timezone     *EventsReceiveSessionSyncTimezoneData  `json:"timezone"`
+  eventsSessionGeneric
+  Timezone  *EventsReceiveSessionSyncTimezoneData  `json:"timezone"`
 }
 
 // EventsReceiveSessionSyncTimezoneData maps session:sync:timezone/timezone
@@ -238,9 +256,8 @@ type EventsReceiveSessionSyncTimezoneData struct {
 
 // EventsReceiveSessionSyncLocales maps session:sync:locales
 type EventsReceiveSessionSyncLocales struct {
-  WebsiteID    *string                               `json:"website_id"`
-  SessionID    *string                               `json:"session_id"`
-  Locales      *EventsReceiveSessionSyncLocalesData  `json:"locales"`
+  eventsSessionGeneric
+  Locales  *EventsReceiveSessionSyncLocalesData  `json:"locales"`
 }
 
 // EventsReceiveSessionSyncLocalesData maps session:sync:locales/locales
@@ -250,61 +267,53 @@ type EventsReceiveSessionSyncLocalesData struct {
 
 // EventsReceiveSessionSetState maps session:set_state
 type EventsReceiveSessionSetState struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  State      *string  `json:"state"`
+  eventsSessionGeneric
+  State  *string  `json:"state"`
 }
 
 // EventsReceiveSessionSetBlock maps session:set_block
 type EventsReceiveSessionSetBlock struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
+  eventsSessionGeneric
   IsBlocked  *bool    `json:"is_blocked"`
 }
 
 // EventsReceiveSessionSetSegments maps session:set_segments
 type EventsReceiveSessionSetSegments struct {
-  WebsiteID  *string    `json:"website_id"`
-  SessionID  *string    `json:"session_id"`
-  Segments   *[]string  `json:"segments"`
+  eventsSessionGeneric
+  Segments  *[]string  `json:"segments"`
 }
 
 // EventsReceiveSessionSetOpened maps session:set_opened
 type EventsReceiveSessionSetOpened struct {
-  WebsiteID  *string                                    `json:"website_id"`
-  SessionID  *string                                    `json:"session_id"`
-  Operator   *EventsReceiveSessionSetOpenStateOperator  `json:"operator"`
+  eventsSessionGeneric
+  Operator  *EventsReceiveSessionSetOpenStateOperator  `json:"operator"`
 }
 
 // EventsReceiveSessionSetClosed maps session:set_closed
 type EventsReceiveSessionSetClosed struct {
-  WebsiteID  *string                                    `json:"website_id"`
-  SessionID  *string                                    `json:"session_id"`
-  Operator   *EventsReceiveSessionSetOpenStateOperator  `json:"operator"`
+  eventsSessionGeneric
+  Operator  *EventsReceiveSessionSetOpenStateOperator  `json:"operator"`
 }
 
 // EventsReceiveSessionSetOpenStateOperator maps session:set_{opened,closed}/operator
 type EventsReceiveSessionSetOpenStateOperator struct {
-  UserID  *string  `json:"user_id"`
+  eventsUserGeneric
 }
 
 // EventsReceiveSessionSetMentions maps session:set_mentions
 type EventsReceiveSessionSetMentions struct {
-  WebsiteID  *string    `json:"website_id"`
-  SessionID  *string    `json:"session_id"`
-  Mentions   *[]string  `json:"mentions"`
+  eventsSessionGeneric
+  Mentions  *[]string  `json:"mentions"`
 }
 
 // EventsReceiveSessionRemoved maps session:removed
 type EventsReceiveSessionRemoved struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
+  eventsSessionGeneric
 }
 
 // EventsReceiveMessageUpdated maps message:updated
 type EventsReceiveMessageUpdated struct {
-  WebsiteID    *string       `json:"website_id"`
-  SessionID    *string       `json:"session_id"`
+  eventsSessionGeneric
   Fingerprint  *int          `json:"fingerprint"`
   Content      *interface{}  `json:"content"`
 }
@@ -392,21 +401,19 @@ type EventsReceiveNoteMessage EventsReceiveTextMessage
 
 // EventsReceiveMessageComposeSend maps message:compose:send
 type EventsReceiveMessageComposeSend struct {
-  WebsiteID    *string  `json:"website_id"`
-  SessionID    *string  `json:"session_id"`
-  Type         *string  `json:"type"`
-  Excerpt      *string  `json:"excerpt"`
-  Timestamp    *uint    `json:"timestamp"`
+  eventsSessionGeneric
+  Type       *string  `json:"type"`
+  Excerpt    *string  `json:"excerpt"`
+  Timestamp  *uint    `json:"timestamp"`
 }
 
 // EventsReceiveMessageComposeReceive maps message:compose:receive
 type EventsReceiveMessageComposeReceive struct {
-  WebsiteID    *string                                  `json:"website_id"`
-  SessionID    *string                                  `json:"session_id"`
-  Type         *string                                  `json:"type"`
-  Excerpt      *string                                  `json:"excerpt"`
-  Timestamp    *uint                                    `json:"timestamp"`
-  User         *EventsReceiveMessageComposeReceiveUser  `json:"user"`
+  eventsSessionGeneric
+  Type       *string                                  `json:"type"`
+  Excerpt    *string                                  `json:"excerpt"`
+  Timestamp  *uint                                    `json:"timestamp"`
+  User       *EventsReceiveMessageComposeReceiveUser  `json:"user"`
 }
 
 // EventsReceiveMessageComposeReceiveUser maps message:compose:receive/user
@@ -418,80 +425,63 @@ type EventsReceiveMessageComposeReceiveUser struct {
 
 // EventsReceiveMessageAcknowledge maps message:acknowledge:*
 type EventsReceiveMessageAcknowledge struct {
-  WebsiteID     *string  `json:"website_id"`
-  SessionID     *string  `json:"session_id"`
+  eventsSessionGeneric
   Origin        *string  `json:"origin"`
   Fingerprints  *[]int   `json:"fingerprints"`
 }
 
 // EventsPeopleBindSession maps people:bind:session
 type EventsPeopleBindSession struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  PeopleID   *string  `json:"people_id"`
+  eventsPeopleGeneric
 }
 
 // EventsPeopleSyncProfile maps people:sync:profile
 type EventsPeopleSyncProfile struct {
-  WebsiteID  *string             `json:"website_id"`
-  SessionID  *string             `json:"session_id"`
-  PeopleID   *string             `json:"people_id"`
-  Identity   *PeopleProfileCard  `json:"identity"`
+  eventsPeopleGeneric
+  Identity  *PeopleProfileCard  `json:"identity"`
 }
 
 // EventsCampaignProgress maps campaign:progress
 type EventsCampaignProgress struct {
-  WebsiteID   *string  `json:"website_id"`
-  CampaignID  *string  `json:"campaign_id"`
-  Progress    *uint8   `json:"progress"`
+  eventsCampaignGeneric
+  Progress  *uint8  `json:"progress"`
 }
 
 // EventsCampaignDispatched maps campaign:dispatched
 type EventsCampaignDispatched struct {
-  WebsiteID   *string  `json:"website_id"`
-  CampaignID  *string  `json:"campaign_id"`
+  eventsCampaignGeneric
 }
 
 // EventsCampaignRunning maps campaign:running
 type EventsCampaignRunning struct {
-  WebsiteID   *string  `json:"website_id"`
-  CampaignID  *string  `json:"campaign_id"`
-  Running     *bool    `json:"running"`
+  eventsCampaignGeneric
+  Running  *bool  `json:"running"`
 }
 
 // EventsBrowsingRequestInitiated maps browsing:request:initiated
 type EventsBrowsingRequestInitiated struct {
-  WebsiteID   *string  `json:"website_id"`
-  SessionID   *string  `json:"session_id"`
-  BrowsingID  *string  `json:"browsing_id"`
+  eventsBrowsingGeneric
 }
 
 // EventsBrowsingRequestRejected maps browsing:request:rejected
 type EventsBrowsingRequestRejected struct {
-  WebsiteID   *string  `json:"website_id"`
-  SessionID   *string  `json:"session_id"`
+  eventsSessionGeneric
 }
 
 // EventsBrowsingActionStarted maps browsing:action:started
 type EventsBrowsingActionStarted struct {
-  WebsiteID   *string  `json:"website_id"`
-  SessionID   *string  `json:"session_id"`
-  BrowsingID  *string  `json:"browsing_id"`
+  eventsBrowsingGeneric
 }
 
 // EventsBrowsingActionStopped maps browsing:action:stopped
 type EventsBrowsingActionStopped struct {
-  WebsiteID   *string  `json:"website_id"`
-  SessionID   *string  `json:"session_id"`
-  BrowsingID  *string  `json:"browsing_id"`
+  eventsBrowsingGeneric
 }
 
 // EventsBrowsingStreamMirror maps browsing:stream:mirror
 type EventsBrowsingStreamMirror struct {
-  WebsiteID   *string                          `json:"website_id"`
-  SessionID   *string                          `json:"session_id"`
-  BrowsingID  *string                          `json:"browsing_id"`
-  Data        *EventsBrowsingStreamMirrorData  `json:"data"`
+  eventsBrowsingGeneric
+  Data  *EventsBrowsingStreamMirrorData  `json:"data"`
 }
 
 // EventsBrowsingStreamMirrorData maps browsing:stream:mirror/data
@@ -502,10 +492,8 @@ type EventsBrowsingStreamMirrorData struct {
 
 // EventsBrowsingStreamMouse maps browsing:stream:mouse
 type EventsBrowsingStreamMouse struct {
-  WebsiteID   *string                         `json:"website_id"`
-  SessionID   *string                         `json:"session_id"`
-  BrowsingID  *string                         `json:"browsing_id"`
-  Data        *EventsBrowsingStreamMouseData  `json:"data"`
+  eventsBrowsingGeneric
+  Data  *EventsBrowsingStreamMouseData  `json:"data"`
 }
 
 // EventsBrowsingStreamMouseData maps browsing:stream:mouse/data
@@ -516,10 +504,8 @@ type EventsBrowsingStreamMouseData struct {
 
 // EventsBrowsingStreamTab maps browsing:stream:tab
 type EventsBrowsingStreamTab struct {
-  WebsiteID   *string                       `json:"website_id"`
-  SessionID   *string                       `json:"session_id"`
-  BrowsingID  *string                       `json:"browsing_id"`
-  Data        *EventsBrowsingStreamTabData  `json:"data"`
+  eventsBrowsingGeneric
+  Data  *EventsBrowsingStreamTabData  `json:"data"`
 }
 
 // EventsBrowsingStreamTabData maps browsing:stream:tab/data
@@ -531,10 +517,8 @@ type EventsBrowsingStreamTabData struct {
 
 // EventsBrowsingStreamScroll maps browsing:stream:scroll
 type EventsBrowsingStreamScroll struct {
-  WebsiteID   *string                          `json:"website_id"`
-  SessionID   *string                          `json:"session_id"`
-  BrowsingID  *string                          `json:"browsing_id"`
-  Data        *EventsBrowsingStreamScrollData  `json:"data"`
+  eventsBrowsingGeneric
+  Data  *EventsBrowsingStreamScrollData  `json:"data"`
 }
 
 // EventsBrowsingStreamScrollData maps browsing:stream:scroll/data
@@ -543,62 +527,85 @@ type EventsBrowsingStreamScrollData struct {
   Y  *int32  `json:"y"`
 }
 
+// EventsBrowsingDebugStarted maps browsing:debug:started
+type EventsBrowsingDebugStarted struct {
+  eventsBrowsingGeneric
+}
+
+// EventsBrowsingDebugStopped maps browsing:debug:stopped
+type EventsBrowsingDebugStopped struct {
+  eventsBrowsingGeneric
+}
+
+// EventsBrowsingDebugExecuted maps browsing:debug:executed
+type EventsBrowsingDebugExecuted struct {
+  eventsBrowsingGeneric
+  Data  *EventsBrowsingDebugExecutedData  `json:"data"`
+}
+
+// EventsBrowsingDebugExecutedData maps browsing:debug:executed/data
+type EventsBrowsingDebugExecutedData struct {
+  Type   *string  `json:"type"`
+  Value  *string  `json:"value"`
+}
+
+// EventsBrowsingDebugStream maps browsing:debug:stream
+type EventsBrowsingDebugStream struct {
+  eventsBrowsingGeneric
+  Data  *EventsBrowsingDebugStreamData  `json:"data"`
+}
+
+// EventsBrowsingDebugStreamData maps browsing:debug:stream/data
+type EventsBrowsingDebugStreamData struct {
+  Level      *string  `json:"level"`
+  Message    *string  `json:"message"`
+  Traceback  *string  `json:"traceback"`
+}
+
 // EventsCallRequestInitiated maps call:request:initiated
 type EventsCallRequestInitiated struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  CallID     *string  `json:"call_id"`
+  eventsCallGeneric
 }
 
 // EventsCallRequestRejected maps call:request:rejected
 type EventsCallRequestRejected struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  CallID     *string  `json:"call_id"`
+  eventsCallGeneric
 }
 
 // EventsCallActionStarted maps call:action:started
 type EventsCallActionStarted struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  CallID     *string  `json:"call_id"`
+  eventsCallGeneric
 }
 
 // EventsCallActionStopped maps call:action:stopped
 type EventsCallActionStopped struct {
-  WebsiteID  *string  `json:"website_id"`
-  SessionID  *string  `json:"session_id"`
-  CallID     *string  `json:"call_id"`
+  eventsCallGeneric
 }
 
 // EventsCallSignalingSDP maps call:signaling:sdp
 type EventsCallSignalingSDP struct {
-  WebsiteID  *string       `json:"website_id"`
-  SessionID  *string       `json:"session_id"`
-  CallID     *string       `json:"call_id"`
-  From       *string       `json:"from"`
-  SDP        *interface{}  `json:"sdp"`
+  eventsCallGeneric
+  From  *string       `json:"from"`
+  SDP   *interface{}  `json:"sdp"`
 }
 
 // EventsCallSignalingCandidate maps call:signaling:candidate
 type EventsCallSignalingCandidate struct {
-  WebsiteID  *string       `json:"website_id"`
-  SessionID  *string       `json:"session_id"`
-  CallID     *string       `json:"call_id"`
+  eventsCallGeneric
   From       *string       `json:"from"`
   Candidate  *interface{}  `json:"candidate"`
 }
 
 // EventsReceiveWebsiteUpdateVisitorsCount maps website:update_visitors_count
 type EventsReceiveWebsiteUpdateVisitorsCount struct {
-  WebsiteID      *string  `json:"website_id"`
+  eventsWebsiteGeneric
   VisitorsCount  *uint    `json:"visitors_count"`
 }
 
 // EventsReceiveWebsiteUpdateOperatorsAvailability maps website:update_operators_availability
 type EventsReceiveWebsiteUpdateOperatorsAvailability struct {
-  WebsiteID     *string                                                 `json:"website_id"`
-  UserID        *string                                                 `json:"user_id"`
+  eventsWebsiteGeneric
+  eventsUserGeneric
   Availability  *EventsReceiveWebsiteUpdateOperatorsAvailabilityItself  `json:"availability"`
 }
 
@@ -609,7 +616,7 @@ type EventsReceiveWebsiteUpdateOperatorsAvailabilityItself struct {
 
 // EventsReceiveWebsiteUsersAvailable maps website:users:available
 type EventsReceiveWebsiteUsersAvailable struct {
-  WebsiteID  *string  `json:"website_id"`
+  eventsWebsiteGeneric
   Available  *bool    `json:"available"`
 }
 
@@ -919,6 +926,30 @@ func (evt EventsBrowsingStreamTab) String() string {
 
 // String returns the string representation of EventsBrowsingStreamScroll
 func (evt EventsBrowsingStreamScroll) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingDebugStarted
+func (evt EventsBrowsingDebugStarted) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingDebugStopped
+func (evt EventsBrowsingDebugStopped) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingDebugExecuted
+func (evt EventsBrowsingDebugExecuted) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingDebugStream
+func (evt EventsBrowsingDebugStream) String() string {
   return Stringify(evt)
 }
 
@@ -1389,6 +1420,30 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("browsing:stream:scroll", func(chnl *gosocketio.Channel, evt EventsBrowsingStreamScroll) {
     if hdl, ok := register.Handlers["browsing:stream:scroll"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:debug:started", func(chnl *gosocketio.Channel, evt EventsBrowsingDebugStarted) {
+    if hdl, ok := register.Handlers["browsing:debug:started"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:debug:stopped", func(chnl *gosocketio.Channel, evt EventsBrowsingDebugStopped) {
+    if hdl, ok := register.Handlers["browsing:debug:stopped"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:debug:executed", func(chnl *gosocketio.Channel, evt EventsBrowsingDebugExecuted) {
+    if hdl, ok := register.Handlers["browsing:debug:executed"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:debug:stream", func(chnl *gosocketio.Channel, evt EventsBrowsingDebugStream) {
+    if hdl, ok := register.Handlers["browsing:debug:stream"]; ok {
       go hdl.callFunc(&evt)
     }
   })

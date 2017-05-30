@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 05/28/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 05/30/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -256,6 +256,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Browsing Sessions For Conversation**: `crisp.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
   * **Initiate Browsing Session For Conversation**: `crisp.Website.InitiateBrowsingSessionForConversation(websiteID string, sessionID string) (*Response, error)`
   * **Send Action To An Existing Browsing Session**: `crisp.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
+  * **Debug Existing Browsing Session**: `crisp.Website.DebugExistingBrowsingSession(websiteID string, sessionID string, browsingID string, debug ConversationBrowsingDebug) (*Response, error)`
   * **Initiate New Call Session For Conversation**: `crisp.Website.InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*Response, error)`
   * **Get Ongoing Call Session For Conversation**: `crisp.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
   * **Abort Ongoing Call Session For Conversation**: `crisp.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error)`
@@ -438,6 +439,10 @@ Available events are listed below:
   * **Browsing Stream Mouse**: `browsing:stream:mouse`
   * **Browsing Stream Tab**: `browsing:stream:tab`
   * **Browsing Stream Scroll**: `browsing:stream:scroll`
+  * **Browsing Debug Started**: `browsing:debug:started`
+  * **Browsing Debug Stopped**: `browsing:debug:stopped`
+  * **Browsing Debug Executed**: `browsing:debug:executed`
+  * **Browsing Debug Stream**: `browsing:debug:stream`
 
 * **Call Events**
   * **Call Request Initiated**: `call:request:initiated`
