@@ -545,8 +545,9 @@ type EventsBrowsingDebugExecuted struct {
 
 // EventsBrowsingDebugExecutedData maps browsing:debug:executed/data
 type EventsBrowsingDebugExecutedData struct {
-  Type   *string  `json:"type"`
-  Value  *string  `json:"value"`
+  Execute  *string  `json:"execute"`
+  Type     *string  `json:"type"`
+  Value    *string  `json:"value"`
 }
 
 // EventsBrowsingDebugStream maps browsing:debug:stream
