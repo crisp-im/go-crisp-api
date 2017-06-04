@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 05/30/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 06/04/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -112,6 +112,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Notification Settings**: `crisp.User.GetNotificationSettings() (*UserNotificationSettings, *Response, error)`
   * **Update Notification Settings**: `crisp.User.UpdateNotificationSettings(notifications UserNotificationSettingsUpdate) (*Response, error)`
   * **Add A Notification Provider**: `crisp.User.AddNotificationProvider(notificationID string) (*Response, error)`
+  * **Delete A Notification Provider**: `crisp.User.DeleteNotificationProvider(notificationID string) (*Response, error)`
 
 * **User Account Websites**
   * **List Websites**: `crisp.User.ListWebsites() (*[]UserWebsite, *Response, error)`

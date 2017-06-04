@@ -10,6 +10,7 @@ import (
   "fmt"
 )
 
+
 // UserRecoverProceed mapping
 type UserRecoverProceed struct {
   Password  *string  `json:"password,omitempty"`

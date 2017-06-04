@@ -6,6 +6,11 @@
 package crisp
 
 
+import (
+  "fmt"
+)
+
+
 // UserNotificationSettingsData mapping
 type UserNotificationSettingsData struct {
   Data  *UserNotificationSettings  `json:"data,omitempty"`
@@ -72,6 +77,15 @@ func (service *UserService) UpdateNotificationSettings(notifications UserNotific
 func (service *UserService) AddNotificationProvider(notificationID string) (*Response, error) {
   url := "user/account/notification/provider"
   req, _ := service.client.NewRequest("POST", url, UserNotificationProviderAdd{&notificationID})
+
+  return service.client.Do(req, nil)
+}
+
+
+// DeleteNotificationProvider deletes a notification provider.
+func (service *UserService) DeleteNotificationProvider(notificationID string) (*Response, error) {
+  url := fmt.Sprintf("user/account/notification/provider/%s", notificationID)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
 
   return service.client.Do(req, nil)
 }
