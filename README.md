@@ -270,7 +270,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website People**
   * **Get People Statistics**: `crisp.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
   * **List People Segments**: `crisp.Website.ListPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSegment, *Response, error)`
-  * **List People Profiles**: `crisp.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchFilter []PeopleFilter) (*[]PeopleProfile, *Response, error)`
+  * **List People Profiles**: `crisp.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter) (*[]PeopleProfile, *Response, error)`
   * **Add New People Profile**: `crisp.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
   * **Check If People Profile Exists**: `crisp.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`
   * **Get People Profile**: `crisp.Website.GetPeopleProfile(websiteID string, peopleID string) (*PeopleProfile, *Response, error)`
