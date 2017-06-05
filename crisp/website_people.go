@@ -148,6 +148,7 @@ type PeopleConversationsData struct {
 
 // PeopleFilter mapping
 type PeopleFilter struct {
+  Model      string    `json:"model,omitempty"`
   Criterion  string    `json:"criterion,omitempty"`
   Operator   string    `json:"operator,omitempty"`
   Query      []string  `json:"query,omitempty"`
