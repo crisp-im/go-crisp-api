@@ -8,6 +8,8 @@ package crisp
 
 import (
   "fmt"
+  "encoding/json"
+  "net/url"
 )
 
 
@@ -144,6 +146,13 @@ type PeopleConversationsData struct {
   Data  []string  `json:"data,omitempty"`
 }
 
+// PeopleFilter mapping
+type PeopleFilter struct {
+  Criterion  string    `json:"criterion,omitempty"`
+  Operator   string    `json:"operator,omitempty"`
+  Query      []string  `json:"query,omitempty"`
+}
+
 
 // String returns the string representation of PeopleStatistics
 func (instance PeopleStatistics) String() string {
@@ -194,8 +203,18 @@ func (service *WebsiteService) ListPeopleSegments(websiteID string, pageNumber u
 
 
 // ListPeopleProfiles lists people profiles for website.
-func (service *WebsiteService) ListPeopleProfiles(websiteID string, pageNumber uint) (*[]PeopleProfile, *Response, error) {
-  url := fmt.Sprintf("website/%s/people/profiles/%d", websiteID, pageNumber)
+func (service *WebsiteService) ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchFilter []PeopleFilter) (*[]PeopleProfile, *Response, error) {
+  searchFilterString := ""
+
+  if len(searchFilter) > 0 {
+    searchFilterBytes, err := json.Marshal(searchFilter)
+
+    if err == nil {
+      searchFilterString = string(searchFilterBytes)
+    }
+  }
+
+  url := fmt.Sprintf("website/%s/people/profiles/%d?sort_field=%s&sort_order=%s&search_filter=%s", websiteID, pageNumber, url.QueryEscape(searchField), url.QueryEscape(searchOrder), url.QueryEscape(searchFilterString))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   people := new(PeopleProfileListData)

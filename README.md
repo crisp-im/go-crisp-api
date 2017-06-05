@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 06/04/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 06/05/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -270,7 +270,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website People**
   * **Get People Statistics**: `crisp.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
   * **List People Segments**: `crisp.Website.ListPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSegment, *Response, error)`
-  * **List People Profiles**: `crisp.Website.ListPeopleProfiles(websiteID string, pageNumber uint) (*[]PeopleProfile, *Response, error)`
+  * **List People Profiles**: `crisp.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchFilter []PeopleFilter) (*[]PeopleProfile, *Response, error)`
   * **Add New People Profile**: `crisp.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
   * **Check If People Profile Exists**: `crisp.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`
   * **Get People Profile**: `crisp.Website.GetPeopleProfile(websiteID string, peopleID string) (*PeopleProfile, *Response, error)`
