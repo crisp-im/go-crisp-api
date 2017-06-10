@@ -1022,11 +1022,17 @@ func (service *WebsiteService) AssistExistingBrowsingSession(websiteID string, s
 
 
 // InitiateNewCallSessionForConversation initiates a new audio/video call session for conversation.
-func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*Response, error) {
+func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/call", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, nil)
 
-  return service.client.Do(req, nil)
+  call := new(ConversationCallData)
+  resp, err := service.client.Do(req, call)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return call.Data, resp, err
 }
 
 
