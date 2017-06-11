@@ -388,6 +388,7 @@ Available events are listed below:
   * **Session Set Data**: `session:set_data`
   * **Session Sync Pages**: `session:sync:pages`
   * **Session Sync Events**: `session:sync:events`
+  * **Session Sync Capabilities**: `session:sync:capabilities`
   * **Session Sync Geolocation**: `session:sync:geolocation`
   * **Session Sync System**: `session:sync:system`
   * **Session Sync Network**: `session:sync:network`
