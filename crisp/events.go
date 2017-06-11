@@ -179,6 +179,17 @@ type EventsReceiveSessionSyncEventsOne struct {
   Timestamp  *uint         `json:"timestamp"`
 }
 
+// EventsReceiveSessionSyncCapabilities maps session:sync:capabilities
+type EventsReceiveSessionSyncCapabilities struct {
+  eventsSessionGeneric
+  Capabilities  *EventsReceiveSessionSyncCapabilitiesData  `json:"capabilities"`
+}
+
+// EventsReceiveSessionSyncCapabilitiesData maps session:sync:capabilities/capabilities
+type EventsReceiveSessionSyncCapabilitiesData struct {
+  Capabilities  *[]string  `json:"capabilities,omitempty"`
+}
+
 // EventsReceiveSessionSyncGeolocation maps session:sync:geolocation
 type EventsReceiveSessionSyncGeolocation struct {
   eventsSessionGeneric
@@ -725,6 +736,12 @@ func (evt EventsReceiveSessionSyncEvents) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveSessionSyncCapabilities
+func (evt EventsReceiveSessionSyncCapabilities) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveSessionSyncGeolocation
 func (evt EventsReceiveSessionSyncGeolocation) String() string {
   return Stringify(evt)
@@ -1131,6 +1148,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:sync:events", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncEvents) {
     if hdl, ok := register.Handlers["session:sync:events"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:sync:capabilities", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncCapabilities) {
+    if hdl, ok := register.Handlers["session:sync:capabilities"]; ok {
       go hdl.callFunc(&evt)
     }
   })

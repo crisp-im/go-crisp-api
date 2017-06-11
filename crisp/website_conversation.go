@@ -205,10 +205,11 @@ type ConversationMessageUser struct {
 
 // ConversationMetaDevice mapping
 type ConversationMetaDevice struct {
-  Geolocation  *ConversationMetaDeviceGeolocation  `json:"geolocation,omitempty"`
-  System       *ConversationMetaDeviceSystem       `json:"system,omitempty"`
-  Timezone     *int16                              `json:"timezone,omitempty"`
-  Locales      *[]string                           `json:"locales,omitempty"`
+  Capabilities  *[]string                           `json:"capabilities,omitempty"`
+  Geolocation   *ConversationMetaDeviceGeolocation  `json:"geolocation,omitempty"`
+  System        *ConversationMetaDeviceSystem       `json:"system,omitempty"`
+  Timezone      *int16                              `json:"timezone,omitempty"`
+  Locales       *[]string                           `json:"locales,omitempty"`
 }
 
 // ConversationMetaDeviceGeolocation mapping
@@ -435,10 +436,11 @@ type ConversationMetaUpdate struct {
 
 // ConversationMetaUpdateDevice mapping
 type ConversationMetaUpdateDevice struct {
-  Geolocation  *ConversationMetaUpdateDeviceGeolocation  `json:"geolocation,omitempty"`
-  System       *ConversationMetaUpdateDeviceSystem       `json:"system,omitempty"`
-  Timezone     int16                                    `json:"timezone,omitempty"`
-  Locales      []string                                 `json:"locales,omitempty"`
+  Capabilities  []string                                  `json:"capabilities,omitempty"`
+  Geolocation   *ConversationMetaUpdateDeviceGeolocation  `json:"geolocation,omitempty"`
+  System        *ConversationMetaUpdateDeviceSystem       `json:"system,omitempty"`
+  Timezone      int16                                     `json:"timezone,omitempty"`
+  Locales       []string                                  `json:"locales,omitempty"`
 }
 
 // ConversationMetaUpdateDeviceGeolocation mapping
