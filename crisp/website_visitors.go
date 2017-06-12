@@ -29,17 +29,18 @@ type WebsiteVisitorListData struct {
 
 // WebsiteVisitor mapping
 type WebsiteVisitor struct {
-  SessionID    *string                     `json:"session_id,omitempty"`
-  Nickname     *string                     `json:"nickname,omitempty"`
-  Email        *string                     `json:"email,omitempty"`
-  Avatar       *string                     `json:"avatar,omitempty"`
-  Useragent    *string                     `json:"useragent,omitempty"`
-  Initiated    *bool                       `json:"initiated,omitempty"`
-  Active       *bool                       `json:"active,omitempty"`
-  LastPage     *WebsiteVisitorLastPage     `json:"last_page,omitempty"`
-  Geolocation  *WebsiteVisitorGeolocation  `json:"geolocation,omitempty"`
-  Timezone     *int16                      `json:"timezone,omitempty"`
-  Locales      *[]string                   `json:"locales,omitempty"`
+  SessionID     *string                     `json:"session_id,omitempty"`
+  Nickname      *string                     `json:"nickname,omitempty"`
+  Email         *string                     `json:"email,omitempty"`
+  Avatar        *string                     `json:"avatar,omitempty"`
+  Useragent     *string                     `json:"useragent,omitempty"`
+  Initiated     *bool                       `json:"initiated,omitempty"`
+  Active        *bool                       `json:"active,omitempty"`
+  LastPage      *WebsiteVisitorLastPage     `json:"last_page,omitempty"`
+  Geolocation   *WebsiteVisitorGeolocation  `json:"geolocation,omitempty"`
+  Timezone      *int16                      `json:"timezone,omitempty"`
+  Capabilities  *[]string                   `json:"capabilities,omitempty"`
+  Locales       *[]string                   `json:"locales,omitempty"`
 }
 
 // WebsiteVisitorLastPage mapping
