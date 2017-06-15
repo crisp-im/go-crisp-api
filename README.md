@@ -279,7 +279,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Remove People Profile**: `crisp.Website.RemovePeopleProfile(websiteID string, peopleID string) (*Response, error)`
   * **List People Conversations**: `crisp.Website.ListPeopleConversations(websiteID string, peopleID string, pageNumber uint) ([]string, *Response, error)`
   * **Export People Profiles**: `crisp.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
-  * **Import People Profiles**: `crisp.Website.ImportPeopleProfiles(websiteID string, profileImport PeopleProfileImport) (*Response, error)`
+  * **Import People Profiles**: `crisp.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
 
 ### Plugin
 

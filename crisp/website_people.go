@@ -138,6 +138,16 @@ type PeopleConversationsData struct {
   Data  []string  `json:"data,omitempty"`
 }
 
+// PeopleProfileImportData mapping
+type PeopleProfileImportData struct {
+  Data  *PeopleProfileImport  `json:"data,omitempty"`
+}
+
+// PeopleProfileImport mapping
+type PeopleProfileImport struct {
+  ImportID  *string  `json:"import_id,omitempty"`
+}
+
 // PeopleProfileUpdateCard mapping
 type PeopleProfileUpdateCard struct {
   Email     string                     `json:"email,omitempty"`
@@ -146,21 +156,21 @@ type PeopleProfileUpdateCard struct {
   Segments  []string                   `json:"segments,omitempty"`
 }
 
-// PeopleProfileImport mapping
-type PeopleProfileImport struct {
-  URL      string                         `json:"url,omitempty"`
-  Mapping  *[]PeopleProfileImportMapping  `json:"mapping,omitempty"`
-  Options  *PeopleProfileImportOptions    `json:"options,omitempty"`
+// PeopleProfileImportSetup mapping
+type PeopleProfileImportSetup struct {
+  URL      string                              `json:"url,omitempty"`
+  Mapping  *[]PeopleProfileImportSetupMapping  `json:"mapping,omitempty"`
+  Options  *PeopleProfileImportSetupOptions    `json:"options,omitempty"`
 }
 
-// PeopleProfileImportMapping mapping
-type PeopleProfileImportMapping struct {
+// PeopleProfileImportSetupMapping mapping
+type PeopleProfileImportSetupMapping struct {
   Column  uint8  `json:"column,omitempty"`
   Field   bool   `json:"field,omitempty"`
 }
 
-// PeopleProfileImportOptions mapping
-type PeopleProfileImportOptions struct {
+// PeopleProfileImportSetupOptions mapping
+type PeopleProfileImportSetupOptions struct {
   ColumnSeparator  string  `json:"column_separator,omitempty"`
   SkipHeader       bool    `json:"skip_header,omitempty"`
 }
@@ -188,6 +198,12 @@ func (instance PeopleSegment) String() string {
 
 // String returns the string representation of PeopleProfile
 func (instance PeopleProfile) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PeopleProfileImport
+func (instance PeopleProfileImport) String() string {
   return Stringify(instance)
 }
 
@@ -332,9 +348,15 @@ func (service *WebsiteService) ExportPeopleProfiles(websiteID string) (*Response
 
 
 // ImportPeopleProfiles imports people profiles.
-func (service *WebsiteService) ImportPeopleProfiles(websiteID string, profileImport PeopleProfileImport) (*Response, error) {
+func (service *WebsiteService) ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error) {
   url := fmt.Sprintf("website/%s/people/import/profiles", websiteID)
-  req, _ := service.client.NewRequest("POST", url, profileImport)
+  req, _ := service.client.NewRequest("POST", url, profileImportSetup)
 
-  return service.client.Do(req, nil)
+  profileImport := new(PeopleProfileImportData)
+  resp, err := service.client.Do(req, profileImport)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return profileImport.Data, resp, err
 }
