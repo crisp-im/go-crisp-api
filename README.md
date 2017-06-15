@@ -428,6 +428,8 @@ Available events are listed below:
 * **People Events**
   * **People Bind Session**: `people:bind:session`
   * **People Sync Profile**: `people:sync:profile`
+  * **People Import Progress**: `people:import:progress`
+  * **People Import Done**: `people:import:done`
 
 * **Campaign Events**
   * **Campaign Progress**: `campaign:progress`

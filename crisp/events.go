@@ -55,6 +55,10 @@ type eventsWebsiteGeneric struct {
   WebsiteID  *string  `json:"website_id"`
 }
 
+type eventsImportGeneric struct {
+  ImportID  *string  `json:"import_id"`
+}
+
 type eventsSessionGeneric struct {
   eventsWebsiteGeneric
   SessionID  *string  `json:"session_id"`
@@ -450,6 +454,18 @@ type EventsPeopleBindSession struct {
 type EventsPeopleSyncProfile struct {
   eventsPeopleGeneric
   Identity  *PeopleProfileCard  `json:"identity"`
+}
+
+// EventsPeopleImportProgress maps people:import:progress
+type EventsPeopleImportProgress struct {
+  eventsImportGeneric
+  Progress  *uint8  `json:"progress"`
+}
+
+// EventsPeopleImportDone maps people:import:done
+type EventsPeopleImportDone struct {
+  eventsImportGeneric
+  Error  *bool  `json:"error"`
 }
 
 // EventsCampaignProgress maps campaign:progress
@@ -888,6 +904,18 @@ func (evt EventsPeopleBindSession) String() string {
 
 // String returns the string representation of EventsPeopleSyncProfile
 func (evt EventsPeopleSyncProfile) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsPeopleImportProgress
+func (evt EventsPeopleImportProgress) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsPeopleImportDone
+func (evt EventsPeopleImportDone) String() string {
   return Stringify(evt)
 }
 
@@ -1400,6 +1428,18 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("people:sync:profile", func(chnl *gosocketio.Channel, evt EventsPeopleSyncProfile) {
     if hdl, ok := register.Handlers["people:sync:profile"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("people:import:progress", func(chnl *gosocketio.Channel, evt EventsPeopleImportProgress) {
+    if hdl, ok := register.Handlers["people:import:progress"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("people:import:done", func(chnl *gosocketio.Channel, evt EventsPeopleImportDone) {
+    if hdl, ok := register.Handlers["people:import:done"]; ok {
       go hdl.callFunc(&evt)
     }
   })
