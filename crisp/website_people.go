@@ -133,6 +133,11 @@ type PeopleProfileCardActive struct {
   Last  *uint  `json:"last,omitempty"`
 }
 
+// PeopleConversationsData mapping
+type PeopleConversationsData struct {
+  Data  []string  `json:"data,omitempty"`
+}
+
 // PeopleProfileUpdateCard mapping
 type PeopleProfileUpdateCard struct {
   Email     string                     `json:"email,omitempty"`
@@ -141,9 +146,23 @@ type PeopleProfileUpdateCard struct {
   Segments  []string                   `json:"segments,omitempty"`
 }
 
-// PeopleConversationsData mapping
-type PeopleConversationsData struct {
-  Data  []string  `json:"data,omitempty"`
+// PeopleProfileImport mapping
+type PeopleProfileImport struct {
+  URL      string                         `json:"url,omitempty"`
+  Mapping  *[]PeopleProfileImportMapping  `json:"mapping,omitempty"`
+  Options  *PeopleProfileImportOptions    `json:"options,omitempty"`
+}
+
+// PeopleProfileImportMapping mapping
+type PeopleProfileImportMapping struct {
+  Column  uint8  `json:"column,omitempty"`
+  Field   bool   `json:"field,omitempty"`
+}
+
+// PeopleProfileImportOptions mapping
+type PeopleProfileImportOptions struct {
+  ColumnSeparator  string  `json:"column_separator,omitempty"`
+  SkipHeader       bool    `json:"skip_header,omitempty"`
 }
 
 // PeopleFilter mapping
@@ -303,10 +322,19 @@ func (service *WebsiteService) ListPeopleConversations(websiteID string, peopleI
 }
 
 
-// ExportAllPeopleProfiles exports all people profiles.
-func (service *WebsiteService) ExportAllPeopleProfiles(websiteID string) (*Response, error) {
+// ExportPeopleProfiles exports people profiles.
+func (service *WebsiteService) ExportPeopleProfiles(websiteID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/people/export/profiles", websiteID)
   req, _ := service.client.NewRequest("POST", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ImportPeopleProfiles imports people profiles.
+func (service *WebsiteService) ImportPeopleProfiles(websiteID string, profileImport PeopleProfileImport) (*Response, error) {
+  url := fmt.Sprintf("website/%s/people/import/profiles", websiteID)
+  req, _ := service.client.NewRequest("POST", url, profileImport)
 
   return service.client.Do(req, nil)
 }

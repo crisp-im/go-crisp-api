@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 06/12/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 06/15/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -278,7 +278,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Update People Profile**: `crisp.Website.UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
   * **Remove People Profile**: `crisp.Website.RemovePeopleProfile(websiteID string, peopleID string) (*Response, error)`
   * **List People Conversations**: `crisp.Website.ListPeopleConversations(websiteID string, peopleID string, pageNumber uint) ([]string, *Response, error)`
-  * **Export All People Profiles**: `crisp.Website.ExportAllPeopleProfiles(websiteID string) (*Response, error)`
+  * **Export People Profiles**: `crisp.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
+  * **Import People Profiles**: `crisp.Website.ImportPeopleProfiles(websiteID string, profileImport PeopleProfileImport) (*Response, error)`
 
 ### Plugin
 
