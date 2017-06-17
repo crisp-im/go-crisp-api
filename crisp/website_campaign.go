@@ -54,10 +54,11 @@ type WebsiteCampaignItemData struct {
 // WebsiteCampaignItem mapping
 type WebsiteCampaignItem struct {
   WebsiteCampaignExcerpt
-  Sender      *string  `json:"sender,omitempty"`
-  Recipients  *string  `json:"recipients,omitempty"`
-  Message     *string  `json:"message,omitempty"`
-  Options     *string  `json:"options,omitempty"`
+  Sender      *WebsiteCampaignItemSender      `json:"sender,omitempty"`
+  Recipients  *WebsiteCampaignItemRecipients  `json:"recipients,omitempty"`
+  Message     *string                         `json:"message,omitempty"`
+  Options     *WebsiteCampaignItemOptions     `json:"options,omitempty"`
+  Statistics  *WebsiteCampaignItemStatistics  `json:"statistics,omitempty"`
 }
 
 // WebsiteCampaignItemSender mapping
@@ -76,6 +77,11 @@ type WebsiteCampaignItemRecipients struct {
 type WebsiteCampaignItemOptions struct {
   DeliverToChatbox  *bool  `json:"deliver_to_chatbox,omitempty"`
   DeliverToEmail    *bool  `json:"deliver_to_email,omitempty"`
+}
+
+// WebsiteCampaignItemStatistics mapping
+type WebsiteCampaignItemStatistics struct {
+  Opened  *uint  `json:"opened,omitempty"`
 }
 
 
