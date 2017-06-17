@@ -459,7 +459,14 @@ type EventsPeopleSyncProfile struct {
 // EventsPeopleImportProgress maps people:import:progress
 type EventsPeopleImportProgress struct {
   eventsImportGeneric
-  Progress  *uint8  `json:"progress"`
+  Progress  *uint8                            `json:"progress"`
+  Count     *EventsPeopleImportProgressCount  `json:"count"`
+}
+
+// EventsPeopleImportProgressCount maps people:import:progress/count
+type EventsPeopleImportProgressCount struct {
+  Total      *uint32  `json:"total"`
+  Remaining  *uint32  `json:"remaining"`
 }
 
 // EventsPeopleImportDone maps people:import:done
