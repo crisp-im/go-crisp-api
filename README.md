@@ -469,6 +469,7 @@ Available events are listed below:
   * **Bucket URL Upload Generated**: `bucket:url:upload:generated`
   * **Bucket URL Avatar Generated**: `bucket:url:avatar:generated`
   * **Bucket URL Campaign Generated**: `bucket:url:campaign:generated`
+  * **Bucket URL Processing Generated**: `bucket:url:processing:generated`
 
 * **Media Events**
   * **Media Animation Listed**: `media:animation:listed`
