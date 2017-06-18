@@ -24,6 +24,7 @@ type WebsiteCampaignNew struct {
 
 // WebsiteCampaignNewItem mapping
 type WebsiteCampaignNewItem struct {
+  Type  string  `json:"type"`
   Name  string  `json:"name"`
 }
 
@@ -35,6 +36,7 @@ type WebsiteCampaignExcerptsData struct {
 // WebsiteCampaignExcerpt mapping
 type WebsiteCampaignExcerpt struct {
   CampaignID    *string  `json:"campaign_id,omitempty"`
+  Type          *string  `json:"type,omitempty"`
   Name          *string  `json:"name,omitempty"`
   Ready         *bool    `json:"ready,omitempty"`
   Dispatched    *bool    `json:"dispatched,omitempty"`
@@ -158,9 +160,9 @@ func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint
 
 
 // CreateNewCampaign creates a new campaign.
-func (service *WebsiteService) CreateNewCampaign(websiteID string, name string) (*WebsiteCampaignNew, *Response, error) {
+func (service *WebsiteService) CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error) {
   url := fmt.Sprintf("website/%s/campaign", websiteID)
-  req, _ := service.client.NewRequest("POST", url, WebsiteCampaignNewItem{Name: name})
+  req, _ := service.client.NewRequest("POST", url, WebsiteCampaignNewItem{Type: campaignType, Name: campaignName})
 
   campaign := new(WebsiteCampaignNewData)
   resp, err := service.client.Do(req, campaign)

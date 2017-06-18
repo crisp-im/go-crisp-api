@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 06/17/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.im/api/v1/) at reference revision: 06/18/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -212,7 +212,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Campaigns (Filter Variant)**: `crisp.Website.FilterCampaigns(websiteID string, pageNumber uint, filterName string, filterReady bool, filterDispatched bool, filterRunning bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
 
 * **Website Campaign**
-  * **Create A New Campaign**: `crisp.Website.CreateNewCampaign(websiteID string, name string) (*WebsiteCampaignNew, *Response, error)`
+  * **Create A New Campaign**: `crisp.Website.CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error)`
   * **Check If Campaign Exists**: `crisp.Website.CheckCampaignExists(websiteID string, campaignID string) (*Response, error)`
   * **Get A Campaign**: `crisp.Website.GetCampaign(websiteID string, campaignID string) (*WebsiteCampaignItem, *Response, error)`
   * **Save A Campaign**: `crisp.Website.SaveCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
