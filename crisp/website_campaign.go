@@ -70,9 +70,18 @@ type WebsiteCampaignItemSender struct {
 
 // WebsiteCampaignItemRecipients mapping
 type WebsiteCampaignItemRecipients struct {
-  Type      *string    `json:"type,omitempty"`
-  Segments  *[]string  `json:"segments,omitempty"`
-  People    *[]string  `json:"people,omitempty"`
+  Type      *string                                 `json:"type,omitempty"`
+  Segments  *[]string                               `json:"segments,omitempty"`
+  People    *[]string                               `json:"people,omitempty"`
+  Filter    *[]WebsiteCampaignItemRecipientsFilter  `json:"filter,omitempty"`
+}
+
+// WebsiteCampaignItemRecipientsFilter mapping
+type WebsiteCampaignItemRecipientsFilter struct {
+  Model      *string         `json:"model,omitempty"`
+  Criterion  *string         `json:"criterion,omitempty"`
+  Operator   *string         `json:"operator,omitempty"`
+  Query      *[]interface{}  `json:"query,omitempty"`
 }
 
 // WebsiteCampaignItemOptions mapping
