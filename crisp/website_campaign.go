@@ -130,32 +130,60 @@ func (service *WebsiteService) ListCampaigns(websiteID string, pageNumber uint) 
 
 
 // FilterCampaigns lists campaigns for website (filter variant).
-func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint, filterName string, filterReady bool, filterDispatched bool, filterRunning bool) (*[]WebsiteCampaignExcerpt, *Response, error) {
+func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterOperator string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error) {
   var (
-    filterReadyValue string
-    filterDispatchedValue string
-    filterRunningValue string
+    filterTypeOneShotValue string
+    filterTypeAutomatedValue string
+    filterStatusNotConfiguredValue string
+    filterStatusReadyValue string
+    filterStatusPausedValue string
+    filterStatusSendingValue string
+    filterStatusDoneValue string
   )
 
-  if filterReady == true {
-    filterReadyValue = "1"
+  if filterTypeOneShot == true {
+    filterTypeOneShotValue = "1"
   } else {
-    filterReadyValue = "0"
+    filterTypeOneShotValue = "0"
   }
 
-  if filterDispatched == true {
-    filterDispatchedValue = "1"
+  if filterTypeAutomated == true {
+    filterTypeAutomatedValue = "1"
   } else {
-    filterDispatchedValue = "0"
+    filterTypeAutomatedValue = "0"
   }
 
-  if filterRunning == true {
-    filterRunningValue = "1"
+  if filterStatusNotConfigured == true {
+    filterStatusNotConfiguredValue = "1"
   } else {
-    filterRunningValue = "0"
+    filterStatusNotConfiguredValue = "0"
   }
 
-  url := fmt.Sprintf("website/%s/campaigns/%d?filter_name=%s&filter_ready=%s&filter_dispatched=%s&filter_running=%s", websiteID, pageNumber, url.QueryEscape(filterName), url.QueryEscape(filterReadyValue), url.QueryEscape(filterDispatchedValue), url.QueryEscape(filterRunningValue))
+  if filterStatusReady == true {
+    filterStatusReadyValue = "1"
+  } else {
+    filterStatusReadyValue = "0"
+  }
+
+  if filterStatusPaused == true {
+    filterStatusPausedValue = "1"
+  } else {
+    filterStatusPausedValue = "0"
+  }
+
+  if filterStatusSending == true {
+    filterStatusSendingValue = "1"
+  } else {
+    filterStatusSendingValue = "0"
+  }
+
+  if filterStatusDone == true {
+    filterStatusDoneValue = "1"
+  } else {
+    filterStatusDoneValue = "0"
+  }
+
+  url := fmt.Sprintf("website/%s/campaigns/%d?search_name=%s&filter_operator=%s&filter_type_one_shot=%s&filter_type_automated=%s&filter_status_not_configured=%s&filter_status_ready=%s&filter_status_paused=%s&filter_status_sending=%s&filter_status_done=%s", websiteID, pageNumber, url.QueryEscape(searchName), url.QueryEscape(filterOperator), url.QueryEscape(filterTypeOneShotValue), url.QueryEscape(filterTypeAutomatedValue), url.QueryEscape(filterStatusNotConfiguredValue), url.QueryEscape(filterStatusReadyValue), url.QueryEscape(filterStatusPausedValue), url.QueryEscape(filterStatusSendingValue), url.QueryEscape(filterStatusDoneValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   campaigns := new(WebsiteCampaignExcerptsData)
