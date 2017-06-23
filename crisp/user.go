@@ -8,3 +8,12 @@ package crisp
 
 // UserService service
 type UserService service
+
+
+// UserFilter mapping
+type UserFilter struct {
+  Model      *string         `json:"model,omitempty"`
+  Criterion  *string         `json:"criterion,omitempty"`
+  Operator   *string         `json:"operator,omitempty"`
+  Query      *[]interface{}  `json:"query,omitempty"`
+}

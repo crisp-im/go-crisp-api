@@ -58,6 +58,7 @@ type WebsiteCampaignItem struct {
   WebsiteCampaignExcerpt
   Sender      *WebsiteCampaignItemSender      `json:"sender,omitempty"`
   Recipients  *WebsiteCampaignItemRecipients  `json:"recipients,omitempty"`
+  Flow        *WebsiteCampaignItemFlow        `json:"flow,omitempty"`
   Message     *string                         `json:"message,omitempty"`
   Options     *WebsiteCampaignItemOptions     `json:"options,omitempty"`
   Statistics  *WebsiteCampaignItemStatistics  `json:"statistics,omitempty"`
@@ -70,18 +71,18 @@ type WebsiteCampaignItemSender struct {
 
 // WebsiteCampaignItemRecipients mapping
 type WebsiteCampaignItemRecipients struct {
-  Type      *string                                 `json:"type,omitempty"`
-  Segments  *[]string                               `json:"segments,omitempty"`
-  People    *[]string                               `json:"people,omitempty"`
-  Filter    *[]WebsiteCampaignItemRecipientsFilter  `json:"filter,omitempty"`
+  Type      *string        `json:"type,omitempty"`
+  Segments  *[]string      `json:"segments,omitempty"`
+  People    *[]string      `json:"people,omitempty"`
+  Filter    *[]UserFilter  `json:"filter,omitempty"`
 }
 
-// WebsiteCampaignItemRecipientsFilter mapping
-type WebsiteCampaignItemRecipientsFilter struct {
-  Model      *string         `json:"model,omitempty"`
-  Criterion  *string         `json:"criterion,omitempty"`
-  Operator   *string         `json:"operator,omitempty"`
-  Query      *[]interface{}  `json:"query,omitempty"`
+// WebsiteCampaignItemFlow mapping
+type WebsiteCampaignItemFlow struct {
+  LaunchEvent   *string        `json:"launch_event,omitempty"`
+  AssertFilter  *[]UserFilter  `json:"assert_filter,omitempty"`
+  DeliverOnce   *bool          `json:"deliver_once,omitempty"`
+  DeliverDelay  *uint16        `json:"deliver_delay,omitempty"`
 }
 
 // WebsiteCampaignItemOptions mapping
