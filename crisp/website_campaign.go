@@ -42,7 +42,8 @@ type WebsiteCampaignExcerpt struct {
   Dispatched    *bool    `json:"dispatched,omitempty"`
   Running       *bool    `json:"running,omitempty"`
   Progress      *uint8   `json:"progress,omitempty"`
-  Targets       *uint16  `json:"targets,omitempty"`
+  Targets       *uint32  `json:"targets,omitempty"`
+  Reached       *uint32  `json:"reached,omitempty"`
   CreatedAt     *uint    `json:"created_at,omitempty"`
   UpdatedAt     *uint    `json:"updated_at,omitempty"`
   DispatchedAt  *uint    `json:"dispatched_at,omitempty"`
