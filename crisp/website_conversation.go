@@ -411,6 +411,9 @@ type ConversationReadMessageMark struct {
   Fingerprints  []int   `json:"fingerprints,omitempty"`
 }
 
+// ConversationDeliveredMessageMark mapping
+type ConversationDeliveredMessageMark ConversationReadMessageMark
+
 // ConversationOpenUpdate mapping
 type ConversationOpenUpdate struct {
   Opened  *bool  `json:"blocked,omitempty"`
@@ -838,6 +841,15 @@ func (service *WebsiteService) ComposeMessageInConversation(websiteID string, se
 func (service *WebsiteService) MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/read", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, read)
+
+  return service.client.Do(req, nil)
+}
+
+
+// MarkMessagesDeliveredInConversation marks messages as delivered in conversation. Either using given message fingerprints, or all messages.
+func (service *WebsiteService) MarkMessagesDeliveredInConversation(websiteID string, sessionID string, delivered ConversationDeliveredMessageMark) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/delivered", websiteID, sessionID)
+  req, _ := service.client.NewRequest("PATCH", url, delivered)
 
   return service.client.Do(req, nil)
 }
