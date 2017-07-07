@@ -53,6 +53,7 @@ type WebsiteSettingsChatbox struct {
   PositionReverse      *bool      `json:"position_reverse,omitempty"`
   EmailVisitors        *bool      `json:"email_visitors,omitempty"`
   PhoneVisitors        *bool      `json:"phone_visitors,omitempty"`
+  ForceIdentify        *bool      `json:"force_identify,omitempty"`
   IgnorePrivacy        *bool      `json:"ignore_privacy,omitempty"`
   CheckDomain          *bool      `json:"check_domain,omitempty"`
   ColorTheme           *string    `json:"color_theme,omitempty"`
@@ -100,6 +101,7 @@ type WebsiteSettingsUpdateChatbox struct {
   PositionReverse      bool       `json:"position_reverse,omitempty"`
   EmailVisitors        bool       `json:"email_visitors,omitempty"`
   PhoneVisitors        bool       `json:"phone_visitors,omitempty"`
+  ForceIdentify        bool       `json:"force_identify,omitempty"`
   IgnorePrivacy        bool       `json:"ignore_privacy,omitempty"`
   CheckDomain          bool       `json:"check_domain,omitempty"`
   ColorTheme           string     `json:"color_theme,omitempty"`
