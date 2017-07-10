@@ -57,15 +57,17 @@ Thus, it is straightforward to look for them in the library while reading the [A
 
 In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.New()` and then call eg: `client.User.CheckSessionValidity()`.
 
-When calling a method that writes data to the API (eg: `crisp.User.CreateUserAccount()`), you need to build an account instance this way:
+When calling a method that writes data to the API (eg: `client.User.CreateUserAccount()`), you need to build an account instance and submit it this way:
 
 ```go
-userAccount = crisp.UserAccountCreate{
-  Email: "john@acme-inc.com"
-  Password: "SecurePassword"
-  FirstName: "John"
-  LastName: "Doe"
+userAccount := crisp.UserAccountCreate{
+  Email: "john@acme-inc.com",
+  Password: "SecurePassword",
+  FirstName: "John",
+  LastName: "Doe",
 }
+
+client.CreateUserAccount(userAccount)
 ```
 
 Refer directly to [the library source code](https://github.com/crisp-im/go-crisp-api/tree/master/crisp) to know more about those structures.
@@ -73,256 +75,256 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 ### Email
 
 * **Email Subscription**
-  * **Get Subscription Status**: `crisp.Email.GetSubscriptionStatus(emailHash string, key string) (*SubscriptionStatus, *Response, error)`
-  * **Update Subscription Status**: `crisp.Email.UpdateSubscriptionStatus(emailHash string, key string, subscribed bool) (*Response, error)`
+  * **Get Subscription Status**: `client.Email.GetSubscriptionStatus(emailHash string, key string) (*SubscriptionStatus, *Response, error)`
+  * **Update Subscription Status**: `client.Email.UpdateSubscriptionStatus(emailHash string, key string, subscribed bool) (*Response, error)`
 
 ### Bucket
 
 * **Bucket URL**
-  * **Generate Bucket URL**: `crisp.Bucket.GenerateBucketURL(bucketData BucketURLRequest) (*Response, error)`
+  * **Generate Bucket URL**: `client.Bucket.GenerateBucketURL(bucketData BucketURLRequest) (*Response, error)`
 
 ### Media
 
 * **Media Animation**
-  * **List Animation Medias**: `crisp.Media.ListAnimationMedias(pageNumber uint, listID string, searchQuery string) (*Response, error)`
+  * **List Animation Medias**: `client.Media.ListAnimationMedias(pageNumber uint, listID string, searchQuery string) (*Response, error)`
 
 ### User
 
 * **User Availability**
-  * **Get User Availability**: `crisp.User.GetUserAvailability() (*UserAvailability, *Response, error)`
-  * **Update User Availability**: `crisp.User.UpdateUserAvailability(availabilityType string, timeFor uint) (*Response, error)`
-  * **Get User Availability Status**: `crisp.User.GetUserAvailabilityStatus() (*UserAvailabilityStatus, *Response, error)`
+  * **Get User Availability**: `client.User.GetUserAvailability() (*UserAvailability, *Response, error)`
+  * **Update User Availability**: `client.User.UpdateUserAvailability(availabilityType string, timeFor uint) (*Response, error)`
+  * **Get User Availability Status**: `client.User.GetUserAvailabilityStatus() (*UserAvailabilityStatus, *Response, error)`
 
 * **User Account Base**
-  * **Get User Account**: `crisp.User.GetUserAccount() (*UserAccount, *Response, error)`
-  * **Create User Account**: `crisp.User.CreateUserAccount(user UserAccountCreate) (*Response, error)`
+  * **Get User Account**: `client.User.GetUserAccount() (*UserAccount, *Response, error)`
+  * **Create User Account**: `client.User.CreateUserAccount(user UserAccountCreate) (*Response, error)`
 
 * **User Account Billing**
-  * **List All Billing Methods**: `crisp.User.ListAllBillingMethods() (*[]BillingMethodAll, *Response, error)`
-  * **Add New Billing Method**: `crisp.User.AddNewBillingMethod(billing BillingMethodCreate) (*Response, error)`
-  * **Get A Billing Method**: `crisp.User.GetBillingMethod(cardID string) (*BillingMethod, *Response, error)`
-  * **Remove A Billing Method**: `crisp.User.RemoveBillingMethod(cardID string) (*Response, error)`
-  * **List Invoices For Billing Method**: `crisp.User.ListInvoicesForBillingMethod(cardID string, pageNumber int) (*BillingMethodInvoiceAll, *Response, error)`
-  * **Get An Invoice For Billing Method**: `crisp.User.GetInvoiceForBillingMethod(cardID string, invoiceID string) (*BillingMethodInvoice, *Response, error)`
-  * **Link To An External Billing Method**: `crisp.User.LinkToExternalBillingMethod(billingService string) (*Response, error)`
-  * **Finish Linking External Billing Method**: `crisp.User.FinishLinkingExternalBillingMethod(cardID string) (*Response, error)`
-  * **Finish Unlinking External Billing Method**: `crisp.User.FinishUnlinkingExternalBillingMethod(cardID string) (*Response, error)`
+  * **List All Billing Methods**: `client.User.ListAllBillingMethods() (*[]BillingMethodAll, *Response, error)`
+  * **Add New Billing Method**: `client.User.AddNewBillingMethod(billing BillingMethodCreate) (*Response, error)`
+  * **Get A Billing Method**: `client.User.GetBillingMethod(cardID string) (*BillingMethod, *Response, error)`
+  * **Remove A Billing Method**: `client.User.RemoveBillingMethod(cardID string) (*Response, error)`
+  * **List Invoices For Billing Method**: `client.User.ListInvoicesForBillingMethod(cardID string, pageNumber int) (*BillingMethodInvoiceAll, *Response, error)`
+  * **Get An Invoice For Billing Method**: `client.User.GetInvoiceForBillingMethod(cardID string, invoiceID string) (*BillingMethodInvoice, *Response, error)`
+  * **Link To An External Billing Method**: `client.User.LinkToExternalBillingMethod(billingService string) (*Response, error)`
+  * **Finish Linking External Billing Method**: `client.User.FinishLinkingExternalBillingMethod(cardID string) (*Response, error)`
+  * **Finish Unlinking External Billing Method**: `client.User.FinishUnlinkingExternalBillingMethod(cardID string) (*Response, error)`
 
 * **User Account Notification**
-  * **Get Notification Settings**: `crisp.User.GetNotificationSettings() (*UserNotificationSettings, *Response, error)`
-  * **Update Notification Settings**: `crisp.User.UpdateNotificationSettings(notifications UserNotificationSettingsUpdate) (*Response, error)`
-  * **Add A Notification Provider**: `crisp.User.AddNotificationProvider(notificationID string) (*Response, error)`
-  * **Delete A Notification Provider**: `crisp.User.DeleteNotificationProvider(notificationID string) (*Response, error)`
+  * **Get Notification Settings**: `client.User.GetNotificationSettings() (*UserNotificationSettings, *Response, error)`
+  * **Update Notification Settings**: `client.User.UpdateNotificationSettings(notifications UserNotificationSettingsUpdate) (*Response, error)`
+  * **Add A Notification Provider**: `client.User.AddNotificationProvider(notificationID string) (*Response, error)`
+  * **Delete A Notification Provider**: `client.User.DeleteNotificationProvider(notificationID string) (*Response, error)`
 
 * **User Account Websites**
-  * **List Websites**: `crisp.User.ListWebsites() (*[]UserWebsite, *Response, error)`
+  * **List Websites**: `client.User.ListWebsites() (*[]UserWebsite, *Response, error)`
 
 * **User Account Profile**
-  * **Get Profile**: `crisp.User.GetProfile() (*UserProfile, *Response, error)`
-  * **Update Profile**: `crisp.User.UpdateProfile(profile UserProfileUpdate) (*Response, error)`
+  * **Get Profile**: `client.User.GetProfile() (*UserProfile, *Response, error)`
+  * **Update Profile**: `client.User.UpdateProfile(profile UserProfileUpdate) (*Response, error)`
 
 * **User Account Recover**
-  * **Get Recovery Details**: `crisp.User.GetRecoveryDetails(userID string, recoverIdentifier string, recoverKey string) (*Response, error)`
-  * **Send Recovery Password**: `crisp.User.SendRecoveryPassword(userID string, recoverIdentifier string, recoverKey string, password string) (*Response, error)`
-  * **Delete Recovery Keypair**: `crisp.User.DeleteRecoveryKeypair(userID string, recoverIdentifier string, recoverKey string) (*Response, error)`
+  * **Get Recovery Details**: `client.User.GetRecoveryDetails(userID string, recoverIdentifier string, recoverKey string) (*Response, error)`
+  * **Send Recovery Password**: `client.User.SendRecoveryPassword(userID string, recoverIdentifier string, recoverKey string, password string) (*Response, error)`
+  * **Delete Recovery Keypair**: `client.User.DeleteRecoveryKeypair(userID string, recoverIdentifier string, recoverKey string) (*Response, error)`
 
 * **User Account Schedule**
-  * **Get Schedule Settings**: `crisp.User.GetScheduleSettings() (*UserScheduleSettings, *Response, error)`
-  * **Update Schedule Settings**: `crisp.User.UpdateScheduleSettings(schedule UserScheduleSettingsUpdate) (*Response, error)`
+  * **Get Schedule Settings**: `client.User.GetScheduleSettings() (*UserScheduleSettings, *Response, error)`
+  * **Update Schedule Settings**: `client.User.UpdateScheduleSettings(schedule UserScheduleSettingsUpdate) (*Response, error)`
 
 * **User Session**
-  * **Check Session Validity**: `crisp.User.CheckSessionValidity() (*Response, error)`
-  * **Create A New Session**: `crisp.User.CreateNewSession(email string, password string) (*UserSessionParameters, *Response, error)`
-  * **Destroy A Session**: `crisp.User.DestroySession() (*Response, error)`
-  * **Recover A Session**: `crisp.User.RecoverSession(email string)`
+  * **Check Session Validity**: `client.User.CheckSessionValidity() (*Response, error)`
+  * **Create A New Session**: `client.User.CreateNewSession(email string, password string) (*UserSessionParameters, *Response, error)`
+  * **Destroy A Session**: `client.User.DestroySession() (*Response, error)`
+  * **Recover A Session**: `client.User.RecoverSession(email string)`
 
 * **User Statistics**
-  * **Count Total Unread Messages**: `crisp.User.CountTotalUnreadMessages() (*UserStatistics, *Response, error)`
+  * **Count Total Unread Messages**: `client.User.CountTotalUnreadMessages() (*UserStatistics, *Response, error)`
 
 ### Website
 
 * **Website Base**
-  * **Create Website**: `crisp.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
-  * **Get A Website**: `crisp.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
-  * **Delete A Website**: `crisp.Website.DeleteWebsite(websiteID string) (*Response, error)`
+  * **Create Website**: `client.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
+  * **Get A Website**: `client.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
+  * **Delete A Website**: `client.Website.DeleteWebsite(websiteID string) (*Response, error)`
 
 * **Website Batch**
-  * **Resolve Given Conversations**: `crisp.Website.ResolveGivenConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Read Given Conversations**: `crisp.Website.ReadGivenConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Remove Given Conversations**: `crisp.Website.RemoveGivenConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Resolve Given Conversations**: `client.Website.ResolveGivenConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Read Given Conversations**: `client.Website.ReadGivenConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Remove Given Conversations**: `client.Website.RemoveGivenConversations(websiteID string, sessions []string) (*Response, error)`
 
 * **Website Billing**
-  * **Get Website Billing**: `crisp.Website.GetWebsiteBilling(websiteID string) (*WebsiteBilling, *Response, error)`
-  * **Update Website Billing**: `crisp.Website.UpdateWebsiteBilling(websiteID string, cardID string) (*Response, error)`
-  * **Unlink Website Billing**: `crisp.Website.UnlinkWebsiteBilling(websiteID string) (*Response, error)`
+  * **Get Website Billing**: `client.Website.GetWebsiteBilling(websiteID string) (*WebsiteBilling, *Response, error)`
+  * **Update Website Billing**: `client.Website.UpdateWebsiteBilling(websiteID string, cardID string) (*Response, error)`
+  * **Unlink Website Billing**: `client.Website.UnlinkWebsiteBilling(websiteID string) (*Response, error)`
 
 * **Website Availability**
-  * **Get Website Availability Status**: `crisp.Website.GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error)`
+  * **Get Website Availability Status**: `client.Website.GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error)`
 
 * **Website Channel**
-  * **Get Website Email Channel**: `crisp.Website.GetWebsiteEmailChannel(websiteID string) (*WebsiteChannelEmail, *Response, error)`
+  * **Get Website Email Channel**: `client.Website.GetWebsiteEmailChannel(websiteID string) (*WebsiteChannelEmail, *Response, error)`
 
 * **Website Operator**
-  * **List Website Operators**: `crisp.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
-  * **List Last Active Website Operators**: `crisp.Website.ListLastActiveWebsiteOperators(websiteID string) (*[]WebsiteOperatorsLastActiveListOne, *Response, error)`
-  * **Flush Last Active Website Operators**: `crisp.Website.FlushLastActiveWebsiteOperators(websiteID string) (*Response, error)`
-  * **Get A Website Operator**: `crisp.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
-  * **Invite A Website Operator**: `crisp.Website.InviteWebsiteOperator(websiteID string, email string, role string) (*Response, error)`
-  * **Change Operator Role**: `crisp.Website.ChangeOperatorRole(websiteID string, userID string, role string) (*Response, error)`
-  * **Unlink Operator From Website**: `crisp.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
+  * **List Website Operators**: `client.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
+  * **List Last Active Website Operators**: `client.Website.ListLastActiveWebsiteOperators(websiteID string) (*[]WebsiteOperatorsLastActiveListOne, *Response, error)`
+  * **Flush Last Active Website Operators**: `client.Website.FlushLastActiveWebsiteOperators(websiteID string) (*Response, error)`
+  * **Get A Website Operator**: `client.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
+  * **Invite A Website Operator**: `client.Website.InviteWebsiteOperator(websiteID string, email string, role string) (*Response, error)`
+  * **Change Operator Role**: `client.Website.ChangeOperatorRole(websiteID string, userID string, role string) (*Response, error)`
+  * **Unlink Operator From Website**: `client.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
 
 * **Website Invite**
-  * **Get Invite Details**: `crisp.Website.GetInviteDetails(websiteID string, inviteIdentifier string, inviteKey string) (*WebsiteInvite, *Response, error)`
-  * **Redeem Invite**: `crisp.Website.RedeemInvite(websiteID string, inviteIdentifier string, inviteKey string) (*Response, error)`
-  * **Delete Invite Keypair**: `crisp.Website.DeleteInviteKeypair(websiteID string, inviteIdentifier string, inviteKey string) (*Response, error)`
+  * **Get Invite Details**: `client.Website.GetInviteDetails(websiteID string, inviteIdentifier string, inviteKey string) (*WebsiteInvite, *Response, error)`
+  * **Redeem Invite**: `client.Website.RedeemInvite(websiteID string, inviteIdentifier string, inviteKey string) (*Response, error)`
+  * **Delete Invite Keypair**: `client.Website.DeleteInviteKeypair(websiteID string, inviteIdentifier string, inviteKey string) (*Response, error)`
 
 * **Website Rating**
-  * **Resolve Session Rating**: `crisp.Website.ResolveSessionRating(websiteID string, sessionID string) (*WebsiteRatingSession, *Response, error)`
-  * **Submit Session Rating**: `crisp.Website.SubmitSessionRating(websiteID string, sessionID string, websiteRatingSession WebsiteRatingCreateSession) (*Response, error)`
-  * **Delete Session Rating**: `crisp.Website.DeleteSessionRating(websiteID string, sessionID string) (*Response, error)`
+  * **Resolve Session Rating**: `client.Website.ResolveSessionRating(websiteID string, sessionID string) (*WebsiteRatingSession, *Response, error)`
+  * **Submit Session Rating**: `client.Website.SubmitSessionRating(websiteID string, sessionID string, websiteRatingSession WebsiteRatingCreateSession) (*Response, error)`
+  * **Delete Session Rating**: `client.Website.DeleteSessionRating(websiteID string, sessionID string) (*Response, error)`
 
 * **Website Settings**
-  * **Get Website Settings**: `crisp.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
-  * **Update Website Settings**: `crisp.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error)`
+  * **Get Website Settings**: `client.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
+  * **Update Website Settings**: `client.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error)`
 
 * **Website Visitors**
-  * **Count Visitors**: `crisp.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
-  * **List Visitors**: `crisp.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
-  * **Pinpoint Visitors On A Map (Wide Variant)**: `crisp.Website.PinpointVisitorsOnMapWide(websiteID string) (*[]WebsiteVisitorsMapPoint, *Response, error)`
-  * **Pinpoint Visitors On A Map (Area Variant)**: `crisp.Website.PinpointVisitorsOnMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*[]WebsiteVisitorsMapPoint, *Response, error)`
+  * **Count Visitors**: `client.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
+  * **List Visitors**: `client.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
+  * **Pinpoint Visitors On A Map (Wide Variant)**: `client.Website.PinpointVisitorsOnMapWide(websiteID string) (*[]WebsiteVisitorsMapPoint, *Response, error)`
+  * **Pinpoint Visitors On A Map (Area Variant)**: `client.Website.PinpointVisitorsOnMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*[]WebsiteVisitorsMapPoint, *Response, error)`
 
 * **Website States**
-  * **Request Website States**: `crisp.Website.RequestWebsiteStates(websiteID string) (*Response, error)`
+  * **Request Website States**: `client.Website.RequestWebsiteStates(websiteID string) (*Response, error)`
 
 * **Website Shortcuts**
-  * **List Shortcuts**: `crisp.Website.ListShortcuts(websiteID string, pageNumber uint) (*[]WebsiteShortcut, *Response, error)`
-  * **List Shortcuts (Search Variant)**: `crisp.Website.SearchShortcuts(websiteID string, pageNumber uint, searchQuery string, searchTag string) (*[]WebsiteShortcut, *Response, error)`
-  * **List Shortcut Tags**: `crisp.Website.ListShortcutTags(websiteID string) (*[]string, *Response, error)`
+  * **List Shortcuts**: `client.Website.ListShortcuts(websiteID string, pageNumber uint) (*[]WebsiteShortcut, *Response, error)`
+  * **List Shortcuts (Search Variant)**: `client.Website.SearchShortcuts(websiteID string, pageNumber uint, searchQuery string, searchTag string) (*[]WebsiteShortcut, *Response, error)`
+  * **List Shortcut Tags**: `client.Website.ListShortcutTags(websiteID string) (*[]string, *Response, error)`
 
 * **Website Shortcut**
-  * **Create A New Shortcut**: `crisp.Website.CreateNewShortcut(websiteID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
-  * **Check If Shortcut Exists**: `crisp.Website.CheckShortcutExists(websiteID string, shortcutID string) (*Response, error)`
-  * **Get A Shortcut**: `crisp.Website.GetShortcut(websiteID string, shortcutID string) (*WebsiteShortcut, *Response, error)`
-  * **Save A Shortcut**: `crisp.Website.SaveShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
-  * **Update A Shortcut**: `crisp.Website.UpdateShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
-  * **Remove A Shortcut**: `crisp.Website.RemoveShortcut(websiteID string, shortcutID string) (*Response, error)`
+  * **Create A New Shortcut**: `client.Website.CreateNewShortcut(websiteID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
+  * **Check If Shortcut Exists**: `client.Website.CheckShortcutExists(websiteID string, shortcutID string) (*Response, error)`
+  * **Get A Shortcut**: `client.Website.GetShortcut(websiteID string, shortcutID string) (*WebsiteShortcut, *Response, error)`
+  * **Save A Shortcut**: `client.Website.SaveShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
+  * **Update A Shortcut**: `client.Website.UpdateShortcut(websiteID string, shortcutID string, websiteShortcutItem WebsiteShortcutItem) (*Response, error)`
+  * **Remove A Shortcut**: `client.Website.RemoveShortcut(websiteID string, shortcutID string) (*Response, error)`
 
 * **Website Campaigns**
-  * **List Campaigns**: `crisp.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
-  * **List Campaigns (Filter Variant)**: `crisp.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaigns**: `client.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaigns (Filter Variant)**: `client.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
 
 * **Website Campaign**
-  * **Create A New Campaign**: `crisp.Website.CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error)`
-  * **Check If Campaign Exists**: `crisp.Website.CheckCampaignExists(websiteID string, campaignID string) (*Response, error)`
-  * **Get A Campaign**: `crisp.Website.GetCampaign(websiteID string, campaignID string) (*WebsiteCampaignItem, *Response, error)`
-  * **Save A Campaign**: `crisp.Website.SaveCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
-  * **Update A Campaign**: `crisp.Website.UpdateCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
-  * **Remove A Campaign**: `crisp.Website.RemoveCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Dispatch A Campaign**: `crisp.Website.DispatchCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Resume A Campaign**: `crisp.Website.ResumeCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Pause A Campaign**: `crisp.Website.PauseCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Create A New Campaign**: `client.Website.CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error)`
+  * **Check If Campaign Exists**: `client.Website.CheckCampaignExists(websiteID string, campaignID string) (*Response, error)`
+  * **Get A Campaign**: `client.Website.GetCampaign(websiteID string, campaignID string) (*WebsiteCampaignItem, *Response, error)`
+  * **Save A Campaign**: `client.Website.SaveCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
+  * **Update A Campaign**: `client.Website.UpdateCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
+  * **Remove A Campaign**: `client.Website.RemoveCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Dispatch A Campaign**: `client.Website.DispatchCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Resume A Campaign**: `client.Website.ResumeCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Pause A Campaign**: `client.Website.PauseCampaign(websiteID string, campaignID string) (*Response, error)`
 
 * **Website Conversations**
-  * **List Conversations**: `crisp.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
-  * **List Conversations (Search Variant)**: `crisp.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
-  * **List Conversation Segments In Meta**: `crisp.Website.ListConversationSegmentsInMeta(websiteID string, pageNumber uint) (*[]ConversationMetaSegment, *Response, error)`
+  * **List Conversations**: `client.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
+  * **List Conversations (Search Variant)**: `client.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
+  * **List Conversation Segments In Meta**: `client.Website.ListConversationSegmentsInMeta(websiteID string, pageNumber uint) (*[]ConversationMetaSegment, *Response, error)`
 
 * **Website Conversation**
-  * **Create A New Conversation**: `crisp.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
-  * **Check If Conversation Exists**: `crisp.Website.CheckConversationExists(websiteID string, sessionID string) (*Response, error)`
-  * **Get A Conversation**: `crisp.Website.GetConversation(websiteID string, sessionID string) (*Conversation, *Response, error)`
-  * **Remove A Conversation**: `crisp.Website.RemoveConversation(websiteID string, sessionID string) (*Response, error)`
-  * **Initiate A Conversation With Existing Session**: `crisp.Website.InitiateConversationWithExistingSession(websiteID string, sessionID string) (*Response, error)`
-  * **Get Messages In Conversation (Last Variant)**: `crisp.Website.GetMessagesInConversationLast(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error)`
-  * **Get Messages In Conversation (Before Variant)**: `crisp.Website.GetMessagesInConversationBefore(websiteID string, sessionID string, timestampBefore uint32) (*[]ConversationMessage, *Response, error)`
-  * **Send A Message In Conversation (Text Variant)**: `crisp.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error)`
-  * **Send A Message In Conversation (File Variant)**: `crisp.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error)`
-  * **Send A Message In Conversation (Animation Variant)**: `crisp.Website.SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*Response, error)`
-  * **Send A Message In Conversation (Audio Variant)**: `crisp.Website.SendAudioMessageInConversation(websiteID string, sessionID string, message ConversationAudioMessageNew) (*Response, error)`
-  * **Send A Message In Conversation (Picker Variant)**: `crisp.Website.SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*Response, error)`
-  * **Send A Message In Conversation (Field Variant)**: `crisp.Website.SendFieldMessageInConversation(websiteID string, sessionID string, message ConversationFieldMessageNew) (*Response, error)`
-  * **Send A Message In Conversation (Note Variant)**: `crisp.Website.SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*Response, error)`
-  * **Compose A Message In Conversation**: `crisp.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
-  * **Mark Messages As Read In Conversation**: `crisp.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
-  * **Mark Messages As Delivered In Conversation**: `crisp.Website.MarkMessagesDeliveredInConversation(websiteID string, sessionID string, delivered ConversationDeliveredMessageMark) (*Response, error)`
-  * **Update Conversation Open State**: `crisp.Website.UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error)`
-  * **Get Conversation Metas**: `crisp.Website.GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error)`
-  * **Update Conversation Metas**: `crisp.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
-  * **List Conversation Pages**: `crisp.Website.ListConversationPages(websiteID string, sessionID string, pageNumber uint) (*[]ConversationPage, *Response, error)`
-  * **List Conversation Events**: `crisp.Website.ListConversationEvents(websiteID string, sessionID string, pageNumber uint) (*[]ConversationEvent, *Response, error)`
-  * **Get Conversation State**: `crisp.Website.GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error)`
-  * **Change Conversation State**: `crisp.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
-  * **Get Block Status For Conversation**: `crisp.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
-  * **Block Incoming Messages For Conversation**: `crisp.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
-  * **Request Email Transcript For Conversation**: `crisp.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error)`
-  * **List Browsing Sessions For Conversation**: `crisp.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
-  * **Initiate Browsing Session For Conversation**: `crisp.Website.InitiateBrowsingSessionForConversation(websiteID string, sessionID string) (*Response, error)`
-  * **Send Action To An Existing Browsing Session**: `crisp.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
-  * **Debug Existing Browsing Session**: `crisp.Website.DebugExistingBrowsingSession(websiteID string, sessionID string, browsingID string, debug ConversationBrowsingDebug) (*Response, error)`
-  * **Assist Existing Browsing Session**: `crisp.Website.AssistExistingBrowsingSession(websiteID string, sessionID string, browsingID string, assist ConversationBrowsingAssist) (*Response, error)`
-  * **Initiate New Call Session For Conversation**: `crisp.Website.InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
-  * **Get Ongoing Call Session For Conversation**: `crisp.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
-  * **Abort Ongoing Call Session For Conversation**: `crisp.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error)`
-  * **Transmit Signaling On Ongoing Call Session**: `crisp.Website.TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error)`
+  * **Create A New Conversation**: `client.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
+  * **Check If Conversation Exists**: `client.Website.CheckConversationExists(websiteID string, sessionID string) (*Response, error)`
+  * **Get A Conversation**: `client.Website.GetConversation(websiteID string, sessionID string) (*Conversation, *Response, error)`
+  * **Remove A Conversation**: `client.Website.RemoveConversation(websiteID string, sessionID string) (*Response, error)`
+  * **Initiate A Conversation With Existing Session**: `client.Website.InitiateConversationWithExistingSession(websiteID string, sessionID string) (*Response, error)`
+  * **Get Messages In Conversation (Last Variant)**: `client.Website.GetMessagesInConversationLast(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error)`
+  * **Get Messages In Conversation (Before Variant)**: `client.Website.GetMessagesInConversationBefore(websiteID string, sessionID string, timestampBefore uint32) (*[]ConversationMessage, *Response, error)`
+  * **Send A Message In Conversation (Text Variant)**: `client.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error)`
+  * **Send A Message In Conversation (File Variant)**: `client.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error)`
+  * **Send A Message In Conversation (Animation Variant)**: `client.Website.SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*Response, error)`
+  * **Send A Message In Conversation (Audio Variant)**: `client.Website.SendAudioMessageInConversation(websiteID string, sessionID string, message ConversationAudioMessageNew) (*Response, error)`
+  * **Send A Message In Conversation (Picker Variant)**: `client.Website.SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*Response, error)`
+  * **Send A Message In Conversation (Field Variant)**: `client.Website.SendFieldMessageInConversation(websiteID string, sessionID string, message ConversationFieldMessageNew) (*Response, error)`
+  * **Send A Message In Conversation (Note Variant)**: `client.Website.SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*Response, error)`
+  * **Compose A Message In Conversation**: `client.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
+  * **Mark Messages As Read In Conversation**: `client.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
+  * **Mark Messages As Delivered In Conversation**: `client.Website.MarkMessagesDeliveredInConversation(websiteID string, sessionID string, delivered ConversationDeliveredMessageMark) (*Response, error)`
+  * **Update Conversation Open State**: `client.Website.UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error)`
+  * **Get Conversation Metas**: `client.Website.GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error)`
+  * **Update Conversation Metas**: `client.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
+  * **List Conversation Pages**: `client.Website.ListConversationPages(websiteID string, sessionID string, pageNumber uint) (*[]ConversationPage, *Response, error)`
+  * **List Conversation Events**: `client.Website.ListConversationEvents(websiteID string, sessionID string, pageNumber uint) (*[]ConversationEvent, *Response, error)`
+  * **Get Conversation State**: `client.Website.GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error)`
+  * **Change Conversation State**: `client.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
+  * **Get Block Status For Conversation**: `client.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
+  * **Block Incoming Messages For Conversation**: `client.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
+  * **Request Email Transcript For Conversation**: `client.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error)`
+  * **List Browsing Sessions For Conversation**: `client.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
+  * **Initiate Browsing Session For Conversation**: `client.Website.InitiateBrowsingSessionForConversation(websiteID string, sessionID string) (*Response, error)`
+  * **Send Action To An Existing Browsing Session**: `client.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
+  * **Debug Existing Browsing Session**: `client.Website.DebugExistingBrowsingSession(websiteID string, sessionID string, browsingID string, debug ConversationBrowsingDebug) (*Response, error)`
+  * **Assist Existing Browsing Session**: `client.Website.AssistExistingBrowsingSession(websiteID string, sessionID string, browsingID string, assist ConversationBrowsingAssist) (*Response, error)`
+  * **Initiate New Call Session For Conversation**: `client.Website.InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
+  * **Get Ongoing Call Session For Conversation**: `client.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
+  * **Abort Ongoing Call Session For Conversation**: `client.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error)`
+  * **Transmit Signaling On Ongoing Call Session**: `client.Website.TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error)`
 
 * **Website Analytics**
-  * **Acquire Chats Analytics**: `crisp.Website.AcquireChatsAnalytics(websiteID string, filterMetric string, filterOperator string, filterDateStart time.Time, filterDateEnd time.Time, filterDateSplit uint8) (*WebsiteAnalytics, *Response, error)`
+  * **Acquire Chats Analytics**: `client.Website.AcquireChatsAnalytics(websiteID string, filterMetric string, filterOperator string, filterDateStart time.Time, filterDateEnd time.Time, filterDateSplit uint8) (*WebsiteAnalytics, *Response, error)`
 
 * **Website People**
-  * **Get People Statistics**: `crisp.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
-  * **List People Segments**: `crisp.Website.ListPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSegment, *Response, error)`
-  * **List People Profiles**: `crisp.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter) (*[]PeopleProfile, *Response, error)`
-  * **Add New People Profile**: `crisp.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
-  * **Check If People Profile Exists**: `crisp.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`
-  * **Get People Profile**: `crisp.Website.GetPeopleProfile(websiteID string, peopleID string) (*PeopleProfile, *Response, error)`
-  * **Save People Profile**: `crisp.Website.SavePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
-  * **Update People Profile**: `crisp.Website.UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
-  * **Remove People Profile**: `crisp.Website.RemovePeopleProfile(websiteID string, peopleID string) (*Response, error)`
-  * **List People Conversations**: `crisp.Website.ListPeopleConversations(websiteID string, peopleID string, pageNumber uint) ([]string, *Response, error)`
-  * **Export People Profiles**: `crisp.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
-  * **Import People Profiles**: `crisp.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
+  * **Get People Statistics**: `client.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
+  * **List People Segments**: `client.Website.ListPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSegment, *Response, error)`
+  * **List People Profiles**: `client.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter) (*[]PeopleProfile, *Response, error)`
+  * **Add New People Profile**: `client.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
+  * **Check If People Profile Exists**: `client.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`
+  * **Get People Profile**: `client.Website.GetPeopleProfile(websiteID string, peopleID string) (*PeopleProfile, *Response, error)`
+  * **Save People Profile**: `client.Website.SavePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
+  * **Update People Profile**: `client.Website.UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
+  * **Remove People Profile**: `client.Website.RemovePeopleProfile(websiteID string, peopleID string) (*Response, error)`
+  * **List People Conversations**: `client.Website.ListPeopleConversations(websiteID string, peopleID string, pageNumber uint) ([]string, *Response, error)`
+  * **Export People Profiles**: `client.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
+  * **Import People Profiles**: `client.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
 
 ### Plugin
 
 * **One Plugin**
-  * **Get Plugin Information**: `crisp.Plugin.GetPluginInformation(pluginID string) (*PluginInformation, *Response, error)`
+  * **Get Plugin Information**: `client.Plugin.GetPluginInformation(pluginID string) (*PluginInformation, *Response, error)`
 
 * **Plugin List**
-  * **List All Plugins**: `crisp.Plugin.ListAllPlugins(pageNumber uint) (*[]PluginInformation, *Response, error)`
-  * **Search Plugins**: `crisp.Plugin.SearchPlugins(query string, pageNumber uint) (*[]PluginInformation, *Response, error)`
+  * **List All Plugins**: `client.Plugin.ListAllPlugins(pageNumber uint) (*[]PluginInformation, *Response, error)`
+  * **Search Plugins**: `client.Plugin.SearchPlugins(query string, pageNumber uint) (*[]PluginInformation, *Response, error)`
 
 * **Plugin Subscription**
-  * **List All Active Subscriptions**: `crisp.Plugin.ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error)`
-  * **List Subscriptions For A Website**: `crisp.Plugin.ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error)`
-  * **Get Subscription Details**: `crisp.Plugin.GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error)`
-  * **Subscribe Website To Plugin**: `crisp.Plugin.SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error)`
-  * **Unsubscribe Plugin From Website**: `crisp.Plugin.UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error)`
-  * **Get Subscription Settings**: `crisp.Plugin.GetSubscriptionSettings(websiteID string, pluginID string) (*PluginSubscriptionSettings, *Response, error)`
-  * **Save Subscription Settings**: `crisp.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
-  * **Update Subscription Settings**: `crisp.Plugin.UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
+  * **List All Active Subscriptions**: `client.Plugin.ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error)`
+  * **List Subscriptions For A Website**: `client.Plugin.ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error)`
+  * **Get Subscription Details**: `client.Plugin.GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error)`
+  * **Subscribe Website To Plugin**: `client.Plugin.SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error)`
+  * **Unsubscribe Plugin From Website**: `client.Plugin.UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error)`
+  * **Get Subscription Settings**: `client.Plugin.GetSubscriptionSettings(websiteID string, pluginID string) (*PluginSubscriptionSettings, *Response, error)`
+  * **Save Subscription Settings**: `client.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
+  * **Update Subscription Settings**: `client.Plugin.UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
 
 * **Plugin Connect**
-  * **Get Connect Account**: `crisp.Plugin.GetConnectAccount() (*PluginConnectAccount, *Response, error)`
-  * **Check Connect Session Validity**: `crisp.Plugin.CheckConnectSessionValidity() (*Response, error)`
-  * **List All Connect Websites**: `crisp.Plugin.ListAllConnectWebsites(pageNumber uint, filterConfigured bool) (*[]PluginConnectAllWebsites, *Response, error)`
-  * **List Connect Websites Since**: `crisp.Plugin.ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool) (*[]PluginConnectWebsitesSince, *Response, error)`
+  * **Get Connect Account**: `client.Plugin.GetConnectAccount() (*PluginConnectAccount, *Response, error)`
+  * **Check Connect Session Validity**: `client.Plugin.CheckConnectSessionValidity() (*Response, error)`
+  * **List All Connect Websites**: `client.Plugin.ListAllConnectWebsites(pageNumber uint, filterConfigured bool) (*[]PluginConnectAllWebsites, *Response, error)`
+  * **List Connect Websites Since**: `client.Plugin.ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool) (*[]PluginConnectWebsitesSince, *Response, error)`
 
 ### Plan
 
 * **One Plan**
-  * **Get Plan Information**: `crisp.Plan.GetPlanInformation(planID string) (*PlanInformation, *Response, error)`
+  * **Get Plan Information**: `client.Plan.GetPlanInformation(planID string) (*PlanInformation, *Response, error)`
 
 * **Plan List**
-  * **List Plans**: `crisp.Plan.ListPlans() (*[]PlanInformation, *Response, error)`
+  * **List Plans**: `client.Plan.ListPlans() (*[]PlanInformation, *Response, error)`
 
 * **Plan Subscription**
-  * **List All Active Subscriptions**: `crisp.Plan.ListAllActiveSubscriptions() (*[]PlanSubscription, *Response, error)`
-  * **Get Subscription For A Website**: `crisp.Plan.GetSubscriptionForWebsite(websiteID string) (*PlanSubscription, *Response, error)`
-  * **Subscribe Website To Plan**: `crisp.Plan.SubscribeWebsiteToPlan(websiteID string, planID string) (*Response, error)`
-  * **Unsubscribe Plan From Website**: `crisp.Plan.UnsubscribePlanFromWebsite(websiteID string) (*Response, error)`
-  * **Change Bill Period For Website Subscription**: `crisp.Plan.ChangeBillPeriodForWebsiteSubscription(websiteID string, period string) (*Response, error)`
-  * **Check Coupon Availability For Website Subscription**: `crisp.Plan.CheckCouponAvailabilityForWebsiteSubscription(websiteID string, code string) (*PlanSubscriptionCoupon, *Response, error)`
-  * **Redeem Coupon For Website Subscription**: `crisp.Plan.RedeemCouponForWebsiteSubscription(websiteID string, code string) (*Response, error)`
+  * **List All Active Subscriptions**: `client.Plan.ListAllActiveSubscriptions() (*[]PlanSubscription, *Response, error)`
+  * **Get Subscription For A Website**: `client.Plan.GetSubscriptionForWebsite(websiteID string) (*PlanSubscription, *Response, error)`
+  * **Subscribe Website To Plan**: `client.Plan.SubscribeWebsiteToPlan(websiteID string, planID string) (*Response, error)`
+  * **Unsubscribe Plan From Website**: `client.Plan.UnsubscribePlanFromWebsite(websiteID string) (*Response, error)`
+  * **Change Bill Period For Website Subscription**: `client.Plan.ChangeBillPeriodForWebsiteSubscription(websiteID string, period string) (*Response, error)`
+  * **Check Coupon Availability For Website Subscription**: `client.Plan.CheckCouponAvailabilityForWebsiteSubscription(websiteID string, code string) (*PlanSubscriptionCoupon, *Response, error)`
+  * **Redeem Coupon For Website Subscription**: `client.Plan.RedeemCouponForWebsiteSubscription(websiteID string, code string) (*Response, error)`
 
 ## Realtime Events
 
