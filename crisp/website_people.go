@@ -44,6 +44,16 @@ type PeopleProfileListData struct {
   Data  *[]PeopleProfile  `json:"data,omitempty"`
 }
 
+// PeopleEventsData mapping
+type PeopleEventsData struct {
+  Data  *[]PeopleEvent  `json:"data,omitempty"`
+}
+
+// PeopleDataData mapping
+type PeopleDataData struct {
+  Data  *PeopleData  `json:"data,omitempty"`
+}
+
 // PeopleProfile mapping
 type PeopleProfile struct {
   PeopleProfileCard
@@ -138,6 +148,19 @@ type PeopleConversationsData struct {
   Data  []string  `json:"data,omitempty"`
 }
 
+// PeopleEvent mapping
+type PeopleEvent struct {
+  Text       *string       `json:"text,omitempty"`
+  Data       *interface{}  `json:"data,omitempty"`
+  Color      *string       `json:"color,omitempty"`
+  Timestamp  *uint         `json:"timestamp,omitempty"`
+}
+
+// PeopleData mapping
+type PeopleData struct {
+  Data  *interface{}  `json:"data,omitempty"`
+}
+
 // PeopleProfileImportData mapping
 type PeopleProfileImportData struct {
   Data  *PeopleProfileImport  `json:"data,omitempty"`
@@ -154,6 +177,13 @@ type PeopleProfileUpdateCard struct {
   Person    *PeopleProfileCardPerson   `json:"person,omitempty"`
   Company   *PeopleProfileCardCompany  `json:"company,omitempty"`
   Segments  []string                   `json:"segments,omitempty"`
+}
+
+// PeopleEventAdd mapping
+type PeopleEventAdd struct {
+  Text   string       `json:"text,omitempty"`
+  Data   interface{}  `json:"data,omitempty"`
+  Color  string       `json:"color,omitempty"`
 }
 
 // PeopleProfileImportSetup mapping
@@ -198,6 +228,18 @@ func (instance PeopleSegment) String() string {
 
 // String returns the string representation of PeopleProfile
 func (instance PeopleProfile) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PeopleEvent
+func (instance PeopleEvent) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PeopleData
+func (instance PeopleData) String() string {
   return Stringify(instance)
 }
 
@@ -335,6 +377,54 @@ func (service *WebsiteService) ListPeopleConversations(websiteID string, peopleI
   }
 
   return conversations.Data, resp, err
+}
+
+
+// AddPeopleEvent stacks an event for people.
+func (service *WebsiteService) AddPeopleEvent(websiteID string, peopleID string, peopleEvent PeopleEventAdd) (*Response, error) {
+  url := fmt.Sprintf("website/%s/people/events/%s", websiteID, peopleID)
+  req, _ := service.client.NewRequest("POST", url, peopleEvent)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ListPeopleEvents lists stacked events for people.
+func (service *WebsiteService) ListPeopleEvents(websiteID string, peopleID string, pageNumber uint) (*[]PeopleEvent, *Response, error) {
+  url := fmt.Sprintf("website/%s/people/events/%s/list/%d", websiteID, peopleID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  events := new(PeopleEventsData)
+  resp, err := service.client.Do(req, events)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return events.Data, resp, err
+}
+
+
+// GetPeopleData gets stored data for people.
+func (service *WebsiteService) GetPeopleData(websiteID string, peopleID string) (*PeopleData, *Response, error) {
+  url := fmt.Sprintf("website/%s/people/data/%s", websiteID, peopleID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  data := new(PeopleDataData)
+  resp, err := service.client.Do(req, data)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return data.Data, resp, err
+}
+
+
+// SavePeopleData saves stored data for people.
+func (service *WebsiteService) SavePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error) {
+  url := fmt.Sprintf("website/%s/people/data/%s", websiteID, peopleID)
+  req, _ := service.client.NewRequest("PUT", url, peopleData)
+
+  return service.client.Do(req, nil)
 }
 
 

@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 07/07/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 07/10/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -281,6 +281,10 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Update People Profile**: `client.Website.UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
   * **Remove People Profile**: `client.Website.RemovePeopleProfile(websiteID string, peopleID string) (*Response, error)`
   * **List People Conversations**: `client.Website.ListPeopleConversations(websiteID string, peopleID string, pageNumber uint) ([]string, *Response, error)`
+  + **Add A People Event**: `client.Website.AddPeopleEvent(websiteID string, peopleID string, peopleEvent PeopleEventAdd) (*Response, error)`
+  + **List People Events**: `client.Website.ListPeopleEvents(websiteID string, peopleID string, pageNumber uint) (*[]PeopleEvent, *Response, error)`
+  + **Get People Data**: `client.Website.GetPeopleData(websiteID string, peopleID string) (*PeopleData, *Response, error)`
+  + **Save People Data**: `client.Website.SavePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error)`
   * **Export People Profiles**: `client.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
   * **Import People Profiles**: `client.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
 
