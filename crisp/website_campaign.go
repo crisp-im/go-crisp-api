@@ -94,7 +94,8 @@ type WebsiteCampaignItemOptions struct {
 
 // WebsiteCampaignItemStatistics mapping
 type WebsiteCampaignItemStatistics struct {
-  Opened  *uint  `json:"opened,omitempty"`
+  Opened   *uint  `json:"opened,omitempty"`
+  Clicked  *uint  `json:"clicked,omitempty"`
 }
 
 
