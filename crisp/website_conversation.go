@@ -365,7 +365,7 @@ type ConversationPickerMessageNewContent struct {
 type ConversationPickerMessageNewContentChoice struct {
   Value     string  `json:"value,omitempty"`
   Label     string  `json:"label,omitempty"`
-  Selected  bool    `json:"selected,omitempty"`
+  Selected  bool    `json:"selected"`
 }
 
 // ConversationFieldMessageNew mapping
