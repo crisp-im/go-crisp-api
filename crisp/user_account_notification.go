@@ -22,6 +22,7 @@ type UserNotificationSettings struct {
   Disabled            *bool    `json:"disabled,omitempty"`
   MessagesOnline      *bool    `json:"messages_online,omitempty"`
   MessagesOffline     *bool    `json:"messages_offline,omitempty"`
+  MessagesUnread      *bool    `json:"messages_unread,omitempty"`
   MessagesTranscript  *bool    `json:"messages_transcript,omitempty"`
   MessagesRating      *bool    `json:"messages_rating,omitempty"`
   BillingInvoice      *bool    `json:"billing_invoice,omitempty"`
@@ -33,6 +34,7 @@ type UserNotificationSettingsUpdate struct {
   Disabled            bool  `json:"disabled,omitempty"`
   MessagesOnline      bool  `json:"messages_online,omitempty"`
   MessagesOffline     bool  `json:"messages_offline,omitempty"`
+  MessagesUnread      bool  `json:"messages_unread,omitempty"`
   MessagesTranscript  bool  `json:"messages_transcript,omitempty"`
   MessagesRating      bool  `json:"messages_rating,omitempty"`
   BillingInvoice      bool  `json:"billing_invoice,omitempty"`
