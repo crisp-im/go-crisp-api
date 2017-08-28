@@ -668,7 +668,7 @@ type EventsReceiveWebsiteUsersAvailable struct {
 // EventsReceiveBucketURLUploadGenerated maps bucket:url:upload:generated
 type EventsReceiveBucketURLUploadGenerated struct {
   From        *string                                         `json:"from"`
-  ID          *int                                            `json:"id"`
+  ID          *string                                         `json:"id"`
   Identifier  *string                                         `json:"identifier"`
   Policy      *EventsReceiveBucketURLUploadGeneratedPolicy    `json:"policy"`
   Type        *string                                         `json:"type"`
