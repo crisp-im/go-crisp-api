@@ -54,6 +54,11 @@ type PeopleDataData struct {
   Data  *PeopleData  `json:"data,omitempty"`
 }
 
+// PeopleSubscriptionData mapping
+type PeopleSubscriptionData struct {
+  Data  *PeopleSubscription  `json:"data,omitempty"`
+}
+
 // PeopleProfile mapping
 type PeopleProfile struct {
   PeopleProfileCard
@@ -161,6 +166,11 @@ type PeopleData struct {
   Data  *interface{}  `json:"data,omitempty"`
 }
 
+// PeopleSubscription mapping
+type PeopleSubscription struct {
+  Email  *bool  `json:"email,omitempty"`
+}
+
 // PeopleProfileImportData mapping
 type PeopleProfileImportData struct {
   Data  *PeopleProfileImport  `json:"data,omitempty"`
@@ -184,6 +194,11 @@ type PeopleEventAdd struct {
   Text   string       `json:"text,omitempty"`
   Data   interface{}  `json:"data,omitempty"`
   Color  string       `json:"color,omitempty"`
+}
+
+// PeopleSubscriptionUpdate mapping
+type PeopleSubscriptionUpdate struct {
+  Email  bool  `json:"email,omitempty"`
 }
 
 // PeopleProfileImportSetup mapping
@@ -240,6 +255,12 @@ func (instance PeopleEvent) String() string {
 
 // String returns the string representation of PeopleData
 func (instance PeopleData) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PeopleSubscription
+func (instance PeopleSubscription) String() string {
   return Stringify(instance)
 }
 
@@ -423,6 +444,30 @@ func (service *WebsiteService) GetPeopleData(websiteID string, peopleID string) 
 func (service *WebsiteService) SavePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error) {
   url := fmt.Sprintf("website/%s/people/data/%s", websiteID, peopleID)
   req, _ := service.client.NewRequest("PUT", url, peopleData)
+
+  return service.client.Do(req, nil)
+}
+
+
+// GetPeopleSubscriptionStatus resolves subscription status for people.
+func (service *WebsiteService) GetPeopleSubscriptionStatus(websiteID string, peopleID string) (*PeopleSubscription, *Response, error) {
+  url := fmt.Sprintf("website/%s/people/subscription/%s", websiteID, peopleID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  subscription := new(PeopleSubscriptionData)
+  resp, err := service.client.Do(req, subscription)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return subscription.Data, resp, err
+}
+
+
+// UpdatePeopleSubscriptionStatus updates current subscription status for people.
+func (service *WebsiteService) UpdatePeopleSubscriptionStatus(websiteID string, peopleID string, peopleSubscription PeopleSubscriptionUpdate) (*Response, error) {
+  url := fmt.Sprintf("website/%s/people/subscription/%s", websiteID, peopleID)
+  req, _ := service.client.NewRequest("PATCH", url, peopleSubscription)
 
   return service.client.Do(req, nil)
 }
