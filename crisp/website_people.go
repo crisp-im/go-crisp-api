@@ -71,6 +71,7 @@ type PeopleProfileCard struct {
   Person    *PeopleProfileCardPerson   `json:"person,omitempty"`
   Company   *PeopleProfileCardCompany  `json:"company,omitempty"`
   Segments  *[]string                  `json:"segments,omitempty"`
+  Notepad   *string                    `json:"notepad,omitempty"`
   Active    *PeopleProfileCardActive   `json:"active,omitempty"`
   Score     *uint8                     `json:"score,omitempty"`
 }
@@ -187,6 +188,7 @@ type PeopleProfileUpdateCard struct {
   Person    *PeopleProfileCardPerson   `json:"person,omitempty"`
   Company   *PeopleProfileCardCompany  `json:"company,omitempty"`
   Segments  []string                   `json:"segments,omitempty"`
+  Notepad   string                     `json:"notepad,omitempty"`
 }
 
 // PeopleEventAdd mapping
