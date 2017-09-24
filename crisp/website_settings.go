@@ -40,6 +40,7 @@ type WebsiteSettingsContact struct {
 type WebsiteSettingsEmails struct {
   Rating      *bool  `json:"rating,omitempty"`
   Transcript  *bool  `json:"transcript,omitempty"`
+  JunkFilter  *bool  `json:"junk_filter,omitempty"`
 }
 
 // WebsiteSettingsChatbox mapping
@@ -88,6 +89,7 @@ type WebsiteSettingsUpdateContact struct {
 type WebsiteSettingsUpdateEmails struct {
   Rating      bool  `json:"rating,omitempty"`
   Transcript  bool  `json:"transcript,omitempty"`
+  JunkFilter  bool  `json:"junk_filter,omitempty"`
 }
 
 // WebsiteSettingsUpdateChatbox mapping
