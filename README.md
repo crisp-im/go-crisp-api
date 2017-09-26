@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 09/23/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 09/26/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -195,6 +195,17 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website States**
   * **Request Website States**: `client.Website.RequestWebsiteStates(websiteID string) (*Response, error)`
+
+* **Website Hooks**
+  * **List Hooks**: `client.Website.ListHooks(websiteID string, pageNumber uint) (*[]WebsiteHook, *Response, error)`
+
+* **Website Hook**
+  * **Create A New Hook**: `client.Website.CreateNewHook(websiteID string, websiteHookItem WebsiteHookItem) (*Response, error)`
+  * **Check If Hook Exists**: `client.Website.CheckHookExists(websiteID string, hookID string) (*Response, error)`
+  * **Get A Hook**: `client.Website.GetHook(websiteID string, hookID string) (*WebsiteHook, *Response, error)`
+  * **Save A Hook**: `client.Website.SaveHook(websiteID string, hookID string, websiteHookItem WebsiteHookItem) (*Response, error)`
+  * **Update A Hook**: `client.Website.UpdateHook(websiteID string, hookID string, websiteHookItem WebsiteHookItem) (*Response, error)`
+  * **Remove A Hook**: `client.Website.RemoveHook(websiteID string, hookID string) (*Response, error)`
 
 * **Website Shortcuts**
   * **List Shortcuts**: `client.Website.ListShortcuts(websiteID string, pageNumber uint) (*[]WebsiteShortcut, *Response, error)`
