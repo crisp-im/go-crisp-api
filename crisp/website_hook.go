@@ -30,6 +30,7 @@ type WebsiteHookTagsData struct {
 type WebsiteHook struct {
   WebsiteHookItem
   HookID  *string  `json:"hook_id,omitempty"`
+  Status  *string  `json:"status,omitempty"`
 }
 
 // WebsiteHookItem mapping
