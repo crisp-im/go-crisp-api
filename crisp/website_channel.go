@@ -22,6 +22,29 @@ type WebsiteChannelEmail struct {
   Email   *string  `json:"email,omitempty"`
 }
 
+// WebsiteChannelEmailRequestChangeData mapping
+type WebsiteChannelEmailRequestChangeData struct {
+  Data  *WebsiteChannelEmailRequestChange  `json:"data,omitempty"`
+}
+
+// WebsiteChannelEmailRequestChange mapping
+type WebsiteChannelEmailRequestChange struct {
+  Domain  *string                                 `json:"domain,omitempty"`
+  Setup   *WebsiteChannelEmailRequestChangeSetup  `json:"setup,omitempty"`
+}
+
+// WebsiteChannelEmailRequestChangeSetup mapping
+type WebsiteChannelEmailRequestChangeSetup struct {
+  Records  *[]WebsiteChannelEmailRequestChangeSetupRecord  `json:"records,omitempty"`
+}
+
+// WebsiteChannelEmailRequestChangeSetupRecord mapping
+type WebsiteChannelEmailRequestChangeSetupRecord struct {
+  Type   *string  `json:"type,omitempty"`
+  Name   *string  `json:"name,omitempty"`
+  Value  *string  `json:"value,omitempty"`
+}
+
 // WebsiteChannelEmailRequest mapping
 type WebsiteChannelEmailRequest struct {
   Domain  *string  `json:"domain,omitempty"`
@@ -50,9 +73,15 @@ func (service *WebsiteService) GetWebsiteEmailChannel(websiteID string) (*Websit
 
 
 // RequestWebsiteEmailChannelChange requests a change in the email channel domain used to send and receive emails.
-func (service *WebsiteService) RequestWebsiteEmailChannelChange(websiteID string, domain string) (*Response, error) {
+func (service *WebsiteService) RequestWebsiteEmailChannelChange(websiteID string, domain string) (*WebsiteChannelEmailRequestChange, *Response, error) {
   url := fmt.Sprintf("website/%s/channel/email", websiteID)
   req, _ := service.client.NewRequest("PATCH", url, WebsiteChannelEmailRequest{Domain: &domain})
 
-  return service.client.Do(req, nil)
+  channel := new(WebsiteChannelEmailRequestChangeData)
+  resp, err := service.client.Do(req, channel)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return channel.Data, resp, err
 }

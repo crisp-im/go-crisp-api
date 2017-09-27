@@ -163,7 +163,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website Channel**
   * **Get Website Email Channel**: `client.Website.GetWebsiteEmailChannel(websiteID string) (*WebsiteChannelEmail, *Response, error)`
-  * **Request Website Email Channel Change**: `client.Website.RequestWebsiteEmailChannelChange(websiteID string, domain string) (*Response, error)`
+  * **Request Website Email Channel Change**: `client.Website.RequestWebsiteEmailChannelChange(websiteID string, domain string) (*WebsiteChannelEmailRequestChange, *Response, error)`
 
 * **Website Operator**
   * **List Website Operators**: `client.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
