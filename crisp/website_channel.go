@@ -18,7 +18,13 @@ type WebsiteChannelEmailData struct {
 
 // WebsiteChannelEmail mapping
 type WebsiteChannelEmail struct {
-  Email  *string  `json:"email,omitempty"`
+  Domain  *string  `json:"domain,omitempty"`
+  Email   *string  `json:"email,omitempty"`
+}
+
+// WebsiteChannelEmailRequest mapping
+type WebsiteChannelEmailRequest struct {
+  Domain  *string  `json:"domain,omitempty"`
 }
 
 
@@ -40,4 +46,13 @@ func (service *WebsiteService) GetWebsiteEmailChannel(websiteID string) (*Websit
   }
 
   return channel.Data, resp, err
+}
+
+
+// RequestWebsiteEmailChannelChange requests a change in the email channel domain used to send and receive emails.
+func (service *WebsiteService) RequestWebsiteEmailChannelChange(websiteID string, domain string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/channel/email", websiteID)
+  req, _ := service.client.NewRequest("PATCH", url, WebsiteChannelEmailRequest{Domain: &domain})
+
+  return service.client.Do(req, nil)
 }
