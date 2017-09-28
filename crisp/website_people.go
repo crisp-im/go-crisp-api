@@ -67,13 +67,15 @@ type PeopleProfile struct {
 
 // PeopleProfileCard mapping
 type PeopleProfileCard struct {
-  Email     *string                    `json:"email,omitempty"`
-  Person    *PeopleProfileCardPerson   `json:"person,omitempty"`
-  Company   *PeopleProfileCardCompany  `json:"company,omitempty"`
-  Segments  *[]string                  `json:"segments,omitempty"`
-  Notepad   *string                    `json:"notepad,omitempty"`
-  Active    *PeopleProfileCardActive   `json:"active,omitempty"`
-  Score     *uint8                     `json:"score,omitempty"`
+  Email      *string                    `json:"email,omitempty"`
+  Person     *PeopleProfileCardPerson   `json:"person,omitempty"`
+  Company    *PeopleProfileCardCompany  `json:"company,omitempty"`
+  Segments   *[]string                  `json:"segments,omitempty"`
+  Notepad    *string                    `json:"notepad,omitempty"`
+  Active     *PeopleProfileCardActive   `json:"active,omitempty"`
+  Score      *uint8                     `json:"score,omitempty"`
+  CreatedAt  *uint                      `json:"created_at,omitempty"`
+  UpdatedAt  *uint                      `json:"updated_at,omitempty"`
 }
 
 // PeopleProfileCardPerson mapping
