@@ -8,6 +8,7 @@ package crisp
 
 import (
   "fmt"
+  "net/url"
 )
 
 
@@ -22,24 +23,24 @@ type WebsiteChannelEmail struct {
   Email   *string  `json:"email,omitempty"`
 }
 
-// WebsiteChannelEmailRequestChangeData mapping
-type WebsiteChannelEmailRequestChangeData struct {
-  Data  *WebsiteChannelEmailRequestChange  `json:"data,omitempty"`
+// WebsiteChannelEmailSetupFlowData mapping
+type WebsiteChannelEmailSetupFlowData struct {
+  Data  *WebsiteChannelEmailSetupFlow  `json:"data,omitempty"`
 }
 
-// WebsiteChannelEmailRequestChange mapping
-type WebsiteChannelEmailRequestChange struct {
-  Domain  *string                                 `json:"domain,omitempty"`
-  Setup   *WebsiteChannelEmailRequestChangeSetup  `json:"setup,omitempty"`
+// WebsiteChannelEmailSetupFlow mapping
+type WebsiteChannelEmailSetupFlow struct {
+  Domain  *string                             `json:"domain,omitempty"`
+  Setup   *WebsiteChannelEmailSetupFlowSetup  `json:"setup,omitempty"`
 }
 
-// WebsiteChannelEmailRequestChangeSetup mapping
-type WebsiteChannelEmailRequestChangeSetup struct {
-  Records  *[]WebsiteChannelEmailRequestChangeSetupRecord  `json:"records,omitempty"`
+// WebsiteChannelEmailSetupFlowSetup mapping
+type WebsiteChannelEmailSetupFlowSetup struct {
+  Records  *[]WebsiteChannelEmailSetupFlowSetupRecord  `json:"records,omitempty"`
 }
 
-// WebsiteChannelEmailRequestChangeSetupRecord mapping
-type WebsiteChannelEmailRequestChangeSetupRecord struct {
+// WebsiteChannelEmailSetupFlowSetupRecord mapping
+type WebsiteChannelEmailSetupFlowSetupRecord struct {
   Type   *string  `json:"type,omitempty"`
   Name   *string  `json:"name,omitempty"`
   Value  *string  `json:"value,omitempty"`
@@ -53,6 +54,11 @@ type WebsiteChannelEmailRequest struct {
 
 // String returns the string representation of WebsiteChannelEmail
 func (instance WebsiteChannelEmail) String() string {
+  return Stringify(instance)
+}
+
+// String returns the string representation of WebsiteChannelEmailSetupFlow
+func (instance WebsiteChannelEmailSetupFlow) String() string {
   return Stringify(instance)
 }
 
@@ -73,15 +79,24 @@ func (service *WebsiteService) GetWebsiteEmailChannel(websiteID string) (*Websit
 
 
 // RequestWebsiteEmailChannelChange requests a change in the email channel domain used to send and receive emails.
-func (service *WebsiteService) RequestWebsiteEmailChannelChange(websiteID string, domain string) (*WebsiteChannelEmailRequestChange, *Response, error) {
+func (service *WebsiteService) RequestWebsiteEmailChannelChange(websiteID string, domain string) (*Response, error) {
   url := fmt.Sprintf("website/%s/channel/email", websiteID)
   req, _ := service.client.NewRequest("PATCH", url, WebsiteChannelEmailRequest{Domain: &domain})
 
-  channel := new(WebsiteChannelEmailRequestChangeData)
-  resp, err := service.client.Do(req, channel)
+  return service.client.Do(req, nil)
+}
+
+
+// GenerateWebsiteEmailChannelSetupFlow retrieves the email channel setup flow.
+func (service *WebsiteService) GenerateWebsiteEmailChannelSetupFlow(websiteID string, domain string) (*WebsiteChannelEmailSetupFlow, *Response, error) {
+  url := fmt.Sprintf("website/%s/channel/email/setup?domain=%s", websiteID, url.QueryEscape(domain))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  setup := new(WebsiteChannelEmailSetupFlowData)
+  resp, err := service.client.Do(req, setup)
   if err != nil {
     return nil, resp, err
   }
 
-  return channel.Data, resp, err
+  return setup.Data, resp, err
 }

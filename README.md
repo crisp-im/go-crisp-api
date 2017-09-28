@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 09/27/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 09/28/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -163,7 +163,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website Channel**
   * **Get Website Email Channel**: `client.Website.GetWebsiteEmailChannel(websiteID string) (*WebsiteChannelEmail, *Response, error)`
-  * **Request Website Email Channel Change**: `client.Website.RequestWebsiteEmailChannelChange(websiteID string, domain string) (*WebsiteChannelEmailRequestChange, *Response, error)`
+  * **Request Website Email Channel Change**: `client.Website.RequestWebsiteEmailChannelChange(websiteID string, domain string) (*Response, error)`
+  * **Generate Website Email Channel Setup Flow**: `client.Website.GenerateWebsiteEmailChannelSetupFlow(websiteID string, domain string) (*WebsiteChannelEmailSetupFlow, *Response, error)`
 
 * **Website Operator**
   * **List Website Operators**: `client.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
