@@ -279,6 +279,48 @@ type ConversationMessagesData struct {
   Data  *[]ConversationMessage  `json:"data,omitempty"`
 }
 
+// ConversationFileMessageNewContent mapping
+type ConversationFileMessageNewContent struct {
+  Name  string  `json:"name,omitempty"`
+  URL   string  `json:"url,omitempty"`
+  Type  string  `json:"type,omitempty"`
+}
+
+// ConversationAnimationMessageNewContent mapping
+type ConversationAnimationMessageNewContent struct {
+  URL   string  `json:"url,omitempty"`
+  Type  string  `json:"type,omitempty"`
+}
+
+// ConversationAudioMessageNewContent mapping
+type ConversationAudioMessageNewContent struct {
+  URL       string  `json:"url,omitempty"`
+  Type      string  `json:"type,omitempty"`
+  Duration  uint16  `json:"duration,omitempty"`
+}
+
+// ConversationPickerMessageNewContent mapping
+type ConversationPickerMessageNewContent struct {
+  ID       string                                       `json:"id,omitempty"`
+  Text     string                                       `json:"text,omitempty"`
+  Choices  []ConversationPickerMessageNewContentChoice  `json:"choices,omitempty"`
+}
+
+// ConversationPickerMessageNewContentChoice mapping
+type ConversationPickerMessageNewContentChoice struct {
+  Value     string  `json:"value,omitempty"`
+  Label     string  `json:"label,omitempty"`
+  Selected  bool    `json:"selected"`
+}
+
+// ConversationFieldMessageNewContent mapping
+type ConversationFieldMessageNewContent struct {
+  ID       string  `json:"id,omitempty"`
+  Text     string  `json:"text,omitempty"`
+  Explain  string  `json:"explain,omitempty"`
+  Value    string  `json:"value,omitempty"`
+}
+
 // ConversationTextMessageNew mapping
 type ConversationTextMessageNew struct {
   Type         string                         `json:"type,omitempty"`
@@ -301,13 +343,6 @@ type ConversationFileMessageNew struct {
   User         ConversationAllMessageNewUser      `json:"user,omitempty"`
 }
 
-// ConversationFileMessageNewContent mapping
-type ConversationFileMessageNewContent struct {
-  Name  string  `json:"name,omitempty"`
-  URL   string  `json:"url,omitempty"`
-  Type  string  `json:"type,omitempty"`
-}
-
 // ConversationAnimationMessageNew mapping
 type ConversationAnimationMessageNew struct {
   Type         string                                  `json:"type,omitempty"`
@@ -317,12 +352,6 @@ type ConversationAnimationMessageNew struct {
   Mentions     []string                                `json:"mentions,omitempty"`
   Fingerprint  int                                     `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser           `json:"user,omitempty"`
-}
-
-// ConversationAnimationMessageNewContent mapping
-type ConversationAnimationMessageNewContent struct {
-  URL   string  `json:"url,omitempty"`
-  Type  string  `json:"type,omitempty"`
 }
 
 // ConversationAudioMessageNew mapping
@@ -336,13 +365,6 @@ type ConversationAudioMessageNew struct {
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
 }
 
-// ConversationAudioMessageNewContent mapping
-type ConversationAudioMessageNewContent struct {
-  URL       string  `json:"url,omitempty"`
-  Type      string  `json:"type,omitempty"`
-  Duration  uint16  `json:"duration,omitempty"`
-}
-
 // ConversationPickerMessageNew mapping
 type ConversationPickerMessageNew struct {
   Type         string                               `json:"type,omitempty"`
@@ -352,20 +374,6 @@ type ConversationPickerMessageNew struct {
   Mentions     []string                             `json:"mentions,omitempty"`
   Fingerprint  int                                  `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser        `json:"user,omitempty"`
-}
-
-// ConversationPickerMessageNewContent mapping
-type ConversationPickerMessageNewContent struct {
-  ID       string                                       `json:"id,omitempty"`
-  Text     string                                       `json:"text,omitempty"`
-  Choices  []ConversationPickerMessageNewContentChoice  `json:"choices,omitempty"`
-}
-
-// ConversationPickerMessageNewContentChoice mapping
-type ConversationPickerMessageNewContentChoice struct {
-  Value     string  `json:"value,omitempty"`
-  Label     string  `json:"label,omitempty"`
-  Selected  bool    `json:"selected"`
 }
 
 // ConversationFieldMessageNew mapping
@@ -379,16 +387,41 @@ type ConversationFieldMessageNew struct {
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
 }
 
-// ConversationFieldMessageNewContent mapping
-type ConversationFieldMessageNewContent struct {
-  ID       string  `json:"id,omitempty"`
-  Text     string  `json:"text,omitempty"`
-  Explain  string  `json:"explain,omitempty"`
-  Value    string  `json:"value,omitempty"`
-}
-
 // ConversationNoteMessageNew mapping
 type ConversationNoteMessageNew ConversationTextMessageNew
+
+// ConversationTextMessageUpdate mapping
+type ConversationTextMessageUpdate struct {
+  Content  string  `json:"content,omitempty"`
+}
+
+// ConversationFileMessageUpdate mapping
+type ConversationFileMessageUpdate struct {
+  Content  ConversationFileMessageNewContent  `json:"content,omitempty"`
+}
+
+// ConversationAnimationMessageUpdate mapping
+type ConversationAnimationMessageUpdate struct {
+  Content  ConversationAnimationMessageNewContent  `json:"content,omitempty"`
+}
+
+// ConversationAudioMessageUpdate mapping
+type ConversationAudioMessageUpdate struct {
+  Content  ConversationAudioMessageNewContent  `json:"content,omitempty"`
+}
+
+// ConversationPickerMessageUpdate mapping
+type ConversationPickerMessageUpdate struct {
+  Content  ConversationPickerMessageNewContent  `json:"content,omitempty"`
+}
+
+// ConversationFieldMessageUpdate mapping
+type ConversationFieldMessageUpdate struct {
+  Content  ConversationFieldMessageNewContent  `json:"content,omitempty"`
+}
+
+// ConversationNoteMessageUpdate mapping
+type ConversationNoteMessageUpdate ConversationTextMessageUpdate
 
 // ConversationAllMessageNewUser mapping
 type ConversationAllMessageNewUser struct {
@@ -823,6 +856,69 @@ func (service *WebsiteService) SendFieldMessageInConversation(websiteID string, 
 func (service *WebsiteService) SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateTextMessageInConversation updates a message in an existing conversation (text variant).
+func (service *WebsiteService) UpdateTextMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationTextMessageUpdate{Content: content})
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateFileMessageInConversation updates a message in an existing conversation (file variant).
+func (service *WebsiteService) UpdateFileMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFileMessageNewContent) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationFileMessageUpdate{Content: content})
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateAnimationMessageInConversation updates a message in an existing conversation (animation variant).
+func (service *WebsiteService) UpdateAnimationMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationAnimationMessageNewContent) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationAnimationMessageUpdate{Content: content})
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateAudioMessageInConversation updates a message in an existing conversation (audio variant).
+func (service *WebsiteService) UpdateAudioMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationAudioMessageNewContent) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationAudioMessageUpdate{Content: content})
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdatePickerMessageInConversation updates a message in an existing conversation (picker variant).
+func (service *WebsiteService) UpdatePickerMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationPickerMessageNewContent) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationPickerMessageUpdate{Content: content})
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateFieldMessageInConversation updates a message in an existing conversation (field variant).
+func (service *WebsiteService) UpdateFieldMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFieldMessageNewContent) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationFieldMessageUpdate{Content: content})
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateNoteMessageInConversation updates a message in an existing conversation (note variant).
+func (service *WebsiteService) UpdateNoteMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationNoteMessageUpdate{Content: content})
 
   return service.client.Do(req, nil)
 }
