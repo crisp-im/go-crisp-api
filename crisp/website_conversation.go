@@ -861,7 +861,7 @@ func (service *WebsiteService) SendNoteMessageInConversation(websiteID string, s
 }
 
 
-// UpdateTextMessageInConversation updates a message in an existing conversation (text variant).
+// UpdateTextMessageInConversation edits an existing message in an existing conversation (text variant).
 func (service *WebsiteService) UpdateTextMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
   req, _ := service.client.NewRequest("PATCH", url, ConversationTextMessageUpdate{Content: content})
@@ -870,7 +870,7 @@ func (service *WebsiteService) UpdateTextMessageInConversation(websiteID string,
 }
 
 
-// UpdateFileMessageInConversation updates a message in an existing conversation (file variant).
+// UpdateFileMessageInConversation edits an existing message in an existing conversation (file variant).
 func (service *WebsiteService) UpdateFileMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFileMessageNewContent) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
   req, _ := service.client.NewRequest("PATCH", url, ConversationFileMessageUpdate{Content: content})
@@ -879,7 +879,7 @@ func (service *WebsiteService) UpdateFileMessageInConversation(websiteID string,
 }
 
 
-// UpdateAnimationMessageInConversation updates a message in an existing conversation (animation variant).
+// UpdateAnimationMessageInConversation edits an existing message in an existing conversation (animation variant).
 func (service *WebsiteService) UpdateAnimationMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationAnimationMessageNewContent) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
   req, _ := service.client.NewRequest("PATCH", url, ConversationAnimationMessageUpdate{Content: content})
@@ -888,7 +888,7 @@ func (service *WebsiteService) UpdateAnimationMessageInConversation(websiteID st
 }
 
 
-// UpdateAudioMessageInConversation updates a message in an existing conversation (audio variant).
+// UpdateAudioMessageInConversation edits an existing message in an existing conversation (audio variant).
 func (service *WebsiteService) UpdateAudioMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationAudioMessageNewContent) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
   req, _ := service.client.NewRequest("PATCH", url, ConversationAudioMessageUpdate{Content: content})
@@ -897,7 +897,7 @@ func (service *WebsiteService) UpdateAudioMessageInConversation(websiteID string
 }
 
 
-// UpdatePickerMessageInConversation updates a message in an existing conversation (picker variant).
+// UpdatePickerMessageInConversation edits an existing message in an existing conversation (picker variant).
 func (service *WebsiteService) UpdatePickerMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationPickerMessageNewContent) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
   req, _ := service.client.NewRequest("PATCH", url, ConversationPickerMessageUpdate{Content: content})
@@ -906,7 +906,7 @@ func (service *WebsiteService) UpdatePickerMessageInConversation(websiteID strin
 }
 
 
-// UpdateFieldMessageInConversation updates a message in an existing conversation (field variant).
+// UpdateFieldMessageInConversation edits an existing message in an existing conversation (field variant).
 func (service *WebsiteService) UpdateFieldMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFieldMessageNewContent) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
   req, _ := service.client.NewRequest("PATCH", url, ConversationFieldMessageUpdate{Content: content})
@@ -915,7 +915,7 @@ func (service *WebsiteService) UpdateFieldMessageInConversation(websiteID string
 }
 
 
-// UpdateNoteMessageInConversation updates a message in an existing conversation (note variant).
+// UpdateNoteMessageInConversation edits an existing message in an existing conversation (note variant).
 func (service *WebsiteService) UpdateNoteMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
   req, _ := service.client.NewRequest("PATCH", url, ConversationNoteMessageUpdate{Content: content})
