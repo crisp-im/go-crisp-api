@@ -13,8 +13,8 @@ import (
 
 
 // ListAnimationMedias lists animation medias.
-func (service *WebsiteService) ListAnimationMedias(pageNumber uint, listID string, searchQuery string) (*Response, error) {
-  url := fmt.Sprintf("media/animation/list/%d?list_id=%s&search_query=%s", pageNumber, url.QueryEscape(listID), url.QueryEscape(searchQuery))
+func (service *WebsiteService) ListAnimationMedias(pageNumber uint, listID int, searchQuery string) (*Response, error) {
+  url := fmt.Sprintf("media/animation/list/%d?list_id=%d&search_query=%s", pageNumber, listID, url.QueryEscape(searchQuery))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   return service.client.Do(req, nil)

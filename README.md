@@ -86,7 +86,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 ### Media
 
 * **Media Animation**
-  * **List Animation Medias**: `client.Media.ListAnimationMedias(pageNumber uint, listID string, searchQuery string) (*Response, error)`
+  * **List Animation Medias**: `client.Media.ListAnimationMedias(pageNumber uint, listID int, searchQuery string) (*Response, error)`
 
 ### User
 
