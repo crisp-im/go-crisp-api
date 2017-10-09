@@ -657,7 +657,6 @@ type EventsCallSignalingCandidate struct {
 // EventsServiceTranslateProcessed maps service:translate:processed
 type EventsServiceTranslateProcessed struct {
   EventsWebsiteGeneric
-  EventsUserGeneric
   ID    *string  `json:"id"`
   Text  *string  `json:"text"`
 }
