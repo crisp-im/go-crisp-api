@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 10/04/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 10/08/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -268,6 +268,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Mark Messages As Read In Conversation**: `client.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
   * **Mark Messages As Delivered In Conversation**: `client.Website.MarkMessagesDeliveredInConversation(websiteID string, sessionID string, delivered ConversationDeliveredMessageMark) (*Response, error)`
   * **Update Conversation Open State**: `client.Website.UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error)`
+  * **Request Translation Service**: `client.Website.RequestTranslationService(websiteID string, translate WebsiteServiceTranslateItem) (*Response, error)`
   * **Get Conversation Metas**: `client.Website.GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error)`
   * **Update Conversation Metas**: `client.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
   * **List Conversation Pages**: `client.Website.ListConversationPages(websiteID string, sessionID string, pageNumber uint) (*[]ConversationPage, *Response, error)`
@@ -488,6 +489,9 @@ Available events are listed below:
   * **Call Action Stopped**: `call:action:stopped`
   * **Call Signaling SDP**: `call:signaling:sdp`
   * **Call Signaling Candidate**: `call:signaling:candidate`
+
+* **Service Events**
+  * **Service Translate Processed**: `service:translate:processed`
 
 * **Website Events**
   * **Website Update Visitors Count**: `website:update_visitors_count`

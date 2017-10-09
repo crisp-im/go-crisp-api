@@ -654,6 +654,13 @@ type EventsCallSignalingCandidate struct {
   Candidate  *interface{}  `json:"candidate"`
 }
 
+// EventsServiceTranslateProcessed maps service:translate:processed
+type EventsServiceTranslateProcessed struct {
+  EventsWebsiteGeneric
+  ID    *string  `json:"id"`
+  Text  *string  `json:"text"`
+}
+
 // EventsReceiveWebsiteUpdateVisitorsCount maps website:update_visitors_count
 type EventsReceiveWebsiteUpdateVisitorsCount struct {
   EventsWebsiteGeneric
@@ -1607,6 +1614,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("call:signaling:candidate", func(chnl *gosocketio.Channel, evt EventsCallSignalingCandidate) {
     if hdl, ok := register.Handlers["call:signaling:candidate"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("service:translate:processed", func(chnl *gosocketio.Channel, evt EventsServiceTranslateProcessed) {
+    if hdl, ok := register.Handlers["service:translate:processed"]; ok {
       go hdl.callFunc(&evt)
     }
   })
