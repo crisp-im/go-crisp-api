@@ -582,11 +582,18 @@ type ConversationBrowsingDebug struct {
 type ConversationBrowsingAssist struct {
   Action  *string                            `json:"action,omitempty"`
   Mouse   *ConversationBrowsingAssistMouse   `json:"mouse,omitempty"`
+  Click   *ConversationBrowsingAssistClick   `json:"click,omitempty"`
   Scroll  *ConversationBrowsingAssistScroll  `json:"scroll,omitempty"`
 }
 
 // ConversationBrowsingAssistMouse mapping
 type ConversationBrowsingAssistMouse struct {
+  X  *uint16  `json:"x,omitempty"`
+  Y  *uint16  `json:"y,omitempty"`
+}
+
+// ConversationBrowsingAssistClick mapping
+type ConversationBrowsingAssistClick struct {
   X  *uint16  `json:"x,omitempty"`
   Y  *uint16  `json:"y,omitempty"`
 }
