@@ -65,10 +65,15 @@ type EventsImportGeneric struct {
   ImportID  *string  `json:"import_id"`
 }
 
+// EventsSessionGeneric maps a generic session (unbound from website)
+type EventsSessionGenericUnbound struct {
+  SessionID  *string  `json:"session_id"`
+}
+
 // EventsSessionGeneric maps a generic session
 type EventsSessionGeneric struct {
   EventsWebsiteGeneric
-  SessionID  *string  `json:"session_id"`
+  EventsSessionGenericUnbound
 }
 
 // EventsBrowsingGeneric maps a generic browsing
@@ -85,7 +90,7 @@ type EventsCallGeneric struct {
 
 // EventsPeopleGeneric maps a generic people
 type EventsPeopleGeneric struct {
-  EventsSessionGeneric
+  EventsWebsiteGeneric
   PeopleID  *string  `json:"people_id"`
 }
 
@@ -458,14 +463,25 @@ type EventsReceiveMessageAcknowledge struct {
   Fingerprints  *[]int   `json:"fingerprints"`
 }
 
+// EventsReceivePeopleProfileCreated maps people:profile:created
+type EventsReceivePeopleProfileCreated struct {
+  EventsPeopleGeneric
+  Email  *string  `json:"email"`
+}
+
+// EventsReceivePeopleProfileRemoved maps people:profile:removed
+type EventsReceivePeopleProfileRemoved EventsReceivePeopleProfileCreated
+
 // EventsPeopleBindSession maps people:bind:session
 type EventsPeopleBindSession struct {
   EventsPeopleGeneric
+  EventsSessionGenericUnbound
 }
 
 // EventsPeopleSyncProfile maps people:sync:profile
 type EventsPeopleSyncProfile struct {
   EventsPeopleGeneric
+  EventsSessionGenericUnbound
   Identity  *PeopleProfileCard  `json:"identity"`
 }
 
@@ -727,6 +743,21 @@ type EventsReceiveMediaAnimationListedResult struct {
   URL   *string  `json:"url"`
 }
 
+// EventsReceiveEmailSubscribe maps email:subscribe
+type EventsReceiveEmailSubscribe struct {
+  EventsWebsiteGeneric
+  Email       *string  `json:"email"`
+  Subscribed  *bool    `json:"subscribed"`
+}
+
+// EventsReceiveEmailTrackView maps email:track:view
+type EventsReceiveEmailTrackView struct {
+  EventsWebsiteGeneric
+  Type        *string  `json:"type"`
+  Identifier  *string  `json:"identifier"`
+  Mode        *string  `json:"mode"`
+}
+
 // EventsReceiveBillingLinkRedirect maps billing:link:redirect
 type EventsReceiveBillingLinkRedirect struct {
   Service  *string  `json:"service"`
@@ -922,6 +953,18 @@ func (evt EventsReceiveMessageComposeReceive) String() string {
 
 // String returns the string representation of EventsReceiveMessageAcknowledge
 func (evt EventsReceiveMessageAcknowledge) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceivePeopleProfileCreated
+func (evt EventsReceivePeopleProfileCreated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceivePeopleProfileRemoved
+func (evt EventsReceivePeopleProfileRemoved) String() string {
   return Stringify(evt)
 }
 
@@ -1132,6 +1175,18 @@ func (evt EventsReceiveBucketURLProcessingGenerated) String() string {
 
 // String returns the string representation of EventsReceiveMediaAnimationListed
 func (evt EventsReceiveMediaAnimationListed) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveEmailSubscribe
+func (evt EventsReceiveEmailSubscribe) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveEmailTrackView
+func (evt EventsReceiveEmailTrackView) String() string {
   return Stringify(evt)
 }
 
@@ -1456,6 +1511,18 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
     }
   })
 
+  so.On("people:profile:created", func(chnl *gosocketio.Channel, evt EventsReceivePeopleProfileCreated) {
+    if hdl, ok := register.Handlers["people:profile:created"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("people:profile:removed", func(chnl *gosocketio.Channel, evt EventsReceivePeopleProfileRemoved) {
+    if hdl, ok := register.Handlers["people:profile:removed"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
   so.On("people:bind:session", func(chnl *gosocketio.Channel, evt EventsPeopleBindSession) {
     if hdl, ok := register.Handlers["people:bind:session"]; ok {
       go hdl.callFunc(&evt)
@@ -1668,6 +1735,18 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("media:animation:listed", func(chnl *gosocketio.Channel, evt EventsReceiveMediaAnimationListed) {
     if hdl, ok := register.Handlers["media:animation:listed"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("email:subscribe", func(chnl *gosocketio.Channel, evt EventsReceiveEmailSubscribe) {
+    if hdl, ok := register.Handlers["email:subscribe"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("email:track:view", func(chnl *gosocketio.Channel, evt EventsReceiveEmailTrackView) {
+    if hdl, ok := register.Handlers["email:track:view"]; ok {
       go hdl.callFunc(&evt)
     }
   })

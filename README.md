@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 10/08/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 10/13/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -456,6 +456,8 @@ Available events are listed below:
   * **Message Acknowledge Delivered**: `message:acknowledge:delivered`
 
 * **People Events**
+  * **People Profile Created**: `people:profile:created`
+  * **People Profile Removed**: `people:profile:removed`
   * **People Bind Session**: `people:bind:session`
   * **People Sync Profile**: `people:sync:profile`
   * **People Import Progress**: `people:import:progress`
@@ -506,6 +508,10 @@ Available events are listed below:
 
 * **Media Events**
   * **Media Animation Listed**: `media:animation:listed`
+
+* **Email Events**
+  * **Email Subscribe**: `email:subscribe`
+  * **Email Track View**: `email:track:view`
 
 * **Billing Events**
   * **Billing Link Redirect**: `billing:link:redirect`
