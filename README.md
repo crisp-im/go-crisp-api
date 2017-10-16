@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM, Inc. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 10/13/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 10/15/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -310,6 +310,38 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   + **Update People Subscription Status**: `client.Website.UpdatePeopleSubscriptionStatus(websiteID string, peopleID string, peopleSubscription PeopleSubscriptionUpdate)`
   * **Export People Profiles**: `client.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
   * **Import People Profiles**: `client.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
+
+* **Website Helpdesk**
+  * **List Helpdesk Locales**: `client.Website.ListHelpdeskLocales(websiteID string, pageNumber uint) (*[]WebsiteHelpdeskLocale, *Response, error)`
+  * **Add Helpdesk Locale**: `client.Website.AddHelpdeskLocale(websiteID string, locale string) (*Response, error)`
+  * **Check If Helpdesk Locale Exists**: `client.Website.CheckIfHelpdeskLocaleExists(websiteID string, locale string) (*Response, error)`
+  * **Resolve Helpdesk Locale**: `client.Website.ResolveHelpdeskLocale(websiteID string, locale string) (*WebsiteHelpdeskLocale, *Response, error)`
+  * **Delete Helpdesk Locale**: `client.Website.DeleteHelpdeskLocale(websiteID string, locale string) (*Response, error)`
+  * **List Helpdesk Locale Articles**: `client.Website.ListHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint) (*[]WebsiteHelpdeskLocaleArticle, *Response, error)`
+  * **List Helpdesk Locale Articles (Filter Variant)**: `client.Website.FilterHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint, searchTitle string, filterCategoryID string, filterStatusPublished bool, filterStatusDraft bool, filterVisibilityVisible bool, filterVisibilityHidden bool) (*[]WebsiteHelpdeskLocaleArticle, *Response, error)`
+  * **Add A New Helpdesk Locale Article**: `client.Website.AddNewHelpdeskLocaleArticle(websiteID string, locale string, articleTitle string) (*WebsiteHelpdeskLocaleArticleNew, *Response, error)`
+  * **Check If Helpdesk Locale Article Exists**: `client.Website.CheckIfHelpdeskLocaleArticleExists(websiteID string, locale string, articleID string) (*Response, error)`
+  * **Resolve Helpdesk Locale Article**: `client.Website.ResolveHelpdeskLocaleArticle(websiteID string, locale string, articleID string) (*WebsiteHelpdeskLocaleArticle, *Response, error)`
+  * **Save Helpdesk Locale Article**: `client.Website.SaveHelpdeskLocaleArticle(websiteID string, locale string, articleID string, article WebsiteHelpdeskLocaleArticleItem) (*Response, error)`
+  * **Update Helpdesk Locale Article**: `client.Website.UpdateHelpdeskLocaleArticle(websiteID string, locale string, articleID string, article WebsiteHelpdeskLocaleArticleItem) (*Response, error)`
+  * **Delete Helpdesk Locale Article**: `client.Website.DeleteHelpdeskLocaleArticle(websiteID string, locale string, articleID string) (*Response, error)`
+  * **Resolve Helpdesk Locale Article Category**: `client.Website.ResolveHelpdeskLocaleArticleCategory(websiteID string, locale string, articleID string) (*WebsiteHelpdeskLocaleArticleCategory, *Response, error)`
+  * **Update Helpdesk Locale Article Category**: `client.Website.UpdateHelpdeskLocaleArticleCategory(websiteID string, locale string, articleID string, categoryID string) (*Response, error)`
+  * **Publish Helpdesk Locale Article**: `client.Website.PublishHelpdeskLocaleArticle(websiteID string, locale string, articleID string) (*WebsiteHelpdeskLocaleArticlePublish, *Response, error)`
+  * **Unpublish Helpdesk Locale Article**: `client.Website.UnpublishHelpdeskLocaleArticle(websiteID string, locale string, articleID string) (*Response, error)`
+  * **List Helpdesk Locale Categories**: `client.Website.ListHelpdeskLocaleCategories(websiteID string, locale string, pageNumber uint) (*[]WebsiteHelpdeskLocaleCategory, *Response, error)`
+  * **List Helpdesk Locale Categories (Filter Variant)**: `client.Website.FilterHelpdeskLocaleCategories(websiteID string, locale string, pageNumber uint, searchName string) (*[]WebsiteHelpdeskLocaleCategory, *Response, error)`
+  * **Add Helpdesk Locale Category**: `client.Website.AddHelpdeskLocaleCategory(websiteID string, locale string, categoryName string) (*WebsiteHelpdeskLocaleCategoryNew, *Response, error)`
+  * **Check If Helpdesk Locale Category Exists**: `client.Website.CheckIfHelpdeskLocaleCategoryExists(websiteID string, locale string, categoryID string) (*Response, error)`
+  * **Resolve Helpdesk Locale Category**: `client.Website.ResolveHelpdeskLocaleCategory(websiteID string, locale string, categoryID string) (*WebsiteHelpdeskLocaleCategory, *Response, error)`
+  * **Save Helpdesk Locale Category**: `client.Website.SaveHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryItem) (*Response, error)`
+  * **Update Helpdesk Locale Category**: `client.Website.UpdateHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryItem) (*Response, error)`
+  * **Delete Helpdesk Locale Category**: `client.Website.DeleteHelpdeskLocaleCategory(websiteID string, locale string, categoryID string) (*Response, error)`
+  * **Resolve Helpdesk Settings**: `client.Website.ResolveHelpdeskSettings(websiteID string) (*WebsiteHelpdeskSettings, *Response, error)`
+  * **Save Helpdesk Settings**: `client.Website.SaveHelpdeskSettings(websiteID string, settings WebsiteHelpdeskSettingsUpdate) (*Response, error)`
+  * **Resolve Helpdesk Domain**: `client.Website.ResolveHelpdeskDomain(websiteID string) (*WebsiteHelpdeskDomain, *Response, error)`
+  * **Request Helpdesk Domain Change**: `client.Website.RequestHelpdeskDomainChange(websiteID string, domain WebsiteHelpdeskDomainChange) (*Response, error)`
+  * **Generate Helpdesk Domain Setup Flow**: `client.Website.GenerateHelpdeskDomainSetupFlow(websiteID string, custom string) (*WebsiteHelpdeskDomainSetupFlow, *Response, error)`
 
 ### Plugin
 
