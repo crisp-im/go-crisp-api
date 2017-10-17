@@ -12,6 +12,16 @@ import (
 )
 
 
+// WebsiteHelpdeskData mapping
+type WebsiteHelpdeskData struct {
+  Data  *WebsiteHelpdesk  `json:"data,omitempty"`
+}
+
+// WebsiteHelpdesk mapping
+type WebsiteHelpdesk struct {
+  URL  *string  `json:"url,omitempty"`
+}
+
 // WebsiteHelpdeskLocalesData mapping
 type WebsiteHelpdeskLocalesData struct {
   Data  *[]WebsiteHelpdeskLocale  `json:"data,omitempty"`
@@ -182,6 +192,12 @@ type WebsiteHelpdeskDomainSetupFlowSetupRecord struct {
   Value  *string  `json:"value,omitempty"`
 }
 
+// WebsiteHelpdeskInitialize mapping
+type WebsiteHelpdeskInitialize struct {
+  Name         string  `json:"name,omitempty"`
+  DomainBasic  string  `json:"domain_basic,omitempty"`
+}
+
 // WebsiteHelpdeskLocaleItem mapping
 type WebsiteHelpdeskLocaleItem struct {
   Locale  *string  `json:"locale,omitempty"`
@@ -236,6 +252,11 @@ type WebsiteHelpdeskDomainChange struct {
 }
 
 
+// String returns the string representation of WebsiteHelpdesk
+func (instance WebsiteHelpdesk) String() string {
+  return Stringify(instance)
+}
+
 // String returns the string representation of WebsiteHelpdeskLocale
 func (instance WebsiteHelpdeskLocale) String() string {
   return Stringify(instance)
@@ -279,6 +300,48 @@ func (instance WebsiteHelpdeskDomain) String() string {
 // String returns the string representation of WebsiteHelpdeskDomainSetupFlow
 func (instance WebsiteHelpdeskDomainSetupFlow) String() string {
   return Stringify(instance)
+}
+
+
+// CheckIfHelpdeskExists checks if helpdesk exists for website.
+func (service *WebsiteService) CheckIfHelpdeskExists(websiteID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk", websiteID)
+  req, _ := service.client.NewRequest("HEAD", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ResolveHelpdesk resolves helpdesk information for website.
+func (service *WebsiteService) ResolveHelpdesk(websiteID string) (*WebsiteHelpdesk, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk", websiteID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  helpdesk := new(WebsiteHelpdeskData)
+  resp, err := service.client.Do(req, helpdesk)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return helpdesk.Data, resp, err
+}
+
+
+// InitializeHelpdesk initializes a new helpdesk for website.
+func (service *WebsiteService) InitializeHelpdesk(websiteID string, helpdesk WebsiteHelpdeskInitialize) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk", websiteID)
+  req, _ := service.client.NewRequest("POST", url, helpdesk)
+
+  return service.client.Do(req, nil)
+}
+
+
+// DeleteHelpdesk deletes helpdesk for website.
+func (service *WebsiteService) DeleteHelpdesk(websiteID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk", websiteID)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
 }
 
 

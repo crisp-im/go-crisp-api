@@ -312,6 +312,10 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Import People Profiles**: `client.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
 
 * **Website Helpdesk**
+  * **Check If Helpdesk Exists**: `client.Website.CheckIfHelpdeskExists(websiteID string) (*Response, error)`
+  * **Resolve Helpdesk**: `client.Website.ResolveHelpdesk(websiteID string) (*WebsiteHelpdesk, *Response, error)`
+  * **Initialize Helpdesk**: `client.Website.InitializeHelpdesk(websiteID string, helpdesk WebsiteHelpdeskInitialize) (*Response, error)`
+  * **Delete Helpdesk**: `client.Website.DeleteHelpdesk(websiteID string) (*Response, error)`
   * **List Helpdesk Locales**: `client.Website.ListHelpdeskLocales(websiteID string, pageNumber uint) (*[]WebsiteHelpdeskLocale, *Response, error)`
   * **Add Helpdesk Locale**: `client.Website.AddHelpdeskLocale(websiteID string, locale string) (*Response, error)`
   * **Check If Helpdesk Locale Exists**: `client.Website.CheckIfHelpdeskLocaleExists(websiteID string, locale string) (*Response, error)`
