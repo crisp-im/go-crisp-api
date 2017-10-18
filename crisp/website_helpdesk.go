@@ -133,7 +133,6 @@ type WebsiteHelpdeskSettingsData struct {
 // WebsiteHelpdeskSettings mapping
 type WebsiteHelpdeskSettings struct {
   Name        *string                             `json:"name,omitempty"`
-  title       *string                             `json:"title,omitempty"`
   Appearance  *WebsiteHelpdeskSettingsAppearance  `json:"appearance,omitempty"`
   Behavior    *WebsiteHelpdeskSettingsBehavior    `json:"behavior,omitempty"`
 }
@@ -221,7 +220,6 @@ type WebsiteHelpdeskLocaleCategoryItem struct {
 // WebsiteHelpdeskSettingsUpdate mapping
 type WebsiteHelpdeskSettingsUpdate struct {
   Name        string                                   `json:"name,omitempty"`
-  title       string                                   `json:"title,omitempty"`
   Appearance  WebsiteHelpdeskSettingsUpdateAppearance  `json:"appearance,omitempty"`
   Behavior    WebsiteHelpdeskSettingsUpdateBehavior    `json:"behavior,omitempty"`
 }
