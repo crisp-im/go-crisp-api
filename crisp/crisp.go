@@ -10,6 +10,7 @@ import (
   "bytes"
   "encoding/json"
   "fmt"
+  "time"
   "io"
   "io/ioutil"
   "net/http"
@@ -18,11 +19,12 @@ import (
 
 
 const (
-  libraryVersion = "2.28.3"
+  libraryVersion = "2.28.4"
   defaultRestEndpointURL = "https://api.crisp.chat/v1/"
   defaultRealtimeEndpointURL = "https://app.relay.crisp.chat:443/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
+  clientTimeout = 10
 )
 
 // ClientConfig mapping
@@ -89,6 +91,7 @@ func NewWithConfig(config ClientConfig) *Client {
   // Defaults
   if config.HTTPClient == nil {
     config.HTTPClient = http.DefaultClient
+    config.HTTPClient.Timeout = time.Duration(clientTimeout * time.Second)
   }
   if config.RestEndpointURL == "" {
     config.RestEndpointURL = defaultRestEndpointURL
