@@ -19,7 +19,8 @@ type WebsiteHelpdeskData struct {
 
 // WebsiteHelpdesk mapping
 type WebsiteHelpdesk struct {
-  URL  *string  `json:"url,omitempty"`
+  Name  *string  `json:"name,omitempty"`
+  URL   *string  `json:"url,omitempty"`
 }
 
 // WebsiteHelpdeskLocalesData mapping
