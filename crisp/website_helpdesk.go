@@ -53,6 +53,7 @@ type WebsiteHelpdeskLocaleArticle struct {
   Content      *string  `json:"content,omitempty"`
   Status       *string  `json:"status,omitempty"`
   Visibility   *string  `json:"visibility,omitempty"`
+  Visits       *uint    `json:"visits,omitempty"`
   URL          *string  `json:"url,omitempty"`
   CreatedAt    *uint    `json:"created_at,omitempty"`
   UpdatedAt    *uint    `json:"updated_at,omitempty"`
