@@ -51,6 +51,7 @@ type WebsiteSettingsChatbox struct {
   ActivityMetrics      *bool      `json:"activity_metrics,omitempty"`
   AvailabilityTooltip  *bool      `json:"availability_tooltip,omitempty"`
   HideOnAway           *bool      `json:"hide_on_away,omitempty"`
+  HideOnMobile         *bool      `json:"hide_on_mobile,omitempty"`
   PositionReverse      *bool      `json:"position_reverse,omitempty"`
   EmailVisitors        *bool      `json:"email_visitors,omitempty"`
   PhoneVisitors        *bool      `json:"phone_visitors,omitempty"`
@@ -100,6 +101,7 @@ type WebsiteSettingsUpdateChatbox struct {
   ActivityMetrics      bool       `json:"activity_metrics,omitempty"`
   AvailabilityTooltip  bool       `json:"availability_tooltip,omitempty"`
   HideOnAway           bool       `json:"hide_on_away,omitempty"`
+  HideOnMobile         bool       `json:"hide_on_mobile,omitempty"`
   PositionReverse      bool       `json:"position_reverse,omitempty"`
   EmailVisitors        bool       `json:"email_visitors,omitempty"`
   PhoneVisitors        bool       `json:"phone_visitors,omitempty"`
