@@ -48,15 +48,23 @@ type WebsiteHelpdeskLocaleArticlesExcerptData struct {
 
 // WebsiteHelpdeskLocaleArticleExcerpt mapping
 type WebsiteHelpdeskLocaleArticleExcerpt struct {
-  ArticleID    *string  `json:"article_id,omitempty"`
-  Title        *string  `json:"title,omitempty"`
-  Status       *string  `json:"status,omitempty"`
-  Visibility   *string  `json:"visibility,omitempty"`
-  Visits       *uint    `json:"visits,omitempty"`
-  URL          *string  `json:"url,omitempty"`
-  CreatedAt    *uint    `json:"created_at,omitempty"`
-  UpdatedAt    *uint    `json:"updated_at,omitempty"`
-  PublishedAt  *uint    `json:"published_at,omitempty"`
+  ArticleID    *string                                       `json:"article_id,omitempty"`
+  Title        *string                                       `json:"title,omitempty"`
+  Status       *string                                       `json:"status,omitempty"`
+  Visibility   *string                                       `json:"visibility,omitempty"`
+  Visits       *uint                                         `json:"visits,omitempty"`
+  URL          *string                                       `json:"url,omitempty"`
+  Category     *WebsiteHelpdeskLocaleArticleExcerptCategory  `json:"category,omitempty"`
+  CreatedAt    *uint                                         `json:"created_at,omitempty"`
+  UpdatedAt    *uint                                         `json:"updated_at,omitempty"`
+  PublishedAt  *uint                                         `json:"published_at,omitempty"`
+}
+
+// WebsiteHelpdeskLocaleArticleExcerptCategory mapping
+type WebsiteHelpdeskLocaleArticleExcerptCategory struct {
+  CategoryID  *string  `json:"category_id,omitempty"`
+  Name        *string  `json:"name,omitempty"`
+  Color       *string  `json:"color,omitempty"`
 }
 
 // WebsiteHelpdeskLocaleArticleData mapping
