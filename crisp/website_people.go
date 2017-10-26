@@ -125,10 +125,10 @@ type PeopleProfileCardCompany struct {
 
 // PeopleProfileCardCompanyMetrics mapping
 type PeopleProfileCardCompanyMetrics struct {
-  Employees  *int16  `json:"employees,omitempty"`
-  MarketCap  *int16  `json:"market_cap,omitempty"`
-  Raised     *int16  `json:"raised,omitempty"`
-  ARR        *int16  `json:"arr,omitempty"`
+  Employees  *uint32  `json:"employees,omitempty"`
+  MarketCap  *uint32  `json:"market_cap,omitempty"`
+  Raised     *uint32  `json:"raised,omitempty"`
+  ARR        *uint32  `json:"arr,omitempty"`
 }
 
 // PeopleProfileCardGeolocation mapping
