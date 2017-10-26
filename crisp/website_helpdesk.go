@@ -41,9 +41,27 @@ type WebsiteHelpdeskLocaleData struct {
   Data  *WebsiteHelpdeskLocale  `json:"data,omitempty"`
 }
 
-// WebsiteHelpdeskLocaleArticlesData mapping
-type WebsiteHelpdeskLocaleArticlesData struct {
-  Data  *[]WebsiteHelpdeskLocaleArticle  `json:"data,omitempty"`
+// WebsiteHelpdeskLocaleArticlesExcerptData mapping
+type WebsiteHelpdeskLocaleArticlesExcerptData struct {
+  Data  *[]WebsiteHelpdeskLocaleArticleExcerpt  `json:"data,omitempty"`
+}
+
+// WebsiteHelpdeskLocaleArticleExcerpt mapping
+type WebsiteHelpdeskLocaleArticleExcerpt struct {
+  ArticleID    *string  `json:"article_id,omitempty"`
+  Title        *string  `json:"title,omitempty"`
+  Status       *string  `json:"status,omitempty"`
+  Visibility   *string  `json:"visibility,omitempty"`
+  Visits       *uint    `json:"visits,omitempty"`
+  URL          *string  `json:"url,omitempty"`
+  CreatedAt    *uint    `json:"created_at,omitempty"`
+  UpdatedAt    *uint    `json:"updated_at,omitempty"`
+  PublishedAt  *uint    `json:"published_at,omitempty"`
+}
+
+// WebsiteHelpdeskLocaleArticleData mapping
+type WebsiteHelpdeskLocaleArticleData struct {
+  Data  *WebsiteHelpdeskLocaleArticle  `json:"data,omitempty"`
 }
 
 // WebsiteHelpdeskLocaleArticle mapping
@@ -58,11 +76,6 @@ type WebsiteHelpdeskLocaleArticle struct {
   CreatedAt    *uint    `json:"created_at,omitempty"`
   UpdatedAt    *uint    `json:"updated_at,omitempty"`
   PublishedAt  *uint    `json:"published_at,omitempty"`
-}
-
-// WebsiteHelpdeskLocaleArticleData mapping
-type WebsiteHelpdeskLocaleArticleData struct {
-  Data  *WebsiteHelpdeskLocaleArticle  `json:"data,omitempty"`
 }
 
 // WebsiteHelpdeskLocaleArticleNewData mapping
@@ -403,11 +416,11 @@ func (service *WebsiteService) DeleteHelpdeskLocale(websiteID string, locale str
 
 
 // ListHelpdeskLocaleArticles lists articles for a helpdesk locale in website.
-func (service *WebsiteService) ListHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint) (*[]WebsiteHelpdeskLocaleArticle, *Response, error) {
+func (service *WebsiteService) ListHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint) (*[]WebsiteHelpdeskLocaleArticleExcerpt, *Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s/articles/%d", websiteID, locale, pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  articles := new(WebsiteHelpdeskLocaleArticlesData)
+  articles := new(WebsiteHelpdeskLocaleArticlesExcerptData)
   resp, err := service.client.Do(req, articles)
   if err != nil {
     return nil, resp, err
@@ -418,7 +431,7 @@ func (service *WebsiteService) ListHelpdeskLocaleArticles(websiteID string, loca
 
 
 // FilterHelpdeskLocaleArticles lists articles for a helpdesk locale in website (filter variant).
-func (service *WebsiteService) FilterHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint, searchTitle string, filterCategoryID string, filterStatusPublished bool, filterStatusDraft bool, filterVisibilityVisible bool, filterVisibilityHidden bool) (*[]WebsiteHelpdeskLocaleArticle, *Response, error) {
+func (service *WebsiteService) FilterHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint, searchTitle string, filterCategoryID string, filterStatusPublished bool, filterStatusDraft bool, filterVisibilityVisible bool, filterVisibilityHidden bool) (*[]WebsiteHelpdeskLocaleArticleExcerpt, *Response, error) {
   var (
     filterStatusPublishedValue string
     filterStatusDraftValue string
@@ -453,7 +466,7 @@ func (service *WebsiteService) FilterHelpdeskLocaleArticles(websiteID string, lo
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s/articles/%d?search_title=%s&filter_category_id=%s&filter_status_published=%s&filter_status_draft=%s&filter_visibility_visible=%s&filter_visibility_hidden=%s", websiteID, locale, pageNumber, url.QueryEscape(searchTitle), url.QueryEscape(filterCategoryID), url.QueryEscape(filterStatusPublishedValue), url.QueryEscape(filterStatusDraftValue), url.QueryEscape(filterVisibilityVisibleValue), url.QueryEscape(filterVisibilityHiddenValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  articles := new(WebsiteHelpdeskLocaleArticlesData)
+  articles := new(WebsiteHelpdeskLocaleArticlesExcerptData)
   resp, err := service.client.Do(req, articles)
   if err != nil {
     return nil, resp, err

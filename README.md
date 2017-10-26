@@ -321,8 +321,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Check If Helpdesk Locale Exists**: `client.Website.CheckIfHelpdeskLocaleExists(websiteID string, locale string) (*Response, error)`
   * **Resolve Helpdesk Locale**: `client.Website.ResolveHelpdeskLocale(websiteID string, locale string) (*WebsiteHelpdeskLocale, *Response, error)`
   * **Delete Helpdesk Locale**: `client.Website.DeleteHelpdeskLocale(websiteID string, locale string) (*Response, error)`
-  * **List Helpdesk Locale Articles**: `client.Website.ListHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint) (*[]WebsiteHelpdeskLocaleArticle, *Response, error)`
-  * **List Helpdesk Locale Articles (Filter Variant)**: `client.Website.FilterHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint, searchTitle string, filterCategoryID string, filterStatusPublished bool, filterStatusDraft bool, filterVisibilityVisible bool, filterVisibilityHidden bool) (*[]WebsiteHelpdeskLocaleArticle, *Response, error)`
+  * **List Helpdesk Locale Articles**: `client.Website.ListHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint) (*[]WebsiteHelpdeskLocaleArticleExcerpt, *Response, error)`
+  * **List Helpdesk Locale Articles (Filter Variant)**: `client.Website.FilterHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint, searchTitle string, filterCategoryID string, filterStatusPublished bool, filterStatusDraft bool, filterVisibilityVisible bool, filterVisibilityHidden bool) (*[]WebsiteHelpdeskLocaleArticleExcerpt, *Response, error)`
   * **Add A New Helpdesk Locale Article**: `client.Website.AddNewHelpdeskLocaleArticle(websiteID string, locale string, articleTitle string) (*WebsiteHelpdeskLocaleArticleNew, *Response, error)`
   * **Check If Helpdesk Locale Article Exists**: `client.Website.CheckIfHelpdeskLocaleArticleExists(websiteID string, locale string, articleID string) (*Response, error)`
   * **Resolve Helpdesk Locale Article**: `client.Website.ResolveHelpdeskLocaleArticle(websiteID string, locale string, articleID string) (*WebsiteHelpdeskLocaleArticle, *Response, error)`
