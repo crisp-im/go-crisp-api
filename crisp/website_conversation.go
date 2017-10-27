@@ -131,6 +131,16 @@ type ConversationMessage struct {
   User         *ConversationMessageUser       `json:"user,omitempty"`
 }
 
+// ConversationMessageDispatchedData mapping
+type ConversationMessageDispatchedData struct {
+  Data  *ConversationMessageDispatched  `json:"data,omitempty"`
+}
+
+// ConversationMessageDispatched mapping
+type ConversationMessageDispatched struct {
+  Timestamp  *uint  `json:"timestamp,omitempty"`
+}
+
 // ConversationMessageTextContent mapping
 type ConversationMessageTextContent string
 
@@ -806,65 +816,107 @@ func (service *WebsiteService) GetMessagesInConversationBefore(websiteID string,
 
 
 // SendTextMessageInConversation sends a message in an existing conversation (text variant).
-func (service *WebsiteService) SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*Response, error) {
+func (service *WebsiteService) SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*ConversationMessageDispatched, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
-  return service.client.Do(req, nil)
+  dispatched := new(ConversationMessageDispatchedData)
+  resp, err := service.client.Do(req, dispatched)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return dispatched.Data, resp, err
 }
 
 
 // SendFileMessageInConversation sends a message in an existing conversation (file variant).
-func (service *WebsiteService) SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*Response, error) {
+func (service *WebsiteService) SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*ConversationMessageDispatched, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
-  return service.client.Do(req, nil)
+  dispatched := new(ConversationMessageDispatchedData)
+  resp, err := service.client.Do(req, dispatched)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return dispatched.Data, resp, err
 }
 
 
 // SendAnimationMessageInConversation sends a message in an existing conversation (animation variant).
-func (service *WebsiteService) SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*Response, error) {
+func (service *WebsiteService) SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*ConversationMessageDispatched, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
-  return service.client.Do(req, nil)
+  dispatched := new(ConversationMessageDispatchedData)
+  resp, err := service.client.Do(req, dispatched)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return dispatched.Data, resp, err
 }
 
 
 // SendAudioMessageInConversation sends a message in an existing conversation (audio variant).
-func (service *WebsiteService) SendAudioMessageInConversation(websiteID string, sessionID string, message ConversationAudioMessageNew) (*Response, error) {
+func (service *WebsiteService) SendAudioMessageInConversation(websiteID string, sessionID string, message ConversationAudioMessageNew) (*ConversationMessageDispatched, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
-  return service.client.Do(req, nil)
+  dispatched := new(ConversationMessageDispatchedData)
+  resp, err := service.client.Do(req, dispatched)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return dispatched.Data, resp, err
 }
 
 
 // SendPickerMessageInConversation sends a message in an existing conversation (picker variant).
-func (service *WebsiteService) SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*Response, error) {
+func (service *WebsiteService) SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*ConversationMessageDispatched, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
-  return service.client.Do(req, nil)
+  dispatched := new(ConversationMessageDispatchedData)
+  resp, err := service.client.Do(req, dispatched)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return dispatched.Data, resp, err
 }
 
 
 // SendFieldMessageInConversation sends a message in an existing conversation (field variant).
-func (service *WebsiteService) SendFieldMessageInConversation(websiteID string, sessionID string, message ConversationFieldMessageNew) (*Response, error) {
+func (service *WebsiteService) SendFieldMessageInConversation(websiteID string, sessionID string, message ConversationFieldMessageNew) (*ConversationMessageDispatched, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
-  return service.client.Do(req, nil)
+  dispatched := new(ConversationMessageDispatchedData)
+  resp, err := service.client.Do(req, dispatched)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return dispatched.Data, resp, err
 }
 
 
 // SendNoteMessageInConversation sends a message in an existing conversation (note variant).
-func (service *WebsiteService) SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*Response, error) {
+func (service *WebsiteService) SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*ConversationMessageDispatched, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, message)
 
-  return service.client.Do(req, nil)
+  dispatched := new(ConversationMessageDispatchedData)
+  resp, err := service.client.Do(req, dispatched)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return dispatched.Data, resp, err
 }
 
 
