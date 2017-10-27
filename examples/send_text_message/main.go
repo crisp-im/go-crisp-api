@@ -18,7 +18,7 @@ func main() {
   message := crisp.ConversationTextMessageNew{Type: "text", From: "operator", Origin: "chat", Content: "Hello :)", Fingerprint: 12345}
 
   // Send text message for `website_id` and `session_id`
-  _, err := client.Website.SendTextMessageInConversation("8c842203-7ed8-4e29-a608-7cf78a7d2fcc", "session_19e5240f-0a8d-461e-a661-a3123fc6eec9", message)
+  _, _, err := client.Website.SendTextMessageInConversation("8c842203-7ed8-4e29-a608-7cf78a7d2fcc", "session_19e5240f-0a8d-461e-a661-a3123fc6eec9", message)
 
   if err != nil {
     fmt.Printf("Error: %s", err)
