@@ -138,7 +138,7 @@ type ConversationMessageDispatchedData struct {
 
 // ConversationMessageDispatched mapping
 type ConversationMessageDispatched struct {
-  Timestamp  *uint  `json:"timestamp,omitempty"`
+  Fingerprint  *int  `json:"fingerprint,omitempty"`
 }
 
 // ConversationMessageTextContent mapping
