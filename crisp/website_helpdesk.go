@@ -50,7 +50,6 @@ type WebsiteHelpdeskLocaleArticlesExcerptData struct {
 type WebsiteHelpdeskLocaleArticleExcerpt struct {
   ArticleID    *string                                       `json:"article_id,omitempty"`
   Title        *string                                       `json:"title,omitempty"`
-  Excerpt      *string                                       `json:"excerpt,omitempty"`
   Status       *string                                       `json:"status,omitempty"`
   Visibility   *string                                       `json:"visibility,omitempty"`
   Visits       *uint                                         `json:"visits,omitempty"`
@@ -77,7 +76,6 @@ type WebsiteHelpdeskLocaleArticleData struct {
 type WebsiteHelpdeskLocaleArticle struct {
   ArticleID    *string  `json:"article_id,omitempty"`
   Title        *string  `json:"title,omitempty"`
-  Excerpt      *string  `json:"excerpt,omitempty"`
   Content      *string  `json:"content,omitempty"`
   Status       *string  `json:"status,omitempty"`
   Visibility   *string  `json:"visibility,omitempty"`
