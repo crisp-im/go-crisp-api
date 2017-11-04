@@ -20,7 +20,7 @@ func main() {
   if err != nil {
     fmt.Printf("Error: %s", err)
   } else {
-    fmt.Printf("Visitor list (raw): %s\n", visitors)
+    fmt.Printf("Visitor list (raw): %v\n", visitors)
 
     for _, visitor := range *visitors {
       fmt.Printf("Got visitor `session_id`: %s\n", *visitor.SessionID)
