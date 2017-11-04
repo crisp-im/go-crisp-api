@@ -49,6 +49,7 @@ type WebsiteSettingsChatbox struct {
   WaitGame             *bool      `json:"wait_game,omitempty"`
   LastOperatorFace     *bool      `json:"last_operator_face,omitempty"`
   ActivityMetrics      *bool      `json:"activity_metrics,omitempty"`
+  OperatorPrivacy      *bool      `json:"operator_privacy,omitempty"`
   AvailabilityTooltip  *bool      `json:"availability_tooltip,omitempty"`
   HideOnAway           *bool      `json:"hide_on_away,omitempty"`
   HideOnMobile         *bool      `json:"hide_on_mobile,omitempty"`
@@ -99,6 +100,7 @@ type WebsiteSettingsUpdateChatbox struct {
   WaitGame             bool       `json:"wait_game,omitempty"`
   LastOperatorFace     bool       `json:"last_operator_face,omitempty"`
   ActivityMetrics      bool       `json:"activity_metrics,omitempty"`
+  OperatorPrivacy      bool       `json:"operator_privacy,omitempty"`
   AvailabilityTooltip  bool       `json:"availability_tooltip,omitempty"`
   HideOnAway           bool       `json:"hide_on_away,omitempty"`
   HideOnMobile         bool       `json:"hide_on_mobile,omitempty"`
