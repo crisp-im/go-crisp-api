@@ -174,9 +174,10 @@ type WebsiteHelpdeskSettingsAppearanceLogos struct {
 
 // WebsiteHelpdeskSettingsBehavior mapping
 type WebsiteHelpdeskSettingsBehavior struct {
-  FrequentlyRead  *bool  `json:"frequently_read,omitempty"`
-  ShowChatbox     *bool  `json:"show_chatbox,omitempty"`
-  AskFeedback     *bool  `json:"ask_feedback,omitempty"`
+  FrequentlyRead      *bool  `json:"frequently_read,omitempty"`
+  ShowCategoryImages  *bool  `json:"show_category_images,omitempty"`
+  ShowChatbox         *bool  `json:"show_chatbox,omitempty"`
+  AskFeedback         *bool  `json:"ask_feedback,omitempty"`
 }
 
 // WebsiteHelpdeskDomainData mapping
@@ -261,9 +262,10 @@ type WebsiteHelpdeskSettingsUpdateAppearanceLogos struct {
 
 // WebsiteHelpdeskSettingsUpdateBehavior mapping
 type WebsiteHelpdeskSettingsUpdateBehavior struct {
-  FrequentlyRead  bool  `json:"frequently_read,omitempty"`
-  ShowChatbox     bool  `json:"show_chatbox,omitempty"`
-  AskFeedback     bool  `json:"ask_feedback,omitempty"`
+  FrequentlyRead      bool  `json:"frequently_read,omitempty"`
+  ShowCategoryImages  bool  `json:"show_category_images,omitempty"`
+  ShowChatbox         bool  `json:"show_chatbox,omitempty"`
+  AskFeedback         bool  `json:"ask_feedback,omitempty"`
 }
 
 // WebsiteHelpdeskDomainChange mapping
