@@ -535,6 +535,8 @@ Available events are listed below:
   * **Website Update Visitors Count**: `website:update_visitors_count`
   * **Website Update Operators Availability**: `website:update_operators_availability`
   * **Website Users Available**: `website:users:available`
+  * **Website Validate Domain Valid**: `website:validate:domain:valid`
+  * **Website Validate Domain Invalid**: `website:validate:domain:invalid`
 
 * **Bucket Events**
   * **Bucket URL Upload Generated**: `bucket:url:upload:generated`

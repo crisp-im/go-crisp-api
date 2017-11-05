@@ -698,8 +698,25 @@ type EventsReceiveWebsiteUpdateOperatorsAvailabilityItself struct {
 // EventsReceiveWebsiteUsersAvailable maps website:users:available
 type EventsReceiveWebsiteUsersAvailable struct {
   EventsWebsiteGeneric
-  Available  *bool    `json:"available"`
+  Available  *bool  `json:"available"`
 }
+
+// EventsReceiveWebsiteValidateDomainValid maps website:validate:domain:valid
+type EventsReceiveWebsiteValidateDomainValid struct {
+  EventsWebsiteGeneric
+  Domain   *string                                           `json:"domain"`
+  Records  *[]EventsReceiveWebsiteValidateDomainValidRecord  `json:"records,omitempty"`
+}
+
+// EventsReceiveWebsiteValidateDomainValidRecord maps website:validate:domain:valid/records
+type EventsReceiveWebsiteValidateDomainValidRecord struct {
+  Type   *string  `json:"type,omitempty"`
+  Name   *string  `json:"name,omitempty"`
+  Value  *string  `json:"value,omitempty"`
+}
+
+// EventsReceiveWebsiteValidateDomainInvalid maps website:validate:domain:invalid
+type EventsReceiveWebsiteValidateDomainInvalid EventsReceiveWebsiteValidateDomainValid
 
 // EventsReceiveBucketURLUploadGenerated maps bucket:url:upload:generated
 type EventsReceiveBucketURLUploadGenerated struct {
@@ -1148,6 +1165,18 @@ func (evt EventsReceiveWebsiteUpdateOperatorsAvailability) String() string {
 
 // String returns the string representation of EventsReceiveWebsiteUsersAvailable
 func (evt EventsReceiveWebsiteUsersAvailable) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveWebsiteValidateDomainValid
+func (evt EventsReceiveWebsiteValidateDomainValid) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveWebsiteValidateDomainInvalid
+func (evt EventsReceiveWebsiteValidateDomainInvalid) String() string {
   return Stringify(evt)
 }
 
@@ -1714,6 +1743,18 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("website:users:available", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteUsersAvailable) {
     if hdl, ok := register.Handlers["website:users:available"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("website:validate:domain:valid", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteValidateDomainValid) {
+    if hdl, ok := register.Handlers["website:validate:domain:valid"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("website:validate:domain:invalid", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteValidateDomainInvalid) {
+    if hdl, ok := register.Handlers["website:validate:domain:invalid"]; ok {
       go hdl.callFunc(&evt)
     }
   })
