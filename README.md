@@ -326,8 +326,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Add A New Helpdesk Locale Article**: `client.Website.AddNewHelpdeskLocaleArticle(websiteID string, locale string, articleTitle string) (*WebsiteHelpdeskLocaleArticleNew, *Response, error)`
   * **Check If Helpdesk Locale Article Exists**: `client.Website.CheckIfHelpdeskLocaleArticleExists(websiteID string, locale string, articleID string) (*Response, error)`
   * **Resolve Helpdesk Locale Article**: `client.Website.ResolveHelpdeskLocaleArticle(websiteID string, locale string, articleID string) (*WebsiteHelpdeskLocaleArticle, *Response, error)`
-  * **Save Helpdesk Locale Article**: `client.Website.SaveHelpdeskLocaleArticle(websiteID string, locale string, articleID string, article WebsiteHelpdeskLocaleArticleItem) (*Response, error)`
-  * **Update Helpdesk Locale Article**: `client.Website.UpdateHelpdeskLocaleArticle(websiteID string, locale string, articleID string, article WebsiteHelpdeskLocaleArticleItem) (*Response, error)`
+  * **Save Helpdesk Locale Article**: `client.Website.SaveHelpdeskLocaleArticle(websiteID string, locale string, articleID string, article WebsiteHelpdeskLocaleArticleUpdate) (*Response, error)`
+  * **Update Helpdesk Locale Article**: `client.Website.UpdateHelpdeskLocaleArticle(websiteID string, locale string, articleID string, article WebsiteHelpdeskLocaleArticleUpdate) (*Response, error)`
   * **Delete Helpdesk Locale Article**: `client.Website.DeleteHelpdeskLocaleArticle(websiteID string, locale string, articleID string) (*Response, error)`
   * **Resolve Helpdesk Locale Article Category**: `client.Website.ResolveHelpdeskLocaleArticleCategory(websiteID string, locale string, articleID string) (*WebsiteHelpdeskLocaleArticleCategory, *Response, error)`
   * **Update Helpdesk Locale Article Category**: `client.Website.UpdateHelpdeskLocaleArticleCategory(websiteID string, locale string, articleID string, categoryID string) (*Response, error)`
@@ -338,8 +338,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Add Helpdesk Locale Category**: `client.Website.AddHelpdeskLocaleCategory(websiteID string, locale string, categoryName string) (*WebsiteHelpdeskLocaleCategoryNew, *Response, error)`
   * **Check If Helpdesk Locale Category Exists**: `client.Website.CheckIfHelpdeskLocaleCategoryExists(websiteID string, locale string, categoryID string) (*Response, error)`
   * **Resolve Helpdesk Locale Category**: `client.Website.ResolveHelpdeskLocaleCategory(websiteID string, locale string, categoryID string) (*WebsiteHelpdeskLocaleCategory, *Response, error)`
-  * **Save Helpdesk Locale Category**: `client.Website.SaveHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryItem) (*Response, error)`
-  * **Update Helpdesk Locale Category**: `client.Website.UpdateHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryItem) (*Response, error)`
+  * **Save Helpdesk Locale Category**: `client.Website.SaveHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryUpdate) (*Response, error)`
+  * **Update Helpdesk Locale Category**: `client.Website.UpdateHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryUpdate) (*Response, error)`
   * **Delete Helpdesk Locale Category**: `client.Website.DeleteHelpdeskLocaleCategory(websiteID string, locale string, categoryID string) (*Response, error)`
   * **Resolve Helpdesk Settings**: `client.Website.ResolveHelpdeskSettings(websiteID string) (*WebsiteHelpdeskSettings, *Response, error)`
   * **Save Helpdesk Settings**: `client.Website.SaveHelpdeskSettings(websiteID string, settings WebsiteHelpdeskSettingsUpdate) (*Response, error)`
