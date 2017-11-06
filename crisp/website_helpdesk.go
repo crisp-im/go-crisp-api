@@ -143,6 +143,7 @@ type WebsiteHelpdeskLocaleCategory struct {
   Description  *string  `json:"description,omitempty"`
   Color        *string  `json:"color,omitempty"`
   Image        *string  `json:"image,omitempty"`
+  Order        *uint    `json:"order,omitempty"`
   URL          *string  `json:"url,omitempty"`
   CreatedAt    *uint    `json:"created_at,omitempty"`
   UpdatedAt    *uint    `json:"updated_at,omitempty"`
@@ -231,6 +232,12 @@ type WebsiteHelpdeskLocaleArticleItem struct {
   Title  *string  `json:"title,omitempty"`
 }
 
+// WebsiteHelpdeskLocaleArticleUpdate mapping
+type WebsiteHelpdeskLocaleArticleUpdate struct {
+  Title    *string  `json:"title,omitempty"`
+  Content  *string  `json:"content,omitempty"`
+}
+
 // WebsiteHelpdeskLocaleArticleCategoryItem mapping
 type WebsiteHelpdeskLocaleArticleCategoryItem struct {
   CategoryID  *string  `json:"category_id,omitempty"`
@@ -239,6 +246,15 @@ type WebsiteHelpdeskLocaleArticleCategoryItem struct {
 // WebsiteHelpdeskLocaleCategoryItem mapping
 type WebsiteHelpdeskLocaleCategoryItem struct {
   Name  *string  `json:"name,omitempty"`
+}
+
+// WebsiteHelpdeskLocaleCategoryUpdate mapping
+type WebsiteHelpdeskLocaleCategoryUpdate struct {
+  Name         *string  `json:"name,omitempty"`
+  Description  *string  `json:"description,omitempty"`
+  Color        *string  `json:"color,omitempty"`
+  Image        *string  `json:"image,omitempty"`
+  Order        *uint    `json:"order,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsUpdate mapping
@@ -526,7 +542,7 @@ func (service *WebsiteService) ResolveHelpdeskLocaleArticle(websiteID string, lo
 
 
 // SaveHelpdeskLocaleArticle saves a locale article for helpdesk in website.
-func (service *WebsiteService) SaveHelpdeskLocaleArticle(websiteID string, locale string, articleID string, article WebsiteHelpdeskLocaleArticleItem) (*Response, error) {
+func (service *WebsiteService) SaveHelpdeskLocaleArticle(websiteID string, locale string, articleID string, article WebsiteHelpdeskLocaleArticleUpdate) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s/article/%s", websiteID, locale, articleID)
   req, _ := service.client.NewRequest("PUT", url, article)
 
@@ -535,7 +551,7 @@ func (service *WebsiteService) SaveHelpdeskLocaleArticle(websiteID string, local
 
 
 // UpdateHelpdeskLocaleArticle updates a locale article for helpdesk in website.
-func (service *WebsiteService) UpdateHelpdeskLocaleArticle(websiteID string, locale string, articleID string, article WebsiteHelpdeskLocaleArticleItem) (*Response, error) {
+func (service *WebsiteService) UpdateHelpdeskLocaleArticle(websiteID string, locale string, articleID string, article WebsiteHelpdeskLocaleArticleUpdate) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s/article/%s", websiteID, locale, articleID)
   req, _ := service.client.NewRequest("PATCH", url, article)
 
@@ -670,7 +686,7 @@ func (service *WebsiteService) ResolveHelpdeskLocaleCategory(websiteID string, l
 
 
 // SaveHelpdeskLocaleCategory saves a locale category for helpdesk in website.
-func (service *WebsiteService) SaveHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryItem) (*Response, error) {
+func (service *WebsiteService) SaveHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryUpdate) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s/category/%s", websiteID, locale, categoryID)
   req, _ := service.client.NewRequest("PUT", url, category)
 
@@ -679,7 +695,7 @@ func (service *WebsiteService) SaveHelpdeskLocaleCategory(websiteID string, loca
 
 
 // UpdateHelpdeskLocaleCategory updates a locale category for helpdesk in website.
-func (service *WebsiteService) UpdateHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryItem) (*Response, error) {
+func (service *WebsiteService) UpdateHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryUpdate) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s/category/%s", websiteID, locale, categoryID)
   req, _ := service.client.NewRequest("PATCH", url, category)
 
