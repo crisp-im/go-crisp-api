@@ -274,6 +274,21 @@ type ConversationMetaSegment struct {
   Count    *int32   `json:"count,omitempty"`
 }
 
+// ConversationRoutingAssignData mapping
+type ConversationRoutingAssignData struct {
+  Data  *ConversationRoutingAssign  `json:"data,omitempty"`
+}
+
+// ConversationRoutingAssign mapping
+type ConversationRoutingAssign struct {
+  Assigned  *ConversationRoutingAssignAssigned  `json:"assigned,omitempty"`
+}
+
+// ConversationRoutingAssignAssigned mapping
+type ConversationRoutingAssignAssigned struct {
+  UserID  *string  `json:"user_id,omitempty"`
+}
+
 // ConversationNewData mapping
 type ConversationNewData struct {
   Data  *ConversationNew  `json:"data,omitempty"`
@@ -460,6 +475,16 @@ type ConversationDeliveredMessageMark ConversationReadMessageMark
 // ConversationOpenUpdate mapping
 type ConversationOpenUpdate struct {
   Opened  *bool  `json:"blocked,omitempty"`
+}
+
+// ConversationRoutingAssignUpdate mapping
+type ConversationRoutingAssignUpdate struct {
+  Assigned  *ConversationRoutingAssignUpdateAssigned  `json:"assigned,omitempty"`
+}
+
+// ConversationRoutingAssignUpdateAssigned mapping
+type ConversationRoutingAssignUpdateAssigned struct {
+  UserID  string  `json:"user_id,omitempty"`
 }
 
 // ConversationMetaData mapping
@@ -663,6 +688,12 @@ func (instance ConversationMeta) String() string {
 
 // String returns the string representation of ConversationState
 func (instance ConversationState) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationRoutingAssign
+func (instance ConversationRoutingAssign) String() string {
   return Stringify(instance)
 }
 
@@ -1010,10 +1041,34 @@ func (service *WebsiteService) MarkMessagesDeliveredInConversation(websiteID str
 }
 
 
-// UpdateConversationOpenState updates conversation open state for authenticated operator user
+// UpdateConversationOpenState updates conversation open state for authenticated operator user.
 func (service *WebsiteService) UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/open", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationOpenUpdate{&opened})
+
+  return service.client.Do(req, nil)
+}
+
+
+// GetConversationRoutingAssign resolves assigned operator for conversation routing.
+func (service *WebsiteService) GetConversationRoutingAssign(websiteID string, sessionID string) (*ConversationRoutingAssign, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/routing", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  assign := new(ConversationRoutingAssignData)
+  resp, err := service.client.Do(req, assign)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return assign.Data, resp, err
+}
+
+
+// AssignConversationRouting assigns conversation routing to an operator, or unassign.
+func (service *WebsiteService) AssignConversationRouting(websiteID string, sessionID string, assign ConversationRoutingAssignUpdate) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/routing", websiteID, sessionID)
+  req, _ := service.client.NewRequest("PATCH", url, assign)
 
   return service.client.Do(req, nil)
 }

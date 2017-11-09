@@ -185,6 +185,12 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Submit Session Rating**: `client.Website.SubmitSessionRating(websiteID string, sessionID string, websiteRatingSession WebsiteRatingCreateSession) (*Response, error)`
   * **Delete Session Rating**: `client.Website.DeleteSessionRating(websiteID string, sessionID string) (*Response, error)`
 
+* **Website Routing**
+  * **GetWebsite Routing Settings**: `client.Website.GetWebsiteRoutingSettings(websiteID string) (*WebsiteRoutingSettings, *Response, error)`
+  * **Update Website Routing Settings**: `client.Website.UpdateWebsiteRoutingSettings(websiteID string, settings WebsiteRoutingSettingsUpdate) (*Response, error)`
+  * **List Website Routing Rules**: `client.Website.ListWebsiteRoutingRules(websiteID string) (*WebsiteRoutingRules, *Response, error)`
+  * **Save Website Routing Rules**: `client.Website.SaveWebsiteRoutingRules(websiteID string, rules WebsiteRoutingRulesUpdate) (*Response, error)`
+
 * **Website Settings**
   * **Get Website Settings**: `client.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
   * **Update Website Settings**: `client.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error)`
@@ -268,6 +274,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Mark Messages As Read In Conversation**: `client.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
   * **Mark Messages As Delivered In Conversation**: `client.Website.MarkMessagesDeliveredInConversation(websiteID string, sessionID string, delivered ConversationDeliveredMessageMark) (*Response, error)`
   * **Update Conversation Open State**: `client.Website.UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error)`
+  * **Get Conversation Routing Assign**: `client.Website.GetConversationRoutingAssign(websiteID string, sessionID string) (*ConversationRoutingAssign, *Response, error)`
+  * **Assign Conversation Routing**: `client.Website.AssignConversationRouting(websiteID string, sessionID string, assign ConversationRoutingAssignUpdate) (*Response, error)`
   * **Request Translation Service**: `client.Website.RequestTranslationService(websiteID string, translate WebsiteServiceTranslateItem) (*Response, error)`
   * **Get Conversation Metas**: `client.Website.GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error)`
   * **Update Conversation Metas**: `client.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
