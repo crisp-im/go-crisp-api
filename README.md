@@ -475,6 +475,7 @@ Available events are listed below:
   * **Session Set Opened**: `session:set_opened`
   * **Session Set Closed**: `session:set_closed`
   * **Session Set Mention**: `session:set_mentions`
+  * **Session Set Routing**: `session:set_routing`
   * **Session Removed**: `session:removed`
 
 * **Message Events**
