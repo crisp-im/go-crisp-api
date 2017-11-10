@@ -13,8 +13,9 @@ type UserStatisticsData struct {
 
 // UserStatistics mapping
 type UserStatistics struct {
-  UserID  *string  `json:"user_id,omitempty"`
-  Unread  *int     `json:"unread,omitempty"`
+  UserID    *string  `json:"user_id,omitempty"`
+  Unread    *int     `json:"unread,omitempty"`
+  Assigned  *int     `json:"assigned,omitempty"`
 }
 
 

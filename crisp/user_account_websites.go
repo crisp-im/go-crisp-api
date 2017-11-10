@@ -13,12 +13,13 @@ type UserWebsiteData struct {
 
 // UserWebsite mapping
 type UserWebsite struct {
-  ID       *string    `json:"id,omitempty"`
-  Name     *string    `json:"name,omitempty"`
-  Domain   *string    `json:"domain,omitempty"`
-  Logo     *string    `json:"logo,omitempty"`
-  Members  *[]string  `json:"members,omitempty"`
-  Count    *uint      `json:"count,omitempty"`
+  ID        *string    `json:"id,omitempty"`
+  Name      *string    `json:"name,omitempty"`
+  Domain    *string    `json:"domain,omitempty"`
+  Logo      *string    `json:"logo,omitempty"`
+  Members   *[]string  `json:"members,omitempty"`
+  Count     *uint      `json:"count,omitempty"`
+  Assigned  *uint      `json:"assigned,omitempty"`
 }
 
 
