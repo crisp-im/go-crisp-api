@@ -50,6 +50,11 @@ type EventsReceiveGenericMessageType struct {
   Type  *string  `json:"type"`
 }
 
+// EventsGeneric maps a generic event
+type EventsGeneric struct {
+  RoutingIDs  *string  `json:"routing_ids"`
+}
+
 // EventsUserGeneric maps a generic user
 type EventsUserGeneric struct {
   UserID  *string  `json:"user_id"`
@@ -128,53 +133,62 @@ type EventsReceiveAuthenticationUnauthorized struct {
 
 // EventsReceiveSessionUpdateAvailability maps session:update_availability
 type EventsReceiveSessionUpdateAvailability struct {
+  EventsGeneric
   EventsSessionGeneric
   Availability  *string  `json:"availability"`
 }
 
 // EventsReceiveSessionRequestInitiated maps session:request:initiated
 type EventsReceiveSessionRequestInitiated struct {
+  EventsGeneric
   EventsSessionGeneric
 }
 
 // EventsReceiveSessionSetEmail maps session:set_email
 type EventsReceiveSessionSetEmail struct {
+  EventsGeneric
   EventsSessionGeneric
   Email  *string  `json:"email"`
 }
 
 // EventsReceiveSessionSetPhone maps session:set_phone
 type EventsReceiveSessionSetPhone struct {
+  EventsGeneric
   EventsSessionGeneric
   Phone  *string  `json:"phone"`
 }
 
 // EventsReceiveSessionSetAddress maps session:set_address
 type EventsReceiveSessionSetAddress struct {
+  EventsGeneric
   EventsSessionGeneric
   Address  *string  `json:"address"`
 }
 
 // EventsReceiveSessionSetAvatar maps session:set_avatar
 type EventsReceiveSessionSetAvatar struct {
+  EventsGeneric
   EventsSessionGeneric
   Avatar  *string  `json:"avatar"`
 }
 
 // EventsReceiveSessionSetNickname maps session:set_nickname
 type EventsReceiveSessionSetNickname struct {
+  EventsGeneric
   EventsSessionGeneric
   Nickname  *string  `json:"nickname"`
 }
 
 // EventsReceiveSessionSetData maps session:set_data
 type EventsReceiveSessionSetData struct {
+  EventsGeneric
   EventsSessionGeneric
   Data  *interface{}  `json:"data"`
 }
 
 // EventsReceiveSessionSyncPages maps session:sync:pages
 type EventsReceiveSessionSyncPages struct {
+  EventsGeneric
   EventsSessionGeneric
   Pages  *[]EventsReceiveSessionSyncPagesOne  `json:"pages"`
 }
@@ -189,6 +203,7 @@ type EventsReceiveSessionSyncPagesOne struct {
 
 // EventsReceiveSessionSyncEvents maps session:sync:events
 type EventsReceiveSessionSyncEvents struct {
+  EventsGeneric
   EventsSessionGeneric
   Events  *EventsReceiveSessionSyncEventsOne  `json:"events"`
 }
@@ -203,6 +218,7 @@ type EventsReceiveSessionSyncEventsOne struct {
 
 // EventsReceiveSessionSyncCapabilities maps session:sync:capabilities
 type EventsReceiveSessionSyncCapabilities struct {
+  EventsGeneric
   EventsSessionGeneric
   Capabilities  *EventsReceiveSessionSyncCapabilitiesData  `json:"capabilities"`
 }
@@ -214,6 +230,7 @@ type EventsReceiveSessionSyncCapabilitiesData struct {
 
 // EventsReceiveSessionSyncGeolocation maps session:sync:geolocation
 type EventsReceiveSessionSyncGeolocation struct {
+  EventsGeneric
   EventsSessionGeneric
   Geolocation  *EventsReceiveSessionSyncGeolocationData  `json:"geolocation"`
 }
@@ -226,7 +243,7 @@ type EventsReceiveSessionSyncGeolocationData struct {
   Country      *string                                              `json:"country,omitempty"`
 }
 
-// EventsReceiveSessionSyncGeolocationDataCoordinates mapping
+// EventsReceiveSessionSyncGeolocationDataCoordinates maps session:sync:geolocation/geolocation/coordinates
 type EventsReceiveSessionSyncGeolocationDataCoordinates struct {
   Latitude   *float32  `json:"latitude,omitempty"`
   Longitude  *float32  `json:"longitude,omitempty"`
@@ -234,6 +251,7 @@ type EventsReceiveSessionSyncGeolocationDataCoordinates struct {
 
 // EventsReceiveSessionSyncSystem maps session:sync:system
 type EventsReceiveSessionSyncSystem struct {
+  EventsGeneric
   EventsSessionGeneric
   System  *EventsReceiveSessionSyncSystemData  `json:"system"`
 }
@@ -267,6 +285,7 @@ type EventsReceiveSessionSyncSystemDataBrowser struct {
 
 // EventsReceiveSessionSyncNetwork maps session:sync:network
 type EventsReceiveSessionSyncNetwork struct {
+  EventsGeneric
   EventsSessionGeneric
   Network  *EventsReceiveSessionSyncNetworkData  `json:"network"`
 }
@@ -278,6 +297,7 @@ type EventsReceiveSessionSyncNetworkData struct {
 
 // EventsReceiveSessionSyncTimezone maps session:sync:timezone
 type EventsReceiveSessionSyncTimezone struct {
+  EventsGeneric
   EventsSessionGeneric
   Timezone  *EventsReceiveSessionSyncTimezoneData  `json:"timezone"`
 }
@@ -289,6 +309,7 @@ type EventsReceiveSessionSyncTimezoneData struct {
 
 // EventsReceiveSessionSyncLocales maps session:sync:locales
 type EventsReceiveSessionSyncLocales struct {
+  EventsGeneric
   EventsSessionGeneric
   Locales  *EventsReceiveSessionSyncLocalesData  `json:"locales"`
 }
@@ -300,30 +321,35 @@ type EventsReceiveSessionSyncLocalesData struct {
 
 // EventsReceiveSessionSetState maps session:set_state
 type EventsReceiveSessionSetState struct {
+  EventsGeneric
   EventsSessionGeneric
   State  *string  `json:"state"`
 }
 
 // EventsReceiveSessionSetBlock maps session:set_block
 type EventsReceiveSessionSetBlock struct {
+  EventsGeneric
   EventsSessionGeneric
   IsBlocked  *bool    `json:"is_blocked"`
 }
 
 // EventsReceiveSessionSetSegments maps session:set_segments
 type EventsReceiveSessionSetSegments struct {
+  EventsGeneric
   EventsSessionGeneric
   Segments  *[]string  `json:"segments"`
 }
 
 // EventsReceiveSessionSetOpened maps session:set_opened
 type EventsReceiveSessionSetOpened struct {
+  EventsGeneric
   EventsSessionGeneric
   Operator  *EventsReceiveSessionSetOpenStateOperator  `json:"operator"`
 }
 
 // EventsReceiveSessionSetClosed maps session:set_closed
 type EventsReceiveSessionSetClosed struct {
+  EventsGeneric
   EventsSessionGeneric
   Operator  *EventsReceiveSessionSetOpenStateOperator  `json:"operator"`
 }
@@ -335,17 +361,20 @@ type EventsReceiveSessionSetOpenStateOperator struct {
 
 // EventsReceiveSessionSetMentions maps session:set_mentions
 type EventsReceiveSessionSetMentions struct {
+  EventsGeneric
   EventsSessionGeneric
   Mentions  *[]string  `json:"mentions"`
 }
 
 // EventsReceiveSessionRemoved maps session:removed
 type EventsReceiveSessionRemoved struct {
+  EventsGeneric
   EventsSessionGeneric
 }
 
 // EventsReceiveMessageUpdated maps message:updated
 type EventsReceiveMessageUpdated struct {
+  EventsGeneric
   EventsSessionGeneric
   Fingerprint  *int          `json:"fingerprint"`
   Content      *interface{}  `json:"content"`
@@ -353,12 +382,14 @@ type EventsReceiveMessageUpdated struct {
 
 // EventsReceiveTextMessage maps message:{send,received} (text type)
 type EventsReceiveTextMessage struct {
+  EventsGeneric
   EventsReceiveGenericMessage
   Content  *string  `json:"content"`
 }
 
 // EventsReceiveFileMessage maps message:{send,received} (file type)
 type EventsReceiveFileMessage struct {
+  EventsGeneric
   EventsReceiveGenericMessage
   Content  *EventsReceiveFileMessageContent  `json:"content"`
 }
@@ -372,6 +403,7 @@ type EventsReceiveFileMessageContent struct {
 
 // EventsReceiveAnimationMessage maps message:{send,received} (animation type)
 type EventsReceiveAnimationMessage struct {
+  EventsGeneric
   EventsReceiveGenericMessage
   Content  *EventsReceiveAnimationMessageContent  `json:"content"`
 }
@@ -384,6 +416,7 @@ type EventsReceiveAnimationMessageContent struct {
 
 // EventsReceiveAudioMessage maps message:{send,received} (audio type)
 type EventsReceiveAudioMessage struct {
+  EventsGeneric
   EventsReceiveGenericMessage
   Content  *EventsReceiveAudioMessageContent  `json:"content"`
 }
@@ -397,6 +430,7 @@ type EventsReceiveAudioMessageContent struct {
 
 // EventsReceivePickerMessage maps message:{send,received} (picker type)
 type EventsReceivePickerMessage struct {
+  EventsGeneric
   EventsReceiveGenericMessage
   Content  *EventsReceivePickerMessageContent  `json:"content"`
 }
@@ -417,6 +451,7 @@ type EventsReceivePickerMessageContentChoice struct {
 
 // EventsReceiveFieldMessage maps message:{send,received} (field type)
 type EventsReceiveFieldMessage struct {
+  EventsGeneric
   EventsReceiveGenericMessage
   Content  *EventsReceiveFieldMessageContent  `json:"content"`
 }
@@ -434,6 +469,7 @@ type EventsReceiveNoteMessage EventsReceiveTextMessage
 
 // EventsReceiveMessageComposeSend maps message:compose:send
 type EventsReceiveMessageComposeSend struct {
+  EventsGeneric
   EventsSessionGeneric
   Type       *string  `json:"type"`
   Excerpt    *string  `json:"excerpt"`
@@ -442,6 +478,7 @@ type EventsReceiveMessageComposeSend struct {
 
 // EventsReceiveMessageComposeReceive maps message:compose:receive
 type EventsReceiveMessageComposeReceive struct {
+  EventsGeneric
   EventsSessionGeneric
   Type       *string                                  `json:"type"`
   Excerpt    *string                                  `json:"excerpt"`
@@ -458,6 +495,7 @@ type EventsReceiveMessageComposeReceiveUser struct {
 
 // EventsReceiveMessageAcknowledge maps message:acknowledge:*
 type EventsReceiveMessageAcknowledge struct {
+  EventsGeneric
   EventsSessionGeneric
   Origin        *string  `json:"origin"`
   Fingerprints  *[]int   `json:"fingerprints"`
@@ -465,6 +503,7 @@ type EventsReceiveMessageAcknowledge struct {
 
 // EventsReceivePeopleProfileCreated maps people:profile:created
 type EventsReceivePeopleProfileCreated struct {
+  EventsGeneric
   EventsPeopleGeneric
   Email  *string  `json:"email"`
 }
@@ -474,12 +513,14 @@ type EventsReceivePeopleProfileRemoved EventsReceivePeopleProfileCreated
 
 // EventsPeopleBindSession maps people:bind:session
 type EventsPeopleBindSession struct {
+  EventsGeneric
   EventsPeopleGeneric
   EventsSessionGenericUnbound
 }
 
 // EventsPeopleSyncProfile maps people:sync:profile
 type EventsPeopleSyncProfile struct {
+  EventsGeneric
   EventsPeopleGeneric
   EventsSessionGenericUnbound
   Identity  *PeopleProfileCard  `json:"identity"`
@@ -487,6 +528,7 @@ type EventsPeopleSyncProfile struct {
 
 // EventsPeopleImportProgress maps people:import:progress
 type EventsPeopleImportProgress struct {
+  EventsGeneric
   EventsImportGeneric
   Progress  *uint8                            `json:"progress"`
   Count     *EventsPeopleImportProgressCount  `json:"count"`
@@ -500,49 +542,58 @@ type EventsPeopleImportProgressCount struct {
 
 // EventsPeopleImportDone maps people:import:done
 type EventsPeopleImportDone struct {
+  EventsGeneric
   EventsImportGeneric
   Error  *bool  `json:"error"`
 }
 
 // EventsCampaignProgress maps campaign:progress
 type EventsCampaignProgress struct {
+  EventsGeneric
   EventsCampaignGeneric
   Progress  *uint8  `json:"progress"`
 }
 
 // EventsCampaignDispatched maps campaign:dispatched
 type EventsCampaignDispatched struct {
+  EventsGeneric
   EventsCampaignGeneric
 }
 
 // EventsCampaignRunning maps campaign:running
 type EventsCampaignRunning struct {
+  EventsGeneric
   EventsCampaignGeneric
   Running  *bool  `json:"running"`
 }
 
 // EventsBrowsingRequestInitiated maps browsing:request:initiated
 type EventsBrowsingRequestInitiated struct {
+  EventsGeneric
   EventsBrowsingGeneric
 }
 
 // EventsBrowsingRequestRejected maps browsing:request:rejected
 type EventsBrowsingRequestRejected struct {
+  EventsGeneric
   EventsSessionGeneric
 }
 
 // EventsBrowsingActionStarted maps browsing:action:started
 type EventsBrowsingActionStarted struct {
+  EventsGeneric
   EventsBrowsingGeneric
 }
 
 // EventsBrowsingActionStopped maps browsing:action:stopped
 type EventsBrowsingActionStopped struct {
+  EventsGeneric
   EventsBrowsingGeneric
 }
 
 // EventsBrowsingStreamMirror maps browsing:stream:mirror
 type EventsBrowsingStreamMirror struct {
+  EventsGeneric
   EventsBrowsingGeneric
   Data  *EventsBrowsingStreamMirrorData  `json:"data"`
 }
@@ -555,6 +606,7 @@ type EventsBrowsingStreamMirrorData struct {
 
 // EventsBrowsingStreamMouse maps browsing:stream:mouse
 type EventsBrowsingStreamMouse struct {
+  EventsGeneric
   EventsBrowsingGeneric
   Data  *EventsBrowsingStreamMouseData  `json:"data"`
 }
@@ -567,6 +619,7 @@ type EventsBrowsingStreamMouseData struct {
 
 // EventsBrowsingStreamTab maps browsing:stream:tab
 type EventsBrowsingStreamTab struct {
+  EventsGeneric
   EventsBrowsingGeneric
   Data  *EventsBrowsingStreamTabData  `json:"data"`
 }
@@ -580,6 +633,7 @@ type EventsBrowsingStreamTabData struct {
 
 // EventsBrowsingStreamScroll maps browsing:stream:scroll
 type EventsBrowsingStreamScroll struct {
+  EventsGeneric
   EventsBrowsingGeneric
   Data  *EventsBrowsingStreamScrollData  `json:"data"`
 }
@@ -592,16 +646,19 @@ type EventsBrowsingStreamScrollData struct {
 
 // EventsBrowsingDebugStarted maps browsing:debug:started
 type EventsBrowsingDebugStarted struct {
+  EventsGeneric
   EventsBrowsingGeneric
 }
 
 // EventsBrowsingDebugStopped maps browsing:debug:stopped
 type EventsBrowsingDebugStopped struct {
+  EventsGeneric
   EventsBrowsingGeneric
 }
 
 // EventsBrowsingDebugExecuted maps browsing:debug:executed
 type EventsBrowsingDebugExecuted struct {
+  EventsGeneric
   EventsBrowsingGeneric
   Data  *EventsBrowsingDebugExecutedData  `json:"data"`
 }
@@ -615,6 +672,7 @@ type EventsBrowsingDebugExecutedData struct {
 
 // EventsBrowsingDebugStream maps browsing:debug:stream
 type EventsBrowsingDebugStream struct {
+  EventsGeneric
   EventsBrowsingGeneric
   Data  *EventsBrowsingDebugStreamData  `json:"data"`
 }
@@ -628,36 +686,43 @@ type EventsBrowsingDebugStreamData struct {
 
 // EventsBrowsingAssistStarted maps browsing:assist:started
 type EventsBrowsingAssistStarted struct {
+  EventsGeneric
   EventsBrowsingGeneric
 }
 
 // EventsBrowsingAssistStopped maps browsing:assist:stopped
 type EventsBrowsingAssistStopped struct {
+  EventsGeneric
   EventsBrowsingGeneric
 }
 
 // EventsCallRequestInitiated maps call:request:initiated
 type EventsCallRequestInitiated struct {
+  EventsGeneric
   EventsCallGeneric
 }
 
 // EventsCallRequestRejected maps call:request:rejected
 type EventsCallRequestRejected struct {
+  EventsGeneric
   EventsCallGeneric
 }
 
 // EventsCallActionStarted maps call:action:started
 type EventsCallActionStarted struct {
+  EventsGeneric
   EventsCallGeneric
 }
 
 // EventsCallActionStopped maps call:action:stopped
 type EventsCallActionStopped struct {
+  EventsGeneric
   EventsCallGeneric
 }
 
 // EventsCallSignalingSDP maps call:signaling:sdp
 type EventsCallSignalingSDP struct {
+  EventsGeneric
   EventsCallGeneric
   From  *string       `json:"from"`
   SDP   *interface{}  `json:"sdp"`
@@ -665,6 +730,7 @@ type EventsCallSignalingSDP struct {
 
 // EventsCallSignalingCandidate maps call:signaling:candidate
 type EventsCallSignalingCandidate struct {
+  EventsGeneric
   EventsCallGeneric
   From       *string       `json:"from"`
   Candidate  *interface{}  `json:"candidate"`
@@ -672,6 +738,7 @@ type EventsCallSignalingCandidate struct {
 
 // EventsServiceTranslateProcessed maps service:translate:processed
 type EventsServiceTranslateProcessed struct {
+  EventsGeneric
   EventsWebsiteGeneric
   ID    *string  `json:"id"`
   Text  *string  `json:"text"`
@@ -679,12 +746,14 @@ type EventsServiceTranslateProcessed struct {
 
 // EventsReceiveWebsiteUpdateVisitorsCount maps website:update_visitors_count
 type EventsReceiveWebsiteUpdateVisitorsCount struct {
+  EventsGeneric
   EventsWebsiteGeneric
   VisitorsCount  *uint    `json:"visitors_count"`
 }
 
 // EventsReceiveWebsiteUpdateOperatorsAvailability maps website:update_operators_availability
 type EventsReceiveWebsiteUpdateOperatorsAvailability struct {
+  EventsGeneric
   EventsWebsiteGeneric
   EventsUserGeneric
   Availability  *EventsReceiveWebsiteUpdateOperatorsAvailabilityItself  `json:"availability"`
@@ -697,12 +766,14 @@ type EventsReceiveWebsiteUpdateOperatorsAvailabilityItself struct {
 
 // EventsReceiveWebsiteUsersAvailable maps website:users:available
 type EventsReceiveWebsiteUsersAvailable struct {
+  EventsGeneric
   EventsWebsiteGeneric
   Available  *bool  `json:"available"`
 }
 
 // EventsReceiveWebsiteValidateDomainValid maps website:validate:domain:valid
 type EventsReceiveWebsiteValidateDomainValid struct {
+  EventsGeneric
   EventsWebsiteGeneric
   Domain   *string                                           `json:"domain"`
   Records  *[]EventsReceiveWebsiteValidateDomainValidRecord  `json:"records,omitempty"`
@@ -720,6 +791,7 @@ type EventsReceiveWebsiteValidateDomainInvalid EventsReceiveWebsiteValidateDomai
 
 // EventsReceiveBucketURLUploadGenerated maps bucket:url:upload:generated
 type EventsReceiveBucketURLUploadGenerated struct {
+  EventsGeneric
   From        *string                                         `json:"from"`
   ID          *string                                         `json:"id"`
   Identifier  *string                                         `json:"identifier"`
@@ -753,6 +825,7 @@ type EventsReceiveBucketURLProcessingGenerated EventsReceiveBucketURLUploadGener
 
 // EventsReceiveMediaAnimationListed maps media:animation:listed
 type EventsReceiveMediaAnimationListed struct {
+  EventsGeneric
   ID       *int                                        `json:"id"`
   Results  *[]EventsReceiveMediaAnimationListedResult  `json:"results"`
 }
@@ -765,6 +838,7 @@ type EventsReceiveMediaAnimationListedResult struct {
 
 // EventsReceiveEmailSubscribe maps email:subscribe
 type EventsReceiveEmailSubscribe struct {
+  EventsGeneric
   EventsWebsiteGeneric
   Email       *string  `json:"email"`
   Subscribed  *bool    `json:"subscribed"`
@@ -772,6 +846,7 @@ type EventsReceiveEmailSubscribe struct {
 
 // EventsReceiveEmailTrackView maps email:track:view
 type EventsReceiveEmailTrackView struct {
+  EventsGeneric
   EventsWebsiteGeneric
   Type        *string  `json:"type"`
   Identifier  *string  `json:"identifier"`
@@ -780,6 +855,7 @@ type EventsReceiveEmailTrackView struct {
 
 // EventsReceiveBillingLinkRedirect maps billing:link:redirect
 type EventsReceiveBillingLinkRedirect struct {
+  EventsGeneric
   Service  *string  `json:"service"`
   URL      *string  `json:"url"`
 }
