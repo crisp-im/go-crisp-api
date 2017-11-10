@@ -18,7 +18,8 @@ type WebsiteRoutingSettingsData struct {
 
 // WebsiteRoutingSettings mapping
 type WebsiteRoutingSettings struct {
-  Assign  *bool  `json:"assign,omitempty"`
+  Assign          *bool  `json:"assign,omitempty"`
+  ReprocessRules  *bool  `json:"reprocess_rules,omitempty"`
 }
 
 // WebsiteRoutingRulesData mapping
@@ -39,7 +40,8 @@ type WebsiteRoutingRulesItem struct {
 
 // WebsiteRoutingSettingsUpdate mapping
 type WebsiteRoutingSettingsUpdate struct {
-  Assign  bool  `json:"assign,omitempty"`
+  Assign          bool  `json:"assign,omitempty"`
+  ReprocessRules  bool  `json:"reprocess_rules,omitempty"`
 }
 
 // WebsiteRoutingRulesUpdate mapping
