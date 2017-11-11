@@ -34,6 +34,7 @@ type WebsiteRoutingRules struct {
 
 // WebsiteRoutingRulesItem mapping
 type WebsiteRoutingRulesItem struct {
+  Name        *string        `json:"name,omitempty"`
   Conditions  *[]UserFilter  `json:"conditions,omitempty"`
   Assign      *[]string      `json:"assign,omitempty"`
 }
@@ -46,6 +47,7 @@ type WebsiteRoutingSettingsUpdate struct {
 
 // WebsiteRoutingRulesUpdate mapping
 type WebsiteRoutingRulesUpdate struct {
+  Name        string         `json:"name,omitempty"`
   Conditions  *[]UserFilter  `json:"conditions,omitempty"`
   Assign      []string       `json:"assign,omitempty"`
 }
