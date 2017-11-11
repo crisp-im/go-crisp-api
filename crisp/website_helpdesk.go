@@ -159,6 +159,7 @@ type WebsiteHelpdeskSettings struct {
   Name        *string                             `json:"name,omitempty"`
   Appearance  *WebsiteHelpdeskSettingsAppearance  `json:"appearance,omitempty"`
   Behavior    *WebsiteHelpdeskSettingsBehavior    `json:"behavior,omitempty"`
+  Include     *WebsiteHelpdeskSettingsInclude     `json:"include,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsAppearance mapping
@@ -179,6 +180,11 @@ type WebsiteHelpdeskSettingsBehavior struct {
   ShowCategoryImages  *bool  `json:"show_category_images,omitempty"`
   ShowChatbox         *bool  `json:"show_chatbox,omitempty"`
   AskFeedback         *bool  `json:"ask_feedback,omitempty"`
+}
+
+// WebsiteHelpdeskSettingsInclude mapping
+type WebsiteHelpdeskSettingsInclude struct {
+  HTML  *string  `json:"html,omitempty"`
 }
 
 // WebsiteHelpdeskDomainData mapping
@@ -262,6 +268,7 @@ type WebsiteHelpdeskSettingsUpdate struct {
   Name        string                                   `json:"name,omitempty"`
   Appearance  WebsiteHelpdeskSettingsUpdateAppearance  `json:"appearance,omitempty"`
   Behavior    WebsiteHelpdeskSettingsUpdateBehavior    `json:"behavior,omitempty"`
+  Include     WebsiteHelpdeskSettingsUpdateInclude     `json:"include,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsUpdateAppearance mapping
@@ -282,6 +289,11 @@ type WebsiteHelpdeskSettingsUpdateBehavior struct {
   ShowCategoryImages  bool  `json:"show_category_images,omitempty"`
   ShowChatbox         bool  `json:"show_chatbox,omitempty"`
   AskFeedback         bool  `json:"ask_feedback,omitempty"`
+}
+
+// WebsiteHelpdeskSettingsUpdateInclude mapping
+type WebsiteHelpdeskSettingsUpdateInclude struct {
+  HTML  string  `json:"html,omitempty"`
 }
 
 // WebsiteHelpdeskDomainChange mapping
