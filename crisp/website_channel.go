@@ -19,8 +19,9 @@ type WebsiteChannelEmailData struct {
 
 // WebsiteChannelEmail mapping
 type WebsiteChannelEmail struct {
-  Domain  *string  `json:"domain,omitempty"`
-  Email   *string  `json:"email,omitempty"`
+  Domain   *string  `json:"domain,omitempty"`
+  Default  *bool    `json:"default,omitempty"`
+  Email    *string  `json:"email,omitempty"`
 }
 
 // WebsiteChannelEmailSetupFlowData mapping
