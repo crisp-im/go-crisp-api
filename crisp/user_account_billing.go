@@ -35,6 +35,7 @@ type BillingMethod struct {
   Country            *string                  `json:"country,omitempty"`
   Information        *string                  `json:"information,omitempty"`
   TaxIdentifier      *string                  `json:"tax_identifier,omitempty"`
+  Currency           *string                  `json:"currency,omitempty"`
   CardNumberPreview  *string                  `json:"card_number_preview,omitempty"`
   CardCountry        *string                  `json:"card_country,omitempty"`
   CardProvider       *string                  `json:"card_provider,omitempty"`
@@ -59,6 +60,7 @@ type BillingMethodCreate struct {
   Country         string                             `json:"country,omitempty"`
   Information     string                             `json:"information,omitempty"`
   TaxIdentifier   string                             `json:"tax_identifier,omitempty"`
+  Currency        string                             `json:"currency,omitempty"`
   CardNumber      string                             `json:"card_number,omitempty"`
   SecurityCode    string                             `json:"security_code,omitempty"`
   ExpirationDate  BillingMethodCreateExpirationDate  `json:"expiration_date,omitempty"`
