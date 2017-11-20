@@ -58,6 +58,7 @@ type WebsiteSettingsChatbox struct {
   PhoneVisitors        *bool      `json:"phone_visitors,omitempty"`
   ForceIdentify        *bool      `json:"force_identify,omitempty"`
   IgnorePrivacy        *bool      `json:"ignore_privacy,omitempty"`
+  HelpdeskLink         *bool      `json:"helpdesk_link,omitempty"`
   CheckDomain          *bool      `json:"check_domain,omitempty"`
   ColorTheme           *string    `json:"color_theme,omitempty"`
   TextTheme            *string    `json:"text_theme,omitempty"`
@@ -109,6 +110,7 @@ type WebsiteSettingsUpdateChatbox struct {
   PhoneVisitors        bool       `json:"phone_visitors,omitempty"`
   ForceIdentify        bool       `json:"force_identify,omitempty"`
   IgnorePrivacy        bool       `json:"ignore_privacy,omitempty"`
+  HelpdeskLink         bool       `json:"helpdesk_link,omitempty"`
   CheckDomain          bool       `json:"check_domain,omitempty"`
   ColorTheme           string     `json:"color_theme,omitempty"`
   TextTheme            string     `json:"text_theme,omitempty"`
