@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 10/24/2017
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 11/26/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -103,6 +103,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List All Billing Methods**: `client.User.ListAllBillingMethods() (*[]BillingMethodAll, *Response, error)`
   * **Add New Billing Method**: `client.User.AddNewBillingMethod(billing BillingMethodCreate) (*Response, error)`
   * **Get A Billing Method**: `client.User.GetBillingMethod(cardID string) (*BillingMethod, *Response, error)`
+  * **Update A Billing Method**: `client.User.UpdateBillingMethod(cardID string, billing BillingMethodUpdate) (*Response, error)`
   * **Remove A Billing Method**: `client.User.RemoveBillingMethod(cardID string) (*Response, error)`
   * **List Invoices For Billing Method**: `client.User.ListInvoicesForBillingMethod(cardID string, pageNumber int) (*BillingMethodInvoiceAll, *Response, error)`
   * **Get An Invoice For Billing Method**: `client.User.GetInvoiceForBillingMethod(cardID string, invoiceID string) (*BillingMethodInvoice, *Response, error)`

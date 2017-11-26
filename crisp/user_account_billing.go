@@ -72,6 +72,13 @@ type BillingMethodCreateExpirationDate struct {
   Year   string  `json:"year,omitempty"`
 }
 
+// BillingMethodUpdate mapping
+type BillingMethodUpdate struct {
+  Address        string  `json:"address,omitempty"`
+  Information    string  `json:"information,omitempty"`
+  TaxIdentifier  string  `json:"tax_identifier,omitempty"`
+}
+
 // BillingMethodInvoiceAllData mapping
 type BillingMethodInvoiceAllData struct {
   Data  *BillingMethodInvoiceAll  `json:"data,omitempty"`
@@ -205,6 +212,15 @@ func (service *UserService) GetBillingMethod(cardID string) (*BillingMethod, *Re
   }
 
   return billing.Data, resp, err
+}
+
+
+// UpdateBillingMethod updates billing method information (eg: credit card).
+func (service *UserService) UpdateBillingMethod(cardID string, billing BillingMethodUpdate) (*Response, error) {
+  url := fmt.Sprintf("user/account/billing/%s", cardID)
+  req, _ := service.client.NewRequest("PATCH", url, billing)
+
+  return service.client.Do(req, nil)
 }
 
 
