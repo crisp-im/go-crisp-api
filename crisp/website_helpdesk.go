@@ -180,6 +180,7 @@ type WebsiteHelpdeskSettingsBehavior struct {
   ShowCategoryImages  *bool  `json:"show_category_images,omitempty"`
   ShowChatbox         *bool  `json:"show_chatbox,omitempty"`
   AskFeedback         *bool  `json:"ask_feedback,omitempty"`
+  LocalePicker        *bool  `json:"locale_picker,omitempty"`
   ReferLink           *bool  `json:"refer_link,omitempty"`
 }
 
@@ -290,6 +291,7 @@ type WebsiteHelpdeskSettingsUpdateBehavior struct {
   ShowCategoryImages  bool  `json:"show_category_images,omitempty"`
   ShowChatbox         bool  `json:"show_chatbox,omitempty"`
   AskFeedback         bool  `json:"ask_feedback,omitempty"`
+  LocalePicker        bool  `json:"locale_picker,omitempty"`
   ReferLink           bool  `json:"refer_link,omitempty"`
 }
 
