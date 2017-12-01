@@ -180,6 +180,7 @@ type WebsiteHelpdeskSettingsBehavior struct {
   ShowCategoryImages  *bool  `json:"show_category_images,omitempty"`
   ShowChatbox         *bool  `json:"show_chatbox,omitempty"`
   AskFeedback         *bool  `json:"ask_feedback,omitempty"`
+  ReferLink           *bool  `json:"refer_link,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsInclude mapping
@@ -289,6 +290,7 @@ type WebsiteHelpdeskSettingsUpdateBehavior struct {
   ShowCategoryImages  bool  `json:"show_category_images,omitempty"`
   ShowChatbox         bool  `json:"show_chatbox,omitempty"`
   AskFeedback         bool  `json:"ask_feedback,omitempty"`
+  ReferLink           bool  `json:"refer_link,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsUpdateInclude mapping
