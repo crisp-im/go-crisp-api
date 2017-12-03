@@ -54,7 +54,8 @@ type WebsiteChannelEmailRelayData struct {
 
 // WebsiteChannelEmailRelay mapping
 type WebsiteChannelEmailRelay struct {
-  SMTP  *WebsiteChannelEmailRelaySMTP  `json:"smtp,omitempty"`
+  Status  *string                        `json:"status,omitempty"`
+  SMTP    *WebsiteChannelEmailRelaySMTP  `json:"smtp,omitempty"`
 }
 
 // WebsiteChannelEmailRelaySMTP mapping
