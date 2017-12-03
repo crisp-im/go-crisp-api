@@ -47,9 +47,39 @@ type WebsiteChannelEmailSetupFlowSetupRecord struct {
   Value  *string  `json:"value,omitempty"`
 }
 
+// WebsiteChannelEmailRelayData mapping
+type WebsiteChannelEmailRelayData struct {
+  Data  *WebsiteChannelEmailRelay  `json:"data,omitempty"`
+}
+
+// WebsiteChannelEmailRelay mapping
+type WebsiteChannelEmailRelay struct {
+  SMTP  *WebsiteChannelEmailRelaySMTP  `json:"smtp,omitempty"`
+}
+
+// WebsiteChannelEmailRelaySMTP mapping
+type WebsiteChannelEmailRelaySMTP struct {
+  Username  *string  `json:"username,omitempty"`
+  Server    *string  `json:"server,omitempty"`
+  Port      *uint16  `json:"port,omitempty"`
+}
+
 // WebsiteChannelEmailRequest mapping
 type WebsiteChannelEmailRequest struct {
   Domain  *string  `json:"domain,omitempty"`
+}
+
+// WebsiteChannelEmailRelayRequest mapping
+type WebsiteChannelEmailRelayRequest struct {
+  SMTP  *WebsiteChannelEmailRelayRequestSMTP  `json:"smtp"`
+}
+
+// WebsiteChannelEmailRelayRequestSMTP mapping
+type WebsiteChannelEmailRelayRequestSMTP struct {
+  Username  *string  `json:"username"`
+  Password  *string  `json:"password"`
+  Server    *string  `json:"server"`
+  Port      *uint16  `json:"port"`
 }
 
 
@@ -60,6 +90,11 @@ func (instance WebsiteChannelEmail) String() string {
 
 // String returns the string representation of WebsiteChannelEmailSetupFlow
 func (instance WebsiteChannelEmailSetupFlow) String() string {
+  return Stringify(instance)
+}
+
+// String returns the string representation of WebsiteChannelEmailRelay
+func (instance WebsiteChannelEmailRelay) String() string {
   return Stringify(instance)
 }
 
@@ -100,4 +135,28 @@ func (service *WebsiteService) GenerateWebsiteEmailChannelSetupFlow(websiteID st
   }
 
   return setup.Data, resp, err
+}
+
+
+// GetWebsiteEmailChannelRelay resolves the website email channel relay store.
+func (service *WebsiteService) GetWebsiteEmailChannelRelay(websiteID string) (*WebsiteChannelEmailRelay, *Response, error) {
+  url := fmt.Sprintf("website/%s/channel/email/relay", websiteID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  channel := new(WebsiteChannelEmailRelayData)
+  resp, err := service.client.Do(req, channel)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return channel.Data, resp, err
+}
+
+
+// RequestWebsiteEmailChannelRelayChange requests a change in the email channel relay store.
+func (service *WebsiteService) RequestWebsiteEmailChannelRelayChange(websiteID string, relay WebsiteChannelEmailRelayRequest) (*Response, error) {
+  url := fmt.Sprintf("website/%s/channel/email/relay", websiteID)
+  req, _ := service.client.NewRequest("PATCH", url, relay)
+
+  return service.client.Do(req, nil)
 }
