@@ -64,6 +64,7 @@ type WebsiteSettingsChatbox struct {
   TextTheme            *string    `json:"text_theme,omitempty"`
   WelcomeMessage       *string    `json:"welcome_message,omitempty"`
   Locale               *string    `json:"locale,omitempty"`
+  AllowedPages         *[]string  `json:"allowed_pages,omitempty"`
   BlockedPages         *[]string  `json:"blocked_pages,omitempty"`
   BlockedLocales       *[]string  `json:"blocked_locales,omitempty"`
 }
@@ -116,6 +117,7 @@ type WebsiteSettingsUpdateChatbox struct {
   TextTheme            string     `json:"text_theme,omitempty"`
   WelcomeMessage       string     `json:"welcome_message,omitempty"`
   Locale               string     `json:"locale,omitempty"`
+  AllowedPages         *[]string  `json:"allowed_pages,omitempty"`
   BlockedPages         *[]string  `json:"blocked_pages,omitempty"`
   BlockedLocales       *[]string  `json:"blocked_locales,omitempty"`
 }
