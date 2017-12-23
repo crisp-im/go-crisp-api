@@ -138,6 +138,13 @@ type EventsReceiveSessionUpdateAvailability struct {
   Availability  *string  `json:"availability"`
 }
 
+// EventsReceiveSessionUpdateVerify maps session:update_verify
+type EventsReceiveSessionUpdateVerify struct {
+  EventsGeneric
+  EventsSessionGeneric
+  IsVerified  *bool  `json:"is_verified"`
+}
+
 // EventsReceiveSessionRequestInitiated maps session:request:initiated
 type EventsReceiveSessionRequestInitiated struct {
   EventsGeneric
@@ -330,7 +337,7 @@ type EventsReceiveSessionSetState struct {
 type EventsReceiveSessionSetBlock struct {
   EventsGeneric
   EventsSessionGeneric
-  IsBlocked  *bool    `json:"is_blocked"`
+  IsBlocked  *bool  `json:"is_blocked"`
 }
 
 // EventsReceiveSessionSetSegments maps session:set_segments
@@ -874,6 +881,12 @@ func (evt EventsReceiveSessionUpdateAvailability) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveSessionUpdateVerify
+func (evt EventsReceiveSessionUpdateVerify) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveSessionRequestInitiated
 func (evt EventsReceiveSessionRequestInitiated) String() string {
   return Stringify(evt)
@@ -1340,6 +1353,12 @@ func (register *EventsRegister) On(eventName string, handler interface{}) error 
 func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
   so.On("session:update_availability", func(chnl *gosocketio.Channel, evt EventsReceiveSessionUpdateAvailability) {
     if hdl, ok := register.Handlers["session:update_availability"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:update_verify", func(chnl *gosocketio.Channel, evt EventsReceiveSessionUpdateVerify) {
+    if hdl, ok := register.Handlers["session:update_verify"]; ok {
       go hdl.callFunc(&evt)
     }
   })

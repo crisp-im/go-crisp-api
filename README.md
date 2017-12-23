@@ -218,6 +218,12 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Update A Hook**: `client.Website.UpdateHook(websiteID string, hookID string, websiteHookItem WebsiteHookItem) (*Response, error)`
   * **Remove A Hook**: `client.Website.RemoveHook(websiteID string, hookID string) (*Response, error)`
 
+* **Website Verify**
+  * **Get Verify Settings**: `client.Website.GetVerifySettings(websiteID string) (*WebsiteVerifySettings, *Response, error)`
+  * **Update Verify Settings**: `client.Website.UpdateVerifySettings(websiteID string, verify WebsiteVerifySettingsUpdate) (*Response, error)`
+  * **Get Verify Key**: `client.Website.GetVerifyKey(websiteID string) (*WebsiteVerifyKey, *Response, error)`
+  * **Roll Verify Key**: `client.Website.RollVerifyKey(websiteID string) (*Response, error)`
+
 * **Website Shortcuts**
   * **List Shortcuts**: `client.Website.ListShortcuts(websiteID string, pageNumber uint) (*[]WebsiteShortcut, *Response, error)`
   * **List Shortcuts (Search Variant)**: `client.Website.SearchShortcuts(websiteID string, pageNumber uint, searchQuery string, searchTag string) (*[]WebsiteShortcut, *Response, error)`
@@ -457,6 +463,7 @@ Available events are listed below:
 
 * **Session Events**
   * **Session Update Availability**: `session:update_availability`
+  * **Session Update Verify**: `session:update_verify`
   * **Session Request Initiated**: `session:request:initiated`
   * **Session Set Email**: `session:set_email`
   * **Session Set Phone**: `session:set_phone`

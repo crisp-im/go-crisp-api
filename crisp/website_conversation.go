@@ -30,6 +30,7 @@ type Conversation struct {
   PeopleID      *string                `json:"people_id,omitempty"`
   State         *string                `json:"state,omitempty"`
   Status        *uint8                 `json:"status,omitempty"`
+  IsVerified    *bool                  `json:"is_verified,omitempty"`
   IsBlocked     *bool                  `json:"is_blocked,omitempty"`
   Availability  *string                `json:"availability,omitempty"`
   Active        *ConversationActive    `json:"active,omitempty"`
