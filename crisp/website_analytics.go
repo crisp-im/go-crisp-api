@@ -55,7 +55,7 @@ func (service *WebsiteService) AcquireChatsAnalytics(websiteID string, filterMet
     return nil, nil, err
   }
 
-  url := fmt.Sprintf("website/%s/analytics/chats/?filter_metric=%s&filter_operator=%s&filter_date_start=%s&filter_date_end=%s&filter_date_split=%d", websiteID, url.QueryEscape(filterMetric), url.QueryEscape(filterOperator), url.QueryEscape(string(filterDateStartFormat[:])), url.QueryEscape(string(filterDateEndFormat[:])), filterDateSplit)
+  url := fmt.Sprintf("website/%s/analytics/chats?filter_metric=%s&filter_operator=%s&filter_date_start=%s&filter_date_end=%s&filter_date_split=%d", websiteID, url.QueryEscape(filterMetric), url.QueryEscape(filterOperator), url.QueryEscape(string(filterDateStartFormat[:])), url.QueryEscape(string(filterDateEndFormat[:])), filterDateSplit)
 
   req, _ := service.client.NewRequest("GET", url, nil)
 
