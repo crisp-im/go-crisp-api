@@ -143,6 +143,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **User Session**
   * **Check Session Validity**: `client.User.CheckSessionValidity() (*Response, error)`
   * **Create A New Session**: `client.User.CreateNewSession(email string, password string) (*UserSessionParameters, *Response, error)`
+  * **Create A New Session (Token Variant)**: `client.User.CreateNewSessionWithToken(email string, password string, token string) (*UserSessionParameters, *Response, error)`
   * **Destroy A Session**: `client.User.DestroySession() (*Response, error)`
   * **Recover A Session**: `client.User.RecoverSession(email string)`
 

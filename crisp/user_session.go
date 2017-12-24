@@ -22,6 +22,7 @@ type UserSessionLogin struct {
   UserID    *string  `json:"user_id,omitempty"`
   Email     *string  `json:"email,omitempty"`
   Password  *string  `json:"password,omitempty"`
+  Token     *string  `json:"token,omitempty"`
 }
 
 // UserSessionRecover mapping
@@ -49,6 +50,21 @@ func (service *UserService) CheckSessionValidity() (*Response, error) {
 func (service *UserService) CreateNewSession(email string, password string) (*UserSessionParameters, *Response, error) {
   url := "user/session/login"
   req, _ := service.client.NewRequest("POST", url, UserSessionLogin{Email: &email, Password: &password})
+
+  session := new(UserSessionParametersData)
+  resp, err := service.client.Do(req, session)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return session.Data, resp, err
+}
+
+
+// CreateNewSessionWithToken logins to user account and create a new session (token variant).
+func (service *UserService) CreateNewSessionWithToken(email string, password string, token string) (*UserSessionParameters, *Response, error) {
+  url := "user/session/login"
+  req, _ := service.client.NewRequest("POST", url, UserSessionLogin{Email: &email, Password: &password, Token: &token})
 
   session := new(UserSessionParametersData)
   resp, err := service.client.Do(req, session)

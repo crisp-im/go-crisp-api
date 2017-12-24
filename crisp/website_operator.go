@@ -36,6 +36,7 @@ type WebsiteOperator struct {
   LastName      *string  `json:"last_name,omitempty"`
   Role          *string  `json:"role,omitempty"`
   Availability  *string  `json:"availability,omitempty"`
+  HasToken      *bool    `json:"has_token,omitempty"`
 }
 
 // WebsiteOperatorsLastActiveListData mapping
