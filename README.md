@@ -158,9 +158,10 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Delete A Website**: `client.Website.DeleteWebsite(websiteID string) (*Response, error)`
 
 * **Website Batch**
-  * **Resolve Given Conversations**: `client.Website.ResolveGivenConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Read Given Conversations**: `client.Website.ReadGivenConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Remove Given Conversations**: `client.Website.RemoveGivenConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Batch Resolve Conversations**: `client.Website.BatchResolveConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Batch Read Conversations**: `client.Website.BatchReadConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Batch Remove Conversations**: `client.Website.BatchRemoveConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Batch Remove People**: `client.Website.BatchRemovePeople(websiteID string, people WebsiteBatchPeopleOperationInner) (*Response, error)`
 
 * **Website Billing**
   * **Get Website Billing**: `client.Website.GetWebsiteBilling(websiteID string) (*WebsiteBilling, *Response, error)`

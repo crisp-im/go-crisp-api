@@ -11,34 +11,60 @@ import (
 )
 
 
-// WebsiteBatchOperation mapping
-type WebsiteBatchOperation struct {
+// WebsiteBatchConversationsOperation mapping
+type WebsiteBatchConversationsOperation struct {
   Sessions  *[]string  `json:"sessions,omitempty"`
 }
 
+// WebsiteBatchPeopleOperation mapping
+type WebsiteBatchPeopleOperation struct {
+  People  *WebsiteBatchPeopleOperationInner  `json:"people,omitempty"`
+}
 
-// ResolveGivenConversations resolves given (or all) conversations in website.
-func (service *WebsiteService) ResolveGivenConversations(websiteID string, sessions []string) (*Response, error) {
+// WebsiteBatchPeopleOperationInner mapping
+type WebsiteBatchPeopleOperationInner struct {
+  Profiles  *[]string                                `json:"profiles,omitempty"`
+  Search    *WebsiteBatchPeopleOperationInnerSearch  `json:"search,omitempty"`
+}
+
+// WebsiteBatchPeopleOperationInnerSearch mapping
+type WebsiteBatchPeopleOperationInnerSearch struct {
+  Filter    []UserFilter  `json:"filter,omitempty"`
+  Operator  string        `json:"operator,omitempty"`
+}
+
+
+// BatchResolveConversations resolves given (or all) items in website (conversation variant).
+func (service *WebsiteService) BatchResolveConversations(websiteID string, sessions []string) (*Response, error) {
   url := fmt.Sprintf("website/%s/batch/resolve", websiteID)
-  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchOperation{Sessions: &sessions})
+  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchConversationsOperation{Sessions: &sessions})
 
   return service.client.Do(req, nil)
 }
 
 
-// ReadGivenConversations marks given (or all) conversations as read in website.
-func (service *WebsiteService) ReadGivenConversations(websiteID string, sessions []string) (*Response, error) {
+// BatchReadConversations marks given (or all) items as read in website (conversation variant).
+func (service *WebsiteService) BatchReadConversations(websiteID string, sessions []string) (*Response, error) {
   url := fmt.Sprintf("website/%s/batch/read", websiteID)
-  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchOperation{Sessions: &sessions})
+  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchConversationsOperation{Sessions: &sessions})
 
   return service.client.Do(req, nil)
 }
 
 
-// RemoveGivenConversations removes given conversations in website.
-func (service *WebsiteService) RemoveGivenConversations(websiteID string, sessions []string) (*Response, error) {
+// BatchRemoveConversations removes given items in website (conversation variant).
+func (service *WebsiteService) BatchRemoveConversations(websiteID string, sessions []string) (*Response, error) {
   url := fmt.Sprintf("website/%s/batch/remove", websiteID)
-  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchOperation{Sessions: &sessions})
+  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchConversationsOperation{Sessions: &sessions})
+
+  return service.client.Do(req, nil)
+}
+
+
+// BatchRemovePeople removes given items in website (people variant).
+func (service *WebsiteService) BatchRemovePeople(websiteID string, people WebsiteBatchPeopleOperationInner) (*Response, error) {
+  url := fmt.Sprintf("website/%s/batch/remove", websiteID)
+  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchPeopleOperation{People: &people})
 
   return service.client.Do(req, nil)
 }
