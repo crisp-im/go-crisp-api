@@ -82,6 +82,7 @@ type WebsiteCampaignItemRecipients struct {
 type WebsiteCampaignItemFlow struct {
   LaunchEvent   *string        `json:"launch_event,omitempty"`
   AssertFilter  *[]UserFilter  `json:"assert_filter,omitempty"`
+  AssertDelay   *uint16        `json:"assert_delay,omitempty"`
   DeliverOnce   *bool          `json:"deliver_once,omitempty"`
   DeliverDelay  *uint16        `json:"deliver_delay,omitempty"`
 }
