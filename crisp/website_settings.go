@@ -66,6 +66,7 @@ type WebsiteSettingsChatbox struct {
   Locale               *string    `json:"locale,omitempty"`
   AllowedPages         *[]string  `json:"allowed_pages,omitempty"`
   BlockedPages         *[]string  `json:"blocked_pages,omitempty"`
+  BlockedCountries     *[]string  `json:"blocked_countries,omitempty"`
   BlockedLocales       *[]string  `json:"blocked_locales,omitempty"`
 }
 
@@ -119,6 +120,7 @@ type WebsiteSettingsUpdateChatbox struct {
   Locale               string     `json:"locale,omitempty"`
   AllowedPages         *[]string  `json:"allowed_pages,omitempty"`
   BlockedPages         *[]string  `json:"blocked_pages,omitempty"`
+  BlockedCountries     *[]string  `json:"blocked_countries,omitempty"`
   BlockedLocales       *[]string  `json:"blocked_locales,omitempty"`
 }
 
