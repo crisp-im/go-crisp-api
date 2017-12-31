@@ -518,6 +518,8 @@ Available events are listed below:
   * **Message Acknowledge Read Send**: `message:acknowledge:read:send`
   * **Message Acknowledge Read Received**: `message:acknowledge:read:received`
   * **Message Acknowledge Delivered**: `message:acknowledge:delivered`
+  * **Message Notify Unread Send**: `message:notify:unread:send`
+  * **Message Notify Unread Received**: `message:notify:unread:received`
 
 * **People Events**
   * **People Profile Created**: `people:profile:created`

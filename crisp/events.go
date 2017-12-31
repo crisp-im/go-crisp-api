@@ -515,6 +515,12 @@ type EventsReceiveMessageAcknowledge struct {
   Fingerprints  *[]int   `json:"fingerprints"`
 }
 
+// EventsReceiveMessageNotify maps message:notify:*
+type EventsReceiveMessageNotify struct {
+  EventsGeneric
+  EventsSessionGeneric
+}
+
 // EventsReceivePeopleProfileCreated maps people:profile:created
 type EventsReceivePeopleProfileCreated struct {
   EventsGeneric
@@ -1075,6 +1081,12 @@ func (evt EventsReceiveMessageComposeReceive) String() string {
 
 // String returns the string representation of EventsReceiveMessageAcknowledge
 func (evt EventsReceiveMessageAcknowledge) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveMessageNotify
+func (evt EventsReceiveMessageNotify) String() string {
   return Stringify(evt)
 }
 
@@ -1659,6 +1671,18 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("message:acknowledge:delivered", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
     if hdl, ok := register.Handlers["message:acknowledge:delivered"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("message:notify:unread:send", func(chnl *gosocketio.Channel, evt EventsReceiveMessageNotify) {
+    if hdl, ok := register.Handlers["message:notify:unread:send"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("message:notify:unread:received", func(chnl *gosocketio.Channel, evt EventsReceiveMessageNotify) {
+    if hdl, ok := register.Handlers["message:notify:unread:received"]; ok {
       go hdl.callFunc(&evt)
     }
   })
