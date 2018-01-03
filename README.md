@@ -125,11 +125,11 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Update Profile**: `client.User.UpdateProfile(profile UserProfileUpdate) (*Response, error)`
 
 * **User Account Token**
-  * **Check Account Token Configured**: `client.CheckAccountTokenConfigured() (*Response, error)`
-  * **Configure Account Token**: `client.ConfigureAccountToken(secret string) (*Response, error)`
-  * **Unconfigure Account Token**: `client.UnconfigureAccountToken() (*Response, error)`
-  * **Generate Account Token**: `client.GenerateAccountToken() (*UserTokenGenerate, *Response, error)`
-  * **Verify Account Token**: `client.VerifyAccountToken(secret string, token string) (*Response, error)`
+  * **Check Account Token Configured**: `client.User.CheckAccountTokenConfigured() (*Response, error)`
+  * **Configure Account Token**: `client.User.ConfigureAccountToken(secret string) (*Response, error)`
+  * **Unconfigure Account Token**: `client.User.UnconfigureAccountToken() (*Response, error)`
+  * **Generate Account Token**: `client.User.GenerateAccountToken() (*UserTokenGenerate, *Response, error)`
+  * **Verify Account Token**: `client.User.VerifyAccountToken(secret string, token string) (*Response, error)`
 
 * **User Account Recover**
   * **Get Recovery Details**: `client.User.GetRecoveryDetails(userID string, recoverIdentifier string, recoverKey string) (*Response, error)`
