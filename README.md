@@ -67,7 +67,7 @@ userAccount := crisp.UserAccountCreate{
   LastName: "Doe",
 }
 
-client.CreateUserAccount(userAccount)
+client.User.CreateUserAccount(userAccount)
 ```
 
 Refer directly to [the library source code](https://github.com/crisp-im/go-crisp-api/tree/master/crisp) to know more about those structures.
