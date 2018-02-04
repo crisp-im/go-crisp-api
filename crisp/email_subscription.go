@@ -8,6 +8,7 @@ package crisp
 
 import (
   "fmt"
+  "net/url"
 )
 
 
@@ -29,8 +30,8 @@ func (instance SubscriptionStatus) String() string {
 
 
 // GetSubscriptionStatus resolves current subscription status (subscribed or unsubscribed).
-func (service *EmailService) GetSubscriptionStatus(emailHash string, key string) (*SubscriptionStatus, *Response, error) {
-  url := fmt.Sprintf("email/%s/subscription/%s", emailHash, key)
+func (service *EmailService) GetSubscriptionStatus(emailHash string, key string, websiteID string) (*SubscriptionStatus, *Response, error) {
+  url := fmt.Sprintf("email/%s/subscription/%s?website_id=%s", emailHash, key, url.QueryEscape(websiteID))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   subscription := new(SubscriptionStatusData)
@@ -44,8 +45,8 @@ func (service *EmailService) GetSubscriptionStatus(emailHash string, key string)
 
 
 // UpdateSubscriptionStatus updates current subscription status (subscribe or unsubscribe).
-func (service *EmailService) UpdateSubscriptionStatus(emailHash string, key string, subscribed bool) (*Response, error) {
-  url := fmt.Sprintf("email/%s/subscription/%s", emailHash, key)
+func (service *EmailService) UpdateSubscriptionStatus(emailHash string, key string, websiteID string, subscribed bool) (*Response, error) {
+  url := fmt.Sprintf("email/%s/subscription/%s?website_id=%s", emailHash, key, url.QueryEscape(websiteID))
   req, _ := service.client.NewRequest("PATCH", url, SubscriptionStatus{&subscribed})
 
   return service.client.Do(req, nil)

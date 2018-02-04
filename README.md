@@ -75,8 +75,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 ### Email
 
 * **Email Subscription**
-  * **Get Subscription Status**: `client.Email.GetSubscriptionStatus(emailHash string, key string) (*SubscriptionStatus, *Response, error)`
-  * **Update Subscription Status**: `client.Email.UpdateSubscriptionStatus(emailHash string, key string, subscribed bool) (*Response, error)`
+  * **Get Subscription Status**: `client.Email.GetSubscriptionStatus(emailHash string, key string, websiteID string) (*SubscriptionStatus, *Response, error)`
+  * **Update Subscription Status**: `client.Email.UpdateSubscriptionStatus(emailHash string, key string, websiteID string, subscribed bool) (*Response, error)`
 
 ### Bucket
 
