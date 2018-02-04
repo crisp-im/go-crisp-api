@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 01/31/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 02/04/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -304,6 +304,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Block Status For Conversation**: `client.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
   * **Block Incoming Messages For Conversation**: `client.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
   * **Request Email Transcript For Conversation**: `client.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error)`
+  * **Request Chatbox Binding Purge For Conversation**: `client.Website.RequestChatboxBindingPurgeForConversation(websiteID string, sessionID string) (*Response, error)`
   * **List Browsing Sessions For Conversation**: `client.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
   * **Initiate Browsing Session For Conversation**: `client.Website.InitiateBrowsingSessionForConversation(websiteID string, sessionID string) (*Response, error)`
   * **Send Action To An Existing Browsing Session**: `client.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`

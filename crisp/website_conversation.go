@@ -1201,6 +1201,15 @@ func (service *WebsiteService) RequestEmailTranscriptForConversation(websiteID s
 }
 
 
+// RequestChatboxBindingPurgeForConversation requests a chatbox binding purge for conversation.
+func (service *WebsiteService) RequestChatboxBindingPurgeForConversation(websiteID string, sessionID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/purge", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
 // ListBrowsingSessionsForConversation lists available browsing sessions for conversation.
 func (service *WebsiteService) ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/browsing", websiteID, sessionID)
