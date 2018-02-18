@@ -153,6 +153,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 ### Website
 
 * **Website Base**
+  * **Check If Website Exists**: `client.Website.CheckWebsiteExists(domain string) (*Response, error)`
   * **Create Website**: `client.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
   * **Get A Website**: `client.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
   * **Delete A Website**: `client.Website.DeleteWebsite(websiteID string) (*Response, error)`

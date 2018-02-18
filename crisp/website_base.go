@@ -8,6 +8,7 @@ package crisp
 
 import (
   "fmt"
+  "net/url"
 )
 
 
@@ -34,6 +35,15 @@ type WebsiteCreate struct {
 // String returns the string representation of Website
 func (instance Website) String() string {
   return Stringify(instance)
+}
+
+
+// CheckWebsiteExists checks if given website exists (by domain).
+func (service *WebsiteService) CheckWebsiteExists(domain string) (*Response, error) {
+  url := fmt.Sprintf("website?domain=%s", url.QueryEscape(domain))
+  req, _ := service.client.NewRequest("HEAD", url, nil)
+
+  return service.client.Do(req, nil)
 }
 
 
