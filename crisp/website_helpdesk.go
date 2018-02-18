@@ -182,6 +182,7 @@ type WebsiteHelpdeskSettingsBehavior struct {
   AskFeedback         *bool  `json:"ask_feedback,omitempty"`
   LocalePicker        *bool  `json:"locale_picker,omitempty"`
   ReferLink           *bool  `json:"refer_link,omitempty"`
+  ForbidIndexing      *bool  `json:"forbid_indexing,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsInclude mapping
@@ -293,6 +294,7 @@ type WebsiteHelpdeskSettingsUpdateBehavior struct {
   AskFeedback         bool  `json:"ask_feedback,omitempty"`
   LocalePicker        bool  `json:"locale_picker,omitempty"`
   ReferLink           bool  `json:"refer_link,omitempty"`
+  ForbidIndexing      bool  `json:"forbid_indexing,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsUpdateInclude mapping
