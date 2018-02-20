@@ -126,6 +126,7 @@ type WebsiteSettingsUpdateChatbox struct {
   BlockedPages         *[]string  `json:"blocked_pages,omitempty"`
   BlockedCountries     *[]string  `json:"blocked_countries,omitempty"`
   BlockedLocales       *[]string  `json:"blocked_locales,omitempty"`
+  BlockedIps           *[]string  `json:"blocked_ips,omitempty"`
 }
 
 
