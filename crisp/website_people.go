@@ -115,6 +115,7 @@ type PeopleProfileCardCompany struct {
   LegalName    *string                           `json:"legal_name,omitempty"`
   Domain       *string                           `json:"domain,omitempty"`
   URL          *string                           `json:"url,omitempty"`
+  Description  *string                           `json:"description,omitempty"`
   Timezone     *int16                            `json:"timezone,omitempty"`
   Phones       *[]string                         `json:"phones,omitempty"`
   Emails       *[]string                         `json:"emails,omitempty"`
