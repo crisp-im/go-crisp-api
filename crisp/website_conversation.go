@@ -467,6 +467,7 @@ type ConversationComposeMessageNew struct {
   Type     string  `json:"type,omitempty"`
   From     string  `json:"from,omitempty"`
   Excerpt  string  `json:"excerpt,omitempty"`
+  Stealth  *bool   `json:"stealth,omitempty"`
 }
 
 // ConversationReadMessageMark mapping
