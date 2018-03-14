@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 02/22/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 03/14/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -98,6 +98,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **User Account Base**
   * **Get User Account**: `client.User.GetUserAccount() (*UserAccount, *Response, error)`
   * **Create User Account**: `client.User.CreateUserAccount(user UserAccountCreate) (*Response, error)`
+  * **Delete User Account**: `client.User.DeleteUserAccount() (*Response, error)`
 
 * **User Account Billing**
   * **List All Billing Methods**: `client.User.ListAllBillingMethods() (*[]BillingMethodAll, *Response, error)`

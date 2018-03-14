@@ -54,3 +54,12 @@ func (service *UserService) CreateUserAccount(user UserAccountCreate) (*Response
 
   return service.client.Do(req, nil)
 }
+
+
+// DeleteUserAccount deletes user account.
+func (service *UserService) DeleteUserAccount() (*Response, error) {
+  url := "user/account"
+  req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
