@@ -52,6 +52,21 @@ type WebsiteOperatorsLastActiveListOne struct {
   Timestamp  *uint    `json:"timestamp,omitempty"`
 }
 
+// WebsiteOperatorEmail mapping
+type WebsiteOperatorEmail struct {
+  Recipient  *string                      `json:"recipient,omitempty"`
+  UserID     *string                      `json:"user_id,omitempty"`
+  Subject    *string                      `json:"subject,omitempty"`
+  Message    *string                      `json:"message,omitempty"`
+  Target     *WebsiteOperatorEmailTarget  `json:"target,omitempty"`
+}
+
+// WebsiteOperatorEmailTarget mapping
+type WebsiteOperatorEmailTarget struct {
+  Label  *string  `json:"label,omitempty"`
+  URL    *string  `json:"url,omitempty"`
+}
+
 // WebsiteOperatorInvite mapping
 type WebsiteOperatorInvite struct {
   Email  *string  `json:"email,omitempty"`
@@ -110,6 +125,15 @@ func (service *WebsiteService) ListLastActiveWebsiteOperators(websiteID string) 
 func (service *WebsiteService) FlushLastActiveWebsiteOperators(websiteID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/operators/active", websiteID)
   req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// SendEmailToWebsiteOperators sends an email to target website operators.
+func (service *WebsiteService) SendEmailToWebsiteOperators(websiteID string, email WebsiteOperatorEmail) (*Response, error) {
+  url := fmt.Sprintf("website/%s/operators/email", websiteID)
+  req, _ := service.client.NewRequest("POST", url, email)
 
   return service.client.Do(req, nil)
 }
