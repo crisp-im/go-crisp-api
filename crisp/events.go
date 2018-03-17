@@ -81,6 +81,18 @@ type EventsSessionGeneric struct {
   EventsSessionGenericUnbound
 }
 
+// EventsBrowsingGeneric maps a generic browsing
+type EventsBrowsingGeneric struct {
+  EventsSessionGeneric
+  BrowsingID  *string  `json:"browsing_id"`
+}
+
+// EventsCallGeneric maps a generic call
+type EventsCallGeneric struct {
+  EventsSessionGeneric
+  CallID  *string  `json:"call_id"`
+}
+
 // EventsPeopleGeneric maps a generic people
 type EventsPeopleGeneric struct {
   EventsWebsiteGeneric
@@ -575,6 +587,30 @@ type EventsCampaignRunning struct {
   Running  *bool  `json:"running"`
 }
 
+// EventsBrowsingRequestInitiated maps browsing:request:initiated
+type EventsBrowsingRequestInitiated struct {
+  EventsGeneric
+  EventsBrowsingGeneric
+}
+
+// EventsBrowsingRequestRejected maps browsing:request:rejected
+type EventsBrowsingRequestRejected struct {
+  EventsGeneric
+  EventsSessionGeneric
+}
+
+// EventsCallRequestInitiated maps call:request:initiated
+type EventsCallRequestInitiated struct {
+  EventsGeneric
+  EventsCallGeneric
+}
+
+// EventsCallRequestRejected maps call:request:rejected
+type EventsCallRequestRejected struct {
+  EventsGeneric
+  EventsCallGeneric
+}
+
 // EventsServiceTranslateProcessed maps service:translate:processed
 type EventsServiceTranslateProcessed struct {
   EventsGeneric
@@ -960,6 +996,30 @@ func (evt EventsCampaignDispatched) String() string {
 
 // String returns the string representation of EventsCampaignRunning
 func (evt EventsCampaignRunning) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingRequestInitiated
+func (evt EventsBrowsingRequestInitiated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsBrowsingRequestRejected
+func (evt EventsBrowsingRequestRejected) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCallRequestInitiated
+func (evt EventsCallRequestInitiated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsCallRequestRejected
+func (evt EventsCallRequestRejected) String() string {
   return Stringify(evt)
 }
 
@@ -1436,6 +1496,30 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("campaign:running", func(chnl *gosocketio.Channel, evt EventsCampaignRunning) {
     if hdl, ok := register.Handlers["campaign:running"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:request:initiated", func(chnl *gosocketio.Channel, evt EventsBrowsingRequestInitiated) {
+    if hdl, ok := register.Handlers["browsing:request:initiated"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("browsing:request:rejected", func(chnl *gosocketio.Channel, evt EventsBrowsingRequestRejected) {
+    if hdl, ok := register.Handlers["browsing:request:rejected"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("call:request:initiated", func(chnl *gosocketio.Channel, evt EventsCallRequestInitiated) {
+    if hdl, ok := register.Handlers["call:request:initiated"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("call:request:rejected", func(chnl *gosocketio.Channel, evt EventsCallRequestRejected) {
+    if hdl, ok := register.Handlers["call:request:rejected"]; ok {
       go hdl.callFunc(&evt)
     }
   })
