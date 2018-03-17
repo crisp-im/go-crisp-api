@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 03/15/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 03/17/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -537,30 +537,6 @@ Available events are listed below:
   * **Campaign Progress**: `campaign:progress`
   * **Campaign Dispatched**: `campaign:dispatched`
   * **Campaign Running**: `campaign:running`
-
-* **Browsing Events**
-  * **Browsing Request Initiated**: `browsing:request:initiated`
-  * **Browsing Request Rejected**: `browsing:request:rejected`
-  * **Browsing Action Started**: `browsing:action:started`
-  * **Browsing Action Stopped**: `browsing:action:stopped`
-  * **Browsing Stream Mirror**: `browsing:stream:mirror`
-  * **Browsing Stream Mouse**: `browsing:stream:mouse`
-  * **Browsing Stream Tab**: `browsing:stream:tab`
-  * **Browsing Stream Scroll**: `browsing:stream:scroll`
-  * **Browsing Debug Started**: `browsing:debug:started`
-  * **Browsing Debug Stopped**: `browsing:debug:stopped`
-  * **Browsing Debug Executed**: `browsing:debug:executed`
-  * **Browsing Debug Stream**: `browsing:debug:stream`
-  * **Browsing Assist Started**: `browsing:assist:started`
-  * **Browsing Assist Stopped**: `browsing:assist:stopped`
-
-* **Call Events**
-  * **Call Request Initiated**: `call:request:initiated`
-  * **Call Request Rejected**: `call:request:rejected`
-  * **Call Action Started**: `call:action:started`
-  * **Call Action Stopped**: `call:action:stopped`
-  * **Call Signaling SDP**: `call:signaling:sdp`
-  * **Call Signaling Candidate**: `call:signaling:candidate`
 
 * **Service Events**
   * **Service Translate Processed**: `service:translate:processed`
