@@ -311,6 +311,11 @@ type ConversationMessagesData struct {
   Data  *[]ConversationMessage  `json:"data,omitempty"`
 }
 
+// ConversationMessageData mapping
+type ConversationMessageData struct {
+  Data  *ConversationMessage  `json:"data,omitempty"`
+}
+
 // ConversationFileMessageNewContent mapping
 type ConversationFileMessageNewContent struct {
   Name  string  `json:"name,omitempty"`
@@ -956,6 +961,21 @@ func (service *WebsiteService) SendNoteMessageInConversation(websiteID string, s
   }
 
   return dispatched.Data, resp, err
+}
+
+
+// GetMessageInConversation resolves an existing message in an existing conversation.
+func (service *WebsiteService) GetMessageInConversation(websiteID string, sessionID string, fingerprint int) (*ConversationMessage, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  message := new(ConversationMessageData)
+  resp, err := service.client.Do(req, message)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return message.Data, resp, err
 }
 
 
