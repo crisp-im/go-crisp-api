@@ -23,6 +23,7 @@ type UserAccountCreate struct {
   FirstName     string   `json:"first_name,omitempty"`
   LastName      string   `json:"last_name,omitempty"`
   AffiliatesID  *string  `json:"affiliates_id,omitempty"`
+  Locale        *string  `json:"locale,omitempty"`
 }
 
 
