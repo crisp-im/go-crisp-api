@@ -740,8 +740,8 @@ type EventsReceiveBillingLinkRedirect struct {
   URL      *string  `json:"url"`
 }
 
-// EventsPluginChannel maps plugin:channel
-type EventsPluginChannel struct {
+// EventsReceivePluginChannel maps plugin:channel
+type EventsReceivePluginChannel struct {
   EventsGeneric
   EventsWebsiteGeneric
   EventsPluginGeneric
@@ -1123,8 +1123,8 @@ func (evt EventsReceiveBillingLinkRedirect) String() string {
 }
 
 
-// String returns the string representation of EventsPluginChannel
-func (evt EventsPluginChannel) String() string {
+// String returns the string representation of EventsReceivePluginChannel
+func (evt EventsReceivePluginChannel) String() string {
   return Stringify(evt)
 }
 
@@ -1635,7 +1635,7 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
     }
   })
 
-  so.On("plugin:channel", func(chnl *gosocketio.Channel, evt EventsPluginChannel) {
+  so.On("plugin:channel", func(chnl *gosocketio.Channel, evt EventsReceivePluginChannel) {
     if hdl, ok := register.Handlers["plugin:channel"]; ok {
       go hdl.callFunc(&evt)
     }
