@@ -745,8 +745,9 @@ type EventsPluginChannel struct {
   EventsGeneric
   EventsWebsiteGeneric
   EventsPluginGeneric
-  Namespace  *string       `json:"namespace"`
-  Payload    *interface{}  `json:"payload"`
+  Namespace   *string       `json:"namespace"`
+  Identifier  *string       `json:"identifier,omitempty"`
+  Payload     *interface{}  `json:"payload"`
 }
 
 

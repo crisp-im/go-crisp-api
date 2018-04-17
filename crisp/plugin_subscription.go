@@ -45,8 +45,9 @@ type PluginSubscriptionCreate struct {
 
 // PluginSubscriptionChannelForward mapping
 type PluginSubscriptionChannelForward struct {
-  Namespace  *string       `json:"namespace,omitempty"`
-  Payload    *interface{}  `json:"payload,omitempty"`
+  Namespace   *string       `json:"namespace,omitempty"`
+  Identifier  *string       `json:"identifier,omitempty"`
+  Payload     *interface{}  `json:"payload,omitempty"`
 }
 
 // PluginSubscriptionSettingsData mapping
@@ -175,9 +176,9 @@ func (service *PluginService) UpdateSubscriptionSettings(websiteID string, plugi
 
 
 // ForwardPluginPayloadToChannel forwards generic payload given generic namespace to plugin channel.
-func (service *PluginService) ForwardPluginPayloadToChannel(websiteID string, pluginID string, namespace string, payload interface{}) (*Response, error) {
+func (service *PluginService) ForwardPluginPayloadToChannel(websiteID string, pluginID string, payload PluginSubscriptionChannelForward) (*Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s/%s/channel", websiteID, pluginID)
-  req, _ := service.client.NewRequest("POST", url, PluginSubscriptionChannelForward{Namespace: &namespace, Payload: &payload})
+  req, _ := service.client.NewRequest("POST", url, payload)
 
   return service.client.Do(req, nil)
 }

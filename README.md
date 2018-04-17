@@ -400,7 +400,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Subscription Settings**: `client.Plugin.GetSubscriptionSettings(websiteID string, pluginID string) (*PluginSubscriptionSettings, *Response, error)`
   * **Save Subscription Settings**: `client.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
   * **Update Subscription Settings**: `client.Plugin.UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
-  * **Forward Plugin Payload To Channel**: `client.Plugin.ForwardPluginPayloadToChannel(websiteID string, pluginID string, namespace string, payload interface{}) (*Response, error)`
+  * **Forward Plugin Payload To Channel**: `client.Plugin.ForwardPluginPayloadToChannel(websiteID string, pluginID string, payload PluginSubscriptionChannelForward) (*Response, error)`
 
 * **Plugin Connect**
   * **Get Connect Account**: `client.Plugin.GetConnectAccount() (*PluginConnectAccount, *Response, error)`
