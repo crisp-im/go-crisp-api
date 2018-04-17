@@ -65,12 +65,17 @@ type EventsWebsiteGeneric struct {
   WebsiteID  *string  `json:"website_id"`
 }
 
+// EventsPluginGeneric maps a generic plugin
+type EventsPluginGeneric struct {
+  PluginID  *string  `json:"plugin_id"`
+}
+
 // EventsImportGeneric maps a generic import
 type EventsImportGeneric struct {
   ImportID  *string  `json:"import_id"`
 }
 
-// EventsSessionGeneric maps a generic session (unbound from website)
+// EventsSessionGenericUnbound maps a generic session (unbound from website)
 type EventsSessionGenericUnbound struct {
   SessionID  *string  `json:"session_id"`
 }
@@ -735,6 +740,14 @@ type EventsReceiveBillingLinkRedirect struct {
   URL      *string  `json:"url"`
 }
 
+// EventsPluginChannel maps plugin:channel
+type EventsPluginChannel struct {
+  EventsGeneric
+  EventsPluginGeneric
+  Namespace  *string       `json:"namespace"`
+  Payload    *interface{}  `json:"payload"`
+}
+
 
 // String returns the string representation of EventsReceiveSessionUpdateAvailability
 func (evt EventsReceiveSessionUpdateAvailability) String() string {
@@ -1104,6 +1117,12 @@ func (evt EventsReceiveEmailTrackView) String() string {
 
 // String returns the string representation of EventsReceiveBillingLinkRedirect
 func (evt EventsReceiveBillingLinkRedirect) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsPluginChannel
+func (evt EventsPluginChannel) String() string {
   return Stringify(evt)
 }
 
@@ -1610,6 +1629,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("billing:link:redirect", func(chnl *gosocketio.Channel, evt EventsReceiveBillingLinkRedirect) {
     if hdl, ok := register.Handlers["billing:link:redirect"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("plugin:channel", func(chnl *gosocketio.Channel, evt EventsPluginChannel) {
+    if hdl, ok := register.Handlers["plugin:channel"]; ok {
       go hdl.callFunc(&evt)
     }
   })
