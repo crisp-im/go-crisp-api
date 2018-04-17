@@ -743,6 +743,7 @@ type EventsReceiveBillingLinkRedirect struct {
 // EventsPluginChannel maps plugin:channel
 type EventsPluginChannel struct {
   EventsGeneric
+  EventsWebsiteGeneric
   EventsPluginGeneric
   Namespace  *string       `json:"namespace"`
   Payload    *interface{}  `json:"payload"`
