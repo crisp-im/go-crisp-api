@@ -215,8 +215,8 @@ type PeopleProfileImportSetup struct {
 
 // PeopleProfileImportSetupMapping mapping
 type PeopleProfileImportSetupMapping struct {
-  Column  uint8  `json:"column,omitempty"`
-  Field   bool   `json:"field,omitempty"`
+  Column  uint8   `json:"column,omitempty"`
+  Field   string  `json:"field,omitempty"`
 }
 
 // PeopleProfileImportSetupOptions mapping
