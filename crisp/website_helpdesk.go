@@ -53,6 +53,7 @@ type WebsiteHelpdeskLocaleArticleExcerpt struct {
   Status       *string                                       `json:"status,omitempty"`
   Visibility   *string                                       `json:"visibility,omitempty"`
   Visits       *uint                                         `json:"visits,omitempty"`
+  Order        *uint                                         `json:"order,omitempty"`
   URL          *string                                       `json:"url,omitempty"`
   Category     *WebsiteHelpdeskLocaleArticleExcerptCategory  `json:"category,omitempty"`
   CreatedAt    *uint                                         `json:"created_at,omitempty"`
@@ -80,6 +81,7 @@ type WebsiteHelpdeskLocaleArticle struct {
   Status       *string  `json:"status,omitempty"`
   Visibility   *string  `json:"visibility,omitempty"`
   Visits       *uint    `json:"visits,omitempty"`
+  Order        *uint    `json:"order,omitempty"`
   URL          *string  `json:"url,omitempty"`
   CreatedAt    *uint    `json:"created_at,omitempty"`
   UpdatedAt    *uint    `json:"updated_at,omitempty"`
@@ -245,6 +247,7 @@ type WebsiteHelpdeskLocaleArticleItem struct {
 type WebsiteHelpdeskLocaleArticleUpdate struct {
   Title    *string  `json:"title,omitempty"`
   Content  *string  `json:"content,omitempty"`
+  Order    *uint    `json:"order,omitempty"`
 }
 
 // WebsiteHelpdeskLocaleArticleCategoryItem mapping
