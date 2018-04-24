@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 04/23/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 04/24/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -366,6 +366,11 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Delete Helpdesk Locale Article**: `client.Website.DeleteHelpdeskLocaleArticle(websiteID string, locale string, articleID string) (*Response, error)`
   * **Resolve Helpdesk Locale Article Category**: `client.Website.ResolveHelpdeskLocaleArticleCategory(websiteID string, locale string, articleID string) (*WebsiteHelpdeskLocaleArticleCategory, *Response, error)`
   * **Update Helpdesk Locale Article Category**: `client.Website.UpdateHelpdeskLocaleArticleCategory(websiteID string, locale string, articleID string, categoryID string) (*Response, error)`
+  * **List Helpdesk Locale Article Alternates**: `client.Website.ListHelpdeskLocaleArticleAlternates(websiteID string, locale string, articleID string) (*[]WebsiteHelpdeskLocaleArticleAlternate, *Response, error)`
+  * **Check If Helpdesk Locale Article Alternate Exists**: `client.Website.CheckIfHelpdeskLocaleArticleAlternateExists(websiteID string, locale string, articleID string, localeLinked string) (*Response, error)`
+  * **Resolve Helpdesk Locale Article Alternate**: `client.Website.ResolveHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleID string, localeLinked string) (*WebsiteHelpdeskLocaleArticleAlternate, *Response, error)`
+  * **Save Helpdesk Locale Article Alternate**: `client.Website.SaveHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleID string, localeLinked string, articleIDAlternate string) (*Response, error)`
+  * **Delete Helpdesk Locale Article Alternate**: `client.Website.DeleteHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleID string, localeLinked string) (*Response, error)`
   * **Publish Helpdesk Locale Article**: `client.Website.PublishHelpdeskLocaleArticle(websiteID string, locale string, articleID string) (*WebsiteHelpdeskLocaleArticlePublish, *Response, error)`
   * **Unpublish Helpdesk Locale Article**: `client.Website.UnpublishHelpdeskLocaleArticle(websiteID string, locale string, articleID string) (*Response, error)`
   * **List Helpdesk Locale Categories**: `client.Website.ListHelpdeskLocaleCategories(websiteID string, locale string, pageNumber uint) (*[]WebsiteHelpdeskLocaleCategory, *Response, error)`

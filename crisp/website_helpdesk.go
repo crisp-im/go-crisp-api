@@ -108,6 +108,22 @@ type WebsiteHelpdeskLocaleArticleCategory struct {
   CategoryID  *string  `json:"category_id,omitempty"`
 }
 
+// WebsiteHelpdeskLocaleArticleAlternatesData mapping
+type WebsiteHelpdeskLocaleArticleAlternatesData struct {
+  Data  *[]WebsiteHelpdeskLocaleArticleAlternate  `json:"data,omitempty"`
+}
+
+// WebsiteHelpdeskLocaleArticleAlternateData mapping
+type WebsiteHelpdeskLocaleArticleAlternateData struct {
+  Data  *WebsiteHelpdeskLocaleArticleAlternate  `json:"data,omitempty"`
+}
+
+// WebsiteHelpdeskLocaleArticleAlternate mapping
+type WebsiteHelpdeskLocaleArticleAlternate struct {
+  Locale     *string  `json:"locale,omitempty"`
+  ArticleID  *string  `json:"article_id,omitempty"`
+}
+
 // WebsiteHelpdeskLocaleCategoriesData mapping
 type WebsiteHelpdeskLocaleCategoriesData struct {
   Data  *[]WebsiteHelpdeskLocaleCategory  `json:"data,omitempty"`
@@ -253,6 +269,11 @@ type WebsiteHelpdeskLocaleArticleUpdate struct {
 // WebsiteHelpdeskLocaleArticleCategoryItem mapping
 type WebsiteHelpdeskLocaleArticleCategoryItem struct {
   CategoryID  *string  `json:"category_id,omitempty"`
+}
+
+// WebsiteHelpdeskLocaleArticleAlternateSave mapping
+type WebsiteHelpdeskLocaleArticleAlternateSave struct {
+  ArticleID  *string  `json:"article_id,omitempty"`
 }
 
 // WebsiteHelpdeskLocaleCategoryItem mapping
@@ -608,6 +629,63 @@ func (service *WebsiteService) ResolveHelpdeskLocaleArticleCategory(websiteID st
 func (service *WebsiteService) UpdateHelpdeskLocaleArticleCategory(websiteID string, locale string, articleID string, categoryID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s/article/%s/category", websiteID, locale, articleID)
   req, _ := service.client.NewRequest("PATCH", url, WebsiteHelpdeskLocaleArticleCategoryItem{CategoryID: &categoryID})
+
+  return service.client.Do(req, nil)
+}
+
+
+// ListHelpdeskLocaleArticleAlternates lists alternate locales on a locale article for helpdesk in website.
+func (service *WebsiteService) ListHelpdeskLocaleArticleAlternates(websiteID string, locale string, articleID string) (*[]WebsiteHelpdeskLocaleArticleAlternate, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/article/%s/alternates", websiteID, locale, articleID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  alternates := new(WebsiteHelpdeskLocaleArticleAlternatesData)
+  resp, err := service.client.Do(req, alternates)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return alternates.Data, resp, err
+}
+
+
+// CheckIfHelpdeskLocaleArticleAlternateExists checks if alternate locale exists on a locale article for helpdesk in website.
+func (service *WebsiteService) CheckIfHelpdeskLocaleArticleAlternateExists(websiteID string, locale string, articleID string, localeLinked string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/article/%s/alternate/%s", websiteID, locale, articleID, localeLinked)
+  req, _ := service.client.NewRequest("HEAD", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ResolveHelpdeskLocaleArticleAlternate resolves alternate locale on a locale article for helpdesk in website.
+func (service *WebsiteService) ResolveHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleID string, localeLinked string) (*WebsiteHelpdeskLocaleArticleAlternate, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/article/%s/alternate/%s", websiteID, locale, articleID, localeLinked)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  alternate := new(WebsiteHelpdeskLocaleArticleAlternateData)
+  resp, err := service.client.Do(req, alternate)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return alternate.Data, resp, err
+}
+
+
+// SaveHelpdeskLocaleArticleAlternate saves alternate locale on a locale article for helpdesk in website.
+func (service *WebsiteService) SaveHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleID string, localeLinked string, articleIDAlternate string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/article/%s/alternate/%s", websiteID, locale, articleID, localeLinked)
+  req, _ := service.client.NewRequest("PUT", url, WebsiteHelpdeskLocaleArticleAlternateSave{ArticleID: &articleIDAlternate})
+
+  return service.client.Do(req, nil)
+}
+
+
+// DeleteHelpdeskLocaleArticleAlternate deletes alternate locale on a locale article for helpdesk in website.
+func (service *WebsiteService) DeleteHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleID string, localeLinked string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/article/%s/alternate/%s", websiteID, locale, articleID, localeLinked)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
 
   return service.client.Do(req, nil)
 }
