@@ -99,6 +99,47 @@ type WebsiteCampaignItemStatistics struct {
   Clicked  *uint  `json:"clicked,omitempty"`
 }
 
+// WebsiteCampaignStatisticsData mapping
+type WebsiteCampaignStatisticsData struct {
+  Data  *[]WebsiteCampaignStatistic  `json:"data,omitempty"`
+}
+
+// WebsiteCampaignStatistic mapping
+type WebsiteCampaignStatistic struct {
+  Profile    *WebsiteCampaignStatisticProfile  `json:"profile,omitempty"`
+  Data       *interface{}                      `json:"data,omitempty"`
+  CreatedAt  *uint                             `json:"created_at,omitempty"`
+  UpdatedAt  *uint                             `json:"updated_at,omitempty"`
+}
+
+// WebsiteCampaignStatisticProfile mapping
+type WebsiteCampaignStatisticProfile struct {
+  PeopleID  *string                                 `json:"people_id,omitempty"`
+  Email     *string                                 `json:"email,omitempty"`
+  Person    *WebsiteCampaignStatisticProfilePerson  `json:"person,omitempty"`
+}
+
+// WebsiteCampaignStatisticProfilePerson mapping
+type WebsiteCampaignStatisticProfilePerson struct {
+  Nickname     *string                                            `json:"nickname,omitempty"`
+  Avatar       *string                                            `json:"avatar,omitempty"`
+  Geolocation  *WebsiteCampaignStatisticProfilePersonGeolocation  `json:"geolocation,omitempty"`
+}
+
+// WebsiteCampaignStatisticProfilePersonGeolocation mapping
+type WebsiteCampaignStatisticProfilePersonGeolocation struct {
+  Country      *string                                                       `json:"country,omitempty"`
+  Region       *string                                                       `json:"region,omitempty"`
+  City         *string                                                       `json:"city,omitempty"`
+  Coordinates  *WebsiteCampaignStatisticProfilePersonGeolocationCoordinates  `json:"coordinates,omitempty"`
+}
+
+// WebsiteCampaignStatisticProfilePersonGeolocationCoordinates mapping
+type WebsiteCampaignStatisticProfilePersonGeolocationCoordinates struct {
+  Latitude   *float32  `json:"latitude,omitempty"`
+  Longitude  *float32  `json:"longitude,omitempty"`
+}
+
 
 // String returns the string representation of WebsiteCampaignNew
 func (instance WebsiteCampaignNew) String() string {
@@ -114,6 +155,12 @@ func (instance WebsiteCampaignExcerpt) String() string {
 
 // String returns the string representation of WebsiteCampaignItem
 func (instance WebsiteCampaignItem) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteCampaignStatistic
+func (instance WebsiteCampaignStatistic) String() string {
   return Stringify(instance)
 }
 
@@ -290,4 +337,19 @@ func (service *WebsiteService) PauseCampaign(websiteID string, campaignID string
   req, _ := service.client.NewRequest("POST", url, nil)
 
   return service.client.Do(req, nil)
+}
+
+
+// ListCampaignStatistics lists campaigns statistics on action for website.
+func (service *WebsiteService) ListCampaignStatistics(websiteID string, campaignID string, action string, pageNumber uint) (*[]WebsiteCampaignStatistic, *Response, error) {
+  url := fmt.Sprintf("website/%s/campaign/%s/statistics/%s/%d", websiteID, campaignID, action, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  statistics := new(WebsiteCampaignStatisticsData)
+  resp, err := service.client.Do(req, statistics)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return statistics.Data, resp, err
 }

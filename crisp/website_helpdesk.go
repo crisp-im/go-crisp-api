@@ -358,6 +358,11 @@ func (instance WebsiteHelpdeskLocaleArticleCategory) String() string {
   return Stringify(instance)
 }
 
+// String returns the string representation of WebsiteHelpdeskLocaleArticleAlternate
+func (instance WebsiteHelpdeskLocaleArticleAlternate) String() string {
+  return Stringify(instance)
+}
+
 // String returns the string representation of WebsiteHelpdeskLocaleCategoryNew
 func (instance WebsiteHelpdeskLocaleCategoryNew) String() string {
   return Stringify(instance)
