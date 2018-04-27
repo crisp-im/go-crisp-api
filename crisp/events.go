@@ -694,6 +694,9 @@ type EventsReceiveBucketURLUploadGeneratedURL struct {
 // EventsReceiveBucketURLAvatarGenerated maps bucket:url:avatar:generated
 type EventsReceiveBucketURLAvatarGenerated EventsReceiveBucketURLUploadGenerated
 
+// EventsReceiveBucketURLWebsiteGenerated maps bucket:url:website:generated
+type EventsReceiveBucketURLWebsiteGenerated EventsReceiveBucketURLUploadGenerated
+
 // EventsReceiveBucketURLCampaignGenerated maps bucket:url:campaign:generated
 type EventsReceiveBucketURLCampaignGenerated EventsReceiveBucketURLUploadGenerated
 
@@ -1085,6 +1088,12 @@ func (evt EventsReceiveBucketURLUploadGenerated) String() string {
 
 // String returns the string representation of EventsReceiveBucketURLAvatarGenerated
 func (evt EventsReceiveBucketURLAvatarGenerated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveBucketURLWebsiteGenerated
+func (evt EventsReceiveBucketURLWebsiteGenerated) String() string {
   return Stringify(evt)
 }
 
@@ -1603,6 +1612,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("bucket:url:avatar:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLAvatarGenerated) {
     if hdl, ok := register.Handlers["bucket:url:avatar:generated"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("bucket:url:website:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLWebsiteGenerated) {
+    if hdl, ok := register.Handlers["bucket:url:website:generated"]; ok {
       go hdl.callFunc(&evt)
     }
   })
