@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2017 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 04/25/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 04/27/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -180,6 +180,13 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Generate Website Email Channel Setup Flow**: `client.Website.GenerateWebsiteEmailChannelSetupFlow(websiteID string, domain string) (*WebsiteChannelEmailSetupFlow, *Response, error)`
   * **Get Website Email Channel Relay**: `client.Website.GetWebsiteEmailChannelRelay(websiteID string) (*WebsiteChannelEmailRelay, *Response, error)`
   * **Request Website Email Channel Relay Change**: `client.Website.RequestWebsiteEmailChannelRelayChange(websiteID string, relay WebsiteChannelEmailRelayRequest) (*Response, error)`
+
+* **Website Contract**
+  * **List Website Contracts**: `client.Website.ListWebsiteContracts(websiteID string) (*[]WebsiteContract, *Response, error)`
+  * **Check If Agreed Website Contract Exists**: `client.Website.CheckIfAgreedWebsiteContractExists(websiteID string, contractID string) (*Response, error)`
+  * **Resolve Agreed Website Contract**: `client.Website.ResolveAgreedWebsiteContract(websiteID string, contractID string) (*WebsiteContract, *Response, error)`
+  * **Agree To Website Contract**: `client.Website.AgreeToWebsiteContract(websiteID string, contractID string, agreementURL string) (*Response, error)`
+  * **Delete Agreed Website Contract**: `client.Website.DeleteAgreedWebsiteContract(websiteID string, contractID string) (*Response, error)`
 
 * **Website Operator**
   * **List Website Operators**: `client.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
