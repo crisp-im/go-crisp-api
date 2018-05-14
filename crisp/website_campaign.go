@@ -340,7 +340,7 @@ func (service *WebsiteService) PauseCampaign(websiteID string, campaignID string
 }
 
 
-// TestCampaign tests a campaign.
+// TestCampaign tests a ready campaign.
 func (service *WebsiteService) TestCampaign(websiteID string, campaignID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/campaign/%s/test", websiteID, campaignID)
   req, _ := service.client.NewRequest("POST", url, nil)
