@@ -340,6 +340,15 @@ func (service *WebsiteService) PauseCampaign(websiteID string, campaignID string
 }
 
 
+// TestCampaign tests a campaign.
+func (service *WebsiteService) TestCampaign(websiteID string, campaignID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/campaign/%s/test", websiteID, campaignID)
+  req, _ := service.client.NewRequest("POST", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
 // ListCampaignStatistics lists campaigns statistics on action for website.
 func (service *WebsiteService) ListCampaignStatistics(websiteID string, campaignID string, action string, pageNumber uint) (*[]WebsiteCampaignStatistic, *Response, error) {
   url := fmt.Sprintf("website/%s/campaign/%s/statistics/%s/%d", websiteID, campaignID, action, pageNumber)
