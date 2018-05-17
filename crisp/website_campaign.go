@@ -37,6 +37,7 @@ type WebsiteCampaignExcerptsData struct {
 type WebsiteCampaignExcerpt struct {
   CampaignID    *string  `json:"campaign_id,omitempty"`
   Type          *string  `json:"type,omitempty"`
+  Format        *string  `json:"format,omitempty"`
   Name          *string  `json:"name,omitempty"`
   Ready         *bool    `json:"ready,omitempty"`
   Dispatched    *bool    `json:"dispatched,omitempty"`
