@@ -3,3 +3,8 @@ language: go
 go:
   - 1.6
   - tip
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
