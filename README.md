@@ -263,6 +263,13 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Campaigns**
   * **List Campaigns**: `client.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
   * **List Campaigns (Filter Variant)**: `client.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaign Templates**: `client.Website.ListCampaignTemplates(websiteID string, pageNumber uint) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
+  * **Create A New Campaign Template**: `client.Website.CreateNewCampaignTemplate(websiteID string, templateFormat string, templateName string) (*WebsiteCampaignTemplateNew, *Response, error)`
+  * **Check If Campaign Template Exists**: `client.Website.CheckCampaignTemplateExists(websiteID string, templateID string) (*Response, error)`
+  * **Get A Campaign Template**: `client.Website.GetCampaignTemplate(websiteID string, templateID string) (*WebsiteCampaignTemplateItem, *Response, error)`
+  * **Save A Campaign Template**: `client.Website.SaveCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
+  * **Update A Campaign Template**: `client.Website.UpdateCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
+  * **Remove A Campaign Template**: `client.Website.RemoveCampaignTemplate(websiteID string, templateID string) (*Response, error)`
 
 * **Website Campaign**
   * **Create A New Campaign**: `client.Website.CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error)`

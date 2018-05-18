@@ -12,6 +12,22 @@ import (
 )
 
 
+// WebsiteCampaignTemplateNewData mapping
+type WebsiteCampaignTemplateNewData struct {
+  Data  *WebsiteCampaignTemplateNew  `json:"data,omitempty"`
+}
+
+// WebsiteCampaignTemplateNew mapping
+type WebsiteCampaignTemplateNew struct {
+  TemplateID  *string  `json:"template_id,omitempty"`
+}
+
+// WebsiteCampaignTemplateNewItem mapping
+type WebsiteCampaignTemplateNewItem struct {
+  Format  string  `json:"format"`
+  Name    string  `json:"name"`
+}
+
 // WebsiteCampaignNewData mapping
 type WebsiteCampaignNewData struct {
   Data  *WebsiteCampaignNew  `json:"data,omitempty"`
@@ -48,6 +64,31 @@ type WebsiteCampaignExcerpt struct {
   CreatedAt     *uint    `json:"created_at,omitempty"`
   UpdatedAt     *uint    `json:"updated_at,omitempty"`
   DispatchedAt  *uint    `json:"dispatched_at,omitempty"`
+}
+
+// WebsiteCampaignTemplateExcerptsData mapping
+type WebsiteCampaignTemplateExcerptsData struct {
+  Data  *[]WebsiteCampaignTemplateExcerpt  `json:"data,omitempty"`
+}
+
+// WebsiteCampaignTemplateExcerpt mapping
+type WebsiteCampaignTemplateExcerpt struct {
+  TemplateID  *string  `json:"template_id,omitempty"`
+  Name        *string  `json:"name,omitempty"`
+  Format      *string  `json:"format,omitempty"`
+  CreatedAt   *uint    `json:"created_at,omitempty"`
+  UpdatedAt   *uint    `json:"updated_at,omitempty"`
+}
+
+// WebsiteCampaignTemplateItemData mapping
+type WebsiteCampaignTemplateItemData struct {
+  Data  *WebsiteCampaignTemplateItem  `json:"data,omitempty"`
+}
+
+// WebsiteCampaignTemplateItem mapping
+type WebsiteCampaignTemplateItem struct {
+  WebsiteCampaignTemplateExcerpt
+  Content  *string  `json:"content,omitempty"`
 }
 
 // WebsiteCampaignItemData mapping
@@ -143,6 +184,12 @@ type WebsiteCampaignStatisticProfilePersonGeolocationCoordinates struct {
 }
 
 
+// String returns the string representation of WebsiteCampaignTemplateNew
+func (instance WebsiteCampaignTemplateNew) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of WebsiteCampaignNew
 func (instance WebsiteCampaignNew) String() string {
   return Stringify(instance)
@@ -151,6 +198,18 @@ func (instance WebsiteCampaignNew) String() string {
 
 // String returns the string representation of WebsiteCampaignExcerpt
 func (instance WebsiteCampaignExcerpt) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteCampaignTemplateExcerpt
+func (instance WebsiteCampaignTemplateExcerpt) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteCampaignTemplateItem
+func (instance WebsiteCampaignTemplateItem) String() string {
   return Stringify(instance)
 }
 
@@ -246,6 +305,87 @@ func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint
   }
 
   return campaigns.Data, resp, err
+}
+
+
+// ListCampaignTemplates lists campaign templates for website.
+func (service *WebsiteService) ListCampaignTemplates(websiteID string, pageNumber uint) (*[]WebsiteCampaignTemplateExcerpt, *Response, error) {
+  url := fmt.Sprintf("website/%s/campaigns/templates/%d", websiteID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  templates := new(WebsiteCampaignTemplateExcerptsData)
+  resp, err := service.client.Do(req, templates)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return templates.Data, resp, err
+}
+
+
+// CreateNewCampaignTemplate creates a new campaign template.
+func (service *WebsiteService) CreateNewCampaignTemplate(websiteID string, templateFormat string, templateName string) (*WebsiteCampaignTemplateNew, *Response, error) {
+  url := fmt.Sprintf("website/%s/campaigns/template", websiteID)
+  req, _ := service.client.NewRequest("POST", url, WebsiteCampaignTemplateNewItem{Format: templateFormat, Name: templateName})
+
+  template := new(WebsiteCampaignTemplateNewData)
+  resp, err := service.client.Do(req, template)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return template.Data, resp, err
+}
+
+
+// CheckCampaignTemplateExists checks if given campaign template exists.
+func (service *WebsiteService) CheckCampaignTemplateExists(websiteID string, templateID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/campaigns/template/%s", websiteID, templateID)
+  req, _ := service.client.NewRequest("HEAD", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// GetCampaignTemplate resolves campaign template information.
+func (service *WebsiteService) GetCampaignTemplate(websiteID string, templateID string) (*WebsiteCampaignTemplateItem, *Response, error) {
+  url := fmt.Sprintf("website/%s/campaigns/template/%s", websiteID, templateID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  template := new(WebsiteCampaignTemplateItemData)
+  resp, err := service.client.Do(req, template)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return template.Data, resp, err
+}
+
+
+// SaveCampaignTemplate saves a campaign template in website, and overwrite previous template information.
+func (service *WebsiteService) SaveCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error) {
+  url := fmt.Sprintf("website/%s/campaigns/template/%s", websiteID, templateID)
+  req, _ := service.client.NewRequest("PUT", url, websiteCampaignTemplateItem)
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateCampaignTemplate updates a campaign template in website, and save only changed fields.
+func (service *WebsiteService) UpdateCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error) {
+  url := fmt.Sprintf("website/%s/campaigns/template/%s", websiteID, templateID)
+  req, _ := service.client.NewRequest("PATCH", url, websiteCampaignTemplateItem)
+
+  return service.client.Do(req, nil)
+}
+
+
+// RemoveCampaignTemplate removes a campaign template in website.
+func (service *WebsiteService) RemoveCampaignTemplate(websiteID string, templateID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/campaigns/template/%s", websiteID, templateID)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
 }
 
 
