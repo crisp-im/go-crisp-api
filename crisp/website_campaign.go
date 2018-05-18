@@ -169,7 +169,7 @@ func (instance WebsiteCampaignStatistic) String() string {
 
 // ListCampaigns lists campaigns for website.
 func (service *WebsiteService) ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error) {
-  url := fmt.Sprintf("website/%s/campaigns/%d", websiteID, pageNumber)
+  url := fmt.Sprintf("website/%s/campaigns/list/%d", websiteID, pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
   campaigns := new(WebsiteCampaignExcerptsData)
@@ -236,7 +236,7 @@ func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint
     filterStatusDoneValue = "0"
   }
 
-  url := fmt.Sprintf("website/%s/campaigns/%d?search_name=%s&filter_type_one_shot=%s&filter_type_automated=%s&filter_status_not_configured=%s&filter_status_ready=%s&filter_status_paused=%s&filter_status_sending=%s&filter_status_done=%s", websiteID, pageNumber, url.QueryEscape(searchName), url.QueryEscape(filterTypeOneShotValue), url.QueryEscape(filterTypeAutomatedValue), url.QueryEscape(filterStatusNotConfiguredValue), url.QueryEscape(filterStatusReadyValue), url.QueryEscape(filterStatusPausedValue), url.QueryEscape(filterStatusSendingValue), url.QueryEscape(filterStatusDoneValue))
+  url := fmt.Sprintf("website/%s/campaigns/list/%d?search_name=%s&filter_type_one_shot=%s&filter_type_automated=%s&filter_status_not_configured=%s&filter_status_ready=%s&filter_status_paused=%s&filter_status_sending=%s&filter_status_done=%s", websiteID, pageNumber, url.QueryEscape(searchName), url.QueryEscape(filterTypeOneShotValue), url.QueryEscape(filterTypeAutomatedValue), url.QueryEscape(filterStatusNotConfiguredValue), url.QueryEscape(filterStatusReadyValue), url.QueryEscape(filterStatusPausedValue), url.QueryEscape(filterStatusSendingValue), url.QueryEscape(filterStatusDoneValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   campaigns := new(WebsiteCampaignExcerptsData)
