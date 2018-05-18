@@ -92,6 +92,7 @@ type WebsiteCampaignItemFlow struct {
 type WebsiteCampaignItemOptions struct {
   DeliverToChatbox  *bool  `json:"deliver_to_chatbox,omitempty"`
   DeliverToEmail    *bool  `json:"deliver_to_email,omitempty"`
+  Tracking          *bool  `json:"tracking,omitempty"`
 }
 
 // WebsiteCampaignItemStatistics mapping
