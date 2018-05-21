@@ -16,6 +16,7 @@ type UserProfile struct {
   UserID     *string  `json:"user_id,omitempty"`
   Avatar     *string  `json:"avatar,omitempty"`
   Email      *string  `json:"email,omitempty"`
+  Phone      *string  `json:"phone,omitempty"`
   FirstName  *string  `json:"first_name,omitempty"`
   LastName   *string  `json:"last_name,omitempty"`
   Locale     *string  `json:"locale,omitempty"`
@@ -26,6 +27,7 @@ type UserProfileUpdate struct {
   FirstName  string  `json:"first_name,omitempty"`
   LastName   string  `json:"last_name,omitempty"`
   Email      string  `json:"email,omitempty"`
+  Phone      string  `json:"phone,omitempty"`
   Password   string  `json:"password,omitempty"`
   Avatar     string  `json:"avatar,omitempty"`
   Locale     string  `json:"locale,omitempty"`
