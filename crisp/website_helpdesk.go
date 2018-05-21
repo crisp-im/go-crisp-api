@@ -239,6 +239,7 @@ type WebsiteHelpdeskDomainSetupFlowSetup struct {
 // WebsiteHelpdeskDomainSetupFlowSetupRecord mapping
 type WebsiteHelpdeskDomainSetupFlowSetupRecord struct {
   Type   *string  `json:"type,omitempty"`
+  Query  *string  `json:"query,omitempty"`
   Name   *string  `json:"name,omitempty"`
   Value  *string  `json:"value,omitempty"`
 }

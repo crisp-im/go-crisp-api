@@ -662,6 +662,7 @@ type EventsReceiveWebsiteValidateDomainValid struct {
 // EventsReceiveWebsiteValidateDomainValidRecord maps website:validate:domain:valid/records
 type EventsReceiveWebsiteValidateDomainValidRecord struct {
   Type   *string  `json:"type,omitempty"`
+  Query  *string  `json:"query,omitempty"`
   Name   *string  `json:"name,omitempty"`
   Value  *string  `json:"value,omitempty"`
 }

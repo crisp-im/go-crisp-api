@@ -53,6 +53,7 @@ type WebsiteChannelEmailSetupFlowSetup struct {
 // WebsiteChannelEmailSetupFlowSetupRecord mapping
 type WebsiteChannelEmailSetupFlowSetupRecord struct {
   Type   *string  `json:"type,omitempty"`
+  Query  *string  `json:"query,omitempty"`
   Name   *string  `json:"name,omitempty"`
   Value  *string  `json:"value,omitempty"`
 }
