@@ -759,6 +759,7 @@ type EventsReceivePluginEvent struct {
   EventsGeneric
   EventsWebsiteGeneric
   EventsPluginGeneric
+  URN   *string       `json:"urn"`
   Name  *string       `json:"name"`
   Data  *interface{}  `json:"data"`
 }
