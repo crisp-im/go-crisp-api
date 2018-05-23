@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2018 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 05/21/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 05/23/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -422,6 +422,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Save Subscription Settings**: `client.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
   * **Update Subscription Settings**: `client.Plugin.UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
   * **Forward Plugin Payload To Channel**: `client.Plugin.ForwardPluginPayloadToChannel(websiteID string, pluginID string, payload PluginSubscriptionChannelForward) (*Response, error)`
+  * **Dispatch Plugin Event**: `client.Plugin.DispatchPluginEvent(websiteID string, pluginID string, payload PluginSubscriptionEventDispatch) (*Response, error)`
 
 * **Plugin Connect**
   * **Get Connect Account**: `client.Plugin.GetConnectAccount() (*PluginConnectAccount, *Response, error)`
@@ -603,4 +604,5 @@ Available events are listed below:
 
 * **Plugin Events**
   * **Plugin Channel**: `plugin:channel`
+  * **Plugin Event**: `plugin:event`
   * **Plugin Settings Saved**: `plugin:settings:saved`

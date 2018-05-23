@@ -50,6 +50,12 @@ type PluginSubscriptionChannelForward struct {
   Payload     *interface{}  `json:"payload,omitempty"`
 }
 
+// PluginSubscriptionEventDispatch mapping
+type PluginSubscriptionEventDispatch struct {
+  Name  *string       `json:"name,omitempty"`
+  Data  *interface{}  `json:"data,omitempty"`
+}
+
 // PluginSubscriptionSettingsData mapping
 type PluginSubscriptionSettingsData struct {
   Data  *PluginSubscriptionSettings  `json:"data,omitempty"`
@@ -178,6 +184,15 @@ func (service *PluginService) UpdateSubscriptionSettings(websiteID string, plugi
 // ForwardPluginPayloadToChannel forwards generic payload given generic namespace to plugin channel.
 func (service *PluginService) ForwardPluginPayloadToChannel(websiteID string, pluginID string, payload PluginSubscriptionChannelForward) (*Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s/%s/channel", websiteID, pluginID)
+  req, _ := service.client.NewRequest("POST", url, payload)
+
+  return service.client.Do(req, nil)
+}
+
+
+// DispatchPluginEvent dispatches a generic data event for plugin.
+func (service *PluginService) DispatchPluginEvent(websiteID string, pluginID string, payload PluginSubscriptionEventDispatch) (*Response, error) {
+  url := fmt.Sprintf("plugins/subscription/%s/%s/event", websiteID, pluginID)
   req, _ := service.client.NewRequest("POST", url, payload)
 
   return service.client.Do(req, nil)
