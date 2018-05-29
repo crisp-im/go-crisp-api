@@ -668,6 +668,12 @@ type ConversationCallSignalingPayload struct {
   Payload  interface{}  `json:"payload,omitempty"`
 }
 
+// ConversationReminderPayload mapping
+type ConversationReminderPayload struct {
+  Date  string  `json:"date,omitempty"`
+  Note  string  `json:"note,omitempty"`
+}
+
 
 // String returns the string representation of Conversation
 func (instance Conversation) String() string {
@@ -1325,6 +1331,15 @@ func (service *WebsiteService) AbortOngoingCallSessionForConversation(websiteID 
 func (service *WebsiteService) TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/call/%s", websiteID, sessionID, callID)
   req, _ := service.client.NewRequest("PATCH", url, payload)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ScheduleReminderForConversation schedules a reminder in the future for conversation.
+func (service *WebsiteService) ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/reminder", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, ConversationReminderPayload{Date: date, Note: note})
 
   return service.client.Do(req, nil)
 }

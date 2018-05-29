@@ -338,6 +338,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Ongoing Call Session For Conversation**: `client.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
   * **Abort Ongoing Call Session For Conversation**: `client.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error)`
   * **Transmit Signaling On Ongoing Call Session**: `client.Website.TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error)`
+  * **Schedule A Reminder For Conversation**: `client.Website.ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error)`
 
 * **Website Analytics**
   * **Acquire Chats Analytics**: `client.Website.AcquireChatsAnalytics(websiteID string, filterMetric string, filterOperator string, filterDateStart time.Time, filterDateEnd time.Time, filterDateSplit uint8) (*WebsiteAnalytics, *Response, error)`
