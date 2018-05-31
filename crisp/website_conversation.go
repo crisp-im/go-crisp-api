@@ -40,14 +40,14 @@ type Conversation struct {
   Unread        *ConversationUnread    `json:"unread,omitempty"`
   Assigned      *ConversationAssigned  `json:"assigned,omitempty"`
   Meta          *ConversationMeta      `json:"meta,omitempty"`
-  CreatedAt     *uint                  `json:"created_at,omitempty"`
-  UpdatedAt     *uint                  `json:"updated_at,omitempty"`
+  CreatedAt     *uint64                `json:"created_at,omitempty"`
+  UpdatedAt     *uint64                `json:"updated_at,omitempty"`
 }
 
 // ConversationActive mapping
 type ConversationActive struct {
-  Now   *bool  `json:"now,omitempty"`
-  Last  *uint  `json:"last,omitempty"`
+  Now   *bool    `json:"now,omitempty"`
+  Last  *uint64  `json:"last,omitempty"`
 }
 
 // ConversationCompose mapping
@@ -60,7 +60,7 @@ type ConversationCompose struct {
 type ConversationComposeAtom struct {
   Type         *string                       `json:"type,omitempty"`
   Excerpt      *string                       `json:"excerpt,omitempty"`
-  Timestamp    *uint                         `json:"timestamp,omitempty"`
+  Timestamp    *uint64                       `json:"timestamp,omitempty"`
   User         *ConversationComposeAtomUser  `json:"user,omitempty"`
 }
 
@@ -73,8 +73,8 @@ type ConversationComposeAtomUser struct {
 
 // ConversationUnread mapping
 type ConversationUnread struct {
-  Operator  *uint  `json:"operator,omitempty"`
-  Visitor   *uint  `json:"visitor,omitempty"`
+  Operator  *uint16  `json:"operator,omitempty"`
+  Visitor   *uint16  `json:"visitor,omitempty"`
 }
 
 // ConversationAssigned mapping
@@ -105,7 +105,7 @@ type ConversationPage struct {
   PageTitle     *string  `json:"page_title,omitempty"`
   PageURL       *string  `json:"page_url,omitempty"`
   PageReferrer  *string  `json:"page_referrer,omitempty"`
-  Timestamp     *uint    `json:"timestamp,omitempty"`
+  Timestamp     *uint64  `json:"timestamp,omitempty"`
 }
 
 // ConversationEventsData mapping
@@ -118,7 +118,7 @@ type ConversationEvent struct {
   Text       *string       `json:"text,omitempty"`
   Data       *interface{}  `json:"data,omitempty"`
   Color      *string       `json:"color,omitempty"`
-  Timestamp  *uint         `json:"timestamp,omitempty"`
+  Timestamp  *uint64       `json:"timestamp,omitempty"`
 }
 
 // ConversationMessage mapping
@@ -134,7 +134,7 @@ type ConversationMessage struct {
   Read         *string                        `json:"read,omitempty"`
   Delivered    *string                        `json:"delivered,omitempty"`
   Fingerprint  *int                           `json:"fingerprint,omitempty"`
-  Timestamp    *uint                          `json:"timestamp,omitempty"`
+  Timestamp    *uint64                        `json:"timestamp,omitempty"`
   User         *ConversationMessageUser       `json:"user,omitempty"`
 }
 
