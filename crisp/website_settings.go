@@ -23,6 +23,7 @@ type WebsiteSettings struct {
   Domain     *string                  `json:"domain,omitempty"`
   Logo       *string                  `json:"logo,omitempty"`
   Contact    *WebsiteSettingsContact  `json:"contact,omitempty"`
+  Inbox      *WebsiteSettingsInbox    `json:"inbox,omitempty"`
   Emails     *WebsiteSettingsEmails   `json:"emails,omitempty"`
   Chatbox    *WebsiteSettingsChatbox  `json:"chatbox,omitempty"`
 }
@@ -34,6 +35,11 @@ type WebsiteSettingsContact struct {
   Messenger  *string  `json:"messenger,omitempty"`
   Telegram   *string  `json:"telegram,omitempty"`
   Twitter    *string  `json:"twitter,omitempty"`
+}
+
+// WebsiteSettingsInbox mapping
+type WebsiteSettingsInbox struct {
+  LockRemoval  *bool  `json:"lock_removal,omitempty"`
 }
 
 // WebsiteSettingsEmails mapping
@@ -81,6 +87,7 @@ type WebsiteSettingsUpdate struct {
   Domain     string                         `json:"domain,omitempty"`
   Logo       string                         `json:"logo,omitempty"`
   Contact    *WebsiteSettingsUpdateContact  `json:"contact,omitempty"`
+  Inbox      *WebsiteSettingsUpdateInbox    `json:"inbox,omitempty"`
   Emails     *WebsiteSettingsUpdateEmails   `json:"emails,omitempty"`
   Chatbox    *WebsiteSettingsUpdateChatbox  `json:"chatbox,omitempty"`
 }
@@ -92,6 +99,11 @@ type WebsiteSettingsUpdateContact struct {
   Messenger  string  `json:"messenger,omitempty"`
   Telegram   string  `json:"telegram,omitempty"`
   Twitter    string  `json:"twitter,omitempty"`
+}
+
+// WebsiteSettingsUpdateInbox mapping
+type WebsiteSettingsUpdateInbox struct {
+  LockRemoval  bool  `json:"lock_removal,omitempty"`
 }
 
 // WebsiteSettingsUpdateEmails mapping
