@@ -18,8 +18,8 @@ type UserWebsite struct {
   Domain    *string    `json:"domain,omitempty"`
   Logo      *string    `json:"logo,omitempty"`
   Members   *[]string  `json:"members,omitempty"`
-  Count     *uint      `json:"count,omitempty"`
-  Assigned  *uint      `json:"assigned,omitempty"`
+  Count     *uint16    `json:"count,omitempty"`
+  Assigned  *uint16    `json:"assigned,omitempty"`
 }
 
 

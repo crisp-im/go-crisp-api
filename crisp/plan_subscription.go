@@ -26,8 +26,8 @@ type PlanSubscriptionData struct {
 type PlanSubscription struct {
   ID              *string                   `json:"id,omitempty"`
   Name            *string                   `json:"name,omitempty"`
-  Price           *uint                     `json:"price,omitempty"`
-  TrialDays       *uint                     `json:"trial_days,omitempty"`
+  Price           *uint16                   `json:"price,omitempty"`
+  TrialDays       *uint16                   `json:"trial_days,omitempty"`
   Since           *string                   `json:"since,omitempty"`
   TrialEnd        *string                   `json:"trial_end,omitempty"`
   BillPeriod      *string                   `json:"bill_period,omitempty"`

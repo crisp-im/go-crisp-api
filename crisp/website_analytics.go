@@ -33,7 +33,7 @@ type WebsiteAnalyticsMetric struct {
 type WebsiteAnalyticsMetricPoint struct {
   Value      *int     `json:"value,omitempty"`
   Unit       *string  `json:"unit,omitempty"`
-  Timestamp  *uint    `json:"timestamp,omitempty"`
+  Timestamp  *uint64  `json:"timestamp,omitempty"`
 }
 
 

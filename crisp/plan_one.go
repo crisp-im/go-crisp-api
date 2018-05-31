@@ -20,8 +20,8 @@ type PlanInformationData struct {
 type PlanInformation struct {
   ID         *string                   `json:"id,omitempty"`
   Name       *string                   `json:"name,omitempty"`
-  Price      *uint                     `json:"price,omitempty"`
-  TrialDays  *uint                     `json:"trial_days,omitempty"`
+  Price      *uint16                   `json:"price,omitempty"`
+  TrialDays  *uint16                   `json:"trial_days,omitempty"`
   Since      *string                   `json:"since,omitempty"`
   Plugins    *[]PlanInformationPlugin  `json:"plugins,omitempty"`
 }
@@ -33,7 +33,7 @@ type PlanInformationPlugin struct {
   Type         *string    `json:"type,omitempty"`
   Name         *string    `json:"name,omitempty"`
   Description  *string    `json:"description,omitempty"`
-  Price        *uint      `json:"price,omitempty"`
+  Price        *uint16    `json:"price,omitempty"`
   Icon         *string    `json:"icon,omitempty"`
   Since        *string    `json:"since,omitempty"`
 }

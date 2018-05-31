@@ -20,7 +20,7 @@ type WebsiteRatingSessionData struct {
 type WebsiteRatingSession struct {
   Stars      *uint8   `json:"stars,omitempty"`
   Comment    *string  `json:"comment,omitempty"`
-  CreatedAt  *uint    `json:"created_at,omitempty"`
+  CreatedAt  *uint64  `json:"created_at,omitempty"`
 }
 
 // WebsiteRatingCreateSession mapping

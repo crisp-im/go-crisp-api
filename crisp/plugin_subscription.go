@@ -28,7 +28,7 @@ type PluginSubscription struct {
   Type          *string                   `json:"type,omitempty"`
   Name          *string                   `json:"name,omitempty"`
   Description   *string                   `json:"description,omitempty"`
-  Price         *uint                     `json:"price,omitempty"`
+  Price         *uint16                   `json:"price,omitempty"`
   Plans         *[]PluginInformationPlan  `json:"plans,omitempty"`
   Icon          *string                   `json:"icon,omitempty"`
   Configurable  *bool                     `json:"configurable,omitempty"`

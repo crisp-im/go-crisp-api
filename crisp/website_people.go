@@ -20,7 +20,7 @@ type PeopleStatisticsData struct {
 
 // PeopleStatistics mapping
 type PeopleStatistics struct {
-  Total  *uint  `json:"total,omitempty"`
+  Total  *uint64  `json:"total,omitempty"`
 }
 
 // PeopleSegmentData mapping
@@ -74,8 +74,8 @@ type PeopleProfileCard struct {
   Notepad    *string                    `json:"notepad,omitempty"`
   Active     *PeopleProfileCardActive   `json:"active,omitempty"`
   Score      *uint8                     `json:"score,omitempty"`
-  CreatedAt  *uint                      `json:"created_at,omitempty"`
-  UpdatedAt  *uint                      `json:"updated_at,omitempty"`
+  CreatedAt  *uint64                    `json:"created_at,omitempty"`
+  UpdatedAt  *uint64                    `json:"updated_at,omitempty"`
 }
 
 // PeopleProfileCardPerson mapping
@@ -148,8 +148,8 @@ type PeopleProfileCardGeolocationCoordinates struct {
 
 // PeopleProfileCardActive mapping
 type PeopleProfileCardActive struct {
-  Now   *bool  `json:"now,omitempty"`
-  Last  *uint  `json:"last,omitempty"`
+  Now   *bool    `json:"now,omitempty"`
+  Last  *uint64  `json:"last,omitempty"`
 }
 
 // PeopleConversationsData mapping
@@ -162,7 +162,7 @@ type PeopleEvent struct {
   Text       *string       `json:"text,omitempty"`
   Data       *interface{}  `json:"data,omitempty"`
   Color      *string       `json:"color,omitempty"`
-  Timestamp  *uint         `json:"timestamp,omitempty"`
+  Timestamp  *uint64       `json:"timestamp,omitempty"`
 }
 
 // PeopleData mapping

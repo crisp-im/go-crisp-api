@@ -61,9 +61,9 @@ type WebsiteCampaignExcerpt struct {
   Progress      *uint8   `json:"progress,omitempty"`
   Targets       *uint32  `json:"targets,omitempty"`
   Reached       *uint32  `json:"reached,omitempty"`
-  CreatedAt     *uint    `json:"created_at,omitempty"`
-  UpdatedAt     *uint    `json:"updated_at,omitempty"`
-  DispatchedAt  *uint    `json:"dispatched_at,omitempty"`
+  CreatedAt     *uint64  `json:"created_at,omitempty"`
+  UpdatedAt     *uint64  `json:"updated_at,omitempty"`
+  DispatchedAt  *uint64  `json:"dispatched_at,omitempty"`
 }
 
 // WebsiteCampaignTemplateExcerptsData mapping
@@ -76,8 +76,8 @@ type WebsiteCampaignTemplateExcerpt struct {
   TemplateID  *string  `json:"template_id,omitempty"`
   Name        *string  `json:"name,omitempty"`
   Format      *string  `json:"format,omitempty"`
-  CreatedAt   *uint    `json:"created_at,omitempty"`
-  UpdatedAt   *uint    `json:"updated_at,omitempty"`
+  CreatedAt   *uint64  `json:"created_at,omitempty"`
+  UpdatedAt   *uint64  `json:"updated_at,omitempty"`
 }
 
 // WebsiteCampaignTemplateItemData mapping
@@ -138,8 +138,8 @@ type WebsiteCampaignItemOptions struct {
 
 // WebsiteCampaignItemStatistics mapping
 type WebsiteCampaignItemStatistics struct {
-  Opened   *uint  `json:"opened,omitempty"`
-  Clicked  *uint  `json:"clicked,omitempty"`
+  Opened   *uint64  `json:"opened,omitempty"`
+  Clicked  *uint64  `json:"clicked,omitempty"`
 }
 
 // WebsiteCampaignStatisticsData mapping
@@ -151,8 +151,8 @@ type WebsiteCampaignStatisticsData struct {
 type WebsiteCampaignStatistic struct {
   Profile    *WebsiteCampaignStatisticProfile  `json:"profile,omitempty"`
   Data       *interface{}                      `json:"data,omitempty"`
-  CreatedAt  *uint                             `json:"created_at,omitempty"`
-  UpdatedAt  *uint                             `json:"updated_at,omitempty"`
+  CreatedAt  *uint64                           `json:"created_at,omitempty"`
+  UpdatedAt  *uint64                           `json:"updated_at,omitempty"`
 }
 
 // WebsiteCampaignStatisticProfile mapping

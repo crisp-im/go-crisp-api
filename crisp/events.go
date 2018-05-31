@@ -118,7 +118,7 @@ type EventsReceiveGenericMessage struct {
   Origin       *string                          `json:"origin"`
   Mentions     *[]string                        `json:"mentions"`
   Stamped      *bool                            `json:"stamped"`
-  Timestamp    *uint                            `json:"timestamp"`
+  Timestamp    *uint64                          `json:"timestamp"`
   Fingerprint  *int                             `json:"fingerprint"`
   User         *EventsReceiveCommonMessageUser  `json:"user"`
 }
@@ -210,7 +210,7 @@ type EventsReceiveSessionSyncPagesOne struct {
   PageTitle     *string  `json:"page_title"`
   PageURL       *string  `json:"page_url"`
   PageReferrer  *string  `json:"page_referrer"`
-  Timestamp     *uint    `json:"timestamp"`
+  Timestamp     *uint64  `json:"timestamp"`
 }
 
 // EventsReceiveSessionSyncEvents maps session:sync:events
@@ -225,7 +225,7 @@ type EventsReceiveSessionSyncEventsOne struct {
   Text       *string       `json:"text"`
   Data       *interface{}  `json:"data"`
   Color      *string       `json:"color"`
-  Timestamp  *uint         `json:"timestamp"`
+  Timestamp  *uint64       `json:"timestamp"`
 }
 
 // EventsReceiveSessionSyncCapabilities maps session:sync:capabilities
@@ -492,7 +492,7 @@ type EventsReceiveMessageComposeSend struct {
   EventsSessionGeneric
   Type       *string  `json:"type"`
   Excerpt    *string  `json:"excerpt"`
-  Timestamp  *uint    `json:"timestamp"`
+  Timestamp  *uint64  `json:"timestamp"`
 }
 
 // EventsReceiveMessageComposeReceive maps message:compose:receive
@@ -501,7 +501,7 @@ type EventsReceiveMessageComposeReceive struct {
   EventsSessionGeneric
   Type       *string                                  `json:"type"`
   Excerpt    *string                                  `json:"excerpt"`
-  Timestamp  *uint                                    `json:"timestamp"`
+  Timestamp  *uint64                                  `json:"timestamp"`
   User       *EventsReceiveMessageComposeReceiveUser  `json:"user"`
 }
 
@@ -628,7 +628,7 @@ type EventsServiceTranslateProcessed struct {
 type EventsReceiveWebsiteUpdateVisitorsCount struct {
   EventsGeneric
   EventsWebsiteGeneric
-  VisitorsCount  *uint    `json:"visitors_count"`
+  VisitorsCount  *uint32  `json:"visitors_count"`
 }
 
 // EventsReceiveWebsiteUpdateOperatorsAvailability maps website:update_operators_availability
@@ -683,7 +683,7 @@ type EventsReceiveBucketURLUploadGenerated struct {
 
 // EventsReceiveBucketURLUploadGeneratedPolicy maps bucket:url:upload:generated/policy
 type EventsReceiveBucketURLUploadGeneratedPolicy struct {
-  SizeLimit  *uint  `json:"size_limit"`
+  SizeLimit  *uint64  `json:"size_limit"`
 }
 
 // EventsReceiveBucketURLUploadGeneratedURL maps bucket:url:upload:generated/url

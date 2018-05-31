@@ -107,8 +107,8 @@ type BillingMethodInvoice struct {
 
 // BillingMethodInvoicePayment mapping
 type BillingMethodInvoicePayment struct {
-  IsPaid         *bool  `json:"is_paid,omitempty"`
-  NumberRetries  *uint  `json:"number_retries,omitempty"`
+  IsPaid         *bool    `json:"is_paid,omitempty"`
+  NumberRetries  *uint16  `json:"number_retries,omitempty"`
 }
 
 // BillingMethodInvoiceContent mapping
@@ -120,7 +120,7 @@ type BillingMethodInvoiceContent struct {
 
 // BillingMethodInvoiceContentDue mapping
 type BillingMethodInvoiceContentDue struct {
-  Total   *uint                                  `json:"total,omitempty"`
+  Total   *uint16                                `json:"total,omitempty"`
   Parts   *[]BillingMethodInvoiceContentDuePart  `json:"parts,omitempty"`
 }
 
@@ -136,14 +136,14 @@ type BillingMethodInvoiceContentDuePart struct {
 type BillingMethodInvoiceContentDuePartPlugin struct {
   ID     *string  `json:"id,omitempty"`
   Name   *string  `json:"name,omitempty"`
-  Price  *uint    `json:"price,omitempty"`
+  Price  *uint16  `json:"price,omitempty"`
 }
 
 // BillingMethodInvoicePaging mapping
 type BillingMethodInvoicePaging struct {
-  Range    *[]uint  `json:"range,omitempty"`
-  PerPage  *uint    `json:"per_page,omitempty"`
-  Total    *uint    `json:"total,omitempty"`
+  Range    *[]uint16  `json:"range,omitempty"`
+  PerPage  *uint16    `json:"per_page,omitempty"`
+  Total    *uint16    `json:"total,omitempty"`
 }
 
 // BillingMethodLink mapping

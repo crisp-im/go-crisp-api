@@ -52,13 +52,13 @@ type WebsiteHelpdeskLocaleArticleExcerpt struct {
   Title        *string                                       `json:"title,omitempty"`
   Status       *string                                       `json:"status,omitempty"`
   Visibility   *string                                       `json:"visibility,omitempty"`
-  Visits       *uint                                         `json:"visits,omitempty"`
-  Order        *uint                                         `json:"order,omitempty"`
+  Visits       *uint64                                       `json:"visits,omitempty"`
+  Order        *uint16                                       `json:"order,omitempty"`
   URL          *string                                       `json:"url,omitempty"`
   Category     *WebsiteHelpdeskLocaleArticleExcerptCategory  `json:"category,omitempty"`
-  CreatedAt    *uint                                         `json:"created_at,omitempty"`
-  UpdatedAt    *uint                                         `json:"updated_at,omitempty"`
-  PublishedAt  *uint                                         `json:"published_at,omitempty"`
+  CreatedAt    *uint64                                       `json:"created_at,omitempty"`
+  UpdatedAt    *uint64                                       `json:"updated_at,omitempty"`
+  PublishedAt  *uint64                                       `json:"published_at,omitempty"`
 }
 
 // WebsiteHelpdeskLocaleArticleExcerptCategory mapping
@@ -80,12 +80,12 @@ type WebsiteHelpdeskLocaleArticle struct {
   Content      *string  `json:"content,omitempty"`
   Status       *string  `json:"status,omitempty"`
   Visibility   *string  `json:"visibility,omitempty"`
-  Visits       *uint    `json:"visits,omitempty"`
-  Order        *uint    `json:"order,omitempty"`
+  Visits       *uint64  `json:"visits,omitempty"`
+  Order        *uint16  `json:"order,omitempty"`
   URL          *string  `json:"url,omitempty"`
-  CreatedAt    *uint    `json:"created_at,omitempty"`
-  UpdatedAt    *uint    `json:"updated_at,omitempty"`
-  PublishedAt  *uint    `json:"published_at,omitempty"`
+  CreatedAt    *uint64  `json:"created_at,omitempty"`
+  UpdatedAt    *uint64  `json:"updated_at,omitempty"`
+  PublishedAt  *uint64  `json:"published_at,omitempty"`
 }
 
 // WebsiteHelpdeskLocaleArticleNewData mapping
@@ -161,10 +161,10 @@ type WebsiteHelpdeskLocaleCategory struct {
   Description  *string  `json:"description,omitempty"`
   Color        *string  `json:"color,omitempty"`
   Image        *string  `json:"image,omitempty"`
-  Order        *uint    `json:"order,omitempty"`
+  Order        *uint16  `json:"order,omitempty"`
   URL          *string  `json:"url,omitempty"`
-  CreatedAt    *uint    `json:"created_at,omitempty"`
-  UpdatedAt    *uint    `json:"updated_at,omitempty"`
+  CreatedAt    *uint64  `json:"created_at,omitempty"`
+  UpdatedAt    *uint64  `json:"updated_at,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsData mapping
@@ -264,7 +264,7 @@ type WebsiteHelpdeskLocaleArticleItem struct {
 type WebsiteHelpdeskLocaleArticleUpdate struct {
   Title    *string  `json:"title,omitempty"`
   Content  *string  `json:"content,omitempty"`
-  Order    *uint    `json:"order,omitempty"`
+  Order    *uint16  `json:"order,omitempty"`
 }
 
 // WebsiteHelpdeskLocaleArticleCategoryItem mapping
@@ -288,7 +288,7 @@ type WebsiteHelpdeskLocaleCategoryUpdate struct {
   Description  *string  `json:"description,omitempty"`
   Color        *string  `json:"color,omitempty"`
   Image        *string  `json:"image,omitempty"`
-  Order        *uint    `json:"order,omitempty"`
+  Order        *uint16  `json:"order,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsUpdate mapping

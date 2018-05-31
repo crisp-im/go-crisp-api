@@ -49,7 +49,7 @@ type WebsiteOperatorsLastActiveListOne struct {
   UserID     *string  `json:"user_id,omitempty"`
   Avatar     *string  `json:"avatar,omitempty"`
   Nickname   *string  `json:"nickname,omitempty"`
-  Timestamp  *uint    `json:"timestamp,omitempty"`
+  Timestamp  *uint64  `json:"timestamp,omitempty"`
 }
 
 // WebsiteOperatorEmail mapping

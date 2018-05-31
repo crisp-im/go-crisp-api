@@ -20,8 +20,8 @@ type UserAvailability struct {
 
 // UserAvailabilityTime mapping
 type UserAvailabilityTime struct {
-  For    *uint  `json:"for,omitempty"`
-  Since  *uint  `json:"since,omitempty"`
+  For    *uint32  `json:"for,omitempty"`
+  Since  *uint64  `json:"since,omitempty"`
 }
 
 // UserAvailabilityStatusData mapping
@@ -64,7 +64,7 @@ func (service *UserService) GetUserAvailability() (*UserAvailability, *Response,
 
 
 // UpdateUserAvailability updates the advertised user availability, for a defined period of time after which to automatically expire.
-func (service *UserService) UpdateUserAvailability(availabilityType string, timeFor uint) (*Response, error) {
+func (service *UserService) UpdateUserAvailability(availabilityType string, timeFor uint32) (*Response, error) {
   url := "user/availability"
   req, _ := service.client.NewRequest("PATCH", url, UserAvailability{Type: &availabilityType, Time: &UserAvailabilityTime{For: &timeFor}})
 

@@ -18,8 +18,8 @@ type WebsiteVisitorCountData struct {
 
 // WebsiteVisitorCount mapping
 type WebsiteVisitorCount struct {
-  Count   *uint  `json:"count,omitempty"`
-  Active  *uint  `json:"active,omitempty"`
+  Count   *uint32  `json:"count,omitempty"`
+  Active  *uint32  `json:"active,omitempty"`
 }
 
 // WebsiteVisitorListData mapping
@@ -90,8 +90,8 @@ type WebsiteVisitorsMapPointGeolocationCoordinates struct {
 
 // WebsiteVisitorsMapPointVisitors mapping
 type WebsiteVisitorsMapPointVisitors struct {
-  Count       *uint      `json:"count,omitempty"`
-  Threshold   *uint      `json:"threshold,omitempty"`
+  Count       *uint32    `json:"count,omitempty"`
+  Threshold   *uint32    `json:"threshold,omitempty"`
   SessionIDs  *[]string  `json:"session_ids,omitempty"`
 }
 
@@ -108,7 +108,7 @@ type WebsiteVisitorsBlockedRuleData struct {
 // WebsiteVisitorsBlocked mapping
 type WebsiteVisitorsBlocked struct {
   Rule     *[]string  `json:"rule,omitempty"`
-  Blocked  *uint      `json:"blocked,omitempty"`
+  Blocked  *uint32    `json:"blocked,omitempty"`
 }
 
 
