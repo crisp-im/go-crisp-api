@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2018 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 05/31/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 06/01/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -398,6 +398,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Save Helpdesk Locale Category**: `client.Website.SaveHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryUpdate) (*Response, error)`
   * **Update Helpdesk Locale Category**: `client.Website.UpdateHelpdeskLocaleCategory(websiteID string, locale string, categoryID string, category WebsiteHelpdeskLocaleCategoryUpdate) (*Response, error)`
   * **Delete Helpdesk Locale Category**: `client.Website.DeleteHelpdeskLocaleCategory(websiteID string, locale string, categoryID string) (*Response, error)`
+  * **Import External Helpdesk To Locale**: `client.Website.ImportExternalHelpdeskToLocale(websiteID string, locale string, helpdeskURL string) (*Response, error)`
   * **Resolve Helpdesk Settings**: `client.Website.ResolveHelpdeskSettings(websiteID string) (*WebsiteHelpdeskSettings, *Response, error)`
   * **Save Helpdesk Settings**: `client.Website.SaveHelpdeskSettings(websiteID string, settings WebsiteHelpdeskSettingsUpdate) (*Response, error)`
   * **Resolve Helpdesk Domain**: `client.Website.ResolveHelpdeskDomain(websiteID string) (*WebsiteHelpdeskDomain, *Response, error)`

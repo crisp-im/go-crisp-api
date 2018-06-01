@@ -291,6 +291,11 @@ type WebsiteHelpdeskLocaleCategoryUpdate struct {
   Order        *uint16  `json:"order,omitempty"`
 }
 
+// WebsiteHelpdeskLocaleImportSetup mapping
+type WebsiteHelpdeskLocaleImportSetup struct {
+  HelpdeskURL  *string  `json:"helpdesk_url,omitempty"`
+}
+
 // WebsiteHelpdeskSettingsUpdate mapping
 type WebsiteHelpdeskSettingsUpdate struct {
   Name        string                                   `json:"name,omitempty"`
@@ -812,6 +817,15 @@ func (service *WebsiteService) UpdateHelpdeskLocaleCategory(websiteID string, lo
 func (service *WebsiteService) DeleteHelpdeskLocaleCategory(websiteID string, locale string, categoryID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s/category/%s", websiteID, locale, categoryID)
   req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ImportExternalHelpdeskToLocale imports a whole external helpdesk to Crisp, as a Crisp Helpdesk.
+func (service *WebsiteService) ImportExternalHelpdeskToLocale(websiteID string, locale string, helpdeskURL string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/import", websiteID, locale)
+  req, _ := service.client.NewRequest("POST", url, WebsiteHelpdeskLocaleImportSetup{HelpdeskURL: &helpdeskURL})
 
   return service.client.Do(req, nil)
 }
