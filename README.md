@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2018 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 06/01/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 06/11/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -404,6 +404,33 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Resolve Helpdesk Domain**: `client.Website.ResolveHelpdeskDomain(websiteID string) (*WebsiteHelpdeskDomain, *Response, error)`
   * **Request Helpdesk Domain Change**: `client.Website.RequestHelpdeskDomainChange(websiteID string, domain WebsiteHelpdeskDomainChange) (*Response, error)`
   * **Generate Helpdesk Domain Setup Flow**: `client.Website.GenerateHelpdeskDomainSetupFlow(websiteID string, custom string) (*WebsiteHelpdeskDomainSetupFlow, *Response, error)`
+
+* **Website Status**
+  * **Check If Status Page Exists**: `client.Website.CheckIfStatusPageExists(websiteID string) (*Response, error)`
+  * **Resolve Status Page**: `client.Website.ResolveStatusPage(websiteID string) (*WebsiteStatus, *Response, error)`
+  * **Initialize Status Page**: `client.Website.InitializeStatusPage(websiteID string, statusPage WebsiteStatusInitialize) (*Response, error)`
+  * **Delete Status Page**: `client.Website.DeleteStatusPage(websiteID string) (*Response, error)`
+  * **List Status Page Services**: `client.Website.ListStatusPageServices(websiteID string, pageNumber uint) (*[]WebsiteStatusService, *Response, error)`
+  * **Add A New Status Page Service**: `client.Website.AddNewStatusPageService(websiteID string, name string) (*WebsiteStatusServiceNew, *Response, error)`
+  * **Check If Status Page Service Exists**: `client.Website.CheckStatusPageServiceExists(websiteID string, serviceID string) (*Response, error)`
+  * **Resolve Status Page Service**: `client.Website.ResolveStatusPageService(websiteID string, serviceID string) (*WebsiteStatusService, *Response, error)`
+  * **Save Status Page Service**: `client.Website.SaveStatusPageService(websiteID string, serviceID string, serviceData WebsiteStatusServiceUpdate) (*Response, error)`
+  * **Update Status Page Service**: `client.Website.UpdateStatusPageService(websiteID string, serviceID string, serviceData WebsiteStatusServiceUpdate) (*Response, error)`
+  * **Delete Status Page Service**: `client.Website.DeleteStatusPageService(websiteID string, serviceID string) (*Response, error)`
+  * **List Status Page Service Nodes**: `client.Website.ListStatusPageServiceNodes(websiteID string, serviceID string, pageNumber uint) (*[]WebsiteStatusServiceNode, *Response, error)`
+  * **Add A New Status Page Service Node**: `client.Website.AddNewStatusPageServiceNode(websiteID string, serviceID string, label string, mode string) (*WebsiteStatusServiceNodeNew, *Response, error)`
+  * **Check If Status Page Service Node Exists**: `client.Website.CheckStatusPageServiceNodeExists(websiteID string, serviceID string, nodeID string) (*Response, error)`
+  * **Resolve Status Page Service Node**: `client.Website.ResolveStatusPageServiceNode(websiteID string, serviceID string, nodeID string) (*WebsiteStatusServiceNode, *Response, error)`
+  * **Save Status Page Service Node**: `client.Website.SaveStatusPageServiceNode(websiteID string, serviceID string, nodeID string, node WebsiteStatusServiceNodeUpdate) (*Response, error)`
+  * **Update Status Page Service Node**: `client.Website.UpdateStatusPageServiceNode(websiteID string, serviceID string, nodeID string, node WebsiteStatusServiceNodeUpdate) (*Response, error)`
+  * **Delete Status Page Service Node**: `client.Website.DeleteStatusPageServiceNode(websiteID string, serviceID string, nodeID string) (*Response, error)`
+  * **Resolve Status Page Settings**: `client.Website.ResolveStatusPageSettings(websiteID string) (*WebsiteStatusSettings, *Response, error)`
+  * **Save Status Page Settings**: `client.Website.SaveStatusPageSettings(websiteID string, settings WebsiteStatusSettingsUpdate) (*Response, error)`
+  * **Resolve Status Page Domain**: `client.Website.ResolveStatusPageDomain(websiteID string) (*WebsiteStatusDomain, *Response, error)`
+  * **Request Status Page Domain Change**: `client.Website.RequestStatusPageDomainChange(websiteID string, domain WebsiteStatusDomainChange) (*Response, error)`
+  * **Generate Status Page Domain Setup Flow**: `client.Website.GenerateStatusPageDomainSetupFlow(websiteID string, custom string) (*WebsiteStatusDomainSetupFlow, *Response, error)`
+  * **Get Status Page Reporter Token**: `client.Website.GetStatusPageReporterToken(websiteID string) (*WebsiteStatusReporterToken, *Response, error)`
+  * **Roll Status Page Reporter Token**: `client.Website.RollStatusPageReporterToken(websiteID string) (*Response, error)`
 
 ### Plugin
 
