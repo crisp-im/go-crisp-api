@@ -107,6 +107,14 @@ type WebsiteStatusServiceNodeNew struct {
   NodeID  *string  `json:"node_id,omitempty"`
 }
 
+// WebsiteStatusServiceNodeReplicasData mapping
+type WebsiteStatusServiceNodeReplicasData struct {
+  Data  *[]WebsiteStatusServiceNodeReplica  `json:"data,omitempty"`
+}
+
+// WebsiteStatusServiceNodeReplica mapping
+type WebsiteStatusServiceNodeReplica string;
+
 // WebsiteStatusSettingsData mapping
 type WebsiteStatusSettingsData struct {
   Data  *WebsiteStatusSettings  `json:"data,omitempty"`
@@ -363,6 +371,16 @@ func (instance WebsiteStatusService) String() string {
 
 // String returns the string representation of WebsiteStatusServiceNode
 func (instance WebsiteStatusServiceNode) String() string {
+  return Stringify(instance)
+}
+
+// String returns the string representation of WebsiteStatusServiceNodeNew
+func (instance WebsiteStatusServiceNodeNew) String() string {
+  return Stringify(instance)
+}
+
+// String returns the string representation of WebsiteStatusServiceNodeReplica
+func (instance WebsiteStatusServiceNodeReplica) String() string {
   return Stringify(instance)
 }
 
@@ -660,6 +678,30 @@ func (service *WebsiteService) UpdateStatusPageServiceNode(websiteID string, ser
 // DeleteStatusPageServiceNode deletes a node in service for status page in website.
 func (service *WebsiteService) DeleteStatusPageServiceNode(websiteID string, serviceID string, nodeID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/status/service/%s/node/%s", websiteID, serviceID, nodeID)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ListStatusPageServiceNodeReplicas lists replicas health for node in service for status page in website.
+func (service *WebsiteService) ListStatusPageServiceNodeReplicas(websiteID string, serviceID string, nodeID string) (*[]WebsiteStatusServiceNodeReplica, *Response, error) {
+  url := fmt.Sprintf("website/%s/status/service/%s/node/%s/replicas", websiteID, serviceID, nodeID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  replicas := new(WebsiteStatusServiceNodeReplicasData)
+  resp, err := service.client.Do(req, replicas)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return replicas.Data, resp, err
+}
+
+
+// FlushStatusPageServiceNodeReplicas flushes the list of replicas health for node in service for status page in website.
+func (service *WebsiteService) FlushStatusPageServiceNodeReplicas(websiteID string, serviceID string, nodeID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/status/service/%s/node/%s/replicas", websiteID, serviceID, nodeID)
   req, _ := service.client.NewRequest("DELETE", url, nil)
 
   return service.client.Do(req, nil)

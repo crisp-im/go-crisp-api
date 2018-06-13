@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2018 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 06/11/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 06/13/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -424,6 +424,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Save Status Page Service Node**: `client.Website.SaveStatusPageServiceNode(websiteID string, serviceID string, nodeID string, node WebsiteStatusServiceNodeUpdate) (*Response, error)`
   * **Update Status Page Service Node**: `client.Website.UpdateStatusPageServiceNode(websiteID string, serviceID string, nodeID string, node WebsiteStatusServiceNodeUpdate) (*Response, error)`
   * **Delete Status Page Service Node**: `client.Website.DeleteStatusPageServiceNode(websiteID string, serviceID string, nodeID string) (*Response, error)`
+  * **List Status Page Service Node Replicas**: `client.Website.ListStatusPageServiceNodeReplicas(websiteID string, serviceID string, nodeID string) (*[]WebsiteStatusServiceNodeReplica, *Response, error)`
+  * **Flush Status Page Service Node Replicas**: `client.Website.FlushStatusPageServiceNodeReplicas(websiteID string, serviceID string, nodeID string) (*Response, error)`
   * **Resolve Status Page Settings**: `client.Website.ResolveStatusPageSettings(websiteID string) (*WebsiteStatusSettings, *Response, error)`
   * **Save Status Page Settings**: `client.Website.SaveStatusPageSettings(websiteID string, settings WebsiteStatusSettingsUpdate) (*Response, error)`
   * **Resolve Status Page Domain**: `client.Website.ResolveStatusPageDomain(websiteID string) (*WebsiteStatusDomain, *Response, error)`
