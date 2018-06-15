@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2018 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 06/13/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 06/15/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -426,6 +426,10 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Delete Status Page Service Node**: `client.Website.DeleteStatusPageServiceNode(websiteID string, serviceID string, nodeID string) (*Response, error)`
   * **List Status Page Service Node Replicas**: `client.Website.ListStatusPageServiceNodeReplicas(websiteID string, serviceID string, nodeID string) (*[]WebsiteStatusServiceNodeReplica, *Response, error)`
   * **Flush Status Page Service Node Replicas**: `client.Website.FlushStatusPageServiceNodeReplicas(websiteID string, serviceID string, nodeID string) (*Response, error)`
+  * **Check If Status Page Announcement Exists**: `client.Website.CheckIfStatusPageAnnouncementExists(websiteID string) (*Response, error)`
+  * **Resolve Status Page Announcement**: `client.Website.ResolveStatusPageAnnouncement(websiteID string) (*WebsiteStatusAnnouncement, *Response, error)`
+  * **Save Status Page Announcement**: `client.Website.SaveStatusPageAnnouncement(websiteID string, announcement WebsiteStatusAnnouncementItem) (*Response, error)`
+  * **Delete Status Page Announcement**: `client.Website.DeleteStatusPageAnnouncement(websiteID string) (*Response, error)`
   * **Resolve Status Page Settings**: `client.Website.ResolveStatusPageSettings(websiteID string) (*WebsiteStatusSettings, *Response, error)`
   * **Save Status Page Settings**: `client.Website.SaveStatusPageSettings(websiteID string, settings WebsiteStatusSettingsUpdate) (*Response, error)`
   * **Resolve Status Page Domain**: `client.Website.ResolveStatusPageDomain(websiteID string) (*WebsiteStatusDomain, *Response, error)`

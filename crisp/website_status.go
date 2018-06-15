@@ -115,6 +115,20 @@ type WebsiteStatusServiceNodeReplicasData struct {
 // WebsiteStatusServiceNodeReplica mapping
 type WebsiteStatusServiceNodeReplica string;
 
+// WebsiteStatusAnnouncementData mapping
+type WebsiteStatusAnnouncementData struct {
+  Data  *WebsiteStatusAnnouncement  `json:"data,omitempty"`
+}
+
+// WebsiteStatusAnnouncement mapping
+type WebsiteStatusAnnouncement struct {
+  Title      *string  `json:"title,omitempty"`
+  Message    *string  `json:"message,omitempty"`
+  CreatedAt  *uint64  `json:"created_at,omitempty"`
+  UpdatedAt  *uint64  `json:"updated_at,omitempty"`
+  ExpireAt   *uint64  `json:"expire_at,omitempty"`
+}
+
 // WebsiteStatusSettingsData mapping
 type WebsiteStatusSettingsData struct {
   Data  *WebsiteStatusSettings  `json:"data,omitempty"`
@@ -280,6 +294,13 @@ type WebsiteStatusServiceNodeUpdateHTTPBody struct {
   HealthyMatch  string  `json:"healthy_match,omitempty"`
 }
 
+// WebsiteStatusAnnouncementItem mapping
+type WebsiteStatusAnnouncementItem struct {
+  Title     string   `json:"title,omitempty"`
+  Message   string   `json:"message,omitempty"`
+  ExpireAt  *uint64  `json:"expire_at,omitempty"`
+}
+
 // WebsiteStatusSettingsUpdate mapping
 type WebsiteStatusSettingsUpdate struct {
   Name        string                                 `json:"name,omitempty"`
@@ -396,6 +417,11 @@ func (instance WebsiteStatusServiceNodeHTTPStatus) String() string {
 
 // String returns the string representation of WebsiteStatusServiceNodeHTTPBody
 func (instance WebsiteStatusServiceNodeHTTPBody) String() string {
+  return Stringify(instance)
+}
+
+// String returns the string representation of WebsiteStatusAnnouncement
+func (instance WebsiteStatusAnnouncement) String() string {
   return Stringify(instance)
 }
 
@@ -702,6 +728,48 @@ func (service *WebsiteService) ListStatusPageServiceNodeReplicas(websiteID strin
 // FlushStatusPageServiceNodeReplicas flushes the list of replicas health for node in service for status page in website.
 func (service *WebsiteService) FlushStatusPageServiceNodeReplicas(websiteID string, serviceID string, nodeID string) (*Response, error) {
   url := fmt.Sprintf("website/%s/status/service/%s/node/%s/replicas", websiteID, serviceID, nodeID)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// CheckIfStatusPageAnnouncementExists checks if an announcement exists for status page in website.
+func (service *WebsiteService) CheckIfStatusPageAnnouncementExists(websiteID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/status/announcement", websiteID)
+  req, _ := service.client.NewRequest("HEAD", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ResolveStatusPageAnnouncement resolves an announcement for status page in website.
+func (service *WebsiteService) ResolveStatusPageAnnouncement(websiteID string) (*WebsiteStatusAnnouncement, *Response, error) {
+  url := fmt.Sprintf("website/%s/status/announcement", websiteID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  announcement := new(WebsiteStatusAnnouncementData)
+  resp, err := service.client.Do(req, announcement)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return announcement.Data, resp, err
+}
+
+
+// SaveStatusPageAnnouncement saves an announcement for status page in website.
+func (service *WebsiteService) SaveStatusPageAnnouncement(websiteID string, announcement WebsiteStatusAnnouncementItem) (*Response, error) {
+  url := fmt.Sprintf("website/%s/status/announcement", websiteID)
+  req, _ := service.client.NewRequest("PUT", url, announcement)
+
+  return service.client.Do(req, nil)
+}
+
+
+// DeleteStatusPageAnnouncement deletes an announcement for status page in website.
+func (service *WebsiteService) DeleteStatusPageAnnouncement(websiteID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/status/announcement", websiteID)
   req, _ := service.client.NewRequest("DELETE", url, nil)
 
   return service.client.Do(req, nil)
