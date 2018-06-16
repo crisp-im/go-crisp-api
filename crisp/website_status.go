@@ -177,7 +177,6 @@ type WebsiteStatusSettingsMetrics struct {
 
 // WebsiteStatusSettingsMetricsPoll mapping
 type WebsiteStatusSettingsMetricsPoll struct {
-  Interval   *uint16  `json:"interval,omitempty"`
   Retry      *uint8   `json:"retry,omitempty"`
   DelayDead  *uint16  `json:"delay_dead,omitempty"`
   DelaySick  *uint16  `json:"delay_sick,omitempty"`
@@ -344,7 +343,6 @@ type WebsiteStatusSettingsUpdateMetrics struct {
 
 // WebsiteStatusSettingsUpdateMetricsPoll mapping
 type WebsiteStatusSettingsUpdateMetricsPoll struct {
-  Interval   uint16  `json:"interval,omitempty"`
   Retry      uint8   `json:"retry,omitempty"`
   DelayDead  uint16  `json:"delay_dead,omitempty"`
   DelaySick  uint16  `json:"delay_sick,omitempty"`
