@@ -193,11 +193,17 @@ type WebsiteStatusSettingsMetricsPush struct {
 type WebsiteStatusSettingsNotify struct {
   Slack  *WebsiteStatusSettingsNotifySlack  `json:"slack,omitempty"`
   Email  *WebsiteStatusSettingsNotifyEmail  `json:"email,omitempty"`
+  App    *WebsiteStatusSettingsNotifyApp    `json:"app,omitempty"`
 }
 
 // WebsiteStatusSettingsNotifySlack mapping
 type WebsiteStatusSettingsNotifySlack struct {
   HookURL  *string  `json:"hook_url,omitempty"`
+}
+
+// WebsiteStatusSettingsNotifyApp mapping
+type WebsiteStatusSettingsNotifyApp struct {
+  UserIDs  *[]string  `json:"user_ids,omitempty"`
 }
 
 // WebsiteStatusSettingsNotifyEmail mapping
@@ -359,11 +365,17 @@ type WebsiteStatusSettingsUpdateMetricsPush struct {
 type WebsiteStatusSettingsUpdateNotify struct {
   Slack  *WebsiteStatusSettingsUpdateNotifySlack  `json:"slack,omitempty"`
   Email  *WebsiteStatusSettingsUpdateNotifyEmail  `json:"email,omitempty"`
+  App    *WebsiteStatusSettingsUpdateNotifyApp    `json:"app,omitempty"`
 }
 
 // WebsiteStatusSettingsUpdateNotifySlack mapping
 type WebsiteStatusSettingsUpdateNotifySlack struct {
   HookURL  string  `json:"hook_url,omitempty"`
+}
+
+// WebsiteStatusSettingsUpdateNotifyApp mapping
+type WebsiteStatusSettingsUpdateNotifyApp struct {
+  UserIDs  []string  `json:"user_ids,omitempty"`
 }
 
 // WebsiteStatusSettingsUpdateNotifyEmail mapping
@@ -470,6 +482,11 @@ func (instance WebsiteStatusSettingsNotify) String() string {
 
 // String returns the string representation of WebsiteStatusSettingsNotifySlack
 func (instance WebsiteStatusSettingsNotifySlack) String() string {
+  return Stringify(instance)
+}
+
+// String returns the string representation of WebsiteStatusSettingsNotifyApp
+func (instance WebsiteStatusSettingsNotifyApp) String() string {
   return Stringify(instance)
 }
 
