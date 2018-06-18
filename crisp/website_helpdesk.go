@@ -201,6 +201,7 @@ type WebsiteHelpdeskSettingsBehavior struct {
   LocalePicker        *bool  `json:"locale_picker,omitempty"`
   ReferLink           *bool  `json:"refer_link,omitempty"`
   ForbidIndexing      *bool  `json:"forbid_indexing,omitempty"`
+  StatusHealthDead    *bool  `json:"status_health_dead,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsInclude mapping
@@ -325,6 +326,7 @@ type WebsiteHelpdeskSettingsUpdateBehavior struct {
   LocalePicker        bool  `json:"locale_picker,omitempty"`
   ReferLink           bool  `json:"refer_link,omitempty"`
   ForbidIndexing      bool  `json:"forbid_indexing,omitempty"`
+  StatusHealthDead    bool  `json:"status_health_dead,omitempty"`
 }
 
 // WebsiteHelpdeskSettingsUpdateInclude mapping
