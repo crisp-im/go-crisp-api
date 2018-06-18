@@ -69,6 +69,7 @@ type WebsiteSettingsChatbox struct {
   IgnorePrivacy        *bool      `json:"ignore_privacy,omitempty"`
   FileTransfer         *bool      `json:"file_transfer,omitempty"`
   HelpdeskLink         *bool      `json:"helpdesk_link,omitempty"`
+  StatusHealthDead     *bool      `json:"status_health_dead,omitempty"`
   CheckDomain          *bool      `json:"check_domain,omitempty"`
   ColorTheme           *string    `json:"color_theme,omitempty"`
   TextTheme            *string    `json:"text_theme,omitempty"`
@@ -133,6 +134,7 @@ type WebsiteSettingsUpdateChatbox struct {
   IgnorePrivacy        bool       `json:"ignore_privacy,omitempty"`
   FileTransfer         bool       `json:"file_transfer,omitempty"`
   HelpdeskLink         bool       `json:"helpdesk_link,omitempty"`
+  StatusHealthDead     bool       `json:"status_health_dead,omitempty"`
   CheckDomain          bool       `json:"check_domain,omitempty"`
   ColorTheme           string     `json:"color_theme,omitempty"`
   TextTheme            string     `json:"text_theme,omitempty"`
