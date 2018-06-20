@@ -704,6 +704,9 @@ type EventsReceiveBucketURLCampaignGenerated EventsReceiveBucketURLUploadGenerat
 // EventsReceiveBucketURLHelpdeskGenerated maps bucket:url:helpdesk:generated
 type EventsReceiveBucketURLHelpdeskGenerated EventsReceiveBucketURLUploadGenerated
 
+// EventsReceiveBucketURLStatusGenerated maps bucket:url:status:generated
+type EventsReceiveBucketURLStatusGenerated EventsReceiveBucketURLUploadGenerated
+
 // EventsReceiveBucketURLProcessingGenerated maps bucket:url:processing:generated
 type EventsReceiveBucketURLProcessingGenerated EventsReceiveBucketURLUploadGenerated
 
@@ -1117,6 +1120,12 @@ func (evt EventsReceiveBucketURLCampaignGenerated) String() string {
 
 // String returns the string representation of EventsReceiveBucketURLHelpdeskGenerated
 func (evt EventsReceiveBucketURLHelpdeskGenerated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveBucketURLStatusGenerated
+func (evt EventsReceiveBucketURLStatusGenerated) String() string {
   return Stringify(evt)
 }
 
@@ -1647,6 +1656,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("bucket:url:helpdesk:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLHelpdeskGenerated) {
     if hdl, ok := register.Handlers["bucket:url:helpdesk:generated"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("bucket:url:status:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLStatusGenerated) {
+    if hdl, ok := register.Handlers["bucket:url:status:generated"]; ok {
       go hdl.callFunc(&evt)
     }
   })
