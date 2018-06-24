@@ -171,8 +171,9 @@ type WebsiteStatusSettingsInclude struct {
 
 // WebsiteStatusSettingsMetrics mapping
 type WebsiteStatusSettingsMetrics struct {
-  Poll  *WebsiteStatusSettingsMetricsPoll  `json:"poll,omitempty"`
-  Push  *WebsiteStatusSettingsMetricsPush  `json:"push,omitempty"`
+  Poll   *WebsiteStatusSettingsMetricsPoll   `json:"poll,omitempty"`
+  Push   *WebsiteStatusSettingsMetricsPush   `json:"push,omitempty"`
+  Local  *WebsiteStatusSettingsMetricsLocal  `json:"local,omitempty"`
 }
 
 // WebsiteStatusSettingsMetricsPoll mapping
@@ -187,6 +188,12 @@ type WebsiteStatusSettingsMetricsPush struct {
   DelayDead           *uint16   `json:"delay_dead,omitempty"`
   SystemCPUSickAbove  *float32  `json:"system_cpu_sick_above,omitempty"`
   SystemRAMSickAbove  *float32  `json:"system_ram_sick_above,omitempty"`
+}
+
+// WebsiteStatusSettingsMetricsLocal mapping
+type WebsiteStatusSettingsMetricsLocal struct {
+  DelayDead  *uint16  `json:"delay_dead,omitempty"`
+  DelaySick  *uint16  `json:"delay_sick,omitempty"`
 }
 
 // WebsiteStatusSettingsNotify mapping
@@ -343,8 +350,9 @@ type WebsiteStatusSettingsUpdateInclude struct {
 
 // WebsiteStatusSettingsUpdateMetrics mapping
 type WebsiteStatusSettingsUpdateMetrics struct {
-  Poll  WebsiteStatusSettingsUpdateMetricsPoll  `json:"poll,omitempty"`
-  Push  WebsiteStatusSettingsUpdateMetricsPush  `json:"push,omitempty"`
+  Poll   WebsiteStatusSettingsUpdateMetricsPoll   `json:"poll,omitempty"`
+  Push   WebsiteStatusSettingsUpdateMetricsPush   `json:"push,omitempty"`
+  Local  WebsiteStatusSettingsUpdateMetricsLocal  `json:"local,omitempty"`
 }
 
 // WebsiteStatusSettingsUpdateMetricsPoll mapping
@@ -359,6 +367,12 @@ type WebsiteStatusSettingsUpdateMetricsPush struct {
   DelayDead           uint16   `json:"delay_dead,omitempty"`
   SystemCPUSickAbove  float32  `json:"system_cpu_sick_above,omitempty"`
   SystemRAMSickAbove  float32  `json:"system_ram_sick_above,omitempty"`
+}
+
+// WebsiteStatusSettingsUpdateMetricsLocal mapping
+type WebsiteStatusSettingsUpdateMetricsLocal struct {
+  DelayDead  uint16  `json:"delay_dead,omitempty"`
+  DelaySick  uint16  `json:"delay_sick,omitempty"`
 }
 
 // WebsiteStatusSettingsUpdateNotify mapping
@@ -467,6 +481,11 @@ func (instance WebsiteStatusSettingsMetrics) String() string {
 
 // String returns the string representation of WebsiteStatusSettingsMetricsPoll
 func (instance WebsiteStatusSettingsMetricsPoll) String() string {
+  return Stringify(instance)
+}
+
+// String returns the string representation of WebsiteStatusSettingsMetricsLocal
+func (instance WebsiteStatusSettingsMetricsLocal) String() string {
   return Stringify(instance)
 }
 
