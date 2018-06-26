@@ -29,9 +29,10 @@ type WebsiteChannelEmailDomainData struct {
 
 // WebsiteChannelEmailDomain mapping
 type WebsiteChannelEmailDomain struct {
-  Root    *string  `json:"root,omitempty"`
-  Basic   *string  `json:"basic,omitempty"`
-  Custom  *string  `json:"custom,omitempty"`
+  Root      *string  `json:"root,omitempty"`
+  Basic     *string  `json:"basic,omitempty"`
+  Custom    *string  `json:"custom,omitempty"`
+  Verified  *bool    `json:"verified,omitempty"`
 }
 
 // WebsiteChannelEmailSetupFlowData mapping

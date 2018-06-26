@@ -225,9 +225,10 @@ type WebsiteStatusDomainData struct {
 
 // WebsiteStatusDomain mapping
 type WebsiteStatusDomain struct {
-  Root    *string  `json:"root,omitempty"`
-  Basic   *string  `json:"basic,omitempty"`
-  Custom  *string  `json:"custom,omitempty"`
+  Root      *string  `json:"root,omitempty"`
+  Basic     *string  `json:"basic,omitempty"`
+  Custom    *string  `json:"custom,omitempty"`
+  Verified  *bool    `json:"verified,omitempty"`
 }
 
 // WebsiteStatusDomainSetupFlowData mapping
