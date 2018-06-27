@@ -77,6 +77,7 @@ type WebsiteHelpdeskLocaleArticleData struct {
 type WebsiteHelpdeskLocaleArticle struct {
   ArticleID    *string  `json:"article_id,omitempty"`
   Title        *string  `json:"title,omitempty"`
+  Description  *string  `json:"description,omitempty"`
   Content      *string  `json:"content,omitempty"`
   Status       *string  `json:"status,omitempty"`
   Visibility   *string  `json:"visibility,omitempty"`
@@ -264,9 +265,10 @@ type WebsiteHelpdeskLocaleArticleItem struct {
 
 // WebsiteHelpdeskLocaleArticleUpdate mapping
 type WebsiteHelpdeskLocaleArticleUpdate struct {
-  Title    *string  `json:"title,omitempty"`
-  Content  *string  `json:"content,omitempty"`
-  Order    *uint16  `json:"order,omitempty"`
+  Title        *string  `json:"title,omitempty"`
+  Description  *string  `json:"description,omitempty"`
+  Content      *string  `json:"content,omitempty"`
+  Order        *uint16  `json:"order,omitempty"`
 }
 
 // WebsiteHelpdeskLocaleArticleCategoryItem mapping
