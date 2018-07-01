@@ -192,6 +192,7 @@ type WebsiteStatusSettingsMetricsPush struct {
 
 // WebsiteStatusSettingsMetricsLocal mapping
 type WebsiteStatusSettingsMetricsLocal struct {
+  Retry      *uint8   `json:"retry,omitempty"`
   DelayDead  *uint16  `json:"delay_dead,omitempty"`
   DelaySick  *uint16  `json:"delay_sick,omitempty"`
 }
@@ -372,6 +373,7 @@ type WebsiteStatusSettingsUpdateMetricsPush struct {
 
 // WebsiteStatusSettingsUpdateMetricsLocal mapping
 type WebsiteStatusSettingsUpdateMetricsLocal struct {
+  Retry      uint8   `json:"retry,omitempty"`
   DelayDead  uint16  `json:"delay_dead,omitempty"`
   DelaySick  uint16  `json:"delay_sick,omitempty"`
 }
