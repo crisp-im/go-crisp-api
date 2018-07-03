@@ -24,14 +24,19 @@ type WebsiteSetup struct {
 
 // WebsiteSetupStates mapping
 type WebsiteSetupStates struct {
-  Apps           *bool  `json:"apps,omitempty"`
-  Chatbox        *bool  `json:"chatbox,omitempty"`
-  Messenger      *bool  `json:"messenger,omitempty"`
-  Email          *bool  `json:"email,omitempty"`
-  Slack          *bool  `json:"slack,omitempty"`
-  AutoResponder  *bool  `json:"autoresponder,omitempty"`
-  Helpdesk       *bool  `json:"helpdesk,omitempty"`
-  Status         *bool  `json:"status,omitempty"`
+  Chatbox        *WebsiteSetupStatesItem  `json:"chatbox,omitempty"`
+  Messenger      *WebsiteSetupStatesItem  `json:"messenger,omitempty"`
+  Email          *WebsiteSetupStatesItem  `json:"email,omitempty"`
+  Slack          *WebsiteSetupStatesItem  `json:"slack,omitempty"`
+  AutoResponder  *WebsiteSetupStatesItem  `json:"autoresponder,omitempty"`
+  Helpdesk       *WebsiteSetupStatesItem  `json:"helpdesk,omitempty"`
+  Status         *WebsiteSetupStatesItem  `json:"status,omitempty"`
+}
+
+// WebsiteSetupStatesItem mapping
+type WebsiteSetupStatesItem struct {
+  Done   *bool    `json:"done,omitempty"`
+  Trial  *uint16  `json:"trial,omitempty"`
 }
 
 // WebsiteSetupUpdate mapping
