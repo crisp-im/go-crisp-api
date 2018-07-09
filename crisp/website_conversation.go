@@ -662,6 +662,11 @@ type ConversationCall struct {
   CallID  *string  `json:"call_id,omitempty"`
 }
 
+// ConversationCallPayload mapping
+type ConversationCallPayload struct {
+  Mode  string  `json:"mode,omitempty"`
+}
+
 // ConversationCallSignalingPayload mapping
 type ConversationCallSignalingPayload struct {
   Type     string       `json:"type,omitempty"`
@@ -1289,9 +1294,9 @@ func (service *WebsiteService) AssistExistingBrowsingSession(websiteID string, s
 
 
 // InitiateNewCallSessionForConversation initiates a new audio/video call session for conversation.
-func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error) {
+func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string, mode string) (*ConversationCall, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/call", websiteID, sessionID)
-  req, _ := service.client.NewRequest("POST", url, nil)
+  req, _ := service.client.NewRequest("POST", url, ConversationCallPayload{mode})
 
   call := new(ConversationCallData)
   resp, err := service.client.Do(req, call)
