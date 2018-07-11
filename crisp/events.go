@@ -486,6 +486,18 @@ type EventsReceiveFieldMessageContent struct {
 // EventsReceiveNoteMessage maps message:{send,received} (note type)
 type EventsReceiveNoteMessage EventsReceiveTextMessage
 
+// EventsReceiveEventMessage maps message:{send,received} (event type)
+type EventsReceiveEventMessage struct {
+  EventsGeneric
+  EventsReceiveGenericMessage
+  Content  *EventsReceiveEventMessageContent  `json:"content"`
+}
+
+// EventsReceiveEventMessageContent maps message:{send,received}/content (event type)
+type EventsReceiveEventMessageContent struct {
+  Namespace  string  `json:"namespace"`
+}
+
 // EventsReceiveMessageComposeSend maps message:compose:send
 type EventsReceiveMessageComposeSend struct {
   EventsGeneric
@@ -962,6 +974,12 @@ func (evt EventsReceiveNoteMessage) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveEventMessage
+func (evt EventsReceiveEventMessage) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveMessageComposeSend
 func (evt EventsReceiveMessageComposeSend) String() string {
   return Stringify(evt)
@@ -1408,6 +1426,14 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
         go hdl.callFunc(&messageSendNote)
       }
+
+    case "event":
+      if hdl, ok := register.Handlers["message:send/event"]; ok {
+        var messageSendEvent EventsReceiveEventMessage
+        json.Unmarshal(*evt, &messageSendEvent)
+
+        go hdl.callFunc(&messageSendEvent)
+      }
     }
   })
 
@@ -1470,6 +1496,14 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         json.Unmarshal(*evt, &messageReceivedNote)
 
         go hdl.callFunc(&messageReceivedNote)
+      }
+
+    case "event":
+      if hdl, ok := register.Handlers["message:received/event"]; ok {
+        var messageReceivedEvent EventsReceiveEventMessage
+        json.Unmarshal(*evt, &messageReceivedEvent)
+
+        go hdl.callFunc(&messageReceivedEvent)
       }
     }
   })

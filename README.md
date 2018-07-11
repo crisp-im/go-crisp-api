@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2018 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 07/09/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 07/11/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -308,6 +308,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Send A Message In Conversation (Picker Variant)**: `client.Website.SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*ConversationMessageDispatched, *Response, error)`
   * **Send A Message In Conversation (Field Variant)**: `client.Website.SendFieldMessageInConversation(websiteID string, sessionID string, message ConversationFieldMessageNew) (*ConversationMessageDispatched, *Response, error)`
   * **Send A Message In Conversation (Note Variant)**: `client.Website.SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*ConversationMessageDispatched, *Response, error)`
+  * **Send A Message In Conversation (Event Variant)**: `client.Website.SendEventMessageInConversation(websiteID string, sessionID string, message ConversationEventMessageNew) (*ConversationMessageDispatched, *Response, error)`
   * **Get A Message In Conversation**: `client.Website.GetMessageInConversation(websiteID string, sessionID string, fingerprint int) (*ConversationMessage, *Response, error)`
   * **Update A Message In Conversation (Text Variant)**: `client.Website.UpdateTextMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error)`
   * **Update A Message In Conversation (File Variant)**: `client.Website.UpdateFileMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFileMessageNewContent) (*Response, error)`
@@ -316,6 +317,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Update A Message In Conversation (Picker Variant)**: `client.Website.UpdatePickerMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationPickerMessageNewContent) (*Response, error)`
   * **Update A Message In Conversation (Field Variant)**: `client.Website.UpdateFieldMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFieldMessageNewContent) (*Response, error)`
   * **Update A Message In Conversation (Note Variant)**: `client.Website.UpdateNoteMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error)`
+  * **Update A Message In Conversation (Event Variant)**: `client.Website.UpdateEventMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationEventMessageNewContent) (*Response, error)`
   * **Compose A Message In Conversation**: `client.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
   * **Mark Messages As Read In Conversation**: `client.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
   * **Mark Messages As Delivered In Conversation**: `client.Website.MarkMessagesDeliveredInConversation(websiteID string, sessionID string, delivered ConversationDeliveredMessageMark) (*Response, error)`
@@ -536,6 +538,11 @@ client.Events.Listen([]string{"message:send"}, func(reg *crisp.EventsRegister) {
   reg.On("message:send/field", func(evt crisp.EventsReceiveFieldMessage) {
     // Handle field message from visitor
   })
+
+  // Register handler on 'message:send/event' namespace
+  reg.On("message:send/event", func(evt crisp.EventsReceiveEventMessage) {
+    // Handle event message from visitor
+  })
 })
 ```
 
@@ -577,6 +584,7 @@ Available events are listed below:
   * **Message Send (Picker Variant)**: `message:send/picker`
   * **Message Send (Field Variant)**: `message:send/field`
   * **Message Send (Note Variant)**: `message:send/note`
+  * **Message Send (Event Variant)**: `message:send/event`
   * **Message Received (Text Variant)**: `message:received/text`
   * **Message Received (File Variant)**: `message:received/file`
   * **Message Received (Animation Variant)**: `message:received/animation`
@@ -584,6 +592,7 @@ Available events are listed below:
   * **Message Received (Picker Variant)**: `message:received/picker`
   * **Message Received (Field Variant)**: `message:received/field`
   * **Message Received (Note Variant)**: `message:received/note`
+  * **Message Received (Event Variant)**: `message:received/event`
   * **Message Compose Send**: `message:compose:send`
   * **Message Compose Receive**: `message:compose:receive`
   * **Message Acknowledge Read Send**: `message:acknowledge:read:send`

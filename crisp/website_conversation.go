@@ -196,6 +196,11 @@ type ConversationMessageFieldContent struct {
 // ConversationMessageNoteContent mapping
 type ConversationMessageNoteContent string
 
+// ConversationMessageEventContent mapping
+type ConversationMessageEventContent struct {
+  Namespace  *string  `json:"namespace"`
+}
+
 // ConversationMessagePreview mapping
 type ConversationMessagePreview struct {
   URL      *string                                 `json:"url,omitempty"`
@@ -358,6 +363,11 @@ type ConversationFieldMessageNewContent struct {
   Value    string  `json:"value,omitempty"`
 }
 
+// ConversationEventMessageNewContent mapping
+type ConversationEventMessageNewContent struct {
+  Namespace  string  `json:"namespace,omitempty"`
+}
+
 // ConversationTextMessageNew mapping
 type ConversationTextMessageNew struct {
   Type         string                         `json:"type,omitempty"`
@@ -427,6 +437,17 @@ type ConversationFieldMessageNew struct {
 // ConversationNoteMessageNew mapping
 type ConversationNoteMessageNew ConversationTextMessageNew
 
+// ConversationEventMessageNew mapping
+type ConversationEventMessageNew struct {
+  Type         string                              `json:"type,omitempty"`
+  From         string                              `json:"from,omitempty"`
+  Origin       string                              `json:"origin,omitempty"`
+  Content      ConversationEventMessageNewContent  `json:"content,omitempty"`
+  Mentions     []string                            `json:"mentions,omitempty"`
+  Fingerprint  int                                 `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+}
+
 // ConversationTextMessageUpdate mapping
 type ConversationTextMessageUpdate struct {
   Content  string  `json:"content,omitempty"`
@@ -459,6 +480,11 @@ type ConversationFieldMessageUpdate struct {
 
 // ConversationNoteMessageUpdate mapping
 type ConversationNoteMessageUpdate ConversationTextMessageUpdate
+
+// ConversationEventMessageUpdate mapping
+type ConversationEventMessageUpdate struct {
+  Content  ConversationEventMessageNewContent  `json:"content,omitempty"`
+}
 
 // ConversationAllMessageNewUser mapping
 type ConversationAllMessageNewUser struct {
@@ -975,6 +1001,21 @@ func (service *WebsiteService) SendNoteMessageInConversation(websiteID string, s
 }
 
 
+// SendEventMessageInConversation sends a message in an existing conversation (event variant).
+func (service *WebsiteService) SendEventMessageInConversation(websiteID string, sessionID string, message ConversationEventMessageNew) (*ConversationMessageDispatched, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, message)
+
+  dispatched := new(ConversationMessageDispatchedData)
+  resp, err := service.client.Do(req, dispatched)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return dispatched.Data, resp, err
+}
+
+
 // GetMessageInConversation resolves an existing message in an existing conversation.
 func (service *WebsiteService) GetMessageInConversation(websiteID string, sessionID string, fingerprint int) (*ConversationMessage, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
@@ -1048,6 +1089,15 @@ func (service *WebsiteService) UpdateFieldMessageInConversation(websiteID string
 func (service *WebsiteService) UpdateNoteMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
   req, _ := service.client.NewRequest("PATCH", url, ConversationNoteMessageUpdate{Content: content})
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateEventMessageInConversation edits an existing message in an existing conversation (event variant).
+func (service *WebsiteService) UpdateEventMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationEventMessageNewContent) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationEventMessageUpdate{Content: content})
 
   return service.client.Do(req, nil)
 }

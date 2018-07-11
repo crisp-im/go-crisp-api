@@ -48,6 +48,10 @@ func main() {
       fmt.Printf("[message:send/note] %s\n", evt)
     })
 
+    reg.On("message:send/event", func(evt crisp.EventsReceiveEventMessage) {
+      fmt.Printf("[message:send/event] %s\n", evt)
+    })
+
     reg.On("message:received/text", func(evt crisp.EventsReceiveTextMessage) {
       fmt.Printf("[message:received/text] %s\n", evt)
     })
@@ -74,6 +78,10 @@ func main() {
 
     reg.On("message:received/note", func(evt crisp.EventsReceiveNoteMessage) {
       fmt.Printf("[message:received/note] %s\n", evt)
+    })
+
+    reg.On("message:received/event", func(evt crisp.EventsReceiveEventMessage) {
+      fmt.Printf("[message:received/event] %s\n", evt)
     })
 
     reg.On("message:compose:send", func(evt crisp.EventsReceiveMessageComposeSend) {
