@@ -90,9 +90,19 @@ type WebsiteVisitorsMapPointGeolocationCoordinates struct {
 
 // WebsiteVisitorsMapPointVisitors mapping
 type WebsiteVisitorsMapPointVisitors struct {
-  Count       *uint32    `json:"count,omitempty"`
-  Threshold   *uint32    `json:"threshold,omitempty"`
-  SessionIDs  *[]string  `json:"session_ids,omitempty"`
+  Count      *uint32                                    `json:"count,omitempty"`
+  Threshold  *uint32                                    `json:"threshold,omitempty"`
+  Sessions   *[]WebsiteVisitorsMapPointVisitorsSession  `json:"sessions,omitempty"`
+}
+
+// WebsiteVisitorsMapPointVisitorsSession mapping
+type WebsiteVisitorsMapPointVisitorsSession struct {
+  SessionID  *string                  `json:"session_id,omitempty"`
+  Nickname   *string                  `json:"nickname,omitempty"`
+  Email      *string                  `json:"email,omitempty"`
+  Avatar     *string                  `json:"avatar,omitempty"`
+  Active     *bool                    `json:"active,omitempty"`
+  LastPage   *WebsiteVisitorLastPage  `json:"last_page,omitempty"`
 }
 
 // WebsiteVisitorsBlockedAllData mapping
