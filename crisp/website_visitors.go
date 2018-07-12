@@ -97,12 +97,16 @@ type WebsiteVisitorsMapPointVisitors struct {
 
 // WebsiteVisitorsMapPointVisitorsSession mapping
 type WebsiteVisitorsMapPointVisitorsSession struct {
-  SessionID  *string                  `json:"session_id,omitempty"`
-  Nickname   *string                  `json:"nickname,omitempty"`
-  Email      *string                  `json:"email,omitempty"`
-  Avatar     *string                  `json:"avatar,omitempty"`
-  Active     *bool                    `json:"active,omitempty"`
-  LastPage   *WebsiteVisitorLastPage  `json:"last_page,omitempty"`
+  SessionID     *string                  `json:"session_id,omitempty"`
+  Nickname      *string                  `json:"nickname,omitempty"`
+  Email         *string                  `json:"email,omitempty"`
+  Avatar        *string                  `json:"avatar,omitempty"`
+  Initiated     *bool                    `json:"initiated,omitempty"`
+  Active        *bool                    `json:"active,omitempty"`
+  LastPage      *WebsiteVisitorLastPage  `json:"last_page,omitempty"`
+  Timezone      *int16                   `json:"timezone,omitempty"`
+  Capabilities  *[]string                `json:"capabilities,omitempty"`
+  Locales       *[]string                `json:"locales,omitempty"`
 }
 
 // WebsiteVisitorsBlockedAllData mapping
