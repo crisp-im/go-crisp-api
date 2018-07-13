@@ -484,6 +484,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Subscription For A Website**: `client.Plan.GetSubscriptionForWebsite(websiteID string) (*PlanSubscription, *Response, error)`
   * **Subscribe Website To Plan**: `client.Plan.SubscribeWebsiteToPlan(websiteID string, planID string) (*Response, error)`
   * **Unsubscribe Plan From Website**: `client.Plan.UnsubscribePlanFromWebsite(websiteID string) (*Response, error)`
+  * **Report Feedback For Website Subscription**: `client.Plan.ReportFeedbackForWebsiteSubscription(websiteID string, feedback PlanSubscriptionFeedbackSubmit) (*Response, error)`
   * **Change Bill Period For Website Subscription**: `client.Plan.ChangeBillPeriodForWebsiteSubscription(websiteID string, period string) (*Response, error)`
   * **Check Coupon Availability For Website Subscription**: `client.Plan.CheckCouponAvailabilityForWebsiteSubscription(websiteID string, code string) (*PlanSubscriptionCoupon, *Response, error)`
   * **Redeem Coupon For Website Subscription**: `client.Plan.RedeemCouponForWebsiteSubscription(websiteID string, code string) (*Response, error)`

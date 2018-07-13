@@ -56,6 +56,17 @@ type PlanSubscriptionBillPeriodChange struct {
   Period  *string  `json:"period,omitempty"`
 }
 
+// PlanSubscriptionFeedbackSubmit mapping
+type PlanSubscriptionFeedbackSubmit struct {
+  Comment  *string                                  `json:"comment,omitempty"`
+  Switch   *PlanSubscriptionFeedbackSubmitPlatform  `json:"switch,omitempty"`
+}
+
+// PlanSubscriptionFeedbackSubmitPlatform mapping
+type PlanSubscriptionFeedbackSubmitPlatform struct {
+  Platform  *string  `json:"platform,omitempty"`
+}
+
 // PlanSubscriptionCouponData mapping
 type PlanSubscriptionCouponData struct {
   Data  *PlanSubscriptionCoupon  `json:"data,omitempty"`
@@ -145,6 +156,15 @@ func (service *PlanService) UnsubscribePlanFromWebsite(websiteID string) (*Respo
 func (service *PlanService) ChangeBillPeriodForWebsiteSubscription(websiteID string, period string) (*Response, error) {
   url := fmt.Sprintf("plans/subscription/%s/bill/period", websiteID)
   req, _ := service.client.NewRequest("PATCH", url, PlanSubscriptionBillPeriodChange{Period: &period})
+
+  return service.client.Do(req, nil)
+}
+
+
+// ReportFeedbackForWebsiteSubscription reports feedback on plan usage.
+func (service *PlanService) ReportFeedbackForWebsiteSubscription(websiteID string, feedback PlanSubscriptionFeedbackSubmit) (*Response, error) {
+  url := fmt.Sprintf("plans/subscription/%s/feedback", websiteID)
+  req, _ := service.client.NewRequest("POST", url, feedback)
 
   return service.client.Do(req, nil)
 }
