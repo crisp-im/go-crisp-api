@@ -217,7 +217,7 @@ type EventsReceiveSessionSyncPagesOne struct {
 type EventsReceiveSessionSyncEvents struct {
   EventsGeneric
   EventsSessionGeneric
-  Events  *EventsReceiveSessionSyncEventsOne  `json:"events"`
+  Events  *[]EventsReceiveSessionSyncEventsOne  `json:"events"`
 }
 
 // EventsReceiveSessionSyncEventsOne maps session:sync:events/events
