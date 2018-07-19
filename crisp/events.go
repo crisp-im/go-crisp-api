@@ -223,8 +223,8 @@ type EventsReceiveSessionSyncEvents struct {
 // EventsReceiveSessionSyncEventsOne maps session:sync:events/events
 type EventsReceiveSessionSyncEventsOne struct {
   Text       *string       `json:"text"`
-  Data       *interface{}  `json:"data"`
-  Color      *string       `json:"color"`
+  Data       *interface{}  `json:"data,omitempty"`
+  Color      *string       `json:"color,omitempty"`
   Timestamp  *uint64       `json:"timestamp"`
 }
 
