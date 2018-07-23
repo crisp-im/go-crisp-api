@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2018 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 07/11/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 07/23/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -625,6 +625,10 @@ Available events are listed below:
 
 * **Service Events**
   * **Service Translate Processed**: `service:translate:processed`
+
+* **Status Events**
+
+  * **Status Health Changed**: `status:health:changed`
 
 * **Website Events**
   * **Website Update Visitors Count**: `website:update_visitors_count`

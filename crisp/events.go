@@ -636,6 +636,13 @@ type EventsServiceTranslateProcessed struct {
   Text  *string  `json:"text"`
 }
 
+// EventsStatusHealthChanged maps status:health:changed
+type EventsStatusHealthChanged struct {
+  EventsGeneric
+  EventsWebsiteGeneric
+  Health  *string  `json:"health"`
+}
+
 // EventsReceiveWebsiteUpdateVisitorsCount maps website:update_visitors_count
 type EventsReceiveWebsiteUpdateVisitorsCount struct {
   EventsGeneric
@@ -1630,6 +1637,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("service:translate:processed", func(chnl *gosocketio.Channel, evt EventsServiceTranslateProcessed) {
     if hdl, ok := register.Handlers["service:translate:processed"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("status:health:changed", func(chnl *gosocketio.Channel, evt EventsStatusHealthChanged) {
+    if hdl, ok := register.Handlers["status:health:changed"]; ok {
       go hdl.callFunc(&evt)
     }
   })
