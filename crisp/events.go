@@ -640,7 +640,14 @@ type EventsServiceTranslateProcessed struct {
 type EventsStatusHealthChanged struct {
   EventsGeneric
   EventsWebsiteGeneric
-  Health  *string  `json:"health"`
+  Health  *string                           `json:"health"`
+  Nodes   *[]EventsStatusHealthChangedNode  `json:"nodes"`
+}
+
+// EventsStatusHealthChangedNode maps status:health:changed/nodes
+type EventsStatusHealthChangedNode struct {
+  Label    *string  `json:"label,omitempty"`
+  Replica  *string  `json:"replica,omitempty"`
 }
 
 // EventsReceiveWebsiteUpdateVisitorsCount maps website:update_visitors_count
