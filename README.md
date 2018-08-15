@@ -107,6 +107,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website Availability**
   * **Get Website Availability Status**: `client.Website.GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error)`
+  * **List Website Operator Availabilities**: `client.Website.ListWebsiteOperatorAvailabilities(websiteID string) (*[]WebsiteAvailabilityOperator, *Response, error)`
 
 * **Website Operator**
   * **List Website Operators**: `client.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
