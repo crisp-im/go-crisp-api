@@ -23,19 +23,26 @@ type PluginSubscriptionData struct {
 
 // PluginSubscription mapping
 type PluginSubscription struct {
-  ID            *string                   `json:"id,omitempty"`
-  URN           *string                   `json:"urn,omitempty"`
-  Type          *string                   `json:"type,omitempty"`
-  Name          *string                   `json:"name,omitempty"`
-  Description   *string                   `json:"description,omitempty"`
-  Price         *uint16                   `json:"price,omitempty"`
-  Plans         *[]PluginInformationPlan  `json:"plans,omitempty"`
-  Icon          *string                   `json:"icon,omitempty"`
-  Configurable  *bool                     `json:"configurable,omitempty"`
-  Since         *string                   `json:"since,omitempty"`
-  Active        *bool                     `json:"active,omitempty"`
-  WebsiteID     *string                   `json:"website_id,omitempty"`
-  CardID        *string                   `json:"card_id,omitempty"`
+  ID            *string                    `json:"id,omitempty"`
+  URN           *string                    `json:"urn,omitempty"`
+  Type          *string                    `json:"type,omitempty"`
+  Name          *string                    `json:"name,omitempty"`
+  Description   *string                    `json:"description,omitempty"`
+  Price         *uint16                    `json:"price,omitempty"`
+  Plans         *[]PluginSubscriptionPlan  `json:"plans,omitempty"`
+  Icon          *string                    `json:"icon,omitempty"`
+  Configurable  *bool                      `json:"configurable,omitempty"`
+  Since         *string                    `json:"since,omitempty"`
+  Active        *bool                      `json:"active,omitempty"`
+  WebsiteID     *string                    `json:"website_id,omitempty"`
+  CardID        *string                    `json:"card_id,omitempty"`
+}
+
+// PluginSubscriptionPlan mapping
+type PluginSubscriptionPlan struct {
+  ID     *string  `json:"id,omitempty"`
+  Name   *string  `json:"name,omitempty"`
+  Price  *uint16  `json:"price,omitempty"`
 }
 
 // PluginSubscriptionCreate mapping

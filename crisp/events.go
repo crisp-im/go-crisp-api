@@ -628,14 +628,6 @@ type EventsCallRequestRejected struct {
   EventsCallGeneric
 }
 
-// EventsServiceTranslateProcessed maps service:translate:processed
-type EventsServiceTranslateProcessed struct {
-  EventsGeneric
-  EventsWebsiteGeneric
-  ID    *string  `json:"id"`
-  Text  *string  `json:"text"`
-}
-
 // EventsStatusHealthChanged maps status:health:changed
 type EventsStatusHealthChanged struct {
   EventsGeneric
@@ -676,25 +668,6 @@ type EventsReceiveWebsiteUsersAvailable struct {
   EventsWebsiteGeneric
   Available  *bool  `json:"available"`
 }
-
-// EventsReceiveWebsiteValidateDomainValid maps website:validate:domain:valid
-type EventsReceiveWebsiteValidateDomainValid struct {
-  EventsGeneric
-  EventsWebsiteGeneric
-  Domain   *string                                           `json:"domain"`
-  Records  *[]EventsReceiveWebsiteValidateDomainValidRecord  `json:"records,omitempty"`
-}
-
-// EventsReceiveWebsiteValidateDomainValidRecord maps website:validate:domain:valid/records
-type EventsReceiveWebsiteValidateDomainValidRecord struct {
-  Type   *string  `json:"type,omitempty"`
-  Query  *string  `json:"query,omitempty"`
-  Name   *string  `json:"name,omitempty"`
-  Value  *string  `json:"value,omitempty"`
-}
-
-// EventsReceiveWebsiteValidateDomainInvalid maps website:validate:domain:invalid
-type EventsReceiveWebsiteValidateDomainInvalid EventsReceiveWebsiteValidateDomainValid
 
 // EventsReceiveBucketURLUploadGenerated maps bucket:url:upload:generated
 type EventsReceiveBucketURLUploadGenerated struct {
@@ -764,13 +737,6 @@ type EventsReceiveEmailTrackView struct {
   Type        *string  `json:"type"`
   Identifier  *string  `json:"identifier"`
   Mode        *string  `json:"mode"`
-}
-
-// EventsReceiveBillingLinkRedirect maps billing:link:redirect
-type EventsReceiveBillingLinkRedirect struct {
-  EventsGeneric
-  Service  *string  `json:"service"`
-  URL      *string  `json:"url"`
 }
 
 // EventsReceivePluginChannel maps plugin:channel
@@ -1114,18 +1080,6 @@ func (evt EventsReceiveWebsiteUsersAvailable) String() string {
 }
 
 
-// String returns the string representation of EventsReceiveWebsiteValidateDomainValid
-func (evt EventsReceiveWebsiteValidateDomainValid) String() string {
-  return Stringify(evt)
-}
-
-
-// String returns the string representation of EventsReceiveWebsiteValidateDomainInvalid
-func (evt EventsReceiveWebsiteValidateDomainInvalid) String() string {
-  return Stringify(evt)
-}
-
-
 // String returns the string representation of EventsReceiveBucketURLUploadGenerated
 func (evt EventsReceiveBucketURLUploadGenerated) String() string {
   return Stringify(evt)
@@ -1182,12 +1136,6 @@ func (evt EventsReceiveEmailSubscribe) String() string {
 
 // String returns the string representation of EventsReceiveEmailTrackView
 func (evt EventsReceiveEmailTrackView) String() string {
-  return Stringify(evt)
-}
-
-
-// String returns the string representation of EventsReceiveBillingLinkRedirect
-func (evt EventsReceiveBillingLinkRedirect) String() string {
   return Stringify(evt)
 }
 
@@ -1642,12 +1590,6 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
     }
   })
 
-  so.On("service:translate:processed", func(chnl *gosocketio.Channel, evt EventsServiceTranslateProcessed) {
-    if hdl, ok := register.Handlers["service:translate:processed"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
   so.On("status:health:changed", func(chnl *gosocketio.Channel, evt EventsStatusHealthChanged) {
     if hdl, ok := register.Handlers["status:health:changed"]; ok {
       go hdl.callFunc(&evt)
@@ -1668,18 +1610,6 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("website:users:available", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteUsersAvailable) {
     if hdl, ok := register.Handlers["website:users:available"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("website:validate:domain:valid", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteValidateDomainValid) {
-    if hdl, ok := register.Handlers["website:validate:domain:valid"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("website:validate:domain:invalid", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteValidateDomainInvalid) {
-    if hdl, ok := register.Handlers["website:validate:domain:invalid"]; ok {
       go hdl.callFunc(&evt)
     }
   })
@@ -1740,12 +1670,6 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("email:track:view", func(chnl *gosocketio.Channel, evt EventsReceiveEmailTrackView) {
     if hdl, ok := register.Handlers["email:track:view"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("billing:link:redirect", func(chnl *gosocketio.Channel, evt EventsReceiveBillingLinkRedirect) {
-    if hdl, ok := register.Handlers["billing:link:redirect"]; ok {
       go hdl.callFunc(&evt)
     }
   })
