@@ -27,11 +27,6 @@ type UserSessionLogin struct {
   Ephemeral  *bool    `json:"ephemeral,omitempty"`
 }
 
-// UserSessionRecover mapping
-type UserSessionRecover struct {
-  Email  *string  `json:"email,omitempty"`
-}
-
 
 // String returns the string representation of UserSessionParameters
 func (instance UserSessionParameters) String() string {
@@ -82,15 +77,6 @@ func (service *UserService) CreateNewSessionWithToken(email string, password str
 func (service *UserService) DestroySession() (*Response, error) {
   url := "user/session/logout"
   req, _ := service.client.NewRequest("POST", url, nil)
-
-  return service.client.Do(req, nil)
-}
-
-
-// RecoverSession recovers an user account from which we are locked out. A password recovery email is sent.
-func (service *UserService) RecoverSession(email string) (*Response, error) {
-  url := "user/session/recover"
-  req, _ := service.client.NewRequest("POST", url, UserSessionRecover{Email: &email})
 
   return service.client.Do(req, nil)
 }

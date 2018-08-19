@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2018 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 08/03/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 08/19/2018
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -89,7 +89,6 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Create A New Session**: `client.User.CreateNewSession(email string, password string) (*UserSessionParameters, *Response, error)`
   * **Create A New Session (Token Variant)**: `client.User.CreateNewSessionWithToken(email string, password string, token string) (*UserSessionParameters, *Response, error)`
   * **Destroy A Session**: `client.User.DestroySession() (*Response, error)`
-  * **Recover A Session**: `client.User.RecoverSession(email string)`
 
 ### Website
 
