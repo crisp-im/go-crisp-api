@@ -121,6 +121,8 @@ type EventsReceiveGenericMessage struct {
   Timestamp    *uint64                          `json:"timestamp"`
   Fingerprint  *int                             `json:"fingerprint"`
   User         *EventsReceiveCommonMessageUser  `json:"user"`
+  Edited       *bool                            `json:"edited,omitempty"`
+  Translated   *bool                            `json:"translated,omitempty"`
 }
 
 // EventsReceiveCommonMessageUser maps a message user

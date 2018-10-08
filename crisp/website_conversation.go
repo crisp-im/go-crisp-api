@@ -133,6 +133,8 @@ type ConversationMessage struct {
   Mentions     *[]string                      `json:"mentions,omitempty"`
   Read         *string                        `json:"read,omitempty"`
   Delivered    *string                        `json:"delivered,omitempty"`
+  Edited       *bool                          `json:"edited,omitempty"`
+  Translated   *bool                          `json:"translated,omitempty"`
   Fingerprint  *int                           `json:"fingerprint,omitempty"`
   Timestamp    *uint64                        `json:"timestamp,omitempty"`
   User         *ConversationMessageUser       `json:"user,omitempty"`
@@ -377,6 +379,7 @@ type ConversationTextMessageNew struct {
   Mentions     []string                       `json:"mentions,omitempty"`
   Fingerprint  int                            `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser  `json:"user,omitempty"`
+  Translated   *bool                          `json:"translated,omitempty"`
 }
 
 // ConversationFileMessageNew mapping
@@ -388,6 +391,7 @@ type ConversationFileMessageNew struct {
   Mentions     []string                           `json:"mentions,omitempty"`
   Fingerprint  int                                `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser      `json:"user,omitempty"`
+  Translated   *bool                              `json:"translated,omitempty"`
 }
 
 // ConversationAnimationMessageNew mapping
@@ -399,6 +403,7 @@ type ConversationAnimationMessageNew struct {
   Mentions     []string                                `json:"mentions,omitempty"`
   Fingerprint  int                                     `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser           `json:"user,omitempty"`
+  Translated   *bool                                   `json:"translated,omitempty"`
 }
 
 // ConversationAudioMessageNew mapping
@@ -410,6 +415,7 @@ type ConversationAudioMessageNew struct {
   Mentions     []string                            `json:"mentions,omitempty"`
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+  Translated   *bool                               `json:"translated,omitempty"`
 }
 
 // ConversationPickerMessageNew mapping
@@ -421,6 +427,7 @@ type ConversationPickerMessageNew struct {
   Mentions     []string                             `json:"mentions,omitempty"`
   Fingerprint  int                                  `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser        `json:"user,omitempty"`
+  Translated   *bool                                `json:"translated,omitempty"`
 }
 
 // ConversationFieldMessageNew mapping
@@ -432,6 +439,7 @@ type ConversationFieldMessageNew struct {
   Mentions     []string                            `json:"mentions,omitempty"`
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+  Translated   *bool                               `json:"translated,omitempty"`
 }
 
 // ConversationNoteMessageNew mapping
@@ -446,6 +454,7 @@ type ConversationEventMessageNew struct {
   Mentions     []string                            `json:"mentions,omitempty"`
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+  Translated   *bool                               `json:"translated,omitempty"`
 }
 
 // ConversationTextMessageUpdate mapping
