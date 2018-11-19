@@ -114,15 +114,16 @@ type EventsCampaignGeneric struct {
 type EventsReceiveGenericMessage struct {
   EventsReceiveGenericMessageType
   EventsSessionGeneric
-  From         *string                          `json:"from"`
-  Origin       *string                          `json:"origin"`
-  Mentions     *[]string                        `json:"mentions"`
-  Stamped      *bool                            `json:"stamped"`
-  Timestamp    *uint64                          `json:"timestamp"`
-  Fingerprint  *int                             `json:"fingerprint"`
-  User         *EventsReceiveCommonMessageUser  `json:"user"`
-  Edited       *bool                            `json:"edited,omitempty"`
-  Translated   *bool                            `json:"translated,omitempty"`
+  From         *string                              `json:"from"`
+  Origin       *string                              `json:"origin"`
+  Mentions     *[]string                            `json:"mentions"`
+  Stamped      *bool                                `json:"stamped"`
+  Timestamp    *uint64                              `json:"timestamp"`
+  Fingerprint  *int                                 `json:"fingerprint"`
+  User         *EventsReceiveCommonMessageUser      `json:"user"`
+  Original     *EventsReceiveCommonMessageOriginal  `json:"original"`
+  Edited       *bool                                `json:"edited,omitempty"`
+  Translated   *bool                                `json:"translated,omitempty"`
 }
 
 // EventsReceiveCommonMessageUser maps a message user
@@ -131,6 +132,12 @@ type EventsReceiveCommonMessageUser struct {
   UserID    *string  `json:"user_id"`
   Nickname  *string  `json:"nickname"`
   Avatar    *string  `json:"avatar"`
+}
+
+// EventsReceiveCommonMessageOriginal maps a message original
+type EventsReceiveCommonMessageOriginal struct {
+  Type     *string  `json:"type"`
+  Content  *string  `json:"content"`
 }
 
 // EventsReceiveAuthenticationUnauthorized maps unauthorized

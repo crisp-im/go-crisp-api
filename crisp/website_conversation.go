@@ -138,6 +138,7 @@ type ConversationMessage struct {
   Fingerprint  *int                           `json:"fingerprint,omitempty"`
   Timestamp    *uint64                        `json:"timestamp,omitempty"`
   User         *ConversationMessageUser       `json:"user,omitempty"`
+  Original     *ConversationMessageOriginal   `json:"original,omitempty"`
 }
 
 // ConversationMessageDispatchedData mapping
@@ -225,6 +226,12 @@ type ConversationMessageUser struct {
   UserID    *string  `json:"user_id,omitempty"`
   Nickname  *string  `json:"nickname,omitempty"`
   Avatar    *string  `json:"avatar,omitempty"`
+}
+
+// ConversationMessageOriginal mapping
+type ConversationMessageOriginal struct {
+  Type     *string  `json:"type,omitempty"`
+  Content  *string  `json:"content,omitempty"`
 }
 
 // ConversationMetaDevice mapping
@@ -379,6 +386,7 @@ type ConversationTextMessageNew struct {
   Mentions     []string                       `json:"mentions,omitempty"`
   Fingerprint  int                            `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser  `json:"user,omitempty"`
+  Original     *ConversationMessageOriginal   `json:"original,omitempty"`
   Translated   *bool                          `json:"translated,omitempty"`
 }
 
@@ -391,6 +399,7 @@ type ConversationFileMessageNew struct {
   Mentions     []string                           `json:"mentions,omitempty"`
   Fingerprint  int                                `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser      `json:"user,omitempty"`
+  Original     *ConversationMessageOriginal       `json:"original,omitempty"`
   Translated   *bool                              `json:"translated,omitempty"`
 }
 
@@ -403,6 +412,7 @@ type ConversationAnimationMessageNew struct {
   Mentions     []string                                `json:"mentions,omitempty"`
   Fingerprint  int                                     `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser           `json:"user,omitempty"`
+  Original     *ConversationMessageOriginal            `json:"original,omitempty"`
   Translated   *bool                                   `json:"translated,omitempty"`
 }
 
@@ -415,6 +425,7 @@ type ConversationAudioMessageNew struct {
   Mentions     []string                            `json:"mentions,omitempty"`
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+  Original     *ConversationMessageOriginal        `json:"original,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
@@ -427,6 +438,7 @@ type ConversationPickerMessageNew struct {
   Mentions     []string                             `json:"mentions,omitempty"`
   Fingerprint  int                                  `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser        `json:"user,omitempty"`
+  Original     *ConversationMessageOriginal         `json:"original,omitempty"`
   Translated   *bool                                `json:"translated,omitempty"`
 }
 
@@ -439,6 +451,7 @@ type ConversationFieldMessageNew struct {
   Mentions     []string                            `json:"mentions,omitempty"`
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+  Original     *ConversationMessageOriginal        `json:"original,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
@@ -454,6 +467,7 @@ type ConversationEventMessageNew struct {
   Mentions     []string                            `json:"mentions,omitempty"`
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+  Original     *ConversationMessageOriginal        `json:"original,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
