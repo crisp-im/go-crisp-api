@@ -18,8 +18,9 @@ type WebsiteVisitorCountData struct {
 
 // WebsiteVisitorCount mapping
 type WebsiteVisitorCount struct {
-  Count   *uint32  `json:"count,omitempty"`
-  Active  *uint32  `json:"active,omitempty"`
+  Count    *uint32  `json:"count,omitempty"`
+  Active   *uint32  `json:"active,omitempty"`
+  Limited  *bool    `json:"limited,omitempty"`
 }
 
 // WebsiteVisitorListData mapping
