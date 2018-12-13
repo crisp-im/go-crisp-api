@@ -127,6 +127,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Visitors**: `client.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
   * **Pinpoint Visitors On A Map (Wide Variant)**: `client.Website.PinpointVisitorsOnMapWide(websiteID string) (*[]WebsiteVisitorsMapPoint, *Response, error)`
   * **Pinpoint Visitors On A Map (Area Variant)**: `client.Website.PinpointVisitorsOnMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*[]WebsiteVisitorsMapPoint, *Response, error)`
+  * **Get Session Identifier From Token**: `client.Website.GetSessionIdentifierFromToken(websiteID string, tokenID string) (*WebsiteVisitorsToken, *Response, error)`
   * **Count Blocked Visitors**: `client.Website.CountBlockedVisitors(websiteID string) (*[]WebsiteVisitorsBlocked, *Response, error)`
   * **Count Blocked Visitors In Rule**: `client.Website.CountBlockedVisitorsInRule(websiteID string, rule string) (*WebsiteVisitorsBlocked, *Response, error)`
   * **Clear Blocked Visitors In Rule**: `client.Website.ClearBlockedVisitorsInRule(websiteID string, rule string) (*Response, error)`

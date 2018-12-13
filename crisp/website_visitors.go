@@ -110,6 +110,16 @@ type WebsiteVisitorsMapPointVisitorsSession struct {
   Locales       *[]string                `json:"locales,omitempty"`
 }
 
+// WebsiteVisitorsTokenData mapping
+type WebsiteVisitorsTokenData struct {
+  Data  *WebsiteVisitorsToken  `json:"data,omitempty"`
+}
+
+// WebsiteVisitorsToken mapping
+type WebsiteVisitorsToken struct {
+  SessionID  *string  `json:"session_id,omitempty"`
+}
+
 // WebsiteVisitorsBlockedAllData mapping
 type WebsiteVisitorsBlockedAllData struct {
   Data  *[]WebsiteVisitorsBlocked  `json:"data,omitempty"`
@@ -141,6 +151,12 @@ func (instance WebsiteVisitor) String() string {
 
 // String returns the string representation of WebsiteVisitorsMapPoint
 func (instance WebsiteVisitorsMapPoint) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteVisitorsToken
+func (instance WebsiteVisitorsToken) String() string {
   return Stringify(instance)
 }
 
@@ -208,6 +224,21 @@ func (service *WebsiteService) PinpointVisitorsOnMapArea(websiteID string, cente
   }
 
   return points.Data, resp, err
+}
+
+
+// GetSessionIdentifierFromToken transforms a token to a session identifier, if any session is bound to the token.
+func (service *WebsiteService) GetSessionIdentifierFromToken(websiteID string, tokenID string) (*WebsiteVisitorsToken, *Response, error) {
+  url := fmt.Sprintf("website/%s/visitors/token/%s", websiteID, tokenID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  token := new(WebsiteVisitorsTokenData)
+  resp, err := service.client.Do(req, token)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return token.Data, resp, err
 }
 
 
