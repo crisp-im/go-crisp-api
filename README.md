@@ -214,7 +214,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Schedule A Reminder For Conversation**: `client.Website.ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error)`
 
 * **Website Analytics**
-  * **Acquire Chats Analytics**: `client.Website.AcquireChatsAnalytics(websiteID string, filterMetric string, filterOperator string, filterDateStart time.Time, filterDateEnd time.Time, filterDateSplit uint8) (*WebsiteAnalytics, *Response, error)`
+  * **Acquire Analytics Points**: `client.Website.AcquireAnalyticsPoints(websiteID string, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time, dateSplit string, classifier string, filterPrimary string, filterSecondary string, filterTertiary string) (*WebsiteAnalyticsPoints, *Response, error)`
+  * **List Analytics Filters**: `client.Website.ListAnalyticsFilters(websiteID string, pageNumber uint) (*[]WebsiteAnalyticsFilter, *Response, error)`
 
 * **Website People**
   * **Get People Statistics**: `client.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
