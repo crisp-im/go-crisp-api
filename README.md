@@ -216,6 +216,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Analytics**
   * **Acquire Analytics Points**: `client.Website.AcquireAnalyticsPoints(websiteID string, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time, dateSplit string, classifier string, filterPrimary string, filterSecondary string, filterTertiary string) (*WebsiteAnalyticsPoints, *Response, error)`
   * **List Analytics Filters**: `client.Website.ListAnalyticsFilters(websiteID string, pageNumber uint) (*[]WebsiteAnalyticsFilter, *Response, error)`
+  * **List Analytics Classifiers**: `client.Website.ListAnalyticsClassifiers(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsClassifier, *Response, error)`
 
 * **Website People**
   * **Get People Statistics**: `client.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`

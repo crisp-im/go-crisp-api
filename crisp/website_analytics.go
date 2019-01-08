@@ -54,6 +54,17 @@ type WebsiteAnalyticsFilter struct {
   Tertiary   *string  `json:"tertiary,omitempty"`
 }
 
+// WebsiteAnalyticsClassifierData mapping
+type WebsiteAnalyticsClassifierData struct {
+  Data  *[]WebsiteAnalyticsClassifier  `json:"data,omitempty"`
+}
+
+// WebsiteAnalyticsClassifier mapping
+type WebsiteAnalyticsClassifier struct {
+  Classifier  *string  `json:"classifier,omitempty"`
+  Aggregated  *uint32  `json:"aggregated,omitempty"`
+}
+
 
 // String returns the string representation of WebsiteAnalyticsPoints
 func (instance WebsiteAnalyticsPoints) String() string {
@@ -104,4 +115,29 @@ func (service *WebsiteService) ListAnalyticsFilters(websiteID string, pointType 
   }
 
   return filters.Data, resp, err
+}
+
+
+// ListAnalyticsClassifiers acquires available analytics classifiers in website.
+func (service *WebsiteService) ListAnalyticsClassifiers(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsClassifier, *Response, error) {
+  dateFromFormat, err := dateFrom.UTC().MarshalText()
+  if err != nil {
+    return nil, nil, err
+  }
+
+  dateToFormat, err := dateTo.UTC().MarshalText()
+  if err != nil {
+    return nil, nil, err
+  }
+
+  url := fmt.Sprintf("website/%s/analytics/%s/%s/classifiers/%d?date_from=%s&date_to=%s", websiteID, pointType, pointMetric, pageNumber, url.QueryEscape(string(dateFromFormat[:])), url.QueryEscape(string(dateToFormat[:])))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  classifiers := new(WebsiteAnalyticsClassifierData)
+  resp, err := service.client.Do(req, classifiers)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return classifiers.Data, resp, err
 }
