@@ -114,7 +114,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Flush Last Active Website Operators**: `client.Website.FlushLastActiveWebsiteOperators(websiteID string) (*Response, error)`
   * **Send Email To Website Operators**: `client.Website.SendEmailToWebsiteOperators(websiteID string, email WebsiteOperatorEmail) (*Response, error)`
   * **Get A Website Operator**: `client.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
-  * **Invite A Website Operator**: `client.Website.InviteWebsiteOperator(websiteID string, email string, role string) (*Response, error)`
+  * **Invite A Website Operator**: `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, password string) (*Response, error)`
   * **Change Operator Role**: `client.Website.ChangeOperatorRole(websiteID string, userID string, role string) (*Response, error)`
   * **Unlink Operator From Website**: `client.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
 
