@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2018 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 10/08/2018
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 02/04/2019
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -96,7 +96,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Check If Website Exists**: `client.Website.CheckWebsiteExists(domain string) (*Response, error)`
   * **Create Website**: `client.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
   * **Get A Website**: `client.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
-  * **Delete A Website**: `client.Website.DeleteWebsite(websiteID string) (*Response, error)`
+  * **Delete A Website**: `client.Website.DeleteWebsite(websiteID string, password string) (*Response, error)`
 
 * **Website Batch**
   * **Batch Resolve Conversations**: `client.Website.BatchResolveConversations(websiteID string, sessions []string) (*Response, error)`

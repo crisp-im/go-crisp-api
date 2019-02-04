@@ -31,6 +31,11 @@ type WebsiteCreate struct {
   Domain  string  `json:"domain,omitempty"`
 }
 
+// WebsiteRemove mapping
+type WebsiteRemove struct {
+  Password  *string  `json:"password,omitempty"`
+}
+
 
 // String returns the string representation of Website
 func (instance Website) String() string {
@@ -78,9 +83,9 @@ func (service *WebsiteService) GetWebsite(websiteID string) (*Website, *Response
 
 
 // DeleteWebsite deletes an existing website.
-func (service *WebsiteService) DeleteWebsite(websiteID string) (*Response, error) {
+func (service *WebsiteService) DeleteWebsite(websiteID string, password string) (*Response, error) {
   url := fmt.Sprintf("website/%s", websiteID)
-  req, _ := service.client.NewRequest("DELETE", url, nil)
+  req, _ := service.client.NewRequest("DELETE", url, WebsiteRemove{Password: &password})
 
   return service.client.Do(req, nil)
 }
