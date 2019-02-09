@@ -273,47 +273,61 @@ client := crisp.New()
 client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
 
 // Connect to realtime events backend and listen (only to 'message:send' namespace)
-client.Events.Listen([]string{"message:send"}, func(reg *crisp.EventsRegister) {
-  // Now listening for events
+client.Events.Listen(
+  []string{
+    "message:send",
+  },
 
-  // Notice: if the realtime socket breaks at any point, this function will be called again upon reconnect (to re-bind events)
-  // Thus, ensure you only use this to register handlers
+  func(reg *crisp.EventsRegister) {
+    // Socket is connected: now listening for events
 
-  // Register handler on 'message:send/text' namespace
-  reg.On("message:send/text", func(evt crisp.EventsReceiveTextMessage) {
-    // Handle text message from visitor
-  })
+    // Notice: if the realtime socket breaks at any point, this function will be called again upon reconnect (to re-bind events)
+    // Thus, ensure you only use this to register handlers
 
-  // Register handler on 'message:send/file' namespace
-  reg.On("message:send/file", func(evt crisp.EventsReceiveFileMessage) {
-    // Handle file message from visitor
-  })
+    // Register handler on 'message:send/text' namespace
+    reg.On("message:send/text", func(evt crisp.EventsReceiveTextMessage) {
+      // Handle text message from visitor
+    })
 
-  // Register handler on 'message:send/animation' namespace
-  reg.On("message:send/animation", func(evt crisp.EventsReceiveAnimationMessage) {
-    // Handle animation message from visitor
-  })
+    // Register handler on 'message:send/file' namespace
+    reg.On("message:send/file", func(evt crisp.EventsReceiveFileMessage) {
+      // Handle file message from visitor
+    })
 
-  // Register handler on 'message:send/audio' namespace
-  reg.On("message:send/audio", func(evt crisp.EventsReceiveAudioMessage) {
-    // Handle audio message from visitor
-  })
+    // Register handler on 'message:send/animation' namespace
+    reg.On("message:send/animation", func(evt crisp.EventsReceiveAnimationMessage) {
+      // Handle animation message from visitor
+    })
 
-  // Register handler on 'message:send/picker' namespace
-  reg.On("message:send/picker", func(evt crisp.EventsReceivePickerMessage) {
-    // Handle picker message from visitor
-  })
+    // Register handler on 'message:send/audio' namespace
+    reg.On("message:send/audio", func(evt crisp.EventsReceiveAudioMessage) {
+      // Handle audio message from visitor
+    })
 
-  // Register handler on 'message:send/field' namespace
-  reg.On("message:send/field", func(evt crisp.EventsReceiveFieldMessage) {
-    // Handle field message from visitor
-  })
+    // Register handler on 'message:send/picker' namespace
+    reg.On("message:send/picker", func(evt crisp.EventsReceivePickerMessage) {
+      // Handle picker message from visitor
+    })
 
-  // Register handler on 'message:send/event' namespace
-  reg.On("message:send/event", func(evt crisp.EventsReceiveEventMessage) {
-    // Handle event message from visitor
-  })
-})
+    // Register handler on 'message:send/field' namespace
+    reg.On("message:send/field", func(evt crisp.EventsReceiveFieldMessage) {
+      // Handle field message from visitor
+    })
+
+    // Register handler on 'message:send/event' namespace
+    reg.On("message:send/event", func(evt crisp.EventsReceiveEventMessage) {
+      // Handle event message from visitor
+    })
+  },
+
+  func() {
+    // Socket is disconnected: will try to reconnect
+  },
+
+  func() {
+    // Socket error: may be broken
+  },
+)
 ```
 
 Available events are listed below:

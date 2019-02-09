@@ -1721,7 +1721,7 @@ func (service *EventsService) getEndpointURL() (string) {
 }
 
 
-func (service *EventsService) reconnect(events []string, handleDone func(*EventsRegister), connectorChild *int, connectedSocket *bool, child int) {
+func (service *EventsService) reconnect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(), connectorChild *int, connectedSocket *bool, child int) {
   // Attempt to reconnect
   for *connectedSocket == false && child == *connectorChild {
     // Hold on.
@@ -1729,12 +1729,12 @@ func (service *EventsService) reconnect(events []string, handleDone func(*Events
 
     *connectorChild++
 
-    service.connect(events, handleDone, connectorChild, connectedSocket)
+    service.connect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket)
   }
 }
 
 
-func (service *EventsService) connect(events []string, handleDone func(*EventsRegister), connectorChild *int, connectedSocket *bool) {
+func (service *EventsService) connect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(), connectorChild *int, connectedSocket *bool) {
   child := *connectorChild
 
   endpointURL := service.getEndpointURL()
@@ -1751,14 +1751,20 @@ func (service *EventsService) connect(events []string, handleDone func(*EventsRe
 
         reg.BindEvents(so)
 
-        handleDone(&reg)
+        handleConnected(&reg)
       }
+    })
+
+    so.On(gosocketio.OnError, func(chnl *gosocketio.Channel) {
+      handleError()
     })
 
     so.On(gosocketio.OnDisconnection, func(chnl *gosocketio.Channel) {
       *connectedSocket = false
 
-      service.reconnect(events, handleDone, connectorChild, connectedSocket, child)
+      handleDisconnected()
+
+      service.reconnect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket, child)
     })
 
     so.On(gosocketio.OnConnection, func(chnl *gosocketio.Channel) {
@@ -1770,7 +1776,7 @@ func (service *EventsService) connect(events []string, handleDone func(*EventsRe
       }
     })
   } else {
-    service.reconnect(events, handleDone, connectorChild, connectedSocket, child)
+    service.reconnect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket, child)
   }
 }
 
@@ -1808,9 +1814,9 @@ func (service *EventsService) BindPop(events []string) {
 
 
 // Listen starts listening for incoming realtime events.
-func (service *EventsService) Listen(events []string, handleDone func(*EventsRegister)) {
+func (service *EventsService) Listen(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func()) {
   connectorChild := 0
   connectedSocket := false
 
-  service.connect(events, handleDone, &connectorChild, &connectedSocket)
+  service.connect(events, handleConnected, handleDisconnected, handleError, &connectorChild, &connectedSocket)
 }
