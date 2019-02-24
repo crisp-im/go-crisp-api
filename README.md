@@ -51,19 +51,17 @@ All the available Crisp API resources are fully implemented. **Programmatic meth
 
 Thus, it is straightforward to look for them in the library while reading the [API Reference](https://docs.crisp.chat/api/v1/).
 
-In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.New()` and then call eg: `client.User.CheckSessionValidity()`.
+In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.New()` and then call eg: `client.Website.ListWebsiteOperators(websiteID)`.
 
-When calling a method that writes data to the API (eg: `client.User.CreateUserAccount()`), you need to build an account instance and submit it this way:
+When calling a method that writes data to the API (eg: `client.Website.CreateWebsite()`), you need to build an account instance and submit it this way:
 
 ```go
-userAccount := crisp.UserAccountCreate{
-  Email: "john@acme-inc.com",
-  Password: "SecurePassword",
-  FirstName: "John",
-  LastName: "Doe",
+websiteData := crisp.WebsiteCreate{
+  Name: "Acme Inc.",
+  Domain: "acme-inc.com",
 }
 
-client.User.CreateUserAccount(userAccount)
+client.Website.CreateWebsite(websiteData)
 ```
 
 Refer directly to [the library source code](https://github.com/crisp-im/go-crisp-api/tree/master/crisp) to know more about those structures.
@@ -77,14 +75,6 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Media Animation**
   * **List Animation Medias**: `client.Media.ListAnimationMedias(pageNumber uint, listID int, searchQuery string) (*Response, error)`
-
-### User
-
-* **User Session**
-  * **Check Session Validity**: `client.User.CheckSessionValidity() (*Response, error)`
-  * **Create A New Session**: `client.User.CreateNewSession(email string, password string) (*UserSessionParameters, *Response, error)`
-  * **Create A New Session (Token Variant)**: `client.User.CreateNewSessionWithToken(email string, password string, token string) (*UserSessionParameters, *Response, error)`
-  * **Destroy A Session**: `client.User.DestroySession() (*Response, error)`
 
 ### Website
 

@@ -29,8 +29,8 @@ type WebsiteBatchPeopleOperationInner struct {
 
 // WebsiteBatchPeopleOperationInnerSearch mapping
 type WebsiteBatchPeopleOperationInnerSearch struct {
-  Filter    []UserFilter  `json:"filter,omitempty"`
-  Operator  string        `json:"operator,omitempty"`
+  Filter    []WebsiteFilter  `json:"filter,omitempty"`
+  Operator  string           `json:"operator,omitempty"`
 }
 
 

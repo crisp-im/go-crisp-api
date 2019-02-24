@@ -114,19 +114,19 @@ type WebsiteCampaignItemSender struct {
 
 // WebsiteCampaignItemRecipients mapping
 type WebsiteCampaignItemRecipients struct {
-  Type      *string        `json:"type,omitempty"`
-  Segments  *[]string      `json:"segments,omitempty"`
-  People    *[]string      `json:"people,omitempty"`
-  Filter    *[]UserFilter  `json:"filter,omitempty"`
+  Type      *string           `json:"type,omitempty"`
+  Segments  *[]string         `json:"segments,omitempty"`
+  People    *[]string         `json:"people,omitempty"`
+  Filter    *[]WebsiteFilter  `json:"filter,omitempty"`
 }
 
 // WebsiteCampaignItemFlow mapping
 type WebsiteCampaignItemFlow struct {
-  LaunchEvent   *string        `json:"launch_event,omitempty"`
-  AssertFilter  *[]UserFilter  `json:"assert_filter,omitempty"`
-  AssertDelay   *uint16        `json:"assert_delay,omitempty"`
-  DeliverOnce   *bool          `json:"deliver_once,omitempty"`
-  DeliverDelay  *uint16        `json:"deliver_delay,omitempty"`
+  LaunchEvent   *string           `json:"launch_event,omitempty"`
+  AssertFilter  *[]WebsiteFilter  `json:"assert_filter,omitempty"`
+  AssertDelay   *uint16           `json:"assert_delay,omitempty"`
+  DeliverOnce   *bool             `json:"deliver_once,omitempty"`
+  DeliverDelay  *uint16           `json:"deliver_delay,omitempty"`
 }
 
 // WebsiteCampaignItemOptions mapping
