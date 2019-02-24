@@ -29,7 +29,7 @@ plugin, _, err := client.Plugin.GetPluginInformation("185fe7ee-7cc6-4b8b-884d-fd
 
 To authenticate against the API, generate your session identifier and session key once using the [Crisp token generation utility](https://go.crisp.chat/account/token/). You'll get a token keypair made of 2 values.
 
-| Keep your token keypair values private, and store them safely for long-term use.
+**Keep your token keypair values private, and store them safely for long-term use.**
 
 Then, add authentication parameters to your `client` instance right after you create it:
 
