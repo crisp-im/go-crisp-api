@@ -307,7 +307,7 @@ func (service *WebsiteService) ListPeopleSegments(websiteID string, pageNumber u
 
 
 // ListPeopleProfiles lists people profiles for website.
-func (service *WebsiteService) ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter) (*[]PeopleProfile, *Response, error) {
+func (service *WebsiteService) ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter, searchText string) (*[]PeopleProfile, *Response, error) {
   searchFilterString := ""
 
   if len(searchFilter) > 0 {
@@ -318,7 +318,7 @@ func (service *WebsiteService) ListPeopleProfiles(websiteID string, pageNumber u
     }
   }
 
-  url := fmt.Sprintf("website/%s/people/profiles/%d?sort_field=%s&sort_order=%s&search_operator=%s&search_filter=%s", websiteID, pageNumber, url.QueryEscape(searchField), url.QueryEscape(searchOrder), url.QueryEscape(searchOperator), url.QueryEscape(searchFilterString))
+  url := fmt.Sprintf("website/%s/people/profiles/%d?sort_field=%s&sort_order=%s&search_operator=%s&search_filter=%s&search_text=%s", websiteID, pageNumber, url.QueryEscape(searchField), url.QueryEscape(searchOrder), url.QueryEscape(searchOperator), url.QueryEscape(searchFilterString), searchText)
   req, _ := service.client.NewRequest("GET", url, nil)
 
   people := new(PeopleProfileListData)
