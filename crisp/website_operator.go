@@ -69,9 +69,9 @@ type WebsiteOperatorEmailTarget struct {
 
 // WebsiteOperatorInvite mapping
 type WebsiteOperatorInvite struct {
-  Email     *string  `json:"email,omitempty"`
-  Role      *string  `json:"role,omitempty"`
-  Password  *string  `json:"password,omitempty"`
+  Email   *string  `json:"email,omitempty"`
+  Role    *string  `json:"role,omitempty"`
+  Verify  *string  `json:"verify,omitempty"`
 }
 
 // WebsiteOperatorEdit mapping
@@ -156,9 +156,9 @@ func (service *WebsiteService) GetWebsiteOperator(websiteID string, userID strin
 
 
 // InviteWebsiteOperator invites an email to join website as operator.
-func (service *WebsiteService) InviteWebsiteOperator(websiteID string, email string, role string, password string) (*Response, error) {
+func (service *WebsiteService) InviteWebsiteOperator(websiteID string, email string, role string, verify string) (*Response, error) {
   url := fmt.Sprintf("website/%s/operator", websiteID)
-  req, _ := service.client.NewRequest("POST", url, WebsiteOperatorInvite{Email: &email, Role: &role, Password: &password})
+  req, _ := service.client.NewRequest("POST", url, WebsiteOperatorInvite{Email: &email, Role: &role, Verify: &verify})
 
   return service.client.Do(req, nil)
 }
