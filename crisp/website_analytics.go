@@ -49,9 +49,10 @@ type WebsiteAnalyticsFilterData struct {
 
 // WebsiteAnalyticsFilter mapping
 type WebsiteAnalyticsFilter struct {
-  Primary    *string  `json:"primary,omitempty"`
-  Secondary  *string  `json:"secondary,omitempty"`
-  Tertiary   *string  `json:"tertiary,omitempty"`
+  Primary     *string  `json:"primary,omitempty"`
+  Secondary   *string  `json:"secondary,omitempty"`
+  Tertiary    *string  `json:"tertiary,omitempty"`
+  Aggregated  *uint32  `json:"aggregated,omitempty"`
 }
 
 // WebsiteAnalyticsClassifierData mapping
@@ -104,8 +105,18 @@ func (service *WebsiteService) AcquireAnalyticsPoints(websiteID string, pointTyp
 
 
 // ListAnalyticsFilters acquires available analytics filters in website.
-func (service *WebsiteService) ListAnalyticsFilters(websiteID string, pointType string, pointMetric string, pageNumber uint) (*[]WebsiteAnalyticsFilter, *Response, error) {
-  url := fmt.Sprintf("website/%s/analytics/%s/%s/filters/%d", websiteID, pointType, pointMetric, pageNumber)
+func (service *WebsiteService) ListAnalyticsFilters(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsFilter, *Response, error) {
+  dateFromFormat, err := dateFrom.UTC().MarshalText()
+  if err != nil {
+    return nil, nil, err
+  }
+
+  dateToFormat, err := dateTo.UTC().MarshalText()
+  if err != nil {
+    return nil, nil, err
+  }
+
+  url := fmt.Sprintf("website/%s/analytics/%s/%s/filters/%d?date_from=%s&date_to=%s", websiteID, pointType, pointMetric, pageNumber, url.QueryEscape(string(dateFromFormat[:])), url.QueryEscape(string(dateToFormat[:])))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   filters := new(WebsiteAnalyticsFilterData)
