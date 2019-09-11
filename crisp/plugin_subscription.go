@@ -26,6 +26,7 @@ type PluginSubscription struct {
   ID            *string                    `json:"id,omitempty"`
   URN           *string                    `json:"urn,omitempty"`
   Type          *string                    `json:"type,omitempty"`
+  Category      *string                    `json:"category,omitempty"`
   Name          *string                    `json:"name,omitempty"`
   Description   *string                    `json:"description,omitempty"`
   Price         *uint16                    `json:"price,omitempty"`
