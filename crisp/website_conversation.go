@@ -660,8 +660,9 @@ type ConversationBrowsingData struct {
 
 // ConversationBrowsing mapping
 type ConversationBrowsing struct {
-  BrowsingID  *string  `json:"browsing_id,omitempty"`
-  Useragent   *string  `json:"useragent,omitempty"`
+  BrowsingID     *string  `json:"browsing_id,omitempty"`
+  BrowsingToken  *string  `json:"browsing_token,omitempty"`
+  Useragent      *string  `json:"useragent,omitempty"`
 }
 
 // ConversationBrowsingAction mapping
