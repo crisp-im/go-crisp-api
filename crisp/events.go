@@ -617,6 +617,7 @@ type EventsCampaignRunning struct {
 type EventsBrowsingRequestInitiated struct {
   EventsGeneric
   EventsBrowsingGeneric
+  BrowsingToken  *string  `json:"browsing_token"`
 }
 
 // EventsBrowsingRequestRejected maps browsing:request:rejected
