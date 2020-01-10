@@ -136,8 +136,7 @@ type EventsReceiveCommonMessageUser struct {
 
 // EventsReceiveCommonMessageOriginal maps a message original
 type EventsReceiveCommonMessageOriginal struct {
-  Type     *string  `json:"type"`
-  Content  *string  `json:"content"`
+  OriginalID  *string  `json:"original_id"`
 }
 
 // EventsReceiveAuthenticationUnauthorized maps unauthorized

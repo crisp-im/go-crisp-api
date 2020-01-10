@@ -230,8 +230,7 @@ type ConversationMessageUser struct {
 
 // ConversationMessageOriginal mapping
 type ConversationMessageOriginal struct {
-  Type     *string  `json:"type,omitempty"`
-  Content  *string  `json:"content,omitempty"`
+  OriginalID  *string  `json:"original_id,omitempty"`
 }
 
 // ConversationMetaDevice mapping
