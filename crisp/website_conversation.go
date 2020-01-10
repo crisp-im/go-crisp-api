@@ -378,28 +378,28 @@ type ConversationEventMessageNewContent struct {
 
 // ConversationTextMessageNew mapping
 type ConversationTextMessageNew struct {
-  Type         string                         `json:"type,omitempty"`
-  From         string                         `json:"from,omitempty"`
-  Origin       string                         `json:"origin,omitempty"`
-  Content      string                         `json:"content,omitempty"`
-  Mentions     []string                       `json:"mentions,omitempty"`
-  Fingerprint  int                            `json:"fingerprint,omitempty"`
-  User         ConversationAllMessageNewUser  `json:"user,omitempty"`
-  Original     *ConversationMessageOriginal   `json:"original,omitempty"`
-  Translated   *bool                          `json:"translated,omitempty"`
+  Type         string                              `json:"type,omitempty"`
+  From         string                              `json:"from,omitempty"`
+  Origin       string                              `json:"origin,omitempty"`
+  Content      string                              `json:"content,omitempty"`
+  Mentions     []string                            `json:"mentions,omitempty"`
+  Fingerprint  int                                 `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+  Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
+  Translated   *bool                               `json:"translated,omitempty"`
 }
 
 // ConversationFileMessageNew mapping
 type ConversationFileMessageNew struct {
-  Type         string                             `json:"type,omitempty"`
-  From         string                             `json:"from,omitempty"`
-  Origin       string                             `json:"origin,omitempty"`
-  Content      ConversationFileMessageNewContent  `json:"content,omitempty"`
-  Mentions     []string                           `json:"mentions,omitempty"`
-  Fingerprint  int                                `json:"fingerprint,omitempty"`
-  User         ConversationAllMessageNewUser      `json:"user,omitempty"`
-  Original     *ConversationMessageOriginal       `json:"original,omitempty"`
-  Translated   *bool                              `json:"translated,omitempty"`
+  Type         string                              `json:"type,omitempty"`
+  From         string                              `json:"from,omitempty"`
+  Origin       string                              `json:"origin,omitempty"`
+  Content      ConversationFileMessageNewContent   `json:"content,omitempty"`
+  Mentions     []string                            `json:"mentions,omitempty"`
+  Fingerprint  int                                 `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser       `json:"user,omitempty"`
+  Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
+  Translated   *bool                               `json:"translated,omitempty"`
 }
 
 // ConversationAnimationMessageNew mapping
@@ -411,7 +411,7 @@ type ConversationAnimationMessageNew struct {
   Mentions     []string                                `json:"mentions,omitempty"`
   Fingerprint  int                                     `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser           `json:"user,omitempty"`
-  Original     *ConversationMessageOriginal            `json:"original,omitempty"`
+  Original     *ConversationAllMessageNewOriginal      `json:"original,omitempty"`
   Translated   *bool                                   `json:"translated,omitempty"`
 }
 
@@ -424,7 +424,7 @@ type ConversationAudioMessageNew struct {
   Mentions     []string                            `json:"mentions,omitempty"`
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
-  Original     *ConversationMessageOriginal        `json:"original,omitempty"`
+  Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
@@ -437,7 +437,7 @@ type ConversationPickerMessageNew struct {
   Mentions     []string                             `json:"mentions,omitempty"`
   Fingerprint  int                                  `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser        `json:"user,omitempty"`
-  Original     *ConversationMessageOriginal         `json:"original,omitempty"`
+  Original     *ConversationAllMessageNewOriginal   `json:"original,omitempty"`
   Translated   *bool                                `json:"translated,omitempty"`
 }
 
@@ -450,7 +450,7 @@ type ConversationFieldMessageNew struct {
   Mentions     []string                            `json:"mentions,omitempty"`
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
-  Original     *ConversationMessageOriginal        `json:"original,omitempty"`
+  Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
@@ -466,7 +466,7 @@ type ConversationEventMessageNew struct {
   Mentions     []string                            `json:"mentions,omitempty"`
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
-  Original     *ConversationMessageOriginal        `json:"original,omitempty"`
+  Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
@@ -513,6 +513,12 @@ type ConversationAllMessageNewUser struct {
   Type      string  `json:"type,omitempty"`
   Nickname  string  `json:"nickname,omitempty"`
   Avatar    string  `json:"avatar,omitempty"`
+}
+
+// ConversationAllMessageNewOriginal mapping
+type ConversationAllMessageNewOriginal struct {
+  Type     *string  `json:"type,omitempty"`
+  Content  *string  `json:"content,omitempty"`
 }
 
 // ConversationComposeMessageNew mapping
