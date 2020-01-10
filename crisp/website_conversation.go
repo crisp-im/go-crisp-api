@@ -95,6 +95,16 @@ type ConversationMeta struct {
   Segments  *[]string                `json:"segments,omitempty"`
 }
 
+// ConversationOriginal mapping
+type ConversationOriginal struct {
+  WebsiteID   *string  `json:"website_id,omitempty"`
+  SessionID   *string  `json:"session_id,omitempty"`
+  OriginalID  *string  `json:"original_id,omitempty"`
+  Type        *string  `json:"type,omitempty"`
+  Content     *string  `json:"content,omitempty"`
+  Timestamp   *uint64  `json:"timestamp,omitempty"`
+}
+
 // ConversationPagesData mapping
 type ConversationPagesData struct {
   Data  *[]ConversationPage  `json:"data,omitempty"`
@@ -517,8 +527,8 @@ type ConversationAllMessageNewUser struct {
 
 // ConversationAllMessageNewOriginal mapping
 type ConversationAllMessageNewOriginal struct {
-  Type     *string  `json:"type,omitempty"`
-  Content  *string  `json:"content,omitempty"`
+  Type     string  `json:"type,omitempty"`
+  Content  string  `json:"content,omitempty"`
 }
 
 // ConversationComposeMessageNew mapping
@@ -620,6 +630,11 @@ type ConversationMetaUpdateDeviceSystemBrowser struct {
   Major    string  `json:"major,omitempty"`
   Version  string  `json:"version,omitempty"`
   Name     string  `json:"name,omitempty"`
+}
+
+// ConversationOriginalData mapping
+type ConversationOriginalData struct {
+  Data  *ConversationOriginal  `json:"data,omitempty"`
 }
 
 // ConversationStateData mapping
@@ -761,6 +776,12 @@ func (instance ConversationMessage) String() string {
 
 // String returns the string representation of ConversationMeta
 func (instance ConversationMeta) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationOriginal
+func (instance ConversationOriginal) String() string {
   return Stringify(instance)
 }
 
@@ -1213,6 +1234,21 @@ func (service *WebsiteService) UpdateConversationMetas(websiteID string, session
   req, _ := service.client.NewRequest("PATCH", url, metas)
 
   return service.client.Do(req, nil)
+}
+
+
+// GetOriginalMessageInConversation resolves conversation original message.
+func (service *WebsiteService) GetOriginalMessageInConversation(websiteID string, sessionID string, originalID string) (*ConversationOriginal, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/original/%s", websiteID, sessionID, originalID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  original := new(ConversationOriginalData)
+  resp, err := service.client.Do(req, original)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return original.Data, resp, err
 }
 
 
