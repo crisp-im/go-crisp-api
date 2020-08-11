@@ -553,6 +553,13 @@ type EventsReceivePeopleProfileCreated struct {
   Email  *string  `json:"email"`
 }
 
+// EventsReceivePeopleProfileUpdated maps people:profile:updated
+type EventsReceivePeopleProfileUpdated struct {
+  EventsGeneric
+  EventsPeopleGeneric
+  Update  *PeopleProfileCard  `json:"update"`
+}
+
 // EventsReceivePeopleProfileRemoved maps people:profile:removed
 type EventsReceivePeopleProfileRemoved EventsReceivePeopleProfileCreated
 
@@ -1523,6 +1530,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("people:profile:created", func(chnl *gosocketio.Channel, evt EventsReceivePeopleProfileCreated) {
     if hdl, ok := register.Handlers["people:profile:created"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("people:profile:updated", func(chnl *gosocketio.Channel, evt EventsReceivePeopleProfileUpdated) {
+    if hdl, ok := register.Handlers["people:profile:updated"]; ok {
       go hdl.callFunc(&evt)
     }
   })
