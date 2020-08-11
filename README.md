@@ -4,9 +4,9 @@
 
 The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, access your agent accounts from your Go code.
 
-Copyright 2018 Crisp IM SARL. See LICENSE for copying information.
+Copyright 2020 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 10/01/2020
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 11/08/2020
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -374,6 +374,7 @@ Available events are listed below:
 
 * **People Events**
   * **People Profile Created**: `people:profile:created`
+  * **People Profile Updated**: `people:profile:updated`
   * **People Profile Removed**: `people:profile:removed`
   * **People Bind Session**: `people:bind:session`
   * **People Sync Profile**: `people:sync:profile`
