@@ -557,6 +557,7 @@ type EventsReceivePeopleProfileCreated struct {
 type EventsReceivePeopleProfileUpdated struct {
   EventsGeneric
   EventsPeopleGeneric
+  Email   *string             `json:"email"`
   Update  *PeopleProfileCard  `json:"update"`
 }
 
