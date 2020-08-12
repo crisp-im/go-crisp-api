@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2020 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 11/08/2020
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 12/08/2020
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -101,7 +101,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Send Email To Website Operators**: `client.Website.SendEmailToWebsiteOperators(websiteID string, email WebsiteOperatorEmail) (*Response, error)`
   * **Get A Website Operator**: `client.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
   * **Invite A Website Operator**: `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, verify string) (*Response, error)`
-  * **Change Operator Role**: `client.Website.ChangeOperatorRole(websiteID string, userID string, role string) (*Response, error)`
+  * **Change Operator Membership**: `client.Website.ChangeOperatorMembership(websiteID string, userID string, role string, title *string) (*Response, error)`
   * **Unlink Operator From Website**: `client.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
 
 * **Website Settings**

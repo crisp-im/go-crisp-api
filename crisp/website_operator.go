@@ -35,6 +35,7 @@ type WebsiteOperator struct {
   FirstName     *string  `json:"first_name,omitempty"`
   LastName      *string  `json:"last_name,omitempty"`
   Role          *string  `json:"role,omitempty"`
+  Title         *string  `json:"title,omitempty"`
   Availability  *string  `json:"availability,omitempty"`
   HasToken      *bool    `json:"has_token,omitempty"`
 }
@@ -76,7 +77,8 @@ type WebsiteOperatorInvite struct {
 
 // WebsiteOperatorEdit mapping
 type WebsiteOperatorEdit struct {
-  Role  *string  `json:"role,omitempty"`
+  Role   *string  `json:"role,omitempty"`
+  Title  *string  `json:"title,omitempty"`
 }
 
 
@@ -164,10 +166,10 @@ func (service *WebsiteService) InviteWebsiteOperator(websiteID string, email str
 }
 
 
-// ChangeOperatorRole changes the role of an existing operator. Useful to downgrade or upgrade an operator from/to owner role.
-func (service *WebsiteService) ChangeOperatorRole(websiteID string, userID string, role string) (*Response, error) {
+// ChangeOperatorMembership changes the membership of an existing operator.
+func (service *WebsiteService) ChangeOperatorMembership(websiteID string, userID string, role string, title *string) (*Response, error) {
   url := fmt.Sprintf("website/%s/operator/%s", websiteID, userID)
-  req, _ := service.client.NewRequest("PATCH", url, WebsiteOperatorEdit{Role: &role})
+  req, _ := service.client.NewRequest("PATCH", url, WebsiteOperatorEdit{Role: &role, Title: title})
 
   return service.client.Do(req, nil)
 }
