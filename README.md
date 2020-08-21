@@ -337,6 +337,7 @@ Available events are listed below:
   * **Session Sync Network**: `session:sync:network`
   * **Session Sync Timezone**: `session:sync:timezone`
   * **Session Sync Locales**: `session:sync:locales`
+  * **Session Sync Rating**: `session:sync:rating`
   * **Session Set State**: `session:set_state`
   * **Session Set Block**: `session:set_block`
   * **Session Set Segments**: `session:set_segments`

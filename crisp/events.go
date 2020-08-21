@@ -339,6 +339,19 @@ type EventsReceiveSessionSyncLocalesData struct {
   Locales  *[]string  `json:"locales,omitempty"`
 }
 
+// EventsReceiveSessionSyncRating maps session:sync:rating
+type EventsReceiveSessionSyncRating struct {
+  EventsGeneric
+  EventsSessionGeneric
+  Rating  *EventsReceiveSessionSyncRatingData  `json:"rating"`
+}
+
+// EventsReceiveSessionSyncRatingData maps session:sync:rating/rating
+type EventsReceiveSessionSyncRatingData struct {
+  Stars    uint8    `json:"stars"`
+  Comment  *string  `json:"comment"`
+}
+
 // EventsReceiveSessionSetState maps session:set_state
 type EventsReceiveSessionSetState struct {
   EventsGeneric
@@ -875,6 +888,12 @@ func (evt EventsReceiveSessionSyncLocales) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveSessionSyncRating
+func (evt EventsReceiveSessionSyncRating) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveSessionSetState
 func (evt EventsReceiveSessionSetState) String() string {
   return Stringify(evt)
@@ -1003,6 +1022,12 @@ func (evt EventsReceiveMessageNotify) String() string {
 
 // String returns the string representation of EventsReceivePeopleProfileCreated
 func (evt EventsReceivePeopleProfileCreated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceivePeopleProfileUpdated
+func (evt EventsReceivePeopleProfileUpdated) String() string {
   return Stringify(evt)
 }
 
@@ -1287,6 +1312,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:sync:locales", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncLocales) {
     if hdl, ok := register.Handlers["session:sync:locales"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:sync:rating", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncRating) {
+    if hdl, ok := register.Handlers["session:sync:rating"]; ok {
       go hdl.callFunc(&evt)
     }
   })
