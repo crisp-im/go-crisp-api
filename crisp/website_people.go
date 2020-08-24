@@ -34,6 +34,17 @@ type PeopleSuggestedSegment struct {
   Count    *int32   `json:"count,omitempty"`
 }
 
+// PeopleSuggestedDataData mapping
+type PeopleSuggestedDataData struct {
+  Data  *[]PeopleSuggestedData  `json:"data,omitempty"`
+}
+
+// PeopleSuggestedData mapping
+type PeopleSuggestedData struct {
+  Key    *string  `json:"key,omitempty"`
+  Count  *int32   `json:"count,omitempty"`
+}
+
 // PeopleProfileData mapping
 type PeopleProfileData struct {
   Data  *PeopleProfile  `json:"data,omitempty"`
@@ -246,6 +257,12 @@ func (instance PeopleSuggestedSegment) String() string {
 }
 
 
+// String returns the string representation of PeopleSuggestedData
+func (instance PeopleSuggestedData) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of PeopleProfile
 func (instance PeopleProfile) String() string {
   return Stringify(instance)
@@ -303,6 +320,21 @@ func (service *WebsiteService) ListSuggestedPeopleSegments(websiteID string, pag
   }
 
   return segments.Data, resp, err
+}
+
+
+// ListSuggestedPeopleDataKeys lists suggested data keys for people.
+func (service *WebsiteService) ListSuggestedPeopleDataKeys(websiteID string, pageNumber uint) (*[]PeopleSuggestedData, *Response, error) {
+  url := fmt.Sprintf("website/%s/people/suggest/data/%d", websiteID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  data := new(PeopleSuggestedDataData)
+  resp, err := service.client.Do(req, data)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return data.Data, resp, err
 }
 
 

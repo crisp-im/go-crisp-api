@@ -304,6 +304,17 @@ type ConversationSuggestedSegment struct {
   Count    *int32   `json:"count,omitempty"`
 }
 
+// ConversationSuggestedDataData mapping
+type ConversationSuggestedDataData struct {
+  Data  *[]ConversationSuggestedData  `json:"data,omitempty"`
+}
+
+// ConversationSuggestedData mapping
+type ConversationSuggestedData struct {
+  Key    *string  `json:"key,omitempty"`
+  Count  *int32   `json:"count,omitempty"`
+}
+
 // ConversationRoutingAssignData mapping
 type ConversationRoutingAssignData struct {
   Data  *ConversationRoutingAssign  `json:"data,omitempty"`
@@ -762,6 +773,12 @@ func (instance ConversationSuggestedSegment) String() string {
 }
 
 
+// String returns the string representation of ConversationSuggestedData
+func (instance ConversationSuggestedData) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of ConversationNew
 func (instance ConversationNew) String() string {
   return Stringify(instance)
@@ -856,6 +873,21 @@ func (service *WebsiteService) ListSuggestedConversationSegments(websiteID strin
   }
 
   return segments.Data, resp, err
+}
+
+
+// ListSuggestedConversationDataKeys lists suggested conversation data keys for website.
+func (service *WebsiteService) ListSuggestedConversationDataKeys(websiteID string, pageNumber uint) (*[]ConversationSuggestedData, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/suggest/data/%d", websiteID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  data := new(ConversationSuggestedDataData)
+  resp, err := service.client.Do(req, data)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return data.Data, resp, err
 }
 
 
