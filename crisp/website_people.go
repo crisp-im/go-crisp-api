@@ -23,13 +23,13 @@ type PeopleStatistics struct {
   Total  *uint64  `json:"total,omitempty"`
 }
 
-// PeopleSegmentData mapping
-type PeopleSegmentData struct {
-  Data  *[]PeopleSegment  `json:"data,omitempty"`
+// PeopleSuggestedSegmentData mapping
+type PeopleSuggestedSegmentData struct {
+  Data  *[]PeopleSuggestedSegment  `json:"data,omitempty"`
 }
 
-// PeopleSegment mapping
-type PeopleSegment struct {
+// PeopleSuggestedSegment mapping
+type PeopleSuggestedSegment struct {
   Segment  *string  `json:"segment,omitempty"`
   Count    *int32   `json:"count,omitempty"`
 }
@@ -240,8 +240,8 @@ func (instance PeopleStatistics) String() string {
 }
 
 
-// String returns the string representation of PeopleSegment
-func (instance PeopleSegment) String() string {
+// String returns the string representation of PeopleSuggestedSegment
+func (instance PeopleSuggestedSegment) String() string {
   return Stringify(instance)
 }
 
@@ -291,12 +291,12 @@ func (service *WebsiteService) GetPeopleStatistics(websiteID string) (*PeopleSta
 }
 
 
-// ListPeopleSegments lists segments in use for people.
-func (service *WebsiteService) ListPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSegment, *Response, error) {
-  url := fmt.Sprintf("website/%s/people/segments/%d", websiteID, pageNumber)
+// ListSuggestedPeopleSegments lists suggested segments for people.
+func (service *WebsiteService) ListSuggestedPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSuggestedSegment, *Response, error) {
+  url := fmt.Sprintf("website/%s/people/suggest/segments/%d", websiteID, pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  segments := new(PeopleSegmentData)
+  segments := new(PeopleSuggestedSegmentData)
   resp, err := service.client.Do(req, segments)
   if err != nil {
     return nil, resp, err

@@ -293,13 +293,13 @@ type ConversationMetaDeviceSystemBrowser struct {
   Name     *string  `json:"name,omitempty"`
 }
 
-// ConversationMetaSegmentData mapping
-type ConversationMetaSegmentData struct {
-  Data  *[]ConversationMetaSegment  `json:"data,omitempty"`
+// ConversationSuggestedSegmentData mapping
+type ConversationSuggestedSegmentData struct {
+  Data  *[]ConversationSuggestedSegment  `json:"data,omitempty"`
 }
 
-// ConversationMetaSegment mapping
-type ConversationMetaSegment struct {
+// ConversationSuggestedSegment mapping
+type ConversationSuggestedSegment struct {
   Segment  *string  `json:"segment,omitempty"`
   Count    *int32   `json:"count,omitempty"`
 }
@@ -756,8 +756,8 @@ func (instance Conversation) String() string {
 }
 
 
-// String returns the string representation of ConversationMetaSegment
-func (instance ConversationMetaSegment) String() string {
+// String returns the string representation of ConversationSuggestedSegment
+func (instance ConversationSuggestedSegment) String() string {
   return Stringify(instance)
 }
 
@@ -844,12 +844,12 @@ func (service *WebsiteService) ListConversations(websiteID string, pageNumber ui
 }
 
 
-// ListConversationSegmentsInMeta lists conversation segments in meta for website.
-func (service *WebsiteService) ListConversationSegmentsInMeta(websiteID string, pageNumber uint) (*[]ConversationMetaSegment, *Response, error) {
-  url := fmt.Sprintf("website/%s/conversations/meta/segments/%d", websiteID, pageNumber)
+// ListSuggestedConversationSegments lists suggested conversation segments for website.
+func (service *WebsiteService) ListSuggestedConversationSegments(websiteID string, pageNumber uint) (*[]ConversationSuggestedSegment, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/suggest/segments/%d", websiteID, pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  segments := new(ConversationMetaSegmentData)
+  segments := new(ConversationSuggestedSegmentData)
   resp, err := service.client.Do(req, segments)
   if err != nil {
     return nil, resp, err

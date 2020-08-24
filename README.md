@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2020 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 21/08/2020
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 24/08/2020
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -145,7 +145,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Conversations**
   * **List Conversations**: `client.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
   * **List Conversations (Search Variant)**: `client.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
-  * **List Conversation Segments In Meta**: `client.Website.ListConversationSegmentsInMeta(websiteID string, pageNumber uint) (*[]ConversationMetaSegment, *Response, error)`
+  * **List Suggested Conversation Segments**: `client.Website.ListSuggestedConversationSegments(websiteID string, pageNumber uint) (*[]ConversationSuggestedSegment, *Response, error)`
 
 * **Website Conversation**
   * **Create A New Conversation**: `client.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
@@ -207,7 +207,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website People**
   * **Get People Statistics**: `client.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
-  * **List People Segments**: `client.Website.ListPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSegment, *Response, error)`
+  * **List Suggested People Segments**: `client.Website.ListSuggestedPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSuggestedSegment, *Response, error)`
   * **List People Profiles**: `client.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter, searchText string) (*[]PeopleProfile, *Response, error)`
   * **Add New People Profile**: `client.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
   * **Check If People Profile Exists**: `client.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`
