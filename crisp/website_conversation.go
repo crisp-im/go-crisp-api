@@ -51,12 +51,6 @@ type ConversationActive struct {
   Last  *uint64  `json:"last,omitempty"`
 }
 
-// ConversationParticipant mapping
-type ConversationParticipant struct {
-  Type    *string  `json:"type,omitempty"`
-  Target  *string  `json:"target,omitempty"`
-}
-
 // ConversationCompose mapping
 type ConversationCompose struct {
   Operator  *ConversationComposeAtom  `json:"operator,omitempty"`
@@ -670,6 +664,27 @@ type ConversationStateUpdate struct {
   State  *string  `json:"state,omitempty"`
 }
 
+// ConversationParticipantsData mapping
+type ConversationParticipantsData struct {
+  Data  *ConversationParticipants  `json:"data,omitempty"`
+}
+
+// ConversationParticipants mapping
+type ConversationParticipants struct {
+  Participants  *[]ConversationParticipant  `json:"participants,omitempty"`
+}
+
+// ConversationParticipant mapping
+type ConversationParticipant struct {
+  Type    *string  `json:"type,omitempty"`
+  Target  *string  `json:"target,omitempty"`
+}
+
+// ConversationParticipantsSave mapping
+type ConversationParticipantsSave struct {
+  Participants  *[]ConversationParticipant  `json:"participants,omitempty"`
+}
+
 // ConversationBlockData mapping
 type ConversationBlockData struct {
   Data  *ConversationBlock  `json:"data,omitempty"`
@@ -812,6 +827,12 @@ func (instance ConversationOriginal) String() string {
 
 // String returns the string representation of ConversationState
 func (instance ConversationState) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationParticipants
+func (instance ConversationParticipants) String() string {
   return Stringify(instance)
 }
 
@@ -1340,6 +1361,30 @@ func (service *WebsiteService) GetConversationState(websiteID string, sessionID 
 func (service *WebsiteService) ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/state", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationStateUpdate{&state})
+
+  return service.client.Do(req, nil)
+}
+
+
+// GetConversationParticipants resolves conversation participants.
+func (service *WebsiteService) GetConversationParticipants(websiteID string, sessionID string) (*ConversationParticipants, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/participants", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  participants := new(ConversationParticipantsData)
+  resp, err := service.client.Do(req, participants)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return participants.Data, resp, err
+}
+
+
+// SaveConversationParticipants saves conversation participants.
+func (service *WebsiteService) SaveConversationParticipants(websiteID string, sessionID string, participants ConversationParticipantsSave) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/participants", websiteID, sessionID)
+  req, _ := service.client.NewRequest("PUT", url, participants)
 
   return service.client.Do(req, nil)
 }

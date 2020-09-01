@@ -186,6 +186,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Conversation Events**: `client.Website.ListConversationEvents(websiteID string, sessionID string, pageNumber uint) (*[]ConversationEvent, *Response, error)`
   * **Get Conversation State**: `client.Website.GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error)`
   * **Change Conversation State**: `client.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
+  * **Get Conversation Participants**: `client.Website.GetConversationParticipants(websiteID string, sessionID string) (*ConversationParticipants, *Response, error)`
+  * **Save Conversation Participants**: `client.Website.SaveConversationParticipants(websiteID string, sessionID string, participants ConversationParticipantsSave) (*Response, error)`
   * **Get Block Status For Conversation**: `client.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
   * **Block Incoming Messages For Conversation**: `client.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
   * **Request Email Transcript For Conversation**: `client.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error)`
