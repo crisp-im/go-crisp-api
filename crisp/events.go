@@ -392,6 +392,19 @@ type EventsReceiveSessionSetOpenStateOperator struct {
   EventsUserGeneric
 }
 
+// EventsReceiveSessionSetParticipants maps session:set_participants
+type EventsReceiveSessionSetParticipants struct {
+  EventsGeneric
+  EventsSessionGeneric
+  Participants  *[]EventsReceiveSessionSetParticipantsOne  `json:"participants"`
+}
+
+// EventsReceiveSessionSetParticipantsOne maps session:set_participants/participants
+type EventsReceiveSessionSetParticipantsOne struct {
+  Type    *string  `json:"type"`
+  Target  *string  `json:"target"`
+}
+
 // EventsReceiveSessionSetMentions maps session:set_mentions
 type EventsReceiveSessionSetMentions struct {
   EventsGeneric
@@ -924,6 +937,12 @@ func (evt EventsReceiveSessionSetClosed) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveSessionSetParticipants
+func (evt EventsReceiveSessionSetParticipants) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveSessionSetMentions
 func (evt EventsReceiveSessionSetMentions) String() string {
   return Stringify(evt)
@@ -1348,6 +1367,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:set_closed", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetClosed) {
     if hdl, ok := register.Handlers["session:set_closed"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:set_participants", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetParticipants) {
+    if hdl, ok := register.Handlers["session:set_participants"]; ok {
       go hdl.callFunc(&evt)
     }
   })
