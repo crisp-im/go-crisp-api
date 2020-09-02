@@ -529,7 +529,8 @@ type EventsReceiveEventMessage struct {
 
 // EventsReceiveEventMessageContent maps message:{send,received}/content (event type)
 type EventsReceiveEventMessageContent struct {
-  Namespace  string  `json:"namespace"`
+  Namespace  string   `json:"namespace"`
+  Text       *string  `json:"text,omitempty"`
 }
 
 // EventsReceiveMessageComposeSend maps message:compose:send

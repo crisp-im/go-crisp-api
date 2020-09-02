@@ -213,6 +213,7 @@ type ConversationMessageNoteContent string
 // ConversationMessageEventContent mapping
 type ConversationMessageEventContent struct {
   Namespace  *string  `json:"namespace"`
+  Text       *string  `json:"text,omitempty"`
 }
 
 // ConversationMessagePreview mapping
