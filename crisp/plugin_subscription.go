@@ -34,6 +34,10 @@ type PluginSubscription struct {
   Icon          *string                    `json:"icon,omitempty"`
   Banner        *string                    `json:"banner,omitempty"`
   Screenshots   *[]string                  `json:"screenshots,omitempty"`
+  WebsiteURL       *string                 `json:"website_url,omitempty"`
+  ContactURL       *string                 `json:"contact_url,omitempty"`
+  TermsURL       *string                   `json:"terms_url,omitempty"`
+  PrivacyURL       *string                 `json:"privacy_url,omitempty"`
   HelpURL       *string                    `json:"help_url,omitempty"`
   VideoURL      *string                    `json:"video_url,omitempty"`
   Configurable  *bool                      `json:"configurable,omitempty"`
