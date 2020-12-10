@@ -32,7 +32,7 @@ jobs:
             ~/go/pkg/mod
             ~/.cache/go-build
             ${{ env.GOROOT }}
-          key: ${{ runner.os }}-go
+          key: ${{ runner.os }}-go-${{ matrix.go-version }}
 
       - name: Install dependencies
         run: go get ./crisp
