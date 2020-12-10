@@ -35,10 +35,10 @@ jobs:
           key: ${{ runner.os }}-go
 
       - name: Install dependencies
-        run: go get ./vigil_reporter
+        run: go get ./crisp
 
       - name: Build code
-        run: go build ./vigil_reporter
+        run: go build ./crisp
 
       - name: Test code
-        run: go test ./vigil_reporter
+        run: go test ./crisp
