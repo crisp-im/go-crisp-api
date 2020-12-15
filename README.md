@@ -21,8 +21,8 @@ access different parts of the Crisp API. For example:
 ```go
 client := crisp.New()
 
-// Get plugin information
-plugin, _, err := client.Plugin.GetPluginInformation("185fe7ee-7cc6-4b8b-884d-fda9df632c13")
+// List plugin subscriptions for website
+subscriptions, _, err := client.Plugin.ListSubscriptionsForWebsite("5d02a3ef-ea86-47b8-a6eb-809f787abab5")
 ```
 
 ## Authentication
