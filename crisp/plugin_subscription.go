@@ -28,15 +28,15 @@ type PluginSubscription struct {
   Type          *string                    `json:"type,omitempty"`
   Category      *string                    `json:"category,omitempty"`
   Name          *string                    `json:"name,omitempty"`
-  Description   *string                    `json:"description,omitempty"`
+  Summary       *string                    `json:"summary,omitempty"`
   Price         *uint16                    `json:"price,omitempty"`
   Plans         *[]PluginSubscriptionPlan  `json:"plans,omitempty"`
   Icon          *string                    `json:"icon,omitempty"`
   Banner        *string                    `json:"banner,omitempty"`
-  WebsiteURL       *string                 `json:"website_url,omitempty"`
-  ContactURL       *string                 `json:"contact_url,omitempty"`
-  TermsURL       *string                   `json:"terms_url,omitempty"`
-  PrivacyURL       *string                 `json:"privacy_url,omitempty"`
+  WebsiteURL    *string                    `json:"website_url,omitempty"`
+  ContactURL    *string                    `json:"contact_url,omitempty"`
+  TermsURL      *string                    `json:"terms_url,omitempty"`
+  PrivacyURL    *string                    `json:"privacy_url,omitempty"`
   HelpURL       *string                    `json:"help_url,omitempty"`
   VideoURL      *string                    `json:"video_url,omitempty"`
   Configurable  *bool                      `json:"configurable,omitempty"`
