@@ -51,6 +51,8 @@ All the available Crisp API resources are fully implemented. **Programmatic meth
 
 Thus, it is straightforward to look for them in the library while reading the [API Reference](https://docs.crisp.chat/api/v1/).
 
+**⚠️ Note that, depending on your authentication token tier, which is either `user` or `plugin`, you may not be allowed to use all methods from the library. When in doubt, always refer to the [API Reference](https://docs.crisp.chat/api/v1/) and check the allowed tiers for the API route.**
+
 In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.New()` and then call eg: `client.Website.ListWebsiteOperators(websiteID)`.
 
 When calling a method that writes data to the API (eg: `client.Website.CreateWebsite()`), you need to build an account instance and submit it this way:
