@@ -51,7 +51,7 @@ All the available Crisp API resources are fully implemented. **Programmatic meth
 
 Thus, it is straightforward to look for them in the library while reading the [API Reference](https://docs.crisp.chat/api/v1/).
 
-**⚠️ Note that, depending on your authentication token tier, which is either `user` or `plugin`, you may not be allowed to use all methods from the library. When in doubt, always refer to the [API Reference](https://docs.crisp.chat/api/v1/) and check the allowed tiers for the API route.**
+**⚠️ Note that, depending on your authentication token tier, which is either `user` or `plugin`, you may not be allowed to use all methods from the library. When in doubt, refer to the library method descriptions below.**
 
 In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.New()` and then call eg: `client.Website.ListWebsiteOperators(websiteID)`.
 
@@ -71,185 +71,185 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 ### Bucket
 
 * **Bucket URL**
-  * **Generate Bucket URL**: `client.Bucket.GenerateBucketURL(bucketData BucketURLRequest) (*Response, error)`
+  * **Generate Bucket URL** [`user`, `plugin`]: `client.Bucket.GenerateBucketURL(bucketData BucketURLRequest) (*Response, error)`
 
 ### Media
 
 * **Media Animation**
-  * **List Animation Medias**: `client.Media.ListAnimationMedias(pageNumber uint, listID int, searchQuery string) (*Response, error)`
+  * **List Animation Medias** [`user`, `plugin`]: `client.Media.ListAnimationMedias(pageNumber uint, listID int, searchQuery string) (*Response, error)`
 
 ### Website
 
 * **Website Base**
-  * **Check If Website Exists**: `client.Website.CheckWebsiteExists(domain string) (*Response, error)`
-  * **Create Website**: `client.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
-  * **Get A Website**: `client.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
-  * **Delete A Website**: `client.Website.DeleteWebsite(websiteID string, verify string) (*Response, error)`
+  * **Check If Website Exists** [`user`, `plugin`]: `client.Website.CheckWebsiteExists(domain string) (*Response, error)`
+  * **Create Website** [`user`, `plugin`]: `client.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
+  * **Get A Website** [`user`, `plugin`]: `client.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
+  * **Delete A Website** [`user`, `plugin`]: `client.Website.DeleteWebsite(websiteID string, verify string) (*Response, error)`
 
 * **Website Batch**
-  * **Batch Resolve Conversations**: `client.Website.BatchResolveConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Batch Read Conversations**: `client.Website.BatchReadConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Batch Remove Conversations**: `client.Website.BatchRemoveConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Batch Remove People**: `client.Website.BatchRemovePeople(websiteID string, people WebsiteBatchPeopleOperationInner) (*Response, error)`
+  * **Batch Resolve Conversations** [`user`, `plugin`]: `client.Website.BatchResolveConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Batch Read Conversations** [`user`, `plugin`]: `client.Website.BatchReadConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Batch Remove Conversations** [`user`, `plugin`]: `client.Website.BatchRemoveConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Batch Remove People** [`user`, `plugin`]: `client.Website.BatchRemovePeople(websiteID string, people WebsiteBatchPeopleOperationInner) (*Response, error)`
 
 * **Website Availability**
-  * **Get Website Availability Status**: `client.Website.GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error)`
-  * **List Website Operator Availabilities**: `client.Website.ListWebsiteOperatorAvailabilities(websiteID string) (*[]WebsiteAvailabilityOperator, *Response, error)`
+  * **Get Website Availability Status** [`user`, `plugin`]: `client.Website.GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error)`
+  * **List Website Operator Availabilities** [`user`, `plugin`]: `client.Website.ListWebsiteOperatorAvailabilities(websiteID string) (*[]WebsiteAvailabilityOperator, *Response, error)`
 
 * **Website Operator**
-  * **List Website Operators**: `client.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
-  * **List Last Active Website Operators**: `client.Website.ListLastActiveWebsiteOperators(websiteID string) (*[]WebsiteOperatorsLastActiveListOne, *Response, error)`
-  * **Flush Last Active Website Operators**: `client.Website.FlushLastActiveWebsiteOperators(websiteID string) (*Response, error)`
-  * **Send Email To Website Operators**: `client.Website.SendEmailToWebsiteOperators(websiteID string, email WebsiteOperatorEmail) (*Response, error)`
-  * **Get A Website Operator**: `client.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
-  * **Invite A Website Operator**: `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, verify string) (*Response, error)`
-  * **Change Operator Membership**: `client.Website.ChangeOperatorMembership(websiteID string, userID string, role string, title *string) (*Response, error)`
-  * **Unlink Operator From Website**: `client.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
+  * **List Website Operators** [`user`, `plugin`]: `client.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
+  * **List Last Active Website Operators** [`user`, `plugin`]: `client.Website.ListLastActiveWebsiteOperators(websiteID string) (*[]WebsiteOperatorsLastActiveListOne, *Response, error)`
+  * **Flush Last Active Website Operators** [`user`, `plugin`]: `client.Website.FlushLastActiveWebsiteOperators(websiteID string) (*Response, error)`
+  * **Send Email To Website Operators** [`user`, `plugin`]: `client.Website.SendEmailToWebsiteOperators(websiteID string, email WebsiteOperatorEmail) (*Response, error)`
+  * **Get A Website Operator** [`user`, `plugin`]: `client.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
+  * **Invite A Website Operator** [`user`, `plugin`]: `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, verify string) (*Response, error)`
+  * **Change Operator Membership** [`user`, `plugin`]: `client.Website.ChangeOperatorMembership(websiteID string, userID string, role string, title *string) (*Response, error)`
+  * **Unlink Operator From Website** [`user`, `plugin`]: `client.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
 
 * **Website Settings**
-  * **Get Website Settings**: `client.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
-  * **Update Website Settings**: `client.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error)`
+  * **Get Website Settings** [`user`, `plugin`]: `client.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
+  * **Update Website Settings** [`user`, `plugin`]: `client.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error)`
 
 * **Website Visitors**
-  * **Count Visitors**: `client.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
-  * **List Visitors**: `client.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
-  * **Pinpoint Visitors On A Map (Wide Variant)**: `client.Website.PinpointVisitorsOnMapWide(websiteID string) (*[]WebsiteVisitorsMapPoint, *Response, error)`
-  * **Pinpoint Visitors On A Map (Area Variant)**: `client.Website.PinpointVisitorsOnMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*[]WebsiteVisitorsMapPoint, *Response, error)`
-  * **Get Session Identifier From Token**: `client.Website.GetSessionIdentifierFromToken(websiteID string, tokenID string) (*WebsiteVisitorsToken, *Response, error)`
-  * **Count Blocked Visitors**: `client.Website.CountBlockedVisitors(websiteID string) (*[]WebsiteVisitorsBlocked, *Response, error)`
-  * **Count Blocked Visitors In Rule**: `client.Website.CountBlockedVisitorsInRule(websiteID string, rule string) (*WebsiteVisitorsBlocked, *Response, error)`
-  * **Clear Blocked Visitors In Rule**: `client.Website.ClearBlockedVisitorsInRule(websiteID string, rule string) (*Response, error)`
+  * **Count Visitors** [`user`, `plugin`]: `client.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
+  * **List Visitors** [`user`, `plugin`]: `client.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
+  * **Pinpoint Visitors On A Map (Wide Variant)** [`user`, `plugin`]: `client.Website.PinpointVisitorsOnMapWide(websiteID string) (*[]WebsiteVisitorsMapPoint, *Response, error)`
+  * **Pinpoint Visitors On A Map (Area Variant)** [`user`, `plugin`]: `client.Website.PinpointVisitorsOnMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*[]WebsiteVisitorsMapPoint, *Response, error)`
+  * **Get Session Identifier From Token** [`user`, `plugin`]: `client.Website.GetSessionIdentifierFromToken(websiteID string, tokenID string) (*WebsiteVisitorsToken, *Response, error)`
+  * **Count Blocked Visitors** [`user`, `plugin`]: `client.Website.CountBlockedVisitors(websiteID string) (*[]WebsiteVisitorsBlocked, *Response, error)`
+  * **Count Blocked Visitors In Rule** [`user`, `plugin`]: `client.Website.CountBlockedVisitorsInRule(websiteID string, rule string) (*WebsiteVisitorsBlocked, *Response, error)`
+  * **Clear Blocked Visitors In Rule** [`user`, `plugin`]: `client.Website.ClearBlockedVisitorsInRule(websiteID string, rule string) (*Response, error)`
 
 * **Website Campaigns**
-  * **List Campaigns**: `client.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
-  * **List Campaigns (Filter Variant)**: `client.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
-  * **List Campaign Templates**: `client.Website.ListCampaignTemplates(websiteID string, pageNumber uint) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
-  * **Create A New Campaign Template**: `client.Website.CreateNewCampaignTemplate(websiteID string, templateFormat string, templateName string) (*WebsiteCampaignTemplateNew, *Response, error)`
-  * **Check If Campaign Template Exists**: `client.Website.CheckCampaignTemplateExists(websiteID string, templateID string) (*Response, error)`
-  * **Get A Campaign Template**: `client.Website.GetCampaignTemplate(websiteID string, templateID string) (*WebsiteCampaignTemplateItem, *Response, error)`
-  * **Save A Campaign Template**: `client.Website.SaveCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
-  * **Update A Campaign Template**: `client.Website.UpdateCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
-  * **Remove A Campaign Template**: `client.Website.RemoveCampaignTemplate(websiteID string, templateID string) (*Response, error)`
+  * **List Campaigns** [`user`, `plugin`]: `client.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaigns (Filter Variant)** [`user`, `plugin`]: `client.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaign Templates** [`user`, `plugin`]: `client.Website.ListCampaignTemplates(websiteID string, pageNumber uint) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
+  * **Create A New Campaign Template** [`user`, `plugin`]: `client.Website.CreateNewCampaignTemplate(websiteID string, templateFormat string, templateName string) (*WebsiteCampaignTemplateNew, *Response, error)`
+  * **Check If Campaign Template Exists** [`user`, `plugin`]: `client.Website.CheckCampaignTemplateExists(websiteID string, templateID string) (*Response, error)`
+  * **Get A Campaign Template** [`user`, `plugin`]: `client.Website.GetCampaignTemplate(websiteID string, templateID string) (*WebsiteCampaignTemplateItem, *Response, error)`
+  * **Save A Campaign Template** [`user`, `plugin`]: `client.Website.SaveCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
+  * **Update A Campaign Template** [`user`, `plugin`]: `client.Website.UpdateCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
+  * **Remove A Campaign Template** [`user`, `plugin`]: `client.Website.RemoveCampaignTemplate(websiteID string, templateID string) (*Response, error)`
 
 * **Website Campaign**
-  * **Create A New Campaign**: `client.Website.CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error)`
-  * **Check If Campaign Exists**: `client.Website.CheckCampaignExists(websiteID string, campaignID string) (*Response, error)`
-  * **Get A Campaign**: `client.Website.GetCampaign(websiteID string, campaignID string) (*WebsiteCampaignItem, *Response, error)`
-  * **Save A Campaign**: `client.Website.SaveCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
-  * **Update A Campaign**: `client.Website.UpdateCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
-  * **Remove A Campaign**: `client.Website.RemoveCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Dispatch A Campaign**: `client.Website.DispatchCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Resume A Campaign**: `client.Website.ResumeCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Pause A Campaign**: `client.Website.PauseCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Test A Campaign**: `client.Website.TestCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **List Campaign Statistics**: `client.Website.ListCampaignStatistics(websiteID string, campaignID string, action string, pageNumber uint) (*[]WebsiteCampaignStatistic, *Response, error)`
+  * **Create A New Campaign** [`user`, `plugin`]: `client.Website.CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error)`
+  * **Check If Campaign Exists** [`user`, `plugin`]: `client.Website.CheckCampaignExists(websiteID string, campaignID string) (*Response, error)`
+  * **Get A Campaign** [`user`, `plugin`]: `client.Website.GetCampaign(websiteID string, campaignID string) (*WebsiteCampaignItem, *Response, error)`
+  * **Save A Campaign** [`user`, `plugin`]: `client.Website.SaveCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
+  * **Update A Campaign** [`user`, `plugin`]: `client.Website.UpdateCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
+  * **Remove A Campaign** [`user`, `plugin`]: `client.Website.RemoveCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Dispatch A Campaign** [`user`, `plugin`]: `client.Website.DispatchCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Resume A Campaign** [`user`, `plugin`]: `client.Website.ResumeCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Pause A Campaign** [`user`, `plugin`]: `client.Website.PauseCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Test A Campaign** [`user`, `plugin`]: `client.Website.TestCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **List Campaign Statistics** [`user`, `plugin`]: `client.Website.ListCampaignStatistics(websiteID string, campaignID string, action string, pageNumber uint) (*[]WebsiteCampaignStatistic, *Response, error)`
 
 * **Website Conversations**
-  * **List Conversations**: `client.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
-  * **List Conversations (Search Variant)**: `client.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
-  * **List Suggested Conversation Segments**: `client.Website.ListSuggestedConversationSegments(websiteID string, pageNumber uint) (*[]ConversationSuggestedSegment, *Response, error)`
-  * **List Suggested Conversation Data Keys**: `client.Website.ListSuggestedConversationDataKeys(websiteID string, pageNumber uint) (*[]ConversationSuggestedData, *Response, error)`
+  * **List Conversations** [`user`, `plugin`]: `client.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
+  * **List Conversations (Search Variant)** [`user`, `plugin`]: `client.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
+  * **List Suggested Conversation Segments** [`user`, `plugin`]: `client.Website.ListSuggestedConversationSegments(websiteID string, pageNumber uint) (*[]ConversationSuggestedSegment, *Response, error)`
+  * **List Suggested Conversation Data Keys** [`user`, `plugin`]: `client.Website.ListSuggestedConversationDataKeys(websiteID string, pageNumber uint) (*[]ConversationSuggestedData, *Response, error)`
 
 * **Website Conversation**
-  * **Create A New Conversation**: `client.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
-  * **Check If Conversation Exists**: `client.Website.CheckConversationExists(websiteID string, sessionID string) (*Response, error)`
-  * **Get A Conversation**: `client.Website.GetConversation(websiteID string, sessionID string) (*Conversation, *Response, error)`
-  * **Remove A Conversation**: `client.Website.RemoveConversation(websiteID string, sessionID string) (*Response, error)`
-  * **Initiate A Conversation With Existing Session**: `client.Website.InitiateConversationWithExistingSession(websiteID string, sessionID string) (*Response, error)`
-  * **Get Messages In Conversation (Last Variant)**: `client.Website.GetMessagesInConversationLast(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error)`
-  * **Get Messages In Conversation (Before Variant)**: `client.Website.GetMessagesInConversationBefore(websiteID string, sessionID string, timestampBefore uint32) (*[]ConversationMessage, *Response, error)`
-  * **Send A Message In Conversation (Text Variant)**: `client.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (File Variant)**: `client.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Animation Variant)**: `client.Website.SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Audio Variant)**: `client.Website.SendAudioMessageInConversation(websiteID string, sessionID string, message ConversationAudioMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Picker Variant)**: `client.Website.SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Field Variant)**: `client.Website.SendFieldMessageInConversation(websiteID string, sessionID string, message ConversationFieldMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Note Variant)**: `client.Website.SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Event Variant)**: `client.Website.SendEventMessageInConversation(websiteID string, sessionID string, message ConversationEventMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Get A Message In Conversation**: `client.Website.GetMessageInConversation(websiteID string, sessionID string, fingerprint int) (*ConversationMessage, *Response, error)`
-  * **Update A Message In Conversation (Text Variant)**: `client.Website.UpdateTextMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error)`
-  * **Update A Message In Conversation (File Variant)**: `client.Website.UpdateFileMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFileMessageNewContent) (*Response, error)`
-  * **Update A Message In Conversation (Animation Variant)**: `client.Website.UpdateAnimationMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationAnimationMessageNewContent) (*Response, error)`
-  * **Update A Message In Conversation (Audio Variant)**: `client.Website.UpdateAudioMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationAudioMessageNewContent) (*Response, error)`
-  * **Update A Message In Conversation (Picker Variant)**: `client.Website.UpdatePickerMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationPickerMessageNewContent) (*Response, error)`
-  * **Update A Message In Conversation (Field Variant)**: `client.Website.UpdateFieldMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFieldMessageNewContent) (*Response, error)`
-  * **Update A Message In Conversation (Note Variant)**: `client.Website.UpdateNoteMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error)`
-  * **Update A Message In Conversation (Event Variant)**: `client.Website.UpdateEventMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationEventMessageNewContent) (*Response, error)`
-  * **Compose A Message In Conversation**: `client.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
-  * **Mark Messages As Read In Conversation**: `client.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
-  * **Mark Messages As Delivered In Conversation**: `client.Website.MarkMessagesDeliveredInConversation(websiteID string, sessionID string, delivered ConversationDeliveredMessageMark) (*Response, error)`
-  * **Update Conversation Open State**: `client.Website.UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error)`
-  * **Get Conversation Routing Assign**: `client.Website.GetConversationRoutingAssign(websiteID string, sessionID string) (*ConversationRoutingAssign, *Response, error)`
-  * **Assign Conversation Routing**: `client.Website.AssignConversationRouting(websiteID string, sessionID string, assign ConversationRoutingAssignUpdate) (*Response, error)`
-  * **Get Conversation Metas**: `client.Website.GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error)`
-  * **Update Conversation Metas**: `client.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
-  * **Get An Original Message In Conversation**: `client.Website.GetOriginalMessageInConversation(websiteID string, sessionID string, originalID string) (*ConversationOriginal, *Response, error)`
-  * **List Conversation Pages**: `client.Website.ListConversationPages(websiteID string, sessionID string, pageNumber uint) (*[]ConversationPage, *Response, error)`
-  * **List Conversation Events**: `client.Website.ListConversationEvents(websiteID string, sessionID string, pageNumber uint) (*[]ConversationEvent, *Response, error)`
-  * **Get Conversation State**: `client.Website.GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error)`
-  * **Change Conversation State**: `client.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
-  * **Get Conversation Participants**: `client.Website.GetConversationParticipants(websiteID string, sessionID string) (*ConversationParticipants, *Response, error)`
-  * **Save Conversation Participants**: `client.Website.SaveConversationParticipants(websiteID string, sessionID string, participants ConversationParticipantsSave) (*Response, error)`
-  * **Get Block Status For Conversation**: `client.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
-  * **Block Incoming Messages For Conversation**: `client.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
-  * **Request Email Transcript For Conversation**: `client.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error)`
-  * **Request Chatbox Binding Purge For Conversation**: `client.Website.RequestChatboxBindingPurgeForConversation(websiteID string, sessionID string) (*Response, error)`
-  * **List Browsing Sessions For Conversation**: `client.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
-  * **Initiate Browsing Session For Conversation**: `client.Website.InitiateBrowsingSessionForConversation(websiteID string, sessionID string) (*Response, error)`
-  * **Send Action To An Existing Browsing Session**: `client.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
-  * **Debug Existing Browsing Session**: `client.Website.DebugExistingBrowsingSession(websiteID string, sessionID string, browsingID string, debug ConversationBrowsingDebug) (*Response, error)`
-  * **Assist Existing Browsing Session**: `client.Website.AssistExistingBrowsingSession(websiteID string, sessionID string, browsingID string, assist ConversationBrowsingAssist) (*Response, error)`
-  * **Initiate New Call Session For Conversation**: `client.Website.InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
-  * **Get Ongoing Call Session For Conversation**: `client.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
-  * **Abort Ongoing Call Session For Conversation**: `client.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error)`
-  * **Transmit Signaling On Ongoing Call Session**: `client.Website.TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error)`
-  * **Schedule A Reminder For Conversation**: `client.Website.ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error)`
+  * **Create A New Conversation** [`user`, `plugin`]: `client.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
+  * **Check If Conversation Exists** [`user`, `plugin`]: `client.Website.CheckConversationExists(websiteID string, sessionID string) (*Response, error)`
+  * **Get A Conversation** [`user`, `plugin`]: `client.Website.GetConversation(websiteID string, sessionID string) (*Conversation, *Response, error)`
+  * **Remove A Conversation** [`user`, `plugin`]: `client.Website.RemoveConversation(websiteID string, sessionID string) (*Response, error)`
+  * **Initiate A Conversation With Existing Session** [`user`, `plugin`]: `client.Website.InitiateConversationWithExistingSession(websiteID string, sessionID string) (*Response, error)`
+  * **Get Messages In Conversation (Last Variant)** [`user`, `plugin`]: `client.Website.GetMessagesInConversationLast(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error)`
+  * **Get Messages In Conversation (Before Variant)** [`user`, `plugin`]: `client.Website.GetMessagesInConversationBefore(websiteID string, sessionID string, timestampBefore uint32) (*[]ConversationMessage, *Response, error)`
+  * **Send A Message In Conversation (Text Variant)** [`user`, `plugin`]: `client.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*ConversationMessageDispatched, *Response, error)`
+  * **Send A Message In Conversation (File Variant)** [`user`, `plugin`]: `client.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*ConversationMessageDispatched, *Response, error)`
+  * **Send A Message In Conversation (Animation Variant)** [`user`, `plugin`]: `client.Website.SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*ConversationMessageDispatched, *Response, error)`
+  * **Send A Message In Conversation (Audio Variant)** [`user`, `plugin`]: `client.Website.SendAudioMessageInConversation(websiteID string, sessionID string, message ConversationAudioMessageNew) (*ConversationMessageDispatched, *Response, error)`
+  * **Send A Message In Conversation (Picker Variant)** [`user`, `plugin`]: `client.Website.SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*ConversationMessageDispatched, *Response, error)`
+  * **Send A Message In Conversation (Field Variant)** [`user`, `plugin`]: `client.Website.SendFieldMessageInConversation(websiteID string, sessionID string, message ConversationFieldMessageNew) (*ConversationMessageDispatched, *Response, error)`
+  * **Send A Message In Conversation (Note Variant)** [`user`, `plugin`]: `client.Website.SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*ConversationMessageDispatched, *Response, error)`
+  * **Send A Message In Conversation (Event Variant)** [`user`, `plugin`]: `client.Website.SendEventMessageInConversation(websiteID string, sessionID string, message ConversationEventMessageNew) (*ConversationMessageDispatched, *Response, error)`
+  * **Get A Message In Conversation** [`user`, `plugin`]: `client.Website.GetMessageInConversation(websiteID string, sessionID string, fingerprint int) (*ConversationMessage, *Response, error)`
+  * **Update A Message In Conversation (Text Variant)** [`user`, `plugin`]: `client.Website.UpdateTextMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error)`
+  * **Update A Message In Conversation (File Variant)** [`user`, `plugin`]: `client.Website.UpdateFileMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFileMessageNewContent) (*Response, error)`
+  * **Update A Message In Conversation (Animation Variant)** [`user`, `plugin`]: `client.Website.UpdateAnimationMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationAnimationMessageNewContent) (*Response, error)`
+  * **Update A Message In Conversation (Audio Variant)** [`user`, `plugin`]: `client.Website.UpdateAudioMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationAudioMessageNewContent) (*Response, error)`
+  * **Update A Message In Conversation (Picker Variant)** [`user`, `plugin`]: `client.Website.UpdatePickerMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationPickerMessageNewContent) (*Response, error)`
+  * **Update A Message In Conversation (Field Variant)** [`user`, `plugin`]: `client.Website.UpdateFieldMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFieldMessageNewContent) (*Response, error)`
+  * **Update A Message In Conversation (Note Variant)** [`user`, `plugin`]: `client.Website.UpdateNoteMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error)`
+  * **Update A Message In Conversation (Event Variant)** [`user`, `plugin`]: `client.Website.UpdateEventMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationEventMessageNewContent) (*Response, error)`
+  * **Compose A Message In Conversation** [`user`, `plugin`]: `client.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
+  * **Mark Messages As Read In Conversation** [`user`, `plugin`]: `client.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
+  * **Mark Messages As Delivered In Conversation** [`user`, `plugin`]: `client.Website.MarkMessagesDeliveredInConversation(websiteID string, sessionID string, delivered ConversationDeliveredMessageMark) (*Response, error)`
+  * **Update Conversation Open State** [`user`, `plugin`]: `client.Website.UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error)`
+  * **Get Conversation Routing Assign** [`user`, `plugin`]: `client.Website.GetConversationRoutingAssign(websiteID string, sessionID string) (*ConversationRoutingAssign, *Response, error)`
+  * **Assign Conversation Routing** [`user`, `plugin`]: `client.Website.AssignConversationRouting(websiteID string, sessionID string, assign ConversationRoutingAssignUpdate) (*Response, error)`
+  * **Get Conversation Metas** [`user`, `plugin`]: `client.Website.GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error)`
+  * **Update Conversation Metas** [`user`, `plugin`]: `client.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
+  * **Get An Original Message In Conversation** [`user`, `plugin`]: `client.Website.GetOriginalMessageInConversation(websiteID string, sessionID string, originalID string) (*ConversationOriginal, *Response, error)`
+  * **List Conversation Pages** [`user`, `plugin`]: `client.Website.ListConversationPages(websiteID string, sessionID string, pageNumber uint) (*[]ConversationPage, *Response, error)`
+  * **List Conversation Events** [`user`, `plugin`]: `client.Website.ListConversationEvents(websiteID string, sessionID string, pageNumber uint) (*[]ConversationEvent, *Response, error)`
+  * **Get Conversation State** [`user`, `plugin`]: `client.Website.GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error)`
+  * **Change Conversation State** [`user`, `plugin`]: `client.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
+  * **Get Conversation Participants** [`user`, `plugin`]: `client.Website.GetConversationParticipants(websiteID string, sessionID string) (*ConversationParticipants, *Response, error)`
+  * **Save Conversation Participants** [`user`, `plugin`]: `client.Website.SaveConversationParticipants(websiteID string, sessionID string, participants ConversationParticipantsSave) (*Response, error)`
+  * **Get Block Status For Conversation** [`user`, `plugin`]: `client.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
+  * **Block Incoming Messages For Conversation** [`user`, `plugin`]: `client.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
+  * **Request Email Transcript For Conversation** [`user`, `plugin`]: `client.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error)`
+  * **Request Chatbox Binding Purge For Conversation** [`user`, `plugin`]: `client.Website.RequestChatboxBindingPurgeForConversation(websiteID string, sessionID string) (*Response, error)`
+  * **List Browsing Sessions For Conversation** [`user`, `plugin`]: `client.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
+  * **Initiate Browsing Session For Conversation** [`user`, `plugin`]: `client.Website.InitiateBrowsingSessionForConversation(websiteID string, sessionID string) (*Response, error)`
+  * **Send Action To An Existing Browsing Session** [`user`, `plugin`]: `client.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
+  * **Debug Existing Browsing Session** [`user`, `plugin`]: `client.Website.DebugExistingBrowsingSession(websiteID string, sessionID string, browsingID string, debug ConversationBrowsingDebug) (*Response, error)`
+  * **Assist Existing Browsing Session** [`user`, `plugin`]: `client.Website.AssistExistingBrowsingSession(websiteID string, sessionID string, browsingID string, assist ConversationBrowsingAssist) (*Response, error)`
+  * **Initiate New Call Session For Conversation** [`user`, `plugin`]: `client.Website.InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
+  * **Get Ongoing Call Session For Conversation** [`user`, `plugin`]: `client.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
+  * **Abort Ongoing Call Session For Conversation** [`user`, `plugin`]: `client.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error)`
+  * **Transmit Signaling On Ongoing Call Session** [`user`, `plugin`]: `client.Website.TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error)`
+  * **Schedule A Reminder For Conversation** [`user`, `plugin`]: `client.Website.ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error)`
 
 * **Website Analytics**
-  * **Acquire Analytics Points**: `client.Website.AcquireAnalyticsPoints(websiteID string, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time, dateSplit string, classifier string, filterPrimary string, filterSecondary string, filterTertiary string) (*WebsiteAnalyticsPoints, *Response, error)`
-  * **List Analytics Filters**: `client.Website.ListAnalyticsFilters(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsFilter, *Response, error)`
-  * **List Analytics Classifiers**: `client.Website.ListAnalyticsClassifiers(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsClassifier, *Response, error)`
+  * **Acquire Analytics Points** [`user`, `plugin`]: `client.Website.AcquireAnalyticsPoints(websiteID string, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time, dateSplit string, classifier string, filterPrimary string, filterSecondary string, filterTertiary string) (*WebsiteAnalyticsPoints, *Response, error)`
+  * **List Analytics Filters** [`user`, `plugin`]: `client.Website.ListAnalyticsFilters(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsFilter, *Response, error)`
+  * **List Analytics Classifiers** [`user`, `plugin`]: `client.Website.ListAnalyticsClassifiers(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsClassifier, *Response, error)`
 
 * **Website People**
-  * **Get People Statistics**: `client.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
-  * **List Suggested People Segments**: `client.Website.ListSuggestedPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSuggestedSegment, *Response, error)`
-  * **List Suggested People Data Keys**: `client.Website.ListSuggestedPeopleDataKeys(websiteID string, pageNumber uint) (*[]PeopleSuggestedData, *Response, error)`
-  * **List People Profiles**: `client.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter, searchText string) (*[]PeopleProfile, *Response, error)`
-  * **Add New People Profile**: `client.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
-  * **Check If People Profile Exists**: `client.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`
-  * **Get People Profile**: `client.Website.GetPeopleProfile(websiteID string, peopleID string) (*PeopleProfile, *Response, error)`
-  * **Save People Profile**: `client.Website.SavePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
-  * **Update People Profile**: `client.Website.UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
-  * **Remove People Profile**: `client.Website.RemovePeopleProfile(websiteID string, peopleID string) (*Response, error)`
-  * **List People Conversations**: `client.Website.ListPeopleConversations(websiteID string, peopleID string, pageNumber uint) ([]string, *Response, error)`
-  + **Add A People Event**: `client.Website.AddPeopleEvent(websiteID string, peopleID string, peopleEvent PeopleEventAdd) (*Response, error)`
-  + **List People Events**: `client.Website.ListPeopleEvents(websiteID string, peopleID string, pageNumber uint) (*[]PeopleEvent, *Response, error)`
-  + **Get People Data**: `client.Website.GetPeopleData(websiteID string, peopleID string) (*PeopleData, *Response, error)`
-  + **Save People Data**: `client.Website.SavePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error)`
-  + **Get People Subscription Status**: `client.Website.GetPeopleSubscriptionStatus(websiteID string, peopleID string) (*PeopleSubscription, *Response, error)`
-  + **Update People Subscription Status**: `client.Website.UpdatePeopleSubscriptionStatus(websiteID string, peopleID string, peopleSubscription PeopleSubscriptionUpdate)`
-  * **Export People Profiles**: `client.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
-  * **Import People Profiles**: `client.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
+  * **Get People Statistics** [`user`, `plugin`]: `client.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
+  * **List Suggested People Segments** [`user`, `plugin`]: `client.Website.ListSuggestedPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSuggestedSegment, *Response, error)`
+  * **List Suggested People Data Keys** [`user`, `plugin`]: `client.Website.ListSuggestedPeopleDataKeys(websiteID string, pageNumber uint) (*[]PeopleSuggestedData, *Response, error)`
+  * **List People Profiles** [`user`, `plugin`]: `client.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter, searchText string) (*[]PeopleProfile, *Response, error)`
+  * **Add New People Profile** [`user`, `plugin`]: `client.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
+  * **Check If People Profile Exists** [`user`, `plugin`]: `client.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`
+  * **Get People Profile** [`user`, `plugin`]: `client.Website.GetPeopleProfile(websiteID string, peopleID string) (*PeopleProfile, *Response, error)`
+  * **Save People Profile** [`user`, `plugin`]: `client.Website.SavePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
+  * **Update People Profile** [`user`, `plugin`]: `client.Website.UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
+  * **Remove People Profile** [`user`, `plugin`]: `client.Website.RemovePeopleProfile(websiteID string, peopleID string) (*Response, error)`
+  * **List People Conversations** [`user`, `plugin`]: `client.Website.ListPeopleConversations(websiteID string, peopleID string, pageNumber uint) ([]string, *Response, error)`
+  + **Add A People Event** [`user`, `plugin`]: `client.Website.AddPeopleEvent(websiteID string, peopleID string, peopleEvent PeopleEventAdd) (*Response, error)`
+  + **List People Events** [`user`, `plugin`]: `client.Website.ListPeopleEvents(websiteID string, peopleID string, pageNumber uint) (*[]PeopleEvent, *Response, error)`
+  + **Get People Data** [`user`, `plugin`]: `client.Website.GetPeopleData(websiteID string, peopleID string) (*PeopleData, *Response, error)`
+  + **Save People Data** [`user`, `plugin`]: `client.Website.SavePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error)`
+  + **Get People Subscription Status** [`user`, `plugin`]: `client.Website.GetPeopleSubscriptionStatus(websiteID string, peopleID string) (*PeopleSubscription, *Response, error)`
+  + **Update People Subscription Status** [`user`, `plugin`]: `client.Website.UpdatePeopleSubscriptionStatus(websiteID string, peopleID string, peopleSubscription PeopleSubscriptionUpdate)`
+  * **Export People Profiles** [`user`, `plugin`]: `client.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
+  * **Import People Profiles** [`user`, `plugin`]: `client.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
 
 ### Plugin
 
 * **Plugin Subscription**
-  * **List All Active Subscriptions**: `client.Plugin.ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error)`
-  * **List Subscriptions For A Website**: `client.Plugin.ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error)`
-  * **Get Subscription Details**: `client.Plugin.GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error)`
-  * **Subscribe Website To Plugin**: `client.Plugin.SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error)`
-  * **Unsubscribe Plugin From Website**: `client.Plugin.UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error)`
-  * **Get Subscription Settings**: `client.Plugin.GetSubscriptionSettings(websiteID string, pluginID string) (*PluginSubscriptionSettings, *Response, error)`
-  * **Save Subscription Settings**: `client.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
-  * **Update Subscription Settings**: `client.Plugin.UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
-  * **Forward Plugin Payload To Channel**: `client.Plugin.ForwardPluginPayloadToChannel(websiteID string, pluginID string, payload PluginSubscriptionChannelForward) (*Response, error)`
-  * **Dispatch Plugin Event**: `client.Plugin.DispatchPluginEvent(websiteID string, pluginID string, payload PluginSubscriptionEventDispatch) (*Response, error)`
+  * **List All Active Subscriptions** [`user`, `plugin`]: `client.Plugin.ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error)`
+  * **List Subscriptions For A Website** [`user`, `plugin`]: `client.Plugin.ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error)`
+  * **Get Subscription Details** [`user`, `plugin`]: `client.Plugin.GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error)`
+  * **Subscribe Website To Plugin** [`user`, `plugin`]: `client.Plugin.SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error)`
+  * **Unsubscribe Plugin From Website** [`user`, `plugin`]: `client.Plugin.UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error)`
+  * **Get Subscription Settings** [`user`, `plugin`]: `client.Plugin.GetSubscriptionSettings(websiteID string, pluginID string) (*PluginSubscriptionSettings, *Response, error)`
+  * **Save Subscription Settings** [`user`, `plugin`]: `client.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
+  * **Update Subscription Settings** [`user`, `plugin`]: `client.Plugin.UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
+  * **Forward Plugin Payload To Channel** [`user`, `plugin`]: `client.Plugin.ForwardPluginPayloadToChannel(websiteID string, pluginID string, payload PluginSubscriptionChannelForward) (*Response, error)`
+  * **Dispatch Plugin Event** [`user`, `plugin`]: `client.Plugin.DispatchPluginEvent(websiteID string, pluginID string, payload PluginSubscriptionEventDispatch) (*Response, error)`
 
 * **Plugin Connect**
-  * **Get Connect Account**: `client.Plugin.GetConnectAccount() (*PluginConnectAccount, *Response, error)`
-  * **Check Connect Session Validity**: `client.Plugin.CheckConnectSessionValidity() (*Response, error)`
-  * **List All Connect Websites**: `client.Plugin.ListAllConnectWebsites(pageNumber uint, filterConfigured bool) (*[]PluginConnectAllWebsites, *Response, error)`
-  * **List Connect Websites Since**: `client.Plugin.ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool) (*[]PluginConnectWebsitesSince, *Response, error)`
+  * **Get Connect Account** [`user`, `plugin`]: `client.Plugin.GetConnectAccount() (*PluginConnectAccount, *Response, error)`
+  * **Check Connect Session Validity** [`user`, `plugin`]: `client.Plugin.CheckConnectSessionValidity() (*Response, error)`
+  * **List All Connect Websites** [`user`, `plugin`]: `client.Plugin.ListAllConnectWebsites(pageNumber uint, filterConfigured bool) (*[]PluginConnectAllWebsites, *Response, error)`
+  * **List Connect Websites Since** [`user`, `plugin`]: `client.Plugin.ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool) (*[]PluginConnectWebsitesSince, *Response, error)`
 
 ## Realtime Events
 
