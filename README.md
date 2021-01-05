@@ -76,21 +76,21 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 ### Media
 
 * **Media Animation**
-  * **List Animation Medias** [`user`, `plugin`]: `client.Media.ListAnimationMedias(pageNumber uint, listID int, searchQuery string) (*Response, error)`
+  * **List Animation Medias** [`user`]: `client.Media.ListAnimationMedias(pageNumber uint, listID int, searchQuery string) (*Response, error)`
 
 ### Website
 
 * **Website Base**
   * **Check If Website Exists** [`user`, `plugin`]: `client.Website.CheckWebsiteExists(domain string) (*Response, error)`
-  * **Create Website** [`user`, `plugin`]: `client.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
+  * **Create Website** [`user`]: `client.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
   * **Get A Website** [`user`, `plugin`]: `client.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
-  * **Delete A Website** [`user`, `plugin`]: `client.Website.DeleteWebsite(websiteID string, verify string) (*Response, error)`
+  * **Delete A Website** [`user`]: `client.Website.DeleteWebsite(websiteID string, verify string) (*Response, error)`
 
 * **Website Batch**
-  * **Batch Resolve Conversations** [`user`, `plugin`]: `client.Website.BatchResolveConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Batch Read Conversations** [`user`, `plugin`]: `client.Website.BatchReadConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Batch Remove Conversations** [`user`, `plugin`]: `client.Website.BatchRemoveConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Batch Remove People** [`user`, `plugin`]: `client.Website.BatchRemovePeople(websiteID string, people WebsiteBatchPeopleOperationInner) (*Response, error)`
+  * **Batch Resolve Conversations** [`user`]: `client.Website.BatchResolveConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Batch Read Conversations** [`user`]: `client.Website.BatchReadConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Batch Remove Conversations** [`user`]: `client.Website.BatchRemoveConversations(websiteID string, sessions []string) (*Response, error)`
+  * **Batch Remove People** [`user`]: `client.Website.BatchRemovePeople(websiteID string, people WebsiteBatchPeopleOperationInner) (*Response, error)`
 
 * **Website Availability**
   * **Get Website Availability Status** [`user`, `plugin`]: `client.Website.GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error)`
@@ -99,12 +99,12 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Operator**
   * **List Website Operators** [`user`, `plugin`]: `client.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
   * **List Last Active Website Operators** [`user`, `plugin`]: `client.Website.ListLastActiveWebsiteOperators(websiteID string) (*[]WebsiteOperatorsLastActiveListOne, *Response, error)`
-  * **Flush Last Active Website Operators** [`user`, `plugin`]: `client.Website.FlushLastActiveWebsiteOperators(websiteID string) (*Response, error)`
+  * **Flush Last Active Website Operators** [`user`]: `client.Website.FlushLastActiveWebsiteOperators(websiteID string) (*Response, error)`
   * **Send Email To Website Operators** [`user`, `plugin`]: `client.Website.SendEmailToWebsiteOperators(websiteID string, email WebsiteOperatorEmail) (*Response, error)`
   * **Get A Website Operator** [`user`, `plugin`]: `client.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
-  * **Invite A Website Operator** [`user`, `plugin`]: `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, verify string) (*Response, error)`
-  * **Change Operator Membership** [`user`, `plugin`]: `client.Website.ChangeOperatorMembership(websiteID string, userID string, role string, title *string) (*Response, error)`
-  * **Unlink Operator From Website** [`user`, `plugin`]: `client.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
+  * **Invite A Website Operator** [`user`]: `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, verify string) (*Response, error)`
+  * **Change Operator Membership** [`user`]: `client.Website.ChangeOperatorMembership(websiteID string, userID string, role string, title *string) (*Response, error)`
+  * **Unlink Operator From Website** [`user`]: `client.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
 
 * **Website Settings**
   * **Get Website Settings** [`user`, `plugin`]: `client.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
@@ -116,33 +116,33 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Pinpoint Visitors On A Map (Wide Variant)** [`user`, `plugin`]: `client.Website.PinpointVisitorsOnMapWide(websiteID string) (*[]WebsiteVisitorsMapPoint, *Response, error)`
   * **Pinpoint Visitors On A Map (Area Variant)** [`user`, `plugin`]: `client.Website.PinpointVisitorsOnMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*[]WebsiteVisitorsMapPoint, *Response, error)`
   * **Get Session Identifier From Token** [`user`, `plugin`]: `client.Website.GetSessionIdentifierFromToken(websiteID string, tokenID string) (*WebsiteVisitorsToken, *Response, error)`
-  * **Count Blocked Visitors** [`user`, `plugin`]: `client.Website.CountBlockedVisitors(websiteID string) (*[]WebsiteVisitorsBlocked, *Response, error)`
-  * **Count Blocked Visitors In Rule** [`user`, `plugin`]: `client.Website.CountBlockedVisitorsInRule(websiteID string, rule string) (*WebsiteVisitorsBlocked, *Response, error)`
-  * **Clear Blocked Visitors In Rule** [`user`, `plugin`]: `client.Website.ClearBlockedVisitorsInRule(websiteID string, rule string) (*Response, error)`
+  * **Count Blocked Visitors** [`user`]: `client.Website.CountBlockedVisitors(websiteID string) (*[]WebsiteVisitorsBlocked, *Response, error)`
+  * **Count Blocked Visitors In Rule** [`user`]: `client.Website.CountBlockedVisitorsInRule(websiteID string, rule string) (*WebsiteVisitorsBlocked, *Response, error)`
+  * **Clear Blocked Visitors In Rule** [`user`]: `client.Website.ClearBlockedVisitorsInRule(websiteID string, rule string) (*Response, error)`
 
 * **Website Campaigns**
-  * **List Campaigns** [`user`, `plugin`]: `client.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
-  * **List Campaigns (Filter Variant)** [`user`, `plugin`]: `client.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
-  * **List Campaign Templates** [`user`, `plugin`]: `client.Website.ListCampaignTemplates(websiteID string, pageNumber uint) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
-  * **Create A New Campaign Template** [`user`, `plugin`]: `client.Website.CreateNewCampaignTemplate(websiteID string, templateFormat string, templateName string) (*WebsiteCampaignTemplateNew, *Response, error)`
-  * **Check If Campaign Template Exists** [`user`, `plugin`]: `client.Website.CheckCampaignTemplateExists(websiteID string, templateID string) (*Response, error)`
-  * **Get A Campaign Template** [`user`, `plugin`]: `client.Website.GetCampaignTemplate(websiteID string, templateID string) (*WebsiteCampaignTemplateItem, *Response, error)`
-  * **Save A Campaign Template** [`user`, `plugin`]: `client.Website.SaveCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
-  * **Update A Campaign Template** [`user`, `plugin`]: `client.Website.UpdateCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
-  * **Remove A Campaign Template** [`user`, `plugin`]: `client.Website.RemoveCampaignTemplate(websiteID string, templateID string) (*Response, error)`
+  * **List Campaigns** [`user`]: `client.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaigns (Filter Variant)** [`user`]: `client.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaign Templates** [`user`]: `client.Website.ListCampaignTemplates(websiteID string, pageNumber uint) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
+  * **Create A New Campaign Template** [`user`]: `client.Website.CreateNewCampaignTemplate(websiteID string, templateFormat string, templateName string) (*WebsiteCampaignTemplateNew, *Response, error)`
+  * **Check If Campaign Template Exists** [`user`]: `client.Website.CheckCampaignTemplateExists(websiteID string, templateID string) (*Response, error)`
+  * **Get A Campaign Template** [`user`]: `client.Website.GetCampaignTemplate(websiteID string, templateID string) (*WebsiteCampaignTemplateItem, *Response, error)`
+  * **Save A Campaign Template** [`user`]: `client.Website.SaveCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
+  * **Update A Campaign Template** [`user`]: `client.Website.UpdateCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
+  * **Remove A Campaign Template** [`user`]: `client.Website.RemoveCampaignTemplate(websiteID string, templateID string) (*Response, error)`
 
 * **Website Campaign**
-  * **Create A New Campaign** [`user`, `plugin`]: `client.Website.CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error)`
-  * **Check If Campaign Exists** [`user`, `plugin`]: `client.Website.CheckCampaignExists(websiteID string, campaignID string) (*Response, error)`
-  * **Get A Campaign** [`user`, `plugin`]: `client.Website.GetCampaign(websiteID string, campaignID string) (*WebsiteCampaignItem, *Response, error)`
-  * **Save A Campaign** [`user`, `plugin`]: `client.Website.SaveCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
-  * **Update A Campaign** [`user`, `plugin`]: `client.Website.UpdateCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
-  * **Remove A Campaign** [`user`, `plugin`]: `client.Website.RemoveCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Dispatch A Campaign** [`user`, `plugin`]: `client.Website.DispatchCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Resume A Campaign** [`user`, `plugin`]: `client.Website.ResumeCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Pause A Campaign** [`user`, `plugin`]: `client.Website.PauseCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Test A Campaign** [`user`, `plugin`]: `client.Website.TestCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **List Campaign Statistics** [`user`, `plugin`]: `client.Website.ListCampaignStatistics(websiteID string, campaignID string, action string, pageNumber uint) (*[]WebsiteCampaignStatistic, *Response, error)`
+  * **Create A New Campaign** [`user`]: `client.Website.CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error)`
+  * **Check If Campaign Exists** [`user`]: `client.Website.CheckCampaignExists(websiteID string, campaignID string) (*Response, error)`
+  * **Get A Campaign** [`user`]: `client.Website.GetCampaign(websiteID string, campaignID string) (*WebsiteCampaignItem, *Response, error)`
+  * **Save A Campaign** [`user`]: `client.Website.SaveCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
+  * **Update A Campaign** [`user`]: `client.Website.UpdateCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
+  * **Remove A Campaign** [`user`]: `client.Website.RemoveCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Dispatch A Campaign** [`user`]: `client.Website.DispatchCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Resume A Campaign** [`user`]: `client.Website.ResumeCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Pause A Campaign** [`user`]: `client.Website.PauseCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **Test A Campaign** [`user`]: `client.Website.TestCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **List Campaign Statistics** [`user`]: `client.Website.ListCampaignStatistics(websiteID string, campaignID string, action string, pageNumber uint) (*[]WebsiteCampaignStatistic, *Response, error)`
 
 * **Website Conversations**
   * **List Conversations** [`user`, `plugin`]: `client.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
@@ -206,9 +206,9 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Schedule A Reminder For Conversation** [`user`, `plugin`]: `client.Website.ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error)`
 
 * **Website Analytics**
-  * **Acquire Analytics Points** [`user`, `plugin`]: `client.Website.AcquireAnalyticsPoints(websiteID string, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time, dateSplit string, classifier string, filterPrimary string, filterSecondary string, filterTertiary string) (*WebsiteAnalyticsPoints, *Response, error)`
-  * **List Analytics Filters** [`user`, `plugin`]: `client.Website.ListAnalyticsFilters(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsFilter, *Response, error)`
-  * **List Analytics Classifiers** [`user`, `plugin`]: `client.Website.ListAnalyticsClassifiers(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsClassifier, *Response, error)`
+  * **Acquire Analytics Points** [`user`]: `client.Website.AcquireAnalyticsPoints(websiteID string, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time, dateSplit string, classifier string, filterPrimary string, filterSecondary string, filterTertiary string) (*WebsiteAnalyticsPoints, *Response, error)`
+  * **List Analytics Filters** [`user`]: `client.Website.ListAnalyticsFilters(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsFilter, *Response, error)`
+  * **List Analytics Classifiers** [`user`]: `client.Website.ListAnalyticsClassifiers(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsClassifier, *Response, error)`
 
 * **Website People**
   * **Get People Statistics** [`user`, `plugin`]: `client.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
@@ -228,17 +228,17 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   + **Save People Data** [`user`, `plugin`]: `client.Website.SavePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error)`
   + **Get People Subscription Status** [`user`, `plugin`]: `client.Website.GetPeopleSubscriptionStatus(websiteID string, peopleID string) (*PeopleSubscription, *Response, error)`
   + **Update People Subscription Status** [`user`, `plugin`]: `client.Website.UpdatePeopleSubscriptionStatus(websiteID string, peopleID string, peopleSubscription PeopleSubscriptionUpdate)`
-  * **Export People Profiles** [`user`, `plugin`]: `client.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
-  * **Import People Profiles** [`user`, `plugin`]: `client.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
+  * **Export People Profiles** [`user`]: `client.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
+  * **Import People Profiles** [`user`]: `client.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
 
 ### Plugin
 
 * **Plugin Subscription**
-  * **List All Active Subscriptions** [`user`, `plugin`]: `client.Plugin.ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error)`
-  * **List Subscriptions For A Website** [`user`, `plugin`]: `client.Plugin.ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error)`
-  * **Get Subscription Details** [`user`, `plugin`]: `client.Plugin.GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error)`
-  * **Subscribe Website To Plugin** [`user`, `plugin`]: `client.Plugin.SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error)`
-  * **Unsubscribe Plugin From Website** [`user`, `plugin`]: `client.Plugin.UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error)`
+  * **List All Active Subscriptions** [`user`]: `client.Plugin.ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error)`
+  * **List Subscriptions For A Website** [`user`]: `client.Plugin.ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error)`
+  * **Get Subscription Details** [`user`]: `client.Plugin.GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error)`
+  * **Subscribe Website To Plugin** [`user`]: `client.Plugin.SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error)`
+  * **Unsubscribe Plugin From Website** [`user`]: `client.Plugin.UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error)`
   * **Get Subscription Settings** [`user`, `plugin`]: `client.Plugin.GetSubscriptionSettings(websiteID string, pluginID string) (*PluginSubscriptionSettings, *Response, error)`
   * **Save Subscription Settings** [`user`, `plugin`]: `client.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
   * **Update Subscription Settings** [`user`, `plugin`]: `client.Plugin.UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
