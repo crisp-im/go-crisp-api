@@ -326,108 +326,108 @@ client.Events.Listen(
 Available events are listed below:
 
 * **Session Events**
-  * **Session Update Availability**: `session:update_availability`
-  * **Session Update Verify**: `session:update_verify`
-  * **Session Request Initiated**: `session:request:initiated`
-  * **Session Set Email**: `session:set_email`
-  * **Session Set Phone**: `session:set_phone`
-  * **Session Set Address**: `session:set_address`
-  * **Session Set Avatar**: `session:set_avatar`
-  * **Session Set Nickname**: `session:set_nickname`
-  * **Session Set Data**: `session:set_data`
-  * **Session Sync Pages**: `session:sync:pages`
-  * **Session Sync Events**: `session:sync:events`
-  * **Session Sync Capabilities**: `session:sync:capabilities`
-  * **Session Sync Geolocation**: `session:sync:geolocation`
-  * **Session Sync System**: `session:sync:system`
-  * **Session Sync Network**: `session:sync:network`
-  * **Session Sync Timezone**: `session:sync:timezone`
-  * **Session Sync Locales**: `session:sync:locales`
-  * **Session Sync Rating**: `session:sync:rating`
-  * **Session Set State**: `session:set_state`
-  * **Session Set Block**: `session:set_block`
-  * **Session Set Segments**: `session:set_segments`
-  * **Session Set Opened**: `session:set_opened`
-  * **Session Set Closed**: `session:set_closed`
-  * **Session Set Participants**: `session:set_participants`
-  * **Session Set Mentions**: `session:set_mentions`
-  * **Session Set Routing**: `session:set_routing`
-  * **Session Removed**: `session:removed`
+  * **Session Update Availability** [`user`, `plugin`]: `session:update_availability`
+  * **Session Update Verify** [`user`, `plugin`]: `session:update_verify`
+  * **Session Request Initiated** [`user`, `plugin`]: `session:request:initiated`
+  * **Session Set Email** [`user`, `plugin`]: `session:set_email`
+  * **Session Set Phone** [`user`, `plugin`]: `session:set_phone`
+  * **Session Set Address** [`user`, `plugin`]: `session:set_address`
+  * **Session Set Avatar** [`user`, `plugin`]: `session:set_avatar`
+  * **Session Set Nickname** [`user`, `plugin`]: `session:set_nickname`
+  * **Session Set Data** [`user`, `plugin`]: `session:set_data`
+  * **Session Sync Pages** [`user`, `plugin`]: `session:sync:pages`
+  * **Session Sync Events** [`user`, `plugin`]: `session:sync:events`
+  * **Session Sync Capabilities** [`user`, `plugin`]: `session:sync:capabilities`
+  * **Session Sync Geolocation** [`user`, `plugin`]: `session:sync:geolocation`
+  * **Session Sync System** [`user`, `plugin`]: `session:sync:system`
+  * **Session Sync Network** [`user`, `plugin`]: `session:sync:network`
+  * **Session Sync Timezone** [`user`, `plugin`]: `session:sync:timezone`
+  * **Session Sync Locales** [`user`, `plugin`]: `session:sync:locales`
+  * **Session Sync Rating** [`user`, `plugin`]: `session:sync:rating`
+  * **Session Set State** [`user`, `plugin`]: `session:set_state`
+  * **Session Set Block** [`user`, `plugin`]: `session:set_block`
+  * **Session Set Segments** [`user`, `plugin`]: `session:set_segments`
+  * **Session Set Opened** [`user`, `plugin`]: `session:set_opened`
+  * **Session Set Closed** [`user`, `plugin`]: `session:set_closed`
+  * **Session Set Participants** [`user`, `plugin`]: `session:set_participants`
+  * **Session Set Mentions** [`user`, `plugin`]: `session:set_mentions`
+  * **Session Set Routing** [`user`, `plugin`]: `session:set_routing`
+  * **Session Removed** [`user`, `plugin`]: `session:removed`
 
 * **Message Events**
-  * **Message Updated**: `message:updated`
-  * **Message Send (Text Variant)**: `message:send/text`
-  * **Message Send (File Variant)**: `message:send/file`
-  * **Message Send (Animation Variant)**: `message:send/animation`
-  * **Message Send (Audio Variant)**: `message:send/audio`
-  * **Message Send (Picker Variant)**: `message:send/picker`
-  * **Message Send (Field Variant)**: `message:send/field`
-  * **Message Send (Note Variant)**: `message:send/note`
-  * **Message Send (Event Variant)**: `message:send/event`
-  * **Message Received (Text Variant)**: `message:received/text`
-  * **Message Received (File Variant)**: `message:received/file`
-  * **Message Received (Animation Variant)**: `message:received/animation`
-  * **Message Received (Audio Variant)**: `message:received/audio`
-  * **Message Received (Picker Variant)**: `message:received/picker`
-  * **Message Received (Field Variant)**: `message:received/field`
-  * **Message Received (Note Variant)**: `message:received/note`
-  * **Message Received (Event Variant)**: `message:received/event`
-  * **Message Compose Send**: `message:compose:send`
-  * **Message Compose Receive**: `message:compose:receive`
-  * **Message Acknowledge Read Send**: `message:acknowledge:read:send`
-  * **Message Acknowledge Read Received**: `message:acknowledge:read:received`
-  * **Message Acknowledge Delivered**: `message:acknowledge:delivered`
-  * **Message Notify Unread Send**: `message:notify:unread:send`
-  * **Message Notify Unread Received**: `message:notify:unread:received`
+  * **Message Updated** [`user`, `plugin`]: `message:updated`
+  * **Message Send (Text Variant)** [`user`, `plugin`]: `message:send/text`
+  * **Message Send (File Variant)** [`user`, `plugin`]: `message:send/file`
+  * **Message Send (Animation Variant)** [`user`, `plugin`]: `message:send/animation`
+  * **Message Send (Audio Variant)** [`user`, `plugin`]: `message:send/audio`
+  * **Message Send (Picker Variant)** [`user`, `plugin`]: `message:send/picker`
+  * **Message Send (Field Variant)** [`user`, `plugin`]: `message:send/field`
+  * **Message Send (Note Variant)** [`user`, `plugin`]: `message:send/note`
+  * **Message Send (Event Variant)** [`user`, `plugin`]: `message:send/event`
+  * **Message Received (Text Variant)** [`user`, `plugin`]: `message:received/text`
+  * **Message Received (File Variant)** [`user`, `plugin`]: `message:received/file`
+  * **Message Received (Animation Variant)** [`user`, `plugin`]: `message:received/animation`
+  * **Message Received (Audio Variant)** [`user`, `plugin`]: `message:received/audio`
+  * **Message Received (Picker Variant)** [`user`, `plugin`]: `message:received/picker`
+  * **Message Received (Field Variant)** [`user`, `plugin`]: `message:received/field`
+  * **Message Received (Note Variant)** [`user`, `plugin`]: `message:received/note`
+  * **Message Received (Event Variant)** [`user`, `plugin`]: `message:received/event`
+  * **Message Compose Send** [`user`, `plugin`]: `message:compose:send`
+  * **Message Compose Receive** [`user`, `plugin`]: `message:compose:receive`
+  * **Message Acknowledge Read Send** [`user`, `plugin`]: `message:acknowledge:read:send`
+  * **Message Acknowledge Read Received** [`user`, `plugin`]: `message:acknowledge:read:received`
+  * **Message Acknowledge Delivered** [`user`, `plugin`]: `message:acknowledge:delivered`
+  * **Message Notify Unread Send** [`user`, `plugin`]: `message:notify:unread:send`
+  * **Message Notify Unread Received** [`user`, `plugin`]: `message:notify:unread:received`
 
 * **People Events**
-  * **People Profile Created**: `people:profile:created`
-  * **People Profile Updated**: `people:profile:updated`
-  * **People Profile Removed**: `people:profile:removed`
-  * **People Bind Session**: `people:bind:session`
-  * **People Sync Profile**: `people:sync:profile`
-  * **People Import Progress**: `people:import:progress`
-  * **People Import Done**: `people:import:done`
+  * **People Profile Created** [`user`, `plugin`]: `people:profile:created`
+  * **People Profile Updated** [`user`, `plugin`]: `people:profile:updated`
+  * **People Profile Removed** [`user`, `plugin`]: `people:profile:removed`
+  * **People Bind Session** [`user`, `plugin`]: `people:bind:session`
+  * **People Sync Profile** [`user`, `plugin`]: `people:sync:profile`
+  * **People Import Progress** [`user`]: `people:import:progress`
+  * **People Import Done** [`user`]: `people:import:done`
 
 * **Campaign Events**
-  * **Campaign Progress**: `campaign:progress`
-  * **Campaign Dispatched**: `campaign:dispatched`
-  * **Campaign Running**: `campaign:running`
+  * **Campaign Progress** [`user`]: `campaign:progress`
+  * **Campaign Dispatched** [`user`]: `campaign:dispatched`
+  * **Campaign Running** [`user`]: `campaign:running`
 
 * **Browsing Events**
-  * **Browsing Request Initiated**: `browsing:request:initiated`
-  * **Browsing Request Rejected**: `browsing:request:rejected`
+  * **Browsing Request Initiated** [`user`, `plugin`]: `browsing:request:initiated`
+  * **Browsing Request Rejected** [`user`, `plugin`]: `browsing:request:rejected`
 
 * **Call Events**
-  * **Call Request Initiated**: `call:request:initiated`
-  * **Call Request Rejected**: `call:request:rejected`
+  * **Call Request Initiated** [`user`, `plugin`]: `call:request:initiated`
+  * **Call Request Rejected** [`user`, `plugin`]: `call:request:rejected`
 
 * **Status Events**
 
-  * **Status Health Changed**: `status:health:changed`
+  * **Status Health Changed** [`user`]: `status:health:changed`
 
 * **Website Events**
-  * **Website Update Visitors Count**: `website:update_visitors_count`
-  * **Website Update Operators Availability**: `website:update_operators_availability`
-  * **Website Users Available**: `website:users:available`
+  * **Website Update Visitors Count** [`user`, `plugin`]: `website:update_visitors_count`
+  * **Website Update Operators Availability** [`user`, `plugin`]: `website:update_operators_availability`
+  * **Website Users Available** [`user`, `plugin`]: `website:users:available`
 
 * **Bucket Events**
-  * **Bucket URL Upload Generated**: `bucket:url:upload:generated`
-  * **Bucket URL Avatar Generated**: `bucket:url:avatar:generated`
-  * **Bucket URL Website Generated**: `bucket:url:website:generated`
-  * **Bucket URL Campaign Generated**: `bucket:url:campaign:generated`
-  * **Bucket URL Helpdesk Generated**: `bucket:url:helpdesk:generated`
-  * **Bucket URL Status Generated**: `bucket:url:status:generated`
-  * **Bucket URL Processing Generated**: `bucket:url:processing:generated`
+  * **Bucket URL Upload Generated** [`user`, `plugin`]: `bucket:url:upload:generated`
+  * **Bucket URL Avatar Generated** [`user`, `plugin`]: `bucket:url:avatar:generated`
+  * **Bucket URL Website Generated** [`user`, `plugin`]: `bucket:url:website:generated`
+  * **Bucket URL Campaign Generated** [`user`, `plugin`]: `bucket:url:campaign:generated`
+  * **Bucket URL Helpdesk Generated** [`user`, `plugin`]: `bucket:url:helpdesk:generated`
+  * **Bucket URL Status Generated** [`user`, `plugin`]: `bucket:url:status:generated`
+  * **Bucket URL Processing Generated** [`user`, `plugin`]: `bucket:url:processing:generated`
 
 * **Media Events**
-  * **Media Animation Listed**: `media:animation:listed`
+  * **Media Animation Listed** [`user`]: `media:animation:listed`
 
 * **Email Events**
-  * **Email Subscribe**: `email:subscribe`
-  * **Email Track View**: `email:track:view`
+  * **Email Subscribe** [`user`, `plugin`]: `email:subscribe`
+  * **Email Track View** [`user`, `plugin`]: `email:track:view`
 
 * **Plugin Events**
-  * **Plugin Channel**: `plugin:channel`
-  * **Plugin Event**: `plugin:event`
-  * **Plugin Settings Saved**: `plugin:settings:saved`
+  * **Plugin Channel** [`user`, `plugin`]: `plugin:channel`
+  * **Plugin Event** [`user`, `plugin`]: `plugin:event`
+  * **Plugin Settings Saved** [`user`, `plugin`]: `plugin:settings:saved`
