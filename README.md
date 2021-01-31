@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2020 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 15/12/2020
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 31/01/2021
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -105,6 +105,12 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Invite A Website Operator** [`user`]: `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, verify string) (*Response, error)`
   * **Change Operator Membership** [`user`]: `client.Website.ChangeOperatorMembership(websiteID string, userID string, role string, title *string) (*Response, error)`
   * **Unlink Operator From Website** [`user`]: `client.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
+
+* **Website Verify**
+  * **Get Verify Settings** [`user`, `plugin`]: `client.Website.GetVerifySettings(websiteID string) (*WebsiteVerifySettings, *Response, error)`
+  * **Update Verify Settings** [`user`, `plugin`]: `client.Website.UpdateVerifySettings(websiteID string, settings WebsiteVerifySettingsUpdate) (*Response, error)`
+  * **Get Verify Key** [`user`, `plugin`]: `client.Website.GetVerifyKey(websiteID string) (*WebsiteVerifyKey, *Response, error)`
+  * **Roll Verify Key** [`user`, `plugin`]: `client.Website.RollVerifyKey(websiteID string) (*Response, error)`
 
 * **Website Settings**
   * **Get Website Settings** [`user`, `plugin`]: `client.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
@@ -403,7 +409,6 @@ Available events are listed below:
   * **Call Request Rejected** [`user`, `plugin`]: `call:request:rejected`
 
 * **Status Events**
-
   * **Status Health Changed** [`user`]: `status:health:changed`
 
 * **Website Events**
