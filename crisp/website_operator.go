@@ -38,6 +38,8 @@ type WebsiteOperator struct {
   Title         *string  `json:"title,omitempty"`
   Availability  *string  `json:"availability,omitempty"`
   HasToken      *bool    `json:"has_token,omitempty"`
+  Identifier    *string  `json:"identifier,omitempty"`
+  Key           *string  `json:"key,omitempty"`
 }
 
 // WebsiteOperatorsLastActiveListData mapping
