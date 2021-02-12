@@ -32,7 +32,6 @@ type PluginSubscription struct {
   Price         *uint16                    `json:"price,omitempty"`
   Plans         *[]PluginSubscriptionPlan  `json:"plans,omitempty"`
   Icon          *string                    `json:"icon,omitempty"`
-  Banner        *string                    `json:"banner,omitempty"`
   WebsiteURL    *string                    `json:"website_url,omitempty"`
   ContactURL    *string                    `json:"contact_url,omitempty"`
   TermsURL      *string                    `json:"terms_url,omitempty"`
