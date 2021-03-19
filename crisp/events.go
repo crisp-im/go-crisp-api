@@ -617,6 +617,7 @@ type EventsPeopleImportProgress struct {
 // EventsPeopleImportProgressCount maps people:import:progress/count
 type EventsPeopleImportProgressCount struct {
   Total      *uint32  `json:"total"`
+  Skipped    *uint32  `json:"skipped"`
   Remaining  *uint32  `json:"remaining"`
 }
 
