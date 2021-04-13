@@ -55,6 +55,7 @@ type WebsiteCampaignExcerpt struct {
   Type          *string  `json:"type,omitempty"`
   Format        *string  `json:"format,omitempty"`
   Name          *string  `json:"name,omitempty"`
+  Subject       *string  `json:"subject,omitempty"`
   Ready         *bool    `json:"ready,omitempty"`
   Dispatched    *bool    `json:"dispatched,omitempty"`
   Running       *bool    `json:"running,omitempty"`
