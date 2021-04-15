@@ -777,6 +777,45 @@ type ConversationCallSignalingPayload struct {
   Payload  interface{}  `json:"payload,omitempty"`
 }
 
+// ConversationWidgetActionData mapping
+type ConversationWidgetActionData struct {
+  Data  *ConversationWidgetAction  `json:"data,omitempty"`
+}
+
+// ConversationWidgetAction mapping
+type ConversationWidgetAction struct {
+  CorrelationID  *string                            `json:"correlation_id,omitempty"`
+  Strategy       *ConversationWidgetActionStrategy  `json:"strategy,omitempty"`
+}
+
+// ConversationWidgetActionStrategy mapping
+type ConversationWidgetActionStrategy struct {
+  Attempts    *uint8   `json:"attempts,omitempty"`
+  Exhaustion  *uint16  `json:"exhaustion,omitempty"`
+}
+
+// ConversationWidgetButtonPayload mapping
+type ConversationWidgetButtonPayload struct {
+  SectionID  string       `json:"section_id,omitempty"`
+  ItemID     string       `json:"item_id,omitempty"`
+  Data       interface{}  `json:"data,omitempty"`
+}
+
+// ConversationWidgetDataFetchPayload mapping
+type ConversationWidgetDataFetchPayload struct {
+  SectionID  string  `json:"section_id,omitempty"`
+  ItemID     string  `json:"item_id,omitempty"`
+  Action     string  `json:"action,omitempty"`
+}
+
+// ConversationWidgetDataEditPayload mapping
+type ConversationWidgetDataEditPayload struct {
+  SectionID  string  `json:"section_id,omitempty"`
+  ItemID     string  `json:"item_id,omitempty"`
+  Action     string  `json:"action,omitempty"`
+  Value      string  `json:"value,omitempty"`
+}
+
 // ConversationReminderPayload mapping
 type ConversationReminderPayload struct {
   Date  string  `json:"date,omitempty"`
@@ -858,6 +897,12 @@ func (instance ConversationBrowsing) String() string {
 
 // String returns the string representation of ConversationCall
 func (instance ConversationCall) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationWidgetAction
+func (instance ConversationWidgetAction) String() string {
   return Stringify(instance)
 }
 
@@ -1538,6 +1583,51 @@ func (service *WebsiteService) TransmitSignalingOnOngoingCallSession(websiteID s
   req, _ := service.client.NewRequest("PATCH", url, payload)
 
   return service.client.Do(req, nil)
+}
+
+
+// DeliverWidgetButtonActionForConversation delivers a button action on plugin widget for conversation.
+func (service *WebsiteService) DeliverWidgetButtonActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, data interface{}) (*ConversationWidgetAction, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/widget/%s/button", websiteID, sessionID, pluginID)
+  req, _ := service.client.NewRequest("POST", url, ConversationWidgetButtonPayload{SectionID: sectionID, ItemID: itemID, Data: data})
+
+  action := new(ConversationWidgetActionData)
+  resp, err := service.client.Do(req, action)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return action.Data, resp, err
+}
+
+
+// DeliverWidgetDataFetchActionForConversation delivers a data action on plugin widget for conversation (fetch action).
+func (service *WebsiteService) DeliverWidgetDataFetchActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string) (*ConversationWidgetAction, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/widget/%s/data", websiteID, sessionID, pluginID)
+  req, _ := service.client.NewRequest("POST", url, ConversationWidgetDataFetchPayload{SectionID: sectionID, ItemID: itemID})
+
+  action := new(ConversationWidgetActionData)
+  resp, err := service.client.Do(req, action)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return action.Data, resp, err
+}
+
+
+// DeliverWidgetDataEditActionForConversation delivers a data action on plugin widget for conversation (edit action).
+func (service *WebsiteService) DeliverWidgetDataEditActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, value string) (*ConversationWidgetAction, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/widget/%s/data", websiteID, sessionID, pluginID)
+  req, _ := service.client.NewRequest("POST", url, ConversationWidgetDataEditPayload{SectionID: sectionID, ItemID: itemID, Value: value})
+
+  action := new(ConversationWidgetActionData)
+  resp, err := service.client.Do(req, action)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return action.Data, resp, err
 }
 
 

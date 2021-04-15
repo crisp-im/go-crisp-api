@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2021 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 31/01/2021
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 15/04/2021
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -209,6 +209,9 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Ongoing Call Session For Conversation** [`user`, `plugin`]: `client.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
   * **Abort Ongoing Call Session For Conversation** [`user`, `plugin`]: `client.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error)`
   * **Transmit Signaling On Ongoing Call Session** [`user`, `plugin`]: `client.Website.TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error)`
+  * **Deliver Widget Button Action For Conversation** [`user`]: `client.Website.DeliverWidgetButtonActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, data interface{}) (*ConversationWidgetAction, *Response, error)`
+  * **Deliver Widget Data Fetch Action For Conversation** [`user`]: `client.Website.DeliverWidgetDataFetchActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string) (*ConversationWidgetAction, *Response, error)`
+  * **Deliver Widget Data Edit Action For Conversation** [`user`]: `client.Website.DeliverWidgetDataEditActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, value string) (*ConversationWidgetAction, *Response, error)`
   * **Schedule A Reminder For Conversation** [`user`, `plugin`]: `client.Website.ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error)`
 
 * **Website Analytics**
