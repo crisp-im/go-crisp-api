@@ -411,6 +411,9 @@ Available events are listed below:
   * **Call Request Initiated** [`user`, `plugin`]: `call:request:initiated`
   * **Call Request Rejected** [`user`, `plugin`]: `call:request:rejected`
 
+* **Widget Events**
+  * **Widget Action Processed** [`user`]: `widget:action:processed`
+
 * **Status Events**
   * **Status Health Changed** [`user`]: `status:health:changed`
 

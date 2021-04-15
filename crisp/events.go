@@ -673,6 +673,16 @@ type EventsCallRequestRejected struct {
   EventsCallGeneric
 }
 
+// EventsWidgetActionProcessed maps widget:action:processed
+type EventsWidgetActionProcessed struct {
+  EventsGeneric
+  EventsSessionGeneric
+  EventsPluginGeneric
+  CorrelationID  *string       `json:"correlation_id"`
+  Outcome        *string       `json:"outcome"`
+  Result         *interface{}  `json:"result,omitempty"`
+}
+
 // EventsStatusHealthChanged maps status:health:changed
 type EventsStatusHealthChanged struct {
   EventsGeneric
@@ -1121,6 +1131,12 @@ func (evt EventsCallRequestInitiated) String() string {
 
 // String returns the string representation of EventsCallRequestRejected
 func (evt EventsCallRequestRejected) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsWidgetActionProcessed
+func (evt EventsWidgetActionProcessed) String() string {
   return Stringify(evt)
 }
 
@@ -1667,6 +1683,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("call:request:rejected", func(chnl *gosocketio.Channel, evt EventsCallRequestRejected) {
     if hdl, ok := register.Handlers["call:request:rejected"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("widget:action:processed", func(chnl *gosocketio.Channel, evt EventsWidgetActionProcessed) {
+    if hdl, ok := register.Handlers["widget:action:processed"]; ok {
       go hdl.callFunc(&evt)
     }
   })
