@@ -148,6 +148,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Resume A Campaign** [`user`]: `client.Website.ResumeCampaign(websiteID string, campaignID string) (*Response, error)`
   * **Pause A Campaign** [`user`]: `client.Website.PauseCampaign(websiteID string, campaignID string) (*Response, error)`
   * **Test A Campaign** [`user`]: `client.Website.TestCampaign(websiteID string, campaignID string) (*Response, error)`
+  * **List Campaign Recipients** [`user`]: `client.Website.ListCampaignRecipients(websiteID string, campaignID string, pageNumber uint) (*[]WebsiteCampaignRecipient, *Response, error)`
   * **List Campaign Statistics** [`user`]: `client.Website.ListCampaignStatistics(websiteID string, campaignID string, action string, pageNumber uint) (*[]WebsiteCampaignStatistic, *Response, error)`
 
 * **Website Conversations**

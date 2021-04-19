@@ -143,6 +143,25 @@ type WebsiteCampaignItemStatistics struct {
   Clicked  *uint64  `json:"clicked,omitempty"`
 }
 
+// WebsiteCampaignRecipientsData mapping
+type WebsiteCampaignRecipientsData struct {
+  Data  *[]WebsiteCampaignRecipient  `json:"data,omitempty"`
+}
+
+// WebsiteCampaignRecipient mapping
+type WebsiteCampaignRecipient struct {
+  PeopleID    *string                          `json:"people_id,omitempty"`
+  Email       *string                          `json:"email,omitempty"`
+  Person      *WebsiteCampaignRecipientPerson  `json:"person,omitempty"`
+  Subscribed  *bool                            `json:"subscribed,omitempty"`
+}
+
+// WebsiteCampaignRecipientPerson mapping
+type WebsiteCampaignRecipientPerson struct {
+  Nickname  *string  `json:"nickname,omitempty"`
+  Avatar    *string  `json:"avatar,omitempty"`
+}
+
 // WebsiteCampaignStatisticsData mapping
 type WebsiteCampaignStatisticsData struct {
   Data  *[]WebsiteCampaignStatistic  `json:"data,omitempty"`
@@ -217,6 +236,12 @@ func (instance WebsiteCampaignTemplateItem) String() string {
 
 // String returns the string representation of WebsiteCampaignItem
 func (instance WebsiteCampaignItem) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of WebsiteCampaignRecipient
+func (instance WebsiteCampaignRecipient) String() string {
   return Stringify(instance)
 }
 
@@ -489,6 +514,21 @@ func (service *WebsiteService) TestCampaign(websiteID string, campaignID string)
   req, _ := service.client.NewRequest("POST", url, nil)
 
   return service.client.Do(req, nil)
+}
+
+
+// ListCampaignRecipients lists campaigns recipients on a non-dispatched one-shot campaign for website.
+func (service *WebsiteService) ListCampaignRecipients(websiteID string, campaignID string, pageNumber uint) (*[]WebsiteCampaignRecipient, *Response, error) {
+  url := fmt.Sprintf("website/%s/campaign/%s/recipients/%d", websiteID, campaignID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  recipients := new(WebsiteCampaignRecipientsData)
+  resp, err := service.client.Do(req, recipients)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return recipients.Data, resp, err
 }
 
 
