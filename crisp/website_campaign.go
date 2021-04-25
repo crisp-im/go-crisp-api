@@ -140,8 +140,9 @@ type WebsiteCampaignItemOptions struct {
 
 // WebsiteCampaignItemStatistics mapping
 type WebsiteCampaignItemStatistics struct {
-  Opened   *uint64  `json:"opened,omitempty"`
-  Clicked  *uint64  `json:"clicked,omitempty"`
+  Opened        *uint64  `json:"opened,omitempty"`
+  Clicked       *uint64  `json:"clicked,omitempty"`
+  Unsubscribed  *uint64  `json:"unsubscribed,omitempty"`
 }
 
 // WebsiteCampaignRecipientsData mapping
