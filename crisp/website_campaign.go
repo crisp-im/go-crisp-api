@@ -135,6 +135,7 @@ type WebsiteCampaignItemOptions struct {
   DeliverToChatbox   *bool  `json:"deliver_to_chatbox,omitempty"`
   DeliverToEmail     *bool  `json:"deliver_to_email,omitempty"`
   SenderNameWebsite  *bool  `json:"sender_name_website,omitempty"`
+  SenderEmailReply   *bool  `json:"sender_email_reply,omitempty"`
   Tracking           *bool  `json:"tracking,omitempty"`
 }
 
