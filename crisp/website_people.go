@@ -168,6 +168,22 @@ type PeopleConversationsData struct {
   Data  []string  `json:"data,omitempty"`
 }
 
+// PeopleCampaignsData mapping
+type PeopleCampaignsData struct {
+  Data  *[]PeopleCampaign  `json:"data,omitempty"`
+}
+
+// PeopleCampaign mapping
+type PeopleCampaign struct {
+  CampaignID    *string    `json:"campaign_id,omitempty"`
+  Type          *string    `json:"type,omitempty"`
+  Name          *string    `json:"name,omitempty"`
+  CreatedAt     *uint64    `json:"created_at,omitempty"`
+  UpdatedAt     *uint64    `json:"updated_at,omitempty"`
+  DispatchedAt  *uint64    `json:"dispatched_at,omitempty"`
+  Statistics    *[]string  `json:"statistics,omitempty"`
+}
+
 // PeopleEvent mapping
 type PeopleEvent struct {
   Text       *string       `json:"text,omitempty"`
@@ -265,6 +281,12 @@ func (instance PeopleSuggestedData) String() string {
 
 // String returns the string representation of PeopleProfile
 func (instance PeopleProfile) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PeopleCampaign
+func (instance PeopleCampaign) String() string {
   return Stringify(instance)
 }
 
@@ -435,6 +457,21 @@ func (service *WebsiteService) ListPeopleConversations(websiteID string, peopleI
   }
 
   return conversations.Data, resp, err
+}
+
+
+// ListPeopleCampaigns lists campaigns linked to people.
+func (service *WebsiteService) ListPeopleCampaigns(websiteID string, peopleID string, pageNumber uint) (*[]PeopleCampaign, *Response, error) {
+  url := fmt.Sprintf("website/%s/people/campaigns/%s/list/%d", websiteID, peopleID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  campaigns := new(PeopleCampaignsData)
+  resp, err := service.client.Do(req, campaigns)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return campaigns.Data, resp, err
 }
 
 
