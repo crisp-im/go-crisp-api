@@ -181,6 +181,7 @@ type PeopleCampaign struct {
   CreatedAt     *uint64    `json:"created_at,omitempty"`
   UpdatedAt     *uint64    `json:"updated_at,omitempty"`
   DispatchedAt  *uint64    `json:"dispatched_at,omitempty"`
+  OccurredAt    *uint64    `json:"occurred_at,omitempty"`
   Statistics    *[]string  `json:"statistics,omitempty"`
 }
 
