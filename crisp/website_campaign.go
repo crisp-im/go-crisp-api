@@ -352,6 +352,21 @@ func (service *WebsiteService) ListCampaignTemplates(websiteID string, pageNumbe
 }
 
 
+// SearchCampaignTemplates lists campaign templates for website (search variant).
+func (service *WebsiteService) SearchCampaignTemplates(websiteID string, pageNumber uint, searchName string) (*[]WebsiteCampaignTemplateExcerpt, *Response, error) {
+  url := fmt.Sprintf("website/%s/campaigns/templates/%d?search_name=%s", websiteID, pageNumber, url.QueryEscape(searchName))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  templates := new(WebsiteCampaignTemplateExcerptsData)
+  resp, err := service.client.Do(req, templates)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return templates.Data, resp, err
+}
+
+
 // CreateNewCampaignTemplate creates a new campaign template.
 func (service *WebsiteService) CreateNewCampaignTemplate(websiteID string, templateFormat string, templateName string) (*WebsiteCampaignTemplateNew, *Response, error) {
   url := fmt.Sprintf("website/%s/campaigns/template", websiteID)
