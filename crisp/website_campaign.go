@@ -56,6 +56,7 @@ type WebsiteCampaignExcerpt struct {
   Format        *string  `json:"format,omitempty"`
   Name          *string  `json:"name,omitempty"`
   Subject       *string  `json:"subject,omitempty"`
+  Tag           *string  `json:"tag,omitempty"`
   Ready         *bool    `json:"ready,omitempty"`
   Dispatched    *bool    `json:"dispatched,omitempty"`
   Running       *bool    `json:"running,omitempty"`
@@ -65,6 +66,11 @@ type WebsiteCampaignExcerpt struct {
   CreatedAt     *uint64  `json:"created_at,omitempty"`
   UpdatedAt     *uint64  `json:"updated_at,omitempty"`
   DispatchedAt  *uint64  `json:"dispatched_at,omitempty"`
+}
+
+// WebsiteCampaignTagsData mapping
+type WebsiteCampaignTagsData struct {
+  Data  *[]string  `json:"data,omitempty"`
 }
 
 // WebsiteCampaignTemplateExcerptsData mapping
@@ -271,7 +277,7 @@ func (service *WebsiteService) ListCampaigns(websiteID string, pageNumber uint) 
 
 
 // FilterCampaigns lists campaigns for website (filter variant).
-func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error) {
+func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTag string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error) {
   var (
     filterTypeOneShotValue string
     filterTypeAutomatedValue string
@@ -324,7 +330,7 @@ func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint
     filterStatusDoneValue = "0"
   }
 
-  url := fmt.Sprintf("website/%s/campaigns/list/%d?search_name=%s&filter_type_one_shot=%s&filter_type_automated=%s&filter_status_not_configured=%s&filter_status_ready=%s&filter_status_paused=%s&filter_status_sending=%s&filter_status_done=%s", websiteID, pageNumber, url.QueryEscape(searchName), url.QueryEscape(filterTypeOneShotValue), url.QueryEscape(filterTypeAutomatedValue), url.QueryEscape(filterStatusNotConfiguredValue), url.QueryEscape(filterStatusReadyValue), url.QueryEscape(filterStatusPausedValue), url.QueryEscape(filterStatusSendingValue), url.QueryEscape(filterStatusDoneValue))
+  url := fmt.Sprintf("website/%s/campaigns/list/%d?search_name=%s&filter_tag=%s&filter_type_one_shot=%s&filter_type_automated=%s&filter_status_not_configured=%s&filter_status_ready=%s&filter_status_paused=%s&filter_status_sending=%s&filter_status_done=%s", websiteID, pageNumber, url.QueryEscape(searchName), url.QueryEscape(filterTag), url.QueryEscape(filterTypeOneShotValue), url.QueryEscape(filterTypeAutomatedValue), url.QueryEscape(filterStatusNotConfiguredValue), url.QueryEscape(filterStatusReadyValue), url.QueryEscape(filterStatusPausedValue), url.QueryEscape(filterStatusSendingValue), url.QueryEscape(filterStatusDoneValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   campaigns := new(WebsiteCampaignExcerptsData)
@@ -334,6 +340,21 @@ func (service *WebsiteService) FilterCampaigns(websiteID string, pageNumber uint
   }
 
   return campaigns.Data, resp, err
+}
+
+
+// ListCampaignTags lists campaign tags for website.
+func (service *WebsiteService) ListCampaignTags(websiteID string) (*[]string, *Response, error) {
+  url := fmt.Sprintf("website/%s/campaigns/tags", websiteID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  tags := new(WebsiteCampaignTagsData)
+  resp, err := service.client.Do(req, tags)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return tags.Data, resp, err
 }
 
 

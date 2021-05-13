@@ -128,7 +128,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * **Website Campaigns**
   * **List Campaigns** [`user`]: `client.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
-  * **List Campaigns (Filter Variant)** [`user`]: `client.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaigns (Filter Variant)** [`user`]: `client.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTag string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
+  * **List Campaign Tags** [`user`]: `client.Website.ListCampaignTags(websiteID string) (*[]string, *Response, error)`
   * **List Campaign Templates** [`user`]: `client.Website.ListCampaignTemplates(websiteID string, pageNumber uint) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
   * **List Campaign Templates (Search Variant)** [`user`]: `client.Website.SearchCampaignTemplates(websiteID string, pageNumber uint, searchName string) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
   * **Create A New Campaign Template** [`user`]: `client.Website.CreateNewCampaignTemplate(websiteID string, templateFormat string, templateName string) (*WebsiteCampaignTemplateNew, *Response, error)`
