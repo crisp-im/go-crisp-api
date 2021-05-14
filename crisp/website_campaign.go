@@ -81,6 +81,7 @@ type WebsiteCampaignTemplateExcerptsData struct {
 // WebsiteCampaignTemplateExcerpt mapping
 type WebsiteCampaignTemplateExcerpt struct {
   TemplateID  *string  `json:"template_id,omitempty"`
+  Type        *string  `json:"type,omitempty"`
   Name        *string  `json:"name,omitempty"`
   Format      *string  `json:"format,omitempty"`
   CreatedAt   *uint64  `json:"created_at,omitempty"`
