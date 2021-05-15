@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2021 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 14/05/2021
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 15/05/2021
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -131,7 +131,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Campaigns (Filter Variant)** [`user`]: `client.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTag string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
   * **List Campaign Tags** [`user`]: `client.Website.ListCampaignTags(websiteID string) (*[]string, *Response, error)`
   * **List Campaign Templates** [`user`]: `client.Website.ListCampaignTemplates(websiteID string, pageNumber uint) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
-  * **List Campaign Templates (Search Variant)** [`user`]: `client.Website.SearchCampaignTemplates(websiteID string, pageNumber uint, searchName string) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
+  * **List Campaign Templates (Filter Variant)** [`user`]: `client.Website.FilterCampaignTemplates(websiteID string, pageNumber uint, searchName string, filterTypeStatic bool, filterTypeCustom bool) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
   * **Create A New Campaign Template** [`user`]: `client.Website.CreateNewCampaignTemplate(websiteID string, templateFormat string, templateName string) (*WebsiteCampaignTemplateNew, *Response, error)`
   * **Check If Campaign Template Exists** [`user`]: `client.Website.CheckCampaignTemplateExists(websiteID string, templateID string) (*Response, error)`
   * **Get A Campaign Template** [`user`]: `client.Website.GetCampaignTemplate(websiteID string, templateID string) (*WebsiteCampaignTemplateItem, *Response, error)`

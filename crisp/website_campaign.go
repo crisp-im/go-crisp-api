@@ -374,9 +374,26 @@ func (service *WebsiteService) ListCampaignTemplates(websiteID string, pageNumbe
 }
 
 
-// SearchCampaignTemplates lists campaign templates for website (search variant).
-func (service *WebsiteService) SearchCampaignTemplates(websiteID string, pageNumber uint, searchName string) (*[]WebsiteCampaignTemplateExcerpt, *Response, error) {
-  url := fmt.Sprintf("website/%s/campaigns/templates/%d?search_name=%s", websiteID, pageNumber, url.QueryEscape(searchName))
+// FilterCampaignTemplates lists campaign templates for website (filter variant).
+func (service *WebsiteService) FilterCampaignTemplates(websiteID string, pageNumber uint, searchName string, filterTypeStatic bool, filterTypeCustom bool) (*[]WebsiteCampaignTemplateExcerpt, *Response, error) {
+  var (
+    filterTypeStaticValue string
+    filterTypeCustomValue string
+  )
+
+  if filterTypeStatic == true {
+    filterTypeStaticValue = "1"
+  } else {
+    filterTypeStaticValue = "0"
+  }
+
+  if filterTypeCustom == true {
+    filterTypeCustomValue = "1"
+  } else {
+    filterTypeCustomValue = "0"
+  }
+
+  url := fmt.Sprintf("website/%s/campaigns/templates/%d?search_name=%s&filter_type_static=%s&filter_type_custom=%s", websiteID, pageNumber, url.QueryEscape(searchName), url.QueryEscape(filterTypeStaticValue), url.QueryEscape(filterTypeCustomValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   templates := new(WebsiteCampaignTemplateExcerptsData)
