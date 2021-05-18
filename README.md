@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2021 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 15/05/2021
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 18/05/2021
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -157,7 +157,9 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Conversations** [`user`, `plugin`]: `client.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
   * **List Conversations (Search Variant)** [`user`, `plugin`]: `client.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
   * **List Suggested Conversation Segments** [`user`, `plugin`]: `client.Website.ListSuggestedConversationSegments(websiteID string, pageNumber uint) (*[]ConversationSuggestedSegment, *Response, error)`
+  * **Delete Suggested Conversation Segment** [`user`, `plugin`]: `client.Website.DeleteSuggestedConversationSegment(websiteID string, segment string) (*Response, error)`
   * **List Suggested Conversation Data Keys** [`user`, `plugin`]: `client.Website.ListSuggestedConversationDataKeys(websiteID string, pageNumber uint) (*[]ConversationSuggestedData, *Response, error)`
+  * **Delete Suggested Conversation Data Key** [`user`, `plugin`]: `client.Website.DeleteSuggestedConversationDataKey(websiteID string, key string) (*Response, error)`
 
 * **Website Conversation**
   * **Create A New Conversation** [`user`, `plugin`]: `client.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
@@ -225,7 +227,9 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website People**
   * **Get People Statistics** [`user`, `plugin`]: `client.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
   * **List Suggested People Segments** [`user`, `plugin`]: `client.Website.ListSuggestedPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSuggestedSegment, *Response, error)`
+  * **Delete Suggested People Segment** [`user`, `plugin`]: `client.Website.DeleteSuggestedPeopleSegment(websiteID string, segment string) (*Response, error)`
   * **List Suggested People Data Keys** [`user`, `plugin`]: `client.Website.ListSuggestedPeopleDataKeys(websiteID string, pageNumber uint) (*[]PeopleSuggestedData, *Response, error)`
+  * **Delete Suggested People Data Key** [`user`, `plugin`]: `client.Website.DeleteSuggestedPeopleDataKey(websiteID string, key string) (*Response, error)`
   * **List People Profiles** [`user`, `plugin`]: `client.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter, searchText string) (*[]PeopleProfile, *Response, error)`
   * **Add New People Profile** [`user`, `plugin`]: `client.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
   * **Check If People Profile Exists** [`user`, `plugin`]: `client.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`

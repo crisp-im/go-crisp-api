@@ -213,6 +213,16 @@ type PeopleProfileImport struct {
   ImportID  *string  `json:"import_id,omitempty"`
 }
 
+// PeopleSuggestedSegmentDelete mapping
+type PeopleSuggestedSegmentDelete struct {
+  Segment  string  `json:"segment,omitempty"`
+}
+
+// PeopleSuggestedDataDelete mapping
+type PeopleSuggestedDataDelete struct {
+  Key  string  `json:"key,omitempty"`
+}
+
 // PeopleProfileUpdateCard mapping
 type PeopleProfileUpdateCard struct {
   Email     string                     `json:"email,omitempty"`
@@ -346,6 +356,15 @@ func (service *WebsiteService) ListSuggestedPeopleSegments(websiteID string, pag
 }
 
 
+// DeleteSuggestedPeopleSegment deletes a suggested segment for people.
+func (service *WebsiteService) DeleteSuggestedPeopleSegment(websiteID string, segment string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/people/suggest/segment", websiteID)
+  req, _ := service.client.NewRequest("DELETE", url, PeopleSuggestedSegmentDelete{Segment: segment})
+
+  return service.client.Do(req, nil)
+}
+
+
 // ListSuggestedPeopleDataKeys lists suggested data keys for people.
 func (service *WebsiteService) ListSuggestedPeopleDataKeys(websiteID string, pageNumber uint) (*[]PeopleSuggestedData, *Response, error) {
   url := fmt.Sprintf("website/%s/people/suggest/data/%d", websiteID, pageNumber)
@@ -358,6 +377,15 @@ func (service *WebsiteService) ListSuggestedPeopleDataKeys(websiteID string, pag
   }
 
   return data.Data, resp, err
+}
+
+
+// DeleteSuggestedPeopleDataKey deletes a suggested data key for people.
+func (service *WebsiteService) DeleteSuggestedPeopleDataKey(websiteID string, key string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/people/suggest/data", websiteID)
+  req, _ := service.client.NewRequest("DELETE", url, PeopleSuggestedDataDelete{Key: key})
+
+  return service.client.Do(req, nil)
 }
 
 

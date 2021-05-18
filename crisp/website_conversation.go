@@ -352,6 +352,16 @@ type ConversationMessageData struct {
   Data  *ConversationMessage  `json:"data,omitempty"`
 }
 
+// ConversationSuggestedSegmentDelete mapping
+type ConversationSuggestedSegmentDelete struct {
+  Segment  string  `json:"segment,omitempty"`
+}
+
+// ConversationSuggestedDataDelete mapping
+type ConversationSuggestedDataDelete struct {
+  Key  string  `json:"key,omitempty"`
+}
+
 // ConversationFileMessageNewContent mapping
 type ConversationFileMessageNewContent struct {
   Name  string  `json:"name,omitempty"`
@@ -950,6 +960,15 @@ func (service *WebsiteService) ListSuggestedConversationSegments(websiteID strin
 }
 
 
+// DeleteSuggestedConversationSegment deletes a suggested conversation segment for website.
+func (service *WebsiteService) DeleteSuggestedConversationSegment(websiteID string, segment string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/suggest/segment", websiteID)
+  req, _ := service.client.NewRequest("DELETE", url, ConversationSuggestedSegmentDelete{Segment: segment})
+
+  return service.client.Do(req, nil)
+}
+
+
 // ListSuggestedConversationDataKeys lists suggested conversation data keys for website.
 func (service *WebsiteService) ListSuggestedConversationDataKeys(websiteID string, pageNumber uint) (*[]ConversationSuggestedData, *Response, error) {
   url := fmt.Sprintf("website/%s/conversations/suggest/data/%d", websiteID, pageNumber)
@@ -962,6 +981,15 @@ func (service *WebsiteService) ListSuggestedConversationDataKeys(websiteID strin
   }
 
   return data.Data, resp, err
+}
+
+
+// DeleteSuggestedConversationDataKey deletes a suggested conversation data key for website.
+func (service *WebsiteService) DeleteSuggestedConversationDataKey(websiteID string, key string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/suggest/data", websiteID)
+  req, _ := service.client.NewRequest("DELETE", url, ConversationSuggestedDataDelete{Key: key})
+
+  return service.client.Do(req, nil)
 }
 
 
