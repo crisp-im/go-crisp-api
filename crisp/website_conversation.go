@@ -406,7 +406,8 @@ type ConversationFieldMessageNewContent struct {
 
 // ConversationEventMessageNewContent mapping
 type ConversationEventMessageNewContent struct {
-  Namespace  string  `json:"namespace,omitempty"`
+  Namespace  string   `json:"namespace,omitempty"`
+  Text       *string  `json:"text,omitempty"`
 }
 
 // ConversationTextMessageNew mapping
