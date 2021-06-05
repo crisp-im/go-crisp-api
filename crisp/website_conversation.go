@@ -918,17 +918,10 @@ func (instance ConversationWidgetAction) String() string {
 }
 
 
-// SearchConversations searches conversations for website.
-func (service *WebsiteService) SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error) {
-  var resourceURL string
-
-  if searchQuery != "" && searchType != "" {
-    resourceURL = fmt.Sprintf("website/%s/conversations/%d?search_query=%s&search_type=%s", websiteID, pageNumber, url.QueryEscape(searchQuery), url.QueryEscape(searchType))
-  } else {
-    resourceURL = fmt.Sprintf("website/%s/conversations/%d", websiteID, pageNumber)
-  }
-
-  req, _ := service.client.NewRequest("GET", resourceURL, nil)
+// ListConversations lists conversations for website.
+func (service *WebsiteService) ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/%d", websiteID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
 
   conversations := new(ConversationListData)
   resp, err := service.client.Do(req, conversations)
@@ -940,9 +933,78 @@ func (service *WebsiteService) SearchConversations(websiteID string, pageNumber 
 }
 
 
-// ListConversations lists conversations for website.
-func (service *WebsiteService) ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error) {
-  return service.SearchConversations(websiteID, pageNumber, "", "")
+// SearchConversations searches conversations for website.
+func (service *WebsiteService) SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/%d?search_query=%s&search_type=%s", websiteID, pageNumber, url.QueryEscape(searchQuery), url.QueryEscape(searchType))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  conversations := new(ConversationListData)
+  resp, err := service.client.Do(req, conversations)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return conversations.Data, resp, err
+}
+
+
+// FilterConversations filters conversations for website.
+func (service *WebsiteService) FilterConversations(websiteID string, pageNumber uint, filterUnread bool, filterResolved bool, filterNotResolved bool, filterMention bool, filterAssigned bool, filterUnassigned bool) (*[]Conversation, *Response, error) {
+  var (
+    filterUnreadValue string
+    filterResolvedValue string
+    filterNotResolvedValue string
+    filterMentionValue string
+    filterAssignedValue string
+    filterUnassignedValue string
+  )
+
+  if filterUnread == true {
+    filterUnreadValue = "1"
+  } else {
+    filterUnreadValue = "0"
+  }
+
+  if filterResolved == true {
+    filterResolvedValue = "1"
+  } else {
+    filterResolvedValue = "0"
+  }
+
+  if filterNotResolved == true {
+    filterNotResolvedValue = "1"
+  } else {
+    filterNotResolvedValue = "0"
+  }
+
+  if filterMention == true {
+    filterMentionValue = "1"
+  } else {
+    filterMentionValue = "0"
+  }
+
+  if filterAssigned == true {
+    filterAssignedValue = "1"
+  } else {
+    filterAssignedValue = "0"
+  }
+
+  if filterUnassigned == true {
+    filterUnassignedValue = "1"
+  } else {
+    filterUnassignedValue = "0"
+  }
+
+  url := fmt.Sprintf("website/%s/conversations/%d?filter_unread=%s&filter_resolved=%s&filter_not_resolved=%s&filter_mention=%s&filter_assigned=%s&filter_unassigned=%s", websiteID, pageNumber, url.QueryEscape(filterUnreadValue), url.QueryEscape(filterResolvedValue), url.QueryEscape(filterNotResolvedValue), url.QueryEscape(filterMentionValue), url.QueryEscape(filterAssignedValue), url.QueryEscape(filterUnassignedValue))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  conversations := new(ConversationListData)
+  resp, err := service.client.Do(req, conversations)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return conversations.Data, resp, err
 }
 
 

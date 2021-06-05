@@ -156,6 +156,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * **Website Conversations**
   * **List Conversations** [`user`, `plugin`]: `client.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
   * **List Conversations (Search Variant)** [`user`, `plugin`]: `client.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
+  * **List Conversations (Filter Variant)** [`user`, `plugin`]: `client.Website.FilterConversations(websiteID string, pageNumber uint, filterUnread bool, filterResolved bool, filterNotResolved bool, filterMention bool, filterAssigned bool, filterUnassigned bool) (*[]Conversation, *Response, error)`
   * **List Suggested Conversation Segments** [`user`, `plugin`]: `client.Website.ListSuggestedConversationSegments(websiteID string, pageNumber uint) (*[]ConversationSuggestedSegment, *Response, error)`
   * **Delete Suggested Conversation Segment** [`user`, `plugin`]: `client.Website.DeleteSuggestedConversationSegment(websiteID string, segment string) (*Response, error)`
   * **List Suggested Conversation Data Keys** [`user`, `plugin`]: `client.Website.ListSuggestedConversationDataKeys(websiteID string, pageNumber uint) (*[]ConversationSuggestedData, *Response, error)`
