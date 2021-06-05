@@ -1067,7 +1067,7 @@ func (service *WebsiteService) GetMessagesInConversationLast(websiteID string, s
 
 
 // GetMessagesInConversationBefore resolves messages in an existing conversation (before variant).
-func (service *WebsiteService) GetMessagesInConversationBefore(websiteID string, sessionID string, timestampBefore uint32) (*[]ConversationMessage, *Response, error) {
+func (service *WebsiteService) GetMessagesInConversationBefore(websiteID string, sessionID string, timestampBefore uint) (*[]ConversationMessage, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/messages?timestamp_before=%d", websiteID, sessionID, timestampBefore)
   req, _ := service.client.NewRequest("GET", url, nil)
 
