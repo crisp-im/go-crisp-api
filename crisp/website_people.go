@@ -489,6 +489,45 @@ func (service *WebsiteService) ListPeopleConversations(websiteID string, peopleI
 }
 
 
+// FilterPeopleConversations filters conversations linked to people.
+func (service *WebsiteService) FilterPeopleConversations(websiteID string, peopleID string, pageNumber uint, filterUnread bool, filterResolved bool, filterNotResolved bool) ([]string, *Response, error) {
+  var (
+    filterUnreadValue string
+    filterResolvedValue string
+    filterNotResolvedValue string
+  )
+
+  if filterUnread == true {
+    filterUnreadValue = "1"
+  } else {
+    filterUnreadValue = "0"
+  }
+
+  if filterResolved == true {
+    filterResolvedValue = "1"
+  } else {
+    filterResolvedValue = "0"
+  }
+
+  if filterNotResolved == true {
+    filterNotResolvedValue = "1"
+  } else {
+    filterNotResolvedValue = "0"
+  }
+
+  url := fmt.Sprintf("website/%s/people/conversations/%s/list/%d?filter_unread=%s&filter_resolved=%s&filter_not_resolved=%s", websiteID, peopleID, pageNumber, url.QueryEscape(filterUnreadValue), url.QueryEscape(filterResolvedValue), url.QueryEscape(filterNotResolvedValue))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  conversations := new(PeopleConversationsData)
+  resp, err := service.client.Do(req, conversations)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return conversations.Data, resp, err
+}
+
+
 // ListPeopleCampaigns lists campaigns linked to people.
 func (service *WebsiteService) ListPeopleCampaigns(websiteID string, peopleID string, pageNumber uint) (*[]PeopleCampaign, *Response, error) {
   url := fmt.Sprintf("website/%s/people/campaigns/%s/list/%d", websiteID, peopleID, pageNumber)
