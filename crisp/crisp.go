@@ -19,7 +19,7 @@ import (
 
 
 const (
-  libraryVersion = "3.10.15"
+  libraryVersion = "3.11.0"
   defaultRestEndpointURL = "https://api.crisp.chat/v1/"
   defaultRealtimeEndpointURL = "https://app.relay.crisp.chat:443/"
   userAgent = "go-crisp-api/" + libraryVersion
