@@ -12,6 +12,7 @@ import (
   "fmt"
   "time"
   "io"
+  "errors"
   "io/ioutil"
   "net/http"
   "net/url"
@@ -19,13 +20,15 @@ import (
 
 
 const (
-  libraryVersion = "3.11.0"
+  libraryVersion = "3.11.1"
   defaultRestEndpointURL = "https://api.crisp.chat/v1/"
   defaultRealtimeEndpointURL = "https://app.relay.crisp.chat:443/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
   clientTimeout = 10
 )
+
+var errorDoNilRequest = errors.New("request could not be constructed")
 
 // ClientConfig mapping
 type ClientConfig struct {
@@ -176,6 +179,10 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
 
 // Do sends an API request
 func (client *Client) Do(req *http.Request, v interface{}) (*Response, error) {
+  if req == nil {
+    return nil, errorDoNilRequest
+  }
+
   resp, err := client.client.Do(req)
   if err != nil {
     return nil, err
