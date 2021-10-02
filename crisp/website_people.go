@@ -45,6 +45,17 @@ type PeopleSuggestedData struct {
   Count  *int32   `json:"count,omitempty"`
 }
 
+// PeopleSuggestedEventData mapping
+type PeopleSuggestedEventData struct {
+  Data  *[]PeopleSuggestedEvent  `json:"data,omitempty"`
+}
+
+// PeopleSuggestedEvent mapping
+type PeopleSuggestedEvent struct {
+  Text   *string  `json:"text,omitempty"`
+  Count  *int32   `json:"count,omitempty"`
+}
+
 // PeopleProfileData mapping
 type PeopleProfileData struct {
   Data  *PeopleProfile  `json:"data,omitempty"`
@@ -223,6 +234,11 @@ type PeopleSuggestedDataDelete struct {
   Key  string  `json:"key,omitempty"`
 }
 
+// PeopleSuggestedEventDelete mapping
+type PeopleSuggestedEventDelete struct {
+  Text  string  `json:"text,omitempty"`
+}
+
 // PeopleProfileUpdateCard mapping
 type PeopleProfileUpdateCard struct {
   Email     string                     `json:"email,omitempty"`
@@ -286,6 +302,12 @@ func (instance PeopleSuggestedSegment) String() string {
 
 // String returns the string representation of PeopleSuggestedData
 func (instance PeopleSuggestedData) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PeopleSuggestedEvent
+func (instance PeopleSuggestedEvent) String() string {
   return Stringify(instance)
 }
 
@@ -384,6 +406,30 @@ func (service *WebsiteService) ListSuggestedPeopleDataKeys(websiteID string, pag
 func (service *WebsiteService) DeleteSuggestedPeopleDataKey(websiteID string, key string) (*Response, error) {
   url := fmt.Sprintf("website/%s/people/suggest/data", websiteID)
   req, _ := service.client.NewRequest("DELETE", url, PeopleSuggestedDataDelete{Key: key})
+
+  return service.client.Do(req, nil)
+}
+
+
+// ListSuggestedPeopleEvents lists suggested events for people.
+func (service *WebsiteService) ListSuggestedPeopleEvents(websiteID string, pageNumber uint) (*[]PeopleSuggestedEvent, *Response, error) {
+  url := fmt.Sprintf("website/%s/people/suggest/events/%d", websiteID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  events := new(PeopleSuggestedEventData)
+  resp, err := service.client.Do(req, events)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return events.Data, resp, err
+}
+
+
+// DeleteSuggestedPeopleEvent deletes a suggested event for people.
+func (service *WebsiteService) DeleteSuggestedPeopleEvent(websiteID string, text string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/people/suggest/event", websiteID)
+  req, _ := service.client.NewRequest("DELETE", url, PeopleSuggestedEventDelete{Text: text})
 
   return service.client.Do(req, nil)
 }

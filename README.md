@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2021 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 05/06/2021
+* **📝 Implements**: [Crisp Platform - API ~ v1](https://docs.crisp.chat/api/v1/) at reference revision: 02/10/2021
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -231,6 +231,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Delete Suggested People Segment** [`user`, `plugin`]: `client.Website.DeleteSuggestedPeopleSegment(websiteID string, segment string) (*Response, error)`
   * **List Suggested People Data Keys** [`user`, `plugin`]: `client.Website.ListSuggestedPeopleDataKeys(websiteID string, pageNumber uint) (*[]PeopleSuggestedData, *Response, error)`
   * **Delete Suggested People Data Key** [`user`, `plugin`]: `client.Website.DeleteSuggestedPeopleDataKey(websiteID string, key string) (*Response, error)`
+  * **List Suggested People Events** [`user`, `plugin`]: `client.Website.ListSuggestedPeopleEvents(websiteID string, pageNumber uint) (*[]PeopleSuggestedEvent, *Response, error)`
+  * **Delete Suggested People Event** [`user`, `plugin`]: `client.Website.DeleteSuggestedPeopleEvent(websiteID string, text string) (*Response, error)`
   * **List People Profiles** [`user`, `plugin`]: `client.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter, searchText string) (*[]PeopleProfile, *Response, error)`
   * **Add New People Profile** [`user`, `plugin`]: `client.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
   * **Check If People Profile Exists** [`user`, `plugin`]: `client.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`
