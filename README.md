@@ -11,6 +11,8 @@ Copyright 2021 Crisp IM SARL. See LICENSE for copying information.
 
 ## Usage
 
+You may follow the [REST API Quickstart](https://docs.crisp.chat/guides/rest-api/quickstart/) guide, which will get you running with the REST API in minutes.
+
 ```go
 import "github.com/crisp-im/go-crisp-api/crisp"
 ```
@@ -27,7 +29,7 @@ subscriptions, _, err := client.Plugin.ListSubscriptionsForWebsite("5d02a3ef-ea8
 
 ## Authentication
 
-To authenticate against the API, generate your session identifier and session key **once** using the [Crisp token generation utility](https://go.crisp.chat/account/token/). You'll get a token keypair made of 2 values.
+To authenticate against the API, obtain your authentication token keypair by following the [REST API Authentication](https://docs.crisp.chat/guides/rest-api/authentication/) guide. You'll get a token keypair made of 2 values.
 
 **Keep your token keypair values private, and store them safely for long-term use.**
 
@@ -36,14 +38,12 @@ Then, add authentication parameters to your `client` instance right after you cr
 ```go
 client := crisp.New()
 
-// Authenticate to API (identifier, key)
-// eg. client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
-client.Authenticate(identifier, key)
+// Authenticate to API with your plugin token (identifier, key)
+// eg. client.AuthenticateTier("plugin", "7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
+client.AuthenticateTier("plugin", identifier, key)
 
 // Now, you can use authenticated API sections.
 ```
-
-**🔴 Important: Make sure to generate your token once, and use the same token keys in all your subsequent requests to the API. Do not generate too many tokens, as we may invalidate your older tokens to make room for newer tokens.**
 
 ## Resource Methods
 
@@ -51,7 +51,7 @@ All the available Crisp API resources are fully implemented. **Programmatic meth
 
 Thus, it is straightforward to look for them in the library while reading the [REST API Reference](https://docs.crisp.chat/references/rest-api/v1/).
 
-**⚠️ Note that, depending on your authentication token tier, which is either `user` or `plugin`, you may not be allowed to use all methods from the library. When in doubt, refer to the library method descriptions below.**
+**⚠️ Note that, depending on your authentication token tier, which is either `user` or `plugin`, you may not be allowed to use all methods from the library. When in doubt, refer to the library method descriptions below. Most likely, you are using a `plugin` token.**
 
 In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.New()` and then call eg: `client.Website.ListWebsiteOperators(websiteID)`.
 
@@ -284,7 +284,7 @@ To start listening for events and bind an handler, proceed as follow:
 client := crisp.New()
 
 // Set authentication parameters
-client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
+client.AuthenticateTier("plugin", "7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
 
 // Connect to realtime events backend and listen (only to 'message:send' namespace)
 client.Events.Listen(
