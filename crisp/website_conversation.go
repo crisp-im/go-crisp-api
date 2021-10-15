@@ -807,9 +807,10 @@ type ConversationWidgetActionStrategy struct {
 
 // ConversationWidgetButtonPayload mapping
 type ConversationWidgetButtonPayload struct {
-  SectionID  string       `json:"section_id,omitempty"`
-  ItemID     string       `json:"item_id,omitempty"`
-  Data       interface{}  `json:"data,omitempty"`
+  SectionID  string        `json:"section_id,omitempty"`
+  ItemID     string        `json:"item_id,omitempty"`
+  Data       interface{}   `json:"data,omitempty"`
+  Value      *interface{}  `json:"value,omitempty"`
 }
 
 // ConversationWidgetDataFetchPayload mapping
@@ -1678,9 +1679,9 @@ func (service *WebsiteService) TransmitSignalingOnOngoingCallSession(websiteID s
 
 
 // DeliverWidgetButtonActionForConversation delivers a button action on plugin widget for conversation.
-func (service *WebsiteService) DeliverWidgetButtonActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, data interface{}) (*ConversationWidgetAction, *Response, error) {
+func (service *WebsiteService) DeliverWidgetButtonActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, data interface{}, value *interface{}) (*ConversationWidgetAction, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/widget/%s/button", websiteID, sessionID, pluginID)
-  req, _ := service.client.NewRequest("POST", url, ConversationWidgetButtonPayload{SectionID: sectionID, ItemID: itemID, Data: data})
+  req, _ := service.client.NewRequest("POST", url, ConversationWidgetButtonPayload{SectionID: sectionID, ItemID: itemID, Data: data, Value: value})
 
   action := new(ConversationWidgetActionData)
   resp, err := service.client.Do(req, action)
