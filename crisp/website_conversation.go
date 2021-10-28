@@ -735,12 +735,6 @@ type ConversationBrowsingAction struct {
   Action  *string  `json:"action,omitempty"`
 }
 
-// ConversationBrowsingDebug mapping
-type ConversationBrowsingDebug struct {
-  Action   *string  `json:"action,omitempty"`
-  Execute  *string  `json:"execute,omitempty"`
-}
-
 // ConversationBrowsingAssist mapping
 type ConversationBrowsingAssist struct {
   Action  *string                            `json:"action,omitempty"`
@@ -1607,15 +1601,6 @@ func (service *WebsiteService) InitiateBrowsingSessionForConversation(websiteID 
 func (service *WebsiteService) SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/browsing/%s", websiteID, sessionID, browsingID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationBrowsingAction{&action})
-
-  return service.client.Do(req, nil)
-}
-
-
-// DebugExistingBrowsingSession debugs an existing browsing session.
-func (service *WebsiteService) DebugExistingBrowsingSession(websiteID string, sessionID string, browsingID string, debug ConversationBrowsingDebug) (*Response, error) {
-  url := fmt.Sprintf("website/%s/conversation/%s/browsing/%s/debug", websiteID, sessionID, browsingID)
-  req, _ := service.client.NewRequest("PATCH", url, debug)
 
   return service.client.Do(req, nil)
 }
