@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2021 Crisp IM SARL. See LICENSE for copying information.
 
-* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 28/10/2021
+* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 08/11/2021
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -246,6 +246,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   + **List People Events** [`user`, `plugin`]: `client.Website.ListPeopleEvents(websiteID string, peopleID string, pageNumber uint) (*[]PeopleEvent, *Response, error)`
   + **Get People Data** [`user`, `plugin`]: `client.Website.GetPeopleData(websiteID string, peopleID string) (*PeopleData, *Response, error)`
   + **Save People Data** [`user`, `plugin`]: `client.Website.SavePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error)`
+  + **Update People Data** [`user`, `plugin`]: `client.Website.UpdatePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error)`
   + **Get People Subscription Status** [`user`, `plugin`]: `client.Website.GetPeopleSubscriptionStatus(websiteID string, peopleID string) (*PeopleSubscription, *Response, error)`
   + **Update People Subscription Status** [`user`, `plugin`]: `client.Website.UpdatePeopleSubscriptionStatus(websiteID string, peopleID string, peopleSubscription PeopleSubscriptionUpdate)`
   * **Export People Profiles** [`user`]: `client.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`

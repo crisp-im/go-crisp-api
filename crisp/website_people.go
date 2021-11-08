@@ -637,6 +637,15 @@ func (service *WebsiteService) SavePeopleData(websiteID string, peopleID string,
 }
 
 
+// UpdatePeopleData updates stored data for people.
+func (service *WebsiteService) UpdatePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error) {
+  url := fmt.Sprintf("website/%s/people/data/%s", websiteID, peopleID)
+  req, _ := service.client.NewRequest("PATCH", url, peopleData)
+
+  return service.client.Do(req, nil)
+}
+
+
 // GetPeopleSubscriptionStatus resolves subscription status for people.
 func (service *WebsiteService) GetPeopleSubscriptionStatus(websiteID string, peopleID string) (*PeopleSubscription, *Response, error) {
   url := fmt.Sprintf("website/%s/people/subscription/%s", websiteID, peopleID)
