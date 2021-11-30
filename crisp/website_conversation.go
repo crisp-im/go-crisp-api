@@ -809,9 +809,10 @@ type ConversationWidgetButtonPayload struct {
 
 // ConversationWidgetDataFetchPayload mapping
 type ConversationWidgetDataFetchPayload struct {
-  SectionID  string  `json:"section_id,omitempty"`
-  ItemID     string  `json:"item_id,omitempty"`
-  Action     string  `json:"action,omitempty"`
+  SectionID  string       `json:"section_id,omitempty"`
+  ItemID     string       `json:"item_id,omitempty"`
+  Action     string       `json:"action,omitempty"`
+  Data       interface{}  `json:"data,omitempty"`
 }
 
 // ConversationWidgetDataEditPayload mapping
@@ -1679,9 +1680,9 @@ func (service *WebsiteService) DeliverWidgetButtonActionForConversation(websiteI
 
 
 // DeliverWidgetDataFetchActionForConversation delivers a data action on plugin widget for conversation (fetch action).
-func (service *WebsiteService) DeliverWidgetDataFetchActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string) (*ConversationWidgetAction, *Response, error) {
+func (service *WebsiteService) DeliverWidgetDataFetchActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, data interface{}) (*ConversationWidgetAction, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/widget/%s/data", websiteID, sessionID, pluginID)
-  req, _ := service.client.NewRequest("POST", url, ConversationWidgetDataFetchPayload{SectionID: sectionID, ItemID: itemID})
+  req, _ := service.client.NewRequest("POST", url, ConversationWidgetDataFetchPayload{SectionID: sectionID, ItemID: itemID, Data: data})
 
   action := new(ConversationWidgetActionData)
   resp, err := service.client.Do(req, action)
