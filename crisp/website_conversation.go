@@ -98,12 +98,13 @@ type ConversationMeta struct {
 
 // ConversationOriginal mapping
 type ConversationOriginal struct {
-  WebsiteID   *string  `json:"website_id,omitempty"`
-  SessionID   *string  `json:"session_id,omitempty"`
-  OriginalID  *string  `json:"original_id,omitempty"`
-  Type        *string  `json:"type,omitempty"`
-  Content     *string  `json:"content,omitempty"`
-  Timestamp   *uint64  `json:"timestamp,omitempty"`
+  WebsiteID   *string       `json:"website_id,omitempty"`
+  SessionID   *string       `json:"session_id,omitempty"`
+  OriginalID  *string       `json:"original_id,omitempty"`
+  Type        *string       `json:"type,omitempty"`
+  Headers     *interface{}  `json:"headers,omitempty"`
+  Content     *string       `json:"content,omitempty"`
+  Timestamp   *uint64       `json:"timestamp,omitempty"`
 }
 
 // ConversationPagesData mapping
