@@ -421,6 +421,8 @@ type ConversationTextMessageNew struct {
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
   Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
+  Timestamp    *uint64                             `json:"timestamp,omitempty"`
+  Stealth      *bool                               `json:"stealth,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
@@ -434,6 +436,8 @@ type ConversationFileMessageNew struct {
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
   Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
+  Timestamp    *uint64                             `json:"timestamp,omitempty"`
+  Stealth      *bool                               `json:"stealth,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
@@ -447,6 +451,8 @@ type ConversationAnimationMessageNew struct {
   Fingerprint  int                                     `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser           `json:"user,omitempty"`
   Original     *ConversationAllMessageNewOriginal      `json:"original,omitempty"`
+  Timestamp    *uint64                                 `json:"timestamp,omitempty"`
+  Stealth      *bool                                   `json:"stealth,omitempty"`
   Translated   *bool                                   `json:"translated,omitempty"`
 }
 
@@ -460,6 +466,8 @@ type ConversationAudioMessageNew struct {
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
   Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
+  Timestamp    *uint64                             `json:"timestamp,omitempty"`
+  Stealth      *bool                               `json:"stealth,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
@@ -473,6 +481,8 @@ type ConversationPickerMessageNew struct {
   Fingerprint  int                                  `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser        `json:"user,omitempty"`
   Original     *ConversationAllMessageNewOriginal   `json:"original,omitempty"`
+  Timestamp    *uint64                              `json:"timestamp,omitempty"`
+  Stealth      *bool                                `json:"stealth,omitempty"`
   Translated   *bool                                `json:"translated,omitempty"`
 }
 
@@ -486,6 +496,8 @@ type ConversationFieldMessageNew struct {
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
   Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
+  Timestamp    *uint64                             `json:"timestamp,omitempty"`
+  Stealth      *bool                               `json:"stealth,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
@@ -502,6 +514,8 @@ type ConversationEventMessageNew struct {
   Fingerprint  int                                 `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser       `json:"user,omitempty"`
   Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
+  Timestamp    *uint64                             `json:"timestamp,omitempty"`
+  Stealth      *bool                               `json:"stealth,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
