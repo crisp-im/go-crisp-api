@@ -71,367 +71,367 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 ### Bucket
 
 * **Bucket URL**
-  * **Generate Bucket URL** [`user`, `plugin`]:
+  * **Generate Bucket URL** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#bucket-url)
     * `client.Bucket.GenerateBucketURL(bucketData BucketURLRequest) (*Response, error)`
 
 ### Media
 
 * **Media Animation**
-  * **List Animation Medias** [`user`]:
+  * **List Animation Medias** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-animation-medias)
     * `client.Media.ListAnimationMedias(pageNumber uint, listID int, searchQuery string) (*Response, error)`
 
 ### Website
 
 * **Website Base**
-  * **Check If Website Exists** [`user`, `plugin`]:
+  * **Check If Website Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-website-exists)
     * `client.Website.CheckWebsiteExists(domain string) (*Response, error)`
-  * **Create Website** [`user`]:
+  * **Create Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-website)
     * `client.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
-  * **Get A Website** [`user`, `plugin`]:
+  * **Get A Website** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-a-website)
     * `client.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
-  * **Delete A Website** [`user`]:
+  * **Delete A Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-a-website)
     * `client.Website.DeleteWebsite(websiteID string, verify string) (*Response, error)`
 
 * **Website Batch**
-  * **Batch Resolve Conversations** [`user`]:
+  * **Batch Resolve Conversations** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-resolve-items)
     * `client.Website.BatchResolveConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Batch Read Conversations** [`user`]:
+  * **Batch Read Conversations** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-read-items)
     * `client.Website.BatchReadConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Batch Remove Conversations** [`user`]:
+  * **Batch Remove Conversations** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-remove-items)
     * `client.Website.BatchRemoveConversations(websiteID string, sessions []string) (*Response, error)`
-  * **Batch Remove People** [`user`]:
+  * **Batch Remove People** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-remove-items)
     * `client.Website.BatchRemovePeople(websiteID string, people WebsiteBatchPeopleOperationInner) (*Response, error)`
 
 * **Website Availability**
-  * **Get Website Availability Status** [`user`, `plugin`]:
+  * **Get Website Availability Status** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-website-availability-status)
     * `client.Website.GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error)`
-  * **List Website Operator Availabilities** [`user`, `plugin`]:
+  * **List Website Operator Availabilities** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-website-operator-availabilities)
     * `client.Website.ListWebsiteOperatorAvailabilities(websiteID string) (*[]WebsiteAvailabilityOperator, *Response, error)`
 
 * **Website Operator**
-  * **List Website Operators** [`user`, `plugin`]:
+  * **List Website Operators** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-website-operators)
     * `client.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
-  * **List Last Active Website Operators** [`user`, `plugin`]:
+  * **List Last Active Website Operators** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-last-active-website-operators)
     * `client.Website.ListLastActiveWebsiteOperators(websiteID string) (*[]WebsiteOperatorsLastActiveListOne, *Response, error)`
-  * **Flush Last Active Website Operators** [`user`]:
+  * **Flush Last Active Website Operators** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#flush-last-active-website-operators)
     * `client.Website.FlushLastActiveWebsiteOperators(websiteID string) (*Response, error)`
-  * **Send Email To Website Operators** [`user`, `plugin`]:
+  * **Send Email To Website Operators** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-email-to-website-operators)
     * `client.Website.SendEmailToWebsiteOperators(websiteID string, email WebsiteOperatorEmail) (*Response, error)`
-  * **Get A Website Operator** [`user`, `plugin`]:
+  * **Get A Website Operator** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-a-website-operator)
     * `client.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
-  * **Invite A Website Operator** [`user`]:
+  * **Invite A Website Operator** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#invite-a-website-operator)
     * `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, verify string) (*Response, error)`
-  * **Change Operator Membership** [`user`]:
+  * **Change Operator Membership** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#change-operator-membership)
     * `client.Website.ChangeOperatorMembership(websiteID string, userID string, role string, title *string) (*Response, error)`
-  * **Unlink Operator From Website** [`user`]:
+  * **Unlink Operator From Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#unlink-operator-from-website)
     * `client.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
 
 * **Website Verify**
-  * **Get Verify Settings** [`user`, `plugin`]:
+  * **Get Verify Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-verify-settings)
     * `client.Website.GetVerifySettings(websiteID string) (*WebsiteVerifySettings, *Response, error)`
-  * **Update Verify Settings** [`user`, `plugin`]:
+  * **Update Verify Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-verify-settings)
     * `client.Website.UpdateVerifySettings(websiteID string, settings WebsiteVerifySettingsUpdate) (*Response, error)`
-  * **Get Verify Key** [`user`, `plugin`]:
+  * **Get Verify Key** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-verify-key)
     * `client.Website.GetVerifyKey(websiteID string) (*WebsiteVerifyKey, *Response, error)`
-  * **Roll Verify Key** [`user`, `plugin`]:
+  * **Roll Verify Key** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#roll-verify-key)
     * `client.Website.RollVerifyKey(websiteID string) (*Response, error)`
 
 * **Website Settings**
-  * **Get Website Settings** [`user`, `plugin`]:
+  * **Get Website Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-website-settings)
     * `client.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
-  * **Update Website Settings** [`user`, `plugin`]:
+  * **Update Website Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-website-settings)
     * `client.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error)`
 
 * **Website Visitors**
-  * **Count Visitors** [`user`, `plugin`]:
+  * **Count Visitors** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#count-visitors)
     * `client.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
-  * **List Visitors** [`user`, `plugin`]:
+  * **List Visitors** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-visitors)
     * `client.Website.ListVisitors(websiteID string, pageNumber uint) (*[]WebsiteVisitor, *Response, error)`
-  * **Pinpoint Visitors On A Map (Wide Variant)** [`user`, `plugin`]:
+  * **Pinpoint Visitors On A Map (Wide Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#pinpoint-visitors-on-a-map)
     * `client.Website.PinpointVisitorsOnMapWide(websiteID string) (*[]WebsiteVisitorsMapPoint, *Response, error)`
-  * **Pinpoint Visitors On A Map (Area Variant)** [`user`, `plugin`]:
+  * **Pinpoint Visitors On A Map (Area Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#pinpoint-visitors-on-a-map)
     * `client.Website.PinpointVisitorsOnMapArea(websiteID string, centerLongitude float32, centerLatitude float32, centerRadius uint) (*[]WebsiteVisitorsMapPoint, *Response, error)`
-  * **Get Session Identifier From Token** [`user`, `plugin`]:
+  * **Get Session Identifier From Token** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-session-identifier-from-token)
     * `client.Website.GetSessionIdentifierFromToken(websiteID string, tokenID string) (*WebsiteVisitorsToken, *Response, error)`
-  * **Count Blocked Visitors** [`user`]:
+  * **Count Blocked Visitors** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#count-blocked-visitors/)
     * `client.Website.CountBlockedVisitors(websiteID string) (*[]WebsiteVisitorsBlocked, *Response, error)`
-  * **Count Blocked Visitors In Rule** [`user`]:
+  * **Count Blocked Visitors In Rule** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#count-blocked-visitors-in-rule)
     * `client.Website.CountBlockedVisitorsInRule(websiteID string, rule string) (*WebsiteVisitorsBlocked, *Response, error)`
-  * **Clear Blocked Visitors In Rule** [`user`]:
+  * **Clear Blocked Visitors In Rule** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#clear-blocked-visitors-in-rule)
     * `client.Website.ClearBlockedVisitorsInRule(websiteID string, rule string) (*Response, error)`
 
 * **Website Campaigns**
-  * **List Campaigns** [`user`]:
+  * **List Campaigns** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-campaigns)
     * `client.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
-  * **List Campaigns (Filter Variant)** [`user`]:
+  * **List Campaigns (Filter Variant)** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-campaigns)
     * `client.Website.FilterCampaigns(websiteID string, pageNumber uint, searchName string, filterTag string, filterTypeOneShot bool, filterTypeAutomated bool, filterStatusNotConfigured bool, filterStatusReady bool, filterStatusPaused bool, filterStatusSending bool, filterStatusDone bool) (*[]WebsiteCampaignExcerpt, *Response, error)`
-  * **List Campaign Tags** [`user`]:
+  * **List Campaign Tags** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-campaign-tags)
     * `client.Website.ListCampaignTags(websiteID string) (*[]string, *Response, error)`
-  * **List Campaign Templates** [`user`]:
+  * **List Campaign Templates** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-campaign-templates)
     * `client.Website.ListCampaignTemplates(websiteID string, pageNumber uint) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
-  * **List Campaign Templates (Filter Variant)** [`user`]:
+  * **List Campaign Templates (Filter Variant)** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-campaign-templates)
     * `client.Website.FilterCampaignTemplates(websiteID string, pageNumber uint, searchName string, filterTypeStatic bool, filterTypeCustom bool) (*[]WebsiteCampaignTemplateExcerpt, *Response, error)`
-  * **Create A New Campaign Template** [`user`]:
+  * **Create A New Campaign Template** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-a-new-campaign-template)
     * `client.Website.CreateNewCampaignTemplate(websiteID string, templateFormat string, templateName string) (*WebsiteCampaignTemplateNew, *Response, error)`
-  * **Check If Campaign Template Exists** [`user`]:
+  * **Check If Campaign Template Exists** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-campaign-template-exists)
     * `client.Website.CheckCampaignTemplateExists(websiteID string, templateID string) (*Response, error)`
-  * **Get A Campaign Template** [`user`]:
+  * **Get A Campaign Template** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-a-campaign-template)
     * `client.Website.GetCampaignTemplate(websiteID string, templateID string) (*WebsiteCampaignTemplateItem, *Response, error)`
-  * **Save A Campaign Template** [`user`]:
+  * **Save A Campaign Template** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-a-campaign-template)
     * `client.Website.SaveCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
-  * **Update A Campaign Template** [`user`]:
+  * **Update A Campaign Template** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-campaign-template)
     * `client.Website.UpdateCampaignTemplate(websiteID string, templateID string, websiteCampaignTemplateItem WebsiteCampaignTemplateItem) (*Response, error)`
-  * **Remove A Campaign Template** [`user`]:
+  * **Remove A Campaign Template** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#remove-a-campaign-template)
     * `client.Website.RemoveCampaignTemplate(websiteID string, templateID string) (*Response, error)`
 
 * **Website Campaign**
-  * **Create A New Campaign** [`user`]:
+  * **Create A New Campaign** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-a-new-campaign)
     * `client.Website.CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error)`
-  * **Check If Campaign Exists** [`user`]:
+  * **Check If Campaign Exists** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-campaign-exists)
     * `client.Website.CheckCampaignExists(websiteID string, campaignID string) (*Response, error)`
-  * **Get A Campaign** [`user`]:
+  * **Get A Campaign** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-a-campaign)
     * `client.Website.GetCampaign(websiteID string, campaignID string) (*WebsiteCampaignItem, *Response, error)`
-  * **Save A Campaign** [`user`]:
+  * **Save A Campaign** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-a-campaign)
     * `client.Website.SaveCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
-  * **Update A Campaign** [`user`]:
+  * **Update A Campaign** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-campaign)
     * `client.Website.UpdateCampaign(websiteID string, campaignID string, websiteCampaignItem WebsiteCampaignItem) (*Response, error)`
-  * **Remove A Campaign** [`user`]:
+  * **Remove A Campaign** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#remove-a-campaign)
     * `client.Website.RemoveCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Dispatch A Campaign** [`user`]:
+  * **Dispatch A Campaign** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#dispatch-a-campaign)
     * `client.Website.DispatchCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Resume A Campaign** [`user`]:
+  * **Resume A Campaign** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resume-a-campaign)
     * `client.Website.ResumeCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Pause A Campaign** [`user`]:
+  * **Pause A Campaign** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#pause-a-campaign)
     * `client.Website.PauseCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **Test A Campaign** [`user`]:
+  * **Test A Campaign** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#test-a-campaign)
     * `client.Website.TestCampaign(websiteID string, campaignID string) (*Response, error)`
-  * **List Campaign Recipients** [`user`]:
+  * **List Campaign Recipients** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-campaign-recipients)
     * `client.Website.ListCampaignRecipients(websiteID string, campaignID string, pageNumber uint) (*[]WebsiteCampaignRecipient, *Response, error)`
-  * **List Campaign Statistics** [`user`]:
+  * **List Campaign Statistics** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-campaign-statistics)
     * `client.Website.ListCampaignStatistics(websiteID string, campaignID string, action string, pageNumber uint) (*[]WebsiteCampaignStatistic, *Response, error)`
 
 * **Website Conversations**
-  * **List Conversations** [`user`, `plugin`]:
+  * **List Conversations** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-conversations)
     * `client.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
-  * **List Conversations (Search Variant)** [`user`, `plugin`]:
+  * **List Conversations (Search Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-conversations)
     * `client.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
-  * **List Conversations (Filter Variant)** [`user`, `plugin`]:
+  * **List Conversations (Filter Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-conversations)
     * `client.Website.FilterConversations(websiteID string, pageNumber uint, filterUnread bool, filterResolved bool, filterNotResolved bool, filterMention bool, filterAssigned bool, filterUnassigned bool) (*[]Conversation, *Response, error)`
-  * **List Suggested Conversation Segments** [`user`, `plugin`]:
+  * **List Suggested Conversation Segments** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-suggested-conversation-segments)
     * `client.Website.ListSuggestedConversationSegments(websiteID string, pageNumber uint) (*[]ConversationSuggestedSegment, *Response, error)`
-  * **Delete Suggested Conversation Segment** [`user`, `plugin`]:
+  * **Delete Suggested Conversation Segment** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-suggested-conversation-segment)
     * `client.Website.DeleteSuggestedConversationSegment(websiteID string, segment string) (*Response, error)`
-  * **List Suggested Conversation Data Keys** [`user`, `plugin`]:
+  * **List Suggested Conversation Data Keys** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-suggested-conversation-data-keys)
     * `client.Website.ListSuggestedConversationDataKeys(websiteID string, pageNumber uint) (*[]ConversationSuggestedData, *Response, error)`
-  * **Delete Suggested Conversation Data Key** [`user`, `plugin`]:
+  * **Delete Suggested Conversation Data Key** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-suggested-conversation-data-key)
     * `client.Website.DeleteSuggestedConversationDataKey(websiteID string, key string) (*Response, error)`
 
 * **Website Conversation**
-  * **Create A New Conversation** [`user`, `plugin`]:
+  * **Create A New Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-a-new-conversation)
     * `client.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
-  * **Check If Conversation Exists** [`user`, `plugin`]:
+  * **Check If Conversation Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-conversation-exists)
     * `client.Website.CheckConversationExists(websiteID string, sessionID string) (*Response, error)`
-  * **Get A Conversation** [`user`, `plugin`]:
+  * **Get A Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-a-conversation)
     * `client.Website.GetConversation(websiteID string, sessionID string) (*Conversation, *Response, error)`
-  * **Remove A Conversation** [`user`, `plugin`]:
+  * **Remove A Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#remove-a-conversation)
     * `client.Website.RemoveConversation(websiteID string, sessionID string) (*Response, error)`
-  * **Initiate A Conversation With Existing Session** [`user`, `plugin`]:
+  * **Initiate A Conversation With Existing Session** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#initiate-a-conversation-with-existing-session)
     * `client.Website.InitiateConversationWithExistingSession(websiteID string, sessionID string) (*Response, error)`
-  * **Get Messages In Conversation (Last Variant)** [`user`, `plugin`]:
+  * **Get Messages In Conversation (Last Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-messages-in-conversation)
     * `client.Website.GetMessagesInConversationLast(websiteID string, sessionID string) (*[]ConversationMessage, *Response, error)`
-  * **Get Messages In Conversation (Before Variant)** [`user`, `plugin`]:
+  * **Get Messages In Conversation (Before Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-messages-in-conversation)
     * `client.Website.GetMessagesInConversationBefore(websiteID string, sessionID string, timestampBefore uint) (*[]ConversationMessage, *Response, error)`
-  * **Send A Message In Conversation (Text Variant)** [`user`, `plugin`]:
+  * **Send A Message In Conversation (Text Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
     * `client.Website.SendTextMessageInConversation(websiteID string, sessionID string, message ConversationTextMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (File Variant)** [`user`, `plugin`]:
+  * **Send A Message In Conversation (File Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
     * `client.Website.SendFileMessageInConversation(websiteID string, sessionID string, message ConversationFileMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Animation Variant)** [`user`, `plugin`]:
+  * **Send A Message In Conversation (Animation Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
     * `client.Website.SendAnimationMessageInConversation(websiteID string, sessionID string, message ConversationAnimationMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Audio Variant)** [`user`, `plugin`]:
+  * **Send A Message In Conversation (Audio Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
     * `client.Website.SendAudioMessageInConversation(websiteID string, sessionID string, message ConversationAudioMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Picker Variant)** [`user`, `plugin`]:
+  * **Send A Message In Conversation (Picker Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
     * `client.Website.SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Field Variant)** [`user`, `plugin`]:
+  * **Send A Message In Conversation (Field Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
     * `client.Website.SendFieldMessageInConversation(websiteID string, sessionID string, message ConversationFieldMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Note Variant)** [`user`, `plugin`]:
+  * **Send A Message In Conversation (Note Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
     * `client.Website.SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Send A Message In Conversation (Event Variant)** [`user`, `plugin`]:
+  * **Send A Message In Conversation (Event Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
     * `client.Website.SendEventMessageInConversation(websiteID string, sessionID string, message ConversationEventMessageNew) (*ConversationMessageDispatched, *Response, error)`
-  * **Get A Message In Conversation** [`user`, `plugin`]:
+  * **Get A Message In Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-a-message-in-conversation)
     * `client.Website.GetMessageInConversation(websiteID string, sessionID string, fingerprint int) (*ConversationMessage, *Response, error)`
-  * **Update A Message In Conversation (Text Variant)** [`user`, `plugin`]:
+  * **Update A Message In Conversation (Text Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
     * `client.Website.UpdateTextMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error)`
-  * **Update A Message In Conversation (File Variant)** [`user`, `plugin`]:
+  * **Update A Message In Conversation (File Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
     * `client.Website.UpdateFileMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFileMessageNewContent) (*Response, error)`
-  * **Update A Message In Conversation (Animation Variant)** [`user`, `plugin`]:
+  * **Update A Message In Conversation (Animation Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
     * `client.Website.UpdateAnimationMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationAnimationMessageNewContent) (*Response, error)`
-  * **Update A Message In Conversation (Audio Variant)** [`user`, `plugin`]:
+  * **Update A Message In Conversation (Audio Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
     * `client.Website.UpdateAudioMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationAudioMessageNewContent) (*Response, error)`
-  * **Update A Message In Conversation (Picker Variant)** [`user`, `plugin`]:
+  * **Update A Message In Conversation (Picker Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
     * `client.Website.UpdatePickerMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationPickerMessageNewContent) (*Response, error)`
-  * **Update A Message In Conversation (Field Variant)** [`user`, `plugin`]:
+  * **Update A Message In Conversation (Field Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
     * `client.Website.UpdateFieldMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFieldMessageNewContent) (*Response, error)`
-  * **Update A Message In Conversation (Note Variant)** [`user`, `plugin`]:
+  * **Update A Message In Conversation (Note Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
     * `client.Website.UpdateNoteMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error)`
-  * **Update A Message In Conversation (Event Variant)** [`user`, `plugin`]:
+  * **Update A Message In Conversation (Event Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
     * `client.Website.UpdateEventMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationEventMessageNewContent) (*Response, error)`
-  * **Compose A Message In Conversation** [`user`, `plugin`]:
+  * **Compose A Message In Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#compose-a-message-in-conversation)
     * `client.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
-  * **Mark Messages As Read In Conversation** [`user`, `plugin`]:
+  * **Mark Messages As Read In Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#mark-messages-as-read-in-conversation)
     * `client.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
-  * **Mark Messages As Delivered In Conversation** [`user`, `plugin`]:
+  * **Mark Messages As Delivered In Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#mark-messages-as-delivered-in-conversation)
     * `client.Website.MarkMessagesDeliveredInConversation(websiteID string, sessionID string, delivered ConversationDeliveredMessageMark) (*Response, error)`
-  * **Update Conversation Open State** [`user`, `plugin`]:
+  * **Update Conversation Open State** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-conversation-open-state)
     * `client.Website.UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error)`
-  * **Get Conversation Routing Assign** [`user`, `plugin`]:
+  * **Get Conversation Routing Assign** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-conversation-routing-assign)
     * `client.Website.GetConversationRoutingAssign(websiteID string, sessionID string) (*ConversationRoutingAssign, *Response, error)`
-  * **Assign Conversation Routing** [`user`, `plugin`]:
+  * **Assign Conversation Routing** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#assign-conversation-routing)
     * `client.Website.AssignConversationRouting(websiteID string, sessionID string, assign ConversationRoutingAssignUpdate) (*Response, error)`
-  * **Get Conversation Metas** [`user`, `plugin`]:
+  * **Get Conversation Metas** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-conversation-metas)
     * `client.Website.GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error)`
-  * **Update Conversation Metas** [`user`, `plugin`]:
+  * **Update Conversation Metas** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-conversation-metas)
     * `client.Website.UpdateConversationMetas(websiteID string, sessionID string, metas ConversationMetaUpdate) (*Response, error)`
-  * **Get An Original Message In Conversation** [`user`, `plugin`]:
+  * **Get An Original Message In Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-an-original-message-in-conversation)
     * `client.Website.GetOriginalMessageInConversation(websiteID string, sessionID string, originalID string) (*ConversationOriginal, *Response, error)`
-  * **List Conversation Pages** [`user`, `plugin`]:
+  * **List Conversation Pages** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-conversation-pages)
     * `client.Website.ListConversationPages(websiteID string, sessionID string, pageNumber uint) (*[]ConversationPage, *Response, error)`
-  * **List Conversation Events** [`user`, `plugin`]:
+  * **List Conversation Events** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-conversation-events)
     * `client.Website.ListConversationEvents(websiteID string, sessionID string, pageNumber uint) (*[]ConversationEvent, *Response, error)`
-  * **Get Conversation State** [`user`, `plugin`]:
+  * **Get Conversation State** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-conversation-state)
     * `client.Website.GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error)`
-  * **Change Conversation State** [`user`, `plugin`]:
+  * **Change Conversation State** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#change-conversation-state)
     * `client.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
-  * **Get Conversation Participants** [`user`, `plugin`]:
+  * **Get Conversation Participants** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-conversation-participants)
     * `client.Website.GetConversationParticipants(websiteID string, sessionID string) (*ConversationParticipants, *Response, error)`
-  * **Save Conversation Participants** [`user`, `plugin`]:
+  * **Save Conversation Participants** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-conversation-participants)
     * `client.Website.SaveConversationParticipants(websiteID string, sessionID string, participants ConversationParticipantsSave) (*Response, error)`
-  * **Get Block Status For Conversation** [`user`, `plugin`]:
+  * **Get Block Status For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-block-status-for-conversation)
     * `client.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
-  * **Block Incoming Messages For Conversation** [`user`, `plugin`]:
+  * **Block Incoming Messages For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#block-incoming-messages-for-conversation)
     * `client.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error)`
-  * **Request Email Transcript For Conversation** [`user`, `plugin`]:
+  * **Request Email Transcript For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#request-email-transcript-for-conversation)
     * `client.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error)`
-  * **Request Chatbox Binding Purge For Conversation** [`user`, `plugin`]:
+  * **Request Chatbox Binding Purge For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#request-chatbox-binding-purge-for-conversation)
     * `client.Website.RequestChatboxBindingPurgeForConversation(websiteID string, sessionID string) (*Response, error)`
-  * **List Browsing Sessions For Conversation** [`user`, `plugin`]:
+  * **List Browsing Sessions For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-browsing-sessions-for-conversation)
     * `client.Website.ListBrowsingSessionsForConversation(websiteID string, sessionID string) (*[]ConversationBrowsing, *Response, error)`
-  * **Initiate Browsing Session For Conversation** [`user`, `plugin`]:
+  * **Initiate Browsing Session For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#initiate-browsing-session-for-conversation)
     * `client.Website.InitiateBrowsingSessionForConversation(websiteID string, sessionID string) (*Response, error)`
-  * **Send Action To An Existing Browsing Session** [`user`, `plugin`]:
+  * **Send Action To An Existing Browsing Session** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-action-to-an-existing-browsing-session)
     * `client.Website.SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error)`
-  * **Assist Existing Browsing Session** [`user`, `plugin`]:
+  * **Assist Existing Browsing Session** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#assist-an-existing-browsing-session)
     * `client.Website.AssistExistingBrowsingSession(websiteID string, sessionID string, browsingID string, assist ConversationBrowsingAssist) (*Response, error)`
-  * **Initiate New Call Session For Conversation** [`user`, `plugin`]:
+  * **Initiate New Call Session For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#initiate-new-call-session-for-conversation)
     * `client.Website.InitiateNewCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
-  * **Get Ongoing Call Session For Conversation** [`user`, `plugin`]:
+  * **Get Ongoing Call Session For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-ongoing-call-session-for-conversation)
     * `client.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
-  * **Abort Ongoing Call Session For Conversation** [`user`, `plugin`]:
+  * **Abort Ongoing Call Session For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#abort-ongoing-call-session-for-conversation)
     * `client.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string) (*Response, error)`
-  * **Transmit Signaling On Ongoing Call Session** [`user`, `plugin`]:
+  * **Transmit Signaling On Ongoing Call Session** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#transmit-signaling-on-ongoing-call-session)
     * `client.Website.TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error)`
-  * **Deliver Widget Button Action For Conversation** [`user`]:
+  * **Deliver Widget Button Action For Conversation** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#deliver-widget-button-action-for-conversation)
     * `client.Website.DeliverWidgetButtonActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, data interface{}, value *interface{}) (*ConversationWidgetAction, *Response, error)`
-  * **Deliver Widget Data Fetch Action For Conversation** [`user`]:
+  * **Deliver Widget Data Fetch Action For Conversation** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#deliver-widget-data-action-for-conversation)
     * `client.Website.DeliverWidgetDataFetchActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, data interface{}) (*ConversationWidgetAction, *Response, error)`
-  * **Deliver Widget Data Edit Action For Conversation** [`user`]:
+  * **Deliver Widget Data Edit Action For Conversation** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#deliver-widget-data-action-for-conversation)
     * `client.Website.DeliverWidgetDataEditActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, value string) (*ConversationWidgetAction, *Response, error)`
-  * **Schedule A Reminder For Conversation** [`user`, `plugin`]:
+  * **Schedule A Reminder For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#schedule-a-reminder-for-conversation)
     * `client.Website.ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error)`
 
 * **Website Analytics**
-  * **Acquire Analytics Points** [`user`]:
+  * **Acquire Analytics Points** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#acquire-analytics-points)
     * `client.Website.AcquireAnalyticsPoints(websiteID string, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time, dateSplit string, classifier string, filterPrimary string, filterSecondary string, filterTertiary string) (*WebsiteAnalyticsPoints, *Response, error)`
-  * **List Analytics Filters** [`user`]:
+  * **List Analytics Filters** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-analytics-filters)
     * `client.Website.ListAnalyticsFilters(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsFilter, *Response, error)`
-  * **List Analytics Classifiers** [`user`]:
+  * **List Analytics Classifiers** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-analytics-classifiers)
     * `client.Website.ListAnalyticsClassifiers(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsClassifier, *Response, error)`
 
 * **Website People**
-  * **Get People Statistics** [`user`, `plugin`]:
+  * **Get People Statistics** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-people-statistics)
     * `client.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
-  * **List Suggested People Segments** [`user`, `plugin`]:
+  * **List Suggested People Segments** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-suggested-people-segments)
     * `client.Website.ListSuggestedPeopleSegments(websiteID string, pageNumber uint) (*[]PeopleSuggestedSegment, *Response, error)`
-  * **Delete Suggested People Segment** [`user`, `plugin`]:
+  * **Delete Suggested People Segment** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-suggested-people-segment)
     * `client.Website.DeleteSuggestedPeopleSegment(websiteID string, segment string) (*Response, error)`
-  * **List Suggested People Data Keys** [`user`, `plugin`]:
+  * **List Suggested People Data Keys** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-suggested-people-data-keys/)
     * `client.Website.ListSuggestedPeopleDataKeys(websiteID string, pageNumber uint) (*[]PeopleSuggestedData, *Response, error)`
-  * **Delete Suggested People Data Key** [`user`, `plugin`]:
+  * **Delete Suggested People Data Key** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-suggested-people-data-key)
     * `client.Website.DeleteSuggestedPeopleDataKey(websiteID string, key string) (*Response, error)`
-  * **List Suggested People Events** [`user`, `plugin`]:
+  * **List Suggested People Events** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-suggested-people-events)
     * `client.Website.ListSuggestedPeopleEvents(websiteID string, pageNumber uint) (*[]PeopleSuggestedEvent, *Response, error)`
-  * **Delete Suggested People Event** [`user`, `plugin`]:
+  * **Delete Suggested People Event** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-suggested-people-event)
     * `client.Website.DeleteSuggestedPeopleEvent(websiteID string, text string) (*Response, error)`
-  * **List People Profiles** [`user`, `plugin`]:
+  * **List People Profiles** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-people-profiles)
     * `client.Website.ListPeopleProfiles(websiteID string, pageNumber uint, searchField string, searchOrder string, searchOperator string, searchFilter []PeopleFilter, searchText string) (*[]PeopleProfile, *Response, error)`
-  * **Add New People Profile** [`user`, `plugin`]:
+  * **Add New People Profile** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#add-new-people-profile)
     * `client.Website.AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
-  * **Check If People Profile Exists** [`user`, `plugin`]:
+  * **Check If People Profile Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-people-profile-exists)
     * `client.Website.CheckPeopleProfileExists(websiteID string, peopleID string) (*Response, error)`
-  * **Get People Profile** [`user`, `plugin`]:
+  * **Get People Profile** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-people-profile)
     * `client.Website.GetPeopleProfile(websiteID string, peopleID string) (*PeopleProfile, *Response, error)`
-  * **Save People Profile** [`user`, `plugin`]:
+  * **Save People Profile** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-people-profile)
     * `client.Website.SavePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
-  * **Update People Profile** [`user`, `plugin`]:
+  * **Update People Profile** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-people-profile)
     * `client.Website.UpdatePeopleProfile(websiteID string, peopleID string, peopleProfile PeopleProfileUpdateCard) (*Response, error)`
-  * **Remove People Profile** [`user`, `plugin`]:
+  * **Remove People Profile** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#remove-people-profile)
     * `client.Website.RemovePeopleProfile(websiteID string, peopleID string) (*Response, error)`
-  * **List People Conversations** [`user`, `plugin`]:
+  * **List People Conversations** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-people-conversations)
     * `client.Website.ListPeopleConversations(websiteID string, peopleID string, pageNumber uint) ([]string, *Response, error)`
-  * **List People Conversations (Filter Variant)** [`user`, `plugin`]:
+  * **List People Conversations (Filter Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-people-conversations)
     * `client.Website.FilterPeopleConversations(websiteID string, peopleID string, pageNumber uint, filterUnread bool, filterResolved bool, filterNotResolved bool) ([]string, *Response, error)`
-  * **List People Campaigns** [`user`]:
+  * **List People Campaigns** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-people-campaigns)
     * `client.Website.ListPeopleCampaigns(websiteID string, peopleID string, pageNumber uint) (*[]PeopleCampaign, *Response, error)`
-  + **Add A People Event** [`user`, `plugin`]:
+  + **Add A People Event** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#add-a-people-event)
     * `client.Website.AddPeopleEvent(websiteID string, peopleID string, peopleEvent PeopleEventAdd) (*Response, error)`
-  + **List People Events** [`user`, `plugin`]:
+  + **List People Events** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-people-events)
     * `client.Website.ListPeopleEvents(websiteID string, peopleID string, pageNumber uint) (*[]PeopleEvent, *Response, error)`
-  + **Get People Data** [`user`, `plugin`]:
+  + **Get People Data** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-people-data)
     * `client.Website.GetPeopleData(websiteID string, peopleID string) (*PeopleData, *Response, error)`
-  + **Save People Data** [`user`, `plugin`]:
+  + **Save People Data** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-people-data)
     * `client.Website.SavePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error)`
-  + **Update People Data** [`user`, `plugin`]:
+  + **Update People Data** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-people-data)
     * `client.Website.UpdatePeopleData(websiteID string, peopleID string, peopleData interface{}) (*Response, error)`
-  + **Get People Subscription Status** [`user`, `plugin`]:
+  + **Get People Subscription Status** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-people-subscription-status)
     * `client.Website.GetPeopleSubscriptionStatus(websiteID string, peopleID string) (*PeopleSubscription, *Response, error)`
-  + **Update People Subscription Status** [`user`, `plugin`]:
+  + **Update People Subscription Status** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-people-subscription-status)
     * `client.Website.UpdatePeopleSubscriptionStatus(websiteID string, peopleID string, peopleSubscription PeopleSubscriptionUpdate)`
-  * **Export People Profiles** [`user`]:
+  * **Export People Profiles** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#export-people-profiles)
     * `client.Website.ExportPeopleProfiles(websiteID string) (*Response, error)`
-  * **Import People Profiles** [`user`]:
+  * **Import People Profiles** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#import-people-profiles)
     * `client.Website.ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error)`
 
 ### Plugin
 
 * **Plugin Subscription**
-  * **List All Active Subscriptions** [`user`]:
+  * **List All Active Subscriptions** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-all-active-subscriptions)
     * `client.Plugin.ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error)`
-  * **List Subscriptions For A Website** [`user`]:
+  * **List Subscriptions For A Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-subscriptions-for-a-website)
     * `client.Plugin.ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error)`
-  * **Get Subscription Details** [`user`]:
+  * **Get Subscription Details** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-subscription-details)
     * `client.Plugin.GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error)`
-  * **Subscribe Website To Plugin** [`user`]:
+  * **Subscribe Website To Plugin** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#subscribe-website-to-plugin)
     * `client.Plugin.SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error)`
-  * **Unsubscribe Plugin From Website** [`user`]:
+  * **Unsubscribe Plugin From Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#unsubscribe-plugin-from-website)
     * `client.Plugin.UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error)`
-  * **Get Subscription Settings** [`user`, `plugin`]:
+  * **Get Subscription Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-subscription-settings)
     * `client.Plugin.GetSubscriptionSettings(websiteID string, pluginID string) (*PluginSubscriptionSettings, *Response, error)`
-  * **Save Subscription Settings** [`user`, `plugin`]:
+  * **Save Subscription Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-subscription-settings)
     * `client.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
-  * **Update Subscription Settings** [`user`, `plugin`]:
+  * **Update Subscription Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-subscription-settings)
     * `client.Plugin.UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
-  * **Forward Plugin Payload To Channel** [`user`, `plugin`]:
+  * **Forward Plugin Payload To Channel** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#forward-plugin-payload-to-channel)
     * `client.Plugin.ForwardPluginPayloadToChannel(websiteID string, pluginID string, payload PluginSubscriptionChannelForward) (*Response, error)`
-  * **Dispatch Plugin Event** [`user`, `plugin`]:
+  * **Dispatch Plugin Event** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#dispatch-plugin-event)
     * `client.Plugin.DispatchPluginEvent(websiteID string, pluginID string, payload PluginSubscriptionEventDispatch) (*Response, error)`
 
 * **Plugin Connect**
-  * **Get Connect Account** [`user`, `plugin`]:
+  * **Get Connect Account** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-connect-account)
     * `client.Plugin.GetConnectAccount() (*PluginConnectAccount, *Response, error)`
-  * **Check Connect Session Validity** [`user`, `plugin`]:
+  * **Check Connect Session Validity** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-connect-session-validity)
     * `client.Plugin.CheckConnectSessionValidity() (*Response, error)`
-  * **List All Connect Websites** [`user`, `plugin`]:
+  * **List All Connect Websites** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-all-connect-websites)
     * `client.Plugin.ListAllConnectWebsites(pageNumber uint, filterConfigured bool) (*[]PluginConnectAllWebsites, *Response, error)`
-  * **List Connect Websites Since** [`user`, `plugin`]:
+  * **List Connect Websites Since** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-all-connect-websites)
     * `client.Plugin.ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool) (*[]PluginConnectWebsitesSince, *Response, error)`
 
 ## Realtime Events
