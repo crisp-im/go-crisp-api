@@ -185,6 +185,13 @@ type EventsReceiveSessionSetAddress struct {
   Address  *string  `json:"address"`
 }
 
+// EventsReceiveSessionSetSubject maps session:set_subject
+type EventsReceiveSessionSetSubject struct {
+  EventsGeneric
+  EventsSessionGeneric
+  Subject  *string  `json:"subject"`
+}
+
 // EventsReceiveSessionSetAvatar maps session:set_avatar
 type EventsReceiveSessionSetAvatar struct {
   EventsGeneric
@@ -1283,6 +1290,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
   so.On("session:set_address", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetAddress) {
     if hdl, ok := register.Handlers["session:set_address"]; ok {
+      go hdl.callFunc(&evt)
+    }
+  })
+
+  so.On("session:set_subject", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetSubject) {
+    if hdl, ok := register.Handlers["session:set_subject"]; ok {
       go hdl.callFunc(&evt)
     }
   })

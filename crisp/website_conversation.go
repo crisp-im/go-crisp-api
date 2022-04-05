@@ -89,6 +89,7 @@ type ConversationMeta struct {
   Email     *string                  `json:"email,omitempty"`
   Phone     *string                  `json:"phone,omitempty"`
   Address   *string                  `json:"address,omitempty"`
+  Subject   *string                  `json:"subject,omitempty"`
   IP        *string                  `json:"ip,omitempty"`
   Data      *interface{}             `json:"data,omitempty"`
   Avatar    *string                  `json:"avatar,omitempty"`
@@ -616,6 +617,7 @@ type ConversationMetaUpdate struct {
   IP        string                        `json:"ip,omitempty"`
   Phone     string                        `json:"phone,omitempty"`
   Address   string                        `json:"address,omitempty"`
+  Subject   string                        `json:"subject,omitempty"`
   Segments  []string                      `json:"segments,omitempty"`
   Data      interface{}                   `json:"data,omitempty"`
   Device    *ConversationMetaUpdateDevice `json:"device,omitempty"`
