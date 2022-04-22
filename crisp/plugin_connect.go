@@ -48,6 +48,21 @@ type PluginConnectWebsitesSince struct {
   Difference  *string       `json:"difference,omitempty"`
 }
 
+// PluginConnectEndpointsData mapping
+type PluginConnectEndpointsData struct {
+  Data  *PluginConnectEndpoints  `json:"data,omitempty"`
+}
+
+// PluginConnectEndpoints mapping
+type PluginConnectEndpoints struct {
+  Socket  *PluginConnectEndpointsSocket  `json:"socket,omitempty"`
+}
+
+// PluginConnectEndpointsSocket mapping
+type PluginConnectEndpointsSocket struct {
+  App  *string  `json:"app,omitempty"`
+}
+
 
 // String returns the string representation of PluginConnectAccount
 func (instance PluginConnectAccount) String() string {
@@ -63,6 +78,12 @@ func (instance PluginConnectAllWebsites) String() string {
 
 // String returns the string representation of PluginConnectWebsitesSince
 func (instance PluginConnectWebsitesSince) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of PluginConnectEndpoints
+func (instance PluginConnectEndpoints) String() string {
   return Stringify(instance)
 }
 
@@ -139,4 +160,19 @@ func (service *PluginService) ListConnectWebsitesSince(dateSince time.Time, filt
   }
 
   return websites.Data, resp, err
+}
+
+
+// GetConnectEndpoints resolves the current plugin endpoints information.
+func (service *PluginService) GetConnectEndpoints() (*PluginConnectEndpoints, *Response, error) {
+  url := "plugin/connect/endpoints"
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  endpoints := new(PluginConnectEndpointsData)
+  resp, err := service.client.Do(req, endpoints)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return endpoints.Data, resp, err
 }
