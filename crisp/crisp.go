@@ -20,9 +20,8 @@ import (
 
 
 const (
-  libraryVersion = "3.16.0"
+  libraryVersion = "3.17.0"
   defaultRestEndpointURL = "https://api.crisp.chat/v1/"
-  defaultRealtimeEndpointURL = "https://app.relay.crisp.chat:443/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
   clientTimeout = 10
@@ -34,7 +33,6 @@ var errorDoNilRequest = errors.New("request could not be constructed")
 type ClientConfig struct {
   HTTPClient *http.Client
   RestEndpointURL string
-  RealtimeEndpointURL string
 }
 
 type auth struct {
@@ -95,9 +93,6 @@ func NewWithConfig(config ClientConfig) *Client {
   }
   if config.RestEndpointURL == "" {
     config.RestEndpointURL = defaultRestEndpointURL
-  }
-  if config.RealtimeEndpointURL == "" {
-    config.RealtimeEndpointURL = defaultRealtimeEndpointURL
   }
 
   // Create client

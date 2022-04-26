@@ -10,15 +10,19 @@ import (
   "github.com/graarh/golang-socketio"
   "github.com/graarh/golang-socketio/transport"
   "time"
-  "net"
+  "strconv"
   "net/url"
   "encoding/json"
-  "strconv"
+  "math/rand"
+  "errors"
+  "fmt"
 )
 
 
 const (
-  reconnectWait = 4
+  reconnectWaitBaseline = 4
+  reconnectWaitRandomization = 8
+  socketioURLQuery = "?EIO=3&transport=websocket"
 )
 
 var activeSocket *gosocketio.Client
@@ -30,6 +34,21 @@ type EventsService service
 // EventsRegister stores event handlers
 type EventsRegister struct {
   Handlers  map[string]*caller
+}
+
+// EventsPullEndpointsData model mapping
+type EventsPullEndpointsData struct {
+  Data  *EventsPullEndpoints  `json:"data,omitempty"`
+}
+
+// EventsPullEndpoints model mapping
+type EventsPullEndpoints struct {
+  Socket  *EventsPullEndpointsSocket  `json:"socket,omitempty"`
+}
+
+// EventsPullEndpointsSocket model mapping
+type EventsPullEndpointsSocket struct {
+  App  *string  `json:"app,omitempty"`
 }
 
 // EventsSendAuthentication sends authentication
@@ -1810,29 +1829,63 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 }
 
 
-func (service *EventsService) getEndpointURL() (string) {
-  var secure bool
+func (service *EventsService) pullRemoteEndpointURL() (string, error) {
+  var (
+    protocol string
+    port int
+    endpointURL string
+  )
 
-  u, _ := url.Parse(service.client.config.RealtimeEndpointURL)
-  host, portString, _ := net.SplitHostPort(u.Host)
+  // Fetch endpoint URLs from remote (for tier)
+  endpointsUrl := fmt.Sprintf("%s/connect/endpoints", service.client.auth.Tier)
+  endpointsReq, _ := service.client.NewRequest("GET", endpointsUrl, nil)
 
-  port, _ := strconv.ParseInt(portString, 10, 64)
+  endpoints := new(EventsPullEndpointsData)
+  _, err := service.client.Do(endpointsReq, endpoints)
 
-  if u.Scheme == "https" {
-    secure = true
-  } else {
-    secure = false
+  if err != nil {
+    return "", err
   }
 
-  return gosocketio.GetUrl(host, int(port), secure)
+  if endpoints.Data != nil && endpoints.Data.Socket != nil && endpoints.Data.Socket.App != nil {
+    endpointURL = *endpoints.Data.Socket.App
+  }
+
+  if endpointURL == "" {
+    return "", errors.New("empty endpoint url")
+  }
+
+  // Generate WebSocket URL
+  u, _ := url.Parse(endpointURL)
+  host := u.Host
+  path := u.Path
+
+  if path == "" {
+    path = "/"
+  }
+
+  if u.Scheme == "https" || u.Scheme == "wss" {
+    protocol = "wss"
+    port = 443
+  } else {
+    protocol = "ws"
+    port = 80
+  }
+
+  wsEndpointUrl := protocol + "://" + host + ":" + strconv.Itoa(port) + path + socketioURLQuery;
+
+  return wsEndpointUrl, nil;
 }
 
 
 func (service *EventsService) reconnect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(), connectorChild *int, connectedSocket *bool, child int) {
   // Attempt to reconnect
   for *connectedSocket == false && child == *connectorChild {
-    // Hold on.
-    time.Sleep(reconnectWait * time.Second)
+    // Compute a random wait interval
+    reconnectWait := reconnectWaitBaseline + rand.Intn(reconnectWaitRandomization)
+
+    // Hold on
+    time.Sleep(time.Duration(reconnectWait) * time.Second)
 
     *connectorChild++
 
@@ -1844,12 +1897,19 @@ func (service *EventsService) reconnect(events []string, handleConnected func(*E
 func (service *EventsService) connect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(), connectorChild *int, connectedSocket *bool) {
   child := *connectorChild
 
-  endpointURL := service.getEndpointURL()
+  // Acquire Socket.IO client
+  var so *gosocketio.Client
+
+  endpointURL, err := service.pullRemoteEndpointURL()
   transport := transport.GetDefaultWebsocketTransport()
 
-  so, err := gosocketio.Dial(endpointURL, transport)
+  // Dial server?
+  if err == nil && endpointURL != "" {
+    so, err = gosocketio.Dial(endpointURL, transport)
+  }
 
-  if err == nil {
+  // Listen for events?
+  if err == nil && so != nil {
     so.On("authenticated", func(chnl *gosocketio.Channel, authenticated bool) {
       if authenticated == true {
         reg := EventsRegister{Handlers: make(map[string]*caller)}
