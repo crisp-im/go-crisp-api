@@ -1878,7 +1878,7 @@ func (service *EventsService) pullRemoteEndpointURL() (string, error) {
 }
 
 
-func (service *EventsService) reconnect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(), connectorChild *int, connectedSocket *bool, child int) {
+func (service *EventsService) reconnect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(), connectorChild *int, connectedSocket *bool, endpointURL *string, child int) {
   // Attempt to reconnect
   for *connectedSocket == false && child == *connectorChild {
     // Compute a random wait interval
@@ -1889,27 +1889,35 @@ func (service *EventsService) reconnect(events []string, handleConnected func(*E
 
     *connectorChild++
 
-    service.connect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket)
+    service.connect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket, endpointURL)
   }
 }
 
 
-func (service *EventsService) connect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(), connectorChild *int, connectedSocket *bool) {
+func (service *EventsService) connect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(), connectorChild *int, connectedSocket *bool, endpointURL *string) {
   child := *connectorChild
 
-  // Acquire Socket.IO client
-  var so *gosocketio.Client
+  // Pull endpoint URL? (for the first time if not set)
+  if *endpointURL == "" {
+    pulledEndpointURL, pullErr := service.pullRemoteEndpointURL()
 
-  endpointURL, err := service.pullRemoteEndpointURL()
-  transport := transport.GetDefaultWebsocketTransport()
-
-  // Dial server?
-  if err == nil && endpointURL != "" {
-    so, err = gosocketio.Dial(endpointURL, transport)
+    if pullErr == nil && pulledEndpointURL != "" {
+      *endpointURL = pulledEndpointURL
+    }
   }
 
-  // Listen for events?
-  if err == nil && so != nil {
+  // Acquire Socket.IO client? (endpoint URL is available)
+  var (
+    so *gosocketio.Client
+    dialErr error
+  )
+
+  if *endpointURL != "" {
+    so, dialErr = gosocketio.Dial(*endpointURL, transport.GetDefaultWebsocketTransport())
+  }
+
+  // Listen for events? (socket has been dialed)
+  if dialErr == nil && so != nil {
     so.On("authenticated", func(chnl *gosocketio.Channel, authenticated bool) {
       if authenticated == true {
         reg := EventsRegister{Handlers: make(map[string]*caller)}
@@ -1931,7 +1939,7 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
 
       handleDisconnected()
 
-      service.reconnect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket, child)
+      service.reconnect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket, endpointURL, child)
     })
 
     so.On(gosocketio.OnConnection, func(chnl *gosocketio.Channel) {
@@ -1943,7 +1951,8 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
       }
     })
   } else {
-    service.reconnect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket, child)
+    // Reconnect later (might re-pull endpoint URL and/or re-dial socket)
+    service.reconnect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket, endpointURL, child)
   }
 }
 
@@ -1984,6 +1993,7 @@ func (service *EventsService) BindPop(events []string) {
 func (service *EventsService) Listen(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func()) {
   connectorChild := 0
   connectedSocket := false
+  endpointURL := ""
 
-  service.connect(events, handleConnected, handleDisconnected, handleError, &connectorChild, &connectedSocket)
+  service.connect(events, handleConnected, handleDisconnected, handleError, &connectorChild, &connectedSocket, &endpointURL)
 }
