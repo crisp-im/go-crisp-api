@@ -246,6 +246,7 @@ type PeopleProfileUpdateCard struct {
   Company   *PeopleProfileCardCompany  `json:"company,omitempty"`
   Segments  []string                   `json:"segments,omitempty"`
   Notepad   string                     `json:"notepad,omitempty"`
+  Active    uint64                     `json:"active,omitempty"`
 }
 
 // PeopleEventAdd mapping

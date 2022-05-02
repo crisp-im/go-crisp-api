@@ -4,7 +4,7 @@
 
 The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, access your agent accounts from your Go code.
 
-Copyright 2021 Crisp IM SAS. See LICENSE for copying information.
+Copyright 2022 Crisp IM SAS. See LICENSE for copying information.
 
 * **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 22/04/2022
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
