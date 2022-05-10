@@ -20,7 +20,7 @@ import (
 
 
 const (
-  libraryVersion = "3.21.0"
+  libraryVersion = "3.21.1"
   defaultRestEndpointURL = "https://api.crisp.chat/v1/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
@@ -92,15 +92,18 @@ func (response *errorResponse) Error() string {
 func NewWithConfig(config ClientConfig) *Client {
   // Defaults
   if config.HTTPClient == nil {
-    config.HTTPClient = http.DefaultClient
+    // Build client transport
+    clientTransport := http.DefaultTransport.(*http.Transport).Clone()
+    clientTransport.IdleConnTimeout = time.Duration(clientIdleConnTimeout * time.Second)
+    clientTransport.MaxIdleConns = clientMaxIdleConns
+    clientTransport.MaxConnsPerHost = clientMaxConnsPerHost
+    clientTransport.MaxIdleConnsPerHost = clientMaxIdleConnsPerHost
 
-    config.HTTPClient.Timeout = time.Duration(clientTimeout * time.Second)
-
-    config.HTTPClient.Transport = http.DefaultTransport
-    config.HTTPClient.Transport.IdleConnTimeout = time.Duration(clientIdleConnTimeout * time.Second)
-    config.HTTPClient.Transport.MaxIdleConns = clientMaxIdleConns
-    config.HTTPClient.Transport.MaxConnsPerHost = clientMaxConnsPerHost
-    config.HTTPClient.Transport.MaxIdleConnsPerHost = clientMaxIdleConnsPerHost
+    // Create client
+    config.HTTPClient = &http.Client{
+      Timeout: time.Duration(clientTimeout * time.Second),
+      Transport: clientTransport,
+    }
   }
   if config.RestEndpointURL == "" {
     config.RestEndpointURL = defaultRestEndpointURL
