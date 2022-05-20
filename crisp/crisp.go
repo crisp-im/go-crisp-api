@@ -29,9 +29,12 @@ const (
   clientMaxIdleConns = 16
   clientMaxConnsPerHost = 64
   clientMaxIdleConnsPerHost = 4
+  clientRequestRetryAttempts = 2
+  clientRequestRetryHoldMillis = 500
 )
 
-var errorDoNilRequest = errors.New("request could not be constructed")
+var errorDoAllAttemptsExhausted = errors.New("all request attempts were exhausted")
+var errorDoAttemptNilRequest = errors.New("request could not be constructed")
 
 // ClientConfig mapping
 type ClientConfig struct {
@@ -188,13 +191,49 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
 
 // Do sends an API request
 func (client *Client) Do(req *http.Request, v interface{}) (*Response, error) {
+  var lastErr error
+
+  attempts := 0
+
+  for attempts < clientRequestRetryAttempts {
+    // Hold before this attempt? (ie. not first attempt)
+    if attempts > 0 {
+      time.Sleep(clientRequestRetryHoldMillis * time.Millisecond)
+    }
+
+    // Dispatch request attempt
+    attempts++
+    resp, shouldRetry, err := client.doAttempt(req, v)
+
+    // Return response straight away? (we are done)
+    if shouldRetry == false {
+      return resp, err
+    }
+
+    // Should retry: store last error (we are not done)
+    lastErr = err
+  }
+
+  // Set default error? (all attempts failed, but no error is set)
+  if lastErr == nil {
+    lastErr = errorDoAllAttemptsExhausted
+  }
+
+  // All attempts failed, return last attempt error
+  return nil, lastErr
+}
+
+
+// doAttempt attempts an API request
+func (client *Client) doAttempt(req *http.Request, v interface{}) (*Response, bool, error) {
   if req == nil {
-    return nil, errorDoNilRequest
+    return nil, false, errorDoAttemptNilRequest
   }
 
   resp, err := client.client.Do(req)
-  if err != nil {
-    return nil, err
+
+  if checkRequestRetry(resp, err) == true {
+    return nil, true, err
   }
 
   defer func() {
@@ -204,9 +243,9 @@ func (client *Client) Do(req *http.Request, v interface{}) (*Response, error) {
 
   response := newResponse(resp)
 
-  err = CheckResponse(resp)
+  err = checkResponse(resp)
   if err != nil {
-    return response, err
+    return response, false, err
   }
 
   if v != nil {
@@ -220,7 +259,7 @@ func (client *Client) Do(req *http.Request, v interface{}) (*Response, error) {
     }
   }
 
-  return response, err
+  return response, false, err
 }
 
 
@@ -232,11 +271,26 @@ func newResponse(httpResponse *http.Response) *Response {
 }
 
 
-// CheckResponse checks response for errors
-func CheckResponse(response *http.Response) error {
+// checkRequestRetry checks if should retry request
+func checkRequestRetry(response *http.Response, err error) bool {
+  // Low-level error, or response status is a server error? (HTTP 5xx)
+  if err != nil || response.StatusCode >= 500 {
+    return true
+  }
+
+  // No low-level error (should not retry)
+  return false
+}
+
+
+// checkResponse checks response for errors
+func checkResponse(response *http.Response) error {
+  // No error in response? (HTTP 2xx)
   if code := response.StatusCode; 200 <= code && code <= 299 {
     return nil
   }
+
+  // Map response error data (eg. HTTP 4xx)
   errorResponse := &errorResponse{Response: response}
 
   data, err := ioutil.ReadAll(response.Body)
