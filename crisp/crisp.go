@@ -20,7 +20,7 @@ import (
 
 
 const (
-  libraryVersion = "3.22.0"
+  libraryVersion = "3.22.1"
   defaultRestEndpointURL = "https://api.crisp.chat/v1/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
@@ -30,7 +30,7 @@ const (
   clientMaxConnsPerHost = 64
   clientMaxIdleConnsPerHost = 4
   clientRequestRetryAttempts = 2
-  clientRequestRetryHoldMillis = 500
+  clientRequestRetryHoldMillis = 1000
 )
 
 var errorDoAllAttemptsExhausted = errors.New("all request attempts were exhausted")
