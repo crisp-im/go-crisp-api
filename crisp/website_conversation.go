@@ -1363,6 +1363,15 @@ func (service *WebsiteService) UpdateEventMessageInConversation(websiteID string
 }
 
 
+// RemoveMessageInConversation removes an existing message in an existing conversation.
+func (service *WebsiteService) RemoveMessageInConversation(websiteID string, sessionID string, fingerprint int) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
 // ComposeMessageInConversation starts or stop composing a message in an existing conversation.
 func (service *WebsiteService) ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/compose", websiteID, sessionID)

@@ -553,6 +553,13 @@ type EventsReceiveEventMessage struct {
   Content  *EventsReceiveEventMessageContent  `json:"content"`
 }
 
+// EventsReceiveMessageRemoved maps message:removed
+type EventsReceiveMessageRemoved struct {
+  EventsGeneric
+  EventsSessionGeneric
+  Fingerprint  *int  `json:"fingerprint"`
+}
+
 // EventsReceiveEventMessageContent maps message:{send,received}/content (event type)
 type EventsReceiveEventMessageContent struct {
   Namespace  string   `json:"namespace"`
@@ -1049,6 +1056,12 @@ func (evt EventsReceiveNoteMessage) String() string {
 
 // String returns the string representation of EventsReceiveEventMessage
 func (evt EventsReceiveEventMessage) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveMessageRemoved
+func (evt EventsReceiveMessageRemoved) String() string {
   return Stringify(evt)
 }
 
@@ -1590,6 +1603,12 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
 
         go hdl.callFunc(&messageReceivedEvent)
       }
+    }
+  })
+
+  so.On("message:removed", func(chnl *gosocketio.Channel, evt EventsReceiveMessageRemoved) {
+    if hdl, ok := register.Handlers["message:removed"]; ok {
+      go hdl.callFunc(&evt)
     }
   })
 
