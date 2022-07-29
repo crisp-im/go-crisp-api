@@ -729,6 +729,21 @@ type ConversationBlockUpdate struct {
   Blocked  *bool  `json:"blocked,omitempty"`
 }
 
+// ConversationVerifyData mapping
+type ConversationVerifyData struct {
+  Data  *ConversationVerify  `json:"data,omitempty"`
+}
+
+// ConversationVerify mapping
+type ConversationVerify struct {
+  Verified  *bool  `json:"verified,omitempty"`
+}
+
+// ConversationVerifyUpdate mapping
+type ConversationVerifyUpdate struct {
+  Verified  *bool  `json:"verified,omitempty"`
+}
+
 // ConversationTranscriptRequest mapping
 type ConversationTranscriptRequest struct {
   To     *string  `json:"to,omitempty"`
@@ -909,6 +924,12 @@ func (instance ConversationRoutingAssign) String() string {
 
 // String returns the string representation of ConversationBlock
 func (instance ConversationBlock) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationVerify
+func (instance ConversationVerify) String() string {
   return Stringify(instance)
 }
 
@@ -1568,6 +1589,30 @@ func (service *WebsiteService) GetBlockStatusForConversation(websiteID string, s
 func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/block", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationBlockUpdate{&blocked})
+
+  return service.client.Do(req, nil)
+}
+
+
+// GetVerifyStatusForConversation resolves conversation verify status.
+func (service *WebsiteService) GetVerifyStatusForConversation(websiteID string, sessionID string) (*ConversationVerify, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/verify", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  verify := new(ConversationVerifyData)
+  resp, err := service.client.Do(req, verify)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return verify.Data, resp, err
+}
+
+
+// UpdateVerifyStatusForConversation updates conversation verify status.
+func (service *WebsiteService) UpdateVerifyStatusForConversation(websiteID string, sessionID string, verified bool) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/verify", websiteID, sessionID)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationVerifyUpdate{&verified})
 
   return service.client.Do(req, nil)
 }
