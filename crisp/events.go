@@ -523,9 +523,10 @@ type EventsReceivePickerMessageContent struct {
 
 // EventsReceivePickerMessageContentChoice maps message:{send,received}/content/choices (picker type)
 type EventsReceivePickerMessageContentChoice struct {
-  Value     string  `json:"value"`
-  Label     string  `json:"label"`
-  Selected  bool    `json:"selected"`
+  Value     string   `json:"value"`
+  Icon      *string  `json:"icon,omitempty"`
+  Label     string   `json:"label"`
+  Selected  bool     `json:"selected"`
 }
 
 // EventsReceiveFieldMessage maps message:{send,received} (field type)

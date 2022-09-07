@@ -197,6 +197,7 @@ type ConversationMessagePickerContent struct {
 // ConversationMessagePickerContentChoice mapping
 type ConversationMessagePickerContentChoice struct {
   Value     *string  `json:"value"`
+  Icon      *string  `json:"icon,omitempty"`
   Label     *string  `json:"label"`
   Selected  *bool    `json:"selected"`
 }
@@ -393,9 +394,10 @@ type ConversationPickerMessageNewContent struct {
 
 // ConversationPickerMessageNewContentChoice mapping
 type ConversationPickerMessageNewContentChoice struct {
-  Value     string  `json:"value,omitempty"`
-  Label     string  `json:"label,omitempty"`
-  Selected  bool    `json:"selected"`
+  Value     string   `json:"value,omitempty"`
+  Icon      *string  `json:"icon,omitempty"`
+  Label     string   `json:"label,omitempty"`
+  Selected  bool     `json:"selected"`
 }
 
 // ConversationFieldMessageNewContent mapping
