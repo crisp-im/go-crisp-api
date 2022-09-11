@@ -52,6 +52,10 @@ func main() {
         fmt.Printf("[message:send/field] %s\n", evt)
       })
 
+      reg.On("message:send/carousel", func(evt crisp.EventsReceiveCarouselMessage) {
+        fmt.Printf("[message:send/carousel] %s\n", evt)
+      })
+
       reg.On("message:send/note", func(evt crisp.EventsReceiveNoteMessage) {
         fmt.Printf("[message:send/note] %s\n", evt)
       })
@@ -82,6 +86,10 @@ func main() {
 
       reg.On("message:received/field", func(evt crisp.EventsReceiveFieldMessage) {
         fmt.Printf("[message:received/field] %s\n", evt)
+      })
+
+      reg.On("message:received/carousel", func(evt crisp.EventsReceiveCarouselMessage) {
+        fmt.Printf("[message:received/carousel] %s\n", evt)
       })
 
       reg.On("message:received/note", func(evt crisp.EventsReceiveNoteMessage) {

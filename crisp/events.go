@@ -544,6 +544,33 @@ type EventsReceiveFieldMessageContent struct {
   Value    string  `json:"value"`
 }
 
+// EventsReceiveCarouselMessage maps message:{send,received} (carousel type)
+type EventsReceiveCarouselMessage struct {
+  EventsGeneric
+  EventsReceiveGenericMessage
+  Content  *EventsReceiveCarouselMessageContent  `json:"content"`
+}
+
+// EventsReceiveCarouselMessageContent maps message:{send,received}/content (carousel type)
+type EventsReceiveCarouselMessageContent struct {
+  Text     string                                        `json:"text"`
+  Targets  *[]EventsReceiveCarouselMessageContentTarget  `json:"targets"`
+}
+
+// EventsReceiveCarouselMessageContentTarget maps message:{send,received}/content/targets (carousel type)
+type EventsReceiveCarouselMessageContentTarget struct {
+  Title        string                                              `json:"title"`
+  Description  string                                              `json:"description"`
+  Image        *string                                             `json:"image,omitempty"`
+  Actions      *[]EventsReceiveCarouselMessageContentTargetAction  `json:"actions"`
+}
+
+// EventsReceiveCarouselMessageContentTargetAction maps message:{send,received}/content/targets/actions (carousel type)
+type EventsReceiveCarouselMessageContentTargetAction struct {
+  Label  string  `json:"label"`
+  URL    string  `json:"url"`
+}
+
 // EventsReceiveNoteMessage maps message:{send,received} (note type)
 type EventsReceiveNoteMessage EventsReceiveTextMessage
 
@@ -1049,6 +1076,12 @@ func (evt EventsReceiveFieldMessage) String() string {
 }
 
 
+// String returns the string representation of EventsReceiveCarouselMessage
+func (evt EventsReceiveCarouselMessage) String() string {
+  return Stringify(evt)
+}
+
+
 // String returns the string representation of EventsReceiveNoteMessage
 func (evt EventsReceiveNoteMessage) String() string {
   return Stringify(evt)
@@ -1518,6 +1551,14 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         go hdl.callFunc(&messageSendField)
       }
 
+    case "carousel":
+      if hdl, ok := register.Handlers["message:send/carousel"]; ok {
+        var messageSendCarousel EventsReceiveCarouselMessage
+        json.Unmarshal(*evt, &messageSendCarousel)
+
+        go hdl.callFunc(&messageSendCarousel)
+      }
+
     case "note":
       if hdl, ok := register.Handlers["message:send/note"]; ok {
         var messageSendNote EventsReceiveNoteMessage
@@ -1587,6 +1628,14 @@ func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
         json.Unmarshal(*evt, &messageReceivedField)
 
         go hdl.callFunc(&messageReceivedField)
+      }
+
+    case "carousel":
+      if hdl, ok := register.Handlers["message:received/carousel"]; ok {
+        var messageReceivedCarousel EventsReceiveCarouselMessage
+        json.Unmarshal(*evt, &messageReceivedCarousel)
+
+        go hdl.callFunc(&messageReceivedCarousel)
       }
 
     case "note":

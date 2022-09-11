@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2022 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 07/09/2022
+* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 11/09/2022
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -253,6 +253,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.SendPickerMessageInConversation(websiteID string, sessionID string, message ConversationPickerMessageNew) (*ConversationMessageDispatched, *Response, error)`
   * **Send A Message In Conversation (Field Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
     * `client.Website.SendFieldMessageInConversation(websiteID string, sessionID string, message ConversationFieldMessageNew) (*ConversationMessageDispatched, *Response, error)`
+  * **Send A Message In Conversation (Carousel Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
+    * `client.Website.SendCarouselMessageInConversation(websiteID string, sessionID string, message ConversationCarouselMessageNew) (*ConversationMessageDispatched, *Response, error)`
   * **⭐ Send A Message In Conversation (Note Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
     * `client.Website.SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*ConversationMessageDispatched, *Response, error)`
   * **Send A Message In Conversation (Event Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#send-a-message-in-conversation)
@@ -271,6 +273,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.UpdatePickerMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationPickerMessageNewContent) (*Response, error)`
   * **Update A Message In Conversation (Field Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
     * `client.Website.UpdateFieldMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFieldMessageNewContent) (*Response, error)`
+  * **Update A Message In Conversation (Carousel Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
+    * `client.Website.UpdateCarouselMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationCarouselMessageNewContent) (*Response, error)`
   * **Update A Message In Conversation (Note Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
     * `client.Website.UpdateNoteMessageInConversation(websiteID string, sessionID string, fingerprint int, content string) (*Response, error)`
   * **Update A Message In Conversation (Event Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-a-message-in-conversation)
@@ -498,6 +502,11 @@ client.Events.Listen(
       // Handle field message from visitor
     })
 
+    // Register handler on 'message:send/carousel' namespace
+    reg.On("message:send/carousel", func(evt crisp.EventsReceiveCarouselMessage) {
+      // Handle carousel message from visitor
+    })
+
     // Register handler on 'message:send/event' namespace
     reg.On("message:send/event", func(evt crisp.EventsReceiveEventMessage) {
       // Handle event message from visitor
@@ -589,6 +598,8 @@ Available events are listed below:
     * `message:send/picker`
   * **Message Send (Field Variant)** [`user`, `plugin`]:
     * `message:send/field`
+  * **Message Send (Carousel Variant)** [`user`, `plugin`]:
+    * `message:send/carousel`
   * **Message Send (Note Variant)** [`user`, `plugin`]:
     * `message:send/note`
   * **Message Send (Event Variant)** [`user`, `plugin`]:
@@ -605,6 +616,8 @@ Available events are listed below:
     * `message:received/picker`
   * **Message Received (Field Variant)** [`user`, `plugin`]:
     * `message:received/field`
+  * **Message Received (Carousel Variant)** [`user`, `plugin`]:
+    * `message:received/carousel`
   * **Message Received (Note Variant)** [`user`, `plugin`]:
     * `message:received/note`
   * **Message Received (Event Variant)** [`user`, `plugin`]:

@@ -210,6 +210,26 @@ type ConversationMessageFieldContent struct {
   Value    *string  `json:"value"`
 }
 
+// ConversationMessageCarouselContent mapping
+type ConversationMessageCarouselContent struct {
+  Text     *string                                      `json:"text"`
+  Targets  *[]ConversationMessageCarouselContentTarget  `json:"targets"`
+}
+
+// ConversationMessageCarouselContentTarget mapping
+type ConversationMessageCarouselContentTarget struct {
+  Title        *string                                            `json:"title"`
+  Description  *string                                            `json:"description"`
+  Image        *string                                            `json:"image,omitempty"`
+  Actions      *[]ConversationMessageCarouselContentTargetAction  `json:"actions"`
+}
+
+// ConversationMessageCarouselContentTargetAction mapping
+type ConversationMessageCarouselContentTargetAction struct {
+  Label  *string  `json:"label"`
+  URL    *string  `json:"url"`
+}
+
 // ConversationMessageNoteContent mapping
 type ConversationMessageNoteContent string
 
@@ -408,6 +428,26 @@ type ConversationFieldMessageNewContent struct {
   Value    string  `json:"value,omitempty"`
 }
 
+// ConversationCarouselMessageNewContent mapping
+type ConversationCarouselMessageNewContent struct {
+  Text     string                                         `json:"text,omitempty"`
+  Targets  []ConversationCarouselMessageNewContentTarget  `json:"targets,omitempty"`
+}
+
+// ConversationCarouselMessageNewContentTarget mapping
+type ConversationCarouselMessageNewContentTarget struct {
+  Title        string                                               `json:"title,omitempty"`
+  Description  string                                               `json:"description,omitempty"`
+  Image        *string                                              `json:"image,omitempty"`
+  Actions      []ConversationCarouselMessageNewContentTargetAction  `json:"actions,omitempty"`
+}
+
+// ConversationCarouselMessageNewContentTargetAction mapping
+type ConversationCarouselMessageNewContentTargetAction struct {
+  Label  string  `json:"label,omitempty"`
+  URL    string  `json:"url,omitempty"`
+}
+
 // ConversationEventMessageNewContent mapping
 type ConversationEventMessageNewContent struct {
   Namespace  string   `json:"namespace,omitempty"`
@@ -504,6 +544,21 @@ type ConversationFieldMessageNew struct {
   Translated   *bool                               `json:"translated,omitempty"`
 }
 
+// ConversationCarouselMessageNew mapping
+type ConversationCarouselMessageNew struct {
+  Type         string                                 `json:"type,omitempty"`
+  From         string                                 `json:"from,omitempty"`
+  Origin       string                                 `json:"origin,omitempty"`
+  Content      ConversationCarouselMessageNewContent  `json:"content,omitempty"`
+  Mentions     []string                               `json:"mentions,omitempty"`
+  Fingerprint  int                                    `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser          `json:"user,omitempty"`
+  Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Timestamp    *uint64                                `json:"timestamp,omitempty"`
+  Stealth      *bool                                  `json:"stealth,omitempty"`
+  Translated   *bool                                  `json:"translated,omitempty"`
+}
+
 // ConversationNoteMessageNew mapping
 type ConversationNoteMessageNew ConversationTextMessageNew
 
@@ -550,6 +605,11 @@ type ConversationPickerMessageUpdate struct {
 // ConversationFieldMessageUpdate mapping
 type ConversationFieldMessageUpdate struct {
   Content  ConversationFieldMessageNewContent  `json:"content,omitempty"`
+}
+
+// ConversationCarouselMessageUpdate mapping
+type ConversationCarouselMessageUpdate struct {
+  Content  ConversationCarouselMessageNewContent  `json:"content,omitempty"`
 }
 
 // ConversationNoteMessageUpdate mapping
@@ -1269,6 +1329,21 @@ func (service *WebsiteService) SendFieldMessageInConversation(websiteID string, 
 }
 
 
+// SendCarouselMessageInConversation sends a message in an existing conversation (carousel variant).
+func (service *WebsiteService) SendCarouselMessageInConversation(websiteID string, sessionID string, message ConversationCarouselMessageNew) (*ConversationMessageDispatched, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, message)
+
+  dispatched := new(ConversationMessageDispatchedData)
+  resp, err := service.client.Do(req, dispatched)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return dispatched.Data, resp, err
+}
+
+
 // SendNoteMessageInConversation sends a message in an existing conversation (note variant).
 func (service *WebsiteService) SendNoteMessageInConversation(websiteID string, sessionID string, message ConversationNoteMessageNew) (*ConversationMessageDispatched, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message", websiteID, sessionID)
@@ -1363,6 +1438,15 @@ func (service *WebsiteService) UpdatePickerMessageInConversation(websiteID strin
 func (service *WebsiteService) UpdateFieldMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationFieldMessageNewContent) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
   req, _ := service.client.NewRequest("PATCH", url, ConversationFieldMessageUpdate{Content: content})
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateCarouselMessageInConversation edits an existing message in an existing conversation (carousel variant).
+func (service *WebsiteService) UpdateCarouselMessageInConversation(websiteID string, sessionID string, fingerprint int, content ConversationCarouselMessageNewContent) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/message/%d", websiteID, sessionID, fingerprint)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationCarouselMessageUpdate{Content: content})
 
   return service.client.Do(req, nil)
 }
