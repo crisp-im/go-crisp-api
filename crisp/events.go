@@ -671,8 +671,9 @@ type EventsPeopleSyncProfile struct {
 type EventsPeopleImportProgress struct {
   EventsGeneric
   EventsImportGeneric
-  Progress  *uint8                            `json:"progress"`
-  Count     *EventsPeopleImportProgressCount  `json:"count"`
+  Progress  *uint8                             `json:"progress"`
+  Count     *EventsPeopleImportProgressCount   `json:"count"`
+  Items     *[]EventsPeopleImportProgressItem  `json:"items"`
 }
 
 // EventsPeopleImportProgressCount maps people:import:progress/count
@@ -680,6 +681,12 @@ type EventsPeopleImportProgressCount struct {
   Total      *uint32  `json:"total"`
   Skipped    *uint32  `json:"skipped"`
   Remaining  *uint32  `json:"remaining"`
+}
+
+// EventsPeopleImportProgressItem maps people:import:progress/items
+type EventsPeopleImportProgressItem struct {
+  Identifier  *string  `json:"identifier,omitempty"`
+  Reason      *string  `json:"reason"`
 }
 
 // EventsPeopleImportDone maps people:import:done
