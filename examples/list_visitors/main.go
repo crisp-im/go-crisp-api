@@ -10,9 +10,14 @@ import (
   "fmt"
 )
 
+const (
+  CONFIG_TOKEN_IDENTIFIER = "7c3ef21c-1e04-41ce-8c06-5605c346f73e"
+  CONFIG_TOKEN_KEY = "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a"
+)
+
 func main() {
   client := crisp.New()
-  client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
+  client.Authenticate(CONFIG_TOKEN_IDENTIFIER, CONFIG_TOKEN_KEY)
 
   // List for `website_id`
   visitors, _, err := client.Website.ListVisitors("8c842203-7ed8-4e29-a608-7cf78a7d2fcc", 1)

@@ -13,11 +13,20 @@ import (
   "strconv"
   "net/url"
   "encoding/json"
+  "encoding/hex"
   "math/rand"
+  "crypto/hmac"
+  "crypto/sha256"
+  "sync"
   "errors"
   "fmt"
 )
 
+
+type eventsLoopback struct {
+  register  *EventsRegister
+  events    map[string]bool
+}
 
 const (
   reconnectWaitBaseline = 4
@@ -25,7 +34,17 @@ const (
   socketioURLQuery = "?EIO=3&transport=websocket"
 )
 
-var activeSocket *gosocketio.Client
+var activeSocket    *gosocketio.Client
+var activeLoopback  *eventsLoopback
+
+
+// EventsMode mode
+type EventsMode uint8
+
+const (
+  EventsModeWebSockets  EventsMode = 0
+  EventsModeWebHooks    EventsMode = 1
+)
 
 
 // EventsService service
@@ -33,7 +52,14 @@ type EventsService service
 
 // EventsRegister stores event handlers
 type EventsRegister struct {
-  Handlers  map[string]*caller
+  handlers      map[string]*caller
+  handlersLock  sync.RWMutex
+}
+
+// EventsPayloadHook model mapping
+type EventsPayloadHook struct {
+  Event  string            `json:"event"`
+  Data   *json.RawMessage  `json:"data"`
 }
 
 // EventsPullEndpointsData model mapping
@@ -1317,591 +1343,58 @@ func (evt EventsReceivePluginSettingsSaved) String() string {
 }
 
 
-// On registers an event handler on event name
-func (register *EventsRegister) On(eventName string, handler interface{}) error {
-  c, err := newCaller(handler)
-  if err != nil {
-    return err
+func (register *EventsRegister) segmentEventName(event string, rawData *json.RawMessage) (string, error) {
+  switch event {
+  case "message:send", "message:received":
+    // Messages event names are segmented (send + received)
+    var messageGenericType EventsReceiveGenericMessageType
+
+    if decodeError := json.Unmarshal(*rawData, &messageGenericType); decodeError != nil {
+      return "", decodeError
+    }
+
+    if messageGenericType.Type == nil || *messageGenericType.Type == "" {
+      return "", errors.New("empty message type for segment")
+    }
+
+    return event + "/" + *messageGenericType.Type, nil
+  default:
+    // Non-segmented event, return identity function
+    return event, nil
   }
-
-  register.Handlers[eventName] = c
-
-  return nil
 }
 
-// BindEvents listens for recognized incoming events
-func (register *EventsRegister) BindEvents(so *gosocketio.Client) {
-  so.On("session:update_availability", func(chnl *gosocketio.Channel, evt EventsReceiveSessionUpdateAvailability) {
-    if hdl, ok := register.Handlers["session:update_availability"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:update_verify", func(chnl *gosocketio.Channel, evt EventsReceiveSessionUpdateVerify) {
-    if hdl, ok := register.Handlers["session:update_verify"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:request:initiated", func(chnl *gosocketio.Channel, evt EventsReceiveSessionRequestInitiated) {
-    if hdl, ok := register.Handlers["session:request:initiated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_email", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetEmail) {
-    if hdl, ok := register.Handlers["session:set_email"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_phone", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetPhone) {
-    if hdl, ok := register.Handlers["session:set_phone"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_address", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetAddress) {
-    if hdl, ok := register.Handlers["session:set_address"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_subject", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetSubject) {
-    if hdl, ok := register.Handlers["session:set_subject"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_avatar", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetAvatar) {
-    if hdl, ok := register.Handlers["session:set_avatar"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_nickname", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetNickname) {
-    if hdl, ok := register.Handlers["session:set_nickname"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_data", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetData) {
-    if hdl, ok := register.Handlers["session:set_data"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:sync:pages", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncPages) {
-    if hdl, ok := register.Handlers["session:sync:pages"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:sync:events", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncEvents) {
-    if hdl, ok := register.Handlers["session:sync:events"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:sync:capabilities", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncCapabilities) {
-    if hdl, ok := register.Handlers["session:sync:capabilities"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:sync:geolocation", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncGeolocation) {
-    if hdl, ok := register.Handlers["session:sync:geolocation"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:sync:system", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncSystem) {
-    if hdl, ok := register.Handlers["session:sync:system"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:sync:network", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncNetwork) {
-    if hdl, ok := register.Handlers["session:sync:network"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:sync:timezone", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncTimezone) {
-    if hdl, ok := register.Handlers["session:sync:timezone"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:sync:locales", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncLocales) {
-    if hdl, ok := register.Handlers["session:sync:locales"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:sync:rating", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSyncRating) {
-    if hdl, ok := register.Handlers["session:sync:rating"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_state", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetState) {
-    if hdl, ok := register.Handlers["session:set_state"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_block", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetBlock) {
-    if hdl, ok := register.Handlers["session:set_block"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_segments", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetSegments) {
-    if hdl, ok := register.Handlers["session:set_segments"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_opened", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetOpened) {
-    if hdl, ok := register.Handlers["session:set_opened"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_closed", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetClosed) {
-    if hdl, ok := register.Handlers["session:set_closed"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_participants", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetParticipants) {
-    if hdl, ok := register.Handlers["session:set_participants"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_mentions", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetMentions) {
-    if hdl, ok := register.Handlers["session:set_mentions"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:set_routing", func(chnl *gosocketio.Channel, evt EventsReceiveSessionSetRouting) {
-    if hdl, ok := register.Handlers["session:set_routing"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("session:removed", func(chnl *gosocketio.Channel, evt EventsReceiveSessionRemoved) {
-    if hdl, ok := register.Handlers["session:removed"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("message:updated", func(chnl *gosocketio.Channel, evt EventsReceiveMessageUpdated) {
-    if hdl, ok := register.Handlers["message:updated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("message:send", func(chnl *gosocketio.Channel, evt *json.RawMessage) {
-    var messageGenericType EventsReceiveGenericMessageType
-    json.Unmarshal(*evt, &messageGenericType)
-
-    switch *messageGenericType.Type {
-    case "text":
-      if hdl, ok := register.Handlers["message:send/text"]; ok {
-        var messageSendText EventsReceiveTextMessage
-        json.Unmarshal(*evt, &messageSendText)
-
-        go hdl.callFunc(&messageSendText)
-      }
-
-    case "file":
-      if hdl, ok := register.Handlers["message:send/file"]; ok {
-        var messageSendFile EventsReceiveFileMessage
-        json.Unmarshal(*evt, &messageSendFile)
-
-        go hdl.callFunc(&messageSendFile)
-      }
-
-    case "animation":
-      if hdl, ok := register.Handlers["message:send/animation"]; ok {
-        var messageSendAnimation EventsReceiveAnimationMessage
-        json.Unmarshal(*evt, &messageSendAnimation)
-
-        go hdl.callFunc(&messageSendAnimation)
-      }
-
-    case "audio":
-      if hdl, ok := register.Handlers["message:send/audio"]; ok {
-        var messageSendAudio EventsReceiveAudioMessage
-        json.Unmarshal(*evt, &messageSendAudio)
-
-        go hdl.callFunc(&messageSendAudio)
-      }
-
-    case "picker":
-      if hdl, ok := register.Handlers["message:send/picker"]; ok {
-        var messageSendPicker EventsReceivePickerMessage
-        json.Unmarshal(*evt, &messageSendPicker)
-
-        go hdl.callFunc(&messageSendPicker)
-      }
-
-    case "field":
-      if hdl, ok := register.Handlers["message:send/field"]; ok {
-        var messageSendField EventsReceiveFieldMessage
-        json.Unmarshal(*evt, &messageSendField)
-
-        go hdl.callFunc(&messageSendField)
-      }
-
-    case "carousel":
-      if hdl, ok := register.Handlers["message:send/carousel"]; ok {
-        var messageSendCarousel EventsReceiveCarouselMessage
-        json.Unmarshal(*evt, &messageSendCarousel)
-
-        go hdl.callFunc(&messageSendCarousel)
-      }
-
-    case "note":
-      if hdl, ok := register.Handlers["message:send/note"]; ok {
-        var messageSendNote EventsReceiveNoteMessage
-        json.Unmarshal(*evt, &messageSendNote)
-
-        go hdl.callFunc(&messageSendNote)
-      }
-
-    case "event":
-      if hdl, ok := register.Handlers["message:send/event"]; ok {
-        var messageSendEvent EventsReceiveEventMessage
-        json.Unmarshal(*evt, &messageSendEvent)
-
-        go hdl.callFunc(&messageSendEvent)
-      }
-    }
-  })
-
-  so.On("message:received", func(chnl *gosocketio.Channel, evt *json.RawMessage) {
-    var messageGenericType EventsReceiveGenericMessageType
-    json.Unmarshal(*evt, &messageGenericType)
-
-    switch *messageGenericType.Type {
-    case "text":
-      if hdl, ok := register.Handlers["message:received/text"]; ok {
-        var messageReceivedText EventsReceiveTextMessage
-        json.Unmarshal(*evt, &messageReceivedText)
-
-        go hdl.callFunc(&messageReceivedText)
-      }
-
-    case "file":
-      if hdl, ok := register.Handlers["message:received/file"]; ok {
-        var messageReceivedFile EventsReceiveFileMessage
-        json.Unmarshal(*evt, &messageReceivedFile)
-
-        go hdl.callFunc(&messageReceivedFile)
-      }
-
-    case "animation":
-      if hdl, ok := register.Handlers["message:received/animation"]; ok {
-        var messageReceivedAnimation EventsReceiveAnimationMessage
-        json.Unmarshal(*evt, &messageReceivedAnimation)
-
-        go hdl.callFunc(&messageReceivedAnimation)
-      }
 
-    case "audio":
-      if hdl, ok := register.Handlers["message:received/audio"]; ok {
-        var messageReceivedAudio EventsReceiveAudioMessage
-        json.Unmarshal(*evt, &messageReceivedAudio)
+func (register *EventsRegister) emit(event string, rawData *json.RawMessage) (bool, error) {
+  // Acquire segmented event name (eg. certain events as 'namespace' may become 'namespace/segment')
+  eventSegmented, segmentErr := register.segmentEventName(event, rawData)
 
-        go hdl.callFunc(&messageReceivedAudio)
-      }
+  if segmentErr != nil {
+    return false, segmentErr
+  }
 
-    case "picker":
-      if hdl, ok := register.Handlers["message:received/picker"]; ok {
-        var messageReceivedPicker EventsReceivePickerMessage
-        json.Unmarshal(*evt, &messageReceivedPicker)
+  // Acquire event handler
+  register.handlersLock.RLock()
+  fnHandle, ok := register.handlers[eventSegmented]
+  register.handlersLock.RUnlock()
 
-        go hdl.callFunc(&messageReceivedPicker)
-      }
+  // Route to event handler?
+  // Important: go asynchronous when emitting so that event processing does not block parents
+  if ok == true {
+    // Decode raw data
+    data := fnHandle.getArgs()
 
-    case "field":
-      if hdl, ok := register.Handlers["message:received/field"]; ok {
-        var messageReceivedField EventsReceiveFieldMessage
-        json.Unmarshal(*evt, &messageReceivedField)
-
-        go hdl.callFunc(&messageReceivedField)
-      }
-
-    case "carousel":
-      if hdl, ok := register.Handlers["message:received/carousel"]; ok {
-        var messageReceivedCarousel EventsReceiveCarouselMessage
-        json.Unmarshal(*evt, &messageReceivedCarousel)
-
-        go hdl.callFunc(&messageReceivedCarousel)
-      }
-
-    case "note":
-      if hdl, ok := register.Handlers["message:received/note"]; ok {
-        var messageReceivedNote EventsReceiveNoteMessage
-        json.Unmarshal(*evt, &messageReceivedNote)
-
-        go hdl.callFunc(&messageReceivedNote)
-      }
-
-    case "event":
-      if hdl, ok := register.Handlers["message:received/event"]; ok {
-        var messageReceivedEvent EventsReceiveEventMessage
-        json.Unmarshal(*evt, &messageReceivedEvent)
-
-        go hdl.callFunc(&messageReceivedEvent)
-      }
-    }
-  })
-
-  so.On("message:removed", func(chnl *gosocketio.Channel, evt EventsReceiveMessageRemoved) {
-    if hdl, ok := register.Handlers["message:removed"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("message:compose:send", func(chnl *gosocketio.Channel, evt EventsReceiveMessageComposeSend) {
-    if hdl, ok := register.Handlers["message:compose:send"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("message:compose:receive", func(chnl *gosocketio.Channel, evt EventsReceiveMessageComposeReceive) {
-    if hdl, ok := register.Handlers["message:compose:receive"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("message:acknowledge:read:send", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
-    if hdl, ok := register.Handlers["message:acknowledge:read:send"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("message:acknowledge:read:received", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
-    if hdl, ok := register.Handlers["message:acknowledge:read:received"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("message:acknowledge:delivered", func(chnl *gosocketio.Channel, evt EventsReceiveMessageAcknowledge) {
-    if hdl, ok := register.Handlers["message:acknowledge:delivered"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("message:notify:unread:send", func(chnl *gosocketio.Channel, evt EventsReceiveMessageNotify) {
-    if hdl, ok := register.Handlers["message:notify:unread:send"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("message:notify:unread:received", func(chnl *gosocketio.Channel, evt EventsReceiveMessageNotify) {
-    if hdl, ok := register.Handlers["message:notify:unread:received"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("people:profile:created", func(chnl *gosocketio.Channel, evt EventsReceivePeopleProfileCreated) {
-    if hdl, ok := register.Handlers["people:profile:created"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("people:profile:updated", func(chnl *gosocketio.Channel, evt EventsReceivePeopleProfileUpdated) {
-    if hdl, ok := register.Handlers["people:profile:updated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("people:profile:removed", func(chnl *gosocketio.Channel, evt EventsReceivePeopleProfileRemoved) {
-    if hdl, ok := register.Handlers["people:profile:removed"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("people:bind:session", func(chnl *gosocketio.Channel, evt EventsPeopleBindSession) {
-    if hdl, ok := register.Handlers["people:bind:session"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("people:sync:profile", func(chnl *gosocketio.Channel, evt EventsPeopleSyncProfile) {
-    if hdl, ok := register.Handlers["people:sync:profile"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("people:import:progress", func(chnl *gosocketio.Channel, evt EventsPeopleImportProgress) {
-    if hdl, ok := register.Handlers["people:import:progress"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("people:import:done", func(chnl *gosocketio.Channel, evt EventsPeopleImportDone) {
-    if hdl, ok := register.Handlers["people:import:done"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("campaign:progress", func(chnl *gosocketio.Channel, evt EventsCampaignProgress) {
-    if hdl, ok := register.Handlers["campaign:progress"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("campaign:dispatched", func(chnl *gosocketio.Channel, evt EventsCampaignDispatched) {
-    if hdl, ok := register.Handlers["campaign:dispatched"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("campaign:running", func(chnl *gosocketio.Channel, evt EventsCampaignRunning) {
-    if hdl, ok := register.Handlers["campaign:running"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("browsing:request:initiated", func(chnl *gosocketio.Channel, evt EventsBrowsingRequestInitiated) {
-    if hdl, ok := register.Handlers["browsing:request:initiated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("browsing:request:rejected", func(chnl *gosocketio.Channel, evt EventsBrowsingRequestRejected) {
-    if hdl, ok := register.Handlers["browsing:request:rejected"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("call:request:initiated", func(chnl *gosocketio.Channel, evt EventsCallRequestInitiated) {
-    if hdl, ok := register.Handlers["call:request:initiated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("call:request:rejected", func(chnl *gosocketio.Channel, evt EventsCallRequestRejected) {
-    if hdl, ok := register.Handlers["call:request:rejected"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("widget:action:processed", func(chnl *gosocketio.Channel, evt EventsWidgetActionProcessed) {
-    if hdl, ok := register.Handlers["widget:action:processed"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("status:health:changed", func(chnl *gosocketio.Channel, evt EventsStatusHealthChanged) {
-    if hdl, ok := register.Handlers["status:health:changed"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("website:update_visitors_count", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteUpdateVisitorsCount) {
-    if hdl, ok := register.Handlers["website:update_visitors_count"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("website:update_operators_availability", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteUpdateOperatorsAvailability) {
-    if hdl, ok := register.Handlers["website:update_operators_availability"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("website:users:available", func(chnl *gosocketio.Channel, evt EventsReceiveWebsiteUsersAvailable) {
-    if hdl, ok := register.Handlers["website:users:available"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("bucket:url:upload:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLUploadGenerated) {
-    if hdl, ok := register.Handlers["bucket:url:upload:generated"]; ok {
-      go hdl.callFunc(&evt)
+    if decodeErr := json.Unmarshal(*rawData, &data); decodeErr != nil {
+      return false, decodeErr
     }
-  })
 
-  so.On("bucket:url:avatar:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLAvatarGenerated) {
-    if hdl, ok := register.Handlers["bucket:url:avatar:generated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("bucket:url:website:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLWebsiteGenerated) {
-    if hdl, ok := register.Handlers["bucket:url:website:generated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("bucket:url:campaign:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLCampaignGenerated) {
-    if hdl, ok := register.Handlers["bucket:url:campaign:generated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("bucket:url:helpdesk:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLHelpdeskGenerated) {
-    if hdl, ok := register.Handlers["bucket:url:helpdesk:generated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("bucket:url:status:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLStatusGenerated) {
-    if hdl, ok := register.Handlers["bucket:url:status:generated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("bucket:url:processing:generated", func(chnl *gosocketio.Channel, evt EventsReceiveBucketURLProcessingGenerated) {
-    if hdl, ok := register.Handlers["bucket:url:processing:generated"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("media:animation:listed", func(chnl *gosocketio.Channel, evt EventsReceiveMediaAnimationListed) {
-    if hdl, ok := register.Handlers["media:animation:listed"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("email:subscribe", func(chnl *gosocketio.Channel, evt EventsReceiveEmailSubscribe) {
-    if hdl, ok := register.Handlers["email:subscribe"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
+    // Route to handler
+    go fnHandle.callFunc(data)
 
-  so.On("email:track:view", func(chnl *gosocketio.Channel, evt EventsReceiveEmailTrackView) {
-    if hdl, ok := register.Handlers["email:track:view"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("plugin:channel", func(chnl *gosocketio.Channel, evt EventsReceivePluginChannel) {
-    if hdl, ok := register.Handlers["plugin:channel"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
+    return true, nil
+  }
 
-  so.On("plugin:event", func(chnl *gosocketio.Channel, evt EventsReceivePluginEvent) {
-    if hdl, ok := register.Handlers["plugin:event"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
-
-  so.On("plugin:settings:saved", func(chnl *gosocketio.Channel, evt EventsReceivePluginSettingsSaved) {
-    if hdl, ok := register.Handlers["plugin:settings:saved"]; ok {
-      go hdl.callFunc(&evt)
-    }
-  })
+  return false, nil
 }
 
 
@@ -1994,23 +1487,30 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
 
   // Listen for events? (socket has been dialed)
   if dialErr == nil && so != nil {
-    so.On("authenticated", func(chnl *gosocketio.Channel, authenticated bool) {
+    so.On("authenticated", func(_, authenticated bool) {
       if authenticated == true {
-        reg := EventsRegister{Handlers: make(map[string]*caller)}
+        reg := EventsRegister{handlers: make(map[string]*caller)}
 
         activeSocket = so
 
-        reg.BindEvents(so)
+        // Bind all listened-for events
+        for _, event := range events {
+          so.On(event, func(_, evt *json.RawMessage) {
+            // Dispatch event to event bus
+            // Important: emit method is already asynchronous
+            reg.emit(event, evt)
+          })
+        }
 
         handleConnected(&reg)
       }
     })
 
-    so.On(gosocketio.OnError, func(chnl *gosocketio.Channel) {
+    so.On(gosocketio.OnError, func() {
       handleError()
     })
 
-    so.On(gosocketio.OnDisconnection, func(chnl *gosocketio.Channel) {
+    so.On(gosocketio.OnDisconnection, func() {
       *connectedSocket = false
 
       handleDisconnected()
@@ -2018,7 +1518,7 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
       service.reconnect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket, endpointURL, child)
     })
 
-    so.On(gosocketio.OnConnection, func(chnl *gosocketio.Channel) {
+    so.On(gosocketio.OnConnection, func() {
       *connectedSocket = true
 
       // Authenticate to socket
@@ -2033,43 +1533,172 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
 }
 
 
-// Rebind emits an empty socket bind event which associates the socket to its channels (without modifying allowed events)
-func (service *EventsService) Rebind() {
+func (service *EventsService) loopback(events []string, handleBound func(*EventsRegister)) {
+  // Prepare register
+  reg := EventsRegister{handlers: make(map[string]*caller)}
+
+  // Prepare events map (used for optimized lookup)
+  var eventsMap = make(map[string]bool)
+
+  for _, event := range events {
+    eventsMap[event] = true
+  }
+
+  // Bind loopback
+  lo := eventsLoopback{
+    register: &reg,
+    events: eventsMap,
+  }
+
+  activeLoopback = &lo
+
+  // Mark as bound
+  handleBound(&reg)
+}
+
+
+// On registers an event handler on event name
+func (register *EventsRegister) On(eventName string, handler interface{}) error {
+  c, err := newCaller(handler)
+  if err != nil {
+    return err
+  }
+
+  register.handlersLock.Lock()
+  register.handlers[eventName] = c
+  register.handlersLock.Unlock()
+
+  return nil
+}
+
+
+// Receive receives a raw event and dispatches it to the listener (used for Web Hooks)
+func (service *EventsService) ReceiveHook(payload *[]byte) (bool, error) {
+  if activeLoopback != nil {
+    // Ensure payload is readable
+    if payload == nil || len(*payload) == 0 {
+      return false, errors.New("empty hook payload")
+    }
+
+    // Parse event name and data contained in payload
+    var parsedPayload EventsPayloadHook
+
+    parseErr := json.Unmarshal(*payload, &parsedPayload)
+
+    if parseErr != nil || parsedPayload.Event == "" || parsedPayload.Data == nil {
+      return false, errors.New("malformatted hook payload")
+    }
+
+    // Check if event is subscribed to? (in routing table)
+    // Notice: if not in routing table, then silently discard the event w/o any error, as we do not want an HTTP failure status to be sent in response by the implementor.
+    if _, ok := activeLoopback.events[parsedPayload.Event]; ok == false {
+      return false, nil
+    }
+
+    // Dispatch event to event bus
+    // Important: emit method is already asynchronous, as the hook might be received synchronously over HTTP
+    if activeLoopback.register == nil {
+      return false, errors.New("could not emit to register")
+    }
+
+    hasRouted, routeErr := activeLoopback.register.emit(parsedPayload.Event, parsedPayload.Data)
+
+    return hasRouted, routeErr
+  }
+
+  return false, errors.New("hook loopback not bound")
+}
+
+
+// Verify verifies an event string and checks that signatures match (used for Web Hooks)
+func (service *EventsService) VerifyHook(localSecret string, remotePayload *[]byte, remoteRawTimestamp string, remoteSignature string) bool {
+  if activeLoopback != nil {
+    // Ensure remote payload is readable
+    if remotePayload == nil || len(*remotePayload) == 0 {
+      return false
+    }
+
+    // Decode remote signature
+    remoteSignatureBytes, decodeErr := hex.DecodeString(remoteSignature)
+
+    if decodeErr != nil {
+      return false
+    }
+
+    // Compute local trace
+    localTrace := fmt.Sprintf("[%s;%s]", remoteRawTimestamp, string(*remotePayload))
+
+    // Create local HMAC
+    localMac := hmac.New(sha256.New, []byte(localSecret))
+
+    localMac.Write([]byte(localTrace))
+
+    // Compute local signature, and compare
+    localSignatureBytes := localMac.Sum(nil)
+
+    return hmac.Equal(localSignatureBytes, remoteSignatureBytes)
+  }
+
+  // Default: not verified (signatures do not match or loopback not /yet?/ bound)
+  return false
+}
+
+
+// Rebind emits an empty socket bind event which associates the socket to its channels, without modifying allowed events (used for WebSockets)
+func (service *EventsService) RebindSocket() {
   if activeSocket != nil {
     activeSocket.Channel.Emit("socket:bind", "")
   }
 }
 
 
-// Bind emits a socket bind event which associates the socket to its channels (with allowed events)
-func (service *EventsService) Bind(events []string) {
+// Bind emits a socket bind event which associates the socket to its channels, with allowed events (used for WebSockets)
+func (service *EventsService) BindSocket(events []string) {
   if activeSocket != nil {
     activeSocket.Channel.Emit("socket:bind", EventsSendBind{Events: events})
   }
 }
 
 
-// BindPush emits a socket bind push event which adds allowed events to socket
-func (service *EventsService) BindPush(events []string) {
+// BindPush emits a socket bind push event which adds allowed events to socket (used for WebSockets)
+func (service *EventsService) BindPushSocket(events []string) {
   if activeSocket != nil {
     activeSocket.Channel.Emit("socket:bind:push", EventsSendBind{Events: events})
   }
 }
 
 
-// BindPop emits a socket bind pop event which removes allowed events from socket
-func (service *EventsService) BindPop(events []string) {
+// BindPop emits a socket bind pop event which removes allowed events from socket (used for WebSockets)
+func (service *EventsService) BindPopSocket(events []string) {
   if activeSocket != nil {
     activeSocket.Channel.Emit("socket:bind:pop", EventsSendBind{Events: events})
   }
 }
 
 
-// Listen starts listening for incoming realtime events.
-func (service *EventsService) Listen(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func()) {
-  connectorChild := 0
-  connectedSocket := false
-  endpointURL := ""
+// Listen starts listening for incoming realtime events (used for both WebSockets and Web Hooks)
+func (service *EventsService) Listen(mode EventsMode, events []string, handleBound func(*EventsRegister), handleUnbound func(), handleError func()) (error) {
+  if len(events) == 0 {
+    return errors.New("no events provided")
+  }
 
-  service.connect(events, handleConnected, handleDisconnected, handleError, &connectorChild, &connectedSocket, &endpointURL)
+  switch mode {
+  case EventsModeWebSockets:
+    // Storage variables
+    connectorChild := 0
+    connectedSocket := false
+    endpointURL := ""
+
+    // Connect to remote WebSocket server and bind listeners once connected
+    service.connect(events, handleBound, handleUnbound, handleError, &connectorChild, &connectedSocket, &endpointURL)
+
+    return nil
+  case EventsModeWebHooks:
+    // Bind to local loopback, acting as an event bus listening for events dispatched using 'Receive()'
+    service.loopback(events, handleBound)
+
+    return nil
+  default:
+    return errors.New("invalid events mode")
+  }
 }
