@@ -14,7 +14,7 @@ Copyright 2022 Crisp IM SAS. See LICENSE for copying information.
 You may follow the [REST API Quickstart](https://docs.crisp.chat/guides/rest-api/quickstart/) guide, which will get you running with the REST API in minutes.
 
 ```go
-import "github.com/crisp-im/go-crisp-api/crisp/v4"
+import "github.com/crisp-im/go-crisp-api/crisp/v3"
 ```
 
 Construct a new Crisp client, then use the various services on the client to
