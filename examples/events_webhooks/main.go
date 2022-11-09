@@ -6,7 +6,7 @@
 package main
 
 import (
-  "github.com/crisp-im/go-crisp-api/crisp/v3"
+  "github.com/crisp-im/go-crisp-api/crisp/v4"
   "fmt"
   "io/ioutil"
   "net/http"

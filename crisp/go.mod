@@ -1,4 +1,4 @@
-module github.com/crisp-im/go-crisp-api/crisp/v3
+module github.com/crisp-im/go-crisp-api/crisp/v4
 
 go 1.17
 
