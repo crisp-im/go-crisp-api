@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        go-version: [1.13.x]
+        go-version: [1.17.x]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -30,15 +30,17 @@ jobs:
         with:
           path: |
             ~/go/pkg/mod
-            ~/.cache/go-build
             ${{ env.GOROOT }}
           key: ${{ runner.os }}-go-${{ matrix.go-version }}
 
       - name: Install dependencies
-        run: go get ./crisp
+        run: go get
+        working-directory: ./crisp
 
       - name: Build code
-        run: go build ./crisp
+        run: go build
+        working-directory: ./crisp
 
       - name: Test code
-        run: go test ./crisp
+        run: go test
+        working-directory: ./crisp
