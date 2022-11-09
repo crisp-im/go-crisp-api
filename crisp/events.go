@@ -1487,7 +1487,7 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
 
   // Listen for events? (socket has been dialed)
   if dialErr == nil && so != nil {
-    so.On("authenticated", func(_, authenticated bool) {
+    so.On("authenticated", func(_ *gosocketio.Channel, authenticated bool) {
       if authenticated == true {
         reg := EventsRegister{handlers: make(map[string]*caller)}
 
@@ -1495,7 +1495,7 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
 
         // Bind all listened-for events
         for _, event := range events {
-          so.On(event, func(_, evt *json.RawMessage) {
+          so.On(event, func(_ *gosocketio.Channel, evt *json.RawMessage) {
             // Dispatch event to event bus
             // Important: emit method is already asynchronous
             reg.emit(event, evt)
@@ -1506,11 +1506,11 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
       }
     })
 
-    so.On(gosocketio.OnError, func() {
+    so.On(gosocketio.OnError, func(_ *gosocketio.Channel) {
       handleError()
     })
 
-    so.On(gosocketio.OnDisconnection, func() {
+    so.On(gosocketio.OnDisconnection, func(_ *gosocketio.Channel) {
       *connectedSocket = false
 
       handleDisconnected()
@@ -1518,7 +1518,7 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
       service.reconnect(events, handleConnected, handleDisconnected, handleError, connectorChild, connectedSocket, endpointURL, child)
     })
 
-    so.On(gosocketio.OnConnection, func() {
+    so.On(gosocketio.OnConnection, func(_ *gosocketio.Channel) {
       *connectedSocket = true
 
       // Authenticate to socket
