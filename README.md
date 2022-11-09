@@ -456,7 +456,7 @@ You won't receive any event if you don't explicitly subscribe to realtime events
 
 **There are two ways to receive realtime events:**
 
-1. Using Web Hooks (**recommended**)
+1. Using Web Hooks (**⭐ recommended**)
 2. Using WebSockets with the RTM API
 
 ### Receive realtime events
