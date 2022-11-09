@@ -1495,10 +1495,12 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
 
         // Bind all listened-for events
         for _, event := range events {
+          boundEvent := event
+
           so.On(event, func(_ *gosocketio.Channel, evt *json.RawMessage) {
             // Dispatch event to event bus
             // Important: emit method is already asynchronous
-            reg.emit(event, evt)
+            reg.emit(boundEvent, evt)
           })
         }
 
