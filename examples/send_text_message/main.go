@@ -11,13 +11,13 @@ import (
 )
 
 const (
-  CONFIG_TOKEN_IDENTIFIER = "7c3ef21c-1e04-41ce-8c06-5605c346f73e"
-  CONFIG_TOKEN_KEY = "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a"
+  CONFIG_TOKEN_IDENTIFIER = "43f34724-9eeb-4474-9cec-560250754dec"
+  CONFIG_TOKEN_KEY = "d12e60c5d2aa264b90997a641b6474ffd6602b66d8e8abc49634c404f06fa7d0"
 )
 
 func main() {
   client := crisp.New()
-  client.Authenticate(CONFIG_TOKEN_IDENTIFIER, CONFIG_TOKEN_KEY)
+  client.AuthenticateTier("plugin", CONFIG_TOKEN_IDENTIFIER, CONFIG_TOKEN_KEY)
 
   // Build text message
   message := crisp.ConversationTextMessageNew{Type: "text", From: "operator", Origin: "chat", Content: "Hello :)", Fingerprint: 12345}
