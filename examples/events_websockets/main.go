@@ -15,7 +15,7 @@ func main() {
   client := crisp.New()
   client.Authenticate("7c3ef21c-1e04-41ce-8c06-5605c346f73e", "cc29e1a5086e428fcc6a697d5837a66d82808e65c5cce006fbf2191ceea80a0a")
 
-  // Subscribe to realtime events
+  // Subscribe to realtime events (RTM API over WebSockets)
   // Notice: set event list to '[]string{}' to listen to all event namespaces
   client.Events.Listen(
     []string{
@@ -26,7 +26,7 @@ func main() {
     },
 
     func(reg *crisp.EventsRegister) {
-      fmt.Print("Socket is connected: now listening for events\n")
+      fmt.Print("WebSocket channel is connected: now listening for events\n")
 
       reg.On("message:send/text", func(evt crisp.EventsReceiveTextMessage) {
         fmt.Printf("[message:send/text] %s\n", evt)
@@ -110,11 +110,11 @@ func main() {
     },
 
     func() {
-      fmt.Print("Socket is disconnected: will try to reconnect\n")
+      fmt.Print("WebSocket channel is disconnected: will try to reconnect\n")
     },
 
     func() {
-      fmt.Print("Socket error: may be broken\n")
+      fmt.Print("WebSocket channel error: may be broken\n")
     },
   )
 
