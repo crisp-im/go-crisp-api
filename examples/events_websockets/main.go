@@ -120,7 +120,7 @@ func main() {
     },
 
     func(err error) {
-      fmt.Printf("WebSocket channel error: may be broken -> %+v\n", err)
+      fmt.Printf("WebSocket channel error: %+v\n", err)
     },
   )
 

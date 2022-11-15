@@ -53,7 +53,7 @@ func main() {
     },
 
     func(err error) {
-      fmt.Printf("Web Hooks channel error: may be broken -> %+v\n", err)
+      fmt.Printf("Web Hooks channel error: %+v\n", err)
     },
   )
 
