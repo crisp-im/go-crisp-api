@@ -70,19 +70,19 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 ### Bucket
 
-* **Bucket URL**
+* #### **Bucket URL**
   * **Generate Bucket URL** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#bucket-url)
     * `client.Bucket.GenerateBucketURL(bucketData BucketURLRequest) (*Response, error)`
 
 ### Media
 
-* **Media Animation**
+* #### **Media Animation**
   * **List Animation Medias** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-animation-medias)
     * `client.Media.ListAnimationMedias(pageNumber uint, listID int, searchQuery string) (*Response, error)`
 
 ### Website
 
-* **Website Base**
+* #### **Website Base**
   * **Check If Website Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-website-exists)
     * `client.Website.CheckWebsiteExists(domain string) (*Response, error)`
   * **Create Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-website)
@@ -92,7 +92,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Delete A Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-a-website)
     * `client.Website.DeleteWebsite(websiteID string, verify string) (*Response, error)`
 
-* **Website Batch**
+* #### **Website Batch**
   * **Batch Resolve Conversations** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-resolve-items)
     * `client.Website.BatchResolveConversations(websiteID string, sessions []string) (*Response, error)`
   * **Batch Read Conversations** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-read-items)
@@ -102,13 +102,13 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Batch Remove People** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-remove-items)
     * `client.Website.BatchRemovePeople(websiteID string, people WebsiteBatchPeopleOperationInner) (*Response, error)`
 
-* **Website Availability**
+* #### **Website Availability**
   * **Get Website Availability Status** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-website-availability-status)
     * `client.Website.GetWebsiteAvailabilityStatus(websiteID string) (*WebsiteAvailabilityStatus, *Response, error)`
   * **List Website Operator Availabilities** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-website-operator-availabilities)
     * `client.Website.ListWebsiteOperatorAvailabilities(websiteID string) (*[]WebsiteAvailabilityOperator, *Response, error)`
 
-* **Website Operator**
+* #### **Website Operator**
   * **List Website Operators** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-website-operators)
     * `client.Website.ListWebsiteOperators(websiteID string) (*[]WebsiteOperatorListOne, *Response, error)`
   * **List Last Active Website Operators** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-last-active-website-operators)
@@ -126,7 +126,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Unlink Operator From Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#unlink-operator-from-website)
     * `client.Website.UnlinkOperatorFromWebsite(websiteID string, userID string) (*Response, error)`
 
-* **Website Verify**
+* #### **Website Verify**
   * **Get Verify Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-verify-settings)
     * `client.Website.GetVerifySettings(websiteID string) (*WebsiteVerifySettings, *Response, error)`
   * **Update Verify Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-verify-settings)
@@ -136,13 +136,13 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Roll Verify Key** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#roll-verify-key)
     * `client.Website.RollVerifyKey(websiteID string) (*Response, error)`
 
-* **Website Settings**
+* #### **Website Settings**
   * **Get Website Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-website-settings)
     * `client.Website.GetWebsiteSettings(websiteID string) (*WebsiteSettings, *Response, error)`
   * **Update Website Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-website-settings)
     * `client.Website.UpdateWebsiteSettings(websiteID string, settings WebsiteSettingsUpdate) (*Response, error)`
 
-* **Website Visitors**
+* #### **Website Visitors**
   * **Count Visitors** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#count-visitors)
     * `client.Website.CountVisitors(websiteID string) (*WebsiteVisitorCount, *Response, error)`
   * **List Visitors** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-visitors)
@@ -160,7 +160,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Clear Blocked Visitors In Rule** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#clear-blocked-visitors-in-rule)
     * `client.Website.ClearBlockedVisitorsInRule(websiteID string, rule string) (*Response, error)`
 
-* **Website Campaigns**
+* #### **Website Campaigns**
   * **List Campaigns** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-campaigns)
     * `client.Website.ListCampaigns(websiteID string, pageNumber uint) (*[]WebsiteCampaignExcerpt, *Response, error)`
   * **List Campaigns (Filter Variant)** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-campaigns)
@@ -184,7 +184,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Remove A Campaign Template** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#remove-a-campaign-template)
     * `client.Website.RemoveCampaignTemplate(websiteID string, templateID string) (*Response, error)`
 
-* **Website Campaign**
+* #### **Website Campaign**
   * **Create A New Campaign** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-a-new-campaign)
     * `client.Website.CreateNewCampaign(websiteID string, campaignType string, campaignName string) (*WebsiteCampaignNew, *Response, error)`
   * **Check If Campaign Exists** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-campaign-exists)
@@ -210,7 +210,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Campaign Statistics** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-campaign-statistics)
     * `client.Website.ListCampaignStatistics(websiteID string, campaignID string, action string, pageNumber uint) (*[]WebsiteCampaignStatistic, *Response, error)`
 
-* **Website Conversations**
+* #### **Website Conversations**
   * **⭐ List Conversations** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-conversations)
     * `client.Website.ListConversations(websiteID string, pageNumber uint) (*[]Conversation, *Response, error)`
   * **List Conversations (Search Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-conversations)
@@ -226,7 +226,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Delete Suggested Conversation Data Key** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-suggested-conversation-data-key)
     * `client.Website.DeleteSuggestedConversationDataKey(websiteID string, key string) (*Response, error)`
 
-* **Website Conversation**
+* #### **Website Conversation**
   * **⭐ Create A New Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-a-new-conversation)
     * `client.Website.CreateNewConversation(websiteID string) (*ConversationNew, *Response, error)`
   * **Check If Conversation Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-conversation-exists)
@@ -350,7 +350,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Schedule A Reminder For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#schedule-a-reminder-for-conversation)
     * `client.Website.ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error)`
 
-* **Website Analytics**
+* #### **Website Analytics**
   * **Acquire Analytics Points** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#acquire-analytics-points)
     * `client.Website.AcquireAnalyticsPoints(websiteID string, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time, dateSplit string, classifier string, filterPrimary string, filterSecondary string, filterTertiary string) (*WebsiteAnalyticsPoints, *Response, error)`
   * **List Analytics Filters** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-analytics-filters)
@@ -358,7 +358,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Analytics Classifiers** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-analytics-classifiers)
     * `client.Website.ListAnalyticsClassifiers(websiteID string, pageNumber uint, pointType string, pointMetric string, dateFrom time.Time, dateTo time.Time) (*[]WebsiteAnalyticsClassifier, *Response, error)`
 
-* **Website People**
+* #### **Website People**
   * **Get People Statistics** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-people-statistics)
     * `client.Website.GetPeopleStatistics(websiteID string) (*PeopleStatistics, *Response, error)`
   * **List Suggested People Segments** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-suggested-people-segments)
@@ -414,7 +414,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 ### Plugin
 
-* **Plugin Subscription**
+* #### **Plugin Subscription**
   * **List All Active Subscriptions** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-all-active-subscriptions)
     * `client.Plugin.ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error)`
   * **List Subscriptions For A Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-subscriptions-for-a-website)
@@ -436,7 +436,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Dispatch Plugin Event** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#dispatch-plugin-event)
     * `client.Plugin.DispatchPluginEvent(websiteID string, pluginID string, payload PluginSubscriptionEventDispatch) (*Response, error)`
 
-* **Plugin Connect**
+* #### **Plugin Connect**
   * **⭐ Get Connect Account** [`plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-connect-account)
     * `client.Plugin.GetConnectAccount() (*PluginConnectAccount, *Response, error)`
   * **⭐ Check Connect Session Validity** [`plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-connect-session-validity)
