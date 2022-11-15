@@ -52,8 +52,8 @@ func main() {
       fmt.Print("Web Hooks channel unbound: not listening anymore\n")
     },
 
-    func() {
-      fmt.Print("Web Hooks channel error: may be broken\n")
+    func(err error) {
+      fmt.Printf("Web Hooks channel error: may be broken -> %+v\n", err)
     },
   )
 

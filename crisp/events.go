@@ -54,6 +54,7 @@ type EventsService service
 type EventsRegister struct {
   handlers      map[string]*caller
   handlersLock  sync.RWMutex
+  fnRaiseError  *func(err error)
 }
 
 // EventsPayloadHook model mapping
@@ -1447,7 +1448,7 @@ func (service *EventsService) pullRemoteEndpointURL() (string, error) {
 }
 
 
-func (service *EventsService) reconnect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(), connectorChild *int, connectedSocket *bool, endpointURL *string, child int) {
+func (service *EventsService) reconnect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(err error), connectorChild *int, connectedSocket *bool, endpointURL *string, child int) {
   // Attempt to reconnect
   for *connectedSocket == false && child == *connectorChild {
     // Compute a random wait interval
@@ -1463,7 +1464,7 @@ func (service *EventsService) reconnect(events []string, handleConnected func(*E
 }
 
 
-func (service *EventsService) connect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(), connectorChild *int, connectedSocket *bool, endpointURL *string) {
+func (service *EventsService) connect(events []string, handleConnected func(*EventsRegister), handleDisconnected func(), handleError func(err error), connectorChild *int, connectedSocket *bool, endpointURL *string) {
   child := *connectorChild
 
   // Pull endpoint URL? (for the first time if not set)
@@ -1489,7 +1490,7 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
   if dialErr == nil && so != nil {
     so.On("authenticated", func(_ *gosocketio.Channel, authenticated bool) {
       if authenticated == true {
-        reg := EventsRegister{handlers: make(map[string]*caller)}
+        reg := EventsRegister{handlers: make(map[string]*caller), fnRaiseError: &handleError}
 
         activeSocket = so
 
@@ -1500,7 +1501,12 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
           so.On(event, func(_ *gosocketio.Channel, evt *json.RawMessage) {
             // Dispatch event to event bus
             // Important: emit method is already asynchronous
-            reg.emit(boundEvent, evt)
+            _, routeErr := reg.emit(boundEvent, evt)
+
+            // Raise error in asynchronous error handler?
+            if routeErr != nil && reg.fnRaiseError != nil {
+              (*reg.fnRaiseError)(routeErr)
+            }
           })
         }
 
@@ -1509,7 +1515,7 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
     })
 
     so.On(gosocketio.OnError, func(_ *gosocketio.Channel) {
-      handleError()
+      handleError(errors.New("socket error"))
     })
 
     so.On(gosocketio.OnDisconnection, func(_ *gosocketio.Channel) {
@@ -1535,9 +1541,9 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
 }
 
 
-func (service *EventsService) loopback(events []string, handleBound func(*EventsRegister)) {
+func (service *EventsService) loopback(events []string, handleBound func(*EventsRegister), handleError func(err error)) {
   // Prepare register
-  reg := EventsRegister{handlers: make(map[string]*caller)}
+  reg := EventsRegister{handlers: make(map[string]*caller), fnRaiseError: &handleError}
 
   // Prepare events map (used for optimized lookup)
   var eventsMap = make(map[string]bool)
@@ -1604,6 +1610,11 @@ func (service *EventsService) ReceiveHook(payload *[]byte) (bool, error) {
     }
 
     hasRouted, routeErr := activeLoopback.register.emit(parsedPayload.Event, parsedPayload.Data)
+
+    // Raise error in asynchronous error handler?
+    if routeErr != nil && activeLoopback.register.fnRaiseError != nil {
+      (*activeLoopback.register.fnRaiseError)(routeErr)
+    }
 
     return hasRouted, routeErr
   }
@@ -1679,7 +1690,7 @@ func (service *EventsService) BindPopSocket(events []string) {
 
 
 // Listen starts listening for incoming realtime events (used for both WebSockets and Web Hooks)
-func (service *EventsService) Listen(mode EventsMode, events []string, handleBound func(*EventsRegister), handleUnbound func(), handleError func()) (error) {
+func (service *EventsService) Listen(mode EventsMode, events []string, handleBound func(*EventsRegister), handleUnbound func(), handleError func(err error)) (error) {
   if len(events) == 0 {
     return errors.New("no events provided")
   }
@@ -1697,7 +1708,7 @@ func (service *EventsService) Listen(mode EventsMode, events []string, handleBou
     return nil
   case EventsModeWebHooks:
     // Bind to local loopback, acting as an event bus listening for events dispatched using 'Receive()'
-    service.loopback(events, handleBound)
+    service.loopback(events, handleBound, handleError)
 
     return nil
   default:

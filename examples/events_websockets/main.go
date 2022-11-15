@@ -119,8 +119,8 @@ func main() {
       fmt.Print("WebSocket channel is disconnected: will try to reconnect\n")
     },
 
-    func() {
-      fmt.Print("WebSocket channel error: may be broken\n")
+    func(err error) {
+      fmt.Printf("WebSocket channel error: may be broken -> %+v\n", err)
     },
   )
 
