@@ -1496,6 +1496,7 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
 
         // Bind all listened-for events
         for _, event := range events {
+          // Important: copy event name in a local (as we are in a loop binding an asynchronous handler)
           boundEvent := event
 
           so.On(event, func(_ *gosocketio.Channel, evt *json.RawMessage) {
@@ -1505,7 +1506,7 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
 
             // Raise error in asynchronous error handler?
             if routeErr != nil && reg.fnRaiseError != nil {
-              (*reg.fnRaiseError)(fmt.Errorf("[socket->%s] %w", event, routeErr))
+              (*reg.fnRaiseError)(fmt.Errorf("[socket->%s] %w", boundEvent, routeErr))
             }
           })
         }
