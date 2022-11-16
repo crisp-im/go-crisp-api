@@ -1506,7 +1506,7 @@ func (service *EventsService) connect(events []string, handleConnected func(*Eve
 
             // Raise error in asynchronous error handler?
             if routeErr != nil && reg.fnRaiseError != nil {
-              (*reg.fnRaiseError)(fmt.Errorf("[socket->%s] %w", boundEvent, routeErr))
+              (*reg.fnRaiseError)(fmt.Errorf("[socket->%s] %w on payload ~> %s", boundEvent, routeErr, *evt))
             }
           })
         }
@@ -1614,7 +1614,7 @@ func (service *EventsService) ReceiveHook(payload *[]byte) (bool, error) {
 
     // Raise error in asynchronous error handler?
     if routeErr != nil && activeLoopback.register.fnRaiseError != nil {
-      (*activeLoopback.register.fnRaiseError)(fmt.Errorf("[hook->%s] %w", parsedPayload.Event, routeErr))
+      (*activeLoopback.register.fnRaiseError)(fmt.Errorf("[hook->%s] %w on payload ~> %s", parsedPayload.Event, routeErr, *parsedPayload.Data))
     }
 
     return hasRouted, routeErr
