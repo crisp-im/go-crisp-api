@@ -196,10 +196,17 @@ type ConversationMessagePickerContent struct {
 
 // ConversationMessagePickerContentChoice mapping
 type ConversationMessagePickerContentChoice struct {
-  Value     *string  `json:"value"`
-  Icon      *string  `json:"icon,omitempty"`
-  Label     *string  `json:"label"`
-  Selected  *bool    `json:"selected"`
+  Value     *string                                        `json:"value"`
+  Icon      *string                                        `json:"icon,omitempty"`
+  Label     *string                                        `json:"label"`
+  Selected  *bool                                          `json:"selected"`
+  Action    *ConversationMessagePickerContentChoiceAction  `json:"action,omitempty"`
+}
+
+// ConversationMessagePickerContentChoiceAction mapping
+type ConversationMessagePickerContentChoiceAction struct {
+  Type    *string  `json:"type"`
+  Target  *string  `json:"target"`
 }
 
 // ConversationMessageFieldContent mapping
@@ -414,10 +421,17 @@ type ConversationPickerMessageNewContent struct {
 
 // ConversationPickerMessageNewContentChoice mapping
 type ConversationPickerMessageNewContentChoice struct {
-  Value     string   `json:"value,omitempty"`
-  Icon      *string  `json:"icon,omitempty"`
-  Label     string   `json:"label,omitempty"`
-  Selected  bool     `json:"selected"`
+  Value     string                                            `json:"value,omitempty"`
+  Icon      *string                                           `json:"icon,omitempty"`
+  Label     string                                            `json:"label,omitempty"`
+  Selected  bool                                              `json:"selected"`
+  Action    *ConversationPickerMessageNewContentChoiceAction  `json:"action,omitempty"`
+}
+
+// ConversationPickerMessageNewContentChoiceAction mapping
+type ConversationPickerMessageNewContentChoiceAction struct {
+  Type    string  `json:"type"`
+  Target  string  `json:"target"`
 }
 
 // ConversationFieldMessageNewContent mapping
