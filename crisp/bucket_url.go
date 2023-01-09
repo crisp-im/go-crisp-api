@@ -22,8 +22,8 @@ type BucketURLRequestFile struct {
 
 // BucketURLRequestResource mapping
 type BucketURLRequestResource struct {
-  Type        string  `json:"type,omitempty"`
-  Identifier  string  `json:"identifier,omitempty"`
+  Type  string  `json:"type,omitempty"`
+  ID    string  `json:"id,omitempty"`
 }
 
 
