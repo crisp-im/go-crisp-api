@@ -8,17 +8,22 @@ package crisp
 
 // BucketURLRequest mapping
 type BucketURLRequest struct {
-  Namespace   string                `json:"namespace,omitempty"`
-  From        string                `json:"from,omitempty"`
-  Identifier  string                `json:"identifier,omitempty"`
-  ID          string                `json:"id,omitempty"`
-  File        BucketURLRequestFile  `json:"file,omitempty"`
+  Namespace   string                     `json:"namespace,omitempty"`
+  ID          string                     `json:"id,omitempty"`
+  File        BucketURLRequestFile       `json:"file,omitempty"`
+  Resource    *BucketURLRequestResource  `json:"resource,omitempty"`
 }
 
 // BucketURLRequestFile mapping
 type BucketURLRequestFile struct {
   Name  string  `json:"name,omitempty"`
   Type  string  `json:"type,omitempty"`
+}
+
+// BucketURLRequestResource mapping
+type BucketURLRequestResource struct {
+  Type        string  `json:"type,omitempty"`
+  Identifier  string  `json:"identifier,omitempty"`
 }
 
 
