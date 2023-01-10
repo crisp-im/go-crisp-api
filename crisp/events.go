@@ -829,23 +829,30 @@ type EventsReceiveWebsiteUsersAvailable struct {
 // EventsReceiveBucketURLUploadGenerated maps bucket:url:upload:generated
 type EventsReceiveBucketURLUploadGenerated struct {
   EventsGeneric
-  From        *string                                         `json:"from"`
-  ID          *string                                         `json:"id"`
-  Identifier  *string                                         `json:"identifier"`
-  Policy      *EventsReceiveBucketURLUploadGeneratedPolicy    `json:"policy"`
   Type        *string                                         `json:"type"`
+  From        *string                                         `json:"from"`
+  Identifier  *string                                         `json:"identifier"`
+  ID          *string                                         `json:"id"`
+  Resource    *EventsReceiveBucketURLUploadGeneratedResource  `json:"resource"`
   URL         *EventsReceiveBucketURLUploadGeneratedURL       `json:"url"`
+  Policy      *EventsReceiveBucketURLUploadGeneratedPolicy    `json:"policy"`
 }
 
-// EventsReceiveBucketURLUploadGeneratedPolicy maps bucket:url:upload:generated/policy
-type EventsReceiveBucketURLUploadGeneratedPolicy struct {
-  SizeLimit  *uint64  `json:"size_limit"`
+// EventsReceiveBucketURLUploadGeneratedResource maps bucket:url:upload:generated/resource
+type EventsReceiveBucketURLUploadGeneratedResource struct {
+  Type  *string  `json:"type"`
+  ID    *string  `json:"id"`
 }
 
 // EventsReceiveBucketURLUploadGeneratedURL maps bucket:url:upload:generated/url
 type EventsReceiveBucketURLUploadGeneratedURL struct {
   Resource  *string  `json:"resource"`
   Signed    *string  `json:"signed"`
+}
+
+// EventsReceiveBucketURLUploadGeneratedPolicy maps bucket:url:upload:generated/policy
+type EventsReceiveBucketURLUploadGeneratedPolicy struct {
+  SizeLimit  *uint64  `json:"size_limit"`
 }
 
 // EventsReceiveBucketURLAvatarGenerated maps bucket:url:avatar:generated
