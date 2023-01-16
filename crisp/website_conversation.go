@@ -134,6 +134,20 @@ type ConversationEvent struct {
   Timestamp  *uint64       `json:"timestamp,omitempty"`
 }
 
+// ConversationFilesData mapping
+type ConversationFilesData struct {
+  Data  *[]ConversationFile  `json:"data,omitempty"`
+}
+
+// ConversationFile mapping
+type ConversationFile struct {
+  Name         *string  `json:"name,omitempty"`
+  Type         *string  `json:"type,omitempty"`
+  URL          *string  `json:"url,omitempty"`
+  Fingerprint  *int     `json:"fingerprint,omitempty"`
+  Timestamp    *uint64  `json:"timestamp,omitempty"`
+}
+
 // ConversationMessage mapping
 type ConversationMessage struct {
   SessionID    *string                        `json:"session_id,omitempty"`
@@ -980,6 +994,24 @@ func (instance ConversationOriginal) String() string {
 }
 
 
+// String returns the string representation of ConversationPage
+func (instance ConversationPage) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationEvent
+func (instance ConversationEvent) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationFile
+func (instance ConversationFile) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of ConversationState
 func (instance ConversationState) String() string {
   return Stringify(instance)
@@ -1619,6 +1651,21 @@ func (service *WebsiteService) ListConversationEvents(websiteID string, sessionI
   }
 
   return events.Data, resp, err
+}
+
+
+// ListConversationFiles lists files in conversation (extracted from messages).
+func (service *WebsiteService) ListConversationFiles(websiteID string, sessionID string, pageNumber uint) (*[]ConversationFile, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/files/%d", websiteID, sessionID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  files := new(ConversationFilesData)
+  resp, err := service.client.Do(req, files)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return files.Data, resp, err
 }
 
 
