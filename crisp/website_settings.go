@@ -35,6 +35,8 @@ type WebsiteSettingsContact struct {
   Messenger  *string  `json:"messenger,omitempty"`
   Telegram   *string  `json:"telegram,omitempty"`
   Twitter    *string  `json:"twitter,omitempty"`
+  WhatsApp   *string  `json:"whatsapp,omitempty"`
+  Instagram  *string  `json:"instagram,omitempty"`
 }
 
 // WebsiteSettingsInbox mapping
@@ -102,6 +104,8 @@ type WebsiteSettingsUpdateContact struct {
   Messenger  string  `json:"messenger,omitempty"`
   Telegram   string  `json:"telegram,omitempty"`
   Twitter    string  `json:"twitter,omitempty"`
+  WhatsApp   string  `json:"whatsapp,omitempty"`
+  Instagram  string  `json:"instagram,omitempty"`
 }
 
 // WebsiteSettingsUpdateInbox mapping
