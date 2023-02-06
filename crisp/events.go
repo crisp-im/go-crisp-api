@@ -543,9 +543,10 @@ type EventsReceivePickerMessage struct {
 
 // EventsReceivePickerMessageContent maps message:{send,received}/content (picker type)
 type EventsReceivePickerMessageContent struct {
-  ID       string                                      `json:"id"`
-  Text     string                                      `json:"text"`
-  Choices  *[]EventsReceivePickerMessageContentChoice  `json:"choices"`
+  ID        string                                      `json:"id"`
+  Text      string                                      `json:"text"`
+  Choices   *[]EventsReceivePickerMessageContentChoice  `json:"choices"`
+  Required  *bool                                       `json:"required,omitempty"`
 }
 
 // EventsReceivePickerMessageContentChoice maps message:{send,received}/content/choices (picker type)
@@ -572,10 +573,11 @@ type EventsReceiveFieldMessage struct {
 
 // EventsReceiveFieldMessageContent maps message:{send,received}/content (field type)
 type EventsReceiveFieldMessageContent struct {
-  ID       string  `json:"id"`
-  Text     string  `json:"text"`
-  Explain  string  `json:"explain"`
-  Value    string  `json:"value"`
+  ID        string  `json:"id"`
+  Text      string  `json:"text"`
+  Explain   string  `json:"explain"`
+  Value     string  `json:"value"`
+  Required  *bool   `json:"required,omitempty"`
 }
 
 // EventsReceiveCarouselMessage maps message:{send,received} (carousel type)

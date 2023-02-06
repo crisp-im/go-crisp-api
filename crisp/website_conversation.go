@@ -203,9 +203,10 @@ type ConversationMessageAudioContent struct {
 
 // ConversationMessagePickerContent mapping
 type ConversationMessagePickerContent struct {
-  ID       *string                                    `json:"id"`
-  Text     *string                                    `json:"text"`
-  Choices  *[]ConversationMessagePickerContentChoice  `json:"choices"`
+  ID        *string                                    `json:"id"`
+  Text      *string                                    `json:"text"`
+  Choices   *[]ConversationMessagePickerContentChoice  `json:"choices"`
+  Required  *bool                                      `json:"required,omitempty"`
 }
 
 // ConversationMessagePickerContentChoice mapping
@@ -225,10 +226,11 @@ type ConversationMessagePickerContentChoiceAction struct {
 
 // ConversationMessageFieldContent mapping
 type ConversationMessageFieldContent struct {
-  ID       *string  `json:"id"`
-  Text     *string  `json:"text"`
-  Explain  *string  `json:"explain"`
-  Value    *string  `json:"value"`
+  ID        *string  `json:"id"`
+  Text      *string  `json:"text"`
+  Explain   *string  `json:"explain"`
+  Value     *string  `json:"value"`
+  Required  *bool    `json:"required,omitempty"`
 }
 
 // ConversationMessageCarouselContent mapping
@@ -428,9 +430,10 @@ type ConversationAudioMessageNewContent struct {
 
 // ConversationPickerMessageNewContent mapping
 type ConversationPickerMessageNewContent struct {
-  ID       string                                       `json:"id,omitempty"`
-  Text     string                                       `json:"text,omitempty"`
-  Choices  []ConversationPickerMessageNewContentChoice  `json:"choices,omitempty"`
+  ID        string                                       `json:"id,omitempty"`
+  Text      string                                       `json:"text,omitempty"`
+  Choices   []ConversationPickerMessageNewContentChoice  `json:"choices,omitempty"`
+  Required  *bool                                        `json:"required,omitempty"`
 }
 
 // ConversationPickerMessageNewContentChoice mapping
@@ -450,10 +453,11 @@ type ConversationPickerMessageNewContentChoiceAction struct {
 
 // ConversationFieldMessageNewContent mapping
 type ConversationFieldMessageNewContent struct {
-  ID       string  `json:"id,omitempty"`
-  Text     string  `json:"text,omitempty"`
-  Explain  string  `json:"explain,omitempty"`
-  Value    string  `json:"value,omitempty"`
+  ID        string  `json:"id,omitempty"`
+  Text      string  `json:"text,omitempty"`
+  Explain   string  `json:"explain,omitempty"`
+  Value     string  `json:"value,omitempty"`
+  Required  *bool   `json:"required,omitempty"`
 }
 
 // ConversationCarouselMessageNewContent mapping
