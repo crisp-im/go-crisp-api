@@ -177,7 +177,7 @@ type HelpdeskLocaleFeedbackRatingsRatings struct {
 
 // HelpdeskLocaleFeedbackListData mapping
 type HelpdeskLocaleFeedbackListData struct {
-  Data  *HelpdeskLocaleFeedbackItem  `json:"data,omitempty"`
+  Data  *[]HelpdeskLocaleFeedbackItem  `json:"data,omitempty"`
 }
 
 // HelpdeskLocaleFeedbackItem mapping
@@ -373,7 +373,7 @@ type HelpdeskLocaleArticleAlternateSave struct {
 
 // HelpdeskLocaleCategoryAdd mapping
 type HelpdeskLocaleCategoryAdd struct {
-  Title  string  `json:"title"`
+  Name  string  `json:"name"`
 }
 
 // HelpdeskLocaleSectionAdd mapping
@@ -581,13 +581,13 @@ func (service *WebsiteService) ResolveHelpdeskLocale(websiteID string, locale st
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s", websiteID, locale)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  locale := new(HelpdeskLocaleData)
-  resp, err := service.client.Do(req, locale)
+  helpdeskLocale := new(HelpdeskLocaleData)
+  resp, err := service.client.Do(req, helpdeskLocale)
   if err != nil {
     return nil, resp, err
   }
 
-  return locale.Data, resp, err
+  return helpdeskLocale.Data, resp, err
 }
 
 
@@ -998,7 +998,7 @@ func (service *WebsiteService) ExportHelpdeskLocaleArticles(websiteID string, lo
 
 // ListHelpdeskRedirections lists redirections for helpdesk in website.
 func (service *WebsiteService) ListHelpdeskRedirections(websiteID string, pageNumber uint) (*[]HelpdeskRedirection, *Response, error) {
-  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/redirections/%d", websiteID, locale, pageNumber)
+  url := fmt.Sprintf("website/%s/helpdesk/redirections/%d", websiteID, pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
   redirections := new(HelpdeskRedirectionListData)
