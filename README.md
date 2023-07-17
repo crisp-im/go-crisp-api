@@ -416,111 +416,111 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * #### **Website Helpdesk**
   * **Check If Helpdesk Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-helpdesk-exists)
-    * `client.Website.checkHelpdeskExists(websiteID string) (*Response, error)`
+    * `client.Website.CheckHelpdeskExists(websiteID string) (*Response, error)`
   * **Resolve Helpdesk** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk)
-    * `client.Website.resolveHelpdesk(websiteID string) (*Helpdesk, *Response, error)`
+    * `client.Website.ResolveHelpdesk(websiteID string) (*Helpdesk, *Response, error)`
   * **Initialize Helpdesk** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#initialize-helpdesk)
-    * `client.Website.initializeHelpdesk(websiteID string, name string, domainBasic string) (*Response, error)`
+    * `client.Website.InitializeHelpdesk(websiteID string, name string, domainBasic string) (*Response, error)`
   * **Delete Helpdesk** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-helpdesk)
-    * `client.Website.deleteHelpdesk(websiteID string, verify string) (*Response, error)`
+    * `client.Website.DeleteHelpdesk(websiteID string, verify string) (*Response, error)`
   * **List Helpdesk Locales** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-helpdesk-locales)
-    * `client.Website.listHelpdeskLocales(websiteID string, pageNumber uint) (*[]HelpdeskLocale, *Response, error)`
+    * `client.Website.ListHelpdeskLocales(websiteID string, pageNumber uint) (*[]HelpdeskLocale, *Response, error)`
   * **Add Helpdesk Locale** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#add-helpdesk-locale)
-    * `client.Website.addHelpdeskLocale(websiteID string, locale string) (*Response, error)`
+    * `client.Website.AddHelpdeskLocale(websiteID string, locale string) (*Response, error)`
   * **Check If Helpdesk Locale Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-helpdesk-locale-exists)
-    * `client.Website.checkHelpdeskLocaleExists(websiteID string, locale string) (*Response, error)`
+    * `client.Website.CheckHelpdeskLocaleExists(websiteID string, locale string) (*Response, error)`
   * **Resolve Helpdesk Locale** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-locale)
-    * `client.Website.resolveHelpdeskLocale(websiteID string, locale string) (*HelpdeskLocale, *Response, error)`
+    * `client.Website.ResolveHelpdeskLocale(websiteID string, locale string) (*HelpdeskLocale, *Response, error)`
   * **Delete Helpdesk Locale** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-helpdesk-locale)
-    * `client.Website.deleteHelpdeskLocale(websiteID string, locale string) (*Response, error)`
+    * `client.Website.DeleteHelpdeskLocale(websiteID string, locale string) (*Response, error)`
   * **List Helpdesk Locale Articles** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-helpdesk-locale-articles)
-    * `client.Website.listHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint) (*[]HelpdeskLocaleArticle, *Response, error)`
+    * `client.Website.ListHelpdeskLocaleArticles(websiteID string, locale string, pageNumber uint) (*[]HelpdeskLocaleArticle, *Response, error)`
   * **Add A New Helpdesk Locale Article** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#add-a-new-helpdesk-locale-article)
-    * `client.Website.addNewHelpdeskLocaleArticle(websiteID string, locale string, title string) (*HelpdeskLocaleArticleNew, *Response, error)`
+    * `client.Website.AddNewHelpdeskLocaleArticle(websiteID string, locale string, title string) (*HelpdeskLocaleArticleNew, *Response, error)`
   * **Check If Helpdesk Locale Article Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-helpdesk-locale-article-exists)
-    * `client.Website.checkHelpdeskLocaleArticleExists(websiteID string, locale string, articleId string) (*Response, error)`
+    * `client.Website.CheckHelpdeskLocaleArticleExists(websiteID string, locale string, articleId string) (*Response, error)`
   * **Resolve Helpdesk Locale Article** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-locale-article)
-    * `client.Website.resolveHelpdeskLocaleArticle(websiteID string, locale string, articleId string) (*HelpdeskLocaleArticle, *Response, error)`
+    * `client.Website.ResolveHelpdeskLocaleArticle(websiteID string, locale string, articleId string) (*HelpdeskLocaleArticle, *Response, error)`
   * **Save Helpdesk Locale Article** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-helpdesk-locale-article)
-    * `client.Website.saveHelpdeskLocaleArticle(websiteID string, locale string, articleId string, article HelpdeskLocaleArticle) (*Response, error)`
+    * `client.Website.SaveHelpdeskLocaleArticle(websiteID string, locale string, articleId string, article HelpdeskLocaleArticle) (*Response, error)`
   * **Update Helpdesk Locale Article** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-helpdesk-locale-article)
-    * `client.Website.updateHelpdeskLocaleArticle(websiteID string, locale string, articleId string, article HelpdeskLocaleArticle) (*Response, error)`
+    * `client.Website.UpdateHelpdeskLocaleArticle(websiteID string, locale string, articleId string, article HelpdeskLocaleArticle) (*Response, error)`
   * **Delete Helpdesk Locale Article** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-helpdesk-locale-article)
-    * `client.Website.deleteHelpdeskLocaleArticle(websiteID string, locale string, articleId string) (*Response, error)`
+    * `client.Website.DeleteHelpdeskLocaleArticle(websiteID string, locale string, articleId string) (*Response, error)`
   * **Resolve Helpdesk Locale Article Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-locale-article-category)
-    * `client.Website.resolveHelpdeskLocaleArticleCategory(websiteID string, locale string, articleId string) (*HelpdeskLocaleArticleCategory, *Response, error)`
+    * `client.Website.ResolveHelpdeskLocaleArticleCategory(websiteID string, locale string, articleId string) (*HelpdeskLocaleArticleCategory, *Response, error)`
   * **Update Helpdesk Locale Article Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-helpdesk-locale-article-category)
-    * `client.Website.updateHelpdeskLocaleArticleCategory(websiteID string, locale string, articleId string, categoryId string, sectionId string) (*Response, error)`
+    * `client.Website.UpdateHelpdeskLocaleArticleCategory(websiteID string, locale string, articleId string, categoryId string, sectionId string) (*Response, error)`
   * **List Helpdesk Locale Article Alternates** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-helpdesk-locale-article-alternates)
-    * `client.Website.listHelpdeskLocaleArticleAlternates(websiteID string, locale string, articleId string) (*[]HelpdeskLocaleArticleAlternate, *Response, error)`
+    * `client.Website.ListHelpdeskLocaleArticleAlternates(websiteID string, locale string, articleId string) (*[]HelpdeskLocaleArticleAlternate, *Response, error)`
   * **Check If Helpdesk Locale Article Alternate Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-helpdesk-locale-article-alternate-exists)
-    * `client.Website.checkHelpdeskLocaleArticleAlternateExists(websiteID string, locale string, articleId string, localeLinked string) (*Response, error)`
+    * `client.Website.CheckHelpdeskLocaleArticleAlternateExists(websiteID string, locale string, articleId string, localeLinked string) (*Response, error)`
   * **Resolve Helpdesk Locale Article Alternate** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-locale-article-alternate)
-    * `client.Website.resolveHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleId string, localeLinked string) (*HelpdeskLocaleArticleAlternate, *Response, error)`
+    * `client.Website.ResolveHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleId string, localeLinked string) (*HelpdeskLocaleArticleAlternate, *Response, error)`
   * **Save Helpdesk Locale Article Alternate** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-helpdesk-locale-article-alternate)
-    * `client.Website.saveHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleId string, localeLinked string, articleIdLinked string) (*Response, error)`
+    * `client.Website.SaveHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleId string, localeLinked string, articleIdLinked string) (*Response, error)`
   * **Delete Helpdesk Locale Article Alternate** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-helpdesk-locale-article-alternate)
-    * `client.Website.deleteHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleId string, localeLinked string) (*Response, error)`
+    * `client.Website.DeleteHelpdeskLocaleArticleAlternate(websiteID string, locale string, articleId string, localeLinked string) (*Response, error)`
   * **Publish Helpdesk Locale Article** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#publish-helpdesk-locale-article)
-    * `client.Website.publishHelpdeskLocaleArticle(websiteID string, locale string, articleId string) (*HelpdeskLocaleArticlePublish, *Response, error)`
+    * `client.Website.PublishHelpdeskLocaleArticle(websiteID string, locale string, articleId string) (*HelpdeskLocaleArticlePublish, *Response, error)`
   * **Unpublish Helpdesk Locale Article** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#unpublish-helpdesk-locale-article)
-    * `client.Website.unpublishHelpdeskLocaleArticle(websiteID string, locale string, articleId string) (*Response, error)`
+    * `client.Website.UnpublishHelpdeskLocaleArticle(websiteID string, locale string, articleId string) (*Response, error)`
   * **List Helpdesk Locale Categories** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-helpdesk-locale-categories)
-    * `client.Website.listHelpdeskLocaleCategories(websiteID string, locale string, pageNumber uint) (*[]HelpdeskLocaleArticleCategory, *Response, error)`
+    * `client.Website.ListHelpdeskLocaleCategories(websiteID string, locale string, pageNumber uint) (*[]HelpdeskLocaleArticleCategory, *Response, error)`
   * **Add Helpdesk Locale Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#add-helpdesk-locale-category)
-    * `client.Website.addHelpdeskLocaleCategory(websiteID string, locale string) (*HelpdeskLocaleArticleCategoryNew, *Response, error)`
+    * `client.Website.AddHelpdeskLocaleCategory(websiteID string, locale string) (*HelpdeskLocaleArticleCategoryNew, *Response, error)`
   * **Check If Helpdesk Locale Category Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-helpdesk-locale-category-exists)
-    * `client.Website.checkHelpdeskLocaleCategoryExists(websiteID string, locale string, categoryId string) (*Response, error)`
+    * `client.Website.CheckHelpdeskLocaleCategoryExists(websiteID string, locale string, categoryId string) (*Response, error)`
   * **Resolve Helpdesk Locale Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-locale-category)
-    * `client.Website.resolveHelpdeskLocaleCategory(websiteID string, locale string, categoryId string) (*HelpdeskLocaleArticleCategory, *Response, error)`
+    * `client.Website.ResolveHelpdeskLocaleCategory(websiteID string, locale string, categoryId string) (*HelpdeskLocaleArticleCategory, *Response, error)`
   * **Save Helpdesk Locale Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-helpdesk-locale-category)
-    * `client.Website.saveHelpdeskLocaleCategory(websiteID string, locale string, categoryId string, category HelpdeskLocaleArticleCategory) (*Response, error)`
+    * `client.Website.SaveHelpdeskLocaleCategory(websiteID string, locale string, categoryId string, category HelpdeskLocaleArticleCategory) (*Response, error)`
   * **Update Helpdesk Locale Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-helpdesk-locale-category)
-    * `client.Website.updateHelpdeskLocaleCategory(websiteID string, locale string, categoryId string, category HelpdeskLocaleArticleCategory) (*Response, error)`
+    * `client.Website.UpdateHelpdeskLocaleCategory(websiteID string, locale string, categoryId string, category HelpdeskLocaleArticleCategory) (*Response, error)`
   * **Delete Helpdesk Locale Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-helpdesk-locale-category)
-    * `client.Website.deleteHelpdeskLocaleCategory(websiteID string, locale string, categoryId string) (*Response, error)`
+    * `client.Website.DeleteHelpdeskLocaleCategory(websiteID string, locale string, categoryId string) (*Response, error)`
   * **List Helpdesk Locale Sections** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-helpdesk-locale-sections)
-    * `client.Website.listHelpdeskLocaleSections(websiteID string, locale string, categoryId string, pageNumber uint) (*[]HelpdeskLocaleSection, *Response, error)`
+    * `client.Website.ListHelpdeskLocaleSections(websiteID string, locale string, categoryId string, pageNumber uint) (*[]HelpdeskLocaleSection, *Response, error)`
   * **Add Helpdesk Locale Section** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#add-helpdesk-locale-section)
-    * `client.Website.addHelpdeskLocaleSection(websiteID string, locale string, categoryId string, name string) (*HelpdeskLocaleSectionNew, *Response, error)`
+    * `client.Website.AddHelpdeskLocaleSection(websiteID string, locale string, categoryId string, name string) (*HelpdeskLocaleSectionNew, *Response, error)`
   * **Check If Helpdesk Locale Section Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-helpdesk-locale-section-exists)
-    * `client.Website.checkHelpdeskLocaleSectionExists(websiteID string, locale string, categoryId string, sectionId string) (*Response, error)`
+    * `client.Website.CheckHelpdeskLocaleSectionExists(websiteID string, locale string, categoryId string, sectionId string) (*Response, error)`
   * **Resolve Helpdesk Locale Section** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-locale-section)
-    * `client.Website.resolveHelpdeskLocaleSection(websiteID string, locale string, categoryId string, sectionId string) (*HelpdeskLocaleSection, *Response, error)`
+    * `client.Website.ResolveHelpdeskLocaleSection(websiteID string, locale string, categoryId string, sectionId string) (*HelpdeskLocaleSection, *Response, error)`
   * **Save Helpdesk Locale Section** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-helpdesk-locale-section)
-    * `client.Website.saveHelpdeskLocaleSection(websiteID string, locale string, categoryId string, sectionId string, section HelpdeskLocaleSection) (*Response, error)`
+    * `client.Website.SaveHelpdeskLocaleSection(websiteID string, locale string, categoryId string, sectionId string, section HelpdeskLocaleSection) (*Response, error)`
   * **Update Helpdesk Locale Section** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-helpdesk-locale-section)
-    * `client.Website.updateHelpdeskLocaleSection(websiteID string, locale string, categoryId string, sectionId string, section HelpdeskLocaleSection) (*Response, error)`
+    * `client.Website.UpdateHelpdeskLocaleSection(websiteID string, locale string, categoryId string, sectionId string, section HelpdeskLocaleSection) (*Response, error)`
   * **Delete Helpdesk Locale Section** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-helpdesk-locale-section)
-    * `client.Website.deleteHelpdeskLocaleSection(websiteID string, locale string, categoryId string, sectionId string) (*Response, error)`
+    * `client.Website.DeleteHelpdeskLocaleSection(websiteID string, locale string, categoryId string, sectionId string) (*Response, error)`
   * **Map Helpdesk Locale Feedback Ratings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#map-helpdesk-locale-feedback-ratings)
-    * `client.Website.mapHelpdeskLocaleFeedbackRatings(websiteID string, locale string, filterDateStart string, filterDateEnd string) (*HelpdeskLocaleFeedbackRatings, *Response, error)`
+    * `client.Website.MapHelpdeskLocaleFeedbackRatings(websiteID string, locale string, filterDateStart string, filterDateEnd string) (*HelpdeskLocaleFeedbackRatings, *Response, error)`
   * **List Helpdesk Locale Feedbacks** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-helpdesk-locale-feedbacks)
-    * `client.Website.listHelpdeskLocaleFeedbacks(websiteID string, locale string, pageNumber uint, filterDateStart string, filterDateEnd string) (*[]HelpdeskLocaleFeedbackItem, *Response, error)`
+    * `client.Website.ListHelpdeskLocaleFeedbacks(websiteID string, locale string, pageNumber uint, filterDateStart string, filterDateEnd string) (*[]HelpdeskLocaleFeedbackItem, *Response, error)`
   * **Import External Helpdesk To Locale** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#import-external-helpdesk-to-locale)
-    * `client.Website.importExternalHelpdeskToLocale(websiteID string, locale string, helpdeskUrl string) (*Response, error)`
+    * `client.Website.ImportExternalHelpdeskToLocale(websiteID string, locale string, helpdeskUrl string) (*Response, error)`
   * **Export Helpdesk Locale Articles** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#export-helpdesk-locale-articles)
-    * `client.Website.exportHelpdeskLocaleArticles(websiteID string, locale string) (*Response, error)`
+    * `client.Website.ExportHelpdeskLocaleArticles(websiteID string, locale string) (*Response, error)`
   * **List Helpdesk Redirections** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-helpdesk-redirections)
-    * `client.Website.listHelpdeskRedirections(websiteID string, pageNumber uint) (*[]HelpdeskRedirection, *Response, error)`
+    * `client.Website.ListHelpdeskRedirections(websiteID string, pageNumber uint) (*[]HelpdeskRedirection, *Response, error)`
   * **Add Helpdesk Redirection** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#add-helpdesk-redirection)
-    * `client.Website.addHelpdeskRedirection(websiteID string, redirectionPath string, redirectionTarget string) (*HelpdeskRedirectionNew, *Response, error)`
+    * `client.Website.AddHelpdeskRedirection(websiteID string, redirectionPath string, redirectionTarget string) (*HelpdeskRedirectionNew, *Response, error)`
   * **Check If Helpdesk Redirection Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-helpdesk-redirection-exists)
-    * `client.Website.checkHelpdeskRedirectionExists(websiteID string, redirectionId string) (*Response, error)`
+    * `client.Website.CheckHelpdeskRedirectionExists(websiteID string, redirectionId string) (*Response, error)`
   * **Resolve Helpdesk Redirection** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-redirection)
-    * `client.Website.resolveHelpdeskRedirection(websiteID string, redirectionId string) (*HelpdeskRedirection, *Response, error)`
+    * `client.Website.ResolveHelpdeskRedirection(websiteID string, redirectionId string) (*HelpdeskRedirection, *Response, error)`
   * **Delete Helpdesk Redirection** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-helpdesk-redirection)
-    * `client.Website.deleteHelpdeskRedirection(websiteID string, redirectionId string) (*Response, error)`
+    * `client.Website.DeleteHelpdeskRedirection(websiteID string, redirectionId string) (*Response, error)`
   * **Resolve Helpdesk Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-settings)
-    * `client.Website.resolveHelpdeskSettings(websiteID string) (*HelpdeskSettings, *Response, error)`
+    * `client.Website.ResolveHelpdeskSettings(websiteID string) (*HelpdeskSettings, *Response, error)`
   * **Save Helpdesk Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-helpdesk-settings)
-    * `client.Website.saveHelpdeskSettings(websiteID string, settings HelpdeskSettings) (*Response, error)`
+    * `client.Website.SaveHelpdeskSettings(websiteID string, settings HelpdeskSettings) (*Response, error)`
   * **Resolve Helpdesk Domain** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-domain)
-    * `client.Website.resolveHelpdeskDomain(websiteID string) (*HelpdeskDomain, *Response, error)`
+    * `client.Website.ResolveHelpdeskDomain(websiteID string) (*HelpdeskDomain, *Response, error)`
   * **Request Helpdesk Domain Change** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#request-helpdesk-domain-change)
-    * `client.Website.requestHelpdeskDomainChange(websiteID string, basic string, custom string) (*Response, error)`
+    * `client.Website.RequestHelpdeskDomainChange(websiteID string, basic string, custom string) (*Response, error)`
   * **Generate Helpdesk Domain Setup Flow** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#generate-helpdesk-domain-setup-flow)
-    * `client.Website.generateHelpdeskDomainSetupFlow(websiteID string, custom string) (*HelpdeskDomainSetupFlow, *Response, error)`
+    * `client.Website.GenerateHelpdeskDomainSetupFlow(websiteID string, custom string) (*HelpdeskDomainSetupFlow, *Response, error)`
 
 ### Plugin
 
