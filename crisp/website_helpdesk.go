@@ -699,7 +699,7 @@ func (service *WebsiteService) ResolveHelpdeskLocaleArticleCategory(websiteID st
 // UpdateHelpdeskLocaleArticleCategory updates a locale article category for helpdesk in website.
 func (service *WebsiteService) UpdateHelpdeskLocaleArticleCategory(websiteID string, locale string, articleId string, categoryId string, sectionId *string) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s/article/%s/category", websiteID, locale, articleId)
-  req, _ := service.client.NewRequest("PATCH", url, HelpdeskLocaleArticleCategoryUpdate{CategoryID: categoryId, SectionID: sectionID})
+  req, _ := service.client.NewRequest("PATCH", url, HelpdeskLocaleArticleCategoryUpdate{CategoryID: categoryId, SectionID: sectionId})
 
   return service.client.Do(req, nil)
 }
