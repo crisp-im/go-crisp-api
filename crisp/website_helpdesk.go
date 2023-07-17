@@ -8,7 +8,6 @@ package crisp
 
 import (
   "fmt"
-  "net/http"
   "net/url"
 )
 
@@ -951,7 +950,7 @@ func (service *WebsiteService) DeleteHelpdeskLocaleSection(websiteID string, loc
 
 // MapHelpdeskLocaleFeedbackRatings map locale feedback ratings for helpdesk in website.
 func (service *WebsiteService) MapHelpdeskLocaleFeedbackRatings(websiteID string, locale string, filterDateStart string, filterDateEnd string) (*HelpdeskLocaleFeedbackRatings, *Response, error) {
-  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/feedback/ratings?filter_date_start=%s&filter_date_end=%s", websiteID, locale, filterDateStart, filterDateEnd)
+  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/feedback/ratings?filter_date_start=%s&filter_date_end=%s", websiteID, locale, url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   ratings := new(HelpdeskLocaleFeedbackRatingsData)
@@ -966,7 +965,7 @@ func (service *WebsiteService) MapHelpdeskLocaleFeedbackRatings(websiteID string
 
 // ListHelpdeskLocaleFeedbacks lists locale feedbacks for helpdesk in website.
 func (service *WebsiteService) ListHelpdeskLocaleFeedbacks(websiteID string, locale string, pageNumber uint, filterDateStart string, filterDateEnd string) (*[]HelpdeskLocaleFeedbackItem, *Response, error) {
-  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/feedback/list/%d?filter_date_start=%s&filter_date_end=%s", websiteID, locale, pageNumber, filterDateStart, filterDateEnd)
+  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/feedback/list/%d?filter_date_start=%s&filter_date_end=%s", websiteID, locale, pageNumber, url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   feedbacks := new(HelpdeskLocaleFeedbackListData)
@@ -1110,7 +1109,7 @@ func (service *WebsiteService) RequestHelpdeskDomainChange(websiteID string, bas
 
 // GenerateHelpdeskDomainSetupFlow retrieves the domain setup flow for helpdesk.
 func (service *WebsiteService) GenerateHelpdeskDomainSetupFlow(websiteID string, custom string) (*HelpdeskDomainSetupFlow, *Response, error) {
-  url := fmt.Sprintf("website/%s/helpdesk/domain/setup?custom=%s", websiteID, custom)
+  url := fmt.Sprintf("website/%s/helpdesk/domain/setup?custom=%s", websiteID, url.QueryEscape(custom))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   flow := new(HelpdeskDomainSetupFlowData)
