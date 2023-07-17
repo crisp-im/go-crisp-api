@@ -450,7 +450,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Resolve Helpdesk Locale Article Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-locale-article-category)
     * `client.Website.ResolveHelpdeskLocaleArticleCategory(websiteID string, locale string, articleId string) (*HelpdeskLocaleArticleCategory, *Response, error)`
   * **Update Helpdesk Locale Article Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-helpdesk-locale-article-category)
-    * `client.Website.UpdateHelpdeskLocaleArticleCategory(websiteID string, locale string, articleId string, categoryId string, sectionId string) (*Response, error)`
+    * `client.Website.UpdateHelpdeskLocaleArticleCategory(websiteID string, locale string, articleId string, categoryId string, sectionId *string) (*Response, error)`
   * **List Helpdesk Locale Article Alternates** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-helpdesk-locale-article-alternates)
     * `client.Website.ListHelpdeskLocaleArticleAlternates(websiteID string, locale string, articleId string) (*[]HelpdeskLocaleArticleAlternate, *Response, error)`
   * **Check If Helpdesk Locale Article Alternate Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-helpdesk-locale-article-alternate-exists)
@@ -468,7 +468,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Helpdesk Locale Categories** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-helpdesk-locale-categories)
     * `client.Website.ListHelpdeskLocaleCategories(websiteID string, locale string, pageNumber uint) (*[]HelpdeskLocaleArticleCategory, *Response, error)`
   * **Add Helpdesk Locale Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#add-helpdesk-locale-category)
-    * `client.Website.AddHelpdeskLocaleCategory(websiteID string, locale string) (*HelpdeskLocaleArticleCategoryNew, *Response, error)`
+    * `client.Website.AddHelpdeskLocaleCategory(websiteID string, locale string, name string) (*HelpdeskLocaleArticleCategoryNew, *Response, error)`
   * **Check If Helpdesk Locale Category Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-helpdesk-locale-category-exists)
     * `client.Website.CheckHelpdeskLocaleCategoryExists(websiteID string, locale string, categoryId string) (*Response, error)`
   * **Resolve Helpdesk Locale Category** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-locale-category)
@@ -518,7 +518,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Resolve Helpdesk Domain** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-helpdesk-domain)
     * `client.Website.ResolveHelpdeskDomain(websiteID string) (*HelpdeskDomain, *Response, error)`
   * **Request Helpdesk Domain Change** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#request-helpdesk-domain-change)
-    * `client.Website.RequestHelpdeskDomainChange(websiteID string, basic string, custom string) (*Response, error)`
+    * `client.Website.RequestHelpdeskDomainChange(websiteID string, basic *string, custom *string) (*Response, error)`
   * **Generate Helpdesk Domain Setup Flow** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#generate-helpdesk-domain-setup-flow)
     * `client.Website.GenerateHelpdeskDomainSetupFlow(websiteID string, custom string) (*HelpdeskDomainSetupFlow, *Response, error)`
 
