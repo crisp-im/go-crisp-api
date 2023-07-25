@@ -73,6 +73,7 @@ type WebsiteSettingsChatbox struct {
   VisitorCompose       *bool      `json:"visitor_compose,omitempty"`
   FileTransfer         *bool      `json:"file_transfer,omitempty"`
   HelpdeskLink         *bool      `json:"helpdesk_link,omitempty"`
+  HelpdeskOnly         *bool      `json:"helpdesk_only,omitempty"`
   StatusHealthDead     *bool      `json:"status_health_dead,omitempty"`
   CheckDomain          *bool      `json:"check_domain,omitempty"`
   ColorTheme           *string    `json:"color_theme,omitempty"`
@@ -142,6 +143,7 @@ type WebsiteSettingsUpdateChatbox struct {
   VisitorCompose       bool       `json:"visitor_compose,omitempty"`
   FileTransfer         bool       `json:"file_transfer,omitempty"`
   HelpdeskLink         bool       `json:"helpdesk_link,omitempty"`
+  HelpdeskOnly         bool       `json:"helpdesk_only,omitempty"`
   StatusHealthDead     bool       `json:"status_health_dead,omitempty"`
   CheckDomain          bool       `json:"check_domain,omitempty"`
   ColorTheme           string     `json:"color_theme,omitempty"`
