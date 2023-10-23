@@ -35,6 +35,7 @@ type Conversation struct {
   Availability  *string                     `json:"availability,omitempty"`
   Active        *ConversationActive         `json:"active,omitempty"`
   LastMessage   *string                     `json:"last_message,omitempty"`
+  Topic         *string                     `json:"topic,omitempty"`
   Participants  *[]ConversationParticipant  `json:"participants,omitempty"`
   Mentions      *[]string                   `json:"mentions,omitempty"`
   Compose       *ConversationCompose        `json:"compose,omitempty"`

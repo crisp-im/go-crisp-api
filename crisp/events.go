@@ -405,6 +405,13 @@ type EventsReceiveSessionSyncRatingData struct {
   Comment  *string  `json:"comment"`
 }
 
+// EventsReceiveSessionSyncTopic maps session:sync:topic
+type EventsReceiveSessionSyncTopic struct {
+  EventsGeneric
+  EventsSessionGeneric
+  Topic  *string  `json:"topic"`
+}
+
 // EventsReceiveSessionSetState maps session:set_state
 type EventsReceiveSessionSetState struct {
   EventsGeneric
@@ -1026,6 +1033,12 @@ func (evt EventsReceiveSessionSyncLocales) String() string {
 
 // String returns the string representation of EventsReceiveSessionSyncRating
 func (evt EventsReceiveSessionSyncRating) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveSessionSyncTopic
+func (evt EventsReceiveSessionSyncTopic) String() string {
   return Stringify(evt)
 }
 
