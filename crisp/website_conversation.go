@@ -44,6 +44,7 @@ type Conversation struct {
   Meta          *ConversationMeta           `json:"meta,omitempty"`
   CreatedAt     *uint64                     `json:"created_at,omitempty"`
   UpdatedAt     *uint64                     `json:"updated_at,omitempty"`
+  WaitingSince  *uint64                     `json:"waiting_since,omitempty"`
 }
 
 // ConversationActive mapping
