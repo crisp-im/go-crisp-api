@@ -20,7 +20,7 @@ import (
 
 
 const (
-  libraryVersion = "3.40.0"
+  libraryVersion = "3.40.1"
   defaultRestEndpointURL = "https://api.crisp.chat/v1/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
@@ -39,7 +39,7 @@ var errorDoAttemptNilRequest = errors.New("request could not be constructed")
 // ClientConfig mapping
 type ClientConfig struct {
   HTTPClient *http.Client
-  HTTPHeaders *http.Header
+  HTTPHeaders *map[string]string
   RestEndpointURL string
 }
 
@@ -53,7 +53,7 @@ type auth struct {
 // Client maps an API client
 type Client struct {
   client *http.Client
-  headers *http.Header
+  headers *map[string]string
   auth *auth
 
   BaseURL *url.URL
@@ -176,10 +176,8 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
 
   // Append custom headers? (if any)
   if client.headers != nil {
-    for headerKey, headerValues := range *client.headers {
-      for _, headerValue := range headerValues {
-        req.Header.Add(headerKey, headerValue)
-      }
+    for headerKey, headerValue := range *client.headers {
+      req.Header.Add(headerKey, headerValue)
     }
   }
 
