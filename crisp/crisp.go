@@ -39,6 +39,7 @@ var errorDoAttemptNilRequest = errors.New("request could not be constructed")
 // ClientConfig mapping
 type ClientConfig struct {
   HTTPClient *http.Client
+  HTTPHeaders *http.Header
   RestEndpointURL string
 }
 
@@ -51,8 +52,8 @@ type auth struct {
 
 // Client maps an API client
 type Client struct {
-  config *ClientConfig
   client *http.Client
+  headers *http.Header
   auth *auth
 
   BaseURL *url.URL
@@ -115,7 +116,7 @@ func NewWithConfig(config ClientConfig) *Client {
   // Create client
   baseURL, _ := url.Parse(config.RestEndpointURL)
 
-  client := &Client{config: &config, client: config.HTTPClient, auth: &auth{}, BaseURL: baseURL, UserAgent: userAgent}
+  client := &Client{client: config.HTTPClient, headers: config.HTTPHeaders, auth: &auth{}, BaseURL: baseURL, UserAgent: userAgent}
   client.common.client = client
 
   // Map services
@@ -173,14 +174,26 @@ func (client *Client) NewRequest(method, urlStr string, body interface{}) (*http
     return nil, err
   }
 
+  // Append custom headers? (if any)
+  if client.headers != nil {
+    for headerKey, headerValues := range *client.headers {
+      for _, headerValue := range headerValues {
+        req.Header.Add(headerKey, headerValue)
+      }
+    }
+  }
+
+  // Append authorization header? (if authenticated)
   if client.auth.Available == true {
     req.SetBasicAuth(client.auth.Username, client.auth.Password)
     req.Header.Add("X-Crisp-Tier", client.auth.Tier)
   }
 
+  // Append common headers
   req.Header.Add("Accept", acceptContentType)
   req.Header.Add("Content-Type", acceptContentType)
 
+  // Append user agent header? (if any)
   if client.UserAgent != "" {
     req.Header.Add("User-Agent", client.UserAgent)
   }
