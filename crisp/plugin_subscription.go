@@ -57,6 +57,13 @@ type PluginSubscriptionCreate struct {
   PluginID  *string  `json:"plugin_id,omitempty"`
 }
 
+// PluginSubscriptionBillUsageReport mapping
+type PluginSubscriptionBillUsageReport struct {
+  Name   *string   `json:"name,omitempty"`
+  Units  *uint32   `json:"units,omitempty"`
+  Price  *float32  `json:"price,omitempty"`
+}
+
 // PluginSubscriptionChannelForward mapping
 type PluginSubscriptionChannelForward struct {
   Namespace   *string       `json:"namespace,omitempty"`
@@ -190,6 +197,15 @@ func (service *PluginService) SaveSubscriptionSettings(websiteID string, pluginI
 func (service *PluginService) UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s/%s/settings", websiteID, pluginID)
   req, _ := service.client.NewRequest("PATCH", url, settings)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ReportPluginUsageToBill reports a billable usage for a website using a subscribed plugin.
+func (service *PluginService) ReportPluginUsageToBill(websiteID string, pluginID string, usage PluginSubscriptionBillUsageReport) (*Response, error) {
+  url := fmt.Sprintf("plugins/subscription/%s/%s/bill/usage", websiteID, pluginID)
+  req, _ := service.client.NewRequest("POST", url, usage)
 
   return service.client.Do(req, nil)
 }
