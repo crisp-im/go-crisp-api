@@ -202,6 +202,15 @@ func (service *PluginService) UpdateSubscriptionSettings(websiteID string, plugi
 }
 
 
+// GetPluginUsageBills acquires all non-settled (ie. open) usage bills for a subscribed plugin.
+func (service *PluginService) GetPluginUsageBills(websiteID string, pluginID string) (*Response, error) {
+  url := fmt.Sprintf("plugins/subscription/%s/%s/bill/usage", websiteID, pluginID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
 // ReportPluginUsageToBill reports a billable usage for a website using a subscribed plugin.
 func (service *PluginService) ReportPluginUsageToBill(websiteID string, pluginID string, usage PluginSubscriptionBillUsageReport) (*Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s/%s/bill/usage", websiteID, pluginID)

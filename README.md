@@ -541,6 +541,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Plugin.SaveSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
   * **Update Subscription Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-subscription-settings)
     * `client.Plugin.UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
+  * **Get Plugin Usage Bills** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-plugin-usage-bills)
+    * `client.Plugin.GetPluginUsageBills(websiteID string, pluginID string) (*Response, error)`
   * **Report Plugin Usage To Bill** [`plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#report-plugin-usage-to-bill)
     * `client.Plugin.ReportPluginUsageToBill(websiteID string, pluginID string, usage PluginSubscriptionBillUsageReport) (*Response, error)`
   * **Forward Plugin Payload To Channel** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#forward-plugin-payload-to-channel)
