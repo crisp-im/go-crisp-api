@@ -164,6 +164,7 @@ type ConversationMessage struct {
   Delivered    *string                        `json:"delivered,omitempty"`
   Edited       *bool                          `json:"edited,omitempty"`
   Translated   *bool                          `json:"translated,omitempty"`
+  Automated    *bool                          `json:"automated,omitempty"`
   Fingerprint  *int                           `json:"fingerprint,omitempty"`
   Timestamp    *uint64                        `json:"timestamp,omitempty"`
   User         *ConversationMessageUser       `json:"user,omitempty"`
@@ -501,6 +502,7 @@ type ConversationTextMessageNew struct {
   Timestamp    *uint64                             `json:"timestamp,omitempty"`
   Stealth      *bool                               `json:"stealth,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
+  Automated    *bool                               `json:"automated,omitempty"`
 }
 
 // ConversationFileMessageNew mapping
@@ -516,6 +518,7 @@ type ConversationFileMessageNew struct {
   Timestamp    *uint64                             `json:"timestamp,omitempty"`
   Stealth      *bool                               `json:"stealth,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
+  Automated    *bool                               `json:"automated,omitempty"`
 }
 
 // ConversationAnimationMessageNew mapping
@@ -531,6 +534,7 @@ type ConversationAnimationMessageNew struct {
   Timestamp    *uint64                                 `json:"timestamp,omitempty"`
   Stealth      *bool                                   `json:"stealth,omitempty"`
   Translated   *bool                                   `json:"translated,omitempty"`
+  Automated    *bool                                   `json:"automated,omitempty"`
 }
 
 // ConversationAudioMessageNew mapping
@@ -546,6 +550,7 @@ type ConversationAudioMessageNew struct {
   Timestamp    *uint64                             `json:"timestamp,omitempty"`
   Stealth      *bool                               `json:"stealth,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
+  Automated    *bool                               `json:"automated,omitempty"`
 }
 
 // ConversationPickerMessageNew mapping
@@ -561,6 +566,7 @@ type ConversationPickerMessageNew struct {
   Timestamp    *uint64                              `json:"timestamp,omitempty"`
   Stealth      *bool                                `json:"stealth,omitempty"`
   Translated   *bool                                `json:"translated,omitempty"`
+  Automated    *bool                                `json:"automated,omitempty"`
 }
 
 // ConversationFieldMessageNew mapping
@@ -576,6 +582,7 @@ type ConversationFieldMessageNew struct {
   Timestamp    *uint64                             `json:"timestamp,omitempty"`
   Stealth      *bool                               `json:"stealth,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
+  Automated    *bool                               `json:"automated,omitempty"`
 }
 
 // ConversationCarouselMessageNew mapping
@@ -591,6 +598,7 @@ type ConversationCarouselMessageNew struct {
   Timestamp    *uint64                                `json:"timestamp,omitempty"`
   Stealth      *bool                                  `json:"stealth,omitempty"`
   Translated   *bool                                  `json:"translated,omitempty"`
+  Automated    *bool                                  `json:"automated,omitempty"`
 }
 
 // ConversationNoteMessageNew mapping
@@ -609,6 +617,7 @@ type ConversationEventMessageNew struct {
   Timestamp    *uint64                             `json:"timestamp,omitempty"`
   Stealth      *bool                               `json:"stealth,omitempty"`
   Translated   *bool                               `json:"translated,omitempty"`
+  Automated    *bool                               `json:"automated,omitempty"`
 }
 
 // ConversationTextMessageUpdate mapping

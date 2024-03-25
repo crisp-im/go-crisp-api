@@ -170,6 +170,7 @@ type EventsReceiveGenericMessage struct {
   Original     *EventsReceiveCommonMessageOriginal  `json:"original"`
   Edited       *bool                                `json:"edited,omitempty"`
   Translated   *bool                                `json:"translated,omitempty"`
+  Automated    *bool                                `json:"automated,omitempty"`
 }
 
 // EventsReceiveCommonMessageUser maps a message user
