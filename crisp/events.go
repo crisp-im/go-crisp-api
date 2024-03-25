@@ -645,6 +645,7 @@ type EventsReceiveMessageComposeSend struct {
   Type       *string  `json:"type"`
   Excerpt    *string  `json:"excerpt"`
   Timestamp  *uint64  `json:"timestamp"`
+  Automated  *bool    `json:"automated,omitempty"`
 }
 
 // EventsReceiveMessageComposeReceive maps message:compose:receive
@@ -655,6 +656,7 @@ type EventsReceiveMessageComposeReceive struct {
   Excerpt    *string                                  `json:"excerpt"`
   Timestamp  *uint64                                  `json:"timestamp"`
   User       *EventsReceiveMessageComposeReceiveUser  `json:"user"`
+  Automated  *bool                                    `json:"automated,omitempty"`
 }
 
 // EventsReceiveMessageComposeReceiveUser maps message:compose:receive/user

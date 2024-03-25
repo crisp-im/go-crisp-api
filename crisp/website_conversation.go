@@ -65,6 +65,7 @@ type ConversationComposeAtom struct {
   Excerpt      *string                       `json:"excerpt,omitempty"`
   Timestamp    *uint64                       `json:"timestamp,omitempty"`
   User         *ConversationComposeAtomUser  `json:"user,omitempty"`
+  Automated    *bool                         `json:"automated,omitempty"`
 }
 
 // ConversationComposeAtomUser mapping
@@ -678,10 +679,11 @@ type ConversationAllMessageNewOriginal struct {
 
 // ConversationComposeMessageNew mapping
 type ConversationComposeMessageNew struct {
-  Type     string  `json:"type,omitempty"`
-  From     string  `json:"from,omitempty"`
-  Excerpt  string  `json:"excerpt,omitempty"`
-  Stealth  *bool   `json:"stealth,omitempty"`
+  Type       string  `json:"type,omitempty"`
+  From       string  `json:"from,omitempty"`
+  Excerpt    string  `json:"excerpt,omitempty"`
+  Stealth    *bool   `json:"stealth,omitempty"`
+  Automated  *bool   `json:"automated,omitempty"`
 }
 
 // ConversationReadMessageMark mapping
