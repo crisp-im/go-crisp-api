@@ -153,23 +153,24 @@ type ConversationFile struct {
 
 // ConversationMessage mapping
 type ConversationMessage struct {
-  SessionID    *string                        `json:"session_id,omitempty"`
-  WebsiteID    *string                        `json:"website_id,omitempty"`
-  Type         *string                        `json:"type,omitempty"`
-  From         *string                        `json:"from,omitempty"`
-  Origin       *string                        `json:"origin,omitempty"`
-  Content      *interface{}                   `json:"content,omitempty"`
-  Preview      *[]ConversationMessagePreview  `json:"preview,omitempty"`
-  Mentions     *[]string                      `json:"mentions,omitempty"`
-  Read         *string                        `json:"read,omitempty"`
-  Delivered    *string                        `json:"delivered,omitempty"`
-  Edited       *bool                          `json:"edited,omitempty"`
-  Translated   *bool                          `json:"translated,omitempty"`
-  Automated    *bool                          `json:"automated,omitempty"`
-  Fingerprint  *int                           `json:"fingerprint,omitempty"`
-  Timestamp    *uint64                        `json:"timestamp,omitempty"`
-  User         *ConversationMessageUser       `json:"user,omitempty"`
-  Original     *ConversationMessageOriginal   `json:"original,omitempty"`
+  SessionID    *string                          `json:"session_id,omitempty"`
+  WebsiteID    *string                          `json:"website_id,omitempty"`
+  Type         *string                          `json:"type,omitempty"`
+  From         *string                          `json:"from,omitempty"`
+  Origin       *string                          `json:"origin,omitempty"`
+  Content      *interface{}                     `json:"content,omitempty"`
+  Preview      *[]ConversationMessagePreview    `json:"preview,omitempty"`
+  Mentions     *[]string                        `json:"mentions,omitempty"`
+  Read         *string                          `json:"read,omitempty"`
+  Delivered    *string                          `json:"delivered,omitempty"`
+  Edited       *bool                            `json:"edited,omitempty"`
+  Translated   *bool                            `json:"translated,omitempty"`
+  Automated    *bool                            `json:"automated,omitempty"`
+  Fingerprint  *int                             `json:"fingerprint,omitempty"`
+  Timestamp    *uint64                          `json:"timestamp,omitempty"`
+  User         *ConversationMessageUser         `json:"user,omitempty"`
+  References   *[]ConversationMessageReference  `json:"references,omitempty"`
+  Original     *ConversationMessageOriginal     `json:"original,omitempty"`
 }
 
 // ConversationMessageDispatchedData mapping
@@ -288,6 +289,13 @@ type ConversationMessageUser struct {
   UserID    *string  `json:"user_id,omitempty"`
   Nickname  *string  `json:"nickname,omitempty"`
   Avatar    *string  `json:"avatar,omitempty"`
+}
+
+// ConversationMessageReference mapping
+type ConversationMessageReference struct {
+  Type    *string  `json:"type,omitempty"`
+  Name    *string  `json:"name,omitempty"`
+  Target  *string  `json:"target,omitempty"`
 }
 
 // ConversationMessageOriginal mapping
@@ -492,34 +500,36 @@ type ConversationEventMessageNewContent struct {
 
 // ConversationTextMessageNew mapping
 type ConversationTextMessageNew struct {
-  Type         string                              `json:"type,omitempty"`
-  From         string                              `json:"from,omitempty"`
-  Origin       string                              `json:"origin,omitempty"`
-  Content      string                              `json:"content,omitempty"`
-  Mentions     []string                            `json:"mentions,omitempty"`
-  Fingerprint  int                                 `json:"fingerprint,omitempty"`
-  User         ConversationAllMessageNewUser       `json:"user,omitempty"`
-  Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
-  Timestamp    *uint64                             `json:"timestamp,omitempty"`
-  Stealth      *bool                               `json:"stealth,omitempty"`
-  Translated   *bool                               `json:"translated,omitempty"`
-  Automated    *bool                               `json:"automated,omitempty"`
+  Type         string                                 `json:"type,omitempty"`
+  From         string                                 `json:"from,omitempty"`
+  Origin       string                                 `json:"origin,omitempty"`
+  Content      string                                 `json:"content,omitempty"`
+  Mentions     []string                               `json:"mentions,omitempty"`
+  Fingerprint  int                                    `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser          `json:"user,omitempty"`
+  References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
+  Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Timestamp    *uint64                                `json:"timestamp,omitempty"`
+  Stealth      *bool                                  `json:"stealth,omitempty"`
+  Translated   *bool                                  `json:"translated,omitempty"`
+  Automated    *bool                                  `json:"automated,omitempty"`
 }
 
 // ConversationFileMessageNew mapping
 type ConversationFileMessageNew struct {
-  Type         string                              `json:"type,omitempty"`
-  From         string                              `json:"from,omitempty"`
-  Origin       string                              `json:"origin,omitempty"`
-  Content      ConversationFileMessageNewContent   `json:"content,omitempty"`
-  Mentions     []string                            `json:"mentions,omitempty"`
-  Fingerprint  int                                 `json:"fingerprint,omitempty"`
-  User         ConversationAllMessageNewUser       `json:"user,omitempty"`
-  Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
-  Timestamp    *uint64                             `json:"timestamp,omitempty"`
-  Stealth      *bool                               `json:"stealth,omitempty"`
-  Translated   *bool                               `json:"translated,omitempty"`
-  Automated    *bool                               `json:"automated,omitempty"`
+  Type         string                                 `json:"type,omitempty"`
+  From         string                                 `json:"from,omitempty"`
+  Origin       string                                 `json:"origin,omitempty"`
+  Content      ConversationFileMessageNewContent      `json:"content,omitempty"`
+  Mentions     []string                               `json:"mentions,omitempty"`
+  Fingerprint  int                                    `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser          `json:"user,omitempty"`
+  References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
+  Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Timestamp    *uint64                                `json:"timestamp,omitempty"`
+  Stealth      *bool                                  `json:"stealth,omitempty"`
+  Translated   *bool                                  `json:"translated,omitempty"`
+  Automated    *bool                                  `json:"automated,omitempty"`
 }
 
 // ConversationAnimationMessageNew mapping
@@ -531,6 +541,7 @@ type ConversationAnimationMessageNew struct {
   Mentions     []string                                `json:"mentions,omitempty"`
   Fingerprint  int                                     `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser           `json:"user,omitempty"`
+  References   *[]ConversationAllMessageNewReference   `json:"references,omitempty"`
   Original     *ConversationAllMessageNewOriginal      `json:"original,omitempty"`
   Timestamp    *uint64                                 `json:"timestamp,omitempty"`
   Stealth      *bool                                   `json:"stealth,omitempty"`
@@ -540,50 +551,53 @@ type ConversationAnimationMessageNew struct {
 
 // ConversationAudioMessageNew mapping
 type ConversationAudioMessageNew struct {
-  Type         string                              `json:"type,omitempty"`
-  From         string                              `json:"from,omitempty"`
-  Origin       string                              `json:"origin,omitempty"`
-  Content      ConversationAudioMessageNewContent  `json:"content,omitempty"`
-  Mentions     []string                            `json:"mentions,omitempty"`
-  Fingerprint  int                                 `json:"fingerprint,omitempty"`
-  User         ConversationAllMessageNewUser       `json:"user,omitempty"`
-  Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
-  Timestamp    *uint64                             `json:"timestamp,omitempty"`
-  Stealth      *bool                               `json:"stealth,omitempty"`
-  Translated   *bool                               `json:"translated,omitempty"`
-  Automated    *bool                               `json:"automated,omitempty"`
+  Type         string                                 `json:"type,omitempty"`
+  From         string                                 `json:"from,omitempty"`
+  Origin       string                                 `json:"origin,omitempty"`
+  Content      ConversationAudioMessageNewContent     `json:"content,omitempty"`
+  Mentions     []string                               `json:"mentions,omitempty"`
+  Fingerprint  int                                    `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser          `json:"user,omitempty"`
+  References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
+  Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Timestamp    *uint64                                `json:"timestamp,omitempty"`
+  Stealth      *bool                                  `json:"stealth,omitempty"`
+  Translated   *bool                                  `json:"translated,omitempty"`
+  Automated    *bool                                  `json:"automated,omitempty"`
 }
 
 // ConversationPickerMessageNew mapping
 type ConversationPickerMessageNew struct {
-  Type         string                               `json:"type,omitempty"`
-  From         string                               `json:"from,omitempty"`
-  Origin       string                               `json:"origin,omitempty"`
-  Content      ConversationPickerMessageNewContent  `json:"content,omitempty"`
-  Mentions     []string                             `json:"mentions,omitempty"`
-  Fingerprint  int                                  `json:"fingerprint,omitempty"`
-  User         ConversationAllMessageNewUser        `json:"user,omitempty"`
-  Original     *ConversationAllMessageNewOriginal   `json:"original,omitempty"`
-  Timestamp    *uint64                              `json:"timestamp,omitempty"`
-  Stealth      *bool                                `json:"stealth,omitempty"`
-  Translated   *bool                                `json:"translated,omitempty"`
-  Automated    *bool                                `json:"automated,omitempty"`
+  Type         string                                 `json:"type,omitempty"`
+  From         string                                 `json:"from,omitempty"`
+  Origin       string                                 `json:"origin,omitempty"`
+  Content      ConversationPickerMessageNewContent    `json:"content,omitempty"`
+  Mentions     []string                               `json:"mentions,omitempty"`
+  Fingerprint  int                                    `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser          `json:"user,omitempty"`
+  References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
+  Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Timestamp    *uint64                                `json:"timestamp,omitempty"`
+  Stealth      *bool                                  `json:"stealth,omitempty"`
+  Translated   *bool                                  `json:"translated,omitempty"`
+  Automated    *bool                                  `json:"automated,omitempty"`
 }
 
 // ConversationFieldMessageNew mapping
 type ConversationFieldMessageNew struct {
-  Type         string                              `json:"type,omitempty"`
-  From         string                              `json:"from,omitempty"`
-  Origin       string                              `json:"origin,omitempty"`
-  Content      ConversationFieldMessageNewContent  `json:"content,omitempty"`
-  Mentions     []string                            `json:"mentions,omitempty"`
-  Fingerprint  int                                 `json:"fingerprint,omitempty"`
-  User         ConversationAllMessageNewUser       `json:"user,omitempty"`
-  Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
-  Timestamp    *uint64                             `json:"timestamp,omitempty"`
-  Stealth      *bool                               `json:"stealth,omitempty"`
-  Translated   *bool                               `json:"translated,omitempty"`
-  Automated    *bool                               `json:"automated,omitempty"`
+  Type         string                                 `json:"type,omitempty"`
+  From         string                                 `json:"from,omitempty"`
+  Origin       string                                 `json:"origin,omitempty"`
+  Content      ConversationFieldMessageNewContent     `json:"content,omitempty"`
+  Mentions     []string                               `json:"mentions,omitempty"`
+  Fingerprint  int                                    `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser          `json:"user,omitempty"`
+  References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
+  Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Timestamp    *uint64                                `json:"timestamp,omitempty"`
+  Stealth      *bool                                  `json:"stealth,omitempty"`
+  Translated   *bool                                  `json:"translated,omitempty"`
+  Automated    *bool                                  `json:"automated,omitempty"`
 }
 
 // ConversationCarouselMessageNew mapping
@@ -595,6 +609,7 @@ type ConversationCarouselMessageNew struct {
   Mentions     []string                               `json:"mentions,omitempty"`
   Fingerprint  int                                    `json:"fingerprint,omitempty"`
   User         ConversationAllMessageNewUser          `json:"user,omitempty"`
+  References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
   Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
   Timestamp    *uint64                                `json:"timestamp,omitempty"`
   Stealth      *bool                                  `json:"stealth,omitempty"`
@@ -607,18 +622,19 @@ type ConversationNoteMessageNew ConversationTextMessageNew
 
 // ConversationEventMessageNew mapping
 type ConversationEventMessageNew struct {
-  Type         string                              `json:"type,omitempty"`
-  From         string                              `json:"from,omitempty"`
-  Origin       string                              `json:"origin,omitempty"`
-  Content      ConversationEventMessageNewContent  `json:"content,omitempty"`
-  Mentions     []string                            `json:"mentions,omitempty"`
-  Fingerprint  int                                 `json:"fingerprint,omitempty"`
-  User         ConversationAllMessageNewUser       `json:"user,omitempty"`
-  Original     *ConversationAllMessageNewOriginal  `json:"original,omitempty"`
-  Timestamp    *uint64                             `json:"timestamp,omitempty"`
-  Stealth      *bool                               `json:"stealth,omitempty"`
-  Translated   *bool                               `json:"translated,omitempty"`
-  Automated    *bool                               `json:"automated,omitempty"`
+  Type         string                                 `json:"type,omitempty"`
+  From         string                                 `json:"from,omitempty"`
+  Origin       string                                 `json:"origin,omitempty"`
+  Content      ConversationEventMessageNewContent     `json:"content,omitempty"`
+  Mentions     []string                               `json:"mentions,omitempty"`
+  Fingerprint  int                                    `json:"fingerprint,omitempty"`
+  User         ConversationAllMessageNewUser          `json:"user,omitempty"`
+  References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
+  Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Timestamp    *uint64                                `json:"timestamp,omitempty"`
+  Stealth      *bool                                  `json:"stealth,omitempty"`
+  Translated   *bool                                  `json:"translated,omitempty"`
+  Automated    *bool                                  `json:"automated,omitempty"`
 }
 
 // ConversationTextMessageUpdate mapping
@@ -669,6 +685,13 @@ type ConversationAllMessageNewUser struct {
   Type      string  `json:"type,omitempty"`
   Nickname  string  `json:"nickname,omitempty"`
   Avatar    string  `json:"avatar,omitempty"`
+}
+
+// ConversationAllMessageNewReference mapping
+type ConversationAllMessageNewReference struct {
+  Type    string  `json:"type,omitempty"`
+  Name    string  `json:"name,omitempty"`
+  Target  string  `json:"target,omitempty"`
 }
 
 // ConversationAllMessageNewOriginal mapping
