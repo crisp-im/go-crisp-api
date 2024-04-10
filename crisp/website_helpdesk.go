@@ -78,6 +78,17 @@ type HelpdeskLocaleArticleNew struct {
   ArticleID  *string  `json:"article_id,omitempty"`
 }
 
+// HelpdeskLocaleArticlePageData mapping
+type HelpdeskLocaleArticlePageData struct {
+  Data  *HelpdeskLocaleArticlePage  `json:"data,omitempty"`
+}
+
+// HelpdeskLocaleArticlePage mapping
+type HelpdeskLocaleArticlePage struct {
+  Title  *string  `json:"title,omitempty"`
+  URL    *string  `json:"url,omitempty"`
+}
+
 // HelpdeskLocaleArticleCategoryListData mapping
 type HelpdeskLocaleArticleCategoryListData struct {
   Data  *[]HelpdeskLocaleArticleCategory  `json:"data,omitempty"`
@@ -423,6 +434,12 @@ func (instance HelpdeskLocaleArticleNew) String() string {
 }
 
 
+// String returns the string representation of HelpdeskLocaleArticlePage
+func (instance HelpdeskLocaleArticlePage) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of HelpdeskLocaleArticleCategory
 func (instance HelpdeskLocaleArticleCategory) String() string {
   return Stringify(instance)
@@ -678,6 +695,21 @@ func (service *WebsiteService) DeleteHelpdeskLocaleArticle(websiteID string, loc
   req, _ := service.client.NewRequest("DELETE", url, nil)
 
   return service.client.Do(req, nil)
+}
+
+
+// ResolveHelpdeskLocaleArticlePage resolves a locale article page information for helpdesk in website.
+func (service *WebsiteService) ResolveHelpdeskLocaleArticlePage(websiteID string, locale string, articleId string) (*HelpdeskLocaleArticlePage, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/article/%s/page", websiteID, locale, articleId)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  page := new(HelpdeskLocaleArticlePageData)
+  resp, err := service.client.Do(req, page)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return page.Data, resp, err
 }
 
 
