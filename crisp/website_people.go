@@ -81,14 +81,19 @@ type PeopleSubscriptionData struct {
   Data  *PeopleSubscription  `json:"data,omitempty"`
 }
 
-// PeopleProfileNew mapping
-type PeopleProfileNew struct {
-  PeopleID  *string  `json:"people_id,omitempty"`
-}
-
 // PeopleProfile mapping
 type PeopleProfile struct {
   PeopleProfileCard
+  PeopleID  *string  `json:"people_id,omitempty"`
+}
+
+// PeopleProfileNewData mapping
+type PeopleProfileNewData struct {
+  Data  *PeopleProfileNew  `json:"data,omitempty"`
+}
+
+// PeopleProfileNew mapping
+type PeopleProfileNew struct {
   PeopleID  *string  `json:"people_id,omitempty"`
 }
 
@@ -471,14 +476,13 @@ func (service *WebsiteService) AddNewPeopleProfile(websiteID string, peopleProfi
   url := fmt.Sprintf("website/%s/people/profile", websiteID)
   req, _ := service.client.NewRequest("POST", url, peopleProfile)
 
-  profile := new(PeopleProfileNew)
-
+  profile := new(PeopleProfileNewData)
   resp, err := service.client.Do(req, profile)
   if err != nil {
     return nil, resp, err
   }
 
-  return profile, resp, err
+  return profile.Data, resp, err
 }
 
 
