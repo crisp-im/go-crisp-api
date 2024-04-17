@@ -81,6 +81,11 @@ type PeopleSubscriptionData struct {
   Data  *PeopleSubscription  `json:"data,omitempty"`
 }
 
+// PeopleProfileNew mapping
+type PeopleProfileNew struct {
+  PeopleID  *string  `json:"people_id,omitempty"`
+}
+
 // PeopleProfile mapping
 type PeopleProfile struct {
   PeopleProfileCard
@@ -462,11 +467,18 @@ func (service *WebsiteService) ListPeopleProfiles(websiteID string, pageNumber u
 
 
 // AddNewPeopleProfile adds a new people profile.
-func (service *WebsiteService) AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*Response, error) {
+func (service *WebsiteService) AddNewPeopleProfile(websiteID string, peopleProfile PeopleProfileUpdateCard) (*PeopleProfileNew, *Response, error) {
   url := fmt.Sprintf("website/%s/people/profile", websiteID)
   req, _ := service.client.NewRequest("POST", url, peopleProfile)
 
-  return service.client.Do(req, nil)
+  profile := new(PeopleProfileNew)
+
+  resp, err := service.client.Do(req, profile)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return profile, resp, err
 }
 
 
