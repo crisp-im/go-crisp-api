@@ -58,7 +58,7 @@ type ConversationActive struct {
 type ConversationPreviewMessage struct {
   Type         *string  `json:"type,omitempty"`
   From         *string  `json:"from,omitempty"`
-  Text         *string  `json:"text,omitempty"`
+  Excerpt      *string  `json:"excerpt,omitempty"`
   Fingerprint  *int     `json:"fingerprint,omitempty"`
 }
 
