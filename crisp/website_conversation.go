@@ -25,32 +25,41 @@ type ConversationData struct {
 
 // Conversation mapping
 type Conversation struct {
-  SessionID     *string                     `json:"session_id,omitempty"`
-  WebsiteID     *string                     `json:"website_id,omitempty"`
-  PeopleID      *string                     `json:"people_id,omitempty"`
-  State         *string                     `json:"state,omitempty"`
-  Status        *uint8                      `json:"status,omitempty"`
-  IsVerified    *bool                       `json:"is_verified,omitempty"`
-  IsBlocked     *bool                       `json:"is_blocked,omitempty"`
-  Availability  *string                     `json:"availability,omitempty"`
-  Active        *ConversationActive         `json:"active,omitempty"`
-  LastMessage   *string                     `json:"last_message,omitempty"`
-  Topic         *string                     `json:"topic,omitempty"`
-  Participants  *[]ConversationParticipant  `json:"participants,omitempty"`
-  Mentions      *[]string                   `json:"mentions,omitempty"`
-  Compose       *ConversationCompose        `json:"compose,omitempty"`
-  Unread        *ConversationUnread         `json:"unread,omitempty"`
-  Assigned      *ConversationAssigned       `json:"assigned,omitempty"`
-  Meta          *ConversationMeta           `json:"meta,omitempty"`
-  CreatedAt     *uint64                     `json:"created_at,omitempty"`
-  UpdatedAt     *uint64                     `json:"updated_at,omitempty"`
-  WaitingSince  *uint64                     `json:"waiting_since,omitempty"`
+  SessionID       *string                      `json:"session_id,omitempty"`
+  WebsiteID       *string                      `json:"website_id,omitempty"`
+  PeopleID        *string                      `json:"people_id,omitempty"`
+  State           *string                      `json:"state,omitempty"`
+  Status          *uint8                       `json:"status,omitempty"`
+  IsVerified      *bool                        `json:"is_verified,omitempty"`
+  IsBlocked       *bool                        `json:"is_blocked,omitempty"`
+  Availability    *string                      `json:"availability,omitempty"`
+  Active          *ConversationActive          `json:"active,omitempty"`
+  LastMessage     *string                      `json:"last_message,omitempty"`
+  PreviewMessage  *ConversationPreviewMessage  `json:"preview_message,omitempty"`
+  Topic           *string                      `json:"topic,omitempty"`
+  Participants    *[]ConversationParticipant   `json:"participants,omitempty"`
+  Mentions        *[]string                    `json:"mentions,omitempty"`
+  Compose         *ConversationCompose         `json:"compose,omitempty"`
+  Unread          *ConversationUnread          `json:"unread,omitempty"`
+  Assigned        *ConversationAssigned        `json:"assigned,omitempty"`
+  Meta            *ConversationMeta            `json:"meta,omitempty"`
+  CreatedAt       *uint64                      `json:"created_at,omitempty"`
+  UpdatedAt       *uint64                      `json:"updated_at,omitempty"`
+  WaitingSince    *uint64                      `json:"waiting_since,omitempty"`
 }
 
 // ConversationActive mapping
 type ConversationActive struct {
   Now   *bool    `json:"now,omitempty"`
   Last  *uint64  `json:"last,omitempty"`
+}
+
+// ConversationPreviewMessage mapping
+type ConversationPreviewMessage struct {
+  Type         *string  `json:"type,omitempty"`
+  From         *string  `json:"from,omitempty"`
+  Text         *string  `json:"text,omitempty"`
+  Fingerprint  *int     `json:"fingerprint,omitempty"`
 }
 
 // ConversationCompose mapping
