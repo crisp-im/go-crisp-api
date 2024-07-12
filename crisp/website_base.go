@@ -89,3 +89,12 @@ func (service *WebsiteService) DeleteWebsite(websiteID string, verify string) (*
 
   return service.client.Do(req, nil)
 }
+
+
+// AbortWebsiteDeletion aborts scheduled deletion for an existing website.
+func (service *WebsiteService) DeleteWebsite(websiteID string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/expunge", websiteID)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}

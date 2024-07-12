@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2023 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 11/07/2024
+* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 12/07/2024
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -91,6 +91,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
   * **Delete A Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-a-website)
     * `client.Website.DeleteWebsite(websiteID string, verify string) (*Response, error)`
+  * **Abort Website Deletion** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#abort-website-deletion)
+    * `client.Website.AbortWebsiteDeletion(websiteID string) (*Response, error)`
 
 * #### **Website Batch**
   * **Batch Resolve Conversations** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-resolve-items)
