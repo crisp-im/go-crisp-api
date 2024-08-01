@@ -27,6 +27,7 @@ type ConversationData struct {
 type Conversation struct {
   SessionID       *string                      `json:"session_id,omitempty"`
   WebsiteID       *string                      `json:"website_id,omitempty"`
+  InboxID         *string                      `json:"inbox_id,omitempty"`
   PeopleID        *string                      `json:"people_id,omitempty"`
   State           *string                      `json:"state,omitempty"`
   Status          *uint8                       `json:"status,omitempty"`
@@ -817,6 +818,11 @@ type ConversationOriginalData struct {
   Data  *ConversationOriginal  `json:"data,omitempty"`
 }
 
+// ConversationInboxUpdate mapping
+type ConversationInboxUpdate struct {
+  InboxID  *string  `json:"inbox_id,omitempty"`
+}
+
 // ConversationStateData mapping
 type ConversationStateData struct {
   Data  *ConversationState  `json:"data,omitempty"`
@@ -1140,8 +1146,9 @@ func (service *WebsiteService) SearchConversations(websiteID string, pageNumber 
 
 
 // FilterConversations filters conversations for website.
-func (service *WebsiteService) FilterConversations(websiteID string, pageNumber uint, filterUnread bool, filterResolved bool, filterNotResolved bool, filterMention bool, filterAssigned bool, filterUnassigned bool) (*[]Conversation, *Response, error) {
+func (service *WebsiteService) FilterConversations(websiteID string, pageNumber uint, filterInboxID string, filterUnread bool, filterResolved bool, filterNotResolved bool, filterMention bool, filterAssigned bool, filterUnassigned bool) (*[]Conversation, *Response, error) {
   var (
+    filterInboxIDValue string
     filterUnreadValue string
     filterResolvedValue string
     filterNotResolvedValue string
@@ -1149,6 +1156,8 @@ func (service *WebsiteService) FilterConversations(websiteID string, pageNumber 
     filterAssignedValue string
     filterUnassignedValue string
   )
+
+  filterInboxIDValue = filterInboxID
 
   if filterUnread == true {
     filterUnreadValue = "1"
@@ -1186,7 +1195,7 @@ func (service *WebsiteService) FilterConversations(websiteID string, pageNumber 
     filterUnassignedValue = "0"
   }
 
-  url := fmt.Sprintf("website/%s/conversations/%d?filter_unread=%s&filter_resolved=%s&filter_not_resolved=%s&filter_mention=%s&filter_assigned=%s&filter_unassigned=%s", websiteID, pageNumber, url.QueryEscape(filterUnreadValue), url.QueryEscape(filterResolvedValue), url.QueryEscape(filterNotResolvedValue), url.QueryEscape(filterMentionValue), url.QueryEscape(filterAssignedValue), url.QueryEscape(filterUnassignedValue))
+  url := fmt.Sprintf("website/%s/conversations/%d?filter_inbox_id=%s&filter_unread=%s&filter_resolved=%s&filter_not_resolved=%s&filter_mention=%s&filter_assigned=%s&filter_unassigned=%s", websiteID, pageNumber, url.QueryEscape(filterInboxIDValue), url.QueryEscape(filterUnreadValue), url.QueryEscape(filterResolvedValue), url.QueryEscape(filterNotResolvedValue), url.QueryEscape(filterMentionValue), url.QueryEscape(filterAssignedValue), url.QueryEscape(filterUnassignedValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   conversations := new(ConversationListData)
@@ -1629,6 +1638,15 @@ func (service *WebsiteService) GetConversationRoutingAssign(websiteID string, se
 func (service *WebsiteService) AssignConversationRouting(websiteID string, sessionID string, assign ConversationRoutingAssignUpdate) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/routing", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, assign)
+
+  return service.client.Do(req, nil)
+}
+
+
+// UpdateConversationInbox updates inbox used for conversation.
+func (service *WebsiteService) UpdateConversationInbox(websiteID string, sessionID string, inboxID *string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/inbox", websiteID, sessionID)
+  req, _ := service.client.NewRequest("PATCH", url, ConversationInboxUpdate{&inboxID})
 
   return service.client.Do(req, nil)
 }

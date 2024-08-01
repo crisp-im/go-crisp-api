@@ -96,11 +96,11 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 * #### **Website Batch**
   * **Batch Resolve Conversations** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-resolve-items)
-    * `client.Website.BatchResolveConversations(websiteID string, sessions []string) (*Response, error)`
+    * `client.Website.BatchResolveConversations(websiteID string, operation WebsiteBatchConversationsOperation) (*Response, error)`
   * **Batch Read Conversations** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-read-items)
-    * `client.Website.BatchReadConversations(websiteID string, sessions []string) (*Response, error)`
+    * `client.Website.BatchReadConversations(websiteID string, operation WebsiteBatchConversationsOperation) (*Response, error)`
   * **Batch Remove Conversations** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-remove-items)
-    * `client.Website.BatchRemoveConversations(websiteID string, sessions []string) (*Response, error)`
+    * `client.Website.BatchRemoveConversations(websiteID string, operation WebsiteBatchConversationsOperation) (*Response, error)`
   * **Batch Remove People** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-remove-items)
     * `client.Website.BatchRemovePeople(websiteID string, people WebsiteBatchPeopleOperationInner) (*Response, error)`
 
@@ -218,7 +218,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **List Conversations (Search Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-conversations)
     * `client.Website.SearchConversations(websiteID string, pageNumber uint, searchQuery string, searchType string) (*[]Conversation, *Response, error)`
   * **List Conversations (Filter Variant)** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-conversations)
-    * `client.Website.FilterConversations(websiteID string, pageNumber uint, filterUnread bool, filterResolved bool, filterNotResolved bool, filterMention bool, filterAssigned bool, filterUnassigned bool) (*[]Conversation, *Response, error)`
+    * `client.Website.FilterConversations(websiteID string, pageNumber uint, filterInboxID string, filterUnread bool, filterResolved bool, filterNotResolved bool, filterMention bool, filterAssigned bool, filterUnassigned bool) (*[]Conversation, *Response, error)`
   * **List Suggested Conversation Segments** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-suggested-conversation-segments)
     * `client.Website.ListSuggestedConversationSegments(websiteID string, pageNumber uint) (*[]ConversationSuggestedSegment, *Response, error)`
   * **Delete Suggested Conversation Segment** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-suggested-conversation-segment)
@@ -295,6 +295,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.GetConversationRoutingAssign(websiteID string, sessionID string) (*ConversationRoutingAssign, *Response, error)`
   * **⭐ Assign Conversation Routing** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#assign-conversation-routing)
     * `client.Website.AssignConversationRouting(websiteID string, sessionID string, assign ConversationRoutingAssignUpdate) (*Response, error)`
+  * **Update Conversation Inbox** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-conversation-inbox)
+    * `client.Website.UpdateConversationInbox(websiteID string, sessionID string, inboxID *string) (*Response, error)`
   * **⭐ Get Conversation Metas** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-conversation-metas)
     * `client.Website.GetConversationMetas(websiteID string, sessionID string) (*ConversationMeta, *Response, error)`
   * **⭐ Update Conversation Metas** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-conversation-metas)
@@ -650,6 +652,8 @@ Available events are listed below:
     * `session:set_mentions`
   * **Session Set Routing** [`user`, `plugin`]:
     * `session:set_routing`
+  * **Session Set Inbox** [`user`, `plugin`]:
+    * `session:set_inbox`
   * **Session Removed** [`user`, `plugin`]:
     * `session:removed`
 

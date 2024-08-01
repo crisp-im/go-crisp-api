@@ -488,6 +488,14 @@ type EventsReceiveSessionSetRouting struct {
   RoutingID  *string  `json:"routing_id"`
 }
 
+// EventsReceiveSessionSetInbox maps session:set_inbox
+type EventsReceiveSessionSetInbox struct {
+  EventsGeneric
+  EventsSessionGeneric
+  InboxID          *string  `json:"inbox_id"`
+  PreviousInboxID  *string  `json:"previous_inbox_id,omitempty"`
+}
+
 // EventsReceiveSessionRemoved maps session:removed
 type EventsReceiveSessionRemoved struct {
   EventsGeneric
@@ -1098,6 +1106,12 @@ func (evt EventsReceiveSessionSetMentions) String() string {
 
 // String returns the string representation of EventsReceiveSessionSetRouting
 func (evt EventsReceiveSessionSetRouting) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveSessionSetInbox
+func (evt EventsReceiveSessionSetInbox) String() string {
   return Stringify(evt)
 }
 

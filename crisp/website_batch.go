@@ -11,6 +11,7 @@ import (
 
 // WebsiteBatchConversationsOperation mapping
 type WebsiteBatchConversationsOperation struct {
+  InboxID  *string  `json:"inbox_id,omitempty"`
   Sessions []string `json:"sessions,omitempty"`
 }
 
@@ -32,25 +33,25 @@ type WebsiteBatchPeopleOperationInnerSearch struct {
 }
 
 // BatchResolveConversations resolves given (or all) items in website (conversation variant).
-func (service *WebsiteService) BatchResolveConversations(websiteID string, sessions []string) (*Response, error) {
+func (service *WebsiteService) BatchResolveConversations(websiteID string, operation WebsiteBatchConversationsOperation) (*Response, error) {
   url := fmt.Sprintf("website/%s/batch/resolve", websiteID)
-  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchConversationsOperation{Sessions: sessions})
+  req, _ := service.client.NewRequest("PATCH", url, operation)
 
   return service.client.Do(req, nil)
 }
 
 // BatchReadConversations marks given (or all) items as read in website (conversation variant).
-func (service *WebsiteService) BatchReadConversations(websiteID string, sessions []string) (*Response, error) {
+func (service *WebsiteService) BatchReadConversations(websiteID string, operation WebsiteBatchConversationsOperation) (*Response, error) {
   url := fmt.Sprintf("website/%s/batch/read", websiteID)
-  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchConversationsOperation{Sessions: sessions})
+  req, _ := service.client.NewRequest("PATCH", url, operation)
 
   return service.client.Do(req, nil)
 }
 
 // BatchRemoveConversations removes given items in website (conversation variant).
-func (service *WebsiteService) BatchRemoveConversations(websiteID string, sessions []string) (*Response, error) {
+func (service *WebsiteService) BatchRemoveConversations(websiteID string, operation WebsiteBatchConversationsOperation) (*Response, error) {
   url := fmt.Sprintf("website/%s/batch/remove", websiteID)
-  req, _ := service.client.NewRequest("PATCH", url, WebsiteBatchConversationsOperation{Sessions: sessions})
+  req, _ := service.client.NewRequest("PATCH", url, operation)
 
   return service.client.Do(req, nil)
 }

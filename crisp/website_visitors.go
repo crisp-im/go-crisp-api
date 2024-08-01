@@ -31,6 +31,7 @@ type WebsiteVisitorListData struct {
 // WebsiteVisitor mapping
 type WebsiteVisitor struct {
   SessionID     *string                     `json:"session_id,omitempty"`
+  InboxID       *string                     `json:"inbox_id,omitempty"`
   Nickname      *string                     `json:"nickname,omitempty"`
   Email         *string                     `json:"email,omitempty"`
   Avatar        *string                     `json:"avatar,omitempty"`
