@@ -1646,7 +1646,7 @@ func (service *WebsiteService) AssignConversationRouting(websiteID string, sessi
 // UpdateConversationInbox updates inbox used for conversation.
 func (service *WebsiteService) UpdateConversationInbox(websiteID string, sessionID string, inboxID *string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/inbox", websiteID, sessionID)
-  req, _ := service.client.NewRequest("PATCH", url, ConversationInboxUpdate{&inboxID})
+  req, _ := service.client.NewRequest("PATCH", url, ConversationInboxUpdate{inboxID})
 
   return service.client.Do(req, nil)
 }
