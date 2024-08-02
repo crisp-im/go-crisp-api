@@ -99,6 +99,7 @@ type EventsReceiveGenericMessageType struct {
 // EventsGeneric maps a generic event
 type EventsGeneric struct {
   RoutingIDs  *[]string  `json:"routing_ids,omitempty"`
+  InboxID     *string    `json:"inbox_id,omitempty"`
 }
 
 // EventsUserGeneric maps a generic user
