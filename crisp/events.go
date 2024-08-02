@@ -99,7 +99,6 @@ type EventsReceiveGenericMessageType struct {
 // EventsGeneric maps a generic event
 type EventsGeneric struct {
   RoutingIDs  *[]string  `json:"routing_ids,omitempty"`
-  InboxID     *string    `json:"inbox_id,omitempty"`
 }
 
 // EventsUserGeneric maps a generic user
@@ -131,6 +130,7 @@ type EventsSessionGenericUnbound struct {
 type EventsSessionGeneric struct {
   EventsWebsiteGeneric
   EventsSessionGenericUnbound
+  InboxID  *string  `json:"inbox_id,omitempty"`
 }
 
 // EventsBrowsingGeneric maps a generic browsing
