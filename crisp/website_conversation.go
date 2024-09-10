@@ -737,6 +737,7 @@ type ConversationOpenUpdate struct {
 // ConversationRoutingAssignUpdate mapping
 type ConversationRoutingAssignUpdate struct {
   Assigned  *ConversationRoutingAssignUpdateAssigned  `json:"assigned"`
+  Silent    *bool                                     `json:"silent,omitempty"`
 }
 
 // ConversationRoutingAssignUpdateAssigned mapping
