@@ -22,10 +22,16 @@ type WebsiteSettings struct {
   Name       *string                  `json:"name,omitempty"`
   Domain     *string                  `json:"domain,omitempty"`
   Logo       *string                  `json:"logo,omitempty"`
+  Audit      *WebsiteSettingsAudit    `json:"audit,omitempty"`
   Contact    *WebsiteSettingsContact  `json:"contact,omitempty"`
   Inbox      *WebsiteSettingsInbox    `json:"inbox,omitempty"`
   Emails     *WebsiteSettingsEmails   `json:"emails,omitempty"`
   Chatbox    *WebsiteSettingsChatbox  `json:"chatbox,omitempty"`
+}
+
+// WebsiteSettingsAudit mapping
+type WebsiteSettingsAudit struct {
+  Log  *bool  `json:"log,omitempty"`
 }
 
 // WebsiteSettingsContact mapping
@@ -95,10 +101,16 @@ type WebsiteSettingsUpdate struct {
   Name       string                         `json:"name,omitempty"`
   Domain     string                         `json:"domain,omitempty"`
   Logo       string                         `json:"logo,omitempty"`
+  Audit      *WebsiteSettingsUpdateAudit    `json:"audit,omitempty"`
   Contact    *WebsiteSettingsUpdateContact  `json:"contact,omitempty"`
   Inbox      *WebsiteSettingsUpdateInbox    `json:"inbox,omitempty"`
   Emails     *WebsiteSettingsUpdateEmails   `json:"emails,omitempty"`
   Chatbox    *WebsiteSettingsUpdateChatbox  `json:"chatbox,omitempty"`
+}
+
+// WebsiteSettingsUpdateAudit mapping
+type WebsiteSettingsUpdateAudit struct {
+  Log  bool  `json:"log,omitempty"`
 }
 
 // WebsiteSettingsUpdateContact mapping
