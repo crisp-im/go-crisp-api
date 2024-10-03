@@ -385,6 +385,36 @@ type ConversationSuggestedData struct {
   Count  *int32   `json:"count,omitempty"`
 }
 
+// ConversationSpamData mapping
+type ConversationSpamData struct {
+  Data  *[]ConversationSpam  `json:"data,omitempty"`
+}
+
+// ConversationSpam mapping
+type ConversationSpam struct {
+  SpamID     *string       `json:"spam_id,omitempty"`
+  Type       *string       `json:"type,omitempty"`
+  Reason     *string       `json:"reason,omitempty"`
+  Metadata   *interface{}  `json:"metadata,omitempty"`
+  Headers    *interface{}  `json:"headers,omitempty"`
+  Timestamp  *uint64       `json:"timestamp,omitempty"`
+}
+
+// ConversationSpamContentData mapping
+type ConversationSpamContentData struct {
+  Data  *ConversationSpamContent  `json:"data,omitempty"`
+}
+
+// ConversationSpamContent mapping
+type ConversationSpamContent struct {
+  Content  *string  `json:"content,omitempty"`
+}
+
+// ConversationSpamDecision mapping
+type ConversationSpamDecision struct {
+  Action  *string  `json:"action,omitempty"`
+}
+
 // ConversationRoutingAssignData mapping
 type ConversationRoutingAssignData struct {
   Data  *ConversationRoutingAssign  `json:"data,omitempty"`
@@ -1026,6 +1056,18 @@ func (instance ConversationSuggestedData) String() string {
 }
 
 
+// String returns the string representation of ConversationSpam
+func (instance ConversationSpam) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationSpamContent
+func (instance ConversationSpamContent) String() string {
+  return Stringify(instance)
+}
+
+
 // String returns the string representation of ConversationNew
 func (instance ConversationNew) String() string {
   return Stringify(instance)
@@ -1252,6 +1294,45 @@ func (service *WebsiteService) ListSuggestedConversationDataKeys(websiteID strin
 func (service *WebsiteService) DeleteSuggestedConversationDataKey(websiteID string, key string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversations/suggest/data", websiteID)
   req, _ := service.client.NewRequest("DELETE", url, ConversationSuggestedDataDelete{Key: key})
+
+  return service.client.Do(req, nil)
+}
+
+
+// ListSpamConversations lists spam conversations in website.
+func (service *WebsiteService) ListSpamConversations(websiteID string, pageNumber uint) (*[]ConversationSpam, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/spams/%d", websiteID, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  spams := new(ConversationSpamData)
+  resp, err := service.client.Do(req, spams)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return spams.Data, resp, err
+}
+
+
+// ResolveSpamConversationContent resolves content for spam conversation.
+func (service *WebsiteService) ResolveSpamConversationContent(websiteID string, spamID string) (*ConversationSpamContent, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/spam/%s/content", websiteID, spamID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  content := new(ConversationSpamContentData)
+  resp, err := service.client.Do(req, content)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return content.Data, resp, err
+}
+
+
+// SubmitSpamConversationDecision submits decision on spam conversation.
+func (service *WebsiteService) SubmitSpamConversationDecision(websiteID string, spamID string, action string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversations/spam/%s/decision", websiteID, spamID)
+  req, _ := service.client.NewRequest("POST", url, ConversationSpamDecision{&action})
 
   return service.client.Do(req, nil)
 }

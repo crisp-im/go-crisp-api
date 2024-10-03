@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2023 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 24/09/2024
+* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 03/10/2024
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -227,6 +227,12 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.ListSuggestedConversationDataKeys(websiteID string, pageNumber uint) (*[]ConversationSuggestedData, *Response, error)`
   * **Delete Suggested Conversation Data Key** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-suggested-conversation-data-key)
     * `client.Website.DeleteSuggestedConversationDataKey(websiteID string, key string) (*Response, error)`
+  * **List Spam Conversations** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-spam-conversations)
+    * `client.Website.ListSpamConversations(websiteID string, pageNumber uint) (*[]ConversationSpam, *Response, error)`
+  * **Resolve Spam Conversation Content** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#resolve-spam-conversation-content)
+    * `client.Website.ResolveSpamConversationContent(websiteID string, spamID string) (*ConversationSpamContent, *Response, error)`
+  * **Submit Spam Conversation Decision** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#submit-spam-conversation-decision)
+    * `client.Website.SubmitSpamConversationDecision(websiteID string, spamID string, action string) (*Response, error)`
 
 * #### **Website Conversation**
   * **⭐ Create A New Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-a-new-conversation)
