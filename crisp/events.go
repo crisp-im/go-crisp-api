@@ -697,6 +697,25 @@ type EventsReceiveMessageNotify struct {
   EventsSessionGeneric
 }
 
+// EventsSpamMessage maps spam:message
+type EventsSpamMessage struct {
+  EventsGeneric
+  EventsWebsiteGeneric
+  SpamID     *string       `json:"spam_id"`
+  Type       *string       `json:"type"`
+  Reason     *string       `json:"reason"`
+  Metadata   *interface{}  `json:"metadata,omitempty"`
+  Headers    *interface{}  `json:"headers,omitempty"`
+  Timestamp  *uint64       `json:"timestamp"`
+}
+
+// EventsSpamDecision maps spam:decision
+type EventsSpamDecision struct {
+  EventsGeneric
+  EventsWebsiteGeneric
+  Action  *string  `json:"action"`
+}
+
 // EventsReceivePeopleProfileCreated maps people:profile:created
 type EventsReceivePeopleProfileCreated struct {
   EventsGeneric
@@ -1209,6 +1228,18 @@ func (evt EventsReceiveMessageAcknowledge) String() string {
 
 // String returns the string representation of EventsReceiveMessageNotify
 func (evt EventsReceiveMessageNotify) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsSpamMessage
+func (evt EventsSpamMessage) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsSpamDecision
+func (evt EventsSpamDecision) String() string {
   return Stringify(evt)
 }
 
