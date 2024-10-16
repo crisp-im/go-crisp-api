@@ -122,7 +122,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get A Website Operator** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-a-website-operator)
     * `client.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
   * **Invite A Website Operator** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#invite-a-website-operator)
-    * `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, token string) (*Response, error)`
+    * `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, verify string) (*Response, error)`
   * **Change Operator Membership** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#change-operator-membership)
     * `client.Website.ChangeOperatorMembership(websiteID string, userID string, role string, title *string) (*Response, error)`
   * **Unlink Operator From Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#unlink-operator-from-website)
