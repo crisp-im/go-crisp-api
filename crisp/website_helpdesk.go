@@ -358,7 +358,13 @@ type HelpdeskCreate struct {
 
 // HelpdeskRemove mapping
 type HelpdeskRemove struct {
-  Verify  *string  `json:"verify,omitempty"`
+  Verify  *HelpdeskRemoveVerify  `json:"verify,omitempty"`
+}
+
+// HelpdeskRemoveVerify mapping
+type HelpdeskRemoveVerify struct {
+  Method  string  `json:"method"`
+  Secret  string  `json:"secret"`
 }
 
 // HelpdeskLocaleAdd mapping
@@ -552,7 +558,7 @@ func (service *WebsiteService) InitializeHelpdesk(websiteID string, name string,
 
 
 // DeleteHelpdesk deletes helpdesk for website.
-func (service *WebsiteService) DeleteHelpdesk(websiteID string, verify string) (*Response, error) {
+func (service *WebsiteService) DeleteHelpdesk(websiteID string, verify HelpdeskRemoveVerify) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk", websiteID)
   req, _ := service.client.NewRequest("DELETE", url, HelpdeskRemove{Verify: &verify})
 

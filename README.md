@@ -90,7 +90,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get A Website** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-a-website)
     * `client.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
   * **Delete A Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-a-website)
-    * `client.Website.DeleteWebsite(websiteID string, verify string) (*Response, error)`
+    * `client.Website.DeleteWebsite(websiteID string, verify WebsiteRemoveVerify) (*Response, error)`
   * **Abort Website Deletion** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#abort-website-deletion)
     * `client.Website.AbortWebsiteDeletion(websiteID string) (*Response, error)`
 
@@ -122,7 +122,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get A Website Operator** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-a-website-operator)
     * `client.Website.GetWebsiteOperator(websiteID string, userID string) (*WebsiteOperator, *Response, error)`
   * **Invite A Website Operator** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#invite-a-website-operator)
-    * `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, verify string) (*Response, error)`
+    * `client.Website.InviteWebsiteOperator(websiteID string, email string, role string, verify WebsiteOperatorInviteVerify) (*Response, error)`
   * **Change Operator Membership** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#change-operator-membership)
     * `client.Website.ChangeOperatorMembership(websiteID string, userID string, role string, title *string) (*Response, error)`
   * **Unlink Operator From Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#unlink-operator-from-website)
@@ -428,7 +428,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Initialize Helpdesk** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#initialize-helpdesk)
     * `client.Website.InitializeHelpdesk(websiteID string, name string, domainBasic string) (*Response, error)`
   * **Delete Helpdesk** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-helpdesk)
-    * `client.Website.DeleteHelpdesk(websiteID string, verify string) (*Response, error)`
+    * `client.Website.DeleteHelpdesk(websiteID string, verify HelpdeskRemoveVerify) (*Response, error)`
   * **List Helpdesk Locales** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-helpdesk-locales)
     * `client.Website.ListHelpdeskLocales(websiteID string, pageNumber uint) (*[]HelpdeskLocale, *Response, error)`
   * **Add Helpdesk Locale** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#add-helpdesk-locale)

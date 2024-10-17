@@ -33,7 +33,13 @@ type WebsiteCreate struct {
 
 // WebsiteRemove mapping
 type WebsiteRemove struct {
-  Verify  *string  `json:"verify,omitempty"`
+  Verify  *WebsiteRemoveVerify  `json:"verify,omitempty"`
+}
+
+// WebsiteRemoveVerify mapping
+type WebsiteRemoveVerify struct {
+  Method  string  `json:"method"`
+  Secret  string  `json:"secret"`
 }
 
 
@@ -83,7 +89,7 @@ func (service *WebsiteService) GetWebsite(websiteID string) (*Website, *Response
 
 
 // DeleteWebsite deletes an existing website.
-func (service *WebsiteService) DeleteWebsite(websiteID string, verify string) (*Response, error) {
+func (service *WebsiteService) DeleteWebsite(websiteID string, verify WebsiteRemoveVerify) (*Response, error) {
   url := fmt.Sprintf("website/%s", websiteID)
   req, _ := service.client.NewRequest("DELETE", url, WebsiteRemove{Verify: &verify})
 
