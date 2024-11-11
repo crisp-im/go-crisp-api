@@ -80,15 +80,25 @@ type Response struct {
 
 type errorResponse struct {
   Response *http.Response
-  Reason   string  `json:"reason,omitempty"`
+  Reason   string        `json:"reason,omitempty"`
+  Data     *interface{}  `json:"data,omitempty"`
 }
 
 
 // Error prints an error response
 func (response *errorResponse) Error() string {
-  return fmt.Sprintf("%v %v: %d %v",
-    response.Response.Request.Method, response.Response.Request.URL,
-    response.Response.StatusCode, response.Reason)
+  // Marshal error data to a JSON string (if any)
+  var errorData []byte
+
+  if response.Data != nil {
+    errorData, _ = json.Marshal(*response.Data)
+  } else {
+    errorData = []byte("{}")
+  }
+
+  return fmt.Sprintf("HTTP %d %v\nPath → %v %v\nData → %s",
+    response.Response.StatusCode, response.Reason,
+    response.Response.Request.Method, response.Response.Request.URL, errorData)
 }
 
 
