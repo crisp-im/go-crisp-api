@@ -98,16 +98,17 @@ type ConversationAssigned struct {
 
 // ConversationMeta mapping
 type ConversationMeta struct {
-  Nickname  *string                  `json:"nickname,omitempty"`
-  Email     *string                  `json:"email,omitempty"`
-  Phone     *string                  `json:"phone,omitempty"`
-  Address   *string                  `json:"address,omitempty"`
-  Subject   *string                  `json:"subject,omitempty"`
-  IP        *string                  `json:"ip,omitempty"`
-  Data      *interface{}             `json:"data,omitempty"`
-  Avatar    *string                  `json:"avatar,omitempty"`
-  Device    *ConversationMetaDevice  `json:"device,omitempty"`
-  Segments  *[]string                `json:"segments,omitempty"`
+  Nickname    *string                      `json:"nickname,omitempty"`
+  Email       *string                      `json:"email,omitempty"`
+  Phone       *string                      `json:"phone,omitempty"`
+  Address     *string                      `json:"address,omitempty"`
+  Subject     *string                      `json:"subject,omitempty"`
+  IP          *string                      `json:"ip,omitempty"`
+  Connection  *ConversationMetaConnection  `json:"connection,omitempty"`
+  Data        *interface{}                 `json:"data,omitempty"`
+  Avatar      *string                      `json:"avatar,omitempty"`
+  Device      *ConversationMetaDevice      `json:"device,omitempty"`
+  Segments    *[]string                    `json:"segments,omitempty"`
 }
 
 // ConversationOriginal mapping
@@ -311,6 +312,12 @@ type ConversationMessageReference struct {
 // ConversationMessageOriginal mapping
 type ConversationMessageOriginal struct {
   OriginalID  *string  `json:"original_id,omitempty"`
+}
+
+// ConversationMetaConnection mapping
+type ConversationMetaConnection struct {
+  ISP  *string  `json:"isp,omitempty"`
+  ASN  *string  `json:"asn,omitempty"`
 }
 
 // ConversationMetaDevice mapping

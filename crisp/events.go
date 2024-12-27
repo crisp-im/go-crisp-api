@@ -375,7 +375,14 @@ type EventsReceiveSessionSyncNetwork struct {
 
 // EventsReceiveSessionSyncNetworkData maps session:sync:network/network
 type EventsReceiveSessionSyncNetworkData struct {
-  IP  *string  `json:"ip,omitempty"`
+  IP          *string                                         `json:"ip,omitempty"`
+  Connection  *EventsReceiveSessionSyncNetworkDataConnection  `json:"connection,omitempty"`
+}
+
+// EventsReceiveSessionSyncNetworkDataConnection maps session:sync:network/network/connection
+type EventsReceiveSessionSyncNetworkDataConnection struct {
+  ISP  *string  `json:"isp,omitempty"`
+  ASN  *string  `json:"asn,omitempty"`
 }
 
 // EventsReceiveSessionSyncTimezone maps session:sync:timezone
