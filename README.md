@@ -1,6 +1,6 @@
 # go-crisp-api
 
-[![Test and Build](https://github.com/crisp-im/go-crisp-api/workflows/Test%20and%20Build/badge.svg?branch=master)](https://github.com/crisp-im/go-crisp-api/actions?query=workflow%3A%22Test+and+Build%22)
+[![Test and Build](https://github.com/crisp-im/go-crisp-api/actions/workflows/test.yml/badge.svg)](https://github.com/crisp-im/go-crisp-api/actions/workflows/test.yml)
 
 The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, access your agent accounts from your Go code.
 
