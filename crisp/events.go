@@ -694,8 +694,15 @@ type EventsReceiveMessageComposeReceiveUser struct {
 type EventsReceiveMessageAcknowledge struct {
   EventsGeneric
   EventsSessionGeneric
-  Origin        *string  `json:"origin"`
-  Fingerprints  *[]int   `json:"fingerprints"`
+  Origin        *string                                  `json:"origin"`
+  Fingerprints  *[]int                                   `json:"fingerprints"`
+  Details       *EventsReceiveMessageAcknowledgeDetails  `json:"details,omitempty"`
+}
+
+// EventsReceiveMessageAcknowledgeDetails maps message:acknowledge:*/details
+type EventsReceiveMessageAcknowledgeDetails struct {
+  Type    *string  `json:"type"`
+  Reason  *string  `json:"reason"`
 }
 
 // EventsReceiveMessageNotify maps message:notify:*
