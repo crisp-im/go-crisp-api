@@ -164,24 +164,25 @@ type ConversationFile struct {
 
 // ConversationMessage mapping
 type ConversationMessage struct {
-  SessionID    *string                          `json:"session_id,omitempty"`
-  WebsiteID    *string                          `json:"website_id,omitempty"`
-  Type         *string                          `json:"type,omitempty"`
-  From         *string                          `json:"from,omitempty"`
-  Origin       *string                          `json:"origin,omitempty"`
-  Content      *interface{}                     `json:"content,omitempty"`
-  Preview      *[]ConversationMessagePreview    `json:"preview,omitempty"`
-  Mentions     *[]string                        `json:"mentions,omitempty"`
-  Read         *string                          `json:"read,omitempty"`
-  Delivered    *string                          `json:"delivered,omitempty"`
-  Edited       *bool                            `json:"edited,omitempty"`
-  Translated   *bool                            `json:"translated,omitempty"`
-  Automated    *bool                            `json:"automated,omitempty"`
-  Fingerprint  *int                             `json:"fingerprint,omitempty"`
-  Timestamp    *uint64                          `json:"timestamp,omitempty"`
-  User         *ConversationMessageUser         `json:"user,omitempty"`
-  References   *[]ConversationMessageReference  `json:"references,omitempty"`
-  Original     *ConversationMessageOriginal     `json:"original,omitempty"`
+  SessionID    *string                                 `json:"session_id,omitempty"`
+  WebsiteID    *string                                 `json:"website_id,omitempty"`
+  Type         *string                                 `json:"type,omitempty"`
+  From         *string                                 `json:"from,omitempty"`
+  Origin       *string                                 `json:"origin,omitempty"`
+  Content      *interface{}                            `json:"content,omitempty"`
+  Preview      *[]ConversationMessagePreview           `json:"preview,omitempty"`
+  Mentions     *[]string                               `json:"mentions,omitempty"`
+  Read         *string                                 `json:"read,omitempty"`
+  Delivered    *string                                 `json:"delivered,omitempty"`
+  Ignored      *map[string]ConversationMessageIgnored  `json:"ignored,omitempty"`
+  Edited       *bool                                   `json:"edited,omitempty"`
+  Translated   *bool                                   `json:"translated,omitempty"`
+  Automated    *bool                                   `json:"automated,omitempty"`
+  Fingerprint  *int                                    `json:"fingerprint,omitempty"`
+  Timestamp    *uint64                                 `json:"timestamp,omitempty"`
+  User         *ConversationMessageUser                `json:"user,omitempty"`
+  References   *[]ConversationMessageReference         `json:"references,omitempty"`
+  Original     *ConversationMessageOriginal            `json:"original,omitempty"`
 }
 
 // ConversationMessageDispatchedData mapping
@@ -292,6 +293,12 @@ type ConversationMessagePreviewInformation struct {
   Excerpt  *string  `json:"excerpt,omitempty"`
   Image    *string  `json:"image,omitempty"`
   Embed    *string  `json:"embed,omitempty"`
+}
+
+// ConversationMessageIgnored mapping
+type ConversationMessageIgnored struct {
+  Type    *string  `json:"type,omitempty"`
+  Reason  *string  `json:"reason,omitempty"`
 }
 
 // ConversationMessageUser mapping
