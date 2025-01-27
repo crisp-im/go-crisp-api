@@ -510,6 +510,15 @@ type EventsReceiveSessionRemoved struct {
   EventsSessionGeneric
 }
 
+// EventsReceiveSessionError maps session:error
+type EventsReceiveSessionError struct {
+  EventsGeneric
+  EventsSessionGeneric
+  Type           *string  `json:"type"`
+  Value          *string  `json:"value"`
+  PreviousValue  *string  `json:"previous_value,omitempty"`
+}
+
 // EventsReceiveMessageUpdated maps message:updated
 type EventsReceiveMessageUpdated struct {
   EventsGeneric
@@ -1152,6 +1161,12 @@ func (evt EventsReceiveSessionSetInbox) String() string {
 
 // String returns the string representation of EventsReceiveSessionRemoved
 func (evt EventsReceiveSessionRemoved) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveSessionError
+func (evt EventsReceiveSessionError) String() string {
   return Stringify(evt)
 }
 

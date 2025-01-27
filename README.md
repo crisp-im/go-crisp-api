@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2024 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 24/01/2025
+* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 27/01/2025
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -658,6 +658,8 @@ Available events are listed below:
     * `session:set_inbox`
   * **Session Removed** [`user`, `plugin`]:
     * `session:removed`
+  * **Session Error** [`user`, `plugin`]:
+    * `session:error`
 
 * #### **Message Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#message-events)
   * **Message Updated** [`user`, `plugin`]:
