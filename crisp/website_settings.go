@@ -68,6 +68,7 @@ type WebsiteSettingsChatbox struct {
   OngoingOperatorFace  *bool      `json:"ongoing_operator_face,omitempty"`
   ActivityMetrics      *bool      `json:"activity_metrics,omitempty"`
   OperatorPrivacy      *bool      `json:"operator_privacy,omitempty"`
+  VisitorPrivacy       *bool      `json:"visitor_privacy,omitempty"`
   AvailabilityTooltip  *bool      `json:"availability_tooltip,omitempty"`
   HideVacation         *bool      `json:"hide_vacation,omitempty"`
   HideOnAway           *bool      `json:"hide_on_away,omitempty"`
@@ -147,6 +148,7 @@ type WebsiteSettingsUpdateChatbox struct {
   OngoingOperatorFace  bool       `json:"ongoing_operator_face,omitempty"`
   ActivityMetrics      bool       `json:"activity_metrics,omitempty"`
   OperatorPrivacy      bool       `json:"operator_privacy,omitempty"`
+  VisitorPrivacy       bool       `json:"visitor_privacy,omitempty"`
   AvailabilityTooltip  bool       `json:"availability_tooltip,omitempty"`
   HideVacation         bool       `json:"hide_vacation,omitempty"`
   HideOnAway           bool       `json:"hide_on_away,omitempty"`
