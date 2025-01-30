@@ -1052,6 +1052,11 @@ type ConversationReminderPayload struct {
   Note  string  `json:"note,omitempty"`
 }
 
+// ConversationReportPayload mapping
+type ConversationReportPayload struct {
+  Flag  string  `json:"flag,omitempty"`
+}
+
 
 // String returns the string representation of Conversation
 func (instance Conversation) String() string {
@@ -2104,6 +2109,15 @@ func (service *WebsiteService) DeliverWidgetDataEditActionForConversation(websit
 func (service *WebsiteService) ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/reminder", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, ConversationReminderPayload{Date: date, Note: note})
+
+  return service.client.Do(req, nil)
+}
+
+
+// ReportConversation reports a conversation to Crisp and remove it from the inbox.
+func (service *WebsiteService) ReportConversation(websiteID string, sessionID string, flag string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/report", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, ConversationReportPayload{Flag: flag})
 
   return service.client.Do(req, nil)
 }
