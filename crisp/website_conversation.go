@@ -422,7 +422,7 @@ type ConversationSpamContentData struct {
 // ConversationSpamContent mapping
 type ConversationSpamContent struct {
   ConversationSpam
-  Content  *string  `json:"content,omitempty"`
+  Content  *interface{}  `json:"content,omitempty"`
 }
 
 // ConversationSpamDecision mapping
