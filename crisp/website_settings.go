@@ -47,8 +47,9 @@ type WebsiteSettingsContact struct {
 
 // WebsiteSettingsInbox mapping
 type WebsiteSettingsInbox struct {
-  LockRemoval         *bool  `json:"lock_removal,omitempty"`
-  ForceOperatorToken  *bool  `json:"force_operator_token,omitempty"`
+  LockRemoval         *bool    `json:"lock_removal,omitempty"`
+  ForceOperatorToken  *bool    `json:"force_operator_token,omitempty"`
+  Locale              *string  `json:"locale,omitempty"`
 }
 
 // WebsiteSettingsEmails mapping
@@ -127,8 +128,9 @@ type WebsiteSettingsUpdateContact struct {
 
 // WebsiteSettingsUpdateInbox mapping
 type WebsiteSettingsUpdateInbox struct {
-  LockRemoval         bool  `json:"lock_removal,omitempty"`
-  ForceOperatorToken  bool  `json:"force_operator_token,omitempty"`
+  LockRemoval         bool    `json:"lock_removal,omitempty"`
+  ForceOperatorToken  bool    `json:"force_operator_token,omitempty"`
+  Locale              string  `json:"locale,omitempty"`
 }
 
 // WebsiteSettingsUpdateEmails mapping
