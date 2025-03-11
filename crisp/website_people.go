@@ -119,7 +119,7 @@ type PeopleProfileCardPerson struct {
   Address      *string                             `json:"address,omitempty"`
   Description  *string                             `json:"description,omitempty"`
   Website      *string                             `json:"website,omitempty"`
-  Timezone     *int16                              `json:"timezone,omitempty"`
+  Timezone     *int32                              `json:"timezone,omitempty"`
   Profiles     *[]PeopleProfileCardPersonProfile   `json:"profiles,omitempty"`
   Employment   *PeopleProfileCardPersonEmployment  `json:"employment,omitempty"`
   Geolocation  *PeopleProfileCardGeolocation       `json:"geolocation,omitempty"`
