@@ -771,6 +771,11 @@ type ConversationReadMessageMark struct {
   Fingerprints  []int   `json:"fingerprints,omitempty"`
 }
 
+// ConversationUnreadMessageMark mapping
+type ConversationUnreadMessageMark struct {
+  From  string  `json:"from,omitempty"`
+}
+
 // ConversationDeliveredMessageMark mapping
 type ConversationDeliveredMessageMark ConversationReadMessageMark
 
@@ -1698,6 +1703,15 @@ func (service *WebsiteService) ComposeMessageInConversation(websiteID string, se
 func (service *WebsiteService) MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/read", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, read)
+
+  return service.client.Do(req, nil)
+}
+
+
+// MarkConversationAsUnread marks whole conversation as unread.
+func (service *WebsiteService) MarkConversationAsUnread(websiteID string, sessionID string, unread ConversationUnreadMessageMark) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/unread", websiteID, sessionID)
+  req, _ := service.client.NewRequest("PATCH", url, unread)
 
   return service.client.Do(req, nil)
 }

@@ -293,6 +293,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.ComposeMessageInConversation(websiteID string, sessionID string, compose ConversationComposeMessageNew) (*Response, error)`
   * **⭐ Mark Messages As Read In Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#mark-messages-as-read-in-conversation)
     * `client.Website.MarkMessagesReadInConversation(websiteID string, sessionID string, read ConversationReadMessageMark) (*Response, error)`
+  * **Mark Conversation As Unread** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#mark-conversation-as-unread)
+    * `client.Website.MarkConversationAsUnread(websiteID string, sessionID string, unread ConversationUnreadMessageMark) (*Response, error)`
   * **⭐ Mark Messages As Delivered In Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#mark-messages-as-delivered-in-conversation)
     * `client.Website.MarkMessagesDeliveredInConversation(websiteID string, sessionID string, delivered ConversationDeliveredMessageMark) (*Response, error)`
   * **Update Conversation Open State** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-conversation-open-state)
