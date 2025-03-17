@@ -262,6 +262,13 @@ type EventsReceiveSessionSetNickname struct {
   Nickname  *string  `json:"nickname"`
 }
 
+// EventsReceiveSessionSetOrigin maps session:set_origin
+type EventsReceiveSessionSetOrigin struct {
+  EventsGeneric
+  EventsSessionGeneric
+  Origin  *string  `json:"origin"`
+}
+
 // EventsReceiveSessionSetData maps session:set_data
 type EventsReceiveSessionSetData struct {
   EventsGeneric
