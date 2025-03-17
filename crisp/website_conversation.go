@@ -105,10 +105,11 @@ type ConversationMeta struct {
   Subject     *string                      `json:"subject,omitempty"`
   IP          *string                      `json:"ip,omitempty"`
   Connection  *ConversationMetaConnection  `json:"connection,omitempty"`
+  Origin      *string                      `json:"origin,omitempty"`
+  Segments    *[]string                    `json:"segments,omitempty"`
   Data        *interface{}                 `json:"data,omitempty"`
   Avatar      *string                      `json:"avatar,omitempty"`
   Device      *ConversationMetaDevice      `json:"device,omitempty"`
-  Segments    *[]string                    `json:"segments,omitempty"`
 }
 
 // ConversationOriginal mapping
@@ -809,6 +810,7 @@ type ConversationMetaUpdate struct {
   Phone     string                        `json:"phone,omitempty"`
   Address   string                        `json:"address,omitempty"`
   Subject   string                        `json:"subject,omitempty"`
+  Origin    string                        `json:"origin,omitempty"`
   Segments  []string                      `json:"segments,omitempty"`
   Data      interface{}                   `json:"data,omitempty"`
   Device    *ConversationMetaUpdateDevice `json:"device,omitempty"`
