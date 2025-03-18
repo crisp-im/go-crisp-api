@@ -13,13 +13,15 @@ import (
 
 // AnalyticsGenerateQuery mapping
 type AnalyticsGenerateQuery struct {
-  Metric      string                      `json:"metric"`
-  Type        string                      `json:"type"`
-  Aggregator  *string                     `json:"aggregator,omitempty"`
-  SplitBy     *string                     `json:"split_by,omitempty"`
-  Filter      *string                     `json:"filter,omitempty"`
-  Date        AnalyticsGenerateQueryDate  `json:"date"`
-  RawExport   *bool                       `json:"raw_export,omitempty"`
+  Metric      string                       `json:"metric"`
+  Type        string                       `json:"type"`
+  Aggregator  *string                      `json:"aggregator,omitempty"`
+  SplitBy     *string                      `json:"split_by,omitempty"`
+  Filter      *interface{}                 `json:"filter,omitempty"`
+  Date        AnalyticsGenerateQueryDate   `json:"date"`
+  If          *AnalyticsGenerateQueryIf    `json:"if,omitempty"`
+  Then        *AnalyticsGenerateQueryThen  `json:"then,omitempty"`
+  RawExport   *bool                        `json:"raw_export,omitempty"`
 }
 
 // AnalyticsGenerateQueryDate mapping
@@ -46,6 +48,18 @@ type AnalyticsGenerateQueryDateDays struct {
 type AnalyticsGenerateQueryDateDay struct {
   HourFrom  string  `json:"hour_from"`
   HourTo    string  `json:"hour_to"`
+}
+
+// AnalyticsGenerateQueryIf mapping
+type AnalyticsGenerateQueryIf struct {
+  Metric   string  `json:"metric"`
+  SplitBy  string  `json:"split_by"`
+}
+
+// AnalyticsGenerateQueryThen mapping
+type AnalyticsGenerateQueryThen struct {
+  Type    *string       `json:"type,omitempty"`
+  Filter  *interface{}  `json:"filter,omitempty"`
 }
 
 // WebsiteAnalyticsGenerateData mapping
