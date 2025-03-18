@@ -81,6 +81,7 @@ type WebsiteSettingsChatbox struct {
   IgnorePrivacy        *bool      `json:"ignore_privacy,omitempty"`
   VisitorCompose       *bool      `json:"visitor_compose,omitempty"`
   FileTransfer         *bool      `json:"file_transfer,omitempty"`
+  AudioRecord          *bool      `json:"audio_record,omitempty"`
   OverlaySearch        *bool      `json:"overlay_search,omitempty"`
   OverlayMode          *bool      `json:"overlay_mode,omitempty"`
   HelpdeskLink         *bool      `json:"helpdesk_link,omitempty"`
@@ -162,6 +163,7 @@ type WebsiteSettingsUpdateChatbox struct {
   IgnorePrivacy        bool       `json:"ignore_privacy,omitempty"`
   VisitorCompose       bool       `json:"visitor_compose,omitempty"`
   FileTransfer         bool       `json:"file_transfer,omitempty"`
+  AudioRecord          bool       `json:"audio_record,omitempty"`
   OverlaySearch        bool       `json:"overlay_search,omitempty"`
   OverlayMode          bool       `json:"overlay_mode,omitempty"`
   HelpdeskLink         bool       `json:"helpdesk_link,omitempty"`
