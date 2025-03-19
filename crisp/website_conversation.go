@@ -873,7 +873,7 @@ type ConversationOriginalData struct {
 
 // ConversationInboxUpdate mapping
 type ConversationInboxUpdate struct {
-  InboxID  *string  `json:"inbox_id,omitempty"`
+  InboxID  *string  `json:"inbox_id"`
 }
 
 // ConversationStateData mapping
