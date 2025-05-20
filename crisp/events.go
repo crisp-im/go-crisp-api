@@ -951,6 +951,9 @@ type EventsReceiveBucketURLStatusGenerated EventsReceiveBucketURLUploadGenerated
 // EventsReceiveBucketURLProcessingGenerated maps bucket:url:processing:generated
 type EventsReceiveBucketURLProcessingGenerated EventsReceiveBucketURLUploadGenerated
 
+// EventsReceiveBucketURLCrawlerGenerated maps bucket:url:crawler:generated
+type EventsReceiveBucketURLCrawlerGenerated EventsReceiveBucketURLUploadGenerated
+
 // EventsReceiveMediaAnimationListed maps media:animation:listed
 type EventsReceiveMediaAnimationListed struct {
   EventsGeneric
@@ -1426,6 +1429,12 @@ func (evt EventsReceiveBucketURLStatusGenerated) String() string {
 
 // String returns the string representation of EventsReceiveBucketURLProcessingGenerated
 func (evt EventsReceiveBucketURLProcessingGenerated) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceiveBucketURLCrawlerGenerated
+func (evt EventsReceiveBucketURLCrawlerGenerated) String() string {
   return Stringify(evt)
 }
 
