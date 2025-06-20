@@ -401,7 +401,7 @@ type HelpdeskLocaleSectionAdd struct {
 // HelpdeskLocaleExternalImport mapping
 type HelpdeskLocaleExternalImport struct {
   HelpdeskURL    string     `json:"helpdesk_url"`
-  DetectLocales  *boolean   `json:"detect_locales,omitempty"`
+  DetectLocales  *bool      `json:"detect_locales,omitempty"`
   OtherLocales   *[]string  `json:"other_locales,omitempty"`
 }
 
