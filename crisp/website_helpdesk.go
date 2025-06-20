@@ -400,7 +400,8 @@ type HelpdeskLocaleSectionAdd struct {
 
 // HelpdeskLocaleExternalImport mapping
 type HelpdeskLocaleExternalImport struct {
-  HelpdeskURL  string  `json:"helpdesk_url"`
+  HelpdeskURL   string     `json:"helpdesk_url"`
+  OtherLocales  *[]string  `json:"other_locales,omitempty"`
 }
 
 // HelpdeskRedirectionAdd mapping
