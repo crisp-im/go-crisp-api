@@ -20,7 +20,7 @@ import (
 
 
 const (
-  libraryVersion = "3.64.1"
+  libraryVersion = "3.64.2"
   defaultRestEndpointURL = "https://api.crisp.chat/v1/"
   userAgent = "go-crisp-api/" + libraryVersion
   acceptContentType = "application/json"
