@@ -211,7 +211,15 @@ type EventsReceiveSessionUpdateAvailability struct {
 type EventsReceiveSessionUpdateVerify struct {
   EventsGeneric
   EventsSessionGeneric
-  IsVerified  *bool  `json:"is_verified"`
+  IsVerified     *bool                                            `json:"is_verified"`
+  Verifications  *[]EventsReceiveSessionUpdateVerifyVerification  `json:"verifications"`
+}
+
+// EventsReceiveSessionUpdateVerifyVerification maps session:update_verify/verifications
+type EventsReceiveSessionUpdateVerifyVerification struct {
+  Identity    *string  `json:"identity"`
+  Method      *string  `json:"method"`
+  VerifiedAt  *uint64  `json:"verified_at"`
 }
 
 // EventsReceiveSessionRequestInitiated maps session:request:initiated

@@ -333,6 +333,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.GetVerifyStatusForConversation(websiteID string, sessionID string) (*ConversationVerify, *Response, error)`
   * **Update Verify Status For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-verify-status-for-conversation)
     * `client.Website.UpdateVerifyStatusForConversation(websiteID string, sessionID string, verified bool) (*Response, error)`
+  * **Request Identity Verification For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#request-identity-verification-for-conversation)
+    * `client.Website.RequestIdentityVerificationForConversation(websiteID string, sessionID string, identity string, method *string) (*Response, error)`
   * **Request Email Transcript For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#request-email-transcript-for-conversation)
     * `client.Website.RequestEmailTranscriptForConversation(websiteID string, sessionID string, to string, email string) (*Response, error)`
   * **Request Chatbox Binding Purge For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#request-chatbox-binding-purge-for-conversation)

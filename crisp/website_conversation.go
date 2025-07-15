@@ -38,6 +38,7 @@ type Conversation struct {
   LastMessage     *string                      `json:"last_message,omitempty"`
   PreviewMessage  *ConversationPreviewMessage  `json:"preview_message,omitempty"`
   Topic           *string                      `json:"topic,omitempty"`
+  Verifications   *[]ConversationVerification  `json:"verifications,omitempty"`
   Participants    *[]ConversationParticipant   `json:"participants,omitempty"`
   Mentions        *[]string                    `json:"mentions,omitempty"`
   Compose         *ConversationCompose         `json:"compose,omitempty"`
@@ -891,6 +892,13 @@ type ConversationStateUpdate struct {
   State  *string  `json:"state,omitempty"`
 }
 
+// ConversationVerification mapping
+type ConversationVerification struct {
+  Identity    *string  `json:"identity,omitempty"`
+  Method      *string  `json:"method,omitempty"`
+  VerifiedAt  *uint64  `json:"verified_at,omitempty"`
+}
+
 // ConversationParticipantsData mapping
 type ConversationParticipantsData struct {
   Data  *ConversationParticipants  `json:"data,omitempty"`
@@ -934,12 +942,19 @@ type ConversationVerifyData struct {
 
 // ConversationVerify mapping
 type ConversationVerify struct {
-  Verified  *bool  `json:"verified,omitempty"`
+  Verified       *bool                        `json:"verified,omitempty"`
+  Verifications  *[]ConversationVerification  `json:"verifications,omitempty"`
 }
 
 // ConversationVerifyUpdate mapping
 type ConversationVerifyUpdate struct {
   Verified  *bool  `json:"verified,omitempty"`
+}
+
+// ConversationVerifyIdentityRequest mapping
+type ConversationVerifyIdentityRequest struct {
+  Identity  *string  `json:"identity,omitempty"`
+  Method    *string  `json:"method,omitempty"`
 }
 
 // ConversationTranscriptRequest mapping
@@ -1945,6 +1960,15 @@ func (service *WebsiteService) GetVerifyStatusForConversation(websiteID string, 
 func (service *WebsiteService) UpdateVerifyStatusForConversation(websiteID string, sessionID string, verified bool) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/verify", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationVerifyUpdate{&verified})
+
+  return service.client.Do(req, nil)
+}
+
+
+// RequestIdentityVerificationForConversation requests a verification of an identity channel for conversation.
+func (service *WebsiteService) RequestIdentityVerificationForConversation(websiteID string, sessionID string, identity string, method *string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/verify/identity", websiteID, sessionID)
+  req, _ := service.client.NewRequest("POST", url, ConversationVerifyIdentityRequest{Identity: &identity, Method: method})
 
   return service.client.Do(req, nil)
 }
