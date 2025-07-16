@@ -954,14 +954,16 @@ type ConversationVerifyUpdate struct {
 
 // ConversationVerifyIdentityRequest mapping
 type ConversationVerifyIdentityRequest struct {
-  Identity  *string  `json:"identity,omitempty"`
-  Method    *string  `json:"method,omitempty"`
+  Identity   *string  `json:"identity,omitempty"`
+  Method     *string  `json:"method,omitempty"`
+  Recipient  *string  `json:"recipient,omitempty"`
 }
 
 // ConversationVerifyIdentityRedeem mapping
 type ConversationVerifyIdentityRedeem struct {
-  Identity  *string  `json:"identity,omitempty"`
-  Token     *string  `json:"token,omitempty"`
+  Identity   *string  `json:"identity,omitempty"`
+  Token      *string  `json:"token,omitempty"`
+  Recipient  *string  `json:"recipient,omitempty"`
 }
 
 // ConversationTranscriptRequest mapping
@@ -1973,18 +1975,18 @@ func (service *WebsiteService) UpdateVerifyStatusForConversation(websiteID strin
 
 
 // RequestIdentityVerificationForConversation requests a verification of an identity channel for conversation.
-func (service *WebsiteService) RequestIdentityVerificationForConversation(websiteID string, sessionID string, identity string, method *string) (*Response, error) {
+func (service *WebsiteService) RequestIdentityVerificationForConversation(websiteID string, sessionID string, request ConversationVerifyIdentityRequest) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/verify/identity", websiteID, sessionID)
-  req, _ := service.client.NewRequest("POST", url, ConversationVerifyIdentityRequest{Identity: &identity, Method: method})
+  req, _ := service.client.NewRequest("POST", url, request)
 
   return service.client.Do(req, nil)
 }
 
 
 // RedeemIdentityVerificationLinkForConversation redeems a verification link to verify an identity channel for conversation.
-func (service *WebsiteService) RedeemIdentityVerificationLinkForConversation(websiteID string, sessionID string, identity string, token string) (*Response, error) {
+func (service *WebsiteService) RedeemIdentityVerificationLinkForConversation(websiteID string, sessionID string, redeem ConversationVerifyIdentityRedeem) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/verify/identity/link", websiteID, sessionID)
-  req, _ := service.client.NewRequest("PUT", url, ConversationVerifyIdentityRedeem{Identity: &identity, Token: &token})
+  req, _ := service.client.NewRequest("PUT", url, redeem)
 
   return service.client.Do(req, nil)
 }
