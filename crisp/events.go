@@ -219,6 +219,7 @@ type EventsReceiveSessionUpdateVerify struct {
 type EventsReceiveSessionUpdateVerifyVerification struct {
   Identity    *string  `json:"identity"`
   Method      *string  `json:"method"`
+  Annotation  *string  `json:"annotation"`
   VerifiedAt  *uint64  `json:"verified_at"`
 }
 

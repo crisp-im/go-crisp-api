@@ -896,6 +896,7 @@ type ConversationStateUpdate struct {
 type ConversationVerification struct {
   Identity    *string  `json:"identity,omitempty"`
   Method      *string  `json:"method,omitempty"`
+  Annotation  *string  `json:"annotation,omitempty"`
   VerifiedAt  *uint64  `json:"verified_at,omitempty"`
 }
 
