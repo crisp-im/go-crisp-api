@@ -957,6 +957,12 @@ type ConversationVerifyIdentityRequest struct {
   Method    *string  `json:"method,omitempty"`
 }
 
+// ConversationVerifyIdentityRedeem mapping
+type ConversationVerifyIdentityRedeem struct {
+  Identity  *string  `json:"identity,omitempty"`
+  Token     *string  `json:"token,omitempty"`
+}
+
 // ConversationTranscriptRequest mapping
 type ConversationTranscriptRequest struct {
   To     *string  `json:"to,omitempty"`
@@ -1969,6 +1975,15 @@ func (service *WebsiteService) UpdateVerifyStatusForConversation(websiteID strin
 func (service *WebsiteService) RequestIdentityVerificationForConversation(websiteID string, sessionID string, identity string, method *string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/verify/identity", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, ConversationVerifyIdentityRequest{Identity: &identity, Method: method})
+
+  return service.client.Do(req, nil)
+}
+
+
+// RedeemIdentityVerificationLinkForConversation redeems a verification link to verify an identity channel for conversation.
+func (service *WebsiteService) RedeemIdentityVerificationLinkForConversation(websiteID string, sessionID string, identity string, token string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/verify/identity/link", websiteID, sessionID)
+  req, _ := service.client.NewRequest("PUT", url, ConversationVerifyIdentityRedeem{Identity: &identity, Token: &token})
 
   return service.client.Do(req, nil)
 }
