@@ -866,8 +866,9 @@ type EventsIdentityVerifyRequest struct {
   EventsGeneric
   EventsSessionGeneric
   EventsPluginGeneric
-  Target  *string  `json:"target"`
-  Code    *string  `json:"code"`
+  Target      *string  `json:"target"`
+  Code        *string  `json:"code"`
+  ConfirmURL  *string  `json:"confirm_url"`
 }
 
 // EventsWidgetActionProcessed maps widget:action:processed
