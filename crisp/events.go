@@ -861,6 +861,15 @@ type EventsCallRequestRejected struct {
   EventsCallGeneric
 }
 
+// EventsIdentityVerifyRequest maps identity:verify:request
+type EventsIdentityVerifyRequest struct {
+  EventsGeneric
+  EventsSessionGeneric
+  EventsPluginGeneric
+  Target  *string  `json:"target"`
+  Code    *string  `json:"code"`
+}
+
 // EventsWidgetActionProcessed maps widget:action:processed
 type EventsWidgetActionProcessed struct {
   EventsGeneric
@@ -1371,6 +1380,12 @@ func (evt EventsCallRequestInitiated) String() string {
 
 // String returns the string representation of EventsCallRequestRejected
 func (evt EventsCallRequestRejected) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsIdentityVerifyRequest
+func (evt EventsIdentityVerifyRequest) String() string {
   return Stringify(evt)
 }
 
