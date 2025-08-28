@@ -812,18 +812,18 @@ type ConversationMetaUpdate struct {
   Address   string                        `json:"address,omitempty"`
   Subject   string                        `json:"subject,omitempty"`
   Origin    string                        `json:"origin,omitempty"`
-  Segments  []string                      `json:"segments,omitempty"`
+  Segments  *[]string                     `json:"segments,omitempty"`
   Data      interface{}                   `json:"data,omitempty"`
   Device    *ConversationMetaUpdateDevice `json:"device,omitempty"`
 }
 
 // ConversationMetaUpdateDevice mapping
 type ConversationMetaUpdateDevice struct {
-  Capabilities  []string                                  `json:"capabilities,omitempty"`
+  Capabilities  *[]string                                 `json:"capabilities,omitempty"`
   Geolocation   *ConversationMetaUpdateDeviceGeolocation  `json:"geolocation,omitempty"`
   System        *ConversationMetaUpdateDeviceSystem       `json:"system,omitempty"`
   Timezone      int16                                     `json:"timezone,omitempty"`
-  Locales       []string                                  `json:"locales,omitempty"`
+  Locales       *[]string                                 `json:"locales,omitempty"`
 }
 
 // ConversationMetaUpdateDeviceGeolocation mapping
