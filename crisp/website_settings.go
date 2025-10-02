@@ -89,6 +89,7 @@ type WebsiteSettingsChatbox struct {
   StatusHealthDead     *bool      `json:"status_health_dead,omitempty"`
   CheckDomain          *bool      `json:"check_domain,omitempty"`
   ColorTheme           *string    `json:"color_theme,omitempty"`
+  LayoutTheme          *string    `json:"layout_theme,omitempty"`
   TextTheme            *string    `json:"text_theme,omitempty"`
   WelcomeMessage       *string    `json:"welcome_message,omitempty"`
   Locale               *string    `json:"locale,omitempty"`
@@ -171,6 +172,7 @@ type WebsiteSettingsUpdateChatbox struct {
   StatusHealthDead     bool       `json:"status_health_dead,omitempty"`
   CheckDomain          bool       `json:"check_domain,omitempty"`
   ColorTheme           string     `json:"color_theme,omitempty"`
+  LayoutTheme          string     `json:"layout_theme,omitempty"`
   TextTheme            string     `json:"text_theme,omitempty"`
   WelcomeMessage       string     `json:"welcome_message,omitempty"`
   Locale               string     `json:"locale,omitempty"`
