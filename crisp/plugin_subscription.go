@@ -23,26 +23,28 @@ type PluginSubscriptionData struct {
 
 // PluginSubscription mapping
 type PluginSubscription struct {
-  ID            *string                    `json:"id,omitempty"`
-  URN           *string                    `json:"urn,omitempty"`
-  Type          *string                    `json:"type,omitempty"`
-  Category      *string                    `json:"category,omitempty"`
-  Name          *string                    `json:"name,omitempty"`
-  Summary       *string                    `json:"summary,omitempty"`
-  Price         *uint16                    `json:"price,omitempty"`
-  Plans         *[]PluginSubscriptionPlan  `json:"plans,omitempty"`
-  Icon          *string                    `json:"icon,omitempty"`
-  WebsiteURL    *string                    `json:"website_url,omitempty"`
-  ContactURL    *string                    `json:"contact_url,omitempty"`
-  TermsURL      *string                    `json:"terms_url,omitempty"`
-  PrivacyURL    *string                    `json:"privacy_url,omitempty"`
-  HelpURL       *string                    `json:"help_url,omitempty"`
-  VideoURL      *string                    `json:"video_url,omitempty"`
-  Configurable  *bool                      `json:"configurable,omitempty"`
-  Since         *string                    `json:"since,omitempty"`
-  Active        *bool                      `json:"active,omitempty"`
-  WebsiteID     *string                    `json:"website_id,omitempty"`
-  CardID        *string                    `json:"card_id,omitempty"`
+  ID              *string                    `json:"id,omitempty"`
+  URN             *string                    `json:"urn,omitempty"`
+  Type            *string                    `json:"type,omitempty"`
+  Category        *string                    `json:"category,omitempty"`
+  Name            *string                    `json:"name,omitempty"`
+  Summary         *string                    `json:"summary,omitempty"`
+  Price           *uint16                    `json:"price,omitempty"`
+  Plans           *[]PluginSubscriptionPlan  `json:"plans,omitempty"`
+  Icon            *string                    `json:"icon,omitempty"`
+  WebsiteURL      *string                    `json:"website_url,omitempty"`
+  ContactURL      *string                    `json:"contact_url,omitempty"`
+  TermsURL        *string                    `json:"terms_url,omitempty"`
+  PrivacyURL      *string                    `json:"privacy_url,omitempty"`
+  HelpURL         *string                    `json:"help_url,omitempty"`
+  VideoURL        *string                    `json:"video_url,omitempty"`
+  Configurable    *bool                      `json:"configurable,omitempty"`
+  Since           *string                    `json:"since,omitempty"`
+  Active          *bool                      `json:"active,omitempty"`
+  BillPeriod      *string                    `json:"bill_period,omitempty"`
+  BillValidUntil  *string                    `json:"bill_valid_until,omitempty"`
+  WebsiteID       *string                    `json:"website_id,omitempty"`
+  CardID          *string                    `json:"card_id,omitempty"`
 }
 
 // PluginSubscriptionPlan mapping
