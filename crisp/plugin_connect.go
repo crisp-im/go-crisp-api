@@ -56,11 +56,17 @@ type PluginConnectEndpointsData struct {
 // PluginConnectEndpoints mapping
 type PluginConnectEndpoints struct {
   Socket  *PluginConnectEndpointsSocket  `json:"socket,omitempty"`
+  Rescue  *PluginConnectEndpointsRescue  `json:"rescue,omitempty"`
 }
 
 // PluginConnectEndpointsSocket mapping
 type PluginConnectEndpointsSocket struct {
   App  *string  `json:"app,omitempty"`
+}
+
+// PluginConnectEndpointsRescue mapping
+type PluginConnectEndpointsRescue struct {
+  Socket  *PluginConnectEndpointsSocket  `json:"app,omitempty"`
 }
 
 
