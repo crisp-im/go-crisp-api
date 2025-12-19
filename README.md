@@ -558,9 +558,11 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Update Subscription Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-subscription-settings)
     * `client.Plugin.UpdateSubscriptionSettings(websiteID string, pluginID string, settings interface{}) (*Response, error)`
   * **Get Plugin Usage Bills** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-plugin-usage-bills)
-    * `client.Plugin.GetPluginUsageBills(websiteID string, pluginID string) (*Response, error)`
+    * `client.Plugin.GetPluginUsageBills(websiteID string, pluginID string) (*[]PluginBillUsage, *Response, error)`
   * **Report Plugin Usage To Bill** [`plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#report-plugin-usage-to-bill)
     * `client.Plugin.ReportPluginUsageToBill(websiteID string, pluginID string, usage PluginSubscriptionBillUsageReport) (*Response, error)`
+  * **Get Plugin Attest Provenance** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-plugin-attest-provenance)
+    * `client.Plugin.GetPluginAttestProvenance(websiteID string, pluginID string) (*PluginAttestProvenance, *Response, error)`
   * **Forward Plugin Payload To Channel** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#forward-plugin-payload-to-channel)
     * `client.Plugin.ForwardPluginPayloadToChannel(websiteID string, pluginID string, payload PluginSubscriptionChannelForward) (*Response, error)`
   * **Dispatch Plugin Event** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#dispatch-plugin-event)

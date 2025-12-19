@@ -95,6 +95,52 @@ type PluginSubscriptionSettings struct {
   CallbackURL       *string       `json:"callback_url,omitempty"`
 }
 
+// PluginBillUsageData mapping
+type PluginBillUsageData struct {
+  Data  *[]PluginBillUsage  `json:"data,omitempty"`
+}
+
+// PluginBillUsage mapping
+type PluginBillUsage struct {
+  Name   *string   `json:"name,omitempty"`
+  Units  *uint32   `json:"units,omitempty"`
+  Price  *float32  `json:"price,omitempty"`
+}
+
+// PluginAttestProvenanceData mapping
+type PluginAttestProvenanceData struct {
+  Data  *PluginAttestProvenance  `json:"data,omitempty"`
+}
+
+// PluginAttestProvenance mapping
+type PluginAttestProvenance struct {
+  Payload  *PluginAttestProvenancePayload  `json:"payload,omitempty"`
+  Signed   *string                         `json:"signed,omitempty"`
+}
+
+// PluginAttestProvenancePayload mapping
+type PluginAttestProvenancePayload struct {
+  Website  *PluginAttestProvenancePayloadWebsite  `json:"website,omitempty"`
+  User     *PluginAttestProvenancePayloadUser     `json:"user,omitempty"`
+  Plugin   *PluginAttestProvenancePayloadPlugin   `json:"plugin,omitempty"`
+}
+
+// PluginAttestProvenancePayloadWebsite mapping
+type PluginAttestProvenancePayloadWebsite struct {
+  WebsiteID  *string  `json:"website_id,omitempty"`
+}
+
+// PluginAttestProvenancePayloadUser mapping
+type PluginAttestProvenancePayloadUser struct {
+  UserID  *string  `json:"user_id,omitempty"`
+  Role    *string  `json:"role,omitempty"`
+}
+
+// PluginAttestProvenancePayloadPlugin mapping
+type PluginAttestProvenancePayloadPlugin struct {
+  PluginID  *string  `json:"plugin_id,omitempty"`
+}
+
 
 // String returns the string representation of PluginSubscription
 func (instance PluginSubscription) String() string {
@@ -205,11 +251,17 @@ func (service *PluginService) UpdateSubscriptionSettings(websiteID string, plugi
 
 
 // GetPluginUsageBills acquires all non-settled (ie. open) usage bills for a subscribed plugin.
-func (service *PluginService) GetPluginUsageBills(websiteID string, pluginID string) (*Response, error) {
+func (service *PluginService) GetPluginUsageBills(websiteID string, pluginID string) (*[]PluginBillUsage, *Response, error) {
   url := fmt.Sprintf("plugins/subscription/%s/%s/bill/usage", websiteID, pluginID)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  return service.client.Do(req, nil)
+  bills := new(PluginBillUsageData)
+  resp, err := service.client.Do(req, bills)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return bills.Data, resp, err
 }
 
 
@@ -219,6 +271,21 @@ func (service *PluginService) ReportPluginUsageToBill(websiteID string, pluginID
   req, _ := service.client.NewRequest("POST", url, usage)
 
   return service.client.Do(req, nil)
+}
+
+
+// GetPluginAttestProvenance attests for plugin user provenance, using the plugin signature secret
+func (service *PluginService) GetPluginAttestProvenance(websiteID string, pluginID string) (*PluginAttestProvenance, *Response, error) {
+  url := fmt.Sprintf("plugins/subscription/%s/%s/attest/provenance", websiteID, pluginID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  provenance := new(PluginAttestProvenanceData)
+  resp, err := service.client.Do(req, provenance)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return provenance.Data, resp, err
 }
 
 
