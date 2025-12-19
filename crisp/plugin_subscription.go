@@ -114,8 +114,9 @@ type PluginAttestProvenanceData struct {
 
 // PluginAttestProvenance mapping
 type PluginAttestProvenance struct {
-  Payload  *PluginAttestProvenancePayload  `json:"payload,omitempty"`
-  Signed   *string                         `json:"signed,omitempty"`
+  Payload   *PluginAttestProvenancePayload  `json:"payload,omitempty"`
+  Signed    *string                         `json:"signed,omitempty"`
+  ExpireAt  *uint64                         `json:"expire_at,omitempty"`
 }
 
 // PluginAttestProvenancePayload mapping
