@@ -86,6 +86,7 @@ type WebsiteSettingsChatbox struct {
   OverlayMode          *bool      `json:"overlay_mode,omitempty"`
   HelpdeskLink         *bool      `json:"helpdesk_link,omitempty"`
   HelpdeskOnly         *bool      `json:"helpdesk_only,omitempty"`
+  HelpdeskNavigate     *string    `json:"helpdesk_navigate,omitempty"`
   StatusHealthDead     *bool      `json:"status_health_dead,omitempty"`
   CheckDomain          *bool      `json:"check_domain,omitempty"`
   ColorTheme           *string    `json:"color_theme,omitempty"`
@@ -170,6 +171,7 @@ type WebsiteSettingsUpdateChatbox struct {
   OverlayMode          bool       `json:"overlay_mode,omitempty"`
   HelpdeskLink         bool       `json:"helpdesk_link,omitempty"`
   HelpdeskOnly         bool       `json:"helpdesk_only,omitempty"`
+  HelpdeskNavigate     string     `json:"helpdesk_navigate,omitempty"`
   StatusHealthDead     bool       `json:"status_health_dead,omitempty"`
   CheckDomain          bool       `json:"check_domain,omitempty"`
   ColorTheme           string     `json:"color_theme,omitempty"`
