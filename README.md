@@ -580,6 +580,24 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **⭐ Get Connect Endpoints** [`plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-connect-endpoints)
     * `client.Plugin.GetConnectEndpoints() (*PluginConnectEndpoints, *Response, error)`
 
+### Plan
+
+* #### **Plan Subscription**
+  * **List All Active Plan Subscriptions** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-all-active-plan-subscriptions)
+    * `client.Plan.ListAllActiveSubscriptions() (*[]PlanSubscription, *Response, error)`
+  * **Get Plan Subscription For A Website** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-plan-subscription-for-a-website)
+    * `client.Plan.GetPlanSubscriptionForWebsite(websiteID string) (*PlanSubscription, *Response, error)`
+  * **Subscribe Website To Plan** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#subscribe-website-to-plan)
+    * `client.Plan.SubscribeWebsiteToPlan(websiteID string, planID string) (*Response, error)`
+  * **Unsubscribe Plan From Website** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#unsubscribe-plan-from-website)
+    * `client.Plan.UnsubscribePlanFromWebsite(websiteID string) (*Response, error)`
+  * **Change Bill Period For Website Plan Subscription** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#change-bill-period-for-website-plan-subscription)
+    * `client.Plan.ChangeBillPeriodForWebsitePlanSubscription(websiteID string, period string) (*Response, error)`
+  * **Check Coupon Availability For Website Plan Subscription** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-coupon-availability-for-website-plan-subscription)
+    * `client.Plan.CheckCouponAvailabilityForWebsitePlanSubscription(websiteID string, code string) (*PlanSubscriptionCoupon, *Response, error)`
+  * **Redeem Coupon For Website Plan Subscription** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#redeem-coupon-for-website-plan-subscription)
+    * `client.Plan.RedeemCouponForWebsitePlanSubscription(websiteID string, code string) (*Response, error)`
+
 ## Realtime Events
 
 You can bind to realtime events from Crisp, in order to get notified of incoming messages and updates in websites.
