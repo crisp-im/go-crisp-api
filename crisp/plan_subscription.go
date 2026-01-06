@@ -124,7 +124,7 @@ func (service *PlanService) GetPlanSubscriptionForWebsite(websiteID string) (*Pl
   url := fmt.Sprintf("plans/subscription/%s", websiteID)
   req, _ := service.client.NewRequest("GET", url, nil)
 
-  plans := new(PlanSubscriptionListData)
+  plans := new(PlanSubscriptionData)
   resp, err := service.client.Do(req, plans)
   if err != nil {
     return nil, resp, err
