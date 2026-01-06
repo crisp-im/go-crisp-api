@@ -4,9 +4,9 @@
 
 The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, access your agent accounts from your Go code.
 
-Copyright 2025 Crisp IM SAS. See LICENSE for copying information.
+Copyright 2026 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 22/11/2025
+* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 06/01/2026
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -574,9 +574,9 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **⭐ Check Connect Session Validity** [`plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-connect-session-validity)
     * `client.Plugin.CheckConnectSessionValidity() (*Response, error)`
   * **⭐ List All Connect Websites** [`plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-all-connect-websites)
-    * `client.Plugin.ListAllConnectWebsites(pageNumber uint, filterConfigured bool) (*[]PluginConnectAllWebsites, *Response, error)`
+    * `client.Plugin.ListAllConnectWebsites(pageNumber uint, filterConfigured bool, includePlan bool) (*[]PluginConnectAllWebsites, *Response, error)`
   * **⭐ List Connect Websites Since** [`plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-all-connect-websites)
-    * `client.Plugin.ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool) (*[]PluginConnectWebsitesSince, *Response, error)`
+    * `client.Plugin.ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool, includePlan bool) (*[]PluginConnectWebsitesSince, *Response, error)`
   * **⭐ Get Connect Endpoints** [`plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-connect-endpoints)
     * `client.Plugin.GetConnectEndpoints() (*PluginConnectEndpoints, *Response, error)`
 

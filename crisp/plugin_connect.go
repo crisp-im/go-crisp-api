@@ -119,8 +119,11 @@ func (service *PluginService) CheckConnectSessionValidity() (*Response, error) {
 
 
 // ListAllConnectWebsites lists all websites linked to connected plugin.
-func (service *PluginService) ListAllConnectWebsites(pageNumber uint, filterConfigured bool) (*[]PluginConnectAllWebsites, *Response, error) {
-  var filterConfiguredValue string
+func (service *PluginService) ListAllConnectWebsites(pageNumber uint, filterConfigured bool, includePlan bool) (*[]PluginConnectAllWebsites, *Response, error) {
+  var (
+    filterConfiguredValue string
+    includePlanValue string
+  )
 
   if filterConfigured == true {
     filterConfiguredValue = "1"
@@ -128,7 +131,13 @@ func (service *PluginService) ListAllConnectWebsites(pageNumber uint, filterConf
     filterConfiguredValue = "0"
   }
 
-  url := fmt.Sprintf("plugin/connect/websites/all/%d?filter_configured=%s", pageNumber, url.QueryEscape(filterConfiguredValue))
+  if includePlan == true {
+    includePlanValue = "1"
+  } else {
+    includePlanValue = "0"
+  }
+
+  url := fmt.Sprintf("plugin/connect/websites/all/%d?filter_configured=%s&include_plan=%s", pageNumber, url.QueryEscape(filterConfiguredValue), url.QueryEscape(includePlanValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   websites := new(PluginConnectAllWebsitesData)
@@ -142,13 +151,16 @@ func (service *PluginService) ListAllConnectWebsites(pageNumber uint, filterConf
 
 
 // ListConnectWebsitesSince lists the websites linked or unlinked or updated for connected plugin, since given date.
-func (service *PluginService) ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool) (*[]PluginConnectWebsitesSince, *Response, error) {
+func (service *PluginService) ListConnectWebsitesSince(dateSince time.Time, filterConfigured bool, includePlan bool) (*[]PluginConnectWebsitesSince, *Response, error) {
   dateSinceFormat, err := dateSince.UTC().MarshalText()
   if err != nil {
     return nil, nil, err
   }
 
-  var filterConfiguredValue string
+  var (
+    filterConfiguredValue string
+    includePlanValue string
+  )
 
   if filterConfigured == true {
     filterConfiguredValue = "1"
@@ -156,7 +168,13 @@ func (service *PluginService) ListConnectWebsitesSince(dateSince time.Time, filt
     filterConfiguredValue = "0"
   }
 
-  url := fmt.Sprintf("plugin/connect/websites/since?date_since=%s&filter_configured=%s", url.QueryEscape(string(dateSinceFormat[:])), url.QueryEscape(filterConfiguredValue))
+  if includePlan == true {
+    includePlanValue = "1"
+  } else {
+    includePlanValue = "0"
+  }
+
+  url := fmt.Sprintf("plugin/connect/websites/since?date_since=%s&filter_configured=%s&include_plan=%s", url.QueryEscape(string(dateSinceFormat[:])), url.QueryEscape(filterConfiguredValue), url.QueryEscape(includePlanValue))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   websites := new(PluginConnectWebsitesSinceData)
