@@ -1030,6 +1030,19 @@ type EventsReceivePluginSettingsSaved struct {
   Settings  *interface{}  `json:"settings"`
 }
 
+// EventsReceivePlanSubscriptionUpdated maps plan:subscription:updated
+type EventsReceivePlanSubscriptionUpdated struct {
+  EventsGeneric
+  EventsWebsiteGeneric
+  Plan  *EventsReceivePlanSubscriptionUpdatedPlan  `json:"plan,omitempty"`
+}
+
+// EventsReceivePlanSubscriptionUpdatedPlan maps plan:subscription:updated/plan
+type EventsReceivePlanSubscriptionUpdatedPlan struct {
+  ID    *string  `json:"id"`
+  Name  *string  `json:"name"`
+}
+
 
 // String returns the string representation of EventsReceiveSessionUpdateAvailability
 func (evt EventsReceiveSessionUpdateAvailability) String() string {
@@ -1495,6 +1508,12 @@ func (evt EventsReceivePluginEvent) String() string {
 
 // String returns the string representation of EventsReceivePluginSettingsSaved
 func (evt EventsReceivePluginSettingsSaved) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceivePlanSubscriptionUpdated
+func (evt EventsReceivePlanSubscriptionUpdated) String() string {
   return Stringify(evt)
 }
 
