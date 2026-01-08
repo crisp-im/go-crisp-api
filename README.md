@@ -6,7 +6,7 @@ The Crisp API Golang wrapper. Authenticate, send messages, fetch conversations, 
 
 Copyright 2026 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 06/01/2026
+* **📝 Implements**: [REST API Reference (V1)](https://docs.crisp.chat/references/rest-api/v1/) at revision: 08/01/2026
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -137,6 +137,22 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.GetVerifyKey(websiteID string) (*WebsiteVerifyKey, *Response, error)`
   * **Roll Verify Key** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#roll-verify-key)
     * `client.Website.RollVerifyKey(websiteID string) (*Response, error)`
+
+* #### **Website Inbox**
+  * **List Inboxes** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-website-inboxes)
+    * `client.Website.ListInboxes(websiteID string, pageNumber uint) (*[]WebsiteInbox, *Response, error)`
+  * **Batch Order Inboxes** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#batch-order-website-inboxes)
+    * `client.Website.BatchOrderInboxes(websiteID string, orders WebsiteInboxOrdersItem) (*Response, error)`
+  * **Create A New Inbox** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-a-new-website-inbox)
+    * `client.Website.CreateNewInbox(websiteID string, inbox WebsiteInboxItem) (*WebsiteInboxNew, *Response, error)`
+  * **Check If Inbox Exists** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-website-inbox-exists)
+    * `client.Website.CheckInboxExists(websiteID string, inboxID string) (*Response, error)`
+  * **Get Inbox** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-website-inbox)
+    * `client.Website.GetInbox(websiteID string, inboxID string) (*WebsiteInbox, *Response, error)`
+  * **Save Inbox** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-website-inbox)
+    * `client.Website.SaveInbox(websiteID string, inboxID string, inbox WebsiteInboxItem) (*Response, error)`
+  * **Delete Inbox** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#delete-website-inbox)
+    * `client.Website.DeleteInbox(websiteID string, inboxID string) (*Response, error)`
 
 * #### **Website Settings**
   * **Get Website Settings** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-website-settings)
