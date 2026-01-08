@@ -58,7 +58,7 @@ type WebsiteInboxItemCondition struct {
 
 // WebsiteInboxOrdersItem mapping
 type WebsiteInboxOrdersItem struct {
-  Orders  WebsiteInboxOrdersItem  `json:"orders"`
+  Orders  []WebsiteInboxOrderItem  `json:"orders"`
 }
 
 // WebsiteInboxOrderItem mapping
