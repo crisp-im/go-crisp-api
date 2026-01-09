@@ -1039,8 +1039,9 @@ type EventsReceivePlanSubscriptionUpdated struct {
 
 // EventsReceivePlanSubscriptionUpdatedPlan maps plan:subscription:updated/plan
 type EventsReceivePlanSubscriptionUpdatedPlan struct {
-  ID    *string  `json:"id"`
-  Name  *string  `json:"name"`
+  ID        *string  `json:"id"`
+  Name      *string  `json:"name"`
+  Trialing  *bool    `json:"trialing"`
 }
 
 
