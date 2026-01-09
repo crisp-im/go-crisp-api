@@ -30,9 +30,17 @@ type PluginConnectAllWebsitesData struct {
 
 // PluginConnectAllWebsites mapping
 type PluginConnectAllWebsites struct {
-  WebsiteID  *string       `json:"website_id,omitempty"`
-  Token      *string       `json:"token,omitempty"`
-  Settings   *interface{}  `json:"settings,omitempty"`
+  WebsiteID  *string                        `json:"website_id,omitempty"`
+  Token      *string                        `json:"token,omitempty"`
+  Settings   *interface{}                   `json:"settings,omitempty"`
+  Plan       *PluginConnectAllWebsitesPlan  `json:"plan,omitempty"`
+}
+
+// PluginConnectAllWebsitesPlan mapping
+type PluginConnectAllWebsitesPlan struct {
+  ID        *string  `json:"id,omitempty"`
+  Name      *string  `json:"name,omitempty"`
+  Trialing  *bool    `json:"trialing,omitempty"`
 }
 
 // PluginConnectWebsitesSinceData mapping
@@ -42,10 +50,8 @@ type PluginConnectWebsitesSinceData struct {
 
 // PluginConnectWebsitesSince mapping
 type PluginConnectWebsitesSince struct {
-  WebsiteID   *string       `json:"website_id,omitempty"`
-  Token       *string       `json:"token,omitempty"`
-  Settings    *interface{}  `json:"settings,omitempty"`
-  Difference  *string       `json:"difference,omitempty"`
+  PluginConnectAllWebsites
+  Difference  *string  `json:"difference,omitempty"`
 }
 
 // PluginConnectEndpointsData mapping
