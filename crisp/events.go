@@ -975,8 +975,9 @@ type EventsReceiveBucketURLCrawlerGenerated EventsReceiveBucketURLUploadGenerate
 // EventsReceiveMediaAnimationListed maps media:animation:listed
 type EventsReceiveMediaAnimationListed struct {
   EventsGeneric
-  ID       *int                                        `json:"id"`
-  Results  *[]EventsReceiveMediaAnimationListedResult  `json:"results"`
+  Identifier  *string                                     `json:"identifier"`
+  ID          *int                                        `json:"id"`
+  Results     *[]EventsReceiveMediaAnimationListedResult  `json:"results"`
 }
 
 // EventsReceiveMediaAnimationListedResult maps media:animation:listed/results
