@@ -337,6 +337,8 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error)`
   * **⭐ Change Conversation State** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#change-conversation-state)
     * `client.Website.ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error)`
+  * **Get Conversation Relations** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-conversation-relations)
+    * `client.Website.GetConversationRelations(websiteID string, sessionID string) (*ConversationRelations, *Response, error)`
   * **Get Conversation Participants** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-conversation-participants)
     * `client.Website.GetConversationParticipants(websiteID string, sessionID string) (*ConversationParticipants, *Response, error)`
   * **Save Conversation Participants** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#save-conversation-participants)

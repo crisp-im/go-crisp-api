@@ -908,6 +908,22 @@ type ConversationVerification struct {
   Annotation  *string  `json:"annotation,omitempty"`
 }
 
+// ConversationRelationsData mapping
+type ConversationRelationsData struct {
+  Data  *ConversationRelations  `json:"data,omitempty"`
+}
+
+// ConversationRelations mapping
+type ConversationRelations struct {
+  Conversations  *ConversationRelationsConversations  `json:"conversations,omitempty"`
+}
+
+// ConversationRelationsConversations mapping
+type ConversationRelationsConversations struct {
+  Parent    *string    `json:"parent,omitempty"`
+  Children  *[]string  `json:"children,omitempty"`
+}
+
 // ConversationParticipantsData mapping
 type ConversationParticipantsData struct {
   Data  *ConversationParticipants  `json:"data,omitempty"`
@@ -1171,6 +1187,12 @@ func (instance ConversationFile) String() string {
 
 // String returns the string representation of ConversationState
 func (instance ConversationState) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of ConversationRelations
+func (instance ConversationRelations) String() string {
   return Stringify(instance)
 }
 
@@ -1907,6 +1929,21 @@ func (service *WebsiteService) ChangeConversationState(websiteID string, session
   req, _ := service.client.NewRequest("PATCH", url, ConversationStateUpdate{&state})
 
   return service.client.Do(req, nil)
+}
+
+
+// GetConversationRelations resolves conversation relations.
+func (service *WebsiteService) GetConversationRelations(websiteID string, sessionID string) (*ConversationRelations, *Response, error) {
+  url := fmt.Sprintf("website/%s/conversation/%s/relations", websiteID, sessionID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  relations := new(ConversationRelationsData)
+  resp, err := service.client.Do(req, relations)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return relations.Data, resp, err
 }
 
 
