@@ -170,6 +170,7 @@ type EventsReceiveGenericMessage struct {
   User         *EventsReceiveCommonMessageUser         `json:"user"`
   References   *[]EventsReceiveCommonMessageReference  `json:"references,omitempty"`
   Original     *EventsReceiveCommonMessageOriginal     `json:"original,omitempty"`
+  Properties   *interface{}                            `json:"properties,omitempty"`
   Edited       *bool                                   `json:"edited,omitempty"`
   Translated   *bool                                   `json:"translated,omitempty"`
   Automated    *bool                                   `json:"automated,omitempty"`

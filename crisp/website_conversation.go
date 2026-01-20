@@ -185,6 +185,7 @@ type ConversationMessage struct {
   User         *ConversationMessageUser                `json:"user,omitempty"`
   References   *[]ConversationMessageReference         `json:"references,omitempty"`
   Original     *ConversationMessageOriginal            `json:"original,omitempty"`
+  Properties   *interface{}                            `json:"properties,omitempty"`
 }
 
 // ConversationMessageDispatchedData mapping
@@ -566,6 +567,7 @@ type ConversationTextMessageNew struct {
   User         ConversationAllMessageNewUser          `json:"user,omitempty"`
   References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
   Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Properties   *interface{}                           `json:"properties,omitempty"`
   Timestamp    *uint64                                `json:"timestamp,omitempty"`
   Stealth      *bool                                  `json:"stealth,omitempty"`
   Translated   *bool                                  `json:"translated,omitempty"`
@@ -583,6 +585,7 @@ type ConversationFileMessageNew struct {
   User         ConversationAllMessageNewUser          `json:"user,omitempty"`
   References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
   Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Properties   *interface{}                           `json:"properties,omitempty"`
   Timestamp    *uint64                                `json:"timestamp,omitempty"`
   Stealth      *bool                                  `json:"stealth,omitempty"`
   Translated   *bool                                  `json:"translated,omitempty"`
@@ -600,6 +603,7 @@ type ConversationAnimationMessageNew struct {
   User         ConversationAllMessageNewUser           `json:"user,omitempty"`
   References   *[]ConversationAllMessageNewReference   `json:"references,omitempty"`
   Original     *ConversationAllMessageNewOriginal      `json:"original,omitempty"`
+  Properties   *interface{}                            `json:"properties,omitempty"`
   Timestamp    *uint64                                 `json:"timestamp,omitempty"`
   Stealth      *bool                                   `json:"stealth,omitempty"`
   Translated   *bool                                   `json:"translated,omitempty"`
@@ -617,6 +621,7 @@ type ConversationAudioMessageNew struct {
   User         ConversationAllMessageNewUser          `json:"user,omitempty"`
   References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
   Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Properties   *interface{}                           `json:"properties,omitempty"`
   Timestamp    *uint64                                `json:"timestamp,omitempty"`
   Stealth      *bool                                  `json:"stealth,omitempty"`
   Translated   *bool                                  `json:"translated,omitempty"`
@@ -634,6 +639,7 @@ type ConversationPickerMessageNew struct {
   User         ConversationAllMessageNewUser          `json:"user,omitempty"`
   References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
   Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Properties   *interface{}                           `json:"properties,omitempty"`
   Timestamp    *uint64                                `json:"timestamp,omitempty"`
   Stealth      *bool                                  `json:"stealth,omitempty"`
   Translated   *bool                                  `json:"translated,omitempty"`
@@ -651,6 +657,7 @@ type ConversationFieldMessageNew struct {
   User         ConversationAllMessageNewUser          `json:"user,omitempty"`
   References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
   Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Properties   *interface{}                           `json:"properties,omitempty"`
   Timestamp    *uint64                                `json:"timestamp,omitempty"`
   Stealth      *bool                                  `json:"stealth,omitempty"`
   Translated   *bool                                  `json:"translated,omitempty"`
@@ -668,6 +675,7 @@ type ConversationCarouselMessageNew struct {
   User         ConversationAllMessageNewUser          `json:"user,omitempty"`
   References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
   Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Properties   *interface{}                           `json:"properties,omitempty"`
   Timestamp    *uint64                                `json:"timestamp,omitempty"`
   Stealth      *bool                                  `json:"stealth,omitempty"`
   Translated   *bool                                  `json:"translated,omitempty"`
@@ -688,6 +696,7 @@ type ConversationEventMessageNew struct {
   User         ConversationAllMessageNewUser          `json:"user,omitempty"`
   References   *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
   Original     *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+  Properties   *interface{}                           `json:"properties,omitempty"`
   Timestamp    *uint64                                `json:"timestamp,omitempty"`
   Stealth      *bool                                  `json:"stealth,omitempty"`
   Translated   *bool                                  `json:"translated,omitempty"`
