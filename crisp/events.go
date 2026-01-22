@@ -1043,6 +1043,7 @@ type EventsReceivePlanSubscriptionUpdated struct {
 type EventsReceivePlanSubscriptionUpdatedPlan struct {
   ID        *string  `json:"id"`
   Name      *string  `json:"name"`
+  Price     *uint16  `json:"price"`
   Trialing  *bool    `json:"trialing"`
 }
 
