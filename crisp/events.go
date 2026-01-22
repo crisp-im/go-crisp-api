@@ -1024,6 +1024,14 @@ type EventsReceivePluginEvent struct {
   Data  *interface{}  `json:"data"`
 }
 
+// EventsReceivePluginSubscriptionUpdated maps plugin:subscription:updated
+type EventsReceivePluginSubscriptionUpdated struct {
+  EventsGeneric
+  EventsWebsiteGeneric
+  EventsPluginGeneric
+  Bound  *bool  `json:"bound"`
+}
+
 // EventsReceivePluginSettingsSaved maps plugin:settings:saved
 type EventsReceivePluginSettingsSaved struct {
   EventsGeneric
@@ -1506,6 +1514,12 @@ func (evt EventsReceivePluginChannel) String() string {
 
 // String returns the string representation of EventsReceivePluginEvent
 func (evt EventsReceivePluginEvent) String() string {
+  return Stringify(evt)
+}
+
+
+// String returns the string representation of EventsReceivePluginSubscriptionUpdated
+func (evt EventsReceivePluginSubscriptionUpdated) String() string {
   return Stringify(evt)
 }
 
