@@ -1029,7 +1029,8 @@ type EventsReceivePluginSubscriptionUpdated struct {
   EventsGeneric
   EventsWebsiteGeneric
   EventsPluginGeneric
-  Bound  *bool  `json:"bound"`
+  Bound   *bool    `json:"bound"`
+  Target  *string  `json:"target"`
 }
 
 // EventsReceivePluginSettingsSaved maps plugin:settings:saved
