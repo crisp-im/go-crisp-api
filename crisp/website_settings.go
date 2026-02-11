@@ -83,6 +83,8 @@ type WebsiteSettingsChatbox struct {
   VisitorCompose       *bool      `json:"visitor_compose,omitempty"`
   FileTransfer         *bool      `json:"file_transfer,omitempty"`
   AudioRecord          *bool      `json:"audio_record,omitempty"`
+  ModeInitial          *string    `json:"mode_initial,omitempty"`
+  Home                 *bool      `json:"home,omitempty"`
   OverlaySearch        *bool      `json:"overlay_search,omitempty"`
   OverlayMode          *bool      `json:"overlay_mode,omitempty"`
   HelpdeskLink         *bool      `json:"helpdesk_link,omitempty"`
@@ -169,6 +171,8 @@ type WebsiteSettingsUpdateChatbox struct {
   VisitorCompose       bool       `json:"visitor_compose,omitempty"`
   FileTransfer         bool       `json:"file_transfer,omitempty"`
   AudioRecord          bool       `json:"audio_record,omitempty"`
+  ModeInitial          string     `json:"mode_initial,omitempty"`
+  Home                 bool       `json:"home,omitempty"`
   OverlaySearch        bool       `json:"overlay_search,omitempty"`
   OverlayMode          bool       `json:"overlay_mode,omitempty"`
   HelpdeskLink         bool       `json:"helpdesk_link,omitempty"`
