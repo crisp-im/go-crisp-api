@@ -1423,7 +1423,7 @@ func (service *WebsiteService) ResolveSpamConversationContent(websiteID string, 
 // SubmitSpamConversationDecision submits decision on spam conversation.
 func (service *WebsiteService) SubmitSpamConversationDecision(websiteID string, spamID string, action string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversations/spam/%s/decision", websiteID, spamID)
-  req, _ := service.client.NewRequest("POST", url, ConversationSpamDecision{&action})
+  req, _ := service.client.NewRequest("POST", url, ConversationSpamDecision{Action: &action})
 
   return service.client.Do(req, nil)
 }
@@ -1795,7 +1795,7 @@ func (service *WebsiteService) MarkMessagesDeliveredInConversation(websiteID str
 // UpdateConversationOpenState updates conversation open state for authenticated operator user.
 func (service *WebsiteService) UpdateConversationOpenState(websiteID string, sessionID string, opened bool) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/open", websiteID, sessionID)
-  req, _ := service.client.NewRequest("PATCH", url, ConversationOpenUpdate{&opened})
+  req, _ := service.client.NewRequest("PATCH", url, ConversationOpenUpdate{Opened: &opened})
 
   return service.client.Do(req, nil)
 }
@@ -1828,7 +1828,7 @@ func (service *WebsiteService) AssignConversationRouting(websiteID string, sessi
 // UpdateConversationInbox updates inbox used for conversation.
 func (service *WebsiteService) UpdateConversationInbox(websiteID string, sessionID string, inboxID *string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/inbox", websiteID, sessionID)
-  req, _ := service.client.NewRequest("PATCH", url, ConversationInboxUpdate{inboxID})
+  req, _ := service.client.NewRequest("PATCH", url, ConversationInboxUpdate{InboxID: inboxID})
 
   return service.client.Do(req, nil)
 }
@@ -1934,9 +1934,9 @@ func (service *WebsiteService) GetConversationState(websiteID string, sessionID 
 
 
 // ChangeConversationState updates conversation state.
-func (service *WebsiteService) ChangeConversationState(websiteID string, sessionID string, state string) (*Response, error) {
+func (service *WebsiteService) ChangeConversationState(websiteID string, sessionID string, state string, user *ConversationMessageUser) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/state", websiteID, sessionID)
-  req, _ := service.client.NewRequest("PATCH", url, ConversationStateUpdate{State: &state})
+  req, _ := service.client.NewRequest("PATCH", url, ConversationStateUpdate{State: &state, User: user})
 
   return service.client.Do(req, nil)
 }
@@ -1997,9 +1997,9 @@ func (service *WebsiteService) GetBlockStatusForConversation(websiteID string, s
 
 
 // BlockIncomingMessagesForConversation blocks further incoming messages from a conversation.
-func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool) (*Response, error) {
+func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool, user *ConversationMessageUser) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/block", websiteID, sessionID)
-  req, _ := service.client.NewRequest("PATCH", url, ConversationBlockUpdate{Blocked: &blocked})
+  req, _ := service.client.NewRequest("PATCH", url, ConversationBlockUpdate{Blocked: &blocked, User: user})
 
   return service.client.Do(req, nil)
 }
@@ -2023,7 +2023,7 @@ func (service *WebsiteService) GetVerifyStatusForConversation(websiteID string, 
 // UpdateVerifyStatusForConversation updates conversation verify status.
 func (service *WebsiteService) UpdateVerifyStatusForConversation(websiteID string, sessionID string, verified bool) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/verify", websiteID, sessionID)
-  req, _ := service.client.NewRequest("PATCH", url, ConversationVerifyUpdate{&verified})
+  req, _ := service.client.NewRequest("PATCH", url, ConversationVerifyUpdate{Verified: &verified})
 
   return service.client.Do(req, nil)
 }
@@ -2110,7 +2110,7 @@ func (service *WebsiteService) InitiateBrowsingSessionForConversation(websiteID 
 // SendActionToExistingBrowsingSession sends an action to an existing browsing session.
 func (service *WebsiteService) SendActionToExistingBrowsingSession(websiteID string, sessionID string, browsingID string, action string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/browsing/%s", websiteID, sessionID, browsingID)
-  req, _ := service.client.NewRequest("PATCH", url, ConversationBrowsingAction{&action})
+  req, _ := service.client.NewRequest("PATCH", url, ConversationBrowsingAction{Action: &action})
 
   return service.client.Do(req, nil)
 }
@@ -2126,9 +2126,9 @@ func (service *WebsiteService) AssistExistingBrowsingSession(websiteID string, s
 
 
 // InitiateNewCallSessionForConversation initiates a new audio/video call session for conversation.
-func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string, mode string) (*ConversationCall, *Response, error) {
+func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string, mode string, user *ConversationMessageUser) (*ConversationCall, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/call", websiteID, sessionID)
-  req, _ := service.client.NewRequest("POST", url, ConversationCallPayload{Mode: mode})
+  req, _ := service.client.NewRequest("POST", url, ConversationCallPayload{Mode: mode, User: user})
 
   call := new(ConversationCallData)
   resp, err := service.client.Do(req, call)
@@ -2158,7 +2158,7 @@ func (service *WebsiteService) GetOngoingCallSessionForConversation(websiteID st
 // AbortOngoingCallSessionForConversation aborts the ongoing audio/video call session for conversation.
 func (service *WebsiteService) AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string, user *ConversationMessageUser) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/call/%s", websiteID, sessionID, callID)
-  req, _ := service.client.NewRequest("DELETE", url, ConversationCallAbortPayload{user})
+  req, _ := service.client.NewRequest("DELETE", url, ConversationCallAbortPayload{User: user})
 
   return service.client.Do(req, nil)
 }
@@ -2219,9 +2219,9 @@ func (service *WebsiteService) DeliverWidgetDataEditActionForConversation(websit
 
 
 // ScheduleReminderForConversation schedules a reminder in the future for conversation.
-func (service *WebsiteService) ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string) (*Response, error) {
+func (service *WebsiteService) ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string, user *ConversationMessageUser) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/reminder", websiteID, sessionID)
-  req, _ := service.client.NewRequest("POST", url, ConversationReminderPayload{Date: date, Note: note})
+  req, _ := service.client.NewRequest("POST", url, ConversationReminderPayload{Date: date, Note: note, User: user})
 
   return service.client.Do(req, nil)
 }
