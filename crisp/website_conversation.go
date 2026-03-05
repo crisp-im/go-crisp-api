@@ -898,9 +898,9 @@ type ConversationState struct {
 
 // ConversationStateUpdate mapping
 type ConversationStateUpdate struct {
-  State   *string                  `json:"state,omitempty"`
-  User    *ConversationMessageUser `json:"user,omitempty"`
-  Origin  *string                  `json:"origin,omitempty"`
+  State   *string                         `json:"state,omitempty"`
+  User    *ConversationAllMessageNewUser  `json:"user,omitempty"`
+  Origin  *string                         `json:"origin,omitempty"`
 }
 
 // ConversationVerification mapping
@@ -944,9 +944,9 @@ type ConversationParticipant struct {
 
 // ConversationParticipantsSave mapping
 type ConversationParticipantsSave struct {
-  Participants  *[]ConversationParticipant   `json:"participants,omitempty"`
-  User          *ConversationMessageUser     `json:"user,omitempty"`
-  Origin        *string                      `json:"origin,omitempty"`
+  Participants  *[]ConversationParticipant      `json:"participants,omitempty"`
+  User          *ConversationAllMessageNewUser  `json:"user,omitempty"`
+  Origin        *string                         `json:"origin,omitempty"`
 }
 
 // ConversationBlockData mapping
@@ -961,9 +961,9 @@ type ConversationBlock struct {
 
 // ConversationBlockUpdate mapping
 type ConversationBlockUpdate struct {
-  Blocked  *bool                    `json:"blocked,omitempty"`
-  User     *ConversationMessageUser `json:"user,omitempty"`
-  Origin   *string                  `json:"origin,omitempty"`
+  Blocked  *bool                           `json:"blocked,omitempty"`
+  User     *ConversationAllMessageNewUser  `json:"user,omitempty"`
+  Origin   *string                         `json:"origin,omitempty"`
 }
 
 // ConversationVerifyData mapping
@@ -1057,15 +1057,15 @@ type ConversationCall struct {
 
 // ConversationCallPayload mapping
 type ConversationCallPayload struct {
-  Mode    string                   `json:"mode,omitempty"`
-  User    *ConversationMessageUser `json:"user,omitempty"`
-  Origin  *string                  `json:"origin,omitempty"`
+  Mode    string                          `json:"mode,omitempty"`
+  User    *ConversationAllMessageNewUser  `json:"user,omitempty"`
+  Origin  *string                         `json:"origin,omitempty"`
 }
 
 // ConversationCallAbortPayload mapping
 type ConversationCallAbortPayload struct {
-  User    *ConversationMessageUser `json:"user,omitempty"`
-  Origin  *string                  `json:"origin,omitempty"`
+  User    *ConversationAllMessageNewUser  `json:"user,omitempty"`
+  Origin  *string                         `json:"origin,omitempty"`
 }
 
 // ConversationCallSignalingPayload mapping
@@ -1117,10 +1117,10 @@ type ConversationWidgetDataEditPayload struct {
 
 // ConversationReminderPayload mapping
 type ConversationReminderPayload struct {
-  Date    string                   `json:"date,omitempty"`
-  Note    string                   `json:"note,omitempty"`
-  User    *ConversationMessageUser `json:"user,omitempty"`
-  Origin  *string                  `json:"origin,omitempty"`
+  Date    string                          `json:"date,omitempty"`
+  Note    string                          `json:"note,omitempty"`
+  User    *ConversationAllMessageNewUser  `json:"user,omitempty"`
+  Origin  *string                         `json:"origin,omitempty"`
 }
 
 // ConversationReportPayload mapping
@@ -1940,7 +1940,7 @@ func (service *WebsiteService) GetConversationState(websiteID string, sessionID 
 
 
 // ChangeConversationState updates conversation state.
-func (service *WebsiteService) ChangeConversationState(websiteID string, sessionID string, state string, user *ConversationMessageUser, origin *string) (*Response, error) {
+func (service *WebsiteService) ChangeConversationState(websiteID string, sessionID string, state string, user *ConversationAllMessageNewUser, origin *string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/state", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationStateUpdate{State: &state, User: user, Origin: origin})
 
@@ -2003,7 +2003,7 @@ func (service *WebsiteService) GetBlockStatusForConversation(websiteID string, s
 
 
 // BlockIncomingMessagesForConversation blocks further incoming messages from a conversation.
-func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool, user *ConversationMessageUser, origin *string) (*Response, error) {
+func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool, user *ConversationAllMessageNewUser, origin *string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/block", websiteID, sessionID)
   req, _ := service.client.NewRequest("PATCH", url, ConversationBlockUpdate{Blocked: &blocked, User: user, Origin: origin})
 
@@ -2132,7 +2132,7 @@ func (service *WebsiteService) AssistExistingBrowsingSession(websiteID string, s
 
 
 // InitiateNewCallSessionForConversation initiates a new audio/video call session for conversation.
-func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string, mode string, user *ConversationMessageUser, origin *string) (*ConversationCall, *Response, error) {
+func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string, mode string, user *ConversationAllMessageNewUser, origin *string) (*ConversationCall, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/call", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, ConversationCallPayload{Mode: mode, User: user, Origin: origin})
 
@@ -2162,7 +2162,7 @@ func (service *WebsiteService) GetOngoingCallSessionForConversation(websiteID st
 
 
 // AbortOngoingCallSessionForConversation aborts the ongoing audio/video call session for conversation.
-func (service *WebsiteService) AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string, user *ConversationMessageUser, origin *string) (*Response, error) {
+func (service *WebsiteService) AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string, user *ConversationAllMessageNewUser, origin *string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/call/%s", websiteID, sessionID, callID)
   req, _ := service.client.NewRequest("DELETE", url, ConversationCallAbortPayload{User: user, Origin: origin})
 
@@ -2225,7 +2225,7 @@ func (service *WebsiteService) DeliverWidgetDataEditActionForConversation(websit
 
 
 // ScheduleReminderForConversation schedules a reminder in the future for conversation.
-func (service *WebsiteService) ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string, user *ConversationMessageUser, origin *string) (*Response, error) {
+func (service *WebsiteService) ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string, user *ConversationAllMessageNewUser, origin *string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/reminder", websiteID, sessionID)
   req, _ := service.client.NewRequest("POST", url, ConversationReminderPayload{Date: date, Note: note, User: user, Origin: origin})
 
