@@ -336,7 +336,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Conversation State** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-conversation-state)
     * `client.Website.GetConversationState(websiteID string, sessionID string) (*ConversationState, *Response, error)`
   * **⭐ Change Conversation State** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#change-conversation-state)
-    * `client.Website.ChangeConversationState(websiteID string, sessionID string, state string, user *ConversationMessageUser) (*Response, error)`
+    * `client.Website.ChangeConversationState(websiteID string, sessionID string, state string, user *ConversationMessageUser, origin *string) (*Response, error)`
   * **Get Conversation Relations** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-conversation-relations)
     * `client.Website.GetConversationRelations(websiteID string, sessionID string) (*ConversationRelations, *Response, error)`
   * **Get Conversation Participants** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-conversation-participants)
@@ -346,7 +346,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Get Block Status For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-block-status-for-conversation)
     * `client.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
   * **Block Incoming Messages For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#block-incoming-messages-for-conversation)
-    * `client.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool, user *ConversationMessageUser) (*Response, error)`
+    * `client.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool, user *ConversationMessageUser, origin *string) (*Response, error)`
   * **Get Verify Status For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-verify-status-for-conversation)
     * `client.Website.GetVerifyStatusForConversation(websiteID string, sessionID string) (*ConversationVerify, *Response, error)`
   * **Update Verify Status For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-verify-status-for-conversation)
@@ -370,11 +370,11 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Assist Existing Browsing Session** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#assist-an-existing-browsing-session)
     * `client.Website.AssistExistingBrowsingSession(websiteID string, sessionID string, browsingID string, assist ConversationBrowsingAssist) (*Response, error)`
   * **Initiate New Call Session For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#initiate-new-call-session-for-conversation)
-    * `client.Website.InitiateNewCallSessionForConversation(websiteID string, sessionID string, mode string, user *ConversationMessageUser) (*ConversationCall, *Response, error)`
+    * `client.Website.InitiateNewCallSessionForConversation(websiteID string, sessionID string, mode string, user *ConversationMessageUser, origin *string) (*ConversationCall, *Response, error)`
   * **Get Ongoing Call Session For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-ongoing-call-session-for-conversation)
     * `client.Website.GetOngoingCallSessionForConversation(websiteID string, sessionID string) (*ConversationCall, *Response, error)`
   * **Abort Ongoing Call Session For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#abort-ongoing-call-session-for-conversation)
-    * `client.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string, user *ConversationMessageUser) (*Response, error)`
+    * `client.Website.AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string, user *ConversationMessageUser, origin *string) (*Response, error)`
   * **Transmit Signaling On Ongoing Call Session** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#transmit-signaling-on-ongoing-call-session)
     * `client.Website.TransmitSignalingOnOngoingCallSession(websiteID string, sessionID string, callID string, payload ConversationCallSignalingPayload) (*Response, error)`
   * **Deliver Widget Button Action For Conversation** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#deliver-widget-button-action-for-conversation)
@@ -384,7 +384,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
   * **Deliver Widget Data Edit Action For Conversation** [`user`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#deliver-widget-data-action-for-conversation)
     * `client.Website.DeliverWidgetDataEditActionForConversation(websiteID string, sessionID string, pluginID string, sectionID string, itemID string, value string) (*ConversationWidgetAction, *Response, error)`
   * **Schedule A Reminder For Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#schedule-a-reminder-for-conversation)
-    * `client.Website.ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string, user *ConversationMessageUser) (*Response, error)`
+    * `client.Website.ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string, user *ConversationMessageUser, origin *string) (*Response, error)`
   * **Report Conversation** [`user`, `plugin`]: [Reference](https://docs.crisp.chat/references/rest-api/v1/#report-conversation)
     * `client.Website.ReportConversation(websiteID string, sessionID string, flag string) (*Response, error)`
 
