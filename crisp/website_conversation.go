@@ -1940,9 +1940,9 @@ func (service *WebsiteService) GetConversationState(websiteID string, sessionID 
 
 
 // ChangeConversationState updates conversation state.
-func (service *WebsiteService) ChangeConversationState(websiteID string, sessionID string, state string, user *ConversationAllMessageNewUser, origin *string) (*Response, error) {
+func (service *WebsiteService) ChangeConversationState(websiteID string, sessionID string, state string, user *ConversationAllMessageNewUser, origin string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/state", websiteID, sessionID)
-  req, _ := service.client.NewRequest("PATCH", url, ConversationStateUpdate{State: &state, User: user, Origin: origin})
+  req, _ := service.client.NewRequest("PATCH", url, ConversationStateUpdate{State: &state, User: user, Origin: &origin})
 
   return service.client.Do(req, nil)
 }
@@ -2003,9 +2003,9 @@ func (service *WebsiteService) GetBlockStatusForConversation(websiteID string, s
 
 
 // BlockIncomingMessagesForConversation blocks further incoming messages from a conversation.
-func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool, user *ConversationAllMessageNewUser, origin *string) (*Response, error) {
+func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool, user *ConversationAllMessageNewUser, origin string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/block", websiteID, sessionID)
-  req, _ := service.client.NewRequest("PATCH", url, ConversationBlockUpdate{Blocked: &blocked, User: user, Origin: origin})
+  req, _ := service.client.NewRequest("PATCH", url, ConversationBlockUpdate{Blocked: &blocked, User: user, Origin: &origin})
 
   return service.client.Do(req, nil)
 }
@@ -2132,9 +2132,9 @@ func (service *WebsiteService) AssistExistingBrowsingSession(websiteID string, s
 
 
 // InitiateNewCallSessionForConversation initiates a new audio/video call session for conversation.
-func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string, mode string, user *ConversationAllMessageNewUser, origin *string) (*ConversationCall, *Response, error) {
+func (service *WebsiteService) InitiateNewCallSessionForConversation(websiteID string, sessionID string, mode string, user *ConversationAllMessageNewUser, origin string) (*ConversationCall, *Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/call", websiteID, sessionID)
-  req, _ := service.client.NewRequest("POST", url, ConversationCallPayload{Mode: mode, User: user, Origin: origin})
+  req, _ := service.client.NewRequest("POST", url, ConversationCallPayload{Mode: mode, User: user, Origin: &origin})
 
   call := new(ConversationCallData)
   resp, err := service.client.Do(req, call)
@@ -2162,9 +2162,9 @@ func (service *WebsiteService) GetOngoingCallSessionForConversation(websiteID st
 
 
 // AbortOngoingCallSessionForConversation aborts the ongoing audio/video call session for conversation.
-func (service *WebsiteService) AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string, user *ConversationAllMessageNewUser, origin *string) (*Response, error) {
+func (service *WebsiteService) AbortOngoingCallSessionForConversation(websiteID string, sessionID string, callID string, user *ConversationAllMessageNewUser, origin string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/call/%s", websiteID, sessionID, callID)
-  req, _ := service.client.NewRequest("DELETE", url, ConversationCallAbortPayload{User: user, Origin: origin})
+  req, _ := service.client.NewRequest("DELETE", url, ConversationCallAbortPayload{User: user, Origin: &origin})
 
   return service.client.Do(req, nil)
 }
@@ -2225,9 +2225,9 @@ func (service *WebsiteService) DeliverWidgetDataEditActionForConversation(websit
 
 
 // ScheduleReminderForConversation schedules a reminder in the future for conversation.
-func (service *WebsiteService) ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string, user *ConversationAllMessageNewUser, origin *string) (*Response, error) {
+func (service *WebsiteService) ScheduleReminderForConversation(websiteID string, sessionID string, date string, note string, user *ConversationAllMessageNewUser, origin string) (*Response, error) {
   url := fmt.Sprintf("website/%s/conversation/%s/reminder", websiteID, sessionID)
-  req, _ := service.client.NewRequest("POST", url, ConversationReminderPayload{Date: date, Note: note, User: user, Origin: origin})
+  req, _ := service.client.NewRequest("POST", url, ConversationReminderPayload{Date: date, Note: note, User: user, Origin: &origin})
 
   return service.client.Do(req, nil)
 }
