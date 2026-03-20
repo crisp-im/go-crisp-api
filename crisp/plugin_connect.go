@@ -31,6 +31,7 @@ type PluginConnectAllWebsitesData struct {
 // PluginConnectAllWebsites mapping
 type PluginConnectAllWebsites struct {
   WebsiteID  *string                        `json:"website_id,omitempty"`
+  Price      *uint16                        `json:"price,omitempty"`
   Token      *string                        `json:"token,omitempty"`
   Settings   *interface{}                   `json:"settings,omitempty"`
   Plan       *PluginConnectAllWebsitesPlan  `json:"plan,omitempty"`
