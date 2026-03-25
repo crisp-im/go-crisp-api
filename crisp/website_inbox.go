@@ -45,6 +45,7 @@ type WebsiteInboxItem struct {
   Emoji       *string                       `json:"emoji,omitempty"`
   Order       *uint16                       `json:"order,omitempty"`
   Operators   *[]string                     `json:"operators,omitempty"`
+  Operator    *string                       `json:"operator,omitempty"`
   Conditions  *[]WebsiteInboxItemCondition  `json:"conditions,omitempty"`
 }
 
