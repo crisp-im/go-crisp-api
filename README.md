@@ -51,7 +51,7 @@ All the available Crisp API resources are fully implemented. **Programmatic meth
 
 All methods that you will most likely need when building a Crisp integration are prefixed with a star symbol (⭐).
 
-**⚠️ Note that, depending on your authentication token tier, which is either `user` or `plugin`, you may not be allowed to use all methods from the library. When in doubt, refer to the library method descriptions below. Most likely, you are using a `plugin` token.**
+**⚠️ Note that, depending on your authentication token tier, which is either `user`, `website` or `plugin`, you may not be allowed to use all methods from the library. When in doubt, refer to the library method descriptions below. Most likely, you are using a `plugin` token.**
 
 In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.New()` and then call eg: `client.Website.ListWebsiteOperators(websiteID)`.
 
