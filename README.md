@@ -38,9 +38,9 @@ Then, add authentication parameters to your `client` instance right after you cr
 ```go
 client := crisp.New()
 
-// Authenticate to API with your plugin token (identifier, key)
+// Authenticate to API with your token (identifier, key)
 // eg. client.AuthenticateTier("plugin", "43f34724-9eeb-4474-9cec-560250754dec", "d12e60c5d2aa264b90997a641b6474ffd6602b66d8e8abc49634c404f06fa7d0")
-client.AuthenticateTier("plugin", identifier, key)
+client.AuthenticateTier(tier, identifier, key)
 
 // Now, you can use authenticated API sections.
 ```
