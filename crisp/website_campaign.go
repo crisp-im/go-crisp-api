@@ -179,6 +179,7 @@ type WebsiteCampaignStatisticsData struct {
 
 // WebsiteCampaignStatistic mapping
 type WebsiteCampaignStatistic struct {
+  Type       *string                           `json:"type,omitempty"`
   Profile    *WebsiteCampaignStatisticProfile  `json:"profile,omitempty"`
   Data       *interface{}                      `json:"data,omitempty"`
   CreatedAt  *uint64                           `json:"created_at,omitempty"`
