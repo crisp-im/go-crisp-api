@@ -8,7 +8,6 @@ package crisp
 
 import (
   "fmt"
-  "net/url"
 )
 
 
