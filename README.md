@@ -557,7 +557,7 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.GenerateHelpdeskDomainSetupFlow(websiteID string, custom string) (*HelpdeskDomainSetupFlow, *Response, error)`
 
 * #### **Website Connect**
-  * **⭐ Get Connect Endpoints**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-website-connect-endpoints)
+  * **Get Connect Endpoints**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-website-connect-endpoints)
     * `client.Website.GetConnectEndpoints(websiteID string) (*WebsiteConnectEndpoints, *Response, error)`
 
 ### Plugin
