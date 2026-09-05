@@ -12,6 +12,17 @@ import (
 )
 
 
+// HelpdeskContentType values
+type HelpdeskContentType string
+
+const (
+  HelpdeskContentTypeArticles    HelpdeskContentType = "articles"
+  HelpdeskContentTypeGuides      HelpdeskContentType = "guides"
+  HelpdeskContentTypeReferences  HelpdeskContentType = "references"
+  HelpdeskContentTypeNews        HelpdeskContentType = "news"
+)
+
+
 // HelpdeskData mapping
 type HelpdeskData struct {
   Data  *Helpdesk  `json:"data,omitempty"`
@@ -647,7 +658,7 @@ func (service *WebsiteService) DeleteHelpdeskLocale(websiteID string, locale str
 
 
 // ListHelpdeskPages lists publicly visible helpdesk pages for a locale and content type.
-func (service *WebsiteService) ListHelpdeskPages(websiteID string, locale string, contentType string, pageNumber uint) (*[]HelpdeskPage, *Response, error) {
+func (service *WebsiteService) ListHelpdeskPages(websiteID string, locale string, contentType HelpdeskContentType, pageNumber uint) (*[]HelpdeskPage, *Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/page/list/%s/%s/%d", websiteID, locale, contentType, pageNumber)
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -662,7 +673,7 @@ func (service *WebsiteService) ListHelpdeskPages(websiteID string, locale string
 
 
 // ListHelpdeskTree lists tree entries for a helpdesk locale and content type.
-func (service *WebsiteService) ListHelpdeskTree(websiteID string, locale string, contentType string, pageNumber uint, subPath string, searchTitle string, filterDateStart string, filterDateEnd string) (*[]HelpdeskTreeEntry, *Response, error) {
+func (service *WebsiteService) ListHelpdeskTree(websiteID string, locale string, contentType HelpdeskContentType, pageNumber uint, subPath string, searchTitle string, filterDateStart string, filterDateEnd string) (*[]HelpdeskTreeEntry, *Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/list/%s/%s/%d?sub_path=%s&search_title=%s&filter_date_start=%s&filter_date_end=%s", websiteID, locale, contentType, pageNumber, url.QueryEscape(subPath), url.QueryEscape(searchTitle), url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -677,7 +688,7 @@ func (service *WebsiteService) ListHelpdeskTree(websiteID string, locale string,
 
 
 // CreateHelpdeskTreePath creates an empty helpdesk tree path.
-func (service *WebsiteService) CreateHelpdeskTreePath(websiteID string, locale string, contentType string, path string) (*Response, error) {
+func (service *WebsiteService) CreateHelpdeskTreePath(websiteID string, locale string, contentType HelpdeskContentType, path string) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/path/%s/%s/%s", websiteID, locale, contentType, path)
   req, _ := service.client.NewRequest("POST", url, nil)
 
@@ -686,7 +697,7 @@ func (service *WebsiteService) CreateHelpdeskTreePath(websiteID string, locale s
 
 
 // ResolveHelpdeskTreePath resolves a helpdesk tree path.
-func (service *WebsiteService) ResolveHelpdeskTreePath(websiteID string, locale string, contentType string, path string) (*HelpdeskTreeEntry, *Response, error) {
+func (service *WebsiteService) ResolveHelpdeskTreePath(websiteID string, locale string, contentType HelpdeskContentType, path string) (*HelpdeskTreeEntry, *Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/path/%s/%s/%s", websiteID, locale, contentType, path)
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -701,7 +712,7 @@ func (service *WebsiteService) ResolveHelpdeskTreePath(websiteID string, locale 
 
 
 // UpdateHelpdeskTreePath moves a helpdesk tree path or changes its display order.
-func (service *WebsiteService) UpdateHelpdeskTreePath(websiteID string, locale string, contentType string, path string, update HelpdeskTreePathUpdate) (*Response, error) {
+func (service *WebsiteService) UpdateHelpdeskTreePath(websiteID string, locale string, contentType HelpdeskContentType, path string, update HelpdeskTreePathUpdate) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/path/%s/%s/%s", websiteID, locale, contentType, path)
   req, _ := service.client.NewRequest("PATCH", url, update)
 
@@ -710,7 +721,7 @@ func (service *WebsiteService) UpdateHelpdeskTreePath(websiteID string, locale s
 
 
 // DeleteHelpdeskTreePath deletes a helpdesk tree path recursively.
-func (service *WebsiteService) DeleteHelpdeskTreePath(websiteID string, locale string, contentType string, path string) (*Response, error) {
+func (service *WebsiteService) DeleteHelpdeskTreePath(websiteID string, locale string, contentType HelpdeskContentType, path string) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/path/%s/%s/%s", websiteID, locale, contentType, path)
   req, _ := service.client.NewRequest("DELETE", url, nil)
 
@@ -719,7 +730,7 @@ func (service *WebsiteService) DeleteHelpdeskTreePath(websiteID string, locale s
 
 
 // ResolveHelpdeskTreeContent resolves the body content of a helpdesk tree file.
-func (service *WebsiteService) ResolveHelpdeskTreeContent(websiteID string, locale string, contentType string, path string) (*HelpdeskTreeContent, *Response, error) {
+func (service *WebsiteService) ResolveHelpdeskTreeContent(websiteID string, locale string, contentType HelpdeskContentType, path string) (*HelpdeskTreeContent, *Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/content/%s/%s/%s", websiteID, locale, contentType, path)
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -734,7 +745,7 @@ func (service *WebsiteService) ResolveHelpdeskTreeContent(websiteID string, loca
 
 
 // SaveHelpdeskTreeContent replaces the body content of a helpdesk tree file.
-func (service *WebsiteService) SaveHelpdeskTreeContent(websiteID string, locale string, contentType string, path string, content string) (*Response, error) {
+func (service *WebsiteService) SaveHelpdeskTreeContent(websiteID string, locale string, contentType HelpdeskContentType, path string, content string) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/content/%s/%s/%s", websiteID, locale, contentType, path)
   req, _ := service.client.NewRequest("PUT", url, HelpdeskTreeContentSave{Content: content})
 
@@ -743,7 +754,7 @@ func (service *WebsiteService) SaveHelpdeskTreeContent(websiteID string, locale 
 
 
 // ResolveHelpdeskTreeMetadata resolves parsed metadata for a helpdesk tree path.
-func (service *WebsiteService) ResolveHelpdeskTreeMetadata(websiteID string, locale string, contentType string, path string) (*HelpdeskTreeMetadata, *Response, error) {
+func (service *WebsiteService) ResolveHelpdeskTreeMetadata(websiteID string, locale string, contentType HelpdeskContentType, path string) (*HelpdeskTreeMetadata, *Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/metadata/%s/%s/%s", websiteID, locale, contentType, path)
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -758,7 +769,7 @@ func (service *WebsiteService) ResolveHelpdeskTreeMetadata(websiteID string, loc
 
 
 // UpdateHelpdeskTreeMetadata updates metadata for a helpdesk tree path.
-func (service *WebsiteService) UpdateHelpdeskTreeMetadata(websiteID string, locale string, contentType string, path string, metadata HelpdeskTreeMetadata) (*Response, error) {
+func (service *WebsiteService) UpdateHelpdeskTreeMetadata(websiteID string, locale string, contentType HelpdeskContentType, path string, metadata HelpdeskTreeMetadata) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/metadata/%s/%s/%s", websiteID, locale, contentType, path)
   req, _ := service.client.NewRequest("PATCH", url, metadata)
 
@@ -767,7 +778,7 @@ func (service *WebsiteService) UpdateHelpdeskTreeMetadata(websiteID string, loca
 
 
 // ResolveHelpdeskTreePage resolves page information for a helpdesk tree file.
-func (service *WebsiteService) ResolveHelpdeskTreePage(websiteID string, locale string, contentType string, path string) (*HelpdeskTreePage, *Response, error) {
+func (service *WebsiteService) ResolveHelpdeskTreePage(websiteID string, locale string, contentType HelpdeskContentType, path string) (*HelpdeskTreePage, *Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/page/%s/%s/%s", websiteID, locale, contentType, path)
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -782,8 +793,8 @@ func (service *WebsiteService) ResolveHelpdeskTreePage(websiteID string, locale 
 
 
 // ListHelpdeskHistoryChanges lists helpdesk content history changes.
-func (service *WebsiteService) ListHelpdeskHistoryChanges(websiteID string, pageNumber uint, filterLocale string, filterType string, filterTreePath string) (*[]HelpdeskHistoryChange, *Response, error) {
-  url := fmt.Sprintf("website/%s/helpdesk/history/changes/%d?filter_locale=%s&filter_type=%s&filter_tree_path=%s", websiteID, pageNumber, url.QueryEscape(filterLocale), url.QueryEscape(filterType), url.QueryEscape(filterTreePath))
+func (service *WebsiteService) ListHelpdeskHistoryChanges(websiteID string, pageNumber uint, filterLocale string, filterType HelpdeskContentType, filterTreePath string) (*[]HelpdeskHistoryChange, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/history/changes/%d?filter_locale=%s&filter_type=%s&filter_tree_path=%s", websiteID, pageNumber, url.QueryEscape(filterLocale), url.QueryEscape(string(filterType)), url.QueryEscape(filterTreePath))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   changes := new(HelpdeskHistoryChangeListData)
@@ -821,7 +832,7 @@ func (service *WebsiteService) CancelHelpdeskHistoryChange(websiteID string, cha
 
 
 // RequestHelpdeskContentRefresh queues an asynchronous full refresh of helpdesk content.
-func (service *WebsiteService) RequestHelpdeskContentRefresh(websiteID string, locale string, contentType string) (*Response, error) {
+func (service *WebsiteService) RequestHelpdeskContentRefresh(websiteID string, locale string, contentType HelpdeskContentType) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/refresh/%s/%s", websiteID, locale, contentType)
   req, _ := service.client.NewRequest("POST", url, nil)
 
@@ -830,7 +841,7 @@ func (service *WebsiteService) RequestHelpdeskContentRefresh(websiteID string, l
 
 
 // MapHelpdeskLocaleFeedbackRatings map locale feedback ratings for helpdesk in website.
-func (service *WebsiteService) MapHelpdeskLocaleFeedbackRatings(websiteID string, locale string, contentType string, filterDateStart string, filterDateEnd string) (*HelpdeskLocaleFeedbackRatings, *Response, error) {
+func (service *WebsiteService) MapHelpdeskLocaleFeedbackRatings(websiteID string, locale string, contentType HelpdeskContentType, filterDateStart string, filterDateEnd string) (*HelpdeskLocaleFeedbackRatings, *Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/feedback/ratings/%s/%s?filter_date_start=%s&filter_date_end=%s", websiteID, locale, contentType, url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -845,7 +856,7 @@ func (service *WebsiteService) MapHelpdeskLocaleFeedbackRatings(websiteID string
 
 
 // ListHelpdeskLocaleFeedbacks lists locale feedbacks for helpdesk in website.
-func (service *WebsiteService) ListHelpdeskLocaleFeedbacks(websiteID string, locale string, contentType string, pageNumber uint, filterDateStart string, filterDateEnd string) (*[]HelpdeskLocaleFeedbackItem, *Response, error) {
+func (service *WebsiteService) ListHelpdeskLocaleFeedbacks(websiteID string, locale string, contentType HelpdeskContentType, pageNumber uint, filterDateStart string, filterDateEnd string) (*[]HelpdeskLocaleFeedbackItem, *Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/feedback/list/%s/%s/%d?filter_date_start=%s&filter_date_end=%s", websiteID, locale, contentType, pageNumber, url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
   req, _ := service.client.NewRequest("GET", url, nil)
 
@@ -860,7 +871,7 @@ func (service *WebsiteService) ListHelpdeskLocaleFeedbacks(websiteID string, loc
 
 
 // ImportExternalHelpdeskToLocale imports a whole external helpdesk to Crisp, as a Crisp Helpdesk.
-func (service *WebsiteService) ImportExternalHelpdeskToLocale(websiteID string, locale string, contentType string, helpdeskUrl string, detectLocales *bool, otherLocales *[]string) (*Response, error) {
+func (service *WebsiteService) ImportExternalHelpdeskToLocale(websiteID string, locale string, contentType HelpdeskContentType, helpdeskUrl string, detectLocales *bool, otherLocales *[]string) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/import/%s/%s", websiteID, locale, contentType)
   req, _ := service.client.NewRequest("POST", url, HelpdeskLocaleExternalImport{HelpdeskURL: helpdeskUrl, DetectLocales: detectLocales, OtherLocales: otherLocales})
 
@@ -869,7 +880,7 @@ func (service *WebsiteService) ImportExternalHelpdeskToLocale(websiteID string, 
 
 
 // ExportHelpdeskLocaleArticles exports helpdesk articles for locale.
-func (service *WebsiteService) ExportHelpdeskLocaleArticles(websiteID string, locale string, contentType string) (*Response, error) {
+func (service *WebsiteService) ExportHelpdeskLocaleArticles(websiteID string, locale string, contentType HelpdeskContentType) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/export/%s/%s", websiteID, locale, contentType)
   req, _ := service.client.NewRequest("POST", url, nil)
 
@@ -1001,4 +1012,3 @@ func (service *WebsiteService) GenerateHelpdeskDomainSetupFlow(websiteID string,
 
   return flow.Data, resp, err
 }
-
