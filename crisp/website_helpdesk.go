@@ -35,11 +35,24 @@ type HelpdeskLocaleData struct {
 
 // HelpdeskLocale mapping
 type HelpdeskLocale struct {
-  LocaleID    *string  `json:"locale_id,omitempty"`
-  Locale      *string  `json:"locale,omitempty"`
-  URL         *string  `json:"url,omitempty"`
-  Articles    *uint16  `json:"articles,omitempty"`
-  Categories  *uint16  `json:"categories,omitempty"`
+  LocaleID    *string                     `json:"locale_id,omitempty"`
+  Locale      *string                     `json:"locale,omitempty"`
+  URL         *string                     `json:"url,omitempty"`
+  Statistics  *HelpdeskLocaleStatistics   `json:"statistics,omitempty"`
+}
+
+// HelpdeskLocaleStatistics mapping
+type HelpdeskLocaleStatistics struct {
+  Articles    *HelpdeskLocaleStatisticsContent  `json:"articles,omitempty"`
+  Guides      *HelpdeskLocaleStatisticsContent  `json:"guides,omitempty"`
+  References  *HelpdeskLocaleStatisticsContent  `json:"references,omitempty"`
+  News        *HelpdeskLocaleStatisticsContent  `json:"news,omitempty"`
+}
+
+// HelpdeskLocaleStatisticsContent mapping
+type HelpdeskLocaleStatisticsContent struct {
+  Entries  *uint32  `json:"entries,omitempty"`
+  Groups   *uint32  `json:"groups,omitempty"`
 }
 
 // HelpdeskLocaleArticleListData mapping
@@ -393,23 +406,49 @@ type HelpdeskSettingsData struct {
 
 // HelpdeskSettings mapping
 type HelpdeskSettings struct {
-  Name        *string                      `json:"name,omitempty"`
-  Appearance  *HelpdeskSettingsAppearance  `json:"appearance,omitempty"`
-  Behavior    *HelpdeskSettingsBehavior    `json:"behavior,omitempty"`
-  Include     *HelpdeskSettingsInclude     `json:"include,omitempty"`
-  Access      *HelpdeskSettingsAccess      `json:"access,omitempty"`
+  Name          *string                        `json:"name,omitempty"`
+  Appearance    *HelpdeskSettingsAppearance    `json:"appearance,omitempty"`
+  Localization  *HelpdeskSettingsLocalization  `json:"localization,omitempty"`
+  Section       *HelpdeskSettingsSection       `json:"section,omitempty"`
+  Behavior      *HelpdeskSettingsBehavior      `json:"behavior,omitempty"`
+  Service       *HelpdeskSettingsService       `json:"service,omitempty"`
+  Include       *HelpdeskSettingsInclude       `json:"include,omitempty"`
+  Access        *HelpdeskSettingsAccess        `json:"access,omitempty"`
 }
 
 // HelpdeskSettingsAppearance mapping
 type HelpdeskSettingsAppearance struct {
+  Color   *HelpdeskSettingsAppearanceColor  `json:"color,omitempty"`
   Logos   *HelpdeskSettingsAppearanceLogos  `json:"logos,omitempty"`
   Banner  *string                           `json:"banner,omitempty"`
 }
 
+// HelpdeskSettingsAppearanceColor mapping
+type HelpdeskSettingsAppearanceColor struct {
+  Mode            *string  `json:"mode,omitempty"`
+  ModeChangeable  *bool    `json:"mode_changeable,omitempty"`
+}
+
 // HelpdeskSettingsAppearanceLogos mapping
 type HelpdeskSettingsAppearanceLogos struct {
-  Header  *string  `json:"header,omitempty"`
-  Footer  *string  `json:"footer,omitempty"`
+  Favicon  *string  `json:"favicon,omitempty"`
+  Header   *string  `json:"header,omitempty"`
+  Footer   *string  `json:"footer,omitempty"`
+}
+
+// HelpdeskSettingsLocalization mapping
+type HelpdeskSettingsLocalization struct {
+  WritingLocale               *string  `json:"writing_locale,omitempty"`
+  TranslatedAutomatic         *bool    `json:"translated_automatic,omitempty"`
+  TranslatedLocalesReadonly   *bool    `json:"translated_locales_readonly,omitempty"`
+}
+
+// HelpdeskSettingsSection mapping
+type HelpdeskSettingsSection struct {
+  Articles    *string  `json:"articles,omitempty"`
+  Guides      *string  `json:"guides,omitempty"`
+  References  *string  `json:"references,omitempty"`
+  News        *string  `json:"news,omitempty"`
 }
 
 // HelpdeskSettingsBehavior mapping
@@ -418,10 +457,20 @@ type HelpdeskSettingsBehavior struct {
   ShowCategoryImages  *bool  `json:"show_category_images,omitempty"`
   ShowChatbox         *bool  `json:"show_chatbox,omitempty"`
   AskFeedback         *bool  `json:"ask_feedback,omitempty"`
+  ReportIncorrect     *bool  `json:"report_incorrect,omitempty"`
+  ServeMarkdown       *bool  `json:"serve_markdown,omitempty"`
+  AgentChatBar        *bool  `json:"agent_chat_bar,omitempty"`
+  AgentCopyButton     *bool  `json:"agent_copy_button,omitempty"`
+  TableOfContents     *bool  `json:"table_of_contents,omitempty"`
   LocalePicker        *bool  `json:"locale_picker,omitempty"`
   ReferLink           *bool  `json:"refer_link,omitempty"`
   ForbidIndexing      *bool  `json:"forbid_indexing,omitempty"`
   StatusHealthDead    *bool  `json:"status_health_dead,omitempty"`
+}
+
+// HelpdeskSettingsService mapping
+type HelpdeskSettingsService struct {
+  MCPServer  *bool  `json:"mcp_server,omitempty"`
 }
 
 // HelpdeskSettingsInclude mapping
@@ -431,7 +480,9 @@ type HelpdeskSettingsInclude struct {
 
 // HelpdeskSettingsAccess mapping
 type HelpdeskSettingsAccess struct {
-  Password  *string  `json:"password,omitempty"`
+  RestrictMode  *string  `json:"restrict_mode,omitempty"`
+  Password      *string  `json:"password,omitempty"`
+  JWTSecret     *string  `json:"jwt_secret,omitempty"`
 }
 
 // HelpdeskDomainData mapping
@@ -1351,8 +1402,8 @@ func (service *WebsiteService) DeleteHelpdeskLocaleSection(websiteID string, loc
 
 
 // MapHelpdeskLocaleFeedbackRatings map locale feedback ratings for helpdesk in website.
-func (service *WebsiteService) MapHelpdeskLocaleFeedbackRatings(websiteID string, locale string, filterDateStart string, filterDateEnd string) (*HelpdeskLocaleFeedbackRatings, *Response, error) {
-  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/feedback/ratings?filter_date_start=%s&filter_date_end=%s", websiteID, locale, url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
+func (service *WebsiteService) MapHelpdeskLocaleFeedbackRatings(websiteID string, locale string, contentType string, filterDateStart string, filterDateEnd string) (*HelpdeskLocaleFeedbackRatings, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/feedback/ratings/%s/%s?filter_date_start=%s&filter_date_end=%s", websiteID, locale, contentType, url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   ratings := new(HelpdeskLocaleFeedbackRatingsData)
@@ -1366,8 +1417,8 @@ func (service *WebsiteService) MapHelpdeskLocaleFeedbackRatings(websiteID string
 
 
 // ListHelpdeskLocaleFeedbacks lists locale feedbacks for helpdesk in website.
-func (service *WebsiteService) ListHelpdeskLocaleFeedbacks(websiteID string, locale string, pageNumber uint, filterDateStart string, filterDateEnd string) (*[]HelpdeskLocaleFeedbackItem, *Response, error) {
-  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/feedback/list/%d?filter_date_start=%s&filter_date_end=%s", websiteID, locale, pageNumber, url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
+func (service *WebsiteService) ListHelpdeskLocaleFeedbacks(websiteID string, locale string, contentType string, pageNumber uint, filterDateStart string, filterDateEnd string) (*[]HelpdeskLocaleFeedbackItem, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/feedback/list/%s/%s/%d?filter_date_start=%s&filter_date_end=%s", websiteID, locale, contentType, pageNumber, url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
   req, _ := service.client.NewRequest("GET", url, nil)
 
   feedbacks := new(HelpdeskLocaleFeedbackListData)
@@ -1381,17 +1432,17 @@ func (service *WebsiteService) ListHelpdeskLocaleFeedbacks(websiteID string, loc
 
 
 // ImportExternalHelpdeskToLocale imports a whole external helpdesk to Crisp, as a Crisp Helpdesk.
-func (service *WebsiteService) ImportExternalHelpdeskToLocale(websiteID string, locale string, helpdeskUrl string) (*Response, error) {
-  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/import", websiteID, locale)
-  req, _ := service.client.NewRequest("POST", url, HelpdeskLocaleExternalImport{HelpdeskURL: helpdeskUrl})
+func (service *WebsiteService) ImportExternalHelpdeskToLocale(websiteID string, locale string, contentType string, helpdeskUrl string, detectLocales *bool, otherLocales *[]string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/import/%s/%s", websiteID, locale, contentType)
+  req, _ := service.client.NewRequest("POST", url, HelpdeskLocaleExternalImport{HelpdeskURL: helpdeskUrl, DetectLocales: detectLocales, OtherLocales: otherLocales})
 
   return service.client.Do(req, nil)
 }
 
 
 // ExportHelpdeskLocaleArticles exports helpdesk articles for locale.
-func (service *WebsiteService) ExportHelpdeskLocaleArticles(websiteID string, locale string) (*Response, error) {
-  url := fmt.Sprintf("website/%s/helpdesk/locale/%s/export", websiteID, locale)
+func (service *WebsiteService) ExportHelpdeskLocaleArticles(websiteID string, locale string, contentType string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/export/%s/%s", websiteID, locale, contentType)
   req, _ := service.client.NewRequest("POST", url, nil)
 
   return service.client.Do(req, nil)
