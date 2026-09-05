@@ -237,6 +237,126 @@ type HelpdeskLocaleFeedbackItemSessionAssigned struct {
   UserID  *string  `json:"user_id,omitempty"`
 }
 
+// HelpdeskPageListData mapping
+type HelpdeskPageListData struct {
+  Data  *[]HelpdeskPage  `json:"data,omitempty"`
+}
+
+// HelpdeskPage mapping
+type HelpdeskPage struct {
+  EntityID  *string  `json:"entity_id,omitempty"`
+  Title     *string  `json:"title,omitempty"`
+  URL       *string  `json:"url,omitempty"`
+}
+
+// HelpdeskTreeListData mapping
+type HelpdeskTreeListData struct {
+  Data  *[]HelpdeskTreeEntry  `json:"data,omitempty"`
+}
+
+// HelpdeskTreeData mapping
+type HelpdeskTreeData struct {
+  Data  *HelpdeskTreeEntry  `json:"data,omitempty"`
+}
+
+// HelpdeskTreeEntry mapping
+type HelpdeskTreeEntry struct {
+  Type      *string                 `json:"type,omitempty"`
+  Slug      *string                 `json:"slug,omitempty"`
+  Title     *string                 `json:"title,omitempty"`
+  State     *HelpdeskTreeState      `json:"state,omitempty"`
+  Children  *[]HelpdeskTreeEntry    `json:"children,omitempty"`
+}
+
+// HelpdeskTreeState mapping
+type HelpdeskTreeState struct {
+  Published  *bool  `json:"published,omitempty"`
+  Hidden     *bool  `json:"hidden,omitempty"`
+  Featured   *bool  `json:"featured,omitempty"`
+}
+
+// HelpdeskTreeContentData mapping
+type HelpdeskTreeContentData struct {
+  Data  *HelpdeskTreeContent  `json:"data,omitempty"`
+}
+
+// HelpdeskTreeContent mapping
+type HelpdeskTreeContent struct {
+  Content  *string  `json:"content,omitempty"`
+}
+
+// HelpdeskTreeMetadataData mapping
+type HelpdeskTreeMetadataData struct {
+  Data  *HelpdeskTreeMetadata  `json:"data,omitempty"`
+}
+
+// HelpdeskTreeMetadata mapping
+type HelpdeskTreeMetadata struct {
+  Format       *string                       `json:"format,omitempty"`
+  Title        *string                       `json:"title,omitempty"`
+  Description  *string                       `json:"description,omitempty"`
+  State        *HelpdeskTreeState            `json:"state,omitempty"`
+  Author       *HelpdeskTreeMetadataAuthor   `json:"author,omitempty"`
+  Color        *string                       `json:"color,omitempty"`
+  Image        *string                       `json:"image,omitempty"`
+}
+
+// HelpdeskTreeMetadataAuthor mapping
+type HelpdeskTreeMetadataAuthor struct {
+  UserID  *string  `json:"user_id,omitempty"`
+}
+
+// HelpdeskTreePageData mapping
+type HelpdeskTreePageData struct {
+  Data  *HelpdeskTreePage  `json:"data,omitempty"`
+}
+
+// HelpdeskTreePage mapping
+type HelpdeskTreePage struct {
+  Title  *string  `json:"title,omitempty"`
+  URL    *string  `json:"url,omitempty"`
+}
+
+// HelpdeskHistoryChangeListData mapping
+type HelpdeskHistoryChangeListData struct {
+  Data  *[]HelpdeskHistoryChange  `json:"data,omitempty"`
+}
+
+// HelpdeskHistoryChangeData mapping
+type HelpdeskHistoryChangeData struct {
+  Data  *HelpdeskHistoryChange  `json:"data,omitempty"`
+}
+
+// HelpdeskHistoryChange mapping
+type HelpdeskHistoryChange struct {
+  ChangeID   *string                       `json:"change_id,omitempty"`
+  Message    *string                       `json:"message,omitempty"`
+  Author     *HelpdeskHistoryChangeAuthor  `json:"author,omitempty"`
+  Edits      *HelpdeskHistoryChangeEdits   `json:"edits,omitempty"`
+  CreatedAt  *uint64                       `json:"created_at,omitempty"`
+  Files      *[]HelpdeskHistoryChangeFile  `json:"files,omitempty"`
+}
+
+// HelpdeskHistoryChangeAuthor mapping
+type HelpdeskHistoryChangeAuthor struct {
+  Email  *string  `json:"email,omitempty"`
+  Name   *string  `json:"name,omitempty"`
+}
+
+// HelpdeskHistoryChangeEdits mapping
+type HelpdeskHistoryChangeEdits struct {
+  Insertions  *uint32  `json:"insertions,omitempty"`
+  Deletions   *uint32  `json:"deletions,omitempty"`
+}
+
+// HelpdeskHistoryChangeFile mapping
+type HelpdeskHistoryChangeFile struct {
+  Change    *string                 `json:"change,omitempty"`
+  Path      *string                 `json:"path,omitempty"`
+  Metadata  *HelpdeskTreeMetadata   `json:"metadata,omitempty"`
+  Content   *string                 `json:"content,omitempty"`
+}
+
 // HelpdeskRedirectionListData mapping
 type HelpdeskRedirectionListData struct {
   Data  *[]HelpdeskRedirection  `json:"data,omitempty"`
@@ -406,6 +526,28 @@ type HelpdeskLocaleExternalImport struct {
   OtherLocales   *[]string  `json:"other_locales,omitempty"`
 }
 
+// HelpdeskTreePathUpdate mapping
+type HelpdeskTreePathUpdate struct {
+  Action    string                        `json:"action"`
+  Path      *HelpdeskTreePathUpdatePath   `json:"path,omitempty"`
+  Position  *int16                        `json:"position,omitempty"`
+}
+
+// HelpdeskTreePathUpdatePath mapping
+type HelpdeskTreePathUpdatePath struct {
+  To  string  `json:"to"`
+}
+
+// HelpdeskTreeContentSave mapping
+type HelpdeskTreeContentSave struct {
+  Content  string  `json:"content"`
+}
+
+// HelpdeskHistoryChangeCancel mapping
+type HelpdeskHistoryChangeCancel struct {
+  Action  string  `json:"action"`
+}
+
 // HelpdeskRedirectionAdd mapping
 type HelpdeskRedirectionAdd struct {
   Path    string  `json:"path"`
@@ -493,6 +635,42 @@ func (instance HelpdeskLocaleFeedbackRatings) String() string {
 
 // String returns the string representation of HelpdeskLocaleFeedbackItem
 func (instance HelpdeskLocaleFeedbackItem) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of HelpdeskPage
+func (instance HelpdeskPage) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of HelpdeskTreeEntry
+func (instance HelpdeskTreeEntry) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of HelpdeskTreeContent
+func (instance HelpdeskTreeContent) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of HelpdeskTreeMetadata
+func (instance HelpdeskTreeMetadata) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of HelpdeskTreePage
+func (instance HelpdeskTreePage) String() string {
+  return Stringify(instance)
+}
+
+
+// String returns the string representation of HelpdeskHistoryChange
+func (instance HelpdeskHistoryChange) String() string {
   return Stringify(instance)
 }
 
@@ -621,6 +799,189 @@ func (service *WebsiteService) ResolveHelpdeskLocale(websiteID string, locale st
 func (service *WebsiteService) DeleteHelpdeskLocale(websiteID string, locale string) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/locale/%s", websiteID, locale)
   req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ListHelpdeskPages lists publicly visible helpdesk pages for a locale and content type.
+func (service *WebsiteService) ListHelpdeskPages(websiteID string, locale string, contentType string, pageNumber uint) (*[]HelpdeskPage, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/page/list/%s/%s/%d", websiteID, locale, contentType, pageNumber)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  pages := new(HelpdeskPageListData)
+  resp, err := service.client.Do(req, pages)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return pages.Data, resp, err
+}
+
+
+// ListHelpdeskTree lists tree entries for a helpdesk locale and content type.
+func (service *WebsiteService) ListHelpdeskTree(websiteID string, locale string, contentType string, pageNumber uint, subPath string, searchTitle string, filterDateStart string, filterDateEnd string) (*[]HelpdeskTreeEntry, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/list/%s/%s/%d?sub_path=%s&search_title=%s&filter_date_start=%s&filter_date_end=%s", websiteID, locale, contentType, pageNumber, url.QueryEscape(subPath), url.QueryEscape(searchTitle), url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  tree := new(HelpdeskTreeListData)
+  resp, err := service.client.Do(req, tree)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return tree.Data, resp, err
+}
+
+
+// CreateHelpdeskTreePath creates an empty helpdesk tree path.
+func (service *WebsiteService) CreateHelpdeskTreePath(websiteID string, locale string, contentType string, path string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/path/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("POST", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ResolveHelpdeskTreePath resolves a helpdesk tree path.
+func (service *WebsiteService) ResolveHelpdeskTreePath(websiteID string, locale string, contentType string, path string) (*HelpdeskTreeEntry, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/path/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  tree := new(HelpdeskTreeData)
+  resp, err := service.client.Do(req, tree)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return tree.Data, resp, err
+}
+
+
+// UpdateHelpdeskTreePath moves a helpdesk tree path or changes its display order.
+func (service *WebsiteService) UpdateHelpdeskTreePath(websiteID string, locale string, contentType string, path string, update HelpdeskTreePathUpdate) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/path/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("PATCH", url, update)
+
+  return service.client.Do(req, nil)
+}
+
+
+// DeleteHelpdeskTreePath deletes a helpdesk tree path recursively.
+func (service *WebsiteService) DeleteHelpdeskTreePath(websiteID string, locale string, contentType string, path string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/path/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("DELETE", url, nil)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ResolveHelpdeskTreeContent resolves the body content of a helpdesk tree file.
+func (service *WebsiteService) ResolveHelpdeskTreeContent(websiteID string, locale string, contentType string, path string) (*HelpdeskTreeContent, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/content/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  content := new(HelpdeskTreeContentData)
+  resp, err := service.client.Do(req, content)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return content.Data, resp, err
+}
+
+
+// SaveHelpdeskTreeContent replaces the body content of a helpdesk tree file.
+func (service *WebsiteService) SaveHelpdeskTreeContent(websiteID string, locale string, contentType string, path string, content string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/content/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("PUT", url, HelpdeskTreeContentSave{Content: content})
+
+  return service.client.Do(req, nil)
+}
+
+
+// ResolveHelpdeskTreeMetadata resolves parsed metadata for a helpdesk tree path.
+func (service *WebsiteService) ResolveHelpdeskTreeMetadata(websiteID string, locale string, contentType string, path string) (*HelpdeskTreeMetadata, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/metadata/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  metadata := new(HelpdeskTreeMetadataData)
+  resp, err := service.client.Do(req, metadata)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return metadata.Data, resp, err
+}
+
+
+// UpdateHelpdeskTreeMetadata updates metadata for a helpdesk tree path.
+func (service *WebsiteService) UpdateHelpdeskTreeMetadata(websiteID string, locale string, contentType string, path string, metadata HelpdeskTreeMetadata) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/metadata/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("PATCH", url, metadata)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ResolveHelpdeskTreePage resolves page information for a helpdesk tree file.
+func (service *WebsiteService) ResolveHelpdeskTreePage(websiteID string, locale string, contentType string, path string) (*HelpdeskTreePage, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/page/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  page := new(HelpdeskTreePageData)
+  resp, err := service.client.Do(req, page)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return page.Data, resp, err
+}
+
+
+// ListHelpdeskHistoryChanges lists helpdesk content history changes.
+func (service *WebsiteService) ListHelpdeskHistoryChanges(websiteID string, pageNumber uint, filterLocale string, filterType string, filterTreePath string) (*[]HelpdeskHistoryChange, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/history/changes/%d?filter_locale=%s&filter_type=%s&filter_tree_path=%s", websiteID, pageNumber, url.QueryEscape(filterLocale), url.QueryEscape(filterType), url.QueryEscape(filterTreePath))
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  changes := new(HelpdeskHistoryChangeListData)
+  resp, err := service.client.Do(req, changes)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return changes.Data, resp, err
+}
+
+
+// ResolveHelpdeskHistoryChange resolves a helpdesk content history change.
+func (service *WebsiteService) ResolveHelpdeskHistoryChange(websiteID string, changeId string) (*HelpdeskHistoryChange, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/history/change/%s", websiteID, changeId)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  change := new(HelpdeskHistoryChangeData)
+  resp, err := service.client.Do(req, change)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return change.Data, resp, err
+}
+
+
+// CancelHelpdeskHistoryChange cancels a helpdesk content history change.
+func (service *WebsiteService) CancelHelpdeskHistoryChange(websiteID string, changeId string, action string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/history/change/%s", websiteID, changeId)
+  req, _ := service.client.NewRequest("DELETE", url, HelpdeskHistoryChangeCancel{Action: action})
+
+  return service.client.Do(req, nil)
+}
+
+
+// RequestHelpdeskContentRefresh queues an asynchronous full refresh of helpdesk content.
+func (service *WebsiteService) RequestHelpdeskContentRefresh(websiteID string, locale string, contentType string) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/refresh/%s/%s", websiteID, locale, contentType)
+  req, _ := service.client.NewRequest("POST", url, nil)
 
   return service.client.Do(req, nil)
 }
