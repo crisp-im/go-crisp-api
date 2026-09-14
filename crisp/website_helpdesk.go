@@ -141,6 +141,7 @@ type HelpdeskPageListData struct {
 type HelpdeskPage struct {
   EntityID  *string  `json:"entity_id,omitempty"`
   Title     *string  `json:"title,omitempty"`
+  TreePath  *string  `json:"tree_path,omitempty"`
   URL       *string  `json:"url,omitempty"`
 }
 
