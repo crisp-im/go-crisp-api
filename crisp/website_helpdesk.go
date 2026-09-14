@@ -137,6 +137,11 @@ type HelpdeskPageListData struct {
   Data  *[]HelpdeskPage  `json:"data,omitempty"`
 }
 
+// HelpdeskPageData mapping
+type HelpdeskPageData struct {
+  Data  *HelpdeskPage  `json:"data,omitempty"`
+}
+
 // HelpdeskPage mapping
 type HelpdeskPage struct {
   EntityID  *string  `json:"entity_id,omitempty"`
@@ -670,6 +675,21 @@ func (service *WebsiteService) ListHelpdeskPages(websiteID string, locale string
   }
 
   return pages.Data, resp, err
+}
+
+
+// ResolveHelpdeskPageEntity resolves a publicly visible helpdesk page by its entity ID.
+func (service *WebsiteService) ResolveHelpdeskPageEntity(websiteID string, locale string, contentType HelpdeskContentType, entityID string) (*HelpdeskPage, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/page/entity/%s/%s/%s", websiteID, locale, contentType, entityID)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  page := new(HelpdeskPageData)
+  resp, err := service.client.Do(req, page)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return page.Data, resp, err
 }
 
 
