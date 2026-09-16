@@ -345,9 +345,7 @@ type HelpdeskSettingsBehavior struct {
   ShowCategoryImages  *bool  `json:"show_category_images,omitempty"`
   ShowChatbox         *bool  `json:"show_chatbox,omitempty"`
   AskFeedback         *bool  `json:"ask_feedback,omitempty"`
-  ReportIncorrect     *bool  `json:"report_incorrect,omitempty"`
   ServeMarkdown       *bool  `json:"serve_markdown,omitempty"`
-  AgentChatBar        *bool  `json:"agent_chat_bar,omitempty"`
   AgentCopyButton     *bool  `json:"agent_copy_button,omitempty"`
   TableOfContents     *bool  `json:"table_of_contents,omitempty"`
   LocalePicker        *bool  `json:"locale_picker,omitempty"`
