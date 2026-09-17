@@ -369,6 +369,7 @@ type HelpdeskSettingsAccess struct {
   RestrictMode  *string  `json:"restrict_mode,omitempty"`
   Password      *string  `json:"password,omitempty"`
   JWTSecret     *string  `json:"jwt_secret,omitempty"`
+  JWTAuthURL    *string  `json:"jwt_auth_url,omitempty"`
 }
 
 // HelpdeskDomainData mapping
