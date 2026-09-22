@@ -218,6 +218,17 @@ type HelpdeskTreePage struct {
   URL    *string  `json:"url,omitempty"`
 }
 
+// HelpdeskTreeAlternatesData mapping
+type HelpdeskTreeAlternatesData struct {
+  Data  *HelpdeskTreeAlternates  `json:"data,omitempty"`
+}
+
+// HelpdeskTreeAlternates maps locale codes to their alternate tree paths.
+type HelpdeskTreeAlternates map[string]string
+
+// HelpdeskTreeAlternatesUpdate maps locale codes to alternate tree paths. Set a value to nil to remove its alternate link.
+type HelpdeskTreeAlternatesUpdate map[string]*string
+
 // HelpdeskHistoryChangeListData mapping
 type HelpdeskHistoryChangeListData struct {
   Data  *[]HelpdeskHistoryChange  `json:"data,omitempty"`
@@ -792,6 +803,30 @@ func (service *WebsiteService) ResolveHelpdeskTreeMetadata(websiteID string, loc
 func (service *WebsiteService) UpdateHelpdeskTreeMetadata(websiteID string, locale string, contentType HelpdeskContentType, path string, metadata HelpdeskTreeMetadata) (*Response, error) {
   url := fmt.Sprintf("website/%s/helpdesk/tree/metadata/%s/%s/%s", websiteID, locale, contentType, path)
   req, _ := service.client.NewRequest("PATCH", url, metadata)
+
+  return service.client.Do(req, nil)
+}
+
+
+// ListHelpdeskTreeAlternates lists alternate locale tree paths linked to a helpdesk tree entry.
+func (service *WebsiteService) ListHelpdeskTreeAlternates(websiteID string, locale string, contentType HelpdeskContentType, path string) (*HelpdeskTreeAlternates, *Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/alternates/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("GET", url, nil)
+
+  alternates := new(HelpdeskTreeAlternatesData)
+  resp, err := service.client.Do(req, alternates)
+  if err != nil {
+    return nil, resp, err
+  }
+
+  return alternates.Data, resp, err
+}
+
+
+// UpdateHelpdeskTreeAlternates creates or updates alternate locale links for a helpdesk tree entry.
+func (service *WebsiteService) UpdateHelpdeskTreeAlternates(websiteID string, locale string, contentType HelpdeskContentType, path string, alternates HelpdeskTreeAlternatesUpdate) (*Response, error) {
+  url := fmt.Sprintf("website/%s/helpdesk/tree/alternates/%s/%s/%s", websiteID, locale, contentType, path)
+  req, _ := service.client.NewRequest("PATCH", url, alternates)
 
   return service.client.Do(req, nil)
 }
