@@ -5,6 +5,5 @@
 
 package crisp
 
-
 // BucketService service
 type BucketService service

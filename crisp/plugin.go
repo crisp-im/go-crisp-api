@@ -5,6 +5,5 @@
 
 package crisp
 
-
 // PluginService service
 type PluginService service

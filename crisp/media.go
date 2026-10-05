@@ -5,6 +5,5 @@
 
 package crisp
 
-
 // MediaService service
 type MediaService service

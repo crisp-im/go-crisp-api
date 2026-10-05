@@ -5,17 +5,15 @@
 
 package crisp
 
-
 import (
-  "fmt"
-  "net/url"
+	"fmt"
+	"net/url"
 )
-
 
 // ListAnimationMedias lists animation medias.
 func (service *WebsiteService) ListAnimationMedias(pageNumber uint, listID int, searchQuery string) (*Response, error) {
-  url := fmt.Sprintf("media/animation/list/%d?list_id=%d&search_query=%s", pageNumber, listID, url.QueryEscape(searchQuery))
-  req, _ := service.client.NewRequest("GET", url, nil)
+	url := fmt.Sprintf("media/animation/list/%d?list_id=%d&search_query=%s", pageNumber, listID, url.QueryEscape(searchQuery))
+	req, _ := service.client.NewRequest("GET", url, nil)
 
-  return service.client.Do(req, nil)
+	return service.client.Do(req, nil)
 }
