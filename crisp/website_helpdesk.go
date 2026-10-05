@@ -162,11 +162,12 @@ type HelpdeskTreeData struct {
 
 // HelpdeskTreeEntry mapping
 type HelpdeskTreeEntry struct {
-  Type      *string                 `json:"type,omitempty"`
-  Slug      *string                 `json:"slug,omitempty"`
-  Title     *string                 `json:"title,omitempty"`
-  State     *HelpdeskTreeState      `json:"state,omitempty"`
-  Children  *[]HelpdeskTreeEntry    `json:"children,omitempty"`
+  Type          *string                 `json:"type,omitempty"`
+  Slug          *string                 `json:"slug,omitempty"`
+  OrderIndexed  *bool                   `json:"order_indexed,omitempty"`
+  Title         *string                 `json:"title,omitempty"`
+  State         *HelpdeskTreeState      `json:"state,omitempty"`
+  Children      *[]HelpdeskTreeEntry    `json:"children,omitempty"`
 }
 
 // HelpdeskTreeState mapping
