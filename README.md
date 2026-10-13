@@ -82,6 +82,12 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 
 ### Website
 
+* #### **Website Audit**
+  * **Create Audit Log**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-audit-log)
+    * `client.Website.CreateAuditLog(websiteID string, auditLog WebsiteAuditLogCreate) (*Response, error)`
+  * **List Audit Logs**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#list-audit-logs)
+    * `client.Website.ListAuditLogs(websiteID string, pageNumber uint, filterUserID string, filterNamespace string, filterDateStart string, filterDateEnd string) (*[]WebsiteAuditLog, *Response, error)`
+
 * #### **Website Base**
   * **Check If Website Exists**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-website-exists)
     * `client.Website.CheckWebsiteExists(domain string) (*Response, error)`
