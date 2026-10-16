@@ -112,11 +112,6 @@ type EventsPluginGeneric struct {
 	PluginID *string `json:"plugin_id"`
 }
 
-// EventsImportGeneric maps a generic import
-type EventsImportGeneric struct {
-	ImportID *string `json:"import_id"`
-}
-
 // EventsSessionGenericUnbound maps a generic session (unbound from website)
 type EventsSessionGenericUnbound struct {
 	SessionID *string `json:"session_id"`
@@ -145,12 +140,6 @@ type EventsCallGeneric struct {
 type EventsPeopleGeneric struct {
 	EventsWebsiteGeneric
 	PeopleID *string `json:"people_id"`
-}
-
-// EventsCampaignGeneric maps a generic campaign
-type EventsCampaignGeneric struct {
-	EventsWebsiteGeneric
-	CampaignID *string `json:"campaign_id"`
 }
 
 // EventsReceiveGenericMessage maps a generic message
@@ -732,25 +721,6 @@ type EventsReceiveMessageNotify struct {
 	EventsSessionGeneric
 }
 
-// EventsSpamMessage maps spam:message
-type EventsSpamMessage struct {
-	EventsGeneric
-	EventsWebsiteGeneric
-	SpamID    *string      `json:"spam_id"`
-	Type      *string      `json:"type"`
-	Reason    *string      `json:"reason"`
-	Metadata  *interface{} `json:"metadata,omitempty"`
-	Headers   *interface{} `json:"headers,omitempty"`
-	Timestamp *uint64      `json:"timestamp"`
-}
-
-// EventsSpamDecision maps spam:decision
-type EventsSpamDecision struct {
-	EventsGeneric
-	EventsWebsiteGeneric
-	Action *string `json:"action"`
-}
-
 // EventsReceivePeopleProfileCreated maps people:profile:created
 type EventsReceivePeopleProfileCreated struct {
 	EventsGeneric
@@ -782,55 +752,6 @@ type EventsPeopleSyncProfile struct {
 	EventsPeopleGeneric
 	EventsSessionGenericUnbound
 	Identity *PeopleProfileCard `json:"identity"`
-}
-
-// EventsPeopleImportProgress maps people:import:progress
-type EventsPeopleImportProgress struct {
-	EventsGeneric
-	EventsImportGeneric
-	Progress *uint8                            `json:"progress"`
-	Count    *EventsPeopleImportProgressCount  `json:"count"`
-	Items    *[]EventsPeopleImportProgressItem `json:"items"`
-}
-
-// EventsPeopleImportProgressCount maps people:import:progress/count
-type EventsPeopleImportProgressCount struct {
-	Total     *uint32 `json:"total"`
-	Skipped   *uint32 `json:"skipped"`
-	Remaining *uint32 `json:"remaining"`
-}
-
-// EventsPeopleImportProgressItem maps people:import:progress/items
-type EventsPeopleImportProgressItem struct {
-	Identifier *string `json:"identifier,omitempty"`
-	Reason     *string `json:"reason"`
-}
-
-// EventsPeopleImportDone maps people:import:done
-type EventsPeopleImportDone struct {
-	EventsGeneric
-	EventsImportGeneric
-	Error *bool `json:"error"`
-}
-
-// EventsCampaignProgress maps campaign:progress
-type EventsCampaignProgress struct {
-	EventsGeneric
-	EventsCampaignGeneric
-	Progress *uint8 `json:"progress"`
-}
-
-// EventsCampaignDispatched maps campaign:dispatched
-type EventsCampaignDispatched struct {
-	EventsGeneric
-	EventsCampaignGeneric
-}
-
-// EventsCampaignRunning maps campaign:running
-type EventsCampaignRunning struct {
-	EventsGeneric
-	EventsCampaignGeneric
-	Running *bool `json:"running"`
 }
 
 // EventsBrowsingRequestInitiated maps browsing:request:initiated
@@ -866,30 +787,6 @@ type EventsIdentityVerifyRequest struct {
 	Target     *string `json:"target"`
 	Code       *string `json:"code"`
 	ConfirmURL *string `json:"confirm_url"`
-}
-
-// EventsWidgetActionProcessed maps widget:action:processed
-type EventsWidgetActionProcessed struct {
-	EventsGeneric
-	EventsSessionGeneric
-	EventsPluginGeneric
-	CorrelationID *string      `json:"correlation_id"`
-	Outcome       *string      `json:"outcome"`
-	Result        *interface{} `json:"result,omitempty"`
-}
-
-// EventsStatusHealthChanged maps status:health:changed
-type EventsStatusHealthChanged struct {
-	EventsGeneric
-	EventsWebsiteGeneric
-	Health *string                          `json:"health"`
-	Nodes  *[]EventsStatusHealthChangedNode `json:"nodes"`
-}
-
-// EventsStatusHealthChangedNode maps status:health:changed/nodes
-type EventsStatusHealthChangedNode struct {
-	Label   *string `json:"label,omitempty"`
-	Replica *string `json:"replica,omitempty"`
 }
 
 // EventsReceiveWebsiteUpdateVisitorsCount maps website:update_visitors_count
@@ -965,20 +862,6 @@ type EventsReceiveBucketURLStatusGenerated EventsReceiveBucketURLUploadGenerated
 
 // EventsReceiveBucketURLProcessingGenerated maps bucket:url:processing:generated
 type EventsReceiveBucketURLProcessingGenerated EventsReceiveBucketURLUploadGenerated
-
-// EventsReceiveMediaAnimationListed maps media:animation:listed
-type EventsReceiveMediaAnimationListed struct {
-	EventsGeneric
-	Identifier *string                                    `json:"identifier"`
-	ID         *int                                       `json:"id"`
-	Results    *[]EventsReceiveMediaAnimationListedResult `json:"results"`
-}
-
-// EventsReceiveMediaAnimationListedResult maps media:animation:listed/results
-type EventsReceiveMediaAnimationListedResult struct {
-	Type *string `json:"type"`
-	URL  *string `json:"url"`
-}
 
 // EventsReceiveEmailSubscribe maps email:subscribe
 type EventsReceiveEmailSubscribe struct {
@@ -1264,16 +1147,6 @@ func (evt EventsReceiveMessageNotify) String() string {
 	return Stringify(evt)
 }
 
-// String returns the string representation of EventsSpamMessage
-func (evt EventsSpamMessage) String() string {
-	return Stringify(evt)
-}
-
-// String returns the string representation of EventsSpamDecision
-func (evt EventsSpamDecision) String() string {
-	return Stringify(evt)
-}
-
 // String returns the string representation of EventsReceivePeopleProfileCreated
 func (evt EventsReceivePeopleProfileCreated) String() string {
 	return Stringify(evt)
@@ -1299,31 +1172,6 @@ func (evt EventsPeopleSyncProfile) String() string {
 	return Stringify(evt)
 }
 
-// String returns the string representation of EventsPeopleImportProgress
-func (evt EventsPeopleImportProgress) String() string {
-	return Stringify(evt)
-}
-
-// String returns the string representation of EventsPeopleImportDone
-func (evt EventsPeopleImportDone) String() string {
-	return Stringify(evt)
-}
-
-// String returns the string representation of EventsCampaignProgress
-func (evt EventsCampaignProgress) String() string {
-	return Stringify(evt)
-}
-
-// String returns the string representation of EventsCampaignDispatched
-func (evt EventsCampaignDispatched) String() string {
-	return Stringify(evt)
-}
-
-// String returns the string representation of EventsCampaignRunning
-func (evt EventsCampaignRunning) String() string {
-	return Stringify(evt)
-}
-
 // String returns the string representation of EventsBrowsingRequestInitiated
 func (evt EventsBrowsingRequestInitiated) String() string {
 	return Stringify(evt)
@@ -1346,11 +1194,6 @@ func (evt EventsCallRequestRejected) String() string {
 
 // String returns the string representation of EventsIdentityVerifyRequest
 func (evt EventsIdentityVerifyRequest) String() string {
-	return Stringify(evt)
-}
-
-// String returns the string representation of EventsWidgetActionProcessed
-func (evt EventsWidgetActionProcessed) String() string {
 	return Stringify(evt)
 }
 
@@ -1401,11 +1244,6 @@ func (evt EventsReceiveBucketURLStatusGenerated) String() string {
 
 // String returns the string representation of EventsReceiveBucketURLProcessingGenerated
 func (evt EventsReceiveBucketURLProcessingGenerated) String() string {
-	return Stringify(evt)
-}
-
-// String returns the string representation of EventsReceiveMediaAnimationListed
-func (evt EventsReceiveMediaAnimationListed) String() string {
 	return Stringify(evt)
 }
 

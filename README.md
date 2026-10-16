@@ -627,12 +627,6 @@ Available events are listed below:
   * **Message Notify Unread Received**:
     * `message:notify:unread:received`
 
-* #### **Spam Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#spam-events)
-  * **Spam Message**:
-    * `spam:message`
-  * **Spam Decision**:
-    * `spam:decision`
-
 * #### **People Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#people-events)
   * **People Profile Created**:
     * `people:profile:created`
@@ -644,18 +638,6 @@ Available events are listed below:
     * `people:bind:session`
   * **People Sync Profile**:
     * `people:sync:profile`
-  * **People Import Progress**:
-    * `people:import:progress`
-  * **People Import Done**:
-    * `people:import:done`
-
-* #### **Campaign Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#campaign-events)
-  * **Campaign Progress**:
-    * `campaign:progress`
-  * **Campaign Dispatched**:
-    * `campaign:dispatched`
-  * **Campaign Running**:
-    * `campaign:running`
 
 * #### **Browsing Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#browsing-events)
   * **Browsing Request Initiated**:
@@ -672,14 +654,6 @@ Available events are listed below:
 * #### **Identity Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#identity-events)
   * **Identity Verify Request**:
     * `identity:verify:request`
-
-* #### **Widget Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#widget-events)
-  * **Widget Action Processed**:
-    * `widget:action:processed`
-
-* #### **Status Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#status-events)
-  * **Status Health Changed**:
-    * `status:health:changed`
 
 * #### **Website Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#website-events)
   * **Website Update Visitors Count**:
@@ -704,10 +678,6 @@ Available events are listed below:
     * `bucket:url:status:generated`
   * **Bucket URL Processing Generated**:
     * `bucket:url:processing:generated`
-
-* #### **Media Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#media-events)
-  * **Media Animation Listed**:
-    * `media:animation:listed`
 
 * #### **Email Events**: [Reference](https://docs.crisp.chat/references/rtm-api/v1/#email-events)
   * **Email Subscribe**:
