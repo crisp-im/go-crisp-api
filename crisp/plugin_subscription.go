@@ -9,11 +9,6 @@ import (
 	"fmt"
 )
 
-// PluginSubscriptionListData mapping
-type PluginSubscriptionListData struct {
-	Data *[]PluginSubscription `json:"data,omitempty"`
-}
-
 // PluginSubscriptionData mapping
 type PluginSubscriptionData struct {
 	Data *PluginSubscription `json:"data,omitempty"`
@@ -50,11 +45,6 @@ type PluginSubscriptionPlan struct {
 	ID    *string `json:"id,omitempty"`
 	Name  *string `json:"name,omitempty"`
 	Price *uint16 `json:"price,omitempty"`
-}
-
-// PluginSubscriptionCreate mapping
-type PluginSubscriptionCreate struct {
-	PluginID *string `json:"plugin_id,omitempty"`
 }
 
 // PluginSubscriptionBillUsageReport mapping
@@ -150,34 +140,6 @@ func (instance PluginSubscriptionSettings) String() string {
 	return Stringify(instance)
 }
 
-// ListAllActiveSubscriptions lists all active plugin subscriptions on all websites, linked to payment methods owned by the user, or from websites the user is member of.
-func (service *PluginService) ListAllActiveSubscriptions() (*[]PluginSubscription, *Response, error) {
-	url := "plugins/subscription"
-	req, _ := service.client.NewRequest("GET", url, nil)
-
-	plugins := new(PluginSubscriptionListData)
-	resp, err := service.client.Do(req, plugins)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return plugins.Data, resp, err
-}
-
-// ListSubscriptionsForWebsite lists plugin subscriptions for given website.
-func (service *PluginService) ListSubscriptionsForWebsite(websiteID string) (*[]PluginSubscription, *Response, error) {
-	url := fmt.Sprintf("plugins/subscription/%s", websiteID)
-	req, _ := service.client.NewRequest("GET", url, nil)
-
-	plugins := new(PluginSubscriptionListData)
-	resp, err := service.client.Do(req, plugins)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return plugins.Data, resp, err
-}
-
 // GetSubscriptionDetails resolves details on a given subscription.
 func (service *PluginService) GetSubscriptionDetails(websiteID string, pluginID string) (*PluginSubscription, *Response, error) {
 	url := fmt.Sprintf("plugins/subscription/%s/%s", websiteID, pluginID)
@@ -190,22 +152,6 @@ func (service *PluginService) GetSubscriptionDetails(websiteID string, pluginID 
 	}
 
 	return plugins.Data, resp, err
-}
-
-// SubscribeWebsiteToPlugin subscribes a given website to a given plugin.
-func (service *PluginService) SubscribeWebsiteToPlugin(websiteID string, pluginID string) (*Response, error) {
-	url := fmt.Sprintf("plugins/subscription/%s", websiteID)
-	req, _ := service.client.NewRequest("POST", url, PluginSubscriptionCreate{PluginID: &pluginID})
-
-	return service.client.Do(req, nil)
-}
-
-// UnsubscribePluginFromWebsite unsubscribes a given plugin from a given website.
-func (service *PluginService) UnsubscribePluginFromWebsite(websiteID string, pluginID string) (*Response, error) {
-	url := fmt.Sprintf("plugins/subscription/%s/%s", websiteID, pluginID)
-	req, _ := service.client.NewRequest("DELETE", url, nil)
-
-	return service.client.Do(req, nil)
 }
 
 // GetSubscriptionSettings resolves plugin subscription settings. Used to read plugin configuration on a given website.

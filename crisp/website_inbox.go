@@ -19,22 +19,12 @@ type WebsiteInboxData struct {
 	Data *WebsiteInbox `json:"data,omitempty"`
 }
 
-// WebsiteInboxNewData mapping
-type WebsiteInboxNewData struct {
-	Data *WebsiteInboxNew `json:"data,omitempty"`
-}
-
 // WebsiteInbox mapping
 type WebsiteInbox struct {
 	WebsiteInboxItem
 	InboxID   *string `json:"inbox_id,omitempty"`
 	CreatedAt *uint64 `json:"created_at,omitempty"`
 	UpdatedAt *uint64 `json:"updated_at,omitempty"`
-}
-
-// WebsiteInboxNew mapping
-type WebsiteInboxNew struct {
-	InboxID *string `json:"inbox_id,omitempty"`
 }
 
 // WebsiteInboxItem mapping
@@ -57,24 +47,8 @@ type WebsiteInboxItemCondition struct {
 	Query     *[]string `json:"query,omitempty"`
 }
 
-// WebsiteInboxOrdersItem mapping
-type WebsiteInboxOrdersItem struct {
-	Orders []WebsiteInboxOrderItem `json:"orders"`
-}
-
-// WebsiteInboxOrderItem mapping
-type WebsiteInboxOrderItem struct {
-	InboxID string `json:"inbox_id"`
-	Order   uint16 `json:"order"`
-}
-
 // String returns the string representation of WebsiteInbox
 func (instance WebsiteInbox) String() string {
-	return Stringify(instance)
-}
-
-// String returns the string representation of WebsiteInboxNew
-func (instance WebsiteInboxNew) String() string {
 	return Stringify(instance)
 }
 
@@ -90,28 +64,6 @@ func (service *WebsiteService) ListInboxes(websiteID string, pageNumber uint) (*
 	}
 
 	return inboxes.Data, resp, err
-}
-
-// BatchOrderInboxes changes order for multiple matching inboxes on website.
-func (service *WebsiteService) BatchOrderInboxes(websiteID string, orders WebsiteInboxOrdersItem) (*Response, error) {
-	url := fmt.Sprintf("website/%s/inboxes/batch/order", websiteID)
-	req, _ := service.client.NewRequest("PATCH", url, orders)
-
-	return service.client.Do(req, nil)
-}
-
-// CreateNewInbox creates a new inbox for website.
-func (service *WebsiteService) CreateNewInbox(websiteID string, inbox WebsiteInboxItem) (*WebsiteInboxNew, *Response, error) {
-	url := fmt.Sprintf("website/%s/inbox", websiteID)
-	req, _ := service.client.NewRequest("POST", url, inbox)
-
-	inboxNew := new(WebsiteInboxNewData)
-	resp, err := service.client.Do(req, inboxNew)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return inboxNew.Data, resp, err
 }
 
 // CheckInboxExists checks if inbox exists for website.
@@ -134,20 +86,4 @@ func (service *WebsiteService) GetInbox(websiteID string, inboxID string) (*Webs
 	}
 
 	return inbox.Data, resp, err
-}
-
-// SaveInbox saves inbox for website.
-func (service *WebsiteService) SaveInbox(websiteID string, inboxID string, inbox WebsiteInboxItem) (*Response, error) {
-	url := fmt.Sprintf("website/%s/inbox/%s", websiteID, inboxID)
-	req, _ := service.client.NewRequest("PUT", url, inbox)
-
-	return service.client.Do(req, nil)
-}
-
-// DeleteInbox deletes inbox for website.
-func (service *WebsiteService) DeleteInbox(websiteID string, inboxID string) (*Response, error) {
-	url := fmt.Sprintf("website/%s/inbox/%s", websiteID, inboxID)
-	req, _ := service.client.NewRequest("DELETE", url, nil)
-
-	return service.client.Do(req, nil)
 }

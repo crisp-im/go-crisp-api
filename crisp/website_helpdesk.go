@@ -227,46 +227,6 @@ type HelpdeskTreeAlternates map[string]string
 // HelpdeskTreeAlternatesUpdate maps locale codes to alternate tree paths. Set a value to nil to remove its alternate link.
 type HelpdeskTreeAlternatesUpdate map[string]*string
 
-// HelpdeskHistoryChangeListData mapping
-type HelpdeskHistoryChangeListData struct {
-	Data *[]HelpdeskHistoryChange `json:"data,omitempty"`
-}
-
-// HelpdeskHistoryChangeData mapping
-type HelpdeskHistoryChangeData struct {
-	Data *HelpdeskHistoryChange `json:"data,omitempty"`
-}
-
-// HelpdeskHistoryChange mapping
-type HelpdeskHistoryChange struct {
-	ChangeID  *string                      `json:"change_id,omitempty"`
-	Message   *string                      `json:"message,omitempty"`
-	Author    *HelpdeskHistoryChangeAuthor `json:"author,omitempty"`
-	Edits     *HelpdeskHistoryChangeEdits  `json:"edits,omitempty"`
-	CreatedAt *uint64                      `json:"created_at,omitempty"`
-	Files     *[]HelpdeskHistoryChangeFile `json:"files,omitempty"`
-}
-
-// HelpdeskHistoryChangeAuthor mapping
-type HelpdeskHistoryChangeAuthor struct {
-	Email *string `json:"email,omitempty"`
-	Name  *string `json:"name,omitempty"`
-}
-
-// HelpdeskHistoryChangeEdits mapping
-type HelpdeskHistoryChangeEdits struct {
-	Insertions *uint32 `json:"insertions,omitempty"`
-	Deletions  *uint32 `json:"deletions,omitempty"`
-}
-
-// HelpdeskHistoryChangeFile mapping
-type HelpdeskHistoryChangeFile struct {
-	Change   *string               `json:"change,omitempty"`
-	Path     *string               `json:"path,omitempty"`
-	Metadata *HelpdeskTreeMetadata `json:"metadata,omitempty"`
-	Content  *string               `json:"content,omitempty"`
-}
-
 // HelpdeskRedirectionListData mapping
 type HelpdeskRedirectionListData struct {
 	Data *[]HelpdeskRedirection `json:"data,omitempty"`
@@ -381,70 +341,9 @@ type HelpdeskSettingsAccess struct {
 	JWTAuthURL   *string `json:"jwt_auth_url,omitempty"`
 }
 
-// HelpdeskDomainData mapping
-type HelpdeskDomainData struct {
-	Data *HelpdeskDomain `json:"data,omitempty"`
-}
-
-// HelpdeskDomain mapping
-type HelpdeskDomain struct {
-	Root     *string `json:"root,omitempty"`
-	Basic    *string `json:"basic,omitempty"`
-	Custom   *string `json:"custom,omitempty"`
-	Verified *bool   `json:"verified,omitempty"`
-}
-
-// HelpdeskDomainSetupFlowData mapping
-type HelpdeskDomainSetupFlowData struct {
-	Data *HelpdeskDomainSetupFlow `json:"data,omitempty"`
-}
-
-// HelpdeskDomainSetupFlow mapping
-type HelpdeskDomainSetupFlow struct {
-	Custom *string                       `json:"custom,omitempty"`
-	Setup  *HelpdeskDomainSetupFlowSetup `json:"setup,omitempty"`
-}
-
-// HelpdeskDomainSetupFlowSetup mapping
-type HelpdeskDomainSetupFlowSetup struct {
-	Records *[]HelpdeskDomainSetupFlowSetupRecord `json:"records,omitempty"`
-}
-
-// HelpdeskDomainSetupFlowSetupRecord mapping
-type HelpdeskDomainSetupFlowSetupRecord struct {
-	Type  *string `json:"type,omitempty"`
-	Query *string `json:"query,omitempty"`
-	Name  *string `json:"name,omitempty"`
-	Value *string `json:"value,omitempty"`
-}
-
-// HelpdeskCreate mapping
-type HelpdeskCreate struct {
-	Name        string `json:"name"`
-	DomainBasic string `json:"domain_basic"`
-}
-
-// HelpdeskRemove mapping
-type HelpdeskRemove struct {
-	Verify *HelpdeskRemoveVerify `json:"verify,omitempty"`
-}
-
-// HelpdeskRemoveVerify mapping
-type HelpdeskRemoveVerify struct {
-	Method string `json:"method"`
-	Secret string `json:"secret"`
-}
-
 // HelpdeskLocaleAdd mapping
 type HelpdeskLocaleAdd struct {
 	Locale string `json:"locale"`
-}
-
-// HelpdeskLocaleExternalImport mapping
-type HelpdeskLocaleExternalImport struct {
-	HelpdeskURL   string    `json:"helpdesk_url"`
-	DetectLocales *bool     `json:"detect_locales,omitempty"`
-	OtherLocales  *[]string `json:"other_locales,omitempty"`
 }
 
 // HelpdeskTreePathUpdate mapping
@@ -464,21 +363,10 @@ type HelpdeskTreeContentSave struct {
 	Content string `json:"content"`
 }
 
-// HelpdeskHistoryChangeCancel mapping
-type HelpdeskHistoryChangeCancel struct {
-	Action string `json:"action"`
-}
-
 // HelpdeskRedirectionAdd mapping
 type HelpdeskRedirectionAdd struct {
 	Path   string `json:"path"`
 	Target string `json:"target"`
-}
-
-// HelpdeskDomainChangeRequest mapping
-type HelpdeskDomainChangeRequest struct {
-	Basic  *string `json:"basic,omitempty"`
-	Custom *string `json:"custom,omitempty"`
 }
 
 // String returns the string representation of Helpdesk
@@ -526,11 +414,6 @@ func (instance HelpdeskTreePage) String() string {
 	return Stringify(instance)
 }
 
-// String returns the string representation of HelpdeskHistoryChange
-func (instance HelpdeskHistoryChange) String() string {
-	return Stringify(instance)
-}
-
 // String returns the string representation of HelpdeskRedirection
 func (instance HelpdeskRedirection) String() string {
 	return Stringify(instance)
@@ -543,16 +426,6 @@ func (instance HelpdeskRedirectionNew) String() string {
 
 // String returns the string representation of HelpdeskSettings
 func (instance HelpdeskSettings) String() string {
-	return Stringify(instance)
-}
-
-// String returns the string representation of HelpdeskDomain
-func (instance HelpdeskDomain) String() string {
-	return Stringify(instance)
-}
-
-// String returns the string representation of HelpdeskDomainSetupFlow
-func (instance HelpdeskDomainSetupFlow) String() string {
 	return Stringify(instance)
 }
 
@@ -576,22 +449,6 @@ func (service *WebsiteService) ResolveHelpdesk(websiteID string) (*Helpdesk, *Re
 	}
 
 	return helpdesk.Data, resp, err
-}
-
-// InitializeHelpdesk initializes a new helpdesk for website.
-func (service *WebsiteService) InitializeHelpdesk(websiteID string, name string, domainBasic string) (*Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk", websiteID)
-	req, _ := service.client.NewRequest("POST", url, HelpdeskCreate{Name: name, DomainBasic: domainBasic})
-
-	return service.client.Do(req, nil)
-}
-
-// DeleteHelpdesk deletes helpdesk for website.
-func (service *WebsiteService) DeleteHelpdesk(websiteID string, verify HelpdeskRemoveVerify) (*Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk", websiteID)
-	req, _ := service.client.NewRequest("DELETE", url, HelpdeskRemove{Verify: &verify})
-
-	return service.client.Do(req, nil)
 }
 
 // ListHelpdeskLocales lists locales for helpdesk in website.
@@ -806,50 +663,6 @@ func (service *WebsiteService) ResolveHelpdeskTreePage(websiteID string, locale 
 	return page.Data, resp, err
 }
 
-// ListHelpdeskHistoryChanges lists helpdesk content history changes.
-func (service *WebsiteService) ListHelpdeskHistoryChanges(websiteID string, pageNumber uint, filterLocale string, filterType HelpdeskContentType, filterTreePath string) (*[]HelpdeskHistoryChange, *Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk/history/changes/%d?filter_locale=%s&filter_type=%s&filter_tree_path=%s", websiteID, pageNumber, url.QueryEscape(filterLocale), url.QueryEscape(string(filterType)), url.QueryEscape(filterTreePath))
-	req, _ := service.client.NewRequest("GET", url, nil)
-
-	changes := new(HelpdeskHistoryChangeListData)
-	resp, err := service.client.Do(req, changes)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return changes.Data, resp, err
-}
-
-// ResolveHelpdeskHistoryChange resolves a helpdesk content history change.
-func (service *WebsiteService) ResolveHelpdeskHistoryChange(websiteID string, changeId string) (*HelpdeskHistoryChange, *Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk/history/change/%s", websiteID, changeId)
-	req, _ := service.client.NewRequest("GET", url, nil)
-
-	change := new(HelpdeskHistoryChangeData)
-	resp, err := service.client.Do(req, change)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return change.Data, resp, err
-}
-
-// CancelHelpdeskHistoryChange cancels a helpdesk content history change.
-func (service *WebsiteService) CancelHelpdeskHistoryChange(websiteID string, changeId string, action string) (*Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk/history/change/%s", websiteID, changeId)
-	req, _ := service.client.NewRequest("DELETE", url, HelpdeskHistoryChangeCancel{Action: action})
-
-	return service.client.Do(req, nil)
-}
-
-// RequestHelpdeskContentRefresh queues an asynchronous full refresh of helpdesk content.
-func (service *WebsiteService) RequestHelpdeskContentRefresh(websiteID string, locale string, contentType HelpdeskContentType) (*Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk/refresh/%s/%s", websiteID, locale, contentType)
-	req, _ := service.client.NewRequest("POST", url, nil)
-
-	return service.client.Do(req, nil)
-}
-
 // MapHelpdeskLocaleFeedbackRatings map locale feedback ratings for helpdesk in website.
 func (service *WebsiteService) MapHelpdeskLocaleFeedbackRatings(websiteID string, locale string, contentType HelpdeskContentType, filterDateStart string, filterDateEnd string) (*HelpdeskLocaleFeedbackRatings, *Response, error) {
 	url := fmt.Sprintf("website/%s/helpdesk/feedback/ratings/%s/%s?filter_date_start=%s&filter_date_end=%s", websiteID, locale, contentType, url.QueryEscape(filterDateStart), url.QueryEscape(filterDateEnd))
@@ -876,22 +689,6 @@ func (service *WebsiteService) ListHelpdeskLocaleFeedbacks(websiteID string, loc
 	}
 
 	return feedbacks.Data, resp, err
-}
-
-// ImportExternalHelpdeskToLocale imports a whole external helpdesk to Crisp, as a Crisp Helpdesk.
-func (service *WebsiteService) ImportExternalHelpdeskToLocale(websiteID string, locale string, contentType HelpdeskContentType, helpdeskUrl string, detectLocales *bool, otherLocales *[]string) (*Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk/import/%s/%s", websiteID, locale, contentType)
-	req, _ := service.client.NewRequest("POST", url, HelpdeskLocaleExternalImport{HelpdeskURL: helpdeskUrl, DetectLocales: detectLocales, OtherLocales: otherLocales})
-
-	return service.client.Do(req, nil)
-}
-
-// ExportHelpdeskLocaleArticles exports helpdesk articles for locale.
-func (service *WebsiteService) ExportHelpdeskLocaleArticles(websiteID string, locale string, contentType HelpdeskContentType) (*Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk/export/%s/%s", websiteID, locale, contentType)
-	req, _ := service.client.NewRequest("POST", url, nil)
-
-	return service.client.Do(req, nil)
 }
 
 // ListHelpdeskRedirections lists redirections for helpdesk in website.
@@ -972,40 +769,4 @@ func (service *WebsiteService) SaveHelpdeskSettings(websiteID string, settings H
 	req, _ := service.client.NewRequest("PATCH", url, settings)
 
 	return service.client.Do(req, nil)
-}
-
-// ResolveHelpdeskDomain resolves domain for helpdesk in website.
-func (service *WebsiteService) ResolveHelpdeskDomain(websiteID string) (*HelpdeskDomain, *Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk/domain", websiteID)
-	req, _ := service.client.NewRequest("GET", url, nil)
-
-	domain := new(HelpdeskDomainData)
-	resp, err := service.client.Do(req, domain)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return domain.Data, resp, err
-}
-
-// RequestHelpdeskDomainChange requests a change in the domain used for helpdesk.
-func (service *WebsiteService) RequestHelpdeskDomainChange(websiteID string, basic *string, custom *string) (*Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk/domain", websiteID)
-	req, _ := service.client.NewRequest("PATCH", url, HelpdeskDomainChangeRequest{Basic: basic, Custom: custom})
-
-	return service.client.Do(req, nil)
-}
-
-// GenerateHelpdeskDomainSetupFlow retrieves the domain setup flow for helpdesk.
-func (service *WebsiteService) GenerateHelpdeskDomainSetupFlow(websiteID string, custom string) (*HelpdeskDomainSetupFlow, *Response, error) {
-	url := fmt.Sprintf("website/%s/helpdesk/domain/setup?custom=%s", websiteID, url.QueryEscape(custom))
-	req, _ := service.client.NewRequest("GET", url, nil)
-
-	flow := new(HelpdeskDomainSetupFlowData)
-	resp, err := service.client.Do(req, flow)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return flow.Data, resp, err
 }

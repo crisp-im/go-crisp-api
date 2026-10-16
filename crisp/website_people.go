@@ -187,23 +187,6 @@ type PeopleConversationsData struct {
 	Data []string `json:"data,omitempty"`
 }
 
-// PeopleCampaignsData mapping
-type PeopleCampaignsData struct {
-	Data *[]PeopleCampaign `json:"data,omitempty"`
-}
-
-// PeopleCampaign mapping
-type PeopleCampaign struct {
-	CampaignID   *string   `json:"campaign_id,omitempty"`
-	Type         *string   `json:"type,omitempty"`
-	Name         *string   `json:"name,omitempty"`
-	CreatedAt    *uint64   `json:"created_at,omitempty"`
-	UpdatedAt    *uint64   `json:"updated_at,omitempty"`
-	DispatchedAt *uint64   `json:"dispatched_at,omitempty"`
-	OccurredAt   *uint64   `json:"occurred_at,omitempty"`
-	Statistics   *[]string `json:"statistics,omitempty"`
-}
-
 // PeopleEvent mapping
 type PeopleEvent struct {
 	Text      *string      `json:"text,omitempty"`
@@ -220,16 +203,6 @@ type PeopleData struct {
 // PeopleSubscription mapping
 type PeopleSubscription struct {
 	Email *bool `json:"email,omitempty"`
-}
-
-// PeopleProfileImportData mapping
-type PeopleProfileImportData struct {
-	Data *PeopleProfileImport `json:"data,omitempty"`
-}
-
-// PeopleProfileImport mapping
-type PeopleProfileImport struct {
-	ImportID *string `json:"import_id,omitempty"`
 }
 
 // PeopleSuggestedSegmentDelete mapping
@@ -269,25 +242,6 @@ type PeopleSubscriptionUpdate struct {
 	Email bool `json:"email,omitempty"`
 }
 
-// PeopleProfileImportSetup mapping
-type PeopleProfileImportSetup struct {
-	URL     string                             `json:"url,omitempty"`
-	Mapping *[]PeopleProfileImportSetupMapping `json:"mapping,omitempty"`
-	Options *PeopleProfileImportSetupOptions   `json:"options,omitempty"`
-}
-
-// PeopleProfileImportSetupMapping mapping
-type PeopleProfileImportSetupMapping struct {
-	Column uint8  `json:"column,omitempty"`
-	Field  string `json:"field,omitempty"`
-}
-
-// PeopleProfileImportSetupOptions mapping
-type PeopleProfileImportSetupOptions struct {
-	ColumnSeparator string `json:"column_separator,omitempty"`
-	SkipHeader      bool   `json:"skip_header,omitempty"`
-}
-
 // PeopleFilter mapping
 type PeopleFilter struct {
 	Model     string   `json:"model,omitempty"`
@@ -321,11 +275,6 @@ func (instance PeopleProfile) String() string {
 	return Stringify(instance)
 }
 
-// String returns the string representation of PeopleCampaign
-func (instance PeopleCampaign) String() string {
-	return Stringify(instance)
-}
-
 // String returns the string representation of PeopleEvent
 func (instance PeopleEvent) String() string {
 	return Stringify(instance)
@@ -338,11 +287,6 @@ func (instance PeopleData) String() string {
 
 // String returns the string representation of PeopleSubscription
 func (instance PeopleSubscription) String() string {
-	return Stringify(instance)
-}
-
-// String returns the string representation of PeopleProfileImport
-func (instance PeopleProfileImport) String() string {
 	return Stringify(instance)
 }
 
@@ -562,20 +506,6 @@ func (service *WebsiteService) FilterPeopleConversations(websiteID string, peopl
 	return conversations.Data, resp, err
 }
 
-// ListPeopleCampaigns lists campaigns linked to people.
-func (service *WebsiteService) ListPeopleCampaigns(websiteID string, peopleID string, pageNumber uint) (*[]PeopleCampaign, *Response, error) {
-	url := fmt.Sprintf("website/%s/people/campaigns/%s/list/%d", websiteID, peopleID, pageNumber)
-	req, _ := service.client.NewRequest("GET", url, nil)
-
-	campaigns := new(PeopleCampaignsData)
-	resp, err := service.client.Do(req, campaigns)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return campaigns.Data, resp, err
-}
-
 // AddPeopleEvent stacks an event for people.
 func (service *WebsiteService) AddPeopleEvent(websiteID string, peopleID string, peopleEvent PeopleEventAdd) (*Response, error) {
 	url := fmt.Sprintf("website/%s/people/events/%s", websiteID, peopleID)
@@ -648,26 +578,4 @@ func (service *WebsiteService) UpdatePeopleSubscriptionStatus(websiteID string, 
 	req, _ := service.client.NewRequest("PATCH", url, peopleSubscription)
 
 	return service.client.Do(req, nil)
-}
-
-// ExportPeopleProfiles exports people profiles.
-func (service *WebsiteService) ExportPeopleProfiles(websiteID string) (*Response, error) {
-	url := fmt.Sprintf("website/%s/people/export/profiles", websiteID)
-	req, _ := service.client.NewRequest("POST", url, nil)
-
-	return service.client.Do(req, nil)
-}
-
-// ImportPeopleProfiles imports people profiles.
-func (service *WebsiteService) ImportPeopleProfiles(websiteID string, profileImportSetup PeopleProfileImportSetup) (*PeopleProfileImport, *Response, error) {
-	url := fmt.Sprintf("website/%s/people/import/profiles", websiteID)
-	req, _ := service.client.NewRequest("POST", url, profileImportSetup)
-
-	profileImport := new(PeopleProfileImportData)
-	resp, err := service.client.Do(req, profileImport)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return profileImport.Data, resp, err
 }

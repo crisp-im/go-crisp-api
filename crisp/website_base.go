@@ -31,17 +31,6 @@ type WebsiteCreate struct {
 	Domain string `json:"domain,omitempty"`
 }
 
-// WebsiteRemove mapping
-type WebsiteRemove struct {
-	Verify *WebsiteRemoveVerify `json:"verify,omitempty"`
-}
-
-// WebsiteRemoveVerify mapping
-type WebsiteRemoveVerify struct {
-	Method string `json:"method"`
-	Secret string `json:"secret"`
-}
-
 // String returns the string representation of Website
 func (instance Website) String() string {
 	return Stringify(instance)
@@ -81,20 +70,4 @@ func (service *WebsiteService) GetWebsite(websiteID string) (*Website, *Response
 	}
 
 	return website.Data, resp, err
-}
-
-// DeleteWebsite deletes an existing website.
-func (service *WebsiteService) DeleteWebsite(websiteID string, verify WebsiteRemoveVerify) (*Response, error) {
-	url := fmt.Sprintf("website/%s", websiteID)
-	req, _ := service.client.NewRequest("DELETE", url, WebsiteRemove{Verify: &verify})
-
-	return service.client.Do(req, nil)
-}
-
-// AbortWebsiteDeletion aborts scheduled deletion for an existing website.
-func (service *WebsiteService) AbortWebsiteDeletion(websiteID string) (*Response, error) {
-	url := fmt.Sprintf("website/%s/expunge", websiteID)
-	req, _ := service.client.NewRequest("DELETE", url, nil)
-
-	return service.client.Do(req, nil)
 }

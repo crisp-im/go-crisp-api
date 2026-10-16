@@ -60,7 +60,6 @@ type Client struct {
 	common service
 
 	Bucket  *BucketService
-	Media   *MediaService
 	Plugin  *PluginService
 	Plan    *PlanService
 	Website *WebsiteService
@@ -128,7 +127,6 @@ func NewWithConfig(config ClientConfig) *Client {
 
 	// Map services
 	client.Bucket = (*BucketService)(&client.common)
-	client.Media = (*MediaService)(&client.common)
 	client.Plugin = (*PluginService)(&client.common)
 	client.Plan = (*PlanService)(&client.common)
 	client.Website = (*WebsiteService)(&client.common)

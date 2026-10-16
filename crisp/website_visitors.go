@@ -119,22 +119,6 @@ type WebsiteVisitorsToken struct {
 	SessionID *string `json:"session_id,omitempty"`
 }
 
-// WebsiteVisitorsBlockedAllData mapping
-type WebsiteVisitorsBlockedAllData struct {
-	Data *[]WebsiteVisitorsBlocked `json:"data,omitempty"`
-}
-
-// WebsiteVisitorsBlockedRuleData mapping
-type WebsiteVisitorsBlockedRuleData struct {
-	Data *WebsiteVisitorsBlocked `json:"data,omitempty"`
-}
-
-// WebsiteVisitorsBlocked mapping
-type WebsiteVisitorsBlocked struct {
-	Rule    *[]string `json:"rule,omitempty"`
-	Blocked *uint32   `json:"blocked,omitempty"`
-}
-
 // String returns the string representation of WebsiteVisitorCount
 func (instance WebsiteVisitorCount) String() string {
 	return Stringify(instance)
@@ -152,11 +136,6 @@ func (instance WebsiteVisitorsMapPoint) String() string {
 
 // String returns the string representation of WebsiteVisitorsToken
 func (instance WebsiteVisitorsToken) String() string {
-	return Stringify(instance)
-}
-
-// String returns the string representation of WebsiteVisitorsBlocked
-func (instance WebsiteVisitorsBlocked) String() string {
 	return Stringify(instance)
 }
 
@@ -228,40 +207,4 @@ func (service *WebsiteService) GetSessionIdentifierFromToken(websiteID string, t
 	}
 
 	return token.Data, resp, err
-}
-
-// CountBlockedVisitors counts all blocked visitors on website, by rule list.
-func (service *WebsiteService) CountBlockedVisitors(websiteID string) (*[]WebsiteVisitorsBlocked, *Response, error) {
-	url := fmt.Sprintf("website/%s/visitors/blocked", websiteID)
-	req, _ := service.client.NewRequest("GET", url, nil)
-
-	blocked := new(WebsiteVisitorsBlockedAllData)
-	resp, err := service.client.Do(req, blocked)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return blocked.Data, resp, err
-}
-
-// CountBlockedVisitorsInRule counts all blocked visitors in rule list on website.
-func (service *WebsiteService) CountBlockedVisitorsInRule(websiteID string, rule string) (*WebsiteVisitorsBlocked, *Response, error) {
-	url := fmt.Sprintf("website/%s/visitors/blocked/%s", websiteID, rule)
-	req, _ := service.client.NewRequest("GET", url, nil)
-
-	blocked := new(WebsiteVisitorsBlockedRuleData)
-	resp, err := service.client.Do(req, blocked)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return blocked.Data, resp, err
-}
-
-// ClearBlockedVisitorsInRule clears all blocked visitors in rule list on website.
-func (service *PluginService) ClearBlockedVisitorsInRule(websiteID string, rule string) (*Response, error) {
-	url := fmt.Sprintf("website/%s/visitors/blocked/%s", websiteID, rule)
-	req, _ := service.client.NewRequest("DELETE", url, nil)
-
-	return service.client.Do(req, nil)
 }

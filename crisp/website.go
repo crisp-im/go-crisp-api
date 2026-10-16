@@ -7,11 +7,3 @@ package crisp
 
 // WebsiteService service
 type WebsiteService service
-
-// WebsiteFilter mapping
-type WebsiteFilter struct {
-	Model     *string        `json:"model,omitempty"`
-	Criterion *string        `json:"criterion,omitempty"`
-	Operator  *string        `json:"operator,omitempty"`
-	Query     *[]interface{} `json:"query,omitempty"`
-}
