@@ -25,12 +25,6 @@ type Website struct {
 	Institutional *bool   `json:"institutional,omitempty"`
 }
 
-// WebsiteCreate mapping
-type WebsiteCreate struct {
-	Name   string `json:"name,omitempty"`
-	Domain string `json:"domain,omitempty"`
-}
-
 // String returns the string representation of Website
 func (instance Website) String() string {
 	return Stringify(instance)
@@ -42,20 +36,6 @@ func (service *WebsiteService) CheckWebsiteExists(domain string) (*Response, err
 	req, _ := service.client.NewRequest("HEAD", url, nil)
 
 	return service.client.Do(req, nil)
-}
-
-// CreateWebsite creates a new website.
-func (service *WebsiteService) CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error) {
-	url := "website"
-	req, _ := service.client.NewRequest("POST", url, websiteData)
-
-	website := new(WebsiteData)
-	resp, err := service.client.Do(req, website)
-	if err != nil {
-		return nil, resp, err
-	}
-
-	return website.Data, resp, err
 }
 
 // GetWebsite resolves an existing website information.

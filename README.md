@@ -55,15 +55,15 @@ All methods that you will most likely need when building a Crisp integration are
 
 In the following method prototypes, `crisp` is to be replaced with your Crisp API instance. For example, instanciate `client := crisp.New()` and then call eg: `client.Website.ListWebsiteOperators(websiteID)`.
 
-When calling a method that writes data to the API (eg: `client.Website.CreateWebsite()`), you need to build an account instance and submit it this way:
+When calling a method that writes data to the API (eg: `client.Website.UpdateWebsiteSettings()`), you need to build a settings instance and submit it this way:
 
 ```go
-websiteData := crisp.WebsiteCreate{
+settings := crisp.WebsiteSettingsUpdate{
   Name: "Acme Inc.",
   Domain: "acme-inc.com",
 }
 
-client.Website.CreateWebsite(websiteData)
+client.Website.UpdateWebsiteSettings(websiteID, settings)
 ```
 
 Refer directly to [the library source code](https://github.com/crisp-im/go-crisp-api/tree/master/crisp) to know more about those structures.
@@ -83,8 +83,6 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
 * #### **Website Base**
   * **Check If Website Exists**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#check-if-website-exists)
     * `client.Website.CheckWebsiteExists(domain string) (*Response, error)`
-  * **Create Website**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#create-website)
-    * `client.Website.CreateWebsite(websiteData WebsiteCreate) (*Website, *Response, error)`
   * **Get A Website**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-a-website)
     * `client.Website.GetWebsite(websiteID string) (*Website, *Response, error)`
 
