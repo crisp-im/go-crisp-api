@@ -842,7 +842,8 @@ type EventsReceiveBucketURLUploadGeneratedURL struct {
 
 // EventsReceiveBucketURLUploadGeneratedPolicy maps bucket:url:upload:generated/policy
 type EventsReceiveBucketURLUploadGeneratedPolicy struct {
-	SizeLimit *uint64 `json:"size_limit"`
+	SizeLimit        *uint64 `json:"size_limit"`
+	RetentionSeconds *uint64 `json:"retention_seconds"`
 }
 
 // EventsReceiveBucketURLAvatarGenerated maps bucket:url:avatar:generated
