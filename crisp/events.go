@@ -176,6 +176,13 @@ type EventsReceiveCommonMessageReference struct {
 	Target *string `json:"target"`
 }
 
+// EventsReceiveCommonMessageAttachment maps a message attachment
+type EventsReceiveCommonMessageAttachment struct {
+	Name *string `json:"name"`
+	Type *string `json:"type"`
+	URL  *string `json:"url"`
+}
+
 // EventsReceiveCommonMessageOriginal maps a message original
 type EventsReceiveCommonMessageOriginal struct {
 	OriginalID *string `json:"original_id"`
@@ -532,7 +539,8 @@ type EventsReceiveMessageUpdated struct {
 type EventsReceiveTextMessage struct {
 	EventsGeneric
 	EventsReceiveGenericMessage
-	Content *string `json:"content"`
+	Content     *string                                 `json:"content"`
+	Attachments *[]EventsReceiveCommonMessageAttachment `json:"attachments,omitempty"`
 }
 
 // EventsReceiveFileMessage maps message:{send,received} (file type)

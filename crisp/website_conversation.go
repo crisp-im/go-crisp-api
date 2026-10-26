@@ -182,6 +182,7 @@ type ConversationMessage struct {
 	Timestamp   *uint64                                `json:"timestamp,omitempty"`
 	User        *ConversationMessageUser               `json:"user,omitempty"`
 	References  *[]ConversationMessageReference        `json:"references,omitempty"`
+	Attachments *[]ConversationMessageAttachment       `json:"attachments,omitempty"`
 	Original    *ConversationMessageOriginal           `json:"original,omitempty"`
 	Properties  *interface{}                           `json:"properties,omitempty"`
 }
@@ -315,6 +316,13 @@ type ConversationMessageReference struct {
 	Type   *string `json:"type,omitempty"`
 	Name   *string `json:"name,omitempty"`
 	Target *string `json:"target,omitempty"`
+}
+
+// ConversationMessageAttachment mapping
+type ConversationMessageAttachment struct {
+	Name *string `json:"name,omitempty"`
+	Type *string `json:"type,omitempty"`
+	URL  *string `json:"url,omitempty"`
 }
 
 // ConversationMessageOriginal mapping
@@ -525,20 +533,21 @@ type ConversationEventMessageNewContent struct {
 
 // ConversationTextMessageNew mapping
 type ConversationTextMessageNew struct {
-	Type        string                                `json:"type,omitempty"`
-	From        string                                `json:"from,omitempty"`
-	Origin      string                                `json:"origin,omitempty"`
-	Content     string                                `json:"content,omitempty"`
-	Mentions    []string                              `json:"mentions,omitempty"`
-	Fingerprint int                                   `json:"fingerprint,omitempty"`
-	User        ConversationAllMessageNewUser         `json:"user,omitempty"`
-	References  *[]ConversationAllMessageNewReference `json:"references,omitempty"`
-	Original    *ConversationAllMessageNewOriginal    `json:"original,omitempty"`
-	Properties  *interface{}                          `json:"properties,omitempty"`
-	Timestamp   *uint64                               `json:"timestamp,omitempty"`
-	Stealth     *bool                                 `json:"stealth,omitempty"`
-	Translated  *bool                                 `json:"translated,omitempty"`
-	Automated   *bool                                 `json:"automated,omitempty"`
+	Type        string                                 `json:"type,omitempty"`
+	From        string                                 `json:"from,omitempty"`
+	Origin      string                                 `json:"origin,omitempty"`
+	Content     string                                 `json:"content,omitempty"`
+	Mentions    []string                               `json:"mentions,omitempty"`
+	Fingerprint int                                    `json:"fingerprint,omitempty"`
+	User        ConversationAllMessageNewUser          `json:"user,omitempty"`
+	References  *[]ConversationAllMessageNewReference  `json:"references,omitempty"`
+	Attachments *[]ConversationAllMessageNewAttachment `json:"attachments,omitempty"`
+	Original    *ConversationAllMessageNewOriginal     `json:"original,omitempty"`
+	Properties  *interface{}                           `json:"properties,omitempty"`
+	Timestamp   *uint64                                `json:"timestamp,omitempty"`
+	Stealth     *bool                                  `json:"stealth,omitempty"`
+	Translated  *bool                                  `json:"translated,omitempty"`
+	Automated   *bool                                  `json:"automated,omitempty"`
 }
 
 // ConversationFileMessageNew mapping
@@ -725,6 +734,13 @@ type ConversationAllMessageNewReference struct {
 	Type   string `json:"type,omitempty"`
 	Name   string `json:"name,omitempty"`
 	Target string `json:"target,omitempty"`
+}
+
+// ConversationAllMessageNewAttachment mapping
+type ConversationAllMessageNewAttachment struct {
+	Name string `json:"name"`
+	Type string `json:"type"`
+	URL  string `json:"url"`
 }
 
 // ConversationAllMessageNewOriginal mapping
@@ -1746,7 +1762,7 @@ func (service *WebsiteService) ListConversationEvents(websiteID string, sessionI
 	return events.Data, resp, err
 }
 
-// ListConversationFiles lists files in conversation (extracted from messages).
+// ListConversationFiles lists files in conversation (extracted from file messages, and from attachments of text and note messages).
 func (service *WebsiteService) ListConversationFiles(websiteID string, sessionID string, pageNumber uint) (*[]ConversationFile, *Response, error) {
 	url := fmt.Sprintf("website/%s/conversation/%s/files/%d", websiteID, sessionID, pageNumber)
 	req, _ := service.client.NewRequest("GET", url, nil)
