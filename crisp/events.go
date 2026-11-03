@@ -557,6 +557,23 @@ type EventsReceiveFileMessageContent struct {
 	Type string `json:"type"`
 }
 
+// EventsReceiveP2PTransferMessage maps message:{send,received} (p2p-transfer type)
+type EventsReceiveP2PTransferMessage struct {
+	EventsGeneric
+	EventsReceiveGenericMessage
+	Content *EventsReceiveP2PTransferMessageContent `json:"content"`
+}
+
+// EventsReceiveP2PTransferMessageContent maps message:{send,received}/content (p2p-transfer type)
+type EventsReceiveP2PTransferMessageContent struct {
+	Name         string  `json:"name"`
+	Size         uint64  `json:"size"`
+	Type         string  `json:"type"`
+	LastModified uint64  `json:"last_modified"`
+	Status       string  `json:"status"`
+	ReceiverID   *string `json:"receiver_id"`
+}
+
 // EventsReceiveAnimationMessage maps message:{send,received} (animation type)
 type EventsReceiveAnimationMessage struct {
 	EventsGeneric
@@ -1093,6 +1110,11 @@ func (evt EventsReceiveTextMessage) String() string {
 
 // String returns the string representation of EventsReceiveFileMessage
 func (evt EventsReceiveFileMessage) String() string {
+	return Stringify(evt)
+}
+
+// String returns the string representation of EventsReceiveP2PTransferMessage
+func (evt EventsReceiveP2PTransferMessage) String() string {
 	return Stringify(evt)
 }
 
