@@ -42,6 +42,10 @@ func main() {
 				fmt.Printf("[message:send/file] %s\n", evt)
 			})
 
+			reg.On("message:send/p2p-transfer", func(evt crisp.EventsReceiveP2PTransferMessage) {
+				fmt.Printf("[message:send/p2p-transfer] %s\n", evt)
+			})
+
 			reg.On("message:send/animation", func(evt crisp.EventsReceiveAnimationMessage) {
 				fmt.Printf("[message:send/animation] %s\n", evt)
 			})
@@ -76,6 +80,10 @@ func main() {
 
 			reg.On("message:received/file", func(evt crisp.EventsReceiveFileMessage) {
 				fmt.Printf("[message:received/file] %s\n", evt)
+			})
+
+			reg.On("message:received/p2p-transfer", func(evt crisp.EventsReceiveP2PTransferMessage) {
+				fmt.Printf("[message:received/p2p-transfer] %s\n", evt)
 			})
 
 			reg.On("message:received/animation", func(evt crisp.EventsReceiveAnimationMessage) {
