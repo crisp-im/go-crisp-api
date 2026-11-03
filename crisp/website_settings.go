@@ -67,10 +67,14 @@ type WebsiteSettingsChatbox struct {
 	WebsiteLogo         *bool     `json:"website_logo,omitempty"`
 	LastOperatorFace    *bool     `json:"last_operator_face,omitempty"`
 	OngoingOperatorFace *bool     `json:"ongoing_operator_face,omitempty"`
+	OperatorAvatar      *string   `json:"operator_avatar,omitempty"`
+	HeaderAvatars       *string   `json:"header_avatars,omitempty"`
+	HeaderOperators     *[]string `json:"header_operators,omitempty"`
 	ActivityMetrics     *bool     `json:"activity_metrics,omitempty"`
 	OperatorPrivacy     *bool     `json:"operator_privacy,omitempty"`
 	VisitorPrivacy      *bool     `json:"visitor_privacy,omitempty"`
 	AvailabilityTooltip *bool     `json:"availability_tooltip,omitempty"`
+	AvailabilityStatus  *bool     `json:"availability_status,omitempty"`
 	HideVacation        *bool     `json:"hide_vacation,omitempty"`
 	HideOnAway          *bool     `json:"hide_on_away,omitempty"`
 	HideOnMobile        *bool     `json:"hide_on_mobile,omitempty"`
@@ -157,10 +161,14 @@ type WebsiteSettingsUpdateChatbox struct {
 	WebsiteLogo         bool      `json:"website_logo,omitempty"`
 	LastOperatorFace    bool      `json:"last_operator_face,omitempty"`
 	OngoingOperatorFace bool      `json:"ongoing_operator_face,omitempty"`
+	OperatorAvatar      string    `json:"operator_avatar,omitempty"`
+	HeaderAvatars       string    `json:"header_avatars,omitempty"`
+	HeaderOperators     *[]string `json:"header_operators,omitempty"`
 	ActivityMetrics     bool      `json:"activity_metrics,omitempty"`
 	OperatorPrivacy     bool      `json:"operator_privacy,omitempty"`
 	VisitorPrivacy      bool      `json:"visitor_privacy,omitempty"`
 	AvailabilityTooltip bool      `json:"availability_tooltip,omitempty"`
+	AvailabilityStatus  bool      `json:"availability_status,omitempty"`
 	HideVacation        bool      `json:"hide_vacation,omitempty"`
 	HideOnAway          bool      `json:"hide_on_away,omitempty"`
 	HideOnMobile        bool      `json:"hide_on_mobile,omitempty"`
