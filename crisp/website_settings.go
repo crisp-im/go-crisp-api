@@ -48,6 +48,7 @@ type WebsiteSettingsContact struct {
 type WebsiteSettingsInbox struct {
 	LockRemoval        *bool   `json:"lock_removal,omitempty"`
 	ForceOperatorToken *bool   `json:"force_operator_token,omitempty"`
+	LinkPreviews       *bool   `json:"link_previews,omitempty"`
 	Locale             *string `json:"locale,omitempty"`
 }
 
@@ -142,6 +143,7 @@ type WebsiteSettingsUpdateContact struct {
 type WebsiteSettingsUpdateInbox struct {
 	LockRemoval        bool   `json:"lock_removal,omitempty"`
 	ForceOperatorToken bool   `json:"force_operator_token,omitempty"`
+	LinkPreviews       bool   `json:"link_previews,omitempty"`
 	Locale             string `json:"locale,omitempty"`
 }
 
