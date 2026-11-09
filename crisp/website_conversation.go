@@ -31,6 +31,8 @@ type Conversation struct {
 	Status         *uint8                      `json:"status,omitempty"`
 	IsVerified     *bool                       `json:"is_verified,omitempty"`
 	IsBlocked      *bool                       `json:"is_blocked,omitempty"`
+	IsLocked       *bool                       `json:"is_locked,omitempty"`
+	ResolvedAt     *uint64                     `json:"resolved_at,omitempty"`
 	Availability   *string                     `json:"availability,omitempty"`
 	Active         *ConversationActive         `json:"active,omitempty"`
 	LastMessage    *string                     `json:"last_message,omitempty"`
@@ -949,6 +951,23 @@ type ConversationBlockUpdate struct {
 	Origin  *string                        `json:"origin,omitempty"`
 }
 
+// ConversationLockData mapping
+type ConversationLockData struct {
+	Data *ConversationLock `json:"data,omitempty"`
+}
+
+// ConversationLock mapping
+type ConversationLock struct {
+	Locked *bool `json:"locked,omitempty"`
+}
+
+// ConversationLockUpdate mapping
+type ConversationLockUpdate struct {
+	Locked *bool                          `json:"locked,omitempty"`
+	User   *ConversationAllMessageNewUser `json:"user,omitempty"`
+	Origin *string                        `json:"origin,omitempty"`
+}
+
 // ConversationVerifyData mapping
 type ConversationVerifyData struct {
 	Data *ConversationVerify `json:"data,omitempty"`
@@ -1148,6 +1167,11 @@ func (instance ConversationRoutingAssign) String() string {
 
 // String returns the string representation of ConversationBlock
 func (instance ConversationBlock) String() string {
+	return Stringify(instance)
+}
+
+// String returns the string representation of ConversationLock
+func (instance ConversationLock) String() string {
 	return Stringify(instance)
 }
 
@@ -1852,6 +1876,28 @@ func (service *WebsiteService) GetBlockStatusForConversation(websiteID string, s
 func (service *WebsiteService) BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool, user *ConversationAllMessageNewUser, origin string) (*Response, error) {
 	url := fmt.Sprintf("website/%s/conversation/%s/block", websiteID, sessionID)
 	req, _ := service.client.NewRequest("PATCH", url, ConversationBlockUpdate{Blocked: &blocked, User: user, Origin: &origin})
+
+	return service.client.Do(req, nil)
+}
+
+// GetLockStatusForConversation resolves conversation lock status.
+func (service *WebsiteService) GetLockStatusForConversation(websiteID string, sessionID string) (*ConversationLock, *Response, error) {
+	url := fmt.Sprintf("website/%s/conversation/%s/lock", websiteID, sessionID)
+	req, _ := service.client.NewRequest("GET", url, nil)
+
+	lock := new(ConversationLockData)
+	resp, err := service.client.Do(req, lock)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return lock.Data, resp, err
+}
+
+// LockOrUnlockConversation locks or unlocks a conversation.
+func (service *WebsiteService) LockOrUnlockConversation(websiteID string, sessionID string, locked bool, user *ConversationAllMessageNewUser, origin string) (*Response, error) {
+	url := fmt.Sprintf("website/%s/conversation/%s/lock", websiteID, sessionID)
+	req, _ := service.client.NewRequest("PATCH", url, ConversationLockUpdate{Locked: &locked, User: user, Origin: &origin})
 
 	return service.client.Do(req, nil)
 }
