@@ -83,6 +83,7 @@ type WebsiteSettingsChatbox struct {
 	EmailVisitors       *bool     `json:"email_visitors,omitempty"`
 	PhoneVisitors       *bool     `json:"phone_visitors,omitempty"`
 	ForceIdentify       *bool     `json:"force_identify,omitempty"`
+	EmailChannel        *bool     `json:"email_channel,omitempty"`
 	IgnorePrivacy       *bool     `json:"ignore_privacy,omitempty"`
 	VisitorCompose      *bool     `json:"visitor_compose,omitempty"`
 	FileTransfer        *bool     `json:"file_transfer,omitempty"`
@@ -178,6 +179,7 @@ type WebsiteSettingsUpdateChatbox struct {
 	EmailVisitors       bool      `json:"email_visitors,omitempty"`
 	PhoneVisitors       bool      `json:"phone_visitors,omitempty"`
 	ForceIdentify       bool      `json:"force_identify,omitempty"`
+	EmailChannel        bool      `json:"email_channel,omitempty"`
 	IgnorePrivacy       bool      `json:"ignore_privacy,omitempty"`
 	VisitorCompose      bool      `json:"visitor_compose,omitempty"`
 	FileTransfer        bool      `json:"file_transfer,omitempty"`
