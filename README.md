@@ -281,6 +281,10 @@ Refer directly to [the library source code](https://github.com/crisp-im/go-crisp
     * `client.Website.GetBlockStatusForConversation(websiteID string, sessionID string) (*ConversationBlock, *Response, error)`
   * **Block Incoming Messages For Conversation**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#block-incoming-messages-for-conversation)
     * `client.Website.BlockIncomingMessagesForConversation(websiteID string, sessionID string, blocked bool, user *ConversationMessageUser, origin *string) (*Response, error)`
+  * **Get Lock Status For Conversation**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-lock-status-for-conversation)
+    * `client.Website.GetLockStatusForConversation(websiteID string, sessionID string) (*ConversationLock, *Response, error)`
+  * **Lock Or Unlock Conversation**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#lock-or-unlock-conversation)
+    * `client.Website.LockOrUnlockConversation(websiteID string, sessionID string, locked bool, user *ConversationAllMessageNewUser, origin string) (*Response, error)`
   * **Get Verify Status For Conversation**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#get-verify-status-for-conversation)
     * `client.Website.GetVerifyStatusForConversation(websiteID string, sessionID string) (*ConversationVerify, *Response, error)`
   * **Update Verify Status For Conversation**: [Reference](https://docs.crisp.chat/references/rest-api/v1/#update-verify-status-for-conversation)
@@ -550,6 +554,8 @@ Available events are listed below:
     * `session:set_state`
   * **Session Set Block**:
     * `session:set_block`
+  * **Session Set Lock**:
+    * `session:set_lock`
   * **Session Set Segments**:
     * `session:set_segments`
   * **Session Set Opened**:
