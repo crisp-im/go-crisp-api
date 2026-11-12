@@ -33,6 +33,7 @@ type Conversation struct {
 	IsBlocked      *bool                       `json:"is_blocked,omitempty"`
 	IsLocked       *bool                       `json:"is_locked,omitempty"`
 	ResolvedAt     *uint64                     `json:"resolved_at,omitempty"`
+	LocksAt        *uint64                     `json:"locks_at,omitempty"`
 	Availability   *string                     `json:"availability,omitempty"`
 	Active         *ConversationActive         `json:"active,omitempty"`
 	LastMessage    *string                     `json:"last_message,omitempty"`
@@ -958,7 +959,8 @@ type ConversationLockData struct {
 
 // ConversationLock mapping
 type ConversationLock struct {
-	Locked *bool `json:"locked,omitempty"`
+	Locked  *bool   `json:"locked,omitempty"`
+	LocksAt *uint64 `json:"locks_at,omitempty"`
 }
 
 // ConversationLockUpdate mapping

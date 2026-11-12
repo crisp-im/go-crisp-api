@@ -66,6 +66,7 @@ type WebsiteSettingsChatbox struct {
 	Conversations           *bool     `json:"conversations,omitempty"`
 	ConversationsEncouraged *bool     `json:"conversations_encouraged,omitempty"`
 	ConversationsLock       *string   `json:"conversations_lock,omitempty"`
+	ConversationsLockDelay  *uint32   `json:"conversations_lock_delay,omitempty"`
 	WaitGame                *bool     `json:"wait_game,omitempty"`
 	WebsiteLogo             *bool     `json:"website_logo,omitempty"`
 	LastOperatorFace        *bool     `json:"last_operator_face,omitempty"`
@@ -164,6 +165,7 @@ type WebsiteSettingsUpdateChatbox struct {
 	Conversations           bool      `json:"conversations,omitempty"`
 	ConversationsEncouraged bool      `json:"conversations_encouraged,omitempty"`
 	ConversationsLock       string    `json:"conversations_lock,omitempty"`
+	ConversationsLockDelay  uint32    `json:"conversations_lock_delay,omitempty"`
 	WaitGame                bool      `json:"wait_game,omitempty"`
 	WebsiteLogo             bool      `json:"website_logo,omitempty"`
 	LastOperatorFace        bool      `json:"last_operator_face,omitempty"`
