@@ -198,6 +198,7 @@ type HelpdeskTreeMetadata struct {
 	Author      *HelpdeskTreeMetadataAuthor `json:"author,omitempty"`
 	Color       *string                     `json:"color,omitempty"`
 	Image       *string                     `json:"image,omitempty"`
+	Icon        *string                     `json:"icon,omitempty"`
 }
 
 // HelpdeskTreeMetadataAuthor mapping
