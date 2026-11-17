@@ -275,9 +275,11 @@ type HelpdeskSettings struct {
 
 // HelpdeskSettingsAppearance mapping
 type HelpdeskSettingsAppearance struct {
-	Color  *HelpdeskSettingsAppearanceColor `json:"color,omitempty"`
-	Logos  *HelpdeskSettingsAppearanceLogos `json:"logos,omitempty"`
-	Banner *string                          `json:"banner,omitempty"`
+	Color           *HelpdeskSettingsAppearanceColor `json:"color,omitempty"`
+	Logos           *HelpdeskSettingsAppearanceLogos `json:"logos,omitempty"`
+	Banner          *string                          `json:"banner,omitempty"`
+	LegacyDesign    *bool                            `json:"legacy_design,omitempty"`
+	PopularSearches *map[string][]string             `json:"popular_searches,omitempty"`
 }
 
 // HelpdeskSettingsAppearanceColor mapping
