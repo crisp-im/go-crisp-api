@@ -276,11 +276,18 @@ type HelpdeskSettings struct {
 
 // HelpdeskSettingsAppearance mapping
 type HelpdeskSettingsAppearance struct {
-	Color           *HelpdeskSettingsAppearanceColor `json:"color,omitempty"`
-	Logos           *HelpdeskSettingsAppearanceLogos `json:"logos,omitempty"`
-	Banner          *string                          `json:"banner,omitempty"`
-	LegacyDesign    *bool                            `json:"legacy_design,omitempty"`
-	PopularSearches *map[string][]string             `json:"popular_searches,omitempty"`
+	Color           *HelpdeskSettingsAppearanceColor      `json:"color,omitempty"`
+	Logos           *HelpdeskSettingsAppearanceLogos      `json:"logos,omitempty"`
+	Banner          *string                               `json:"banner,omitempty"`
+	LegacyDesign    *bool                                 `json:"legacy_design,omitempty"`
+	Categories      *HelpdeskSettingsAppearanceCategories `json:"categories,omitempty"`
+	PopularSearches *map[string][]string                  `json:"popular_searches,omitempty"`
+}
+
+// HelpdeskSettingsAppearanceCategories mapping
+type HelpdeskSettingsAppearanceCategories struct {
+	Visual *string `json:"visual,omitempty"`
+	Cards  *string `json:"cards,omitempty"`
 }
 
 // HelpdeskSettingsAppearanceColor mapping
@@ -313,17 +320,16 @@ type HelpdeskSettingsSection struct {
 
 // HelpdeskSettingsBehavior mapping
 type HelpdeskSettingsBehavior struct {
-	FrequentlyRead     *bool `json:"frequently_read,omitempty"`
-	ShowCategoryImages *bool `json:"show_category_images,omitempty"`
-	ShowChatbox        *bool `json:"show_chatbox,omitempty"`
-	AskFeedback        *bool `json:"ask_feedback,omitempty"`
-	ServeMarkdown      *bool `json:"serve_markdown,omitempty"`
-	AgentCopyButton    *bool `json:"agent_copy_button,omitempty"`
-	TableOfContents    *bool `json:"table_of_contents,omitempty"`
-	LocalePicker       *bool `json:"locale_picker,omitempty"`
-	ReferLink          *bool `json:"refer_link,omitempty"`
-	ForbidIndexing     *bool `json:"forbid_indexing,omitempty"`
-	StatusHealthDead   *bool `json:"status_health_dead,omitempty"`
+	FrequentlyRead   *bool `json:"frequently_read,omitempty"`
+	ShowChatbox      *bool `json:"show_chatbox,omitempty"`
+	AskFeedback      *bool `json:"ask_feedback,omitempty"`
+	ServeMarkdown    *bool `json:"serve_markdown,omitempty"`
+	AgentCopyButton  *bool `json:"agent_copy_button,omitempty"`
+	TableOfContents  *bool `json:"table_of_contents,omitempty"`
+	LocalePicker     *bool `json:"locale_picker,omitempty"`
+	ReferLink        *bool `json:"refer_link,omitempty"`
+	ForbidIndexing   *bool `json:"forbid_indexing,omitempty"`
+	StatusHealthDead *bool `json:"status_health_dead,omitempty"`
 }
 
 // HelpdeskSettingsService mapping
