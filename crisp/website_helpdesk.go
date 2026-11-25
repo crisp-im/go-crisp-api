@@ -279,7 +279,7 @@ type HelpdeskSettingsAppearance struct {
 	Color           *HelpdeskSettingsAppearanceColor      `json:"color,omitempty"`
 	Logos           *HelpdeskSettingsAppearanceLogos      `json:"logos,omitempty"`
 	Banner          *string                               `json:"banner,omitempty"`
-	LegacyDesign    *bool                                 `json:"legacy_design,omitempty"`
+	Design          *string                               `json:"design,omitempty"`
 	Categories      *HelpdeskSettingsAppearanceCategories `json:"categories,omitempty"`
 	PopularSearches *map[string][]string                  `json:"popular_searches,omitempty"`
 }
