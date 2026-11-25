@@ -451,6 +451,13 @@ type EventsReceiveSessionSetBlock struct {
 	IsBlocked *bool `json:"is_blocked"`
 }
 
+// EventsReceiveSessionSetLock maps session:set_lock
+type EventsReceiveSessionSetLock struct {
+	EventsGeneric
+	EventsSessionGeneric
+	IsLocked *bool `json:"is_locked"`
+}
+
 // EventsReceiveSessionSetSegments maps session:set_segments
 type EventsReceiveSessionSetSegments struct {
 	EventsGeneric
@@ -1033,6 +1040,11 @@ func (evt EventsReceiveSessionSetState) String() string {
 
 // String returns the string representation of EventsReceiveSessionSetBlock
 func (evt EventsReceiveSessionSetBlock) String() string {
+	return Stringify(evt)
+}
+
+// String returns the string representation of EventsReceiveSessionSetLock
+func (evt EventsReceiveSessionSetLock) String() string {
 	return Stringify(evt)
 }
 

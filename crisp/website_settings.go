@@ -64,6 +64,8 @@ type WebsiteSettingsEmails struct {
 type WebsiteSettingsChatbox struct {
 	Tile                *string   `json:"tile,omitempty"`
 	Conversations       *bool     `json:"conversations,omitempty"`
+	ConversationsNudge  *bool     `json:"conversations_nudge,omitempty"`
+	ConversationsLock   *string   `json:"conversations_lock,omitempty"`
 	WaitGame            *bool     `json:"wait_game,omitempty"`
 	WebsiteLogo         *bool     `json:"website_logo,omitempty"`
 	LastOperatorFace    *bool     `json:"last_operator_face,omitempty"`
@@ -160,6 +162,8 @@ type WebsiteSettingsUpdateEmails struct {
 type WebsiteSettingsUpdateChatbox struct {
 	Tile                string    `json:"tile,omitempty"`
 	Conversations       bool      `json:"conversations,omitempty"`
+	ConversationsNudge  bool      `json:"conversations_nudge,omitempty"`
+	ConversationsLock   string    `json:"conversations_lock,omitempty"`
 	WaitGame            bool      `json:"wait_game,omitempty"`
 	WebsiteLogo         bool      `json:"website_logo,omitempty"`
 	LastOperatorFace    bool      `json:"last_operator_face,omitempty"`
