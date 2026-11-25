@@ -455,7 +455,8 @@ type EventsReceiveSessionSetBlock struct {
 type EventsReceiveSessionSetLock struct {
 	EventsGeneric
 	EventsSessionGeneric
-	IsLocked *bool `json:"is_locked"`
+	IsLocked *bool   `json:"is_locked"`
+	LocksAt  *uint64 `json:"locks_at"`
 }
 
 // EventsReceiveSessionSetSegments maps session:set_segments
